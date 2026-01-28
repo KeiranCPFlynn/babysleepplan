@@ -1,0 +1,39 @@
+# Optimizing the Sleep Environment
+
+## Overview
+Before attempting any training, ensure the physical space supports sleep. A perfect environment can solve many "sleep problems" on its own.
+
+## The Checklist
+
+### 1. Darkness
+*   **Goal:** Pitch black. You shouldn't be able to see your hand in front of your face.
+*   **Why:** Light signals the brain to wake up. Even a sliver of morning light can cause 5 AM wakings.
+*   **Tools:** Blackout curtains, portable blinds, or taping foil/garbage bags on windows.
+
+### 2. White Noise
+*   **Goal:** Continuous, non-looping sound.
+*   **Volume:** ~50 dB (shower loudness) at the crib.
+*   **Why:** Masks household noise (dogs, floors creaking) and mimics the womb. It cues the brain that it is sleep time.
+*   **Note:** Use plain white noise, pink noise, or rain. Avoid music/lullabies that change pitch/rhythm.
+
+### 3. Temperature
+*   **Goal:** 16–20°C (61–68°F).
+*   **Why:** Babies sleep better in cooler environments. Overheating is a safety risk and causes restlessness.
+*   **check:** Feel baby's chest or back. Hands and feet should be cool.
+
+### 4. Sleepwear
+*   **Swaddle:** 0-8 weeks (or until rolling signs). Dampens startle reflex.
+*   **Sleep Sack:** 3 months+. A wearable blanket is safer than loose blankets. Use appropriate TOG (thickness) for room temp.
+*   **Merlin Suit/Transition Products:** Useful for the transition out of swaddle (3-6 months), but must stop if baby can roll in the suit.
+
+### 5. Crib Setup
+*   **Boring:** No mobiles, light projectors, or toys in the crib. These stimulate the baby.
+*   **Safety:** Flat mattress, tight sheet.
+
+## Room Sharing vs. Own Room
+*   **Safety:** Room sharing recommended for first 6 months.
+*   **Sleep Quality:** Studies show babies (and parents) often sleep longer stretches once baby is in their own room (after 4-6 months), as they don't wake each other up with minor noises. Moving baby to their own room is a personal choice after 6 months.
+
+## Transitioning Locations
+*   If moving baby from your room to theirs, spend time playing in the new room during the day so it feels safe.
+*   Keep the sleep environment (dark/noise/sack) identical in the new room.

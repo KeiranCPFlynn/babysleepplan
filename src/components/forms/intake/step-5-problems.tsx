@@ -1,0 +1,93 @@
+'use client'
+
+import { useFormContext, useWatch } from 'react-hook-form'
+import { useCallback } from 'react'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
+import { Check } from 'lucide-react'
+import { sleepProblems, type IntakeFormData } from '@/lib/validations/intake'
+
+export function Step5Problems() {
+  const { register, setValue, control, formState: { errors } } = useFormContext<IntakeFormData>()
+
+  // useWatch is more reliable for watching values in child components
+  const selectedProblems = useWatch({
+    control,
+    name: 'problems',
+    defaultValue: []
+  }) ?? []
+
+  const toggleProblem = useCallback((problemValue: string) => {
+    const currentProblems = Array.isArray(selectedProblems) ? selectedProblems : []
+    const isCurrentlySelected = currentProblems.includes(problemValue)
+
+    const updated = isCurrentlySelected
+      ? currentProblems.filter((p: string) => p !== problemValue)
+      : [...currentProblems, problemValue]
+
+    setValue('problems', updated, { shouldDirty: true, shouldValidate: true })
+  }, [selectedProblems, setValue])
+
+  return (
+    <div className="space-y-6">
+      <div className="space-y-2">
+        <h2 className="text-2xl font-bold">Sleep Challenges</h2>
+        <p className="text-gray-600">
+          What are the main sleep challenges you're facing? Select all that apply.
+        </p>
+      </div>
+
+      <div className="space-y-4">
+        <div className="space-y-3">
+          <Label>Select your sleep challenges</Label>
+          <div className="grid gap-3">
+            {sleepProblems.map((problem) => {
+              const problemsArray = Array.isArray(selectedProblems) ? selectedProblems : []
+              const isSelected = problemsArray.includes(problem.value)
+              return (
+                <button
+                  key={problem.value}
+                  type="button"
+                  onClick={() => toggleProblem(problem.value)}
+                  className={`flex items-center space-x-3 p-3 border rounded-lg cursor-pointer transition-colors text-left w-full ${
+                    isSelected ? 'bg-blue-50 border-blue-300' : 'hover:bg-gray-50'
+                  }`}
+                >
+                  <div className={`flex items-center justify-center w-5 h-5 rounded border ${
+                    isSelected
+                      ? 'bg-blue-600 border-blue-600 text-white'
+                      : 'border-gray-300 bg-white'
+                  }`}>
+                    {isSelected && <Check className="w-3 h-3" />}
+                  </div>
+                  <span className="text-sm font-medium leading-none flex-1">
+                    {problem.label}
+                  </span>
+                </button>
+              )
+            })}
+          </div>
+          {errors.problems && (
+            <p className="text-sm text-red-500">{errors.problems.message}</p>
+          )}
+        </div>
+
+        <div className="space-y-2 pt-4">
+          <Label htmlFor="problem_description">Tell us more about your challenges</Label>
+          <Textarea
+            id="problem_description"
+            {...register('problem_description')}
+            placeholder="Describe your biggest sleep challenges in detail. What have you tried? What hasn't worked?"
+            rows={5}
+          />
+          <p className="text-sm text-gray-500">
+            The more details you provide, the more personalized your plan will be.
+          </p>
+          {errors.problem_description && (
+            <p className="text-sm text-red-500">{errors.problem_description.message}</p>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}

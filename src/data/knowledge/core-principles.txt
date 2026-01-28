@@ -1,0 +1,43 @@
+# Core Sleep Principles & Science
+
+## Overview
+Understanding the biological and environmental foundations of infant sleep is the first step to healthy sleep habits. This section covers sleep cycles, circadian rhythms, and the non-negotiable safety guidelines that apply to all ages.
+
+## Key Points
+
+### Safe Sleep Guidelines (The "ABCs")
+To reduce the risk of Sudden Infant Death Syndrome (SIDS) and accidents, follow these globally recognized guidelines (AAP, NHS, WHO):
+*   **Alone:** The safest place for a baby is in the same room as the parents, but on a separate sleep surface (crib, bassinet, play yard).
+*   **Back:** Always place baby on their back to sleep for every sleep (naps and night) until 1 year old. Back-sleeping keeps the airway open and reduces re-breathing carbon dioxide. Once a baby can roll both ways (usually 5–6 months), they can choose their position, but must be placed down on their back.
+*   **Crib (Bare is Best):** Use a firm, flat mattress with a tight-fitting sheet. No pillows, loose blankets, stuffed toys, or crib bumpers. Incline should not be greater than 10 degrees.
+*   **Temperature:** Keep the room comfortably cool (16–20°C / 61–68°F). Overheating is a SIDS risk. Use a sleep sack rather than loose blankets.
+*   **Smoke-Free:** Maintain a smoke-free environment.
+
+### Circadian Rhythms
+*   **Newborns:** Have no established circadian rhythm and cannot distinguish day from night. They produce melatonin irregularly.
+*   **Development:** Around 3–4 months, babies begin developing a 24-hour sleep-wake cycle.
+*   **Light Cues:** Darkness stimulates melatonin (sleep hormone). Daylight signals wakefulness. Morning light exposure and evening darkness are crucial for setting this internal clock.
+
+### Sleep Cycles and Pressure
+*   **Sleep Pressure (Homeostatic Drive):** The longer a baby is awake, the more "sleep pressure" builds. If awake too long, cortisol (stress hormone) is released, causing a "second wind" and making sleep difficult (overtiredness).
+*   **Sleep Cycles:**
+    *   **0-3 Months:** Sleep is immature with no distinct cycles; babies transition between active (REM-like) and quiet sleep.
+    *   **4 Months+:** Sleep matures into adult-like cycles with distinct light and deep sleep phases. Cycles last ~45–50 minutes. Babies naturally wake or come to a very light sleep at the end of every cycle.
+
+### What "Sleeping Through the Night" Means
+*   Medically and research-wise, "sleeping through the night" is often defined as a consolidated stretch of **6 to 8 hours**, not necessarily 12 hours.
+*   **Statistics:** By 6 months, about 50–60% of babies sleep 6+ hours continuously. By 12 months, about 72% do. It is normal variation for healthy babies to still wake occasionally in the first year.
+
+## Age-Specific Notes
+*   **0-3 Months:** Waking frequently is physiological and necessary for feeding.
+*   **4-6 Months:** Biological consolidation of night sleep begins; earliest appropriate age for formal sleep training.
+*   **6-12 Months:** Most babies can physically go 8-12 hours without feeding, though habits may persist.
+
+## Common Mistakes to Avoid
+*   **Assuming 12 hours is the norm:** Unrealistic expectations can lead to unnecessary stress.
+*   **Ignoring safe sleep for naps:** SIDS risks exist during naps; avoid letting babies sleep routinely in car seats, swings, or on sofas.
+*   **Overheating:** Dressing baby in too many layers (hats should not be used indoors for sleep).
+
+## When to Seek Help
+*   If you cannot create a safe sleep environment due to resources.
+*   If you are unsure if your crib or bassinet meets current safety standards.

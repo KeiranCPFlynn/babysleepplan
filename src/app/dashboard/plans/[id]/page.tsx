@@ -1,0 +1,219 @@
+import { notFound } from 'next/navigation'
+import { createClient } from '@/lib/supabase/server'
+import { requireAuth } from '@/lib/auth'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card'
+import { ArrowLeft, RefreshCw, Star, Moon } from 'lucide-react'
+import { PlanContent } from './plan-content'
+import { RefreshButton } from './refresh-button'
+import { RetryButton } from './retry-button'
+import { CancelButton } from './cancel-button'
+import { PrintButton } from './print-button'
+import { DownloadPdfButton } from './download-pdf-button'
+import { RegenerateButton } from './regenerate-button'
+
+const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
+const isDevMode = !isStripeEnabled
+
+export default async function PlanViewPage({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}) {
+  const user = await requireAuth()
+  const supabase = await createClient()
+  const { id } = await params
+
+  // Get plan with baby info
+  const { data: plan, error } = await supabase
+    .from('plans')
+    .select(`
+      *,
+      baby:babies(name, date_of_birth, temperament)
+    `)
+    .eq('id', id)
+    .eq('user_id', user.id)
+    .single()
+
+  if (error || !plan) {
+    notFound()
+  }
+
+  // Calculate baby age
+  const getAge = (dob: string) => {
+    const birth = new Date(dob)
+    const now = new Date()
+    const diffTime = Math.abs(now.getTime() - birth.getTime())
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+    const months = Math.floor(diffDays / 30.44)
+    const years = Math.floor(diffDays / 365.25)
+
+    if (years >= 1) return `${years} year${years > 1 ? 's' : ''} old`
+    if (months >= 1) return `${months} month${months > 1 ? 's' : ''} old`
+    const weeks = Math.floor(diffDays / 7)
+    return `${weeks} week${weeks > 1 ? 's' : ''} old`
+  }
+
+  if (plan.status === 'generating') {
+    return (
+      <div className="max-w-3xl mx-auto space-y-6">
+        <Link
+          href="/dashboard/plans"
+          className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700"
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back to Plans
+        </Link>
+
+        <Card className="overflow-hidden">
+          <div className="bg-purple-100 px-8 py-8 text-center">
+            <div className="flex justify-center gap-2 mb-4">
+              <Star className="h-5 w-5 text-pink-400" />
+              <Moon className="h-6 w-6 text-purple-500" />
+              <Star className="h-5 w-5 text-pink-400" />
+            </div>
+            <h1 className="text-2xl font-bold text-purple-700 mb-2">
+              {plan.baby?.name || 'Baby'}&apos;s Sleep Plan
+            </h1>
+            <p className="text-purple-600 text-sm">
+              Creating something special...
+            </p>
+          </div>
+          <CardContent className="py-12 text-center">
+            <div className="flex justify-center mb-6">
+              <RefreshCw className="h-12 w-12 text-purple-400 animate-spin" />
+            </div>
+            <p className="text-gray-600 mb-2">
+              We&apos;re crafting a personalized plan for {plan.baby?.name || 'your baby'}.
+            </p>
+            <p className="text-gray-500 text-sm mb-6">
+              This usually takes 1-2 minutes.
+            </p>
+            <div className="flex justify-center gap-4">
+              <RefreshButton />
+              {isDevMode && (
+                <>
+                  <CancelButton planId={plan.id} />
+                  <RetryButton planId={plan.id} />
+                </>
+              )}
+            </div>
+            {isDevMode && (
+              <p className="text-xs text-orange-500 mt-4 bg-orange-50 inline-block px-3 py-1 rounded-full">
+                Dev mode: Cancel/Retry available
+              </p>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
+
+  if (plan.status === 'failed') {
+    return (
+      <div className="max-w-3xl mx-auto space-y-6">
+        <Link
+          href="/dashboard/plans"
+          className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700"
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back to Plans
+        </Link>
+
+        <Card className="border-red-200 bg-red-50">
+          <CardHeader>
+            <h1 className="text-xl font-bold text-red-800">Plan Generation Failed</h1>
+            <CardDescription className="text-red-600">
+              {plan.error_message || 'An error occurred while generating your plan.'}
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p className="text-sm text-red-700">
+              We encountered an issue while creating your plan. You can try again or contact support.
+            </p>
+            <div className="flex gap-4">
+              <RetryButton planId={plan.id} />
+              <Button variant="outline" asChild>
+                <Link href="/dashboard">Back to Dashboard</Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
+
+  return (
+    <div className="max-w-4xl mx-auto space-y-6">
+      <div className="flex justify-between items-center">
+        <Link
+          href="/dashboard/plans"
+          className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700"
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back to Plans
+        </Link>
+        <div className="flex gap-2">
+          {isDevMode && <RegenerateButton planId={plan.id} />}
+          <DownloadPdfButton
+            babyName={plan.baby?.name || 'Baby'}
+            babyAge={plan.baby?.date_of_birth ? getAge(plan.baby.date_of_birth) : ''}
+            createdDate={new Date(plan.created_at).toLocaleDateString()}
+            planContent={plan.plan_content || ''}
+          />
+          <PrintButton />
+        </div>
+      </div>
+
+      <Card className="print:shadow-none print:border-none overflow-hidden">
+        {/* Baby-friendly header matching PDF design */}
+        <div className="bg-purple-100 px-8 py-8 print:bg-purple-50 rounded-b-3xl">
+          <div className="flex justify-center gap-2 mb-4">
+            <Star className="h-5 w-5 text-pink-400" />
+            <Moon className="h-6 w-6 text-purple-500" />
+            <Star className="h-5 w-5 text-pink-400" />
+          </div>
+          <p className="text-xs font-medium uppercase tracking-widest text-purple-500 text-center mb-2">
+            Sweet Dreams Sleep Plan
+          </p>
+          <h1 className="text-3xl font-bold text-purple-700 text-center mb-2">
+            {plan.baby?.name || 'Baby'}&apos;s Sleep Journey
+          </h1>
+          <p className="text-purple-600 text-sm text-center">
+            {plan.baby?.date_of_birth && getAge(plan.baby.date_of_birth)}
+            {plan.baby?.date_of_birth && ' · '}
+            Created {new Date(plan.created_at).toLocaleDateString()}
+          </p>
+        </div>
+
+        {/* Welcome message */}
+        <div className="mx-8 -mt-4 mb-8 bg-amber-50 border-2 border-amber-200 rounded-xl p-6 print:hidden">
+          <p className="text-gray-600 text-base text-center leading-relaxed">
+            This plan was made especially for {plan.baby?.name || 'your baby'} and your family.
+            Take it one step at a time, trust your instincts, and remember — you&apos;re doing amazing!
+          </p>
+        </div>
+
+        <CardContent className="py-6 px-8">
+          <PlanContent content={plan.plan_content} />
+        </CardContent>
+
+        {/* Footer decoration */}
+        <div className="flex justify-center gap-2 pb-6 print:hidden">
+          <Star className="h-3 w-3 text-purple-200" />
+          <Star className="h-2 w-2 text-pink-300" />
+          <Star className="h-3 w-3 text-purple-200" />
+        </div>
+      </Card>
+
+      {isDevMode && (
+        <div className="text-center">
+          <p className="text-xs text-orange-500 bg-orange-50 inline-block px-4 py-2 rounded-full">
+            Dev mode: Regenerate button available above
+          </p>
+        </div>
+      )}
+    </div>
+  )
+}
