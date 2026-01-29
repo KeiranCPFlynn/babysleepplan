@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { DiaryEntryForm } from '@/components/diary/diary-entry-form'
+import { PlanContent } from '../plan-content'
 import { Calendar, ChevronLeft, ChevronRight, Loader2, Sparkles } from 'lucide-react'
 import type { SleepDiaryEntry, WeeklyReview } from '@/types/database.types'
 
@@ -12,6 +13,8 @@ interface DiaryClientProps {
   babyName: string
   initialEntries: SleepDiaryEntry[]
   initialReviews: WeeklyReview[]
+  initialSelectedDate?: string | null
+  initialUpdatedForLast7?: boolean
 }
 
 const moodColors: Record<string, string> = {
@@ -27,13 +30,20 @@ export function DiaryClient({
   babyName,
   initialEntries,
   initialReviews,
+  initialSelectedDate = null,
+  initialUpdatedForLast7 = false,
 }: DiaryClientProps) {
   const [entries, setEntries] = useState<SleepDiaryEntry[]>(initialEntries)
   const [reviews, setReviews] = useState<WeeklyReview[]>(initialReviews)
-  const [selectedDate, setSelectedDate] = useState<string | null>(null)
+  const [selectedDate, setSelectedDate] = useState<string | null>(initialSelectedDate)
   const [weekOffset, setWeekOffset] = useState(0)
   const [generatingReview, setGeneratingReview] = useState(false)
   const [reviewError, setReviewError] = useState<string | null>(null)
+  const [updatingPlan, setUpdatingPlan] = useState(false)
+  const [updateMessage, setUpdateMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
+  const [seeding, setSeeding] = useState(false)
+  const [updatedForLast7, setUpdatedForLast7] = useState(initialUpdatedForLast7)
+  const isDevMode = process.env.NEXT_PUBLIC_STRIPE_ENABLED === 'false'
 
   // Calculate week dates based on offset
   const getWeekDates = () => {
@@ -52,6 +62,11 @@ export function DiaryClient({
 
   const weekDates = getWeekDates()
   const todayStr = new Date().toISOString().split('T')[0]
+  const last7Dates = Array.from({ length: 7 }).map((_, index) => {
+    const date = new Date()
+    date.setDate(date.getDate() - (6 - index))
+    return date.toISOString().split('T')[0]
+  })
 
   // Get entry for a specific date
   const getEntryForDate = (date: string) => {
@@ -60,6 +75,10 @@ export function DiaryClient({
 
   // Check how many days are logged this week
   const weekEntries = weekDates
+    .map((d) => getEntryForDate(d))
+    .filter(Boolean)
+
+  const last7Entries = last7Dates
     .map((d) => getEntryForDate(d))
     .filter(Boolean)
 
@@ -78,6 +97,15 @@ export function DiaryClient({
     const end = new Date(weekDates[6] + 'T12:00:00')
     const opts: Intl.DateTimeFormatOptions = { month: 'short', day: 'numeric' }
     return `${start.toLocaleDateString('en-US', opts)} - ${end.toLocaleDateString('en-US', opts)}`
+  }
+
+  const formatFullDate = (dateStr: string) => {
+    const date = new Date(dateStr + 'T12:00:00')
+    return date.toLocaleDateString('en-US', {
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric',
+    })
   }
 
   // Refresh entries from server
@@ -105,7 +133,7 @@ export function DiaryClient({
   }
 
   // Generate weekly review
-  const generateReview = async () => {
+  const requestReview = async () => {
     setGeneratingReview(true)
     setReviewError(null)
 
@@ -132,6 +160,66 @@ export function DiaryClient({
       setReviewError(err instanceof Error ? err.message : 'Failed to generate review')
     } finally {
       setGeneratingReview(false)
+    }
+  }
+
+  const generateReview = () => requestReview()
+  const regenerateReview = () => requestReview()
+
+  const seedEntries = async (days: number) => {
+    setSeeding(true)
+    setReviewError(null)
+    setUpdateMessage(null)
+
+    try {
+      const response = await fetch('/api/diary/seed', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ planId, days }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to seed entries')
+      }
+
+      await refreshEntries()
+      setUpdateMessage({ type: 'success', text: `Seeded ${days} days of entries for testing.` })
+    } catch (err) {
+      setUpdateMessage({ type: 'error', text: err instanceof Error ? err.message : 'Failed to seed entries' })
+    } finally {
+      setSeeding(false)
+    }
+  }
+
+  const updatePlan = async (force: boolean = false) => {
+    setUpdatingPlan(true)
+    setUpdateMessage(null)
+
+    try {
+      const response = await fetch(`/api/diary/plan-update${force ? '?force=true' : ''}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          planId,
+          weekStart: last7Dates[0],
+          weekEnd: last7Dates[6],
+        }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to update plan')
+      }
+
+      setUpdateMessage({ type: 'success', text: 'Plan updated and saved to history.' })
+      setUpdatedForLast7(true)
+    } catch (err) {
+      setUpdateMessage({ type: 'error', text: err instanceof Error ? err.message : 'Failed to update plan' })
+    } finally {
+      setUpdatingPlan(false)
     }
   }
 
@@ -215,7 +303,13 @@ export function DiaryClient({
                 const isToday = date === todayStr
                 const isFuture = isFutureDate(date)
                 const tooOld = isTooOld(date)
-                const canEdit = !isFuture && !tooOld
+                const canEdit = !isFuture && (!tooOld || !!entry)
+                const bedWakeSummary = entry
+                  ? [
+                      entry.bedtime ? `Bed ${entry.bedtime}` : null,
+                      entry.wake_time ? `Wake ${entry.wake_time}` : null,
+                    ].filter(Boolean).join(' · ')
+                  : null
 
                 return (
                   <button
@@ -247,6 +341,16 @@ export function DiaryClient({
                             {entry.night_wakings}x wake
                           </span>
                         )}
+                        {bedWakeSummary && (
+                          <span className="text-[10px] text-gray-500 block leading-tight">
+                            {bedWakeSummary}
+                          </span>
+                        )}
+                        {entry.nap_count > 0 && (
+                          <span className="text-[10px] text-gray-500 block leading-tight">
+                            Naps {entry.nap_count}
+                          </span>
+                        )}
                       </div>
                     ) : canEdit ? (
                       <span className="text-xs text-gray-400 mt-1">+ log</span>
@@ -255,6 +359,66 @@ export function DiaryClient({
                 )
               })}
             </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* 7-day Plan Update */}
+      {!selectedDate && !updatedForLast7 && (
+        <Card className="border-emerald-200 bg-emerald-50">
+          <CardHeader>
+            <h3 className="font-semibold text-emerald-900">7-Day Plan Update</h3>
+            <p className="text-sm text-emerald-700">
+              Based on the last 7 days of diary entries.
+            </p>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {last7Entries.length < 7 ? (
+              <div>
+                <p className="text-sm text-emerald-800">
+                  {last7Entries.length}/7 days logged
+                </p>
+                <p className="text-xs text-emerald-700">
+                  Once you log 7 days, you&apos;ll be able to apply a plan update.
+                </p>
+              </div>
+            ) : (
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div>
+                  <p className="text-sm font-medium text-emerald-900">
+                    Ready to update the plan
+                  </p>
+                  <p className="text-xs text-emerald-700">
+                    We&apos;ll add a focused update based on the past week.
+                  </p>
+                </div>
+                <Button
+                  onClick={updatePlan}
+                  disabled={updatingPlan}
+                  className="bg-emerald-600 hover:bg-emerald-700"
+                >
+                  {updatingPlan ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Updating...
+                    </>
+                  ) : (
+                    'Update Plan'
+                  )}
+                </Button>
+              </div>
+            )}
+            {updateMessage && (
+              <p
+                className={`text-sm rounded px-3 py-2 ${
+                  updateMessage.type === 'success'
+                    ? 'bg-emerald-100 text-emerald-900'
+                    : 'bg-red-50 text-red-600'
+                }`}
+              >
+                {updateMessage.text}
+              </p>
+            )}
           </CardContent>
         </Card>
       )}
@@ -268,26 +432,76 @@ export function DiaryClient({
                 <Sparkles className="h-5 w-5 text-purple-500" />
                 <h3 className="font-semibold text-gray-800">Weekly Review</h3>
               </div>
-              {weekEntries.length >= 3 && !currentWeekReview && (
-                <Button
-                  onClick={generateReview}
-                  disabled={generatingReview}
-                  size="sm"
-                  className="bg-purple-600 hover:bg-purple-700"
-                >
-                  {generatingReview ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Generating...
-                    </>
-                  ) : (
-                    'Get Review'
-                  )}
-                </Button>
-              )}
+              <div className="flex items-center gap-2 flex-wrap justify-end">
+                {weekEntries.length >= 3 && !currentWeekReview && (
+                  <Button
+                    onClick={generateReview}
+                    disabled={generatingReview}
+                    size="sm"
+                    className="bg-purple-600 hover:bg-purple-700"
+                  >
+                    {generatingReview ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Generating...
+                      </>
+                    ) : (
+                      'Get Review'
+                    )}
+                  </Button>
+                )}
+                {isDevMode && currentWeekReview && (
+                  <Button
+                    onClick={regenerateReview}
+                    disabled={generatingReview}
+                    size="sm"
+                    variant="ghost"
+                  >
+                    {generatingReview ? 'Regenerating...' : 'Regenerate Review'}
+                  </Button>
+                )}
+                {isDevMode && (
+                  <>
+                    <Button
+                      onClick={() => seedEntries(3)}
+                      disabled={seeding}
+                      size="sm"
+                      variant="ghost"
+                    >
+                      Seed 3 Days
+                    </Button>
+                    <Button
+                      onClick={() => seedEntries(7)}
+                      disabled={seeding}
+                      size="sm"
+                      variant="ghost"
+                    >
+                      Seed 7 Days
+                    </Button>
+                    <Button
+                      onClick={() => updatePlan(true)}
+                      disabled={updatingPlan || last7Entries.length < 7}
+                      size="sm"
+                      variant="ghost"
+                    >
+                      {updatingPlan ? 'Updating...' : 'Force Update'}
+                    </Button>
+                  </>
+                )}
+              </div>
             </div>
           </CardHeader>
           <CardContent>
+            {!currentWeekReview && weekEntries.length >= 3 && (
+              <div className="mb-4 rounded-xl border border-purple-200 bg-purple-50 p-4">
+                <p className="text-sm font-medium text-purple-800">
+                  This week&apos;s review is ready to generate.
+                </p>
+                <p className="text-xs text-purple-600 mt-1">
+                  We&apos;ll summarize patterns from the diary and highlight wins.
+                </p>
+              </div>
+            )}
             {reviewError && (
               <p className="text-sm text-red-600 bg-red-50 px-3 py-2 rounded mb-4">
                 {reviewError}
@@ -295,15 +509,14 @@ export function DiaryClient({
             )}
 
             {currentWeekReview ? (
-              <div className="prose prose-sm max-w-none">
-                <p className="text-xs text-gray-500 mb-3">
+              <div className="space-y-4">
+                <p className="text-xs text-gray-500">
                   Generated {new Date(currentWeekReview.created_at).toLocaleDateString()}
                 </p>
-                {currentWeekReview.review_content.split('\n\n').map((paragraph, i) => (
-                  <p key={i} className="text-gray-700 leading-relaxed">
-                    {paragraph}
-                  </p>
-                ))}
+                <PlanContent content={currentWeekReview.review_content} />
+                <p className="text-xs text-gray-400">
+                  Plan updates unlock after 7 logged days.
+                </p>
               </div>
             ) : weekEntries.length < 3 ? (
               <div className="text-center py-6">
@@ -346,6 +559,66 @@ export function DiaryClient({
                   </p>
                 </div>
               ))}
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Daily Entry Summary */}
+      {!selectedDate && (
+        <Card>
+          <CardHeader>
+            <h3 className="font-semibold text-gray-800">Daily Entries</h3>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {entries.length === 0 ? (
+              <p className="text-sm text-gray-500">
+                No entries yet. Log today&apos;s sleep to get started.
+              </p>
+            ) : (
+              entries.map((entry) => (
+                <div key={entry.id} className="border rounded-lg p-4">
+                  <div className="flex items-center justify-between gap-4">
+                    <div>
+                      <p className="text-sm font-medium text-gray-800">
+                        {formatFullDate(entry.date)}
+                      </p>
+                      <p className="text-xs text-gray-500 mt-1">
+                        {entry.bedtime ? `Bed ${entry.bedtime}` : 'Bedtime not set'} ·{' '}
+                        {entry.wake_time ? `Wake ${entry.wake_time}` : 'Wake time not set'}
+                      </p>
+                    </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setSelectedDate(entry.date)}
+                    >
+                      Edit
+                    </Button>
+                  </div>
+
+                  <div className="mt-3 flex flex-wrap gap-2 text-xs">
+                    {entry.mood && (
+                      <span className={`px-2 py-0.5 rounded ${moodColors[entry.mood]}`}>
+                        {entry.mood}
+                      </span>
+                    )}
+                    <span className="px-2 py-0.5 rounded bg-gray-100 text-gray-600">
+                      Night wakings: {entry.night_wakings}
+                      {entry.night_waking_duration ? ` (${entry.night_waking_duration} min)` : ''}
+                    </span>
+                    <span className="px-2 py-0.5 rounded bg-gray-100 text-gray-600">
+                      Naps: {entry.nap_count} ({entry.nap_total_minutes} min)
+                    </span>
+                  </div>
+
+                  {entry.notes && (
+                    <p className="text-xs text-gray-500 mt-2">
+                      {entry.notes}
+                    </p>
+                  )}
+                </div>
+              ))
+            )}
           </CardContent>
         </Card>
       )}

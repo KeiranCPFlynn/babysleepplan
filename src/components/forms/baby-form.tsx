@@ -40,6 +40,7 @@ export function BabyForm({ baby, mode, returnTo }: BabyFormProps) {
           premature_weeks: baby.premature_weeks,
           medical_conditions: baby.medical_conditions || '',
           temperament: baby.temperament || undefined,
+          temperament_notes: baby.temperament_notes || '',
         }
       : {
           premature_weeks: 0,
@@ -47,6 +48,18 @@ export function BabyForm({ baby, mode, returnTo }: BabyFormProps) {
   })
 
   const temperament = watch('temperament')
+
+  const temperamentOptions = [
+    { value: 'easy', label: 'Easy-going' },
+    { value: 'moderate', label: 'Moderate / average' },
+    { value: 'adaptable', label: 'Adaptable / flexible' },
+    { value: 'sensitive', label: 'Sensitive / easily overstimulated' },
+    { value: 'slow_to_warm', label: 'Slow to warm up / cautious' },
+    { value: 'persistent', label: 'Persistent / determined' },
+    { value: 'spirited', label: 'Spirited / high needs' },
+    { value: 'not_sure', label: 'Not sure yet' },
+    { value: 'other', label: 'Other' },
+  ] as const
 
   const onSubmit = async (data: BabyFormData) => {
     setLoading(true)
@@ -150,21 +163,41 @@ export function BabyForm({ baby, mode, returnTo }: BabyFormProps) {
             <Select
               value={temperament}
               onValueChange={(value) =>
-                setValue('temperament', value as 'easy' | 'moderate' | 'spirited')
+                setValue('temperament', value as BabyFormData['temperament'])
               }
             >
               <SelectTrigger>
                 <SelectValue placeholder="Select temperament" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="easy">Easy-going</SelectItem>
-                <SelectItem value="moderate">Moderate</SelectItem>
-                <SelectItem value="spirited">Spirited / High needs</SelectItem>
+                {temperamentOptions.map(option => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
             {errors.temperament && (
               <p className="text-sm text-red-500">
                 {errors.temperament.message}
+              </p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="temperament_notes">Temperament notes (optional)</Label>
+            <Textarea
+              id="temperament_notes"
+              {...register('temperament_notes')}
+              placeholder="Describe your baby's temperament in your own words or add extra details"
+              rows={3}
+            />
+            <p className="text-sm text-gray-500">
+              Share anything that doesn&apos;t fit the list above.
+            </p>
+            {errors.temperament_notes && (
+              <p className="text-sm text-red-500">
+                {errors.temperament_notes.message}
               </p>
             )}
           </div>

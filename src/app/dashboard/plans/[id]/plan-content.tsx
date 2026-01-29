@@ -9,8 +9,18 @@ interface PlanContentProps {
 }
 
 // Detect blockquote type based on content
+function getTextFromNode(node: ReactNode): string {
+  if (node === null || node === undefined || typeof node === 'boolean') return ''
+  if (typeof node === 'string' || typeof node === 'number') return String(node)
+  if (Array.isArray(node)) return node.map(getTextFromNode).join('')
+  if (typeof node === 'object' && 'props' in node) {
+    return getTextFromNode((node as { props?: { children?: ReactNode } }).props?.children)
+  }
+  return ''
+}
+
 function getBlockquoteStyle(children: ReactNode): { className: string; label: string | null } {
-  const text = String(children).toLowerCase()
+  const text = getTextFromNode(children).toLowerCase()
 
   if (text.includes('tip:') || text.includes('tip')) {
     return {
@@ -44,6 +54,28 @@ function getBlockquoteStyle(children: ReactNode): { className: string; label: st
 }
 
 export function PlanContent({ content }: PlanContentProps) {
+  const normalizeNumberedLists = (input: string) => {
+    const lines = input.replace(/^(\s*)(\d+)\)\s+/gm, '$1$2. ').split('\n')
+    const normalized: string[] = []
+
+    for (let i = 0; i < lines.length; i += 1) {
+      const line = lines[i]
+      const prevLine = normalized[normalized.length - 1] ?? ''
+      const isNumberedLine = /^\s*\d+\.\s+/.test(line)
+      const prevIsListLine = /^\s*\d+\.\s+/.test(prevLine) || /^\s*[-*+]\s+/.test(prevLine)
+
+      if (isNumberedLine && prevLine.trim() !== '' && !prevIsListLine) {
+        normalized.push('')
+      }
+
+      normalized.push(line)
+    }
+
+    return normalized.join('\n')
+  }
+
+  const normalizedContent = normalizeNumberedLists(content)
+
   return (
     <div id="plan-content" className="plan-content max-w-none">
       <ReactMarkdown
@@ -128,25 +160,6 @@ export function PlanContent({ content }: PlanContentProps) {
               {children}
             </ol>
           ),
-          li: ({ node, children }) => {
-            // Check if this is inside an ordered list by looking at parent
-            const isOrdered = node?.position && content.slice(0, node.position.start.offset || 0).match(/\d+\.\s[^\n]*$/m)
-
-            if (isOrdered) {
-              return (
-                <li className="bg-green-50 border-l-4 border-green-300 rounded-r-lg py-4 px-5 text-gray-600 text-base leading-relaxed">
-                  {children}
-                </li>
-              )
-            }
-
-            return (
-              <li className="flex gap-3 text-gray-600 text-base leading-relaxed pl-2">
-                <span className="flex-shrink-0 text-pink-400 mt-1">♡</span>
-                <span className="flex-1">{children}</span>
-              </li>
-            )
-          },
           hr: () => (
             <div className="flex items-center justify-center gap-3 my-10">
               <div className="flex-1 h-0.5 bg-purple-100"></div>
@@ -158,13 +171,23 @@ export function PlanContent({ content }: PlanContentProps) {
             <strong className="font-semibold text-gray-800">{children}</strong>
           ),
           p: ({ children }) => {
-            const text = String(children)
+            const text = getTextFromNode(children).trim()
+            const lowerText = text.toLowerCase()
             // Special formatting for troubleshooting patterns
-            if (text.startsWith('**If ') || text.match(/^\*\*If [^:]+:\*\*/)) {
+            if (text.startsWith('If ') || text.match(/^If [^:]+:/)) {
               return (
                 <p className="text-gray-600 text-base leading-relaxed my-4 pl-5 border-l-2 border-orange-200 bg-orange-50/50 py-3 pr-4 rounded-r">
                   {children}
                 </p>
+              )
+            }
+            if (lowerText.startsWith('why this change') || lowerText.startsWith('**why this change') || lowerText.includes('why this change')) {
+              return (
+                <div className="my-4 rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-4">
+                  <p className="text-emerald-900 text-base leading-relaxed m-0">
+                    {children}
+                  </p>
+                </div>
               )
             }
             return <p className="text-gray-600 text-base leading-relaxed my-4">{children}</p>
@@ -176,7 +199,7 @@ export function PlanContent({ content }: PlanContentProps) {
           ),
         }}
       >
-        {content}
+        {normalizedContent}
       </ReactMarkdown>
     </div>
   )

@@ -116,3 +116,67 @@ export async function POST(
     }, { status: 500 })
   }
 }
+
+// DELETE handler for removing draft intakes
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await params
+
+    // Verify user is authenticated
+    const supabase = await createClient()
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+
+    if (authError || !user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const adminSupabase = getSupabaseAdmin()
+
+    // Verify intake exists and belongs to user
+    const { data: intake, error: intakeError } = await adminSupabase
+      .from('intake_submissions')
+      .select('id, user_id, status')
+      .eq('id', id)
+      .single()
+
+    if (intakeError || !intake) {
+      return NextResponse.json({ error: 'Intake not found' }, { status: 404 })
+    }
+
+    if (intake.user_id !== user.id) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 403 })
+    }
+
+    // Only allow deleting draft intakes
+    if (intake.status !== 'draft') {
+      return NextResponse.json({
+        error: 'Cannot delete submitted intakes'
+      }, { status: 400 })
+    }
+
+    // Delete the intake
+    const { error: deleteError } = await adminSupabase
+      .from('intake_submissions')
+      .delete()
+      .eq('id', id)
+
+    if (deleteError) {
+      console.error('Failed to delete intake:', deleteError)
+      return NextResponse.json({
+        error: 'Failed to delete intake',
+        details: deleteError.message
+      }, { status: 500 })
+    }
+
+    return NextResponse.json({ success: true })
+  } catch (error) {
+    console.error('Intake delete error:', error)
+    return NextResponse.json({
+      error: 'Internal server error',
+      details: error instanceof Error ? error.message : 'Unknown error'
+    }, { status: 500 })
+  }
+}

@@ -27,19 +27,44 @@ const cryingLevels: Record<number, string> = {
   5: 'Any method (open to any approach)',
 }
 
+const OTHER_PREFIX = 'other:'
+
+function getCustomValue(value?: string | null) {
+  if (!value) return null
+  if (value === 'other') return 'Other'
+  if (value.startsWith(OTHER_PREFIX)) {
+    const custom = value.slice(OTHER_PREFIX.length).trim()
+    return custom || 'Other'
+  }
+  return null
+}
+
+function displaySelectValue(
+  value: string | null | undefined,
+  options: { value: string; label: string }[]
+) {
+  if (!value) return 'Not specified'
+  const custom = getCustomValue(value)
+  if (custom) return custom
+  return options.find(option => option.value === value)?.label || value
+}
+
 export function Step8Review({ babies }: Step8Props) {
   const { watch } = useFormContext<IntakeFormData>()
   const values = watch()
 
   const baby = babies.find(b => b.id === values.baby_id)
-  const fallingAsleepMethod = fallingAsleepMethods.find(m => m.value === values.falling_asleep_method)
-  const nightWakingDuration = nightWakingDurations.find(d => d.value === values.night_waking_duration)
-  const napDuration = napDurations.find(d => d.value === values.nap_duration)
-  const napMethod = fallingAsleepMethods.find(m => m.value === values.nap_method)
-  const napLocation = napLocations.find(l => l.value === values.nap_location)
+  const fallingAsleepMethod = displaySelectValue(values.falling_asleep_method, fallingAsleepMethods)
+  const nightWakingDuration = displaySelectValue(values.night_waking_duration, nightWakingDurations)
+  const napDuration = displaySelectValue(values.nap_duration, napDurations)
+  const napMethod = displaySelectValue(values.nap_method, fallingAsleepMethods)
+  const napLocation = displaySelectValue(values.nap_location, napLocations)
   const selectedProblems = (values.problems || []).map(
     p => sleepProblems.find(sp => sp.value === p)?.label
   ).filter(Boolean)
+  const additionalSleepTimes = Array.isArray(values.additional_sleep_times)
+    ? values.additional_sleep_times.filter((time) => time?.bedtime || time?.waketime)
+    : []
 
   return (
     <div className="space-y-6">
@@ -79,8 +104,22 @@ export function Step8Review({ babies }: Step8Props) {
             </div>
             <div>
               <span className="text-gray-500">Falls asleep by:</span>{' '}
-              <span className="font-medium">{fallingAsleepMethod?.label || 'Not specified'}</span>
+              <span className="font-medium">{fallingAsleepMethod}</span>
             </div>
+            {additionalSleepTimes.length > 0 && (
+              <div>
+                <span className="text-gray-500">Additional sleep periods:</span>
+                <ul className="list-disc list-inside mt-1 space-y-1">
+                  {additionalSleepTimes.map((time, index) => (
+                    <li key={index} className="font-medium">
+                      Period {index + 2}:{' '}
+                      {time.bedtime ? `Bedtime ${time.bedtime}` : 'Bedtime not specified'}
+                      {time.waketime ? `, Wake ${time.waketime}` : ', Wake not specified'}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </CardContent>
         </Card>
 
@@ -97,7 +136,7 @@ export function Step8Review({ babies }: Step8Props) {
               </div>
               <div>
                 <span className="text-gray-500">Duration:</span>{' '}
-                <span className="font-medium">{nightWakingDuration?.label || 'Not specified'}</span>
+                <span className="font-medium">{nightWakingDuration}</span>
               </div>
             </div>
             {values.night_wakings_description && (
@@ -128,15 +167,15 @@ export function Step8Review({ babies }: Step8Props) {
               </div>
               <div>
                 <span className="text-gray-500">Duration:</span>{' '}
-                <span className="font-medium">{napDuration?.label || 'Not specified'}</span>
+                <span className="font-medium">{napDuration}</span>
               </div>
               <div>
                 <span className="text-gray-500">Method:</span>{' '}
-                <span className="font-medium">{napMethod?.label || 'Not specified'}</span>
+                <span className="font-medium">{napMethod}</span>
               </div>
               <div>
                 <span className="text-gray-500">Location:</span>{' '}
-                <span className="font-medium">{napLocation?.label || 'Not specified'}</span>
+                <span className="font-medium">{napLocation}</span>
               </div>
             </div>
           </CardContent>

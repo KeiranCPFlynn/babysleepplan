@@ -83,7 +83,7 @@ export function DiaryEntryForm({
 
       if (!response.ok) {
         const data = await response.json()
-        throw new Error(data.error || 'Failed to save entry')
+        throw new Error(data.details || data.error || 'Failed to save entry')
       }
 
       onSave()

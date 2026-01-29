@@ -3,7 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import { requireAuth } from '@/lib/auth'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { ArrowLeft, RefreshCw, Star, Moon, BookOpen } from 'lucide-react'
 import { PlanContent } from './plan-content'
 import { RefreshButton } from './refresh-button'
@@ -39,6 +39,21 @@ export default async function PlanViewPage({
   if (error || !plan) {
     notFound()
   }
+
+  const { data: revisions } = await supabase
+    .from('plan_revisions')
+    .select('id, revision_number, summary, source, week_start, created_at')
+    .eq('plan_id', id)
+    .eq('user_id', user.id)
+    .order('revision_number', { ascending: false })
+
+  const latestRevision = revisions && revisions.length > 0 ? revisions[0] : null
+  const lastDividerIndex = plan.plan_content ? plan.plan_content.lastIndexOf('\n---\n') : -1
+  const latestUpdateContent = latestRevision && latestRevision.source !== 'initial' && plan.plan_content
+    ? (lastDividerIndex >= 0
+        ? plan.plan_content.slice(lastDividerIndex + 5).trim()
+        : plan.plan_content)
+    : null
 
   // Calculate baby age
   const getAge = (dob: string) => {
@@ -202,6 +217,33 @@ export default async function PlanViewPage({
         </div>
 
         <CardContent className="py-6 px-8">
+          {latestRevision && (
+            <div className="mb-6 rounded-xl border border-purple-100 bg-purple-50/60 px-5 py-4">
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="text-sm font-semibold text-purple-800">
+                    Current Revision: {latestRevision.revision_number}
+                  </p>
+                  <p className="text-xs text-purple-600">
+                    {latestRevision.summary || 'Latest plan update'} · {new Date(latestRevision.created_at).toLocaleDateString()}
+                  </p>
+                </div>
+                <Button variant="outline" size="sm" asChild>
+                  <Link href={`/dashboard/plans/${plan.id}/history/${latestRevision.id}`}>
+                    View Revision
+                  </Link>
+                </Button>
+              </div>
+              {latestUpdateContent && (
+                <div className="mt-4">
+                  <p className="text-xs font-semibold text-purple-700 uppercase tracking-wide">
+                    Latest Update
+                  </p>
+                  <PlanContent content={latestUpdateContent} />
+                </div>
+              )}
+            </div>
+          )}
           <PlanContent content={plan.plan_content} />
         </CardContent>
 
@@ -212,6 +254,43 @@ export default async function PlanViewPage({
           <Star className="h-3 w-3 text-purple-200" />
         </div>
       </Card>
+
+      {revisions && revisions.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Plan History</CardTitle>
+            <CardDescription>
+              Your plan updates over time. The top entry is the current version.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {revisions.map((revision, index) => {
+              const isCurrent = index === 0
+              const createdAt = new Date(revision.created_at).toLocaleDateString()
+              const weekLabel = revision.week_start
+                ? `Week of ${new Date(revision.week_start + 'T12:00:00').toLocaleDateString()}`
+                : null
+              return (
+                <div key={revision.id} className="flex items-center justify-between gap-4 border rounded-lg px-4 py-3">
+                  <div>
+                    <p className="text-sm font-medium text-gray-800">
+                      Revision {revision.revision_number}{isCurrent ? ' · Current' : ''}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {revision.summary || weekLabel || 'Plan update'} · {createdAt}
+                    </p>
+                  </div>
+                  <Button variant="outline" size="sm" asChild>
+                    <Link href={`/dashboard/plans/${plan.id}/history/${revision.id}`}>
+                      View
+                    </Link>
+                  </Button>
+                </div>
+              )
+            })}
+          </CardContent>
+        </Card>
+      )}
 
       {isDevMode && (
         <div className="text-center">

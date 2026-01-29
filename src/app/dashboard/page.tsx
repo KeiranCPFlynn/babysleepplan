@@ -3,7 +3,8 @@ import { requireAuth } from '@/lib/auth'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Baby, FileText, Plus } from 'lucide-react'
+import { Baby, FileText, Plus, BookOpen } from 'lucide-react'
+import { DeleteIntakeButton } from './delete-intake-button'
 
 export default async function DashboardPage() {
   const user = await requireAuth()
@@ -37,6 +38,30 @@ export default async function DashboardPage() {
     .eq('user_id', user.id)
     .order('created_at', { ascending: false })
     .limit(3)
+
+  // Get completed plans for daily diary prompt
+  const { data: completedPlans } = await supabase
+    .from('plans')
+    .select(`
+      *,
+      baby:babies(name)
+    `)
+    .eq('user_id', user.id)
+    .eq('status', 'completed')
+    .order('created_at', { ascending: false })
+    .limit(5)
+
+  const todayStr = new Date().toISOString().split('T')[0]
+  const completedPlanIds = (completedPlans || []).map((plan) => plan.id)
+  const { data: todaysDiaryEntries } = completedPlanIds.length > 0
+    ? await supabase
+        .from('sleep_diary_entries')
+        .select('id, plan_id')
+        .eq('user_id', user.id)
+        .eq('date', todayStr)
+        .in('plan_id', completedPlanIds)
+    : { data: [] }
+  const todaysEntryPlanIds = new Set((todaysDiaryEntries || []).map((entry) => entry.plan_id))
 
   // Get draft intakes
   const { data: draftIntakes } = await supabase
@@ -121,6 +146,47 @@ export default async function DashboardPage() {
         </Button>
       </div>
 
+      {/* Daily diary prompt */}
+      {completedPlans && completedPlans.length > 0 && (
+        <Card className="border-purple-200 bg-purple-50">
+          <CardHeader>
+            <CardTitle className="text-lg text-purple-700">
+              Log today&apos;s sleep
+            </CardTitle>
+            <CardDescription className="text-purple-600">
+              Choose a plan to log today&apos;s entry.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {completedPlans.map((plan) => {
+              const hasEntry = todaysEntryPlanIds.has(plan.id)
+              return (
+                <div key={plan.id} className="flex items-center justify-between gap-4 rounded-lg bg-white/70 px-4 py-3">
+                  <div>
+                    <p className="text-sm font-medium text-purple-900">
+                      {plan.baby?.name || 'Baby'}&apos;s Plan
+                    </p>
+                    <p className="text-xs text-purple-600">
+                      {hasEntry ? 'Logged today' : 'Not logged yet'}
+                    </p>
+                  </div>
+                  <Button
+                    asChild
+                    size="sm"
+                    variant={hasEntry ? 'outline' : 'default'}
+                    className={hasEntry ? '' : 'bg-purple-600 hover:bg-purple-700'}
+                  >
+                    <Link href={`/dashboard/plans/${plan.id}/diary?date=${todayStr}`}>
+                      {hasEntry ? 'View / Edit' : 'Log Today'}
+                    </Link>
+                  </Button>
+                </div>
+              )
+            })}
+          </CardContent>
+        </Card>
+      )}
+
       {/* Draft intakes */}
       {draftIntakes && draftIntakes.length > 0 && (
         <div>
@@ -131,12 +197,12 @@ export default async function DashboardPage() {
                 <CardHeader>
                   <div className="flex justify-between items-start">
                     <div>
-                      <CardTitle>{intake.baby?.name || 'Unknown Baby'}'s Questionnaire</CardTitle>
+                      <CardTitle>{intake.baby?.name || 'Unknown Baby'}&apos;s Questionnaire</CardTitle>
                       <CardDescription>
                         Last updated {new Date(intake.updated_at).toLocaleDateString()}
                       </CardDescription>
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 items-center">
                       <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
                         In Progress
                       </span>
@@ -145,6 +211,10 @@ export default async function DashboardPage() {
                           Continue
                         </Link>
                       </Button>
+                      <DeleteIntakeButton
+                        intakeId={intake.id}
+                        babyName={intake.baby?.name || 'Unknown Baby'}
+                      />
                     </div>
                   </div>
                 </CardHeader>
@@ -164,12 +234,12 @@ export default async function DashboardPage() {
                 <CardHeader>
                   <div className="flex justify-between items-start">
                     <div>
-                      <CardTitle>{plan.baby?.name || 'Baby'}'s Sleep Plan</CardTitle>
+                      <CardTitle>{plan.baby?.name || 'Baby'}&apos;s Sleep Plan</CardTitle>
                       <CardDescription>
                         Created {new Date(plan.created_at).toLocaleDateString()}
                       </CardDescription>
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 items-center">
                       <span
                         className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
                           plan.status === 'completed'
@@ -181,6 +251,14 @@ export default async function DashboardPage() {
                       >
                         {plan.status}
                       </span>
+                      {plan.status === 'completed' && (
+                        <Button variant="outline" size="sm" asChild>
+                          <Link href={`/dashboard/plans/${plan.id}/diary`}>
+                            <BookOpen className="mr-1 h-3 w-3" />
+                            Diary
+                          </Link>
+                        </Button>
+                      )}
                       <Button variant="outline" size="sm" asChild>
                         <Link href={`/dashboard/plans/${plan.id}`}>
                           View

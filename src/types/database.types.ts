@@ -1,7 +1,17 @@
 export type SubscriptionStatus = 'inactive' | 'active' | 'cancelled'
-export type Temperament = 'easy' | 'moderate' | 'spirited'
+export type Temperament =
+  | 'easy'
+  | 'moderate'
+  | 'spirited'
+  | 'sensitive'
+  | 'adaptable'
+  | 'slow_to_warm'
+  | 'persistent'
+  | 'not_sure'
+  | 'other'
 export type IntakeStatus = 'draft' | 'submitted' | 'paid'
 export type PlanStatus = 'generating' | 'completed' | 'failed'
+export type PlanRevisionSource = 'initial' | 'weekly-review' | 'manual'
 
 export interface Profile {
   id: string
@@ -21,6 +31,7 @@ export interface Baby {
   premature_weeks: number
   medical_conditions: string | null
   temperament: Temperament | null
+  temperament_notes: string | null
   created_at: string
   updated_at: string
 }
@@ -78,6 +89,19 @@ export interface Plan {
   error_message: string | null
   created_at: string
   updated_at: string
+}
+
+export interface PlanRevision {
+  id: string
+  plan_id: string
+  user_id: string
+  revision_number: number
+  plan_content: string
+  summary: string | null
+  source: PlanRevisionSource
+  week_start: string | null
+  week_end: string | null
+  created_at: string
 }
 
 export type DiaryMood = 'great' | 'good' | 'okay' | 'rough' | 'terrible'

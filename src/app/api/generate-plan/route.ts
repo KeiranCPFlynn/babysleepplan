@@ -130,8 +130,22 @@ function calculateAge(dob: string, prematureWeeks: number = 0): { months: number
   return { months, weeks, adjustedMonths }
 }
 
+const OTHER_PREFIX = 'other:'
+
+function extractCustomValue(value: string | null) {
+  if (!value) return null
+  if (value === 'other') return 'Other'
+  if (value.startsWith(OTHER_PREFIX)) {
+    const custom = value.slice(OTHER_PREFIX.length).trim()
+    return custom || 'Other'
+  }
+  return null
+}
+
 // Map database values to readable text
 function formatMethod(value: string | null): string {
+  const custom = extractCustomValue(value)
+  if (custom) return custom === 'Other' ? 'Other method' : custom
   const methods: Record<string, string> = {
     nursing: 'Nursing/Bottle feeding',
     rocking: 'Rocking',
@@ -146,21 +160,31 @@ function formatMethod(value: string | null): string {
 }
 
 function formatDuration(value: string | null): string {
+  const custom = extractCustomValue(value)
+  if (custom) return custom === 'Other' ? 'Other duration' : custom
   const durations: Record<string, string> = {
-    under_15: 'Under 15 minutes',
+    under_5: 'Under 5 minutes (quick resettle)',
+    '5_10': '5-10 minutes',
+    '10_15': '10-15 minutes',
     '15_30': '15-30 minutes',
+    '30_45': '30-45 minutes',
+    '45_60': '45-60 minutes',
+    '60_90': '1-1.5 hours',
+    over_90: 'Over 1.5 hours',
+    under_15: 'Under 15 minutes',
     '30_60': '30-60 minutes',
     over_60: 'Over 1 hour',
-    varies: 'Varies widely',
     under_30: 'Under 30 minutes (cat naps)',
-    '60_90': '1-1.5 hours',
     '90_120': '1.5-2 hours',
     over_120: 'Over 2 hours',
+    varies: 'Varies widely',
   }
   return durations[value || ''] || value || 'Not specified'
 }
 
 function formatLocation(value: string | null): string {
+  const custom = extractCustomValue(value)
+  if (custom) return custom === 'Other' ? 'Other location' : custom
   const locations: Record<string, string> = {
     crib: 'Crib/Bassinet',
     parent_bed: "Parent's bed",
@@ -186,11 +210,49 @@ function formatProblems(problems: string[] | null): string {
     sleep_associations: 'Needs specific conditions to sleep',
     night_feeds: 'Still needs night feeds',
     schedule: 'Inconsistent schedule',
-    transitions: 'Difficulty with sleep transitions',
+    transitions: 'Difficulty with sleep cycle transitions',
     separation_anxiety: 'Separation anxiety at sleep times',
   }
 
   return problems.map(p => problemLabels[p] || p).join(', ')
+}
+
+type AdditionalSleepTime = {
+  bedtime?: string
+  waketime?: string
+}
+
+function getAdditionalSleepTimes(data: unknown): AdditionalSleepTime[] {
+  if (!data || typeof data !== 'object') return []
+  const raw = (data as Record<string, unknown>).additional_sleep_times
+  if (!Array.isArray(raw)) return []
+  return raw.filter((item) => item && typeof item === 'object') as AdditionalSleepTime[]
+}
+
+function formatAdditionalSleepTimes(times: AdditionalSleepTime[]) {
+  if (times.length === 0) return 'None'
+  return times
+    .map((time, index) => {
+      const bedtime = time.bedtime || 'Not specified'
+      const waketime = time.waketime || 'Not specified'
+      return `  - Period ${index + 2}: Bedtime ${bedtime}, Wake ${waketime}`
+    })
+    .join('\n')
+}
+
+function formatTemperament(value: string | null): string {
+  const labels: Record<string, string> = {
+    easy: 'Easy-going',
+    moderate: 'Moderate / average',
+    adaptable: 'Adaptable / flexible',
+    sensitive: 'Sensitive / easily overstimulated',
+    slow_to_warm: 'Slow to warm up / cautious',
+    persistent: 'Persistent / determined',
+    spirited: 'Spirited / high needs',
+    not_sure: 'Not sure yet',
+    other: 'Other',
+  }
+  return labels[value || ''] || value || 'Not specified'
 }
 
 function formatCryingLevel(level: number | null): string {
@@ -299,6 +361,10 @@ export async function POST(request: NextRequest) {
       problems: intake.problems,
       cryingComfortLevel: intake.crying_comfort_level,
     })
+    const additionalSleepTimes = getAdditionalSleepTimes(intake.data)
+    const additionalSleepTimesLine = additionalSleepTimes.length > 0
+      ? `- **Additional sleep periods:**\n${formatAdditionalSleepTimes(additionalSleepTimes)}`
+      : '- **Additional sleep periods:** None'
 
     // Build the prompt
     const prompt = `You are an expert pediatric sleep consultant. Using the knowledge base provided and the specific information about this baby, create a detailed, personalized sleep plan.
@@ -310,13 +376,15 @@ ${knowledgeBase}
 - **Name:** ${baby.name}
 - **Age:** ${age.months} months (${age.weeks} weeks)
 ${baby.premature_weeks > 0 ? `- **Adjusted Age:** ${age.adjustedMonths} months (born ${baby.premature_weeks} weeks early)` : ''}
-- **Temperament:** ${baby.temperament === 'easy' ? 'Easy-going' : baby.temperament === 'moderate' ? 'Moderate' : baby.temperament === 'spirited' ? 'Spirited/High-needs' : 'Not specified'}
+    - **Temperament:** ${formatTemperament(baby.temperament)}
+    ${baby.temperament_notes ? `- **Temperament Notes:** ${baby.temperament_notes}` : ''}
 ${baby.medical_conditions ? `- **Medical Notes:** ${baby.medical_conditions}` : ''}
 
 ## Current Sleep Situation
 - **Current Bedtime:** ${intake.current_bedtime || 'Not specified'}
 - **Current Wake Time:** ${intake.current_waketime || 'Not specified'}
 - **Falling Asleep Method:** ${formatMethod(intake.falling_asleep_method)}
+${additionalSleepTimesLine}
 
 ## Night Sleep
 - **Night Wakings:** ${intake.night_wakings_count ?? 'Not specified'} times per night
@@ -468,6 +536,33 @@ Remember: Write like a friend, not a textbook. Paragraphs over bullets. Keep it 
     if (updateError) {
       console.error('Failed to update plan:', updateError)
       throw updateError
+    }
+
+    const { data: latestRevision } = await supabase
+      .from('plan_revisions')
+      .select('revision_number')
+      .eq('plan_id', planId)
+      .order('revision_number', { ascending: false })
+      .limit(1)
+      .maybeSingle()
+
+    const revisionNumber = (latestRevision?.revision_number || 0) + 1
+    const revisionSource = latestRevision ? 'manual' : 'initial'
+    const revisionSummary = latestRevision ? 'Regenerated plan' : 'Initial plan'
+
+    const { error: revisionError } = await supabase
+      .from('plan_revisions')
+      .insert({
+        plan_id: planId,
+        user_id: plan.user_id,
+        revision_number: revisionNumber,
+        plan_content: planContent,
+        summary: revisionSummary,
+        source: revisionSource,
+      })
+
+    if (revisionError) {
+      console.error('Failed to save plan revision:', revisionError)
     }
 
     // Send plan ready email

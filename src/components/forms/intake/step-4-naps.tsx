@@ -3,7 +3,7 @@
 import { useFormContext } from 'react-hook-form'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { SelectWithOther } from '@/components/ui/select-with-other'
 import { napDurations, napLocations, fallingAsleepMethods, type IntakeFormData } from '@/lib/validations/intake'
 
 export function Step4Naps() {
@@ -17,7 +17,7 @@ export function Step4Naps() {
       <div className="space-y-2">
         <h2 className="text-2xl font-bold">Naps</h2>
         <p className="text-gray-600">
-          Tell us about your baby's daytime sleep.
+          Tell us about your baby&apos;s daytime sleep.
         </p>
       </div>
 
@@ -38,80 +38,38 @@ export function Step4Naps() {
           )}
         </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="nap_duration">How long are the naps?</Label>
-          <Select
-            value={napDuration || undefined}
-            onValueChange={(value) => setValue('nap_duration', value, { shouldDirty: true })}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Select duration" />
-            </SelectTrigger>
-            <SelectContent>
-              {napDurations.map((duration) => (
-                <SelectItem key={duration.value} value={duration.value}>
-                  {duration.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <p className="text-sm text-gray-500">
-            On average, how long do naps usually last?
-          </p>
-          {errors.nap_duration && (
-            <p className="text-sm text-red-500">{errors.nap_duration.message}</p>
-          )}
-        </div>
+        <SelectWithOther
+          label="How long are the naps?"
+          description="On average, how long do naps usually last? Use Other if they vary a lot."
+          options={napDurations}
+          value={napDuration}
+          onChange={(value) => setValue('nap_duration', value, { shouldDirty: true })}
+          placeholder="Select duration"
+          otherPlaceholder="Describe nap duration (e.g., 'morning nap 1.5hrs, afternoon 30min')..."
+          error={errors.nap_duration?.message}
+        />
 
-        <div className="space-y-2">
-          <Label htmlFor="nap_method">How does your baby fall asleep for naps?</Label>
-          <Select
-            value={napMethod || undefined}
-            onValueChange={(value) => setValue('nap_method', value, { shouldDirty: true })}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Select method" />
-            </SelectTrigger>
-            <SelectContent>
-              {fallingAsleepMethods.map((method) => (
-                <SelectItem key={method.value} value={method.value}>
-                  {method.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <p className="text-sm text-gray-500">
-            How does your baby usually fall asleep for naps?
-          </p>
-          {errors.nap_method && (
-            <p className="text-sm text-red-500">{errors.nap_method.message}</p>
-          )}
-        </div>
+        <SelectWithOther
+          label="How does your baby fall asleep for naps?"
+          description="How does your baby usually fall asleep for naps?"
+          options={fallingAsleepMethods}
+          value={napMethod}
+          onChange={(value) => setValue('nap_method', value, { shouldDirty: true })}
+          placeholder="Select method"
+          otherPlaceholder="Describe how your baby falls asleep for naps..."
+          error={errors.nap_method?.message}
+        />
 
-        <div className="space-y-2">
-          <Label htmlFor="nap_location">Where does your baby nap?</Label>
-          <Select
-            value={napLocation || undefined}
-            onValueChange={(value) => setValue('nap_location', value, { shouldDirty: true })}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Select location" />
-            </SelectTrigger>
-            <SelectContent>
-              {napLocations.map((location) => (
-                <SelectItem key={location.value} value={location.value}>
-                  {location.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <p className="text-sm text-gray-500">
-            Where does your baby usually take naps?
-          </p>
-          {errors.nap_location && (
-            <p className="text-sm text-red-500">{errors.nap_location.message}</p>
-          )}
-        </div>
+        <SelectWithOther
+          label="Where does your baby nap?"
+          description="Where does your baby usually take naps?"
+          options={napLocations}
+          value={napLocation}
+          onChange={(value) => setValue('nap_location', value, { shouldDirty: true })}
+          placeholder="Select location"
+          otherPlaceholder="Describe where your baby naps..."
+          error={errors.nap_location?.message}
+        />
       </div>
     </div>
   )

@@ -1,5 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { createClient as createSupabaseClient, SupabaseClient } from '@supabase/supabase-js'
+
+let supabaseAdmin: SupabaseClient | null = null
+
+function getSupabaseAdmin() {
+  if (!supabaseAdmin) {
+    supabaseAdmin = createSupabaseClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    )
+  }
+  return supabaseAdmin
+}
 
 // GET: Fetch diary entries for a plan
 export async function GET(request: NextRequest) {
@@ -91,7 +104,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Upsert the entry
-    const { data: entry, error } = await supabase
+    const adminSupabase = getSupabaseAdmin()
+    const { data: entry, error } = await adminSupabase
       .from('sleep_diary_entries')
       .upsert(
         {
@@ -116,7 +130,10 @@ export async function POST(request: NextRequest) {
 
     if (error) {
       console.error('Failed to save diary entry:', error)
-      return NextResponse.json({ error: 'Failed to save entry' }, { status: 500 })
+      return NextResponse.json(
+        { error: 'Failed to save entry', details: error.message },
+        { status: 500 }
+      )
     }
 
     return NextResponse.json({ entry })

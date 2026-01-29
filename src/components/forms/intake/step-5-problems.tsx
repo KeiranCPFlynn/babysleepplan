@@ -49,20 +49,27 @@ export function Step5Problems() {
                   key={problem.value}
                   type="button"
                   onClick={() => toggleProblem(problem.value)}
-                  className={`flex items-center space-x-3 p-3 border rounded-lg cursor-pointer transition-colors text-left w-full ${
+                  className={`flex items-start space-x-3 p-4 border rounded-lg cursor-pointer transition-colors text-left w-full ${
                     isSelected ? 'bg-blue-50 border-blue-300' : 'hover:bg-gray-50'
                   }`}
                 >
-                  <div className={`flex items-center justify-center w-5 h-5 rounded border ${
+                  <div className={`flex items-center justify-center w-5 h-5 rounded border mt-0.5 shrink-0 ${
                     isSelected
                       ? 'bg-blue-600 border-blue-600 text-white'
                       : 'border-gray-300 bg-white'
                   }`}>
                     {isSelected && <Check className="w-3 h-3" />}
                   </div>
-                  <span className="text-sm font-medium leading-none flex-1">
-                    {problem.label}
-                  </span>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-sm font-medium block">
+                      {problem.label}
+                    </span>
+                    {problem.description && (
+                      <span className="text-xs text-gray-500 block mt-1">
+                        {problem.description}
+                      </span>
+                    )}
+                  </div>
                 </button>
               )
             })}

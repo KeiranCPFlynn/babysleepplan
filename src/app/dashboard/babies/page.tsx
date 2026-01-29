@@ -88,13 +88,31 @@ export default async function BabiesPage() {
                 {baby.temperament && (
                   <div>
                     <span className="font-medium">Temperament:</span>{' '}
-                    <span className="capitalize">
+                    <span>
                       {baby.temperament === 'easy'
                         ? 'Easy-going'
                         : baby.temperament === 'moderate'
-                        ? 'Moderate'
-                        : 'Spirited / High needs'}
+                        ? 'Moderate / average'
+                        : baby.temperament === 'adaptable'
+                        ? 'Adaptable / flexible'
+                        : baby.temperament === 'sensitive'
+                        ? 'Sensitive / easily overstimulated'
+                        : baby.temperament === 'slow_to_warm'
+                        ? 'Slow to warm up / cautious'
+                        : baby.temperament === 'persistent'
+                        ? 'Persistent / determined'
+                        : baby.temperament === 'not_sure'
+                        ? 'Not sure yet'
+                        : baby.temperament === 'other'
+                        ? 'Other'
+                        : 'Spirited / high needs'}
                     </span>
+                  </div>
+                )}
+                {baby.temperament_notes && (
+                  <div>
+                    <span className="font-medium">Temperament notes:</span>{' '}
+                    {baby.temperament_notes}
                   </div>
                 )}
                 {baby.medical_conditions && (

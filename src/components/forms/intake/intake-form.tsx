@@ -57,6 +57,13 @@ export function IntakeForm({ babies, intake }: IntakeFormProps) {
   // Ref to store pending save timer so we can cancel it
   const saveTimerRef = useRef<NodeJS.Timeout | null>(null)
 
+  const intakeData = (intake.data && typeof intake.data === 'object')
+    ? intake.data as Record<string, unknown>
+    : {}
+  const storedAdditionalSleepTimes = Array.isArray(intakeData.additional_sleep_times)
+    ? intakeData.additional_sleep_times as Array<{ bedtime?: string; waketime?: string }>
+    : []
+
   const methods = useForm<IntakeFormData>({
     resolver: zodResolver(intakeSchema),
     defaultValues: {
@@ -64,6 +71,7 @@ export function IntakeForm({ babies, intake }: IntakeFormProps) {
       current_bedtime: intake.current_bedtime || '',
       current_waketime: intake.current_waketime || '',
       falling_asleep_method: intake.falling_asleep_method || '',
+      additional_sleep_times: storedAdditionalSleepTimes,
       night_wakings_count: intake.night_wakings_count ?? undefined,
       night_wakings_description: intake.night_wakings_description || '',
       night_waking_duration: intake.night_waking_duration || '',
@@ -93,6 +101,36 @@ export function IntakeForm({ babies, intake }: IntakeFormProps) {
     }
   }, [])
 
+  const buildSubmissionData = useCallback(() => {
+    const values = methods.getValues()
+    const { additional_sleep_times, ...rest } = values
+    const normalizedAdditionalTimes = Array.isArray(additional_sleep_times)
+      ? additional_sleep_times.filter((time) => time?.bedtime || time?.waketime)
+      : []
+
+    return {
+      ...rest,
+      // Convert empty strings to null for database
+      current_bedtime: rest.current_bedtime || null,
+      current_waketime: rest.current_waketime || null,
+      falling_asleep_method: rest.falling_asleep_method || null,
+      night_waking_duration: rest.night_waking_duration || null,
+      night_wakings_description: rest.night_wakings_description || null,
+      night_waking_pattern: rest.night_waking_pattern || null,
+      nap_duration: rest.nap_duration || null,
+      nap_method: rest.nap_method || null,
+      nap_location: rest.nap_location || null,
+      problem_description: rest.problem_description || null,
+      parent_constraints: rest.parent_constraints || null,
+      success_description: rest.success_description || null,
+      additional_notes: rest.additional_notes || null,
+      data: {
+        ...intakeData,
+        additional_sleep_times: normalizedAdditionalTimes,
+      },
+    }
+  }, [methods, intakeData])
+
   // Save immediately when user leaves page or switches tabs
   useEffect(() => {
     const saveBeforeLeave = () => {
@@ -105,23 +143,7 @@ export function IntakeForm({ babies, intake }: IntakeFormProps) {
       }
 
       // Synchronous save using sendBeacon for reliability on page close
-      const values = methods.getValues()
-      const data = {
-        ...values,
-        current_bedtime: values.current_bedtime || null,
-        current_waketime: values.current_waketime || null,
-        falling_asleep_method: values.falling_asleep_method || null,
-        night_waking_duration: values.night_waking_duration || null,
-        night_wakings_description: values.night_wakings_description || null,
-        night_waking_pattern: values.night_waking_pattern || null,
-        nap_duration: values.nap_duration || null,
-        nap_method: values.nap_method || null,
-        nap_location: values.nap_location || null,
-        problem_description: values.problem_description || null,
-        parent_constraints: values.parent_constraints || null,
-        success_description: values.success_description || null,
-        additional_notes: values.additional_notes || null,
-      }
+      const data = buildSubmissionData()
 
       // Use sendBeacon for page unload - it's more reliable than fetch
       navigator.sendBeacon(
@@ -145,29 +167,12 @@ export function IntakeForm({ babies, intake }: IntakeFormProps) {
       window.removeEventListener('beforeunload', saveBeforeLeave)
       document.removeEventListener('visibilitychange', handleVisibilityChange)
     }
-  }, [intake.id, intakeStatus, methods])
+  }, [buildSubmissionData, intake.id, intakeStatus, methods])
 
   // Prepare form data for save
   const prepareFormData = useCallback(() => {
-    const values = methods.getValues()
-    return {
-      ...values,
-      // Convert empty strings to null for database
-      current_bedtime: values.current_bedtime || null,
-      current_waketime: values.current_waketime || null,
-      falling_asleep_method: values.falling_asleep_method || null,
-      night_waking_duration: values.night_waking_duration || null,
-      night_wakings_description: values.night_wakings_description || null,
-      night_waking_pattern: values.night_waking_pattern || null,
-      nap_duration: values.nap_duration || null,
-      nap_method: values.nap_method || null,
-      nap_location: values.nap_location || null,
-      problem_description: values.problem_description || null,
-      parent_constraints: values.parent_constraints || null,
-      success_description: values.success_description || null,
-      additional_notes: values.additional_notes || null,
-    }
-  }, [methods])
+    return buildSubmissionData()
+  }, [buildSubmissionData])
 
   // Save form data
   const saveForm = useCallback(async () => {

@@ -4,7 +4,7 @@ import { useFormContext } from 'react-hook-form'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { SelectWithOther } from '@/components/ui/select-with-other'
 import { nightWakingDurations, type IntakeFormData } from '@/lib/validations/intake'
 
 export function Step3NightWakings() {
@@ -37,30 +37,16 @@ export function Step3NightWakings() {
           )}
         </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="night_waking_duration">How long are the wakings?</Label>
-          <Select
-            value={nightWakingDuration || undefined}
-            onValueChange={(value) => setValue('night_waking_duration', value, { shouldDirty: true })}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Select duration" />
-            </SelectTrigger>
-            <SelectContent>
-              {nightWakingDurations.map((duration) => (
-                <SelectItem key={duration.value} value={duration.value}>
-                  {duration.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <p className="text-sm text-gray-500">
-            On average, how long does it take to get your baby back to sleep?
-          </p>
-          {errors.night_waking_duration && (
-            <p className="text-sm text-red-500">{errors.night_waking_duration.message}</p>
-          )}
-        </div>
+        <SelectWithOther
+          label="How long are the wakings?"
+          description="On average, how long does it take to get your baby back to sleep?"
+          options={nightWakingDurations}
+          value={nightWakingDuration}
+          onChange={(value) => setValue('night_waking_duration', value, { shouldDirty: true })}
+          placeholder="Select duration"
+          otherPlaceholder="Describe waking duration (e.g., 'first waking 10min, later ones 30-45min')..."
+          error={errors.night_waking_duration?.message}
+        />
 
         <div className="space-y-2">
           <Label htmlFor="night_wakings_description">What happens during wakings?</Label>
@@ -87,7 +73,7 @@ export function Step3NightWakings() {
             rows={3}
           />
           <p className="text-sm text-gray-500">
-            Any patterns you've noticed (times, frequency, triggers)?
+            Any patterns you&apos;ve noticed (times, frequency, triggers)?
           </p>
           {errors.night_waking_pattern && (
             <p className="text-sm text-red-500">{errors.night_waking_pattern.message}</p>

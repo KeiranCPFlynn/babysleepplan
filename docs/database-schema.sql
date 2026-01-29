@@ -3,6 +3,7 @@
 
 -- Enable UUID extension
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
 -- =====================================================
 -- TABLES
@@ -27,7 +28,8 @@ CREATE TABLE babies (
   date_of_birth DATE NOT NULL,
   premature_weeks INTEGER DEFAULT 0,
   medical_conditions TEXT,
-  temperament TEXT CHECK (temperament IN ('easy', 'moderate', 'spirited')),
+  temperament TEXT CHECK (temperament IN ('easy', 'moderate', 'spirited', 'sensitive', 'adaptable', 'slow_to_warm', 'persistent', 'not_sure', 'other')),
+  temperament_notes TEXT,
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
@@ -89,6 +91,22 @@ CREATE TABLE plans (
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- Plan revisions table (living plan history)
+CREATE TABLE plan_revisions (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  plan_id UUID REFERENCES plans(id) ON DELETE CASCADE NOT NULL,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
+  revision_number INTEGER NOT NULL,
+  plan_content TEXT NOT NULL,
+  summary TEXT,
+  source TEXT DEFAULT 'weekly-review' CHECK (source IN ('initial', 'weekly-review', 'manual')),
+  week_start DATE,
+  week_end DATE,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+
+  UNIQUE(plan_id, revision_number)
+);
+
 -- =====================================================
 -- INDEXES
 -- =====================================================
@@ -98,6 +116,8 @@ CREATE INDEX idx_intake_submissions_user_id ON intake_submissions(user_id);
 CREATE INDEX idx_intake_submissions_baby_id ON intake_submissions(baby_id);
 CREATE INDEX idx_plans_user_id ON plans(user_id);
 CREATE INDEX idx_plans_intake_submission_id ON plans(intake_submission_id);
+CREATE INDEX idx_plan_revisions_plan_id ON plan_revisions(plan_id);
+CREATE INDEX idx_plan_revisions_plan_week ON plan_revisions(plan_id, week_start);
 
 -- =====================================================
 -- ROW LEVEL SECURITY (RLS)
@@ -107,6 +127,7 @@ ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE babies ENABLE ROW LEVEL SECURITY;
 ALTER TABLE intake_submissions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE plans ENABLE ROW LEVEL SECURITY;
+ALTER TABLE plan_revisions ENABLE ROW LEVEL SECURITY;
 
 -- Profiles policies
 CREATE POLICY "Users can view own profile" ON profiles
@@ -140,6 +161,13 @@ CREATE POLICY "Users can insert own submissions" ON intake_submissions
 
 CREATE POLICY "Users can update own submissions" ON intake_submissions
   FOR UPDATE USING (auth.uid() = user_id);
+
+-- Plan revisions policies
+CREATE POLICY "Users can view own plan revisions" ON plan_revisions
+  FOR SELECT USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can insert own plan revisions" ON plan_revisions
+  FOR INSERT WITH CHECK (auth.uid() = user_id);
 
 -- Plans policies
 CREATE POLICY "Users can view own plans" ON plans

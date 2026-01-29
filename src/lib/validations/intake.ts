@@ -10,6 +10,12 @@ export const step2Schema = z.object({
   current_bedtime: z.string().optional(),
   current_waketime: z.string().optional(),
   falling_asleep_method: z.string().optional(),
+  additional_sleep_times: z.array(
+    z.object({
+      bedtime: z.string().optional(),
+      waketime: z.string().optional(),
+    })
+  ).optional(),
 })
 
 // Step 3: Night Sleep
@@ -53,6 +59,12 @@ export const intakeSchema = z.object({
   current_bedtime: z.string().optional().nullable(),
   current_waketime: z.string().optional().nullable(),
   falling_asleep_method: z.string().optional().nullable(),
+  additional_sleep_times: z.array(
+    z.object({
+      bedtime: z.string().optional(),
+      waketime: z.string().optional(),
+    })
+  ).optional().nullable(),
   // Step 3
   night_wakings_count: z.number().min(0).max(20).optional().nullable(),
   night_wakings_description: z.string().max(1000).optional().nullable(),
@@ -72,6 +84,8 @@ export const intakeSchema = z.object({
   // Step 7
   success_description: z.string().max(1000).optional().nullable(),
   additional_notes: z.string().max(2000).optional().nullable(),
+  // Additional data storage
+  data: z.record(z.unknown()).optional().nullable(),
 })
 
 export type IntakeFormData = z.infer<typeof intakeSchema>
@@ -85,16 +99,19 @@ export const fallingAsleepMethods = [
   { value: 'cosleeping', label: 'Co-sleeping' },
   { value: 'independent', label: 'Falls asleep independently' },
   { value: 'stroller', label: 'Stroller/Car' },
-  { value: 'other', label: 'Other' },
 ]
 
 // Night waking duration options
 export const nightWakingDurations = [
-  { value: 'under_15', label: 'Under 15 minutes' },
+  { value: 'under_5', label: 'Under 5 minutes (quick resettle)' },
+  { value: '5_10', label: '5-10 minutes' },
+  { value: '10_15', label: '10-15 minutes' },
   { value: '15_30', label: '15-30 minutes' },
-  { value: '30_60', label: '30-60 minutes' },
-  { value: 'over_60', label: 'Over 1 hour' },
-  { value: 'varies', label: 'Varies widely' },
+  { value: '30_45', label: '30-45 minutes' },
+  { value: '45_60', label: '45-60 minutes' },
+  { value: '60_90', label: '1-1.5 hours' },
+  { value: 'over_90', label: 'Over 1.5 hours' },
+  { value: 'varies', label: 'Varies widely (sometimes quick, sometimes long)' },
 ]
 
 // Nap duration options
@@ -119,16 +136,56 @@ export const napLocations = [
   { value: 'multiple', label: 'Multiple locations' },
 ]
 
-// Sleep problems options
+// Sleep problems options with descriptions
 export const sleepProblems = [
-  { value: 'hard_to_settle', label: 'Hard to settle at bedtime' },
-  { value: 'frequent_wakings', label: 'Frequent night wakings' },
-  { value: 'early_waking', label: 'Waking too early in the morning' },
-  { value: 'short_naps', label: 'Short naps' },
-  { value: 'nap_resistance', label: 'Resists napping' },
-  { value: 'sleep_associations', label: 'Needs specific conditions to sleep' },
-  { value: 'night_feeds', label: 'Still needs night feeds' },
-  { value: 'schedule', label: 'Inconsistent schedule' },
-  { value: 'transitions', label: 'Difficulty with sleep transitions' },
-  { value: 'separation_anxiety', label: 'Separation anxiety at sleep times' },
+  {
+    value: 'hard_to_settle',
+    label: 'Hard to settle at bedtime',
+    description: 'Takes a long time to fall asleep, fights bedtime, cries or protests'
+  },
+  {
+    value: 'frequent_wakings',
+    label: 'Frequent night wakings',
+    description: 'Wakes up multiple times during the night needing help to resettle'
+  },
+  {
+    value: 'early_waking',
+    label: 'Waking too early in the morning',
+    description: 'Consistently wakes before 6am ready to start the day'
+  },
+  {
+    value: 'short_naps',
+    label: 'Short naps',
+    description: 'Naps are consistently under 45 minutes (cat naps)'
+  },
+  {
+    value: 'nap_resistance',
+    label: 'Resists napping',
+    description: 'Fights naps, hard to get down for daytime sleep, skips naps'
+  },
+  {
+    value: 'sleep_associations',
+    label: 'Needs specific conditions to sleep',
+    description: 'Can only fall asleep with feeding, rocking, holding, or other specific help'
+  },
+  {
+    value: 'night_feeds',
+    label: 'Still needs night feeds',
+    description: 'Wakes to feed during the night (may or may not be developmentally appropriate)'
+  },
+  {
+    value: 'schedule',
+    label: 'Inconsistent schedule',
+    description: 'No predictable routine, sleep times vary day to day'
+  },
+  {
+    value: 'transitions',
+    label: 'Difficulty with sleep cycle transitions',
+    description: 'Wakes fully between sleep cycles (every 30-45 min) instead of connecting them'
+  },
+  {
+    value: 'separation_anxiety',
+    label: 'Separation anxiety at sleep times',
+    description: 'Cries or panics when parent leaves the room, needs presence to sleep'
+  },
 ]

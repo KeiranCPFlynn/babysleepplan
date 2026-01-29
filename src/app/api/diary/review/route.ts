@@ -180,14 +180,23 @@ ${formatDiaryEntries(entries)}
 
 ---
 
-Write a brief, warm review (3-4 paragraphs):
-1. Start with what went well this week - find positives
-2. Note any patterns (improving, declining, or inconsistent)
-3. Give ONE specific, actionable suggestion for next week
-4. End with encouragement
+Write a brief, warm review in Markdown that matches the tone and structure of the plan:
 
-Keep it conversational and supportive. Write in paragraphs, not bullets.
-No emojis.`
+## Weekly Review
+
+### This Week's Wins
+2-3 sentences highlighting positives.
+
+### Patterns from the Diary
+2-3 sentences that clearly reference the diary entries (bedtime/wake time, night wakings, naps, mood, notes). Include at least TWO specific observations tied to the log.
+
+### Focus for Next Week
+2-3 sentences with ONE specific, actionable suggestion.
+
+End with a blockquote encouragement like:
+> You're doing great. Consistency now will pay off soon.
+
+Keep it conversational and supportive. No emojis.`
 
     // Generate the review
     console.log('Generating weekly review for plan:', planId)

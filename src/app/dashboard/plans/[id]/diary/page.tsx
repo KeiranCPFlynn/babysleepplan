@@ -7,8 +7,10 @@ import { DiaryClient } from './diary-client'
 
 export default async function DiaryPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>
+  searchParams?: { date?: string }
 }) {
   const user = await requireAuth()
   const supabase = await createClient()
@@ -70,6 +72,21 @@ export default async function DiaryPage({
     .order('week_start', { ascending: false })
     .limit(3)
 
+  const last7Start = new Date(today)
+  last7Start.setDate(today.getDate() - 6)
+  const last7StartStr = last7Start.toISOString().split('T')[0]
+
+  const { data: last7Update } = await supabase
+    .from('plan_revisions')
+    .select('id')
+    .eq('plan_id', id)
+    .eq('user_id', user.id)
+    .eq('source', 'weekly-review')
+    .eq('week_start', last7StartStr)
+    .maybeSingle()
+
+  const preselectDate = searchParams?.date
+
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       <Link
@@ -100,6 +117,8 @@ export default async function DiaryPage({
         babyName={plan.baby?.name || 'Baby'}
         initialEntries={entries || []}
         initialReviews={reviews || []}
+        initialSelectedDate={preselectDate || null}
+        initialUpdatedForLast7={Boolean(last7Update)}
       />
     </div>
   )

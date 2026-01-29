@@ -1,5 +1,6 @@
 -- Migration: Add Sleep Diary Feature
 -- Creates tables for daily sleep logging and weekly AI reviews
+-- Run this in Supabase SQL Editor
 
 -- =====================================================
 -- TABLES
@@ -109,3 +110,6 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER update_sleep_diary_entries_updated_at
   BEFORE UPDATE ON sleep_diary_entries
   FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+-- Refresh the schema cache
+NOTIFY pgrst, 'reload schema';
