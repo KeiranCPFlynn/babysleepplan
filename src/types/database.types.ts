@@ -79,3 +79,39 @@ export interface Plan {
   created_at: string
   updated_at: string
 }
+
+export type DiaryMood = 'great' | 'good' | 'okay' | 'rough' | 'terrible'
+
+export interface SleepDiaryEntry {
+  id: string
+  plan_id: string
+  user_id: string
+  date: string
+
+  // Core sleep data
+  bedtime: string | null
+  wake_time: string | null
+  night_wakings: number
+  night_waking_duration: number | null
+
+  // Naps
+  nap_count: number
+  nap_total_minutes: number
+
+  // Qualitative
+  mood: DiaryMood | null
+  notes: string | null
+
+  created_at: string
+  updated_at: string
+}
+
+export interface WeeklyReview {
+  id: string
+  plan_id: string
+  user_id: string
+  week_start: string
+  week_end: string
+  review_content: string
+  created_at: string
+}

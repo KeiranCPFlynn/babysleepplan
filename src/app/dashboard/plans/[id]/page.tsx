@@ -4,7 +4,7 @@ import { requireAuth } from '@/lib/auth'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card'
-import { ArrowLeft, RefreshCw, Star, Moon } from 'lucide-react'
+import { ArrowLeft, RefreshCw, Star, Moon, BookOpen } from 'lucide-react'
 import { PlanContent } from './plan-content'
 import { RefreshButton } from './refresh-button'
 import { RetryButton } from './retry-button'
@@ -155,6 +155,12 @@ export default async function PlanViewPage({
           Back to Plans
         </Link>
         <div className="flex gap-2">
+          <Button variant="outline" asChild>
+            <Link href={`/dashboard/plans/${plan.id}/diary`}>
+              <BookOpen className="mr-2 h-4 w-4" />
+              Sleep Diary
+            </Link>
+          </Button>
           {isDevMode && <RegenerateButton planId={plan.id} />}
           <DownloadPdfButton
             babyName={plan.baby?.name || 'Baby'}
