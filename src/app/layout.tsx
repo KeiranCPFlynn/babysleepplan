@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Baby Sleep Plan - Personalized AI Sleep Plans",
-  description: "Get personalized, evidence-based sleep plans for your baby powered by AI",
+  title: "Baby Sleep Plan - Get a Plan for Tonight",
+  description: "Get a personalized plan for tonight in 3 minutes, tailored to your baby's needs.",
 };
 
 export default function RootLayout({

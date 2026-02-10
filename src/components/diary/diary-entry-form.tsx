@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
+import { TimePicker } from '@/components/ui/time-picker'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Loader2, Minus, Plus } from 'lucide-react'
 import type { SleepDiaryEntry, DiaryMood } from '@/types/database.types'
@@ -107,20 +108,18 @@ export function DiaryEntryForm({
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="bedtime">Bedtime</Label>
-              <Input
+              <TimePicker
                 id="bedtime"
-                type="time"
                 value={bedtime}
-                onChange={(e) => setBedtime(e.target.value)}
+                onChange={setBedtime}
               />
             </div>
             <div className="space-y-2">
               <Label htmlFor="wakeTime">Wake Time</Label>
-              <Input
+              <TimePicker
                 id="wakeTime"
-                type="time"
                 value={wakeTime}
-                onChange={(e) => setWakeTime(e.target.value)}
+                onChange={setWakeTime}
               />
             </div>
           </div>

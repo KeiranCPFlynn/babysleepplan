@@ -6,8 +6,6 @@ import { IntakeForm } from '@/components/forms/intake'
 // Disable caching for this page to ensure fresh data
 export const dynamic = 'force-dynamic'
 
-const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
-
 export default async function IntakePage({
   params,
 }: {
@@ -19,8 +17,8 @@ export default async function IntakePage({
   const { id } = await params
 
   try {
-    // Fetch intake and babies using server-side client
-    const [intakeResult, babiesResult] = await Promise.all([
+    // Fetch intake, babies, and profile
+    const [intakeResult, babiesResult, profileResult] = await Promise.all([
       supabase
         .from('intake_submissions')
         .select('*')
@@ -31,6 +29,11 @@ export default async function IntakePage({
         .select('*')
         .eq('user_id', user.id)
         .order('created_at', { ascending: false }),
+      supabase
+        .from('profiles')
+        .select('has_used_trial, subscription_status')
+        .eq('id', user.id)
+        .single(),
     ])
 
     if (intakeResult.error) throw intakeResult.error
@@ -38,14 +41,19 @@ export default async function IntakePage({
     const intake = intakeResult.data
     const babies = babiesResult.data || []
 
-    // If intake is already submitted or paid, redirect to appropriate page
-    if (intake.status === 'submitted') {
-      redirect(`/dashboard/intake/${id}/payment`)
+    if (intake.status === 'paid') {
+      redirect(`/dashboard/plans?intake=${id}`)
     }
 
-    if (intake.status === 'paid') {
-      // Redirect to plan page if payment complete
-      redirect(`/dashboard/plans?intake=${id}`)
+    // If intake was submitted, reset to draft so user can edit
+    // (they clicked "back to questionnaire" from payment page)
+    if (intake.status === 'submitted') {
+      await supabase
+        .from('intake_submissions')
+        .update({ status: 'draft' })
+        .eq('id', id)
+        .eq('user_id', user.id)
+      intake.status = 'draft'
     }
 
     return (
@@ -53,11 +61,11 @@ export default async function IntakePage({
         <div>
           <h1 className="text-3xl font-bold">Sleep Plan Questionnaire</h1>
           <p className="text-gray-600 mt-2">
-            Tell us about your baby's sleep so we can create a personalized plan.
+            Tell us about your baby&apos;s sleep so we can create a personalized plan.
           </p>
         </div>
 
-        <IntakeForm babies={babies} intake={intake} />
+        <IntakeForm babies={babies} intake={intake} hasUsedTrial={profileResult.data?.has_used_trial === true} />
       </div>
     )
   } catch {

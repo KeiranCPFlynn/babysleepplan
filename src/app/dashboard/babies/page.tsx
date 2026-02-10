@@ -3,8 +3,12 @@ import { requireAuth } from '@/lib/auth'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Baby, Plus, Edit, Trash2 } from 'lucide-react'
-import { differenceInMonths, differenceInDays } from 'date-fns'
+import { Baby, Plus, Edit, CreditCard } from 'lucide-react'
+import { formatBabyAge } from '@/lib/age'
+import { hasActiveSubscription, MONTHLY_PRICE, ADDITIONAL_BABY_PRICE } from '@/lib/subscription'
+import { DeleteBabyButton } from './delete-baby-button'
+
+const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
 
 export default async function BabiesPage() {
   const user = await requireAuth()
@@ -16,39 +20,46 @@ export default async function BabiesPage() {
     .eq('user_id', user.id)
     .order('created_at', { ascending: false })
 
-  function calculateAge(dateOfBirth: string) {
-    const dob = new Date(dateOfBirth)
-    const now = new Date()
-    const months = differenceInMonths(now, dob)
-    const days = differenceInDays(now, dob)
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('subscription_status')
+    .eq('id', user.id)
+    .single()
 
-    if (months < 1) {
-      const weeks = Math.floor(days / 7)
-      return `${weeks} ${weeks === 1 ? 'week' : 'weeks'} old`
-    } else if (months < 24) {
-      return `${months} ${months === 1 ? 'month' : 'months'} old`
-    } else {
-      const years = Math.floor(months / 12)
-      return `${years} ${years === 1 ? 'year' : 'years'} old`
-    }
-  }
+  const isActive = hasActiveSubscription(profile?.subscription_status, isStripeEnabled)
+  const babyCount = babies?.length ?? 0
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold">My Babies</h1>
-          <p className="text-gray-600 mt-1">
+          <h1 className="text-3xl font-bold text-purple-900">My Babies</h1>
+          <p className="text-purple-600/80 mt-1">
             Manage information about your little ones
           </p>
         </div>
-        <Button asChild>
+        <Button asChild className="bg-purple-600 hover:bg-purple-700">
           <Link href="/dashboard/babies/new">
             <Plus className="mr-2 h-4 w-4" />
             Add Baby
           </Link>
         </Button>
       </div>
+
+      {isActive && babyCount > 0 && (
+        <Card className="border-purple-200 bg-purple-50/50">
+          <CardContent className="flex items-center gap-3 py-4">
+            <CreditCard className="h-5 w-5 text-purple-600" />
+            <div className="text-sm text-purple-800">
+              {babyCount === 1 ? (
+                <span>${MONTHLY_PRICE}/month for 1 baby. Additional babies are ${ADDITIONAL_BABY_PRICE}/month each.</span>
+              ) : (
+                <span>${MONTHLY_PRICE}/month + ${ADDITIONAL_BABY_PRICE}/month x {babyCount - 1} additional {babyCount - 1 === 1 ? 'baby' : 'babies'}.</span>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {babies && babies.length > 0 ? (
         <div className="grid gap-6 md:grid-cols-2">
@@ -61,7 +72,7 @@ export default async function BabiesPage() {
                     <div>
                       <CardTitle>{baby.name}</CardTitle>
                       <CardDescription>
-                        {calculateAge(baby.date_of_birth)}
+                        {formatBabyAge(baby.date_of_birth)}
                       </CardDescription>
                     </div>
                   </div>
@@ -71,6 +82,7 @@ export default async function BabiesPage() {
                         <Edit className="h-4 w-4" />
                       </Link>
                     </Button>
+                    <DeleteBabyButton babyId={baby.id} babyName={baby.name} />
                   </div>
                 </div>
               </CardHeader>
@@ -134,7 +146,7 @@ export default async function BabiesPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button asChild>
+            <Button asChild className="bg-purple-600 hover:bg-purple-700">
               <Link href="/dashboard/babies/new">
                 <Plus className="mr-2 h-4 w-4" />
                 Add Your First Baby

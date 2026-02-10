@@ -1,8 +1,34 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { getModel } from '@/lib/gemini'
+import { hasActiveSubscription } from '@/lib/subscription'
 import fs from 'fs'
 import path from 'path'
+
+const isDev = process.env.NODE_ENV !== 'production'
+const reviewKnowledgeCache = new Map<string, string | null>()
+
+function loadReviewFile(knowledgeDir: string, file: string) {
+  if (reviewKnowledgeCache.has(file)) {
+    return reviewKnowledgeCache.get(file)
+  }
+  try {
+    const filePath = path.join(knowledgeDir, file)
+    if (!fs.existsSync(filePath)) {
+      reviewKnowledgeCache.set(file, null)
+      return null
+    }
+    const content = fs.readFileSync(filePath, 'utf-8')
+    reviewKnowledgeCache.set(file, content)
+    return content
+  } catch (error) {
+    reviewKnowledgeCache.set(file, null)
+    if (isDev) {
+      console.error(`Failed to load ${file}:`, error)
+    }
+    return null
+  }
+}
 
 // Load relevant knowledge base files for weekly review
 function loadReviewKnowledge(ageMonths: number): string {
@@ -32,14 +58,11 @@ function loadReviewKnowledge(ageMonths: number): string {
 
   let knowledge = ''
   for (const file of filesToLoad) {
-    try {
-      const filePath = path.join(knowledgeDir, file)
-      if (fs.existsSync(filePath)) {
-        const content = fs.readFileSync(filePath, 'utf-8')
-        knowledge += `\n\n--- ${file} ---\n${content}`
-      }
-    } catch (error) {
-      console.error(`Failed to load ${file}:`, error)
+    const content = loadReviewFile(knowledgeDir, file)
+    if (content) {
+      knowledge += `\n\n--- ${file} ---\n${content}`
+    } else if (isDev) {
+      console.warn(`Knowledge file not found: ${file}`)
     }
   }
 
@@ -111,19 +134,34 @@ export async function POST(request: NextRequest) {
     }
 
     // Get the plan with baby and intake info
-    const { data: plan, error: planError } = await supabase
-      .from('plans')
-      .select(`
-        *,
-        baby:babies(*),
-        intake:intake_submissions(*)
-      `)
-      .eq('id', planId)
-      .eq('user_id', user.id)
-      .single()
+    const [planResult, profileResult] = await Promise.all([
+      supabase
+        .from('plans')
+        .select(`
+          *,
+          baby:babies(*),
+          intake:intake_submissions(*)
+        `)
+        .eq('id', planId)
+        .eq('user_id', user.id)
+        .single(),
+      supabase
+        .from('profiles')
+        .select('subscription_status')
+        .eq('id', user.id)
+        .single(),
+    ])
 
+    const { data: plan, error: planError } = planResult
     if (planError || !plan) {
       return NextResponse.json({ error: 'Plan not found' }, { status: 404 })
+    }
+
+    const { data: profile } = profileResult
+
+    const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
+    if (!hasActiveSubscription(profile?.subscription_status, isStripeEnabled)) {
+      return NextResponse.json({ error: 'Subscription required to generate reviews' }, { status: 402 })
     }
 
     // Get diary entries for the week
@@ -199,7 +237,9 @@ End with a blockquote encouragement like:
 Keep it conversational and supportive. No emojis.`
 
     // Generate the review
-    console.log('Generating weekly review for plan:', planId)
+    if (isDev) {
+      console.log('Generating weekly review for plan:', planId)
+    }
     const model = getModel()
 
     const timeoutPromise = new Promise<never>((_, reject) => {

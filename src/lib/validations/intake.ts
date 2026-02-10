@@ -7,9 +7,9 @@ export const step1Schema = z.object({
 
 // Step 2: Current Sleep Situation
 export const step2Schema = z.object({
-  current_bedtime: z.string().optional(),
-  current_waketime: z.string().optional(),
-  falling_asleep_method: z.string().optional(),
+  current_bedtime: z.string().min(1, 'Please enter a bedtime'),
+  current_waketime: z.string().min(1, 'Please enter a wake time'),
+  falling_asleep_method: z.string().min(1, 'Please select how your baby falls asleep'),
   additional_sleep_times: z.array(
     z.object({
       bedtime: z.string().optional(),
@@ -20,7 +20,7 @@ export const step2Schema = z.object({
 
 // Step 3: Night Sleep
 export const step3Schema = z.object({
-  night_wakings_count: z.number().min(0).max(20).optional(),
+  night_wakings_count: z.number({ message: 'Please enter the number of night wakings' }).min(0).max(20),
   night_wakings_description: z.string().max(1000).optional(),
   night_waking_duration: z.string().optional(),
   night_waking_pattern: z.string().max(1000).optional(),
@@ -28,7 +28,7 @@ export const step3Schema = z.object({
 
 // Step 4: Naps
 export const step4Schema = z.object({
-  nap_count: z.number().min(0).max(10).optional(),
+  nap_count: z.number({ message: 'Please enter the number of naps' }).min(0).max(10),
   nap_duration: z.string().optional(),
   nap_method: z.string().optional(),
   nap_location: z.string().optional(),
@@ -36,19 +36,19 @@ export const step4Schema = z.object({
 
 // Step 5: The Problem
 export const step5Schema = z.object({
-  problems: z.array(z.string()).optional(),
-  problem_description: z.string().max(2000).optional(),
+  problems: z.array(z.string()).min(1, 'Please select at least one sleep challenge'),
+  problem_description: z.string().min(1, 'Please describe your sleep challenges').max(2000),
 })
 
 // Step 6: Parent Preferences
 export const step6Schema = z.object({
-  crying_comfort_level: z.number().min(1).max(5).optional(),
+  crying_comfort_level: z.number().min(1).max(5),
   parent_constraints: z.string().max(1000).optional(),
 })
 
 // Step 7: Goals
 export const step7Schema = z.object({
-  success_description: z.string().max(1000).optional(),
+  success_description: z.string().min(1, 'Please describe what success looks like').max(1000),
   additional_notes: z.string().max(2000).optional(),
 })
 
@@ -85,7 +85,7 @@ export const intakeSchema = z.object({
   success_description: z.string().max(1000).optional().nullable(),
   additional_notes: z.string().max(2000).optional().nullable(),
   // Additional data storage
-  data: z.record(z.unknown()).optional().nullable(),
+  data: z.record(z.string(), z.unknown()).optional().nullable(),
 })
 
 export type IntakeFormData = z.infer<typeof intakeSchema>

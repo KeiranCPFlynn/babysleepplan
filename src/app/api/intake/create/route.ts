@@ -4,6 +4,12 @@ import { createClient as createSupabaseClient, SupabaseClient } from '@supabase/
 
 // Lazy initialization of admin client (same pattern as webhook route)
 let supabaseAdmin: SupabaseClient | null = null
+const isDev = process.env.NODE_ENV !== 'production'
+const logInfo = (...args: unknown[]) => {
+  if (isDev) {
+    console.log(...args)
+  }
+}
 
 function getSupabaseAdmin() {
   if (!supabaseAdmin) {
@@ -16,7 +22,7 @@ function getSupabaseAdmin() {
 }
 
 export async function POST(request: NextRequest) {
-  console.log('=== Intake create API called ===')
+  logInfo('=== Intake create API called ===')
 
   try {
     // Parse body first
@@ -24,7 +30,7 @@ export async function POST(request: NextRequest) {
     try {
       const body = await request.json()
       babyId = body.babyId
-      console.log('Request body parsed, babyId:', babyId)
+      logInfo('Request body parsed, babyId:', babyId)
     } catch (parseErr) {
       console.error('Failed to parse request body:', parseErr)
       return NextResponse.json({ error: 'Invalid request body' }, { status: 400 })
@@ -47,9 +53,9 @@ export async function POST(request: NextRequest) {
     // Verify user is authenticated
     let user
     try {
-      console.log('Creating auth client...')
+      logInfo('Creating auth client...')
       const supabase = await createClient()
-      console.log('Getting user...')
+      logInfo('Getting user...')
       const { data, error: authError } = await supabase.auth.getUser()
 
       if (authError) {
@@ -58,7 +64,7 @@ export async function POST(request: NextRequest) {
       }
 
       user = data.user
-      console.log('User authenticated:', user?.id)
+      logInfo('User authenticated:', user?.id)
     } catch (authErr) {
       console.error('Failed to create auth client:', authErr)
       return NextResponse.json({ error: 'Auth client error', details: String(authErr) }, { status: 500 })
@@ -68,7 +74,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    console.log('Creating intake for baby:', babyId, 'user:', user.id)
+    logInfo('Creating intake for baby:', babyId, 'user:', user.id)
 
     if (!babyId) {
       return NextResponse.json({ error: 'Missing babyId' }, { status: 400 })
@@ -94,7 +100,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Baby not found' }, { status: 404 })
     }
 
-    console.log('Baby verified:', baby.id)
+    logInfo('Baby verified:', baby.id)
 
     // Check for existing draft
     const { data: existingDraft } = await adminSupabase
@@ -118,7 +124,7 @@ export async function POST(request: NextRequest) {
       user_id: user.id,
       data: {}, // Required by database
     }
-    console.log('Inserting intake with:', insertPayload)
+    logInfo('Inserting intake with:', insertPayload)
 
     const { data: intake, error: intakeError } = await adminSupabase
       .from('intake_submissions')
@@ -139,7 +145,7 @@ export async function POST(request: NextRequest) {
       }, { status: 500 })
     }
 
-    console.log('Intake created:', intake.id)
+    logInfo('Intake created:', intake.id)
     return NextResponse.json({ intakeId: intake.id, existing: false })
   } catch (error) {
     console.error('Intake creation error:', error)

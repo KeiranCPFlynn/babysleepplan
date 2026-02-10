@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm, FormProvider } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { intakeSchema, step1Schema, type IntakeFormData } from '@/lib/validations/intake'
+import { intakeSchema, step1Schema, step2Schema, step3Schema, step4Schema, step5Schema, step7Schema, type IntakeFormData } from '@/lib/validations/intake'
 import { updateIntakeSubmission, submitIntake } from '@/lib/api/intake'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
@@ -24,6 +24,7 @@ import { Step8Review } from './step-8-review'
 interface IntakeFormProps {
   babies: Baby[]
   intake: IntakeSubmission
+  hasUsedTrial?: boolean
 }
 
 const TOTAL_STEPS = 8
@@ -39,7 +40,7 @@ const stepTitles = [
   'Review',
 ]
 
-export function IntakeForm({ babies, intake }: IntakeFormProps) {
+export function IntakeForm({ babies, intake, hasUsedTrial }: IntakeFormProps) {
   const router = useRouter()
   // Start at step 2 if baby is already selected (from intake creation page)
   const [currentStep, setCurrentStep] = useState(intake.baby_id ? 2 : 1)
@@ -244,11 +245,67 @@ export function IntakeForm({ babies, intake }: IntakeFormProps) {
   }, [currentStep]) // Intentionally not including saveForm to avoid loops
 
   const validateCurrentStep = async () => {
+    const values = methods.getValues()
     switch (currentStep) {
       case 1:
         return await trigger('baby_id')
+      case 2: {
+        const r = step2Schema.safeParse(values)
+        if (!r.success) {
+          r.error.issues.forEach((e) => {
+            const field = e.path[0] as keyof IntakeFormData
+            methods.setError(field, { message: e.message })
+          })
+          return false
+        }
+        return true
+      }
+      case 3: {
+        const r = step3Schema.safeParse(values)
+        if (!r.success) {
+          r.error.issues.forEach((e) => {
+            const field = e.path[0] as keyof IntakeFormData
+            methods.setError(field, { message: e.message })
+          })
+          return false
+        }
+        return true
+      }
+      case 4: {
+        const r = step4Schema.safeParse(values)
+        if (!r.success) {
+          r.error.issues.forEach((e) => {
+            const field = e.path[0] as keyof IntakeFormData
+            methods.setError(field, { message: e.message })
+          })
+          return false
+        }
+        return true
+      }
+      case 5: {
+        const r = step5Schema.safeParse(values)
+        if (!r.success) {
+          r.error.issues.forEach((e) => {
+            const field = e.path[0] as keyof IntakeFormData
+            methods.setError(field, { message: e.message })
+          })
+          return false
+        }
+        return true
+      }
+      case 7: {
+        const r = step7Schema.safeParse(values)
+        if (!r.success) {
+          r.error.issues.forEach((e) => {
+            const field = e.path[0] as keyof IntakeFormData
+            methods.setError(field, { message: e.message })
+          })
+          return false
+        }
+        return true
+      }
       default:
-        return true // Other steps have optional fields
+        return true
     }
   }
 
@@ -311,28 +368,8 @@ export function IntakeForm({ babies, intake }: IntakeFormProps) {
       await submitIntake(intake.id)
       setIntakeStatus('submitted')
 
-      if (isStripeEnabled) {
-        // Paid mode: go to payment page
-        toast.success('Intake submitted successfully!')
-        router.push(`/dashboard/intake/${intake.id}/payment`)
-      } else {
-        // Free mode: directly trigger plan generation
-        toast.success('Generating your sleep plan...')
-        const response = await fetch('/api/stripe/checkout', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ intakeId: intake.id }),
-        })
-        const data = await response.json()
-        if (!response.ok) {
-          throw new Error(data.error || 'Failed to start plan generation')
-        }
-        if (data.url) {
-          router.push(data.url)
-        } else {
-          throw new Error('No redirect URL received')
-        }
-      }
+      toast.success('Intake submitted successfully!')
+      router.push(`/dashboard/intake/${intake.id}/payment`)
     } catch (error) {
       // Reset active flag on error so user can try again
       isActiveRef.current = true
@@ -377,7 +414,7 @@ export function IntakeForm({ babies, intake }: IntakeFormProps) {
             className="mt-4"
             onClick={() => router.push(`/dashboard/intake/${intake.id}/payment`)}
           >
-            {isStripeEnabled ? 'Continue to Payment' : 'Generate Plan'}
+            {isStripeEnabled ? 'Continue to Start Trial' : 'Generate Plan'}
           </Button>
         </CardContent>
       </Card>
@@ -465,7 +502,7 @@ export function IntakeForm({ babies, intake }: IntakeFormProps) {
                 onClick={handleSubmit}
                 disabled={submitting}
               >
-                {submitting ? 'Submitting...' : isStripeEnabled ? 'Submit & Continue to Payment' : 'Submit & Generate Plan'}
+                {submitting ? 'Submitting...' : isStripeEnabled ? (hasUsedTrial ? 'Submit & Continue' : 'Submit & Start Trial') : 'Submit & Generate Plan'}
               </Button>
             )}
           </CardFooter>

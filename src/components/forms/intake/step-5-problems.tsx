@@ -39,7 +39,7 @@ export function Step5Problems() {
 
       <div className="space-y-4">
         <div className="space-y-3">
-          <Label>Select your sleep challenges</Label>
+          <Label>Select your sleep challenges <span className="text-red-500">*</span></Label>
           <div className="grid gap-3">
             {sleepProblems.map((problem) => {
               const problemsArray = Array.isArray(selectedProblems) ? selectedProblems : []
@@ -80,7 +80,7 @@ export function Step5Problems() {
         </div>
 
         <div className="space-y-2 pt-4">
-          <Label htmlFor="problem_description">Tell us more about your challenges</Label>
+          <Label htmlFor="problem_description">Tell us more about your challenges <span className="text-red-500">*</span></Label>
           <Textarea
             id="problem_description"
             {...register('problem_description')}

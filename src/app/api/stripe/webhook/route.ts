@@ -45,13 +45,26 @@ export async function POST(request: NextRequest) {
     case 'checkout.session.completed': {
       const session = event.data.object as Stripe.Checkout.Session
 
-      if (session.payment_status === 'paid') {
+      // Trials fire with 'no_payment_required', paid sessions with 'paid'
+      if (session.payment_status === 'paid' || session.payment_status === 'no_payment_required') {
         const intakeId = session.metadata?.intake_id
         const userId = session.metadata?.user_id
         const babyId = session.metadata?.baby_id
 
         if (intakeId && userId && babyId) {
           const adminClient = getSupabaseAdmin()
+
+          // Idempotency check: verify this intake hasn't already been processed
+          const { data: existingPlan } = await adminClient
+            .from('plans')
+            .select('id')
+            .eq('intake_submission_id', intakeId)
+            .maybeSingle()
+
+          if (existingPlan) {
+            console.log(`Webhook already processed for intake ${intakeId}, skipping (idempotency check)`)
+            return NextResponse.json({ received: true, skipped: true })
+          }
 
           // Update intake status to paid
           const { error: updateError } = await adminClient
@@ -61,6 +74,30 @@ export async function POST(request: NextRequest) {
 
           if (updateError) {
             console.error('Failed to update intake status:', updateError)
+          }
+
+          // Set subscription status to trialing (trial just started)
+          // Get period end from the Stripe subscription
+          let periodEnd: string | null = null
+          if (session.subscription) {
+            const sub = await stripe.subscriptions.retrieve(session.subscription as string)
+            const endTimestamp = sub.trial_end ?? sub.items.data[0]?.current_period_end
+            if (endTimestamp) {
+              periodEnd = new Date(endTimestamp * 1000).toISOString()
+            }
+          }
+
+          const { error: subscriptionError } = await adminClient
+            .from('profiles')
+            .update({
+              subscription_status: 'trialing',
+              has_used_trial: true,
+              ...(periodEnd ? { subscription_period_end: periodEnd } : {}),
+            })
+            .eq('id', userId)
+
+          if (subscriptionError) {
+            console.error('Failed to update subscription status:', subscriptionError)
           }
 
           // Create a plan record
@@ -81,19 +118,21 @@ export async function POST(request: NextRequest) {
           } else if (plan) {
             // Trigger plan generation asynchronously
             const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+            const internalKey = process.env.INTERNAL_API_KEY || 'internal-generate-plan'
             fetch(`${appUrl}/api/generate-plan`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${internalKey}`,
               },
               body: JSON.stringify({ planId: plan.id }),
             }).catch((err) => {
               console.error('Failed to trigger plan generation:', err)
             })
 
-            console.log(`Payment completed for intake ${intakeId}, generating plan ${plan.id}`)
+            console.log(`Trial started for intake ${intakeId}, generating plan ${plan.id}`)
 
-            // Send payment confirmation email
+            // Send confirmation email
             const { data: baby } = await adminClient
               .from('babies')
               .select('name')
@@ -105,10 +144,10 @@ export async function POST(request: NextRequest) {
                 await sendPaymentConfirmationEmail(
                   session.customer_email,
                   baby.name,
-                  '$29.00'
+                  'Free trial started'
                 )
               } catch (emailError) {
-                console.error('Failed to send payment confirmation email:', emailError)
+                console.error('Failed to send confirmation email:', emailError)
               }
             }
           }
@@ -120,6 +159,127 @@ export async function POST(request: NextRequest) {
     case 'checkout.session.expired': {
       const session = event.data.object as Stripe.Checkout.Session
       console.log(`Checkout session expired: ${session.id}`)
+      break
+    }
+
+    case 'customer.subscription.created': {
+      const subscription = event.data.object as Stripe.Subscription
+      const customerId = subscription.customer as string
+      const adminClient = getSupabaseAdmin()
+
+      // Find user by Stripe customer ID
+      const { data: profile } = await adminClient
+        .from('profiles')
+        .select('id')
+        .eq('stripe_customer_id', customerId)
+        .single()
+
+      if (profile) {
+        const status = subscription.status === 'trialing' ? 'trialing' : 'active'
+        const createdEndTimestamp = subscription.trial_end ?? subscription.items.data[0]?.current_period_end
+        const createdPeriodEnd = createdEndTimestamp ? new Date(createdEndTimestamp * 1000).toISOString() : null
+
+        const { error } = await adminClient
+          .from('profiles')
+          .update({
+            subscription_status: status,
+            has_used_trial: true,
+            ...(createdPeriodEnd ? { subscription_period_end: createdPeriodEnd } : {}),
+          })
+          .eq('id', profile.id)
+
+        if (error) {
+          console.error('Failed to update subscription status:', error)
+        } else {
+          console.log(`Subscription created for user ${profile.id} with status ${status}`)
+        }
+      }
+      break
+    }
+
+    case 'customer.subscription.updated': {
+      const subscription = event.data.object as Stripe.Subscription
+      const customerId = subscription.customer as string
+      const adminClient = getSupabaseAdmin()
+
+      const { data: profile } = await adminClient
+        .from('profiles')
+        .select('id')
+        .eq('stripe_customer_id', customerId)
+        .single()
+
+      if (profile) {
+        // Map Stripe subscription statuses to our statuses
+        let ourStatus: string
+        switch (subscription.status) {
+          case 'trialing':
+            ourStatus = 'trialing'
+            break
+          case 'active':
+            ourStatus = 'active'
+            break
+          case 'canceled':
+          case 'unpaid':
+            ourStatus = 'cancelled'
+            break
+          case 'past_due':
+            ourStatus = 'active' // Keep active during retry period
+            break
+          default:
+            ourStatus = 'inactive'
+        }
+
+        const updatedEndTimestamp = subscription.trial_end ?? subscription.items.data[0]?.current_period_end
+        const updatedPeriodEnd = updatedEndTimestamp ? new Date(updatedEndTimestamp * 1000).toISOString() : null
+
+        const { error } = await adminClient
+          .from('profiles')
+          .update({
+            subscription_status: ourStatus,
+            ...(updatedPeriodEnd ? { subscription_period_end: updatedPeriodEnd } : {}),
+          })
+          .eq('id', profile.id)
+
+        if (error) {
+          console.error('Failed to update subscription status:', error)
+        } else {
+          console.log(`Subscription updated for user ${profile.id}: ${subscription.status} -> ${ourStatus}`)
+        }
+      }
+      break
+    }
+
+    case 'customer.subscription.deleted': {
+      const subscription = event.data.object as Stripe.Subscription
+      const customerId = subscription.customer as string
+      const adminClient = getSupabaseAdmin()
+
+      // Find user by Stripe customer ID and cancel subscription
+      const { data: profile } = await adminClient
+        .from('profiles')
+        .select('id')
+        .eq('stripe_customer_id', customerId)
+        .single()
+
+      if (profile) {
+        const { error } = await adminClient
+          .from('profiles')
+          .update({ subscription_status: 'cancelled' })
+          .eq('id', profile.id)
+
+        if (error) {
+          console.error('Failed to cancel subscription:', error)
+        } else {
+          console.log(`Subscription cancelled for user ${profile.id}`)
+        }
+      }
+      break
+    }
+
+    case 'invoice.payment_failed': {
+      const invoice = event.data.object as Stripe.Invoice
+      const customerId = invoice.customer as string
+      console.log(`Payment failed for customer ${customerId}, invoice ${invoice.id}`)
       break
     }
 

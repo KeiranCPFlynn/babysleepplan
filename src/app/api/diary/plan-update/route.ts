@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { getModel } from '@/lib/gemini'
+import { hasActiveSubscription } from '@/lib/subscription'
 
 function calculateAgeMonths(dob: string): number {
   const birth = new Date(dob)
@@ -141,23 +142,38 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
-    const { data: plan, error: planError } = await supabase
-      .from('plans')
-      .select(`
-        *,
-        baby:babies(*),
-        intake:intake_submissions(*)
-      `)
-      .eq('id', planId)
-      .eq('user_id', user.id)
-      .single()
+    const [planResult, profileResult] = await Promise.all([
+      supabase
+        .from('plans')
+        .select(`
+          *,
+          baby:babies(*),
+          intake:intake_submissions(*)
+        `)
+        .eq('id', planId)
+        .eq('user_id', user.id)
+        .single(),
+      supabase
+        .from('profiles')
+        .select('subscription_status')
+        .eq('id', user.id)
+        .single(),
+    ])
 
+    const { data: plan, error: planError } = planResult
     if (planError || !plan) {
       return NextResponse.json({ error: 'Plan not found' }, { status: 404 })
     }
 
     if (plan.status !== 'completed') {
       return NextResponse.json({ error: 'Plan not completed yet' }, { status: 400 })
+    }
+
+    const { data: profile } = profileResult
+
+    const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
+    if (!hasActiveSubscription(profile?.subscription_status, isStripeEnabled) && !force) {
+      return NextResponse.json({ error: 'Subscription required to update the plan' }, { status: 402 })
     }
 
     const { data: entries, error: entriesError } = await supabase

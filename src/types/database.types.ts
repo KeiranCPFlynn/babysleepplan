@@ -1,4 +1,4 @@
-export type SubscriptionStatus = 'inactive' | 'active' | 'cancelled'
+export type SubscriptionStatus = 'inactive' | 'trialing' | 'active' | 'cancelled'
 export type Temperament =
   | 'easy'
   | 'moderate'
@@ -18,7 +18,11 @@ export interface Profile {
   email: string
   full_name: string | null
   subscription_status: SubscriptionStatus
+  subscription_period_end: string | null
   stripe_customer_id: string | null
+  is_admin: boolean
+  has_used_trial: boolean
+  trial_days_override: number | null
   created_at: string
   updated_at: string
 }

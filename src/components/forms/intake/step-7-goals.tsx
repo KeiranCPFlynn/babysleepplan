@@ -19,7 +19,7 @@ export function Step7Goals() {
 
       <div className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="success_description">What does success look like?</Label>
+          <Label htmlFor="success_description">What does success look like? <span className="text-red-500">*</span></Label>
           <Textarea
             id="success_description"
             {...register('success_description')}
