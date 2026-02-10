@@ -3,7 +3,9 @@ import { createClient } from '@/lib/supabase/server'
 import { requireAuth } from '@/lib/auth'
 import Link from 'next/link'
 import { ArrowLeft, Moon, Star } from 'lucide-react'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { DiaryClient } from './diary-client'
+import { hasActiveSubscription } from '@/lib/subscription'
 
 export default async function DiaryPage({
   params,
@@ -46,6 +48,42 @@ export default async function DiaryPage({
             The sleep diary is available once your plan is ready.
           </p>
         </div>
+      </div>
+    )
+  }
+
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('subscription_status')
+    .eq('id', user.id)
+    .single()
+
+  const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
+
+  if (!hasActiveSubscription(profile?.subscription_status, isStripeEnabled)) {
+    return (
+      <div className="max-w-3xl mx-auto space-y-6">
+        <Link
+          href={`/dashboard/plans/${id}`}
+          className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700"
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back to Plan
+        </Link>
+
+        <Card className="border-amber-200 bg-amber-50">
+          <CardHeader>
+            <CardTitle>Subscription Inactive</CardTitle>
+            <CardDescription>
+              Your subscription is no longer active. The sleep diary requires an active subscription.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-amber-800">
+              Your plan is still available to view.
+            </p>
+          </CardContent>
+        </Card>
       </div>
     )
   }

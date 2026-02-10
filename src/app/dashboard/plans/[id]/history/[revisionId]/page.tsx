@@ -60,7 +60,7 @@ export default async function PlanRevisionPage({
         }
       }
     }
-    updateContent = updateContent.replace(/^\s*---\s*/g, '').trim()
+    updateContent = updateContent?.replace(/^\s*---\s*/g, '').trim() ?? null
     if (!updateContent) {
       updateContent = null
     }

@@ -48,6 +48,8 @@
 
 :root {
   --radius: 0.625rem;
+  --font-display: var(--font-geist-sans);
+  --font-body: var(--font-geist-sans);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -121,6 +123,318 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .font-body {
+    font-family: var(--font-body);
+  }
+}
+
+@layer utilities {
+  /* Ambient background blobs */
+  .float {
+    animation: float 4s ease-in-out infinite;
+  }
+  .float-slow {
+    animation: float 5s ease-in-out infinite;
+  }
+  .float-delayed {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: 0.8s;
+  }
+  .float-slower {
+    animation: float 7s ease-in-out infinite;
+  }
+  .float-reverse {
+    animation: floatReverse 5.5s ease-in-out infinite;
+  }
+
+  /* Decorative icon floats */
+  .float-gentle {
+    animation: floatGentle 6s ease-in-out infinite;
+  }
+  .float-drift {
+    animation: floatDrift 8s ease-in-out infinite;
+  }
+  .float-orbit {
+    animation: floatOrbit 10s ease-in-out infinite;
+  }
+
+  /* CTA pulse glow */
+  .pulse-glow {
+    animation: pulseGlow 2.5s ease-in-out infinite;
+  }
+
+  /* Gradient text shimmer */
+  .text-shimmer {
+    background: linear-gradient(
+      90deg,
+      oklch(0.55 0.15 250) 0%,
+      oklch(0.6 0.2 300) 25%,
+      oklch(0.65 0.18 340) 50%,
+      oklch(0.6 0.2 300) 75%,
+      oklch(0.55 0.15 250) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textShimmer 4s linear infinite;
+  }
+
+  /* Scroll-reveal base state */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Card hover lift */
+  .card-hover {
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  }
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px -8px oklch(0.5 0.1 230 / 0.15);
+  }
+
+  /* Animated gradient border */
+  .gradient-border {
+    position: relative;
+    z-index: 0;
+  }
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    z-index: -1;
+    border-radius: inherit;
+    background: conic-gradient(
+      from var(--gradient-angle, 0deg),
+      oklch(0.7 0.15 250),
+      oklch(0.7 0.18 300),
+      oklch(0.75 0.15 340),
+      oklch(0.7 0.12 200),
+      oklch(0.7 0.15 250)
+    );
+    animation: rotateBorder 4s linear infinite;
+    opacity: 0.7;
+  }
+
+  /* Twinkling star dots */
+  .twinkle {
+    animation: twinkle 3s ease-in-out infinite;
+  }
+  .twinkle-slow {
+    animation: twinkle 5s ease-in-out infinite;
+  }
+  .twinkle-fast {
+    animation: twinkle 2s ease-in-out infinite;
+  }
+
+  /* Marquee scroll for social proof */
+  .marquee-track {
+    display: flex;
+    animation: marqueeScroll 25s linear infinite;
+    width: max-content;
+  }
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  /* CTA button hover bounce */
+  .cta-bounce {
+    transition: transform 0.2s ease-out;
+  }
+  .cta-bounce:hover {
+    transform: scale(1.05);
+  }
+  .cta-bounce:active {
+    transform: scale(0.98);
+  }
+
+  /* Color-morphing blobs */
+  .blob-morph {
+    animation: blobMorph 12s ease-in-out infinite alternate;
+  }
+  .blob-morph-alt {
+    animation: blobMorphAlt 14s ease-in-out infinite alternate;
+  }
+
+  /* Heading accent underline slide-in */
+  .heading-underline {
+    position: relative;
+    display: inline-block;
+  }
+  .heading-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, oklch(0.55 0.15 230), oklch(0.6 0.2 300));
+    transition: width 0.8s ease-out;
+  }
+  .is-visible .heading-underline::after,
+  .heading-underline.animate-underline::after {
+    width: 60px;
+  }
+}
+
+/* Decorative icon keyframes */
+@keyframes floatGentle {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(8px, -12px, 0) rotate(6deg); }
+}
+
+@keyframes floatDrift {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  33% { transform: translate3d(-10px, -8px, 0) rotate(-4deg); }
+  66% { transform: translate3d(6px, -14px, 0) rotate(5deg); }
+}
+
+@keyframes floatOrbit {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+  25% { transform: translate3d(12px, -6px, 0) rotate(8deg) scale(1.05); }
+  50% { transform: translate3d(0, -16px, 0) rotate(0deg) scale(1); }
+  75% { transform: translate3d(-12px, -6px, 0) rotate(-8deg) scale(1.05); }
+}
+
+/* CTA button glow */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.55 0.15 230 / 0.4); }
+  50% { box-shadow: 0 0 20px 4px oklch(0.55 0.15 230 / 0.15); }
+}
+
+/* Text shimmer slide */
+@keyframes textShimmer {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+/* Rotating gradient border */
+@keyframes rotateBorder {
+  0% { --gradient-angle: 0deg; }
+  100% { --gradient-angle: 360deg; }
+}
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* Twinkling stars */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Marquee horizontal scroll */
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Color-morphing blobs */
+@keyframes blobMorph {
+  0% { filter: hue-rotate(0deg) blur(120px); }
+  50% { filter: hue-rotate(30deg) blur(130px); }
+  100% { filter: hue-rotate(60deg) blur(120px); }
+}
+@keyframes blobMorphAlt {
+  0% { filter: hue-rotate(0deg) blur(130px); }
+  50% { filter: hue-rotate(-25deg) blur(140px); }
+  100% { filter: hue-rotate(-50deg) blur(130px); }
+}
+
+/* Ambient background blobs */
+@keyframes float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(90px, -110px, 0) scale(1.08);
+  }
+}
+
+@keyframes floatReverse {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-90px, 120px, 0) scale(1.08);
+  }
+}
+
+@keyframes shimmerBar {
+  0% {
+    width: 20%;
+    margin-left: 0;
+  }
+  50% {
+    width: 70%;
+    margin-left: 15%;
+  }
+  100% {
+    width: 20%;
+    margin-left: 80%;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .float,
+  .float-slow,
+  .float-delayed,
+  .float-slower,
+  .float-reverse,
+  .float-gentle,
+  .float-drift,
+  .float-orbit,
+  .pulse-glow,
+  .text-shimmer,
+  .twinkle,
+  .twinkle-slow,
+  .twinkle-fast,
+  .blob-morph,
+  .blob-morph-alt {
+    animation: none !important;
+  }
+  .gradient-border::before {
+    animation: none !important;
+  }
+  .marquee-track {
+    animation: none !important;
+  }
+  .card-hover {
+    transition: none !important;
+  }
+  .card-hover:hover {
+    transform: none !important;
+  }
+  .scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .heading-underline::after {
+    width: 60px !important;
+    transition: none !important;
+  }
+  /* Also disable tw-animate-css entrance animations */
+  [class*="animate-in"] {
+    animation: none !important;
+    opacity: 1 !important;
   }
 }
 

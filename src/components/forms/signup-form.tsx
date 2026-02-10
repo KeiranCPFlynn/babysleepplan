@@ -6,9 +6,10 @@ import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import Link from 'next/link'
 import { toast } from 'sonner'
+import { Sparkles } from 'lucide-react'
 
 export function SignupForm() {
   const router = useRouter()
@@ -64,31 +65,35 @@ export function SignupForm() {
   }
 
   return (
-    <Card className="w-full max-w-md">
-      <CardHeader>
-        <CardTitle>Create an account</CardTitle>
-        <CardDescription>
+    <Card className="w-full max-w-md border-white/60 bg-white/80 backdrop-blur-sm shadow-lg">
+      <CardHeader className="text-center pb-2">
+        <div className="flex justify-center mb-3">
+          <Sparkles className="h-5 w-5 text-sky-600" />
+        </div>
+        <h1 className="text-2xl font-bold text-slate-900">Create an account</h1>
+        <p className="text-sm text-slate-500 mt-1">
           Get personalized sleep plans for your baby
-        </CardDescription>
+        </p>
       </CardHeader>
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="fullName">Full Name</Label>
+            <Label htmlFor="fullName" className="text-slate-700">Full Name</Label>
             <Input
               id="fullName"
               type="text"
-              placeholder="John Doe"
+              placeholder="Jane Smith"
               value={formData.fullName}
               onChange={(e) =>
                 setFormData({ ...formData, fullName: e.target.value })
               }
               required
+              className="bg-white/70 border-slate-200 focus:border-sky-400 focus:ring-sky-400/20"
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email" className="text-slate-700">Email</Label>
             <Input
               id="email"
               type="email"
@@ -98,11 +103,12 @@ export function SignupForm() {
                 setFormData({ ...formData, email: e.target.value })
               }
               required
+              className="bg-white/70 border-slate-200 focus:border-sky-400 focus:ring-sky-400/20"
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password" className="text-slate-700">Password</Label>
             <Input
               id="password"
               type="password"
@@ -113,11 +119,12 @@ export function SignupForm() {
               }
               required
               minLength={6}
+              className="bg-white/70 border-slate-200 focus:border-sky-400 focus:ring-sky-400/20"
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="confirmPassword">Confirm Password</Label>
+            <Label htmlFor="confirmPassword" className="text-slate-700">Confirm Password</Label>
             <Input
               id="confirmPassword"
               type="password"
@@ -128,18 +135,23 @@ export function SignupForm() {
               }
               required
               minLength={6}
+              className="bg-white/70 border-slate-200 focus:border-sky-400 focus:ring-sky-400/20"
             />
           </div>
         </CardContent>
 
         <CardFooter className="flex flex-col space-y-4 pt-2">
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Button
+            type="submit"
+            className="w-full bg-sky-700 hover:bg-sky-800 text-white"
+            disabled={loading}
+          >
             {loading ? 'Creating account...' : 'Sign up'}
           </Button>
 
-          <p className="text-sm text-center text-muted-foreground">
+          <p className="text-sm text-center text-slate-500">
             Already have an account?{' '}
-            <Link href="/login" className="text-primary hover:underline">
+            <Link href="/login" className="text-sky-700 font-medium hover:text-sky-800 hover:underline">
               Log in
             </Link>
           </p>

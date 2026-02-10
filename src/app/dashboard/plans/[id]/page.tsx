@@ -12,6 +12,7 @@ import { CancelButton } from './cancel-button'
 import { PrintButton } from './print-button'
 import { DownloadPdfButton } from './download-pdf-button'
 import { RegenerateButton } from './regenerate-button'
+import { formatBabyAge } from '@/lib/age'
 
 const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
 const isDevMode = !isStripeEnabled
@@ -25,27 +26,27 @@ export default async function PlanViewPage({
   const supabase = await createClient()
   const { id } = await params
 
-  // Get plan with baby info
-  const { data: plan, error } = await supabase
-    .from('plans')
-    .select(`
-      *,
-      baby:babies(name, date_of_birth, temperament)
-    `)
-    .eq('id', id)
-    .eq('user_id', user.id)
-    .single()
+  const [{ data: plan, error }, { data: revisions }] = await Promise.all([
+    supabase
+      .from('plans')
+      .select(`
+        *,
+        baby:babies(name, date_of_birth, temperament)
+      `)
+      .eq('id', id)
+      .eq('user_id', user.id)
+      .single(),
+    supabase
+      .from('plan_revisions')
+      .select('id, revision_number, summary, source, week_start, created_at')
+      .eq('plan_id', id)
+      .eq('user_id', user.id)
+      .order('revision_number', { ascending: false }),
+  ])
 
   if (error || !plan) {
     notFound()
   }
-
-  const { data: revisions } = await supabase
-    .from('plan_revisions')
-    .select('id, revision_number, summary, source, week_start, created_at')
-    .eq('plan_id', id)
-    .eq('user_id', user.id)
-    .order('revision_number', { ascending: false })
 
   const latestRevision = revisions && revisions.length > 0 ? revisions[0] : null
   const lastDividerIndex = plan.plan_content ? plan.plan_content.lastIndexOf('\n---\n') : -1
@@ -55,27 +56,12 @@ export default async function PlanViewPage({
         : plan.plan_content)
     : null
 
-  // Calculate baby age
-  const getAge = (dob: string) => {
-    const birth = new Date(dob)
-    const now = new Date()
-    const diffTime = Math.abs(now.getTime() - birth.getTime())
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-    const months = Math.floor(diffDays / 30.44)
-    const years = Math.floor(diffDays / 365.25)
-
-    if (years >= 1) return `${years} year${years > 1 ? 's' : ''} old`
-    if (months >= 1) return `${months} month${months > 1 ? 's' : ''} old`
-    const weeks = Math.floor(diffDays / 7)
-    return `${weeks} week${weeks > 1 ? 's' : ''} old`
-  }
-
   if (plan.status === 'generating') {
     return (
       <div className="max-w-3xl mx-auto space-y-6">
         <Link
           href="/dashboard/plans"
-          className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700"
+          className="inline-flex items-center text-sm text-purple-600 hover:text-purple-800"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Plans
@@ -130,7 +116,7 @@ export default async function PlanViewPage({
       <div className="max-w-3xl mx-auto space-y-6">
         <Link
           href="/dashboard/plans"
-          className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700"
+          className="inline-flex items-center text-sm text-purple-600 hover:text-purple-800"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Plans
@@ -164,7 +150,7 @@ export default async function PlanViewPage({
       <div className="flex justify-between items-center">
         <Link
           href="/dashboard/plans"
-          className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700"
+          className="inline-flex items-center text-sm text-purple-600 hover:text-purple-800"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Plans
@@ -179,7 +165,7 @@ export default async function PlanViewPage({
           {isDevMode && <RegenerateButton planId={plan.id} />}
           <DownloadPdfButton
             babyName={plan.baby?.name || 'Baby'}
-            babyAge={plan.baby?.date_of_birth ? getAge(plan.baby.date_of_birth) : ''}
+            babyAge={plan.baby?.date_of_birth ? formatBabyAge(plan.baby.date_of_birth) : ''}
             createdDate={new Date(plan.created_at).toLocaleDateString()}
             planContent={plan.plan_content || ''}
           />
@@ -202,7 +188,7 @@ export default async function PlanViewPage({
             {plan.baby?.name || 'Baby'}&apos;s Sleep Journey
           </h1>
           <p className="text-purple-600 text-sm text-center">
-            {plan.baby?.date_of_birth && getAge(plan.baby.date_of_birth)}
+            {plan.baby?.date_of_birth && formatBabyAge(plan.baby.date_of_birth)}
             {plan.baby?.date_of_birth && ' · '}
             Created {new Date(plan.created_at).toLocaleDateString()}
           </p>

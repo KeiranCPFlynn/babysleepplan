@@ -2,17 +2,18 @@
 
 import { useFormContext, useFieldArray } from 'react-hook-form'
 import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { TimePicker } from '@/components/ui/time-picker'
 import { SelectWithOther } from '@/components/ui/select-with-other'
 import { Plus, X } from 'lucide-react'
 import { fallingAsleepMethods, type IntakeFormData } from '@/lib/validations/intake'
 
 export function Step2CurrentSleep() {
-  const { control, register, setValue, watch, formState: { errors } } = useFormContext<IntakeFormData>()
+  const { control, setValue, watch, formState: { errors } } = useFormContext<IntakeFormData>()
   const fallingAsleepMethod = watch('falling_asleep_method')
   const currentBedtime = watch('current_bedtime')
   const currentWaketime = watch('current_waketime')
+  const additionalSleepTimes = watch('additional_sleep_times')
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -32,12 +33,11 @@ export function Step2CurrentSleep() {
         {/* Primary sleep times */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <Label htmlFor="bedtime">Usual Bedtime</Label>
-            <Input
+            <Label htmlFor="bedtime">Usual Bedtime <span className="text-red-500">*</span></Label>
+            <TimePicker
               id="bedtime"
-              type="time"
-              value={currentBedtime || ''}
-              onChange={(e) => setValue('current_bedtime', e.target.value, { shouldDirty: true })}
+              value={currentBedtime}
+              onChange={(val) => setValue('current_bedtime', val, { shouldDirty: true })}
             />
             <p className="text-sm text-gray-500">When do you start the bedtime routine?</p>
             {errors.current_bedtime && (
@@ -46,12 +46,11 @@ export function Step2CurrentSleep() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="waketime">Usual Morning Wake Time</Label>
-            <Input
+            <Label htmlFor="waketime">Usual Morning Wake Time <span className="text-red-500">*</span></Label>
+            <TimePicker
               id="waketime"
-              type="time"
-              value={currentWaketime || ''}
-              onChange={(e) => setValue('current_waketime', e.target.value, { shouldDirty: true })}
+              value={currentWaketime}
+              onChange={(val) => setValue('current_waketime', val, { shouldDirty: true })}
             />
             <p className="text-sm text-gray-500">When does your baby usually wake up for the day?</p>
             {errors.current_waketime && (
@@ -74,18 +73,16 @@ export function Step2CurrentSleep() {
             </Button>
             <div className="space-y-2">
               <Label>Additional Bedtime {index + 2}</Label>
-              <Input
-                type="time"
-                defaultValue={field.bedtime || ''}
-                {...register(`additional_sleep_times.${index}.bedtime` as const)}
+              <TimePicker
+                value={additionalSleepTimes?.[index]?.bedtime}
+                onChange={(val) => setValue(`additional_sleep_times.${index}.bedtime`, val, { shouldDirty: true })}
               />
             </div>
             <div className="space-y-2">
               <Label>Wake Time {index + 2}</Label>
-              <Input
-                type="time"
-                defaultValue={field.waketime || ''}
-                {...register(`additional_sleep_times.${index}.waketime` as const)}
+              <TimePicker
+                value={additionalSleepTimes?.[index]?.waketime}
+                onChange={(val) => setValue(`additional_sleep_times.${index}.waketime`, val, { shouldDirty: true })}
               />
             </div>
           </div>
@@ -106,7 +103,7 @@ export function Step2CurrentSleep() {
         </p>
 
         <SelectWithOther
-          label="How does your baby fall asleep at bedtime?"
+          label="How does your baby fall asleep at bedtime? *"
           description="What's the main way your baby falls asleep at night?"
           options={fallingAsleepMethods}
           value={fallingAsleepMethod}

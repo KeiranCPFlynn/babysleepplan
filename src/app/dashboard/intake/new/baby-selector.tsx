@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import { Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
+import { formatBabyAge } from '@/lib/age'
 
 interface Baby {
   id: string
@@ -21,20 +22,6 @@ interface BabySelectorProps {
 export function BabySelector({ babies, selectedBabyId }: BabySelectorProps) {
   const router = useRouter()
   const [loading, setLoading] = useState<string | null>(selectedBabyId || null)
-
-  const getAge = (dob: string) => {
-    const birth = new Date(dob)
-    const now = new Date()
-    const diffTime = Math.abs(now.getTime() - birth.getTime())
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-    const months = Math.floor(diffDays / 30.44)
-    const years = Math.floor(diffDays / 365.25)
-
-    if (years >= 1) return `${years} year${years > 1 ? 's' : ''} old`
-    if (months >= 1) return `${months} month${months > 1 ? 's' : ''} old`
-    const weeks = Math.floor(diffDays / 7)
-    return `${weeks} week${weeks > 1 ? 's' : ''} old`
-  }
 
   const createIntake = async (babyId: string) => {
     setLoading(babyId)
@@ -84,7 +71,7 @@ export function BabySelector({ babies, selectedBabyId }: BabySelectorProps) {
         <Card key={baby.id} className="hover:border-blue-300 transition-colors">
           <CardHeader>
             <CardTitle>{baby.name}</CardTitle>
-            <CardDescription>{getAge(baby.date_of_birth)}</CardDescription>
+            <CardDescription>{formatBabyAge(baby.date_of_birth)}</CardDescription>
           </CardHeader>
           <CardContent>
             <Button

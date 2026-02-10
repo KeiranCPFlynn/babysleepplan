@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { createClient as createSupabaseClient, SupabaseClient } from '@supabase/supabase-js'
+import { hasActiveSubscription } from '@/lib/subscription'
 
 let supabaseAdmin: SupabaseClient | null = null
 
@@ -31,6 +32,32 @@ export async function GET(request: NextRequest) {
 
     if (!planId) {
       return NextResponse.json({ error: 'Missing planId' }, { status: 400 })
+    }
+
+    const [planResult, profileResult] = await Promise.all([
+      supabase
+        .from('plans')
+        .select('id')
+        .eq('id', planId)
+        .eq('user_id', user.id)
+        .single(),
+      supabase
+        .from('profiles')
+        .select('subscription_status')
+        .eq('id', user.id)
+        .single(),
+    ])
+
+    const { data: plan, error: planError } = planResult
+    if (planError || !plan) {
+      return NextResponse.json({ error: 'Plan not found' }, { status: 404 })
+    }
+
+    const { data: profile } = profileResult
+
+    const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
+    if (!hasActiveSubscription(profile?.subscription_status, isStripeEnabled)) {
+      return NextResponse.json({ error: 'Subscription required to access the diary' }, { status: 402 })
     }
 
     // Build query
@@ -92,15 +119,30 @@ export async function POST(request: NextRequest) {
     }
 
     // Verify user owns this plan
-    const { data: plan, error: planError } = await supabase
-      .from('plans')
-      .select('id')
-      .eq('id', planId)
-      .eq('user_id', user.id)
-      .single()
+    const [planResult, profileResult] = await Promise.all([
+      supabase
+        .from('plans')
+        .select('id')
+        .eq('id', planId)
+        .eq('user_id', user.id)
+        .single(),
+      supabase
+        .from('profiles')
+        .select('subscription_status')
+        .eq('id', user.id)
+        .single(),
+    ])
 
+    const { data: plan, error: planError } = planResult
     if (planError || !plan) {
       return NextResponse.json({ error: 'Plan not found' }, { status: 404 })
+    }
+
+    const { data: profile } = profileResult
+
+    const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
+    if (!hasActiveSubscription(profile?.subscription_status, isStripeEnabled)) {
+      return NextResponse.json({ error: 'Subscription required to log sleep' }, { status: 402 })
     }
 
     // Upsert the entry

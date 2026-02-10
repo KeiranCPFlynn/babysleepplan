@@ -1,9 +1,36 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import { createClient as createServerClient } from '@/lib/supabase/server'
 import { getModel } from '@/lib/gemini'
 import { sendPlanReadyEmail } from '@/lib/email/send'
 import fs from 'fs'
 import path from 'path'
+
+const isDev = process.env.NODE_ENV !== 'production'
+
+const knowledgeFileCache = new Map<string, string | null>()
+
+function loadKnowledgeFile(knowledgeDir: string, file: string) {
+  if (knowledgeFileCache.has(file)) {
+    return knowledgeFileCache.get(file)
+  }
+  try {
+    const filePath = path.join(knowledgeDir, file)
+    if (!fs.existsSync(filePath)) {
+      knowledgeFileCache.set(file, null)
+      return null
+    }
+    const content = fs.readFileSync(filePath, 'utf-8')
+    knowledgeFileCache.set(file, content)
+    return content
+  } catch (error) {
+    knowledgeFileCache.set(file, null)
+    if (isDev) {
+      console.error(`Failed to load ${file}:`, error)
+    }
+    return null
+  }
+}
 
 // Use service role for API (triggered by webhook)
 function getSupabaseAdmin() {
@@ -90,22 +117,19 @@ function loadKnowledgeBase(context: KnowledgeContext): string {
   let loadedCount = 0
 
   for (const file of uniqueFiles) {
-    try {
-      const filePath = path.join(knowledgeDir, file)
-      if (fs.existsSync(filePath)) {
-        const content = fs.readFileSync(filePath, 'utf-8')
-        knowledge += `\n\n--- ${file} ---\n${content}`
-        loadedCount++
-      } else {
-        console.warn(`Knowledge file not found: ${file}`)
-      }
-    } catch (error) {
-      console.error(`Failed to load ${file}:`, error)
+    const content = loadKnowledgeFile(knowledgeDir, file)
+    if (content) {
+      knowledge += `\n\n--- ${file} ---\n${content}`
+      loadedCount++
+    } else if (isDev) {
+      console.warn(`Knowledge file not found: ${file}`)
     }
   }
 
-  console.log(`Loaded ${loadedCount} relevant knowledge files: ${uniqueFiles.join(', ')}`)
-  console.log(`Knowledge base size: ${knowledge.length.toLocaleString()} characters`)
+  if (isDev) {
+    console.log(`Loaded ${loadedCount} relevant knowledge files: ${uniqueFiles.join(', ')}`)
+    console.log(`Knowledge base size: ${knowledge.length.toLocaleString()} characters`)
+  }
 
   if (loadedCount === 0) {
     throw new Error('Failed to load any knowledge files')
@@ -268,16 +292,13 @@ function formatCryingLevel(level: number | null): string {
 
 export async function POST(request: NextRequest) {
   let planId: string | undefined
+  let generationTimeout: NodeJS.Timeout | undefined
 
   try {
-    // Verify API key or internal call
+    // Verify authorization: internal API key OR authenticated user who owns the plan
     const authHeader = request.headers.get('authorization')
     const internalKey = process.env.INTERNAL_API_KEY || 'internal-generate-plan'
-
-    if (authHeader !== `Bearer ${internalKey}`) {
-      // Allow calls without auth for now (webhook will call this)
-      console.log('Generate plan called without auth - allowing for now')
-    }
+    const isInternalCall = authHeader === `Bearer ${internalKey}`
 
     const body = await request.json()
     planId = body.planId
@@ -286,7 +307,28 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Missing planId' }, { status: 400 })
     }
 
-    console.log('Starting plan generation for:', planId)
+    // If not an internal call, verify user owns the plan
+    if (!isInternalCall) {
+      const userSupabase = await createServerClient()
+      const { data: { user } } = await userSupabase.auth.getUser()
+      if (!user) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      }
+      // Verify plan ownership
+      const { data: ownedPlan } = await userSupabase
+        .from('plans')
+        .select('id')
+        .eq('id', planId)
+        .eq('user_id', user.id)
+        .single()
+      if (!ownedPlan) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      }
+    }
+
+    if (isDev) {
+      console.log('Starting plan generation for:', planId)
+    }
 
     const supabase = getSupabaseAdmin()
 
@@ -306,7 +348,25 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Plan not found' }, { status: 404 })
     }
 
-    console.log('Fetched plan:', { id: plan.id, status: plan.status, baby_id: plan.baby_id, intake_submission_id: plan.intake_submission_id })
+    if (isDev) {
+      console.log('Fetched plan:', { id: plan.id, status: plan.status, baby_id: plan.baby_id, intake_submission_id: plan.intake_submission_id })
+    }
+
+    // Add timeout protection for plan generation
+    const generationTimeout = setTimeout(async () => {
+      console.error(`Plan generation timeout for plan ${planId} - marking as failed`)
+      try {
+        await supabase
+          .from('plans')
+          .update({
+            status: 'failed',
+            error_message: 'Plan generation timeout - took longer than 5 minutes'
+          })
+          .eq('id', planId)
+      } catch (timeoutError) {
+        console.error('Failed to mark plan as timed out:', timeoutError)
+      }
+    }, 5 * 60 * 1000) // 5 minute timeout
 
     // Fetch baby and intake separately to avoid join issues
     const { data: baby, error: babyError } = await supabase
@@ -329,7 +389,9 @@ export async function POST(request: NextRequest) {
       console.error('Failed to fetch intake:', intakeError)
     }
 
-    console.log('Fetched related data:', { hasBaby: !!baby, hasIntake: !!intake })
+    if (isDev) {
+      console.log('Fetched related data:', { hasBaby: !!baby, hasIntake: !!intake })
+    }
 
     // Allow retry if failed, skip if already completed
     if (plan.status === 'completed') {
@@ -509,7 +571,9 @@ A warm paragraph about self-care and when to reach out for help. End with an enc
 Remember: Write like a friend, not a textbook. Paragraphs over bullets. Keep it warm and readable.`
 
     // Generate the plan with timeout
-    console.log('Calling Gemini API...')
+    if (isDev) {
+      console.log('Calling Gemini API...')
+    }
     const model = getModel()
 
     const timeoutPromise = new Promise<never>((_, reject) => {
@@ -521,8 +585,13 @@ Remember: Write like a friend, not a textbook. Paragraphs over bullets. Keep it 
       timeoutPromise
     ])
 
-    console.log('Gemini API response received')
+    if (isDev) {
+      console.log('Gemini API response received')
+    }
     const planContent = result.response.text()
+
+    // Clear the timeout since generation completed successfully
+    clearTimeout(generationTimeout)
 
     // Update the plan with generated content
     const { error: updateError } = await supabase
@@ -584,6 +653,11 @@ Remember: Write like a friend, not a textbook. Paragraphs over bullets. Keep it 
     return NextResponse.json({ success: true, planId })
   } catch (error) {
     console.error('Plan generation error:', error)
+
+    // Clear timeout on error
+    if (generationTimeout) {
+      clearTimeout(generationTimeout)
+    }
 
     // Try to mark plan as failed
     if (planId) {

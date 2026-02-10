@@ -22,7 +22,7 @@ export function Step3NightWakings() {
 
       <div className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="night_wakings_count">How many times does your baby wake at night?</Label>
+          <Label htmlFor="night_wakings_count">How many times does your baby wake at night? <span className="text-red-500">*</span></Label>
           <Input
             id="night_wakings_count"
             type="number"

@@ -23,7 +23,7 @@ export function Step4Naps() {
 
       <div className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="nap_count">How many naps per day?</Label>
+          <Label htmlFor="nap_count">How many naps per day? <span className="text-red-500">*</span></Label>
           <Input
             id="nap_count"
             type="number"

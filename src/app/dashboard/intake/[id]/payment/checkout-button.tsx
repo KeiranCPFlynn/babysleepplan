@@ -3,16 +3,18 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
-import { CreditCard, Loader2, Sparkles } from 'lucide-react'
+import { CreditCard, Loader2, Sparkles, PlusCircle } from 'lucide-react'
 
 const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
 
 interface CheckoutButtonProps {
   intakeId: string
   babyName: string
+  isAdditionalBaby?: boolean
+  isReturningUser?: boolean
 }
 
-export function CheckoutButton({ intakeId, babyName }: CheckoutButtonProps) {
+export function CheckoutButton({ intakeId, babyName, isAdditionalBaby, isReturningUser }: CheckoutButtonProps) {
   const [loading, setLoading] = useState(false)
 
   const handleCheckout = async () => {
@@ -33,7 +35,7 @@ export function CheckoutButton({ intakeId, babyName }: CheckoutButtonProps) {
         throw new Error(data.error || 'Failed to create checkout session')
       }
 
-      // Redirect to Stripe Checkout (or success page in dev mode)
+      // Redirect to Stripe Checkout (or success page in dev mode / additional baby)
       if (data.url) {
         window.location.href = data.url
       } else {
@@ -59,17 +61,31 @@ export function CheckoutButton({ intakeId, babyName }: CheckoutButtonProps) {
       {loading ? (
         <>
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          {isStripeEnabled ? 'Redirecting to checkout...' : 'Generating plan...'}
+          {isStripeEnabled
+            ? isAdditionalBaby ? 'Adding to subscription...' : 'Redirecting to checkout...'
+            : 'Generating plan...'}
         </>
       ) : isStripeEnabled ? (
-        <>
-          <CreditCard className="mr-2 h-4 w-4" />
-          Pay $29 for {babyName}'s Plan
-        </>
+        isAdditionalBaby ? (
+          <>
+            <PlusCircle className="mr-2 h-4 w-4" />
+            Add {babyName}&apos;s Plan
+          </>
+        ) : isReturningUser ? (
+          <>
+            <CreditCard className="mr-2 h-4 w-4" />
+            Subscribe Now
+          </>
+        ) : (
+          <>
+            <CreditCard className="mr-2 h-4 w-4" />
+            Start Free Trial
+          </>
+        )
       ) : (
         <>
           <Sparkles className="mr-2 h-4 w-4" />
-          Generate {babyName}'s Plan (Dev Mode)
+          Generate {babyName}&apos;s Plan (Dev Mode)
         </>
       )}
     </Button>

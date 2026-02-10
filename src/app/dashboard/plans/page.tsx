@@ -36,12 +36,12 @@ export default async function PlansPage() {
     <div className="space-y-8">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold">My Sleep Plans</h1>
-          <p className="text-gray-600 mt-2">
-            View and manage your baby's personalized sleep plans.
+          <h1 className="text-3xl font-bold text-purple-900">My Sleep Plans</h1>
+          <p className="text-purple-600/80 mt-2">
+            View and manage your baby&apos;s personalized sleep plans.
           </p>
         </div>
-        <Button asChild>
+        <Button asChild className="bg-purple-600 hover:bg-purple-700">
           <Link href="/dashboard/intake/new">
             <Plus className="mr-2 h-4 w-4" />
             New Plan
@@ -52,7 +52,7 @@ export default async function PlansPage() {
       {/* Pending intakes */}
       {pendingIntakes && pendingIntakes.length > 0 && (
         <div>
-          <h2 className="text-xl font-semibold mb-4">
+          <h2 className="text-xl font-semibold text-purple-900 mb-4">
             {isStripeEnabled ? 'Awaiting Payment' : 'Ready to Generate'}
           </h2>
           <div className="space-y-4">
@@ -68,7 +68,7 @@ export default async function PlansPage() {
                           : 'Questionnaire completed - ready to generate'}
                       </CardDescription>
                     </div>
-                    <Button size="sm" asChild>
+                    <Button size="sm" asChild className="bg-purple-600 hover:bg-purple-700">
                       <Link href={`/dashboard/intake/${intake.id}/payment`}>
                         {isStripeEnabled ? 'Complete Payment' : 'Generate Plan'}
                       </Link>
@@ -84,7 +84,7 @@ export default async function PlansPage() {
       {/* Completed plans */}
       {plans && plans.length > 0 ? (
         <div>
-          <h2 className="text-xl font-semibold mb-4">Your Plans</h2>
+          <h2 className="text-xl font-semibold text-purple-900 mb-4">Your Plans</h2>
           <div className="space-y-4">
             {plans.map((plan) => (
               <Card key={plan.id}>
@@ -135,7 +135,7 @@ export default async function PlansPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button asChild>
+            <Button asChild className="bg-purple-600 hover:bg-purple-700">
               <Link href="/dashboard/intake/new">Create Your First Plan</Link>
             </Button>
           </CardContent>

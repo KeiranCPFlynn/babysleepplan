@@ -393,7 +393,7 @@ export function DiaryClient({
                   </p>
                 </div>
                 <Button
-                  onClick={updatePlan}
+                  onClick={() => updatePlan()}
                   disabled={updatingPlan}
                   className="bg-emerald-600 hover:bg-emerald-700"
                 >

@@ -1,260 +1,335 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Moon, Baby, Clock, Heart, CheckCircle, Star } from 'lucide-react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { AnimateOnScroll } from '@/components/ui/animate-on-scroll'
+import { Moon, Star, Heart, Sparkles, CheckCircle, X, BookOpen, Shield } from 'lucide-react'
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      {/* Header */}
-      <header className="container mx-auto px-4 py-6">
-        <nav className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Moon className="h-8 w-8 text-blue-600" />
-            <span className="text-xl font-bold text-gray-900">Baby Sleep Plan</span>
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-sky-50 via-white to-rose-50 text-slate-900">
+      {/* Ambient background blobs with color morphing */}
+      <div className="pointer-events-none absolute -top-48 -right-56 h-[30rem] w-[30rem] rounded-full bg-gradient-to-br from-rose-300/80 via-pink-300/70 to-amber-200/70 float-reverse blob-morph" />
+      <div className="pointer-events-none absolute top-16 -left-60 h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-sky-300/85 via-cyan-200/70 to-indigo-200/60 float blob-morph-alt" />
+      <div className="pointer-events-none absolute -bottom-24 right-6 h-[32rem] w-[32rem] rounded-full bg-gradient-to-br from-amber-200/80 via-rose-200/70 to-sky-200/60 float-slow blob-morph" />
+
+      {/* Twinkling star field */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <div className="absolute top-[8%] left-[15%] h-1.5 w-1.5 rounded-full bg-sky-400/40 twinkle" style={{ animationDelay: '0s' }} />
+        <div className="absolute top-[12%] right-[20%] h-1 w-1 rounded-full bg-amber-400/40 twinkle-slow" style={{ animationDelay: '0.7s' }} />
+        <div className="absolute top-[25%] left-[8%] h-1 w-1 rounded-full bg-rose-400/30 twinkle-fast" style={{ animationDelay: '1.2s' }} />
+        <div className="absolute top-[18%] right-[35%] h-1.5 w-1.5 rounded-full bg-violet-400/30 twinkle" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-[30%] left-[45%] h-1 w-1 rounded-full bg-sky-300/40 twinkle-slow" style={{ animationDelay: '0.3s' }} />
+        <div className="absolute top-[5%] left-[55%] h-1 w-1 rounded-full bg-amber-300/30 twinkle-fast" style={{ animationDelay: '1.8s' }} />
+        <div className="absolute top-[22%] right-[8%] h-1.5 w-1.5 rounded-full bg-rose-300/30 twinkle" style={{ animationDelay: '0.5s' }} />
+        <div className="absolute top-[35%] left-[25%] h-1 w-1 rounded-full bg-indigo-300/30 twinkle-slow" style={{ animationDelay: '1.5s' }} />
+        <div className="absolute top-[15%] left-[70%] h-1 w-1 rounded-full bg-sky-400/30 twinkle-fast" style={{ animationDelay: '2.5s' }} />
+        <div className="absolute top-[40%] right-[45%] h-1 w-1 rounded-full bg-amber-400/25 twinkle" style={{ animationDelay: '3s' }} />
+      </div>
+
+      <div className="relative">
+        {/* 1. Nav */}
+        <header className="container mx-auto px-4 py-6 animate-in fade-in slide-in-from-top-4 duration-700">
+          <nav className="flex items-center justify-between rounded-3xl border border-white/60 bg-white/70 px-4 py-3 shadow-sm backdrop-blur">
+            <div className="flex items-center gap-2">
+              <Moon className="h-7 w-7 text-sky-700" />
+              <span className="text-lg font-semibold tracking-tight">Baby Sleep Plan</span>
+            </div>
+            <div className="flex items-center gap-4 text-sm">
+              <Link href="/login" className="text-slate-600 hover:text-slate-900">
+                Log in
+              </Link>
+              <Button asChild className="bg-sky-700 text-white hover:bg-sky-800 cta-bounce">
+                <Link href="/signup">Start Free Trial</Link>
+              </Button>
+            </div>
+          </nav>
+        </header>
+
+        {/* 2. Hero */}
+        <section className="container mx-auto px-4 pt-16 pb-20">
+          <div className="relative text-center">
+            {/* Floating decorative icons — larger and more visible */}
+            <div className="pointer-events-none absolute inset-0 hidden md:block" aria-hidden="true">
+              <Moon className="absolute -top-6 left-[10%] h-9 w-9 text-sky-300/50 float-gentle" style={{ animationDelay: '0s' }} />
+              <Star className="absolute top-6 right-[8%] h-8 w-8 text-amber-300/50 float-drift" style={{ animationDelay: '1s' }} />
+              <Heart className="absolute bottom-2 left-[6%] h-7 w-7 text-rose-300/50 float-orbit" style={{ animationDelay: '0.5s' }} />
+              <Sparkles className="absolute bottom-6 right-[12%] h-8 w-8 text-violet-300/40 float-gentle" style={{ animationDelay: '1.5s' }} />
+              <Star className="absolute top-1/2 left-[2%] h-6 w-6 text-sky-200/40 float-drift" style={{ animationDelay: '2s' }} />
+              <Moon className="absolute top-1/3 right-[3%] h-7 w-7 text-indigo-200/40 float-orbit" style={{ animationDelay: '0.8s' }} />
+              <Heart className="absolute -top-2 right-[30%] h-5 w-5 text-rose-200/40 float-drift" style={{ animationDelay: '3s' }} />
+              <Sparkles className="absolute bottom-0 left-[30%] h-5 w-5 text-amber-200/40 float-orbit" style={{ animationDelay: '2.5s' }} />
+            </div>
+
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold leading-tight animate-in fade-in slide-in-from-bottom-4 duration-700">
+              Better sleep starts tonight.
+            </h1>
+            <p className="mt-5 text-lg md:text-2xl text-shimmer font-medium max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700 delay-150">
+              A plan built on leading sleep research, that adapts as your baby grows.
+            </p>
+            <p className="mt-6 text-base md:text-lg text-slate-600 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
+              $0 for 5 days. Then $19/month. Cancel anytime.
+            </p>
+            <div className="mt-8 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-500">
+              <Button size="lg" asChild className="bg-sky-700 text-white hover:bg-sky-800 pulse-glow cta-bounce text-base px-8 py-6">
+                <Link href="/signup">Start Free Trial</Link>
+              </Button>
+            </div>
+            <p className="mt-3 text-sm text-slate-400 animate-in fade-in duration-700 delay-700">
+              Credit card required to start trial.
+            </p>
+
+            {/* Research credibility badge */}
+            <div className="mt-8 flex items-center justify-center gap-2 text-xs text-slate-500 animate-in fade-in duration-700 delay-700">
+              <BookOpen className="h-3.5 w-3.5" />
+              <span>Based on research from the AAP, NHS, and leading pediatric sleep organizations</span>
+            </div>
           </div>
-          <div className="flex items-center gap-4">
-            <Link href="/login" className="text-gray-600 hover:text-gray-900">
-              Log in
-            </Link>
-            <Button asChild>
-              <Link href="/signup">Get Started</Link>
-            </Button>
-          </div>
-        </nav>
-      </header>
+        </section>
 
-      {/* Hero Section */}
-      <section className="container mx-auto px-4 py-16 text-center">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-          Better Sleep for Baby,<br />
-          <span className="text-blue-600">Better Rest for You</span>
-        </h1>
-        <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-          Get a personalized, AI-powered sleep plan tailored to your baby's unique needs.
-          Evidence-based strategies that actually work.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button size="lg" asChild>
-            <Link href="/signup">Create Your Plan - $29</Link>
-          </Button>
-          <Button size="lg" variant="outline" asChild>
-            <Link href="#how-it-works">Learn More</Link>
-          </Button>
-        </div>
-        <p className="mt-4 text-sm text-gray-500">
-          30-day money-back guarantee
-        </p>
-      </section>
-
-      {/* Features Section */}
-      <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl font-bold text-center mb-12">
-          Why Parents Love Baby Sleep Plan
-        </h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          <Card>
-            <CardHeader>
-              <Baby className="h-10 w-10 text-blue-600 mb-2" />
-              <CardTitle>Personalized for Your Baby</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription className="text-base">
-                Our AI considers your baby's age, temperament, and unique challenges
-                to create a plan that fits your family.
-              </CardDescription>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <Heart className="h-10 w-10 text-blue-600 mb-2" />
-              <CardTitle>Your Comfort Level Matters</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription className="text-base">
-                From gentle no-cry methods to more structured approaches -
-                we match the plan to what you're comfortable with.
-              </CardDescription>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <Clock className="h-10 w-10 text-blue-600 mb-2" />
-              <CardTitle>Ready in Minutes</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription className="text-base">
-                Complete a simple questionnaire, and receive your detailed
-                sleep plan within minutes - not days or weeks.
-              </CardDescription>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section id="how-it-works" className="bg-gray-50 py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            How It Works
-          </h2>
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              { step: '1', title: 'Sign Up', description: 'Create your free account in seconds' },
-              { step: '2', title: 'Add Your Baby', description: 'Tell us about your little one' },
-              { step: '3', title: 'Complete Questionnaire', description: "Share your baby's sleep patterns and challenges" },
-              { step: '4', title: 'Get Your Plan', description: 'Receive your personalized sleep plan instantly' },
-            ].map((item) => (
-              <div key={item.step} className="text-center">
-                <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
-                  {item.step}
+        {/* Research trust strip */}
+        <AnimateOnScroll>
+          <section className="py-6 border-y border-white/50 bg-white/40 backdrop-blur-sm">
+            <div className="container mx-auto px-4">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-xs text-slate-500">
+                <div className="flex items-center gap-1.5">
+                  <Shield className="h-3.5 w-3.5 text-sky-600" />
+                  <span>AAP safe sleep aligned</span>
                 </div>
-                <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
-                <p className="text-gray-600">{item.description}</p>
+                <div className="hidden sm:block h-3 w-px bg-slate-300" />
+                <div className="flex items-center gap-1.5">
+                  <BookOpen className="h-3.5 w-3.5 text-sky-600" />
+                  <span>Evidence-based guidance</span>
+                </div>
+                <div className="hidden sm:block h-3 w-px bg-slate-300" />
+                <div className="flex items-center gap-1.5">
+                  <Heart className="h-3.5 w-3.5 text-sky-600" />
+                  <span>Gentle &amp; structured options</span>
+                </div>
+                <div className="hidden sm:block h-3 w-px bg-slate-300" />
+                <div className="flex items-center gap-1.5">
+                  <Sparkles className="h-3.5 w-3.5 text-sky-600" />
+                  <span>Updated with latest research</span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </AnimateOnScroll>
+
+        {/* 3. How It Works */}
+        <section id="how-it-works" className="py-20">
+          <div className="container mx-auto px-4">
+            <AnimateOnScroll>
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+                <span className="heading-underline">How It Works</span>
+              </h2>
+              <p className="text-center text-slate-500 mb-12 max-w-lg mx-auto">Three steps to a calmer night.</p>
+            </AnimateOnScroll>
+            <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              {[
+                { step: '1', title: 'Tell us about your baby', description: 'Age, sleep habits, and your comfort level — takes about 3 minutes.' },
+                { step: '2', title: 'Get your plan tonight', description: 'A personalized plan grounded in sleep science, ready in minutes.' },
+                { step: '3', title: 'Track, adapt, improve', description: 'Log sleep daily. Your plan updates weekly based on real patterns.' },
+              ].map((item, index) => (
+                <AnimateOnScroll key={item.step} delay={index * 150}>
+                  <div className="rounded-3xl border border-white/70 bg-white/80 p-6 text-center shadow-sm card-hover">
+                    <div className="w-14 h-14 bg-gradient-to-br from-sky-600 to-sky-400 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg shadow-sky-200/50">
+                      {item.step}
+                    </div>
+                    <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
+                    <p className="text-slate-600 text-sm">{item.description}</p>
+                  </div>
+                </AnimateOnScroll>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 4. Social Proof — scrolling marquee */}
+        <section className="py-8 border-y border-white/60 bg-sky-50/50 overflow-hidden">
+          <div className="marquee-track">
+            {/* Duplicate the items for seamless loop */}
+            {[...Array(2)].map((_, setIndex) => (
+              <div key={setIndex} className="flex items-center gap-10 px-5 shrink-0">
+                {[
+                  { quote: 'Simple plan, started the same night.', author: 'Sarah M.' },
+                  { quote: 'Matched our comfort level from day one.', author: 'Jessica T.' },
+                  { quote: 'The daily checklist kept us on track.', author: 'Michael R.' },
+                  { quote: 'Our 8-month-old sleeps through the night now.', author: 'Emily K.' },
+                  { quote: 'The weekly updates are a game changer.', author: 'David L.' },
+                  { quote: 'Finally, advice backed by real research.', author: 'Anna W.' },
+                ].map((t, i) => (
+                  <div key={i} className="flex items-center gap-3 text-sm whitespace-nowrap">
+                    <div className="flex shrink-0">
+                      {[1, 2, 3, 4, 5].map((s) => (
+                        <Star key={s} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+                      ))}
+                    </div>
+                    <p className="text-slate-600">
+                      &ldquo;{t.quote}&rdquo;
+                      <span className="ml-1 font-medium text-slate-800">&mdash; {t.author}</span>
+                    </p>
+                  </div>
+                ))}
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* What's Included */}
-      <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl font-bold text-center mb-12">
-          What's Included in Your Plan
-        </h2>
-        <div className="max-w-2xl mx-auto">
-          <ul className="space-y-4">
-            {[
-              'Customized sleep schedule based on your baby\'s age',
-              'Step-by-step bedtime routine',
-              'Sleep training method matched to your comfort level',
-              'Personalized solutions for your specific challenges',
-              'Week-by-week implementation guide',
-              'Nap optimization strategies',
-              'Night waking solutions',
-              'Troubleshooting guide',
-            ].map((item, index) => (
-              <li key={index} className="flex items-start gap-3">
-                <CheckCircle className="h-6 w-6 text-green-600 flex-shrink-0 mt-0.5" />
-                <span className="text-lg">{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="bg-blue-50 py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            What Parents Are Saying
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                quote: "Within a week, our 6-month-old was sleeping through the night. The plan was so easy to follow!",
-                author: "Sarah M.",
-                baby: "Mom of 6-month-old"
-              },
-              {
-                quote: "I loved that the plan respected my preference for gentle methods. No cry-it-out for us, and it still worked!",
-                author: "Jessica T.",
-                baby: "Mom of 8-month-old"
-              },
-              {
-                quote: "Best $29 I've ever spent. We went from 5 wake-ups a night to 1. Life-changing!",
-                author: "Michael R.",
-                baby: "Dad of 10-month-old"
-              },
-            ].map((testimonial, index) => (
-              <Card key={index}>
-                <CardContent className="pt-6">
-                  <div className="flex mb-4">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <Star key={star} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                    ))}
-                  </div>
-                  <p className="text-gray-700 mb-4">"{testimonial.quote}"</p>
-                  <p className="font-semibold">{testimonial.author}</p>
-                  <p className="text-sm text-gray-500">{testimonial.baby}</p>
+        {/* 5. Comparison */}
+        <section className="container mx-auto px-4 py-20">
+          <AnimateOnScroll>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+              <span className="heading-underline">Why Not a Sleep Consultant?</span>
+            </h2>
+            <p className="text-center text-slate-500 mb-12 max-w-lg mx-auto">Same research. Fraction of the cost.</p>
+          </AnimateOnScroll>
+          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+            <AnimateOnScroll delay={0}>
+              <Card className="border-slate-200 bg-white/80 card-hover">
+                <CardHeader>
+                  <CardTitle className="text-lg">Sleep Consultant</CardTitle>
+                  <p className="text-sm text-slate-500">$300+ / 2-week wait</p>
+                </CardHeader>
+                <CardContent className="space-y-2.5 text-sm text-slate-600">
+                  <div className="flex items-center gap-2"><X className="h-4 w-4 text-slate-400" /> Scheduling delays</div>
+                  <div className="flex items-center gap-2"><X className="h-4 w-4 text-slate-400" /> Manual tracking</div>
+                  <div className="flex items-center gap-2"><X className="h-4 w-4 text-slate-400" /> Updates cost extra</div>
+                  <div className="flex items-center gap-2"><X className="h-4 w-4 text-slate-400" /> One-size approach</div>
                 </CardContent>
               </Card>
-            ))}
+            </AnimateOnScroll>
+            <AnimateOnScroll delay={150}>
+              <Card className="border-sky-200 bg-gradient-to-br from-sky-50 via-white to-rose-50 shadow-md card-hover">
+                <CardHeader>
+                  <CardTitle className="text-lg">Baby Sleep Plan</CardTitle>
+                  <p className="text-sm text-sky-600 font-medium">Free 5 days, then $19/mo</p>
+                </CardHeader>
+                <CardContent className="space-y-2.5 text-sm text-slate-600">
+                  <div className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-sky-600" /> Start tonight</div>
+                  <div className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-sky-600" /> Built-in diary &amp; tracking</div>
+                  <div className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-sky-600" /> Weekly updates included</div>
+                  <div className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-sky-600" /> Based on leading research</div>
+                </CardContent>
+              </Card>
+            </AnimateOnScroll>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA Section */}
-      <section className="container mx-auto px-4 py-16 text-center">
-        <h2 className="text-3xl font-bold mb-4">
-          Ready for Better Sleep?
-        </h2>
-        <p className="text-xl text-gray-600 mb-8 max-w-xl mx-auto">
-          Join thousands of parents who have transformed their nights with a personalized sleep plan.
-        </p>
-        <Button size="lg" asChild>
-          <Link href="/signup">Get Your Sleep Plan Now</Link>
-        </Button>
-        <p className="mt-4 text-sm text-gray-500">
-          One-time payment of $29 • 30-day money-back guarantee
-        </p>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="bg-gray-50 py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            Frequently Asked Questions
-          </h2>
-          <div className="max-w-2xl mx-auto space-y-6">
-            {[
-              {
-                q: 'What age is this for?',
-                a: 'Our plans work for babies from 4 months to 3 years old. We adjust recommendations based on your child\'s specific age and development.'
-              },
-              {
-                q: 'Do I have to let my baby cry?',
-                a: 'No! We offer methods ranging from completely no-cry approaches to more structured options. You choose what you\'re comfortable with, and we tailor the plan accordingly.'
-              },
-              {
-                q: 'How long until I see results?',
-                a: 'Most families see improvement within the first week. Significant changes typically occur within 2-3 weeks of consistent implementation.'
-              },
-              {
-                q: 'What if it doesn\'t work?',
-                a: 'We offer a 30-day money-back guarantee. If you\'re not satisfied with your plan, contact us for a full refund.'
-              },
-            ].map((faq, index) => (
-              <div key={index}>
-                <h3 className="font-semibold text-lg mb-2">{faq.q}</h3>
-                <p className="text-gray-600">{faq.a}</p>
+        {/* 6. Pricing + CTA with animated gradient border */}
+        <AnimateOnScroll>
+          <section id="pricing" className="bg-white/70 py-20">
+            <div className="container mx-auto px-4">
+              <div className="max-w-lg mx-auto">
+                <Card className="border-sky-200 bg-white shadow-lg gradient-border rounded-2xl overflow-hidden">
+                  <CardHeader className="text-center pb-2">
+                    <CardTitle className="text-2xl font-bold">Baby Sleep Plan</CardTitle>
+                    <p className="text-xs text-slate-500 mt-1">Grounded in AAP, NHS &amp; pediatric sleep research</p>
+                  </CardHeader>
+                  <CardContent className="space-y-5">
+                    <div className="text-center">
+                      <p className="text-5xl font-bold text-slate-900">$0 <span className="text-lg font-normal text-slate-500">for 5 days</span></p>
+                      <p className="text-sm text-slate-500 mt-1">then $19/month &middot; cancel anytime</p>
+                    </div>
+                    <ul className="space-y-2.5 text-slate-600 text-sm">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-sky-600 mt-0.5 shrink-0" />
+                        Personalized sleep plan, ready tonight
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-sky-600 mt-0.5 shrink-0" />
+                        Daily sleep diary with pattern tracking
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-sky-600 mt-0.5 shrink-0" />
+                        Weekly plan updates based on your logs
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-sky-600 mt-0.5 shrink-0" />
+                        Daily checklist &amp; troubleshooting tips
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-sky-600 mt-0.5 shrink-0" />
+                        Built on research from leading sleep organizations
+                      </li>
+                    </ul>
+                    <Button className="w-full bg-sky-700 text-white hover:bg-sky-800 pulse-glow cta-bounce text-base py-6" size="lg" asChild>
+                      <Link href="/signup">Start Free Trial</Link>
+                    </Button>
+                    <p className="text-xs text-center text-slate-400">Credit card required. Cancel anytime.</p>
+                  </CardContent>
+                </Card>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            </div>
+          </section>
+        </AnimateOnScroll>
 
-      {/* Footer */}
-      <footer className="border-t py-12">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <Moon className="h-6 w-6 text-blue-600" />
-              <span className="font-semibold">Baby Sleep Plan</span>
-            </div>
-            <p className="text-sm text-gray-500">
-              © {new Date().getFullYear()} Baby Sleep Plan. All rights reserved.
-            </p>
-            <div className="flex gap-4 text-sm text-gray-500">
-              <Link href="/privacy" className="hover:text-gray-900">Privacy</Link>
-              <Link href="/terms" className="hover:text-gray-900">Terms</Link>
-              <Link href="mailto:support@babysleepplan.com" className="hover:text-gray-900">Contact</Link>
+        {/* 7. FAQ */}
+        <section className="py-20">
+          <div className="container mx-auto px-4">
+            <AnimateOnScroll>
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+                <span className="heading-underline">FAQ</span>
+              </h2>
+            </AnimateOnScroll>
+            <div className="max-w-2xl mx-auto space-y-4">
+              {[
+                {
+                  q: 'What age is this for?',
+                  a: 'Best for 4 months to 3 years. We adjust for your child\u2019s age and development.'
+                },
+                {
+                  q: 'What research is this based on?',
+                  a: 'Our guidance draws from the American Academy of Pediatrics (AAP), NHS, and peer-reviewed pediatric sleep research. We stay current as new findings are published.'
+                },
+                {
+                  q: 'Do I have to let my baby cry?',
+                  a: 'No. We offer methods from completely no-cry to more structured. You choose what fits your family.'
+                },
+                {
+                  q: 'Is this medical advice?',
+                  a: 'No. This is educational guidance based on established research. Always consult your pediatrician for medical concerns.'
+                },
+                {
+                  q: 'What happens after the free trial?',
+                  a: 'Your subscription continues at $19/month. Cancel anytime from your account.'
+                },
+              ].map((faq, index) => (
+                <AnimateOnScroll key={index} delay={index * 80}>
+                  <div className="rounded-2xl border border-white/70 bg-white/80 p-5 shadow-sm card-hover">
+                    <h3 className="font-semibold text-base mb-1">{faq.q}</h3>
+                    <p className="text-slate-600 text-sm">{faq.a}</p>
+                  </div>
+                </AnimateOnScroll>
+              ))}
             </div>
           </div>
-        </div>
-      </footer>
+        </section>
+
+        {/* 8. Footer */}
+        <AnimateOnScroll>
+          <footer className="border-t border-white/70 py-10">
+            <div className="container mx-auto px-4">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div className="flex items-center gap-2">
+                  <Moon className="h-6 w-6 text-sky-700" />
+                  <span className="font-semibold">Baby Sleep Plan</span>
+                </div>
+                <p className="text-sm text-slate-500">
+                  &copy; {new Date().getFullYear()} Baby Sleep Plan. All rights reserved.
+                </p>
+                <div className="flex gap-4 text-sm text-slate-500">
+                  <Link href="/privacy" className="hover:text-slate-900">Privacy</Link>
+                  <Link href="/terms" className="hover:text-slate-900">Terms</Link>
+                  <Link href="/contact" className="hover:text-slate-900">Contact</Link>
+                </div>
+              </div>
+              <p className="mt-4 text-center text-xs text-slate-400 max-w-2xl mx-auto">
+                Not medical advice &mdash; always follow your pediatrician&apos;s guidance and AAP safe sleep guidelines. Guidance is based on published research from leading pediatric sleep organizations. Your data stays private to your account.
+              </p>
+            </div>
+          </footer>
+        </AnimateOnScroll>
+      </div>
     </div>
   )
 }
