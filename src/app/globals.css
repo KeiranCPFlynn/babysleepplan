@@ -259,6 +259,55 @@
     transform: scale(0.98);
   }
 
+  /* Smoother CTA motion: subtle lift, no scale flash */
+  .cta-smooth {
+    transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+    will-change: transform;
+  }
+  .cta-smooth:hover {
+    transform: translateY(-1px);
+  }
+  .cta-smooth:active {
+    transform: translateY(0);
+  }
+
+  /* Subtle always-on CTA polish: gentle float + occasional sheen */
+  .cta-fancy {
+    position: relative;
+    overflow: hidden;
+    animation: ctaFloat 6s ease-in-out infinite;
+  }
+  .cta-fancy::after {
+    content: "";
+    position: absolute;
+    inset: -140% -45%;
+    background: linear-gradient(
+      115deg,
+      transparent 42%,
+      oklch(1 0 0 / 0.24) 50%,
+      transparent 58%
+    );
+    transform: translateX(-145%) rotate(8deg);
+    animation: ctaSheen 7.5s ease-in-out infinite;
+    animation-delay: 1.2s;
+    pointer-events: none;
+  }
+
+  /* Smooth first-load hero reveal without opacity flicker */
+  .hero-load {
+    animation: heroLoadIn 880ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    will-change: filter, opacity;
+  }
+  .hero-load-1 {
+    animation-delay: 90ms;
+  }
+  .hero-load-2 {
+    animation-delay: 180ms;
+  }
+  .hero-load-3 {
+    animation-delay: 270ms;
+  }
+
   /* Color-morphing blobs */
   .blob-morph {
     animation: blobMorph 12s ease-in-out infinite alternate;
@@ -355,6 +404,47 @@
   100% { filter: hue-rotate(-50deg) blur(130px); }
 }
 
+@keyframes ctaFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-1.5px);
+  }
+}
+
+@keyframes ctaSheen {
+  0%,
+  68%,
+  100% {
+    transform: translateX(-145%) rotate(8deg);
+    opacity: 0;
+  }
+  74% {
+    opacity: 1;
+  }
+  86% {
+    transform: translateX(145%) rotate(8deg);
+    opacity: 0;
+  }
+}
+
+@keyframes heroLoadIn {
+  0% {
+    opacity: 0.25;
+    filter: blur(8px);
+  }
+  70% {
+    opacity: 1;
+    filter: blur(0.6px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
 /* Ambient background blobs */
 @keyframes float {
   0%,
@@ -406,9 +496,18 @@
   .twinkle,
   .twinkle-slow,
   .twinkle-fast,
+  .hero-load,
+  .hero-load-1,
+  .hero-load-2,
+  .hero-load-3,
+  .cta-fancy,
   .blob-morph,
   .blob-morph-alt {
     animation: none !important;
+  }
+  .cta-fancy::after {
+    animation: none !important;
+    opacity: 0 !important;
   }
   .gradient-border::before {
     animation: none !important;

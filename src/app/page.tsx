@@ -28,7 +28,7 @@ export default function HomePage() {
 
       <div className="relative">
         {/* 1. Nav */}
-        <header className="container mx-auto px-4 py-6 animate-in fade-in slide-in-from-top-4 duration-700">
+        <header className="container mx-auto px-4 py-6">
           <nav className="flex items-center justify-between rounded-3xl border border-white/60 bg-white/70 px-4 py-3 shadow-sm backdrop-blur">
             <div className="flex items-center gap-2">
               <Moon className="h-7 w-7 text-sky-700" />
@@ -63,26 +63,28 @@ export default function HomePage() {
               <Sparkles className="absolute bottom-0 left-[30%] h-5 w-5 text-amber-200/40 float-orbit" style={{ animationDelay: '2.5s' }} />
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold leading-tight animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold leading-tight hero-load">
               Better sleep starts tonight.
             </h1>
-            <p className="mt-5 text-lg md:text-2xl text-shimmer font-medium max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700 delay-150">
+            <p className="mt-5 text-lg md:text-2xl text-shimmer font-medium max-w-2xl mx-auto hero-load hero-load-1">
               A plan built on leading sleep research, that adapts as your baby grows.
             </p>
-            <p className="mt-6 text-base md:text-lg text-slate-600 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
-              $0 for 5 days. Then $19/month. Cancel anytime.
-            </p>
-            <div className="mt-8 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-500">
-              <Button size="lg" asChild className="bg-sky-700 text-white hover:bg-sky-800 pulse-glow cta-bounce text-base px-8 py-6">
-                <Link href="/signup">Start Free Trial</Link>
-              </Button>
+            <div className="mt-6 min-h-[8.5rem] hero-load hero-load-2">
+              <p className="text-base md:text-lg text-slate-600">
+                $0 for 5 days. Then $19/month. Cancel anytime.
+              </p>
+              <div className="mt-8">
+                <Button size="lg" asChild className="bg-sky-700 text-white hover:bg-sky-800 cta-smooth cta-fancy text-base px-8 py-6">
+                  <Link href="/signup">Start Free Trial</Link>
+                </Button>
+              </div>
+              <p className="mt-3 text-sm text-slate-400">
+                Credit card required to start trial.
+              </p>
             </div>
-            <p className="mt-3 text-sm text-slate-400 animate-in fade-in duration-700 delay-700">
-              Credit card required to start trial.
-            </p>
 
             {/* Research credibility badge */}
-            <div className="mt-8 flex items-center justify-center gap-2 text-xs text-slate-500 animate-in fade-in duration-700 delay-700">
+            <div className="mt-8 flex items-center justify-center gap-2 text-xs text-slate-500 hero-load hero-load-3">
               <BookOpen className="h-3.5 w-3.5" />
               <span>Based on research from the AAP, NHS, and leading pediatric sleep organizations</span>
             </div>
@@ -255,7 +257,7 @@ export default function HomePage() {
                         Built on research from leading sleep organizations
                       </li>
                     </ul>
-                    <Button className="w-full bg-sky-700 text-white hover:bg-sky-800 pulse-glow cta-bounce text-base py-6" size="lg" asChild>
+                    <Button className="w-full bg-sky-700 text-white hover:bg-sky-800 cta-smooth cta-fancy text-base py-6" size="lg" asChild>
                       <Link href="/signup">Start Free Trial</Link>
                     </Button>
                     <p className="text-xs text-center text-slate-400">Credit card required. Cancel anytime.</p>
