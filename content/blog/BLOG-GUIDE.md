@@ -90,6 +90,16 @@ Replace `photo-XXXXXXX` with the full photo ID from the URL.
 
 The blog automatically renders this as: "Photo by [Name](profile-link) on [Unsplash](unsplash-link)" with proper UTM referral parameters.
 
+### Image Reuse Rule (Important)
+
+Avoid reusing the same Unsplash `photo-...` ID across nearby posts. As a default rule, do not reuse an image ID if it appears in the **most recent 5 published posts** unless there is a clear editorial reason.
+
+Quick local check:
+
+```bash
+rg -n '^image:' content/blog/*.md
+```
+
 ---
 
 ## 4. Markdown Formatting Guide
@@ -108,6 +118,12 @@ The blog automatically renders this as: "Photo by [Name](profile-link) on [Unspl
 | `[text](url)` | Hyperlink | Sky-blue color. External links open in a new tab. |
 | `---` | Horizontal rule | Clean divider between sections. |
 | Tables | Full support | Header row is styled differently from body rows. |
+
+### Keep It Human (Not Checklist-Heavy)
+
+- Make prose the default. Aim for mostly paragraphs, with lists used only when they genuinely improve clarity.
+- Limit list-heavy stacking. Avoid back-to-back sections that are all bullets or numbered steps.
+- Use transitions between sections so the post reads like a conversation with a tired parent, not a template dump.
 
 ### What to Avoid
 
@@ -151,6 +167,7 @@ Verify each item before publishing:
 - [ ] **Slug** (filename) uses hyphens, all lowercase, and contains the primary keyword
 - [ ] **At least 2-3 tags** that overlap with other posts (this powers "Related Articles")
 - [ ] **Image alt text** is descriptive and includes keywords naturally
+- [ ] **Hero image ID is not reused** in the most recent 5 posts
 - [ ] **Post body** has at least 600 words (reading time >= 3 minutes; calculated at 200 words/min)
 - [ ] **Ends with italic disclaimer** referencing AAP/NHS research and advising readers to consult their pediatrician
 - [ ] **Uses H2/H3 structure** (Google uses heading hierarchy for featured snippets)

@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { ArrowLeft, CheckCircle, CreditCard, HelpCircle } from 'lucide-react'
 import { getDaysRemaining, getSubscriptionLabel, hasActiveSubscription, MONTHLY_PRICE, TRIAL_DAYS } from '@/lib/subscription'
 import { TestSubscriptionControls } from '@/components/subscription/test-subscription-controls'
+import { DeleteUserControls } from '@/components/admin/delete-user-controls'
 import { ManageSubscriptionButton } from '@/components/subscription/manage-subscription-button'
 import { stripe } from '@/lib/stripe'
 import { isAdminToolsEnabled } from '@/lib/admin'
@@ -134,6 +135,9 @@ export default async function SubscriptionPage() {
 
       {/* Test Controls (Admin Only) */}
       {showAdminTools && <TestSubscriptionControls />}
+
+      {/* Delete User (Admin Only) */}
+      {showAdminTools && <DeleteUserControls />}
 
       <Card className={isActive ? 'border-green-200 bg-green-50/50' : 'border-amber-200 bg-amber-50/50'}>
         <CardHeader>

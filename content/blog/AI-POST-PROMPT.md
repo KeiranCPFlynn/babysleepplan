@@ -84,6 +84,8 @@ The `image`, `imageCredit`, and `imageCreditUrl` fields require you to find a re
 
 Go to [unsplash.com](https://unsplash.com) and search for a term related to the post topic (e.g., "baby sleeping in crib", "toddler bedtime"). Click on a photo you like.
 
+Before finalizing the image, scan recent posts in `content/blog/` and avoid reusing any Unsplash `photo-...` ID used in the most recent 5 published posts unless there is a strong editorial reason.
+
 #### Step 2: Get the CDN image URL
 
 The photo page URL will look like this:
@@ -140,12 +142,23 @@ If you cannot access unsplash.com to look up real photos, **leave all three imag
 - Practical: every post should include actionable advice parents can use tonight
 - Non-judgmental: never shame parents for current habits; frame everything as "building skills"
 - Confident but not preachy: state what the research says without hedging excessively
+- Human and specific: use natural transitions, occasional plain-language asides, and real-life bedtime context so it reads like an experienced parent coach, not a checklist generator
+
+### Human-sounding writing constraints (IMPORTANT)
+
+- Make prose the default: target roughly **70-80% paragraphs** and **20-30% lists/tables**.
+- Limit total lists in the article to **2-4** (combined bullets + numbered lists).
+- Avoid list-stacking: never place multiple list-heavy sections back-to-back.
+- In strategy sections, use short explanatory paragraphs first; use lists only to summarize key actions.
+- Vary sentence length and rhythm. Avoid repetitive "Do X. Do Y. Do Z." patterns.
+- Include at least 2 empathetic lines that acknowledge what parents are feeling (without sounding dramatic or generic).
+- Use contractions naturally ("you're", "it's", "don't") to keep tone conversational.
 
 ### Structure and formatting
 
 - Use `##` (H2) for main sections and `###` (H3) for subsections. **Never use `#` (H1)** — the page already renders the title as H1.
 - Use `**bold**` for key terms and emphasis.
-- Use bullet lists and numbered lists for scannable information.
+- Use bullet lists and numbered lists selectively for scannability; do not let lists dominate the post.
 - Use `>` blockquotes sparingly for standout tips.
 - Do **NOT** use inline images (`![]()`), raw HTML, or code blocks.
 - Aim for **800-1200 words** (4-6 minute read at 200 words/min).
@@ -156,8 +169,8 @@ Follow this outline (adapt section names to your topic):
 
 1. **Opening hook** — Empathize with the parent's struggle. State the problem using the primary keyword. 1-2 paragraphs.
 2. **Why this happens / The science** — Explain the underlying cause with references to research. Help parents understand *why* so the advice feels credible.
-3. **What the research says** — Specific numbers, age ranges, or findings from AAP/NHS/peer-reviewed studies. Use a table or bullet list for scannability if appropriate.
-4. **Evidence-based strategies** — 3-6 actionable steps. Each should be a ### subsection with a clear heading. Explain *why* each works, not just *what* to do.
+3. **What the research says** — Specific numbers, age ranges, or findings from AAP/NHS/peer-reviewed studies. Prefer prose; add one concise list or table only if it meaningfully improves clarity.
+4. **Evidence-based strategies** — 3-6 actionable steps. Use clear mini-sections and natural transitions; each strategy should include both *what to do* and *why it helps*.
 5. **Common mistakes or myths** — Address 2-3 misconceptions. This builds trust and targets "People also ask" queries.
 6. **When to seek help** — Brief section on when to talk to a pediatrician. This is important for safety and credibility.
 7. **Reassuring close** — 1-2 sentences of encouragement.
@@ -171,6 +184,7 @@ Follow this outline (adapt section names to your topic):
 - Use the keyword and close variations naturally 3-5 times throughout the post. Do not stuff.
 - Structure with clear H2/H3 hierarchy (Google uses this for featured snippets and jump-to links).
 - Write H2s as questions or clear statements that match how parents search (e.g., "Why Does My Baby Wake Up Every Hour?" not "Sleep Cycle Disruption Factors").
+- Prioritize readability signals: short paragraphs, concrete language, and smooth transitions that keep readers on page.
 
 ---
 
@@ -182,3 +196,4 @@ Output the complete markdown file (frontmatter + body), then after the file outp
 2. **Key sources used** — List the specific AAP guidelines, NHS pages, or studies you drew from so the publisher can verify.
 3. **Suggested filename slug** — lowercase, hyphens, no special characters. Example: `baby-wont-sleep-in-cot-gentle-evidence-based-solutions`
 4. **3 Unsplash search terms** to find a good hero image (in case the image fields were left empty).
+5. **Image uniqueness check** — list the chosen `photo-...` ID and confirm it is not reused in the most recent 5 published posts.
