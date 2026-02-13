@@ -9,10 +9,12 @@ import { getDaysRemaining, getSubscriptionLabel, hasActiveSubscription, MONTHLY_
 import { TestSubscriptionControls } from '@/components/subscription/test-subscription-controls'
 import { ManageSubscriptionButton } from '@/components/subscription/manage-subscription-button'
 import { stripe } from '@/lib/stripe'
+import { isAdminToolsEnabled } from '@/lib/admin'
 
 export const dynamic = 'force-dynamic'
 
 const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
+const adminToolsEnabled = isAdminToolsEnabled()
 
 function getSupabaseAdmin() {
   return createAdminClient(
@@ -89,6 +91,7 @@ export default async function SubscriptionPage() {
   const label = getSubscriptionLabel(status)
   const isActive = hasActiveSubscription(status, isStripeEnabled)
   const isAdmin = profile?.is_admin === true
+  const showAdminTools = isAdmin && adminToolsEnabled
   const daysRemaining = getDaysRemaining(profile?.subscription_period_end ?? null)
 
   return (
@@ -108,8 +111,15 @@ export default async function SubscriptionPage() {
         </p>
       </div>
 
-      {/* Debug Information (Admin Only, Dev Only) */}
-      {process.env.NODE_ENV !== 'production' && isAdmin && (
+      <div className="rounded-md border border-purple-100 bg-purple-50/50 px-3 py-2">
+        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
+          <span className="text-xs text-purple-700">Account email</span>
+          <span className="text-sm font-medium text-purple-900 break-all">{user.email || 'No email on account'}</span>
+        </div>
+      </div>
+
+      {/* Debug Information (Admin Only) */}
+      {showAdminTools && (
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
           <h3 className="text-sm font-medium text-blue-800 mb-2">Debug Information</h3>
           <div className="text-xs text-blue-600 space-y-1">
@@ -122,8 +132,8 @@ export default async function SubscriptionPage() {
         </div>
       )}
 
-      {/* Test Controls (Admin Only, Dev Only) */}
-      {process.env.NODE_ENV !== 'production' && isAdmin && <TestSubscriptionControls />}
+      {/* Test Controls (Admin Only) */}
+      {showAdminTools && <TestSubscriptionControls />}
 
       <Card className={isActive ? 'border-green-200 bg-green-50/50' : 'border-amber-200 bg-amber-50/50'}>
         <CardHeader>

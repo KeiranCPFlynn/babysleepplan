@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { createClient as createAdminClient } from '@supabase/supabase-js'
 import { TRIAL_DAYS } from '@/lib/stripe'
+import { isAdminToolsEnabled } from '@/lib/admin'
 
 function getSupabaseAdmin() {
   return createAdminClient(
@@ -11,7 +12,7 @@ function getSupabaseAdmin() {
 }
 
 export async function POST(request: NextRequest) {
-  if (process.env.NODE_ENV === 'production') {
+  if (!isAdminToolsEnabled()) {
     return NextResponse.json({ error: 'Not found' }, { status: 404 })
   }
 
