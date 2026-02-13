@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { getModel } from '@/lib/gemini'
 import { hasActiveSubscription } from '@/lib/subscription'
+import { sanitizeForPrompt } from '@/lib/sanitize'
+import { weeklyReviewLimiter } from '@/lib/rate-limit'
 import fs from 'fs'
 import path from 'path'
 
@@ -126,6 +128,15 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
+    // Rate limit per user
+    const rateCheck = weeklyReviewLimiter.check(user.id)
+    if (rateCheck.limited) {
+      return NextResponse.json(
+        { error: 'Too many review requests. Please try again later.' },
+        { status: 429 }
+      )
+    }
+
     const body = await request.json()
     const { planId, weekStart, weekEnd } = body
 
@@ -195,6 +206,11 @@ export async function POST(request: NextRequest) {
     // Get first ~500 chars of plan for context
     const planSummary = plan.plan_content?.substring(0, 1500) || 'No plan content available'
 
+    // Sanitize user-controlled fields
+    const safeBabyName = sanitizeForPrompt(plan.baby.name, 100)
+    const safeSuccessDesc = plan.intake?.success_description ? sanitizeForPrompt(plan.intake.success_description, 1000) : 'Not specified'
+    const safeAdditionalNotes = plan.intake?.additional_notes ? sanitizeForPrompt(plan.intake.additional_notes, 1000) : ''
+
     // Build the prompt
     const prompt = `You are a supportive sleep consultant reviewing a week of sleep diary entries.
 
@@ -202,13 +218,13 @@ export async function POST(request: NextRequest) {
 ${knowledgeBase}
 
 ## Baby Information
-- Name: ${plan.baby.name}
+- Name: ${safeBabyName}
 - Age: ${ageMonths} months
 - Temperament: ${plan.baby.temperament || 'Not specified'}
 
 ## Original Goals (from intake)
-${plan.intake?.success_description || 'Not specified'}
-${plan.intake?.additional_notes ? `\nAdditional notes: ${plan.intake.additional_notes}` : ''}
+${safeSuccessDesc}
+${safeAdditionalNotes ? `\nAdditional notes: ${safeAdditionalNotes}` : ''}
 
 ## Original Plan Summary
 ${planSummary}
@@ -240,6 +256,7 @@ Keep it conversational and supportive. No emojis.`
     if (isDev) {
       console.log('Generating weekly review for plan:', planId)
     }
+
     const model = getModel()
 
     const timeoutPromise = new Promise<never>((_, reject) => {
@@ -280,7 +297,7 @@ Keep it conversational and supportive. No emojis.`
   } catch (error) {
     console.error('Review generation error:', error)
     return NextResponse.json(
-      { error: 'Failed to generate review', details: error instanceof Error ? error.message : 'Unknown error' },
+      { error: 'An unexpected error occurred' },
       { status: 500 }
     )
   }

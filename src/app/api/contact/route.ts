@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import { stripHtml } from '@/lib/sanitize'
+import { sendContactNotificationEmail } from '@/lib/email/send'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
@@ -45,7 +47,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    if (typeof email !== 'string' || !email.includes('@')) {
+    if (typeof email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json(
         { error: 'Please provide a valid email address.' },
         { status: 400 }
@@ -57,10 +59,10 @@ export async function POST(request: NextRequest) {
     const { error } = await supabase
       .from('contact_messages')
       .insert({
-        name: name.slice(0, 200),
+        name: stripHtml(name).slice(0, 200),
         email: email.slice(0, 320),
-        topic: topic.slice(0, 50),
-        message: message.slice(0, 5000),
+        topic: stripHtml(topic).slice(0, 50),
+        message: stripHtml(message).slice(0, 5000),
       })
 
     if (error) {
@@ -70,6 +72,16 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       )
     }
+
+    // Fire-and-forget: send notification email without blocking the response
+    sendContactNotificationEmail(
+      stripHtml(name).slice(0, 200),
+      email.slice(0, 320),
+      stripHtml(topic).slice(0, 50),
+      stripHtml(message).slice(0, 5000),
+    ).catch((err) => {
+      console.error('Failed to send contact notification email:', err)
+    })
 
     return NextResponse.json({ success: true })
   } catch {

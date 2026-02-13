@@ -32,9 +32,12 @@ export default function HomePage() {
           <nav className="flex items-center justify-between rounded-3xl border border-white/60 bg-white/70 px-4 py-3 shadow-sm backdrop-blur">
             <div className="flex items-center gap-2">
               <Moon className="h-7 w-7 text-sky-700" />
-              <span className="text-lg font-semibold tracking-tight">Baby Sleep Plan</span>
+              <span className="text-lg font-semibold tracking-tight">LunaCradle</span>
             </div>
             <div className="flex items-center gap-4 text-sm">
+              <Link href="/blog" className="text-slate-600 hover:text-slate-900">
+                Blog
+              </Link>
               <Link href="/login" className="text-slate-600 hover:text-slate-900">
                 Log in
               </Link>
@@ -201,7 +204,7 @@ export default function HomePage() {
             <AnimateOnScroll delay={150}>
               <Card className="border-sky-200 bg-gradient-to-br from-sky-50 via-white to-rose-50 shadow-md card-hover">
                 <CardHeader>
-                  <CardTitle className="text-lg">Baby Sleep Plan</CardTitle>
+                  <CardTitle className="text-lg">LunaCradle</CardTitle>
                   <p className="text-sm text-sky-600 font-medium">Free 5 days, then $19/mo</p>
                 </CardHeader>
                 <CardContent className="space-y-2.5 text-sm text-slate-600">
@@ -222,7 +225,7 @@ export default function HomePage() {
               <div className="max-w-lg mx-auto">
                 <Card className="border-sky-200 bg-white shadow-lg gradient-border rounded-2xl overflow-hidden">
                   <CardHeader className="text-center pb-2">
-                    <CardTitle className="text-2xl font-bold">Baby Sleep Plan</CardTitle>
+                    <CardTitle className="text-2xl font-bold">LunaCradle</CardTitle>
                     <p className="text-xs text-slate-500 mt-1">Grounded in AAP, NHS &amp; pediatric sleep research</p>
                   </CardHeader>
                   <CardContent className="space-y-5">
@@ -312,12 +315,13 @@ export default function HomePage() {
               <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                 <div className="flex items-center gap-2">
                   <Moon className="h-6 w-6 text-sky-700" />
-                  <span className="font-semibold">Baby Sleep Plan</span>
+                  <span className="font-semibold">LunaCradle</span>
                 </div>
                 <p className="text-sm text-slate-500">
-                  &copy; {new Date().getFullYear()} Baby Sleep Plan. All rights reserved.
+                  &copy; {new Date().getFullYear()} LunaCradle. All rights reserved.
                 </p>
                 <div className="flex gap-4 text-sm text-slate-500">
+                  <Link href="/blog" className="hover:text-slate-900">Blog</Link>
                   <Link href="/privacy" className="hover:text-slate-900">Privacy</Link>
                   <Link href="/terms" className="hover:text-slate-900">Terms</Link>
                   <Link href="/contact" className="hover:text-slate-900">Contact</Link>

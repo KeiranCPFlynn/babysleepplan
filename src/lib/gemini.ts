@@ -13,6 +13,5 @@ export function getGemini() {
 }
 
 export function getModel() {
-  // Using gemini-2.0-flash for higher free tier limits
-  return getGemini().getGenerativeModel({ model: 'gemini-2.0-flash' })
+  return getGemini().getGenerativeModel({ model: 'gemini-3-pro-preview' })
 }

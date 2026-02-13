@@ -173,7 +173,7 @@ export async function POST(request: NextRequest) {
     if (error) {
       console.error('Failed to save diary entry:', error)
       return NextResponse.json(
-        { error: 'Failed to save entry', details: error.message },
+        { error: 'Failed to save entry' },
         { status: 500 }
       )
     }

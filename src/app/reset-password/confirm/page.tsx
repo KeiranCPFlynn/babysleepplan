@@ -11,7 +11,7 @@ export default function ResetPasswordConfirmPage() {
       <div className="relative flex flex-col items-center justify-center min-h-screen px-4 py-12">
         <Link href="/" className="flex items-center gap-2 mb-8 group">
           <Moon className="h-8 w-8 text-sky-700 transition-transform group-hover:rotate-12" />
-          <span className="text-xl font-semibold tracking-tight text-slate-900">Baby Sleep Plan</span>
+          <span className="text-xl font-semibold tracking-tight text-slate-900">LunaCradle</span>
         </Link>
 
         <UpdatePasswordForm />

@@ -366,7 +366,6 @@ export function IntakeForm({ babies, intake, hasUsedTrial }: IntakeFormProps) {
 
       // Submit the intake (changes status to 'submitted')
       await submitIntake(intake.id)
-      setIntakeStatus('submitted')
 
       toast.success('Intake submitted successfully!')
       router.push(`/dashboard/intake/${intake.id}/payment`)

@@ -5,6 +5,8 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js'
 import Stripe from 'stripe'
 import { sendPaymentConfirmationEmail } from '@/lib/email/send'
 
+const isDev = process.env.NODE_ENV !== 'production'
+
 // Lazy initialization of admin client
 let supabaseAdmin: SupabaseClient | null = null
 
@@ -62,7 +64,7 @@ export async function POST(request: NextRequest) {
             .maybeSingle()
 
           if (existingPlan) {
-            console.log(`Webhook already processed for intake ${intakeId}, skipping (idempotency check)`)
+            if (isDev) console.log(`Webhook already processed for intake ${intakeId}, skipping (idempotency check)`)
             return NextResponse.json({ received: true, skipped: true })
           }
 
@@ -118,7 +120,11 @@ export async function POST(request: NextRequest) {
           } else if (plan) {
             // Trigger plan generation asynchronously
             const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
-            const internalKey = process.env.INTERNAL_API_KEY || 'internal-generate-plan'
+            const internalKey = process.env.INTERNAL_API_KEY
+            if (!internalKey) {
+              console.error('INTERNAL_API_KEY is not set')
+              return NextResponse.json({ error: 'Server configuration error' }, { status: 500 })
+            }
             fetch(`${appUrl}/api/generate-plan`, {
               method: 'POST',
               headers: {
@@ -130,7 +136,7 @@ export async function POST(request: NextRequest) {
               console.error('Failed to trigger plan generation:', err)
             })
 
-            console.log(`Trial started for intake ${intakeId}, generating plan ${plan.id}`)
+            if (isDev) console.log(`Trial started for intake ${intakeId}, generating plan ${plan.id}`)
 
             // Send confirmation email
             const { data: baby } = await adminClient
@@ -158,7 +164,7 @@ export async function POST(request: NextRequest) {
 
     case 'checkout.session.expired': {
       const session = event.data.object as Stripe.Checkout.Session
-      console.log(`Checkout session expired: ${session.id}`)
+      if (isDev) console.log(`Checkout session expired: ${session.id}`)
       break
     }
 
@@ -191,7 +197,7 @@ export async function POST(request: NextRequest) {
         if (error) {
           console.error('Failed to update subscription status:', error)
         } else {
-          console.log(`Subscription created for user ${profile.id} with status ${status}`)
+          if (isDev) console.log(`Subscription created for user ${profile.id} with status ${status}`)
         }
       }
       break
@@ -243,7 +249,7 @@ export async function POST(request: NextRequest) {
         if (error) {
           console.error('Failed to update subscription status:', error)
         } else {
-          console.log(`Subscription updated for user ${profile.id}: ${subscription.status} -> ${ourStatus}`)
+          if (isDev) console.log(`Subscription updated for user ${profile.id}: ${subscription.status} -> ${ourStatus}`)
         }
       }
       break
@@ -270,7 +276,7 @@ export async function POST(request: NextRequest) {
         if (error) {
           console.error('Failed to cancel subscription:', error)
         } else {
-          console.log(`Subscription cancelled for user ${profile.id}`)
+          if (isDev) console.log(`Subscription cancelled for user ${profile.id}`)
         }
       }
       break
@@ -279,12 +285,12 @@ export async function POST(request: NextRequest) {
     case 'invoice.payment_failed': {
       const invoice = event.data.object as Stripe.Invoice
       const customerId = invoice.customer as string
-      console.log(`Payment failed for customer ${customerId}, invoice ${invoice.id}`)
+      if (isDev) console.log(`Payment failed for customer ${customerId}, invoice ${invoice.id}`)
       break
     }
 
     default:
-      console.log(`Unhandled event type: ${event.type}`)
+      if (isDev) console.log(`Unhandled event type: ${event.type}`)
   }
 
   return NextResponse.json({ received: true })

@@ -47,8 +47,8 @@ export function UpdatePasswordForm() {
       return
     }
 
-    if (formData.password.length < 6) {
-      toast.error('Password must be at least 6 characters')
+    if (formData.password.length < 8) {
+      toast.error('Password must be at least 8 characters')
       return
     }
 
@@ -123,7 +123,7 @@ export function UpdatePasswordForm() {
                 setFormData({ ...formData, password: e.target.value })
               }
               required
-              minLength={6}
+              minLength={8}
               className="bg-white/70 border-slate-200 focus:border-sky-400 focus:ring-sky-400/20"
             />
           </div>
@@ -139,7 +139,7 @@ export function UpdatePasswordForm() {
                 setFormData({ ...formData, confirmPassword: e.target.value })
               }
               required
-              minLength={6}
+              minLength={8}
               className="bg-white/70 border-slate-200 focus:border-sky-400 focus:ring-sky-400/20"
             />
           </div>

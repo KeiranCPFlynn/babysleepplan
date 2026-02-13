@@ -12,4 +12,4 @@ export function getResend(): Resend {
   return resendClient
 }
 
-export const FROM_EMAIL = 'Baby Sleep Plan <noreply@babysleepplan.com>'
+export const FROM_EMAIL = 'LunaCradle <noreply@lunacradle.com>'

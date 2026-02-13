@@ -645,7 +645,7 @@ export function SleepPlanPDF({ babyName, babyAge, createdDate, content }: SleepP
             <Moon size={24} />
             <Star size={16} color={colors.pinkAccent} />
           </View>
-          <Text style={styles.headerLabel}>Sweet Dreams Sleep Plan</Text>
+          <Text style={styles.headerLabel}>LunaCradle Sleep Plan</Text>
           <Text style={styles.headerTitle}>{cleanName}&apos;s Sleep Journey</Text>
           <Text style={styles.headerSubtitle}>
             {babyAge}{babyAge && createdDate ? '  ·  ' : ''}Created {createdDate}

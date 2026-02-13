@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
+import { createClient as createAdminClient } from '@supabase/supabase-js'
 import { requireAuth } from '@/lib/auth'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -7,20 +8,84 @@ import { ArrowLeft, CheckCircle, CreditCard, HelpCircle } from 'lucide-react'
 import { getDaysRemaining, getSubscriptionLabel, hasActiveSubscription, MONTHLY_PRICE, TRIAL_DAYS } from '@/lib/subscription'
 import { TestSubscriptionControls } from '@/components/subscription/test-subscription-controls'
 import { ManageSubscriptionButton } from '@/components/subscription/manage-subscription-button'
+import { stripe } from '@/lib/stripe'
+
+export const dynamic = 'force-dynamic'
 
 const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
+
+function getSupabaseAdmin() {
+  return createAdminClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
+}
+
+const isDev = process.env.NODE_ENV !== 'production'
 
 export default async function SubscriptionPage() {
   const user = await requireAuth()
   const supabase = await createClient()
 
-  const { data: profile } = await supabase
+  const { data: profile, error: profileError } = await supabase
     .from('profiles')
     .select('subscription_status, subscription_period_end, stripe_customer_id, is_admin, has_used_trial, created_at')
     .eq('id', user.id)
     .single()
 
-  const status = profile?.subscription_status
+  if (isDev) {
+    console.log('[sub-sync] Profile query:', { userId: user.id, profile, profileError: JSON.stringify(profileError) })
+  }
+
+  let status = profile?.subscription_status
+  const stripeCustomerId = profile?.stripe_customer_id
+
+  // Self-healing: if DB says inactive but user has a Stripe customer, check Stripe directly
+  const shouldSync = isStripeEnabled && stripeCustomerId && !hasActiveSubscription(status, isStripeEnabled)
+
+  if (shouldSync) {
+    try {
+      const subscriptions = await stripe.subscriptions.list({
+        customer: stripeCustomerId,
+        limit: 10,
+      })
+
+      if (isDev) {
+        console.log('[sub-sync] Stripe returned', subscriptions.data.length, 'subscriptions:',
+          subscriptions.data.map(s => ({ id: s.id, status: s.status }))
+        )
+      }
+
+      const activeSub = subscriptions.data.find(
+        (s: { status: string }) => s.status === 'active' || s.status === 'trialing'
+      )
+
+      if (activeSub) {
+        const ourStatus = activeSub.status === 'trialing' ? 'trialing' : 'active'
+        const endTimestamp = activeSub.trial_end ?? activeSub.items.data[0]?.current_period_end
+        const periodEnd = endTimestamp ? new Date(endTimestamp * 1000).toISOString() : null
+
+        const adminClient = getSupabaseAdmin()
+        const { error: updateError } = await adminClient.from('profiles').update({
+          subscription_status: ourStatus,
+          ...(periodEnd ? { subscription_period_end: periodEnd } : {}),
+        }).eq('id', user.id)
+
+        if (isDev) {
+          console.log('[sub-sync] DB update result:', { ourStatus, periodEnd, updateError: JSON.stringify(updateError) })
+        }
+
+        if (!updateError) {
+          status = ourStatus
+        }
+      } else if (isDev) {
+        console.log('[sub-sync] No active/trialing subscription found in Stripe')
+      }
+    } catch (e) {
+      console.error('[sub-sync] Stripe sync failed:', e)
+    }
+  }
+
   const label = getSubscriptionLabel(status)
   const isActive = hasActiveSubscription(status, isStripeEnabled)
   const isAdmin = profile?.is_admin === true
@@ -39,12 +104,12 @@ export default async function SubscriptionPage() {
       <div>
         <h1 className="text-3xl font-bold text-purple-900">Subscription</h1>
         <p className="text-purple-600/80 mt-1">
-          Manage your Baby Sleep Plan subscription.
+          Manage your LunaCradle subscription.
         </p>
       </div>
 
-      {/* Debug Information (Admin Only) */}
-      {isAdmin && (
+      {/* Debug Information (Admin Only, Dev Only) */}
+      {process.env.NODE_ENV !== 'production' && isAdmin && (
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
           <h3 className="text-sm font-medium text-blue-800 mb-2">Debug Information</h3>
           <div className="text-xs text-blue-600 space-y-1">
@@ -57,8 +122,8 @@ export default async function SubscriptionPage() {
         </div>
       )}
 
-      {/* Test Controls (Admin Only) */}
-      {isAdmin && <TestSubscriptionControls />}
+      {/* Test Controls (Admin Only, Dev Only) */}
+      {process.env.NODE_ENV !== 'production' && isAdmin && <TestSubscriptionControls />}
 
       <Card className={isActive ? 'border-green-200 bg-green-50/50' : 'border-amber-200 bg-amber-50/50'}>
         <CardHeader>
@@ -102,7 +167,7 @@ export default async function SubscriptionPage() {
           <CardContent className="space-y-4">
             <div className="flex justify-between items-center py-2 border-b border-gray-100">
               <span className="text-sm text-gray-600">Plan</span>
-              <span className="text-sm font-medium text-purple-800">Baby Sleep Plan</span>
+              <span className="text-sm font-medium text-purple-800">LunaCradle</span>
             </div>
             <div className="flex justify-between items-center py-2 border-b border-gray-100">
               <span className="text-sm text-gray-600">Price</span>

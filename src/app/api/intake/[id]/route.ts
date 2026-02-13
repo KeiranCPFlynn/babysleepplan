@@ -77,7 +77,6 @@ async function handleIntakeUpdate(
     console.error('Failed to update intake:', updateError)
     return NextResponse.json({
       error: 'Failed to update intake',
-      details: updateError.message
     }, { status: 500 })
   }
 
@@ -94,8 +93,7 @@ export async function PATCH(
   } catch (error) {
     console.error('Intake update error:', error)
     return NextResponse.json({
-      error: 'Internal server error',
-      details: error instanceof Error ? error.message : 'Unknown error'
+      error: 'Internal server error'
     }, { status: 500 })
   }
 }
@@ -111,8 +109,7 @@ export async function POST(
   } catch (error) {
     console.error('Intake update error:', error)
     return NextResponse.json({
-      error: 'Internal server error',
-      details: error instanceof Error ? error.message : 'Unknown error'
+      error: 'Internal server error'
     }, { status: 500 })
   }
 }
@@ -167,7 +164,6 @@ export async function DELETE(
       console.error('Failed to delete intake:', deleteError)
       return NextResponse.json({
         error: 'Failed to delete intake',
-        details: deleteError.message
       }, { status: 500 })
     }
 
@@ -175,8 +171,7 @@ export async function DELETE(
   } catch (error) {
     console.error('Intake delete error:', error)
     return NextResponse.json({
-      error: 'Internal server error',
-      details: error instanceof Error ? error.message : 'Unknown error'
+      error: 'Internal server error'
     }, { status: 500 })
   }
 }

@@ -23,6 +23,7 @@ export default async function IntakePage({
         .from('intake_submissions')
         .select('*')
         .eq('id', id)
+        .eq('user_id', user.id)
         .single(),
       supabase
         .from('babies')

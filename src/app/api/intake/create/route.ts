@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
       logInfo('User authenticated:', user?.id)
     } catch (authErr) {
       console.error('Failed to create auth client:', authErr)
-      return NextResponse.json({ error: 'Auth client error', details: String(authErr) }, { status: 500 })
+      return NextResponse.json({ error: 'Auth client error' }, { status: 500 })
     }
 
     if (!user) {
@@ -92,7 +92,7 @@ export async function POST(request: NextRequest) {
 
     if (babyError) {
       console.error('Baby lookup error:', babyError)
-      return NextResponse.json({ error: 'Baby not found', details: babyError.message }, { status: 404 })
+      return NextResponse.json({ error: 'Baby not found' }, { status: 404 })
     }
 
     if (!baby) {
@@ -141,7 +141,6 @@ export async function POST(request: NextRequest) {
       })
       return NextResponse.json({
         error: 'Failed to create intake',
-        details: intakeError.message
       }, { status: 500 })
     }
 
@@ -150,8 +149,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Intake creation error:', error)
     return NextResponse.json({
-      error: 'Internal server error',
-      details: error instanceof Error ? error.message : 'Unknown error'
+      error: 'An unexpected error occurred',
     }, { status: 500 })
   }
 }

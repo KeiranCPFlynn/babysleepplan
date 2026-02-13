@@ -3,8 +3,8 @@ import { Moon } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy - Baby Sleep Plan',
-  description: 'How Baby Sleep Plan collects, uses, and protects your personal information.',
+  title: 'Privacy Policy - LunaCradle',
+  description: 'How LunaCradle collects, uses, and protects your personal information.',
 }
 
 export default function PrivacyPage() {
@@ -14,7 +14,7 @@ export default function PrivacyPage() {
         <nav className="flex items-center justify-between rounded-3xl border border-white/60 bg-white/70 px-4 py-3 shadow-sm backdrop-blur">
           <Link href="/" className="flex items-center gap-2">
             <Moon className="h-7 w-7 text-sky-700" />
-            <span className="text-lg font-semibold tracking-tight">Baby Sleep Plan</span>
+            <span className="text-lg font-semibold tracking-tight">LunaCradle</span>
           </Link>
           <div className="flex items-center gap-4 text-sm">
             <Link href="/terms" className="text-slate-600 hover:text-slate-900">Terms</Link>
@@ -30,7 +30,7 @@ export default function PrivacyPage() {
         <div className="space-y-8 text-slate-700 leading-relaxed">
           <section>
             <h2 className="text-xl font-semibold text-slate-900 mb-3">1. Information We Collect</h2>
-            <p className="mb-3">When you use Baby Sleep Plan, we collect information you provide directly:</p>
+            <p className="mb-3">When you use LunaCradle, we collect information you provide directly:</p>
             <ul className="list-disc pl-6 space-y-1.5 text-sm">
               <li><strong>Account information:</strong> name, email address, and password when you create an account.</li>
               <li><strong>Baby profile data:</strong> your baby&apos;s name, date of birth, and sleep-related details you share through the intake questionnaire.</li>
@@ -95,7 +95,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-xl font-semibold text-slate-900 mb-3">8. Children&apos;s Privacy</h2>
             <p className="text-sm">
-              Baby Sleep Plan is a service for parents and caregivers. We do not knowingly collect information from children under 13. The baby profile data you enter is collected from you, the parent or caregiver, not from the child.
+              LunaCradle is a service for parents and caregivers. We do not knowingly collect information from children under 13. The baby profile data you enter is collected from you, the parent or caregiver, not from the child.
             </p>
           </section>
 
@@ -133,7 +133,7 @@ export default function PrivacyPage() {
 
       <footer className="border-t border-white/70 py-8">
         <div className="container mx-auto px-4 text-center text-sm text-slate-500">
-          &copy; {new Date().getFullYear()} Baby Sleep Plan. All rights reserved.
+          &copy; {new Date().getFullYear()} LunaCradle. All rights reserved.
         </div>
       </footer>
     </div>

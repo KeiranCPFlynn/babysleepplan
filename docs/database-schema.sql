@@ -1,4 +1,4 @@
--- Baby Sleep Plan App - Database Schema
+-- LunaCradle - Database Schema
 -- Run this in Supabase SQL Editor when your project is ready
 
 -- Enable UUID extension
@@ -18,6 +18,7 @@ CREATE TABLE profiles (
   subscription_period_end TIMESTAMPTZ,
   stripe_customer_id TEXT,
   is_admin BOOLEAN DEFAULT false,
+  has_used_trial BOOLEAN DEFAULT false,
   trial_days_override INTEGER,
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
@@ -304,3 +305,19 @@ CREATE POLICY "Users can delete their own reviews" ON weekly_reviews
 CREATE TRIGGER update_sleep_diary_entries_updated_at
   BEFORE UPDATE ON sleep_diary_entries
   FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+-- =====================================================
+-- CONTACT MESSAGES
+-- =====================================================
+
+CREATE TABLE contact_messages (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  topic TEXT NOT NULL,
+  message TEXT NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- No RLS needed — only the service role key inserts into this table.
+-- No user-facing read access.

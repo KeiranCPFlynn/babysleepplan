@@ -16,6 +16,10 @@ const notesPool = [
 ] as const
 
 export async function POST(request: NextRequest) {
+  if (process.env.NODE_ENV === 'production') {
+    return NextResponse.json({ error: 'Not found' }, { status: 404 })
+  }
+
   try {
     const supabase = await createClient()
     const { data: { user }, error: authError } = await supabase.auth.getUser()
@@ -87,7 +91,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Seed diary error:', error)
     return NextResponse.json(
-      { error: 'Failed to seed entries', details: error instanceof Error ? error.message : 'Unknown error' },
+      { error: 'Failed to seed entries' },
       { status: 500 }
     )
   }

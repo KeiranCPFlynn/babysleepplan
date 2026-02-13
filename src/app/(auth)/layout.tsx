@@ -33,7 +33,7 @@ export default async function AuthLayout({
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 mb-8 group">
           <Moon className="h-8 w-8 text-sky-700 transition-transform group-hover:rotate-12" />
-          <span className="text-xl font-semibold tracking-tight text-slate-900">Baby Sleep Plan</span>
+          <span className="text-xl font-semibold tracking-tight text-slate-900">LunaCradle</span>
         </Link>
 
         {children}

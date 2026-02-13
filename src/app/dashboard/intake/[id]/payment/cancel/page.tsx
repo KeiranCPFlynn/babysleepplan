@@ -58,7 +58,7 @@ export default async function PaymentCancelPage({
       <Card className="bg-blue-50 border-blue-200">
         <CardContent className="pt-6">
           <h3 className="font-semibold text-blue-900 mb-2">
-            Why choose Baby Sleep Plan?
+            Why choose LunaCradle?
           </h3>
           <ul className="space-y-2 text-sm text-blue-800">
             <li>• Personalized plan based on your baby's unique needs</li>

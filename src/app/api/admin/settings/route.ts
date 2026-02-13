@@ -46,7 +46,8 @@ export async function POST(request: NextRequest) {
           .eq('id', user.id)
 
         if (error) {
-          return NextResponse.json({ error: error.message }, { status: 500 })
+          console.error('Failed to set trial override:', error)
+          return NextResponse.json({ error: 'Failed to update settings' }, { status: 500 })
         }
 
         return NextResponse.json({ success: true, trial_days_override: days })
@@ -73,7 +74,8 @@ export async function POST(request: NextRequest) {
             .eq('id', user.id)
 
           if (error) {
-            return NextResponse.json({ error: error.message }, { status: 500 })
+            console.error('Failed to end trial:', error)
+            return NextResponse.json({ error: 'Failed to update settings' }, { status: 500 })
           }
 
           return NextResponse.json({ success: true, message: 'Trial ended (dev mode). Status set to active.' })
@@ -110,17 +112,42 @@ export async function POST(request: NextRequest) {
       }
 
       case 'resetSubscription': {
+        // Cancel any active Stripe subscriptions first
+        const { data: resetProfile } = await adminSupabase
+          .from('profiles')
+          .select('stripe_customer_id')
+          .eq('id', user.id)
+          .single()
+
+        if (resetProfile?.stripe_customer_id) {
+          try {
+            const subs = await stripe.subscriptions.list({
+              customer: resetProfile.stripe_customer_id,
+              limit: 10,
+            })
+            for (const sub of subs.data) {
+              if (sub.status !== 'canceled') {
+                await stripe.subscriptions.cancel(sub.id)
+              }
+            }
+          } catch (e) {
+            console.error('[admin] Failed to cancel Stripe subscriptions:', e)
+          }
+        }
+
         const { error } = await adminSupabase
           .from('profiles')
           .update({
             subscription_status: 'inactive',
             stripe_customer_id: null,
+            subscription_period_end: null,
             has_used_trial: false,
           })
           .eq('id', user.id)
 
         if (error) {
-          return NextResponse.json({ error: error.message }, { status: 500 })
+          console.error('Failed to reset subscription:', error)
+          return NextResponse.json({ error: 'Failed to update settings' }, { status: 500 })
         }
 
         return NextResponse.json({ success: true })

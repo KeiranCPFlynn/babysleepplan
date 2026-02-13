@@ -4,8 +4,8 @@ import type { Metadata } from 'next'
 import { ContactForm } from './contact-form'
 
 export const metadata: Metadata = {
-  title: 'Contact Us - Baby Sleep Plan',
-  description: 'Get in touch with the Baby Sleep Plan team.',
+  title: 'Contact Us - LunaCradle',
+  description: 'Get in touch with the LunaCradle team.',
 }
 
 export default function ContactPage() {
@@ -15,7 +15,7 @@ export default function ContactPage() {
         <nav className="flex items-center justify-between rounded-3xl border border-white/60 bg-white/70 px-4 py-3 shadow-sm backdrop-blur">
           <Link href="/" className="flex items-center gap-2">
             <Moon className="h-7 w-7 text-sky-700" />
-            <span className="text-lg font-semibold tracking-tight">Baby Sleep Plan</span>
+            <span className="text-lg font-semibold tracking-tight">LunaCradle</span>
           </Link>
           <div className="flex items-center gap-4 text-sm">
             <Link href="/privacy" className="text-slate-600 hover:text-slate-900">Privacy</Link>
@@ -77,7 +77,7 @@ export default function ContactPage() {
 
       <footer className="border-t border-white/70 py-8">
         <div className="container mx-auto px-4 text-center text-sm text-slate-500">
-          &copy; {new Date().getFullYear()} Baby Sleep Plan. All rights reserved.
+          &copy; {new Date().getFullYear()} LunaCradle. All rights reserved.
         </div>
       </footer>
     </div>

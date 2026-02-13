@@ -73,7 +73,7 @@ export default async function PaymentPage({
         <Card className="border-sky-200 shadow-sm">
           <CardHeader className="text-center">
             <CardTitle className="text-2xl">
-              {isAdditionalBaby ? 'Additional Baby Plan' : 'Baby Sleep Plan'}
+              {isAdditionalBaby ? 'Additional Baby Plan' : 'LunaCradle'}
             </CardTitle>
             <CardDescription>Everything you need for better sleep</CardDescription>
           </CardHeader>

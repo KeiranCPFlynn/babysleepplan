@@ -4,7 +4,10 @@
 - [README](../README.md) - Project overview, setup, and development
 
 ## Architecture
-- [Architecture Overview](./ARCHITECTURE.md) - Data flow, key components, design decisions
+- [Architecture Overview](./ARCHITECTURE.md) - Data flow, key components, design decisions, security architecture
+
+## Security
+- [Security Guide](./SECURITY.md) - Security measures, headers, sanitization, production checklist
 
 ## Database
 - [Database Schema](./database-schema.sql) - Full SQL schema with RLS policies
@@ -23,22 +26,31 @@
 | `src/app/api/diary/review/route.ts` | Weekly diary review generation |
 | `src/app/api/diary/plan-update/route.ts` | 7-day plan updates + history |
 | `src/app/api/intake/[id]/route.ts` | Intake CRUD operations |
-| `src/app/api/stripe/webhook/route.ts` | Stripe payment handling |
+| `src/app/api/intake/create/route.ts` | Intake creation |
+| `src/app/api/stripe/checkout/route.ts` | Stripe checkout session creation |
+| `src/app/api/stripe/webhook/route.ts` | Stripe webhook handling |
+| `src/app/api/contact/route.ts` | Contact form (rate-limited, sanitized) |
 
 ### Core Components
 | File | Purpose |
 |------|---------|
 | `src/components/forms/intake/intake-form.tsx` | Multi-step intake wizard |
+| `src/components/forms/signup-form.tsx` | Signup form (8-char min password) |
+| `src/components/forms/update-password-form.tsx` | Password reset form (8-char min) |
 | `src/app/dashboard/plans/[id]/page.tsx` | Plan view page |
 | `src/app/dashboard/plans/[id]/diary/page.tsx` | Plan diary page |
 | `src/app/dashboard/diary/page.tsx` | Diary hub for multi-plan access |
 | `src/components/pdf/sleep-plan-pdf.tsx` | PDF document generation |
 
-### Configuration
+### Security & Configuration
 | File | Purpose |
 |------|---------|
+| `next.config.ts` | Security headers (CSP, HSTS, etc.) |
+| `src/lib/env.ts` | Startup env var validation |
+| `src/lib/sanitize.ts` | HTML escaping, prompt sanitization |
 | `src/lib/gemini.ts` | Gemini AI client setup |
 | `src/lib/supabase/server.ts` | Server-side Supabase client |
+| `src/lib/email/send.ts` | Email templates (HTML-escaped) |
 | `src/middleware.ts` | Route protection |
 
 ## Knowledge Base

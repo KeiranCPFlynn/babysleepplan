@@ -605,7 +605,7 @@
   left: 0;
   width: 60px;
   height: 3px;
-  background: linear-gradient(to right, #3b82f6, #60a5fa);
+  background: linear-gradient(to right, #7E57C2, #B39DDB);
   border-radius: 2px;
 }
 
@@ -615,6 +615,27 @@
     background: white !important;
   }
 
+  /* Hide dashboard shell: sidebar nav, mobile header, decorative blobs/stars */
+  nav,
+  [data-dashboard-nav],
+  .md\:hidden.flex.shrink-0 {
+    display: none !important;
+  }
+
+  /* Reset dashboard layout so the content fills the page */
+  .relative.flex.h-screen.overflow-hidden {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+    background: white !important;
+  }
+
+  /* Hide decorative background elements */
+  .pointer-events-none.absolute {
+    display: none !important;
+  }
+
+  /* Hide all non-printable siblings of the plan card */
   .print\:hidden {
     display: none !important;
   }

@@ -3,8 +3,8 @@ import { Moon } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Terms of Service - Baby Sleep Plan',
-  description: 'Terms and conditions for using Baby Sleep Plan.',
+  title: 'Terms of Service - LunaCradle',
+  description: 'Terms and conditions for using LunaCradle.',
 }
 
 export default function TermsPage() {
@@ -14,7 +14,7 @@ export default function TermsPage() {
         <nav className="flex items-center justify-between rounded-3xl border border-white/60 bg-white/70 px-4 py-3 shadow-sm backdrop-blur">
           <Link href="/" className="flex items-center gap-2">
             <Moon className="h-7 w-7 text-sky-700" />
-            <span className="text-lg font-semibold tracking-tight">Baby Sleep Plan</span>
+            <span className="text-lg font-semibold tracking-tight">LunaCradle</span>
           </Link>
           <div className="flex items-center gap-4 text-sm">
             <Link href="/privacy" className="text-slate-600 hover:text-slate-900">Privacy</Link>
@@ -31,14 +31,14 @@ export default function TermsPage() {
           <section>
             <h2 className="text-xl font-semibold text-slate-900 mb-3">1. Acceptance of Terms</h2>
             <p className="text-sm">
-              By accessing or using Baby Sleep Plan (&ldquo;the Service&rdquo;), you agree to be bound by these Terms of Service. If you do not agree to these terms, do not use the Service.
+              By accessing or using LunaCradle (&ldquo;the Service&rdquo;), you agree to be bound by these Terms of Service. If you do not agree to these terms, do not use the Service.
             </p>
           </section>
 
           <section>
             <h2 className="text-xl font-semibold text-slate-900 mb-3">2. Description of Service</h2>
             <p className="text-sm">
-              Baby Sleep Plan provides AI-generated, personalized sleep guidance for parents and caregivers of infants and toddlers. The Service includes a sleep plan, a daily sleep diary, and weekly plan updates based on your logged data.
+              LunaCradle provides AI-generated, personalized sleep guidance for parents and caregivers of infants and toddlers. The Service includes a sleep plan, a daily sleep diary, and weekly plan updates based on your logged data.
             </p>
           </section>
 
@@ -92,14 +92,14 @@ export default function TermsPage() {
           <section>
             <h2 className="text-xl font-semibold text-slate-900 mb-3">8. Intellectual Property</h2>
             <p className="text-sm">
-              All content, design, and technology of Baby Sleep Plan is owned by us or our licensors. Your personalized sleep plan is generated for your personal, non-commercial use only. You may not copy, distribute, or republish any part of the Service without our written permission.
+              All content, design, and technology of LunaCradle is owned by us or our licensors. Your personalized sleep plan is generated for your personal, non-commercial use only. You may not copy, distribute, or republish any part of the Service without our written permission.
             </p>
           </section>
 
           <section>
             <h2 className="text-xl font-semibold text-slate-900 mb-3">9. Limitation of Liability</h2>
             <p className="text-sm">
-              To the maximum extent permitted by law, Baby Sleep Plan and its operators shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the Service. Our total liability shall not exceed the amount you paid us in the 12 months preceding the claim.
+              To the maximum extent permitted by law, LunaCradle and its operators shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the Service. Our total liability shall not exceed the amount you paid us in the 12 months preceding the claim.
             </p>
           </section>
 
@@ -127,7 +127,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-xl font-semibold text-slate-900 mb-3">13. Governing Law</h2>
             <p className="text-sm">
-              These terms are governed by and construed in accordance with the laws of the jurisdiction in which Baby Sleep Plan operates, without regard to conflict of law principles.
+              These terms are governed by and construed in accordance with the laws of the jurisdiction in which LunaCradle operates, without regard to conflict of law principles.
             </p>
           </section>
 
@@ -143,7 +143,7 @@ export default function TermsPage() {
 
       <footer className="border-t border-white/70 py-8">
         <div className="container mx-auto px-4 text-center text-sm text-slate-500">
-          &copy; {new Date().getFullYear()} Baby Sleep Plan. All rights reserved.
+          &copy; {new Date().getFullYear()} LunaCradle. All rights reserved.
         </div>
       </footer>
     </div>

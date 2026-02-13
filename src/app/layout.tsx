@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ToastProvider } from "@/components/providers/toast-provider";
+import '@/lib/env'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,8 +15,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Baby Sleep Plan - Get a Plan for Tonight",
-  description: "Get a personalized plan for tonight in 3 minutes, tailored to your baby's needs.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://lunacradle.com'),
+  title: {
+    default: "LunaCradle - Personalized AI Sleep Plans for Your Baby",
+    template: "%s | LunaCradle",
+  },
+  description: "Gentle, evidence-based sleep plans for your baby, powered by AI. Better sleep for baby, better rest for you.",
+  openGraph: {
+    type: 'website',
+    siteName: 'LunaCradle',
+    title: 'LunaCradle - Personalized AI Sleep Plans for Your Baby',
+    description: 'Gentle, evidence-based sleep plans for your baby, powered by AI. Better sleep for baby, better rest for you.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+  },
 };
 
 export default function RootLayout({

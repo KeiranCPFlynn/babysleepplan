@@ -34,14 +34,14 @@ export default async function PlansPage() {
 
   return (
     <div className="space-y-8">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <div>
           <h1 className="text-3xl font-bold text-purple-900">My Sleep Plans</h1>
           <p className="text-purple-600/80 mt-2">
             View and manage your baby&apos;s personalized sleep plans.
           </p>
         </div>
-        <Button asChild className="bg-purple-600 hover:bg-purple-700">
+        <Button asChild className="bg-purple-600 hover:bg-purple-700 self-start sm:self-auto">
           <Link href="/dashboard/intake/new">
             <Plus className="mr-2 h-4 w-4" />
             New Plan
@@ -59,16 +59,16 @@ export default async function PlansPage() {
             {pendingIntakes.map((intake) => (
               <Card key={intake.id} className="border-orange-200 bg-orange-50">
                 <CardHeader>
-                  <div className="flex justify-between items-start">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
                     <div>
-                      <CardTitle>{intake.baby?.name || 'Unknown Baby'}'s Plan</CardTitle>
+                      <CardTitle>{intake.baby?.name || 'Unknown Baby'}&apos;s Plan</CardTitle>
                       <CardDescription>
                         {isStripeEnabled
                           ? 'Questionnaire completed - ready for payment'
                           : 'Questionnaire completed - ready to generate'}
                       </CardDescription>
                     </div>
-                    <Button size="sm" asChild className="bg-purple-600 hover:bg-purple-700">
+                    <Button size="sm" asChild className="bg-purple-600 hover:bg-purple-700 self-start sm:self-auto">
                       <Link href={`/dashboard/intake/${intake.id}/payment`}>
                         {isStripeEnabled ? 'Complete Payment' : 'Generate Plan'}
                       </Link>
@@ -89,9 +89,9 @@ export default async function PlansPage() {
             {plans.map((plan) => (
               <Card key={plan.id}>
                 <CardHeader>
-                  <div className="flex justify-between items-start">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
                     <div>
-                      <CardTitle>{plan.baby?.name || 'Unknown Baby'}'s Sleep Plan</CardTitle>
+                      <CardTitle>{plan.baby?.name || 'Unknown Baby'}&apos;s Sleep Plan</CardTitle>
                       <CardDescription>
                         Created {new Date(plan.created_at).toLocaleDateString()}
                       </CardDescription>

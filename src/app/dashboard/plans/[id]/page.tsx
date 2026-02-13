@@ -93,18 +93,9 @@ export default async function PlanViewPage({
             </p>
             <div className="flex justify-center gap-4">
               <RefreshButton />
-              {isDevMode && (
-                <>
-                  <CancelButton planId={plan.id} />
-                  <RetryButton planId={plan.id} />
-                </>
-              )}
+              <RetryButton planId={plan.id} />
+              {isDevMode && <CancelButton planId={plan.id} />}
             </div>
-            {isDevMode && (
-              <p className="text-xs text-orange-500 mt-4 bg-orange-50 inline-block px-3 py-1 rounded-full">
-                Dev mode: Cancel/Retry available
-              </p>
-            )}
           </CardContent>
         </Card>
       </div>
@@ -147,7 +138,7 @@ export default async function PlanViewPage({
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="space-y-3 print:hidden">
         <Link
           href="/dashboard/plans"
           className="inline-flex items-center text-sm text-purple-600 hover:text-purple-800"
@@ -155,7 +146,7 @@ export default async function PlanViewPage({
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Plans
         </Link>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <Button variant="outline" asChild>
             <Link href={`/dashboard/plans/${plan.id}/diary`}>
               <BookOpen className="mr-2 h-4 w-4" />
@@ -182,7 +173,7 @@ export default async function PlanViewPage({
             <Star className="h-5 w-5 text-pink-400" />
           </div>
           <p className="text-xs font-medium uppercase tracking-widest text-purple-500 text-center mb-2">
-            Sweet Dreams Sleep Plan
+            LunaCradle Sleep Plan
           </p>
           <h1 className="text-3xl font-bold text-purple-700 text-center mb-2">
             {plan.baby?.name || 'Baby'}&apos;s Sleep Journey
@@ -242,7 +233,7 @@ export default async function PlanViewPage({
       </Card>
 
       {revisions && revisions.length > 0 && (
-        <Card>
+        <Card className="print:hidden">
           <CardHeader>
             <CardTitle>Plan History</CardTitle>
             <CardDescription>
@@ -279,7 +270,7 @@ export default async function PlanViewPage({
       )}
 
       {isDevMode && (
-        <div className="text-center">
+        <div className="text-center print:hidden">
           <p className="text-xs text-orange-500 bg-orange-50 inline-block px-4 py-2 rounded-full">
             Dev mode: Regenerate button available above
           </p>

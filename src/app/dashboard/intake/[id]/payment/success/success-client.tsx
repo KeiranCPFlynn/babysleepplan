@@ -11,10 +11,11 @@ interface SuccessClientProps {
   intakeId: string
   babyName: string
   isDevMode: boolean
+  isAdditionalBaby: boolean
   initialPlan: { id: string; status: string } | null
 }
 
-export function SuccessClient({ intakeId, babyName, isDevMode, initialPlan }: SuccessClientProps) {
+export function SuccessClient({ intakeId, babyName, isDevMode, isAdditionalBaby, initialPlan }: SuccessClientProps) {
   const router = useRouter()
   const [plan, setPlan] = useState(initialPlan)
   const [dots, setDots] = useState(0)
@@ -191,12 +192,18 @@ export function SuccessClient({ intakeId, babyName, isDevMode, initialPlan }: Su
             <CheckCircle className="h-10 w-10 text-purple-600" />
           </div>
           <CardTitle className="text-2xl text-purple-800">
-            {isDevMode ? 'Plan Generation Started!' : 'Trial Started Successfully!'}
+            {isDevMode
+              ? 'Plan Generation Started!'
+              : isAdditionalBaby
+                ? `${babyName}'s Plan Added!`
+                : 'Trial Started Successfully!'}
           </CardTitle>
           <CardDescription className="text-purple-600">
             {isDevMode
               ? 'Your sleep plan is being created.'
-              : 'Your 5-day free trial has begun. Your personalized plan is being created.'}
+              : isAdditionalBaby
+                ? `${babyName}'s sleep plan has been added to your subscription.`
+                : 'Your 5-day free trial has begun. Your personalized plan is being created.'}
           </CardDescription>
         </CardHeader>
       </Card>

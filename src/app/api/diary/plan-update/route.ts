@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { getModel } from '@/lib/gemini'
 import { hasActiveSubscription } from '@/lib/subscription'
+import { sanitizeForPrompt } from '@/lib/sanitize'
+import { planUpdateLimiter } from '@/lib/rate-limit'
 
 function calculateAgeMonths(dob: string): number {
   const birth = new Date(dob)
@@ -133,6 +135,15 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
+    // Rate limit per user
+    const rateCheck = planUpdateLimiter.check(user.id)
+    if (rateCheck.limited) {
+      return NextResponse.json(
+        { error: 'Too many plan update requests. Please try again later.' },
+        { status: 429 }
+      )
+    }
+
     const body = await request.json()
     const { planId, weekStart, weekEnd } = body
     const isDevMode = process.env.NEXT_PUBLIC_STRIPE_ENABLED === 'false'
@@ -253,10 +264,13 @@ export async function POST(request: NextRequest) {
     const weekLabel = formatWeekLabel(weekStart)
     const planContent = plan.plan_content || ''
 
+    // Sanitize user-controlled fields
+    const safeBabyName = sanitizeForPrompt(plan.baby.name, 100)
+
     const prompt = `You are updating an existing baby sleep plan based on a week of diary entries${review ? ' and the weekly review' : ''}. Do NOT rewrite the full plan. Write a concise update section that will be appended to the plan.
 
 ## Baby Info
-- Name: ${plan.baby.name}
+- Name: ${safeBabyName}
 - Age: ${ageMonths} months
 - Temperament: ${plan.baby.temperament || 'Not specified'}
 
@@ -340,7 +354,7 @@ Return ONLY the Markdown for the new section.`
   } catch (error) {
     console.error('Plan update error:', error)
     return NextResponse.json(
-      { error: 'Failed to update plan', details: error instanceof Error ? error.message : 'Unknown error' },
+      { error: 'An unexpected error occurred' },
       { status: 500 }
     )
   }

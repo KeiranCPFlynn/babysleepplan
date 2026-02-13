@@ -47,6 +47,10 @@ export async function POST(request: NextRequest) {
 
     // Dev mode bypass: create plan directly
     if (!isStripeEnabled) {
+      if (process.env.NODE_ENV === 'production') {
+        console.error('STRIPE_ENABLED is false in production!')
+        return NextResponse.json({ error: 'Payment system unavailable' }, { status: 503 })
+      }
       console.log('[PAYMENT] Bypassing Stripe for intake:', intakeId)
 
       const adminSupabase = getSupabaseAdmin()
@@ -97,7 +101,11 @@ export async function POST(request: NextRequest) {
       }
 
       // Trigger plan generation asynchronously
-      const internalKey = process.env.INTERNAL_API_KEY || 'internal-generate-plan'
+      const internalKey = process.env.INTERNAL_API_KEY
+      if (!internalKey) {
+        console.error('INTERNAL_API_KEY is not set')
+        return NextResponse.json({ error: 'Server configuration error' }, { status: 500 })
+      }
       fetch(`${appUrl}/api/generate-plan`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${internalKey}` },
@@ -164,12 +172,24 @@ export async function POST(request: NextRequest) {
       }
 
       if (subscription) {
-        // Add the additional baby price as a new line item
-        await stripe.subscriptionItems.create({
-          subscription: subscription.id,
-          price: SUBSCRIPTION_ADDITIONAL_BABY_PRICE_ID,
-          quantity: 1,
-        })
+        // Check if additional baby price item already exists on this subscription
+        const existingItem = subscription.items.data.find(
+          (item) => item.price.id === SUBSCRIPTION_ADDITIONAL_BABY_PRICE_ID
+        )
+
+        if (existingItem) {
+          // Increment quantity on existing item
+          await stripe.subscriptionItems.update(existingItem.id, {
+            quantity: (existingItem.quantity ?? 0) + 1,
+          })
+        } else {
+          // First additional baby — create new line item
+          await stripe.subscriptionItems.create({
+            subscription: subscription.id,
+            price: SUBSCRIPTION_ADDITIONAL_BABY_PRICE_ID,
+            quantity: 1,
+          })
+        }
 
         // Mark intake as paid and create plan directly (no checkout session needed)
         const adminSupabase = getSupabaseAdmin()
@@ -197,7 +217,11 @@ export async function POST(request: NextRequest) {
         }
 
         // Trigger plan generation asynchronously
-        const internalKey2 = process.env.INTERNAL_API_KEY || 'internal-generate-plan'
+        const internalKey2 = process.env.INTERNAL_API_KEY
+        if (!internalKey2) {
+          console.error('INTERNAL_API_KEY is not set')
+          return NextResponse.json({ error: 'Server configuration error' }, { status: 500 })
+        }
         fetch(`${appUrl}/api/generate-plan`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${internalKey2}` },

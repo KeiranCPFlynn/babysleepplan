@@ -3,6 +3,8 @@ import { createClient } from '@supabase/supabase-js'
 import { createClient as createServerClient } from '@/lib/supabase/server'
 import { getModel } from '@/lib/gemini'
 import { sendPlanReadyEmail } from '@/lib/email/send'
+import { sanitizeForPrompt } from '@/lib/sanitize'
+import { planGenerationLimiter } from '@/lib/rate-limit'
 import fs from 'fs'
 import path from 'path'
 
@@ -297,7 +299,11 @@ export async function POST(request: NextRequest) {
   try {
     // Verify authorization: internal API key OR authenticated user who owns the plan
     const authHeader = request.headers.get('authorization')
-    const internalKey = process.env.INTERNAL_API_KEY || 'internal-generate-plan'
+    const internalKey = process.env.INTERNAL_API_KEY
+    if (!internalKey) {
+      console.error('INTERNAL_API_KEY is not set')
+      return NextResponse.json({ error: 'Server configuration error' }, { status: 500 })
+    }
     const isInternalCall = authHeader === `Bearer ${internalKey}`
 
     const body = await request.json()
@@ -314,6 +320,16 @@ export async function POST(request: NextRequest) {
       if (!user) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
       }
+
+      // Rate limit user-initiated plan generations
+      const rateCheck = planGenerationLimiter.check(user.id)
+      if (rateCheck.limited) {
+        return NextResponse.json(
+          { error: 'Too many plan generation requests. Please try again later.' },
+          { status: 429 }
+        )
+      }
+
       // Verify plan ownership
       const { data: ownedPlan } = await userSupabase
         .from('plans')
@@ -341,7 +357,7 @@ export async function POST(request: NextRequest) {
 
     if (planError) {
       console.error('Failed to fetch plan:', planError)
-      return NextResponse.json({ error: 'Plan not found', details: planError.message }, { status: 404 })
+      return NextResponse.json({ error: 'Plan not found' }, { status: 404 })
     }
 
     if (!plan) {
@@ -354,7 +370,9 @@ export async function POST(request: NextRequest) {
 
     // Add timeout protection for plan generation
     const generationTimeout = setTimeout(async () => {
-      console.error(`Plan generation timeout for plan ${planId} - marking as failed`)
+      if (isDev) {
+        console.log(`Plan generation timeout for plan ${planId} - marking as failed`)
+      }
       try {
         await supabase
           .from('plans')
@@ -428,6 +446,17 @@ export async function POST(request: NextRequest) {
       ? `- **Additional sleep periods:**\n${formatAdditionalSleepTimes(additionalSleepTimes)}`
       : '- **Additional sleep periods:** None'
 
+    // Sanitize user-controlled fields before prompt interpolation
+    const safeBabyName = sanitizeForPrompt(baby.name, 100)
+    const safeTemperamentNotes = baby.temperament_notes ? sanitizeForPrompt(baby.temperament_notes, 500) : ''
+    const safeMedicalConditions = baby.medical_conditions ? sanitizeForPrompt(baby.medical_conditions, 500) : ''
+    const safeNightWakingsDesc = intake.night_wakings_description ? sanitizeForPrompt(intake.night_wakings_description, 1000) : 'Not specified'
+    const safeNightWakingPattern = intake.night_waking_pattern ? sanitizeForPrompt(intake.night_waking_pattern, 1000) : 'Not specified'
+    const safeProblemDescription = intake.problem_description ? sanitizeForPrompt(intake.problem_description, 2000) : ''
+    const safeParentConstraints = intake.parent_constraints ? sanitizeForPrompt(intake.parent_constraints, 1000) : ''
+    const safeSuccessDescription = intake.success_description ? sanitizeForPrompt(intake.success_description, 1000) : ''
+    const safeAdditionalNotes = intake.additional_notes ? sanitizeForPrompt(intake.additional_notes, 1000) : ''
+
     // Build the prompt
     const prompt = `You are an expert pediatric sleep consultant. Using the knowledge base provided and the specific information about this baby, create a detailed, personalized sleep plan.
 
@@ -435,12 +464,12 @@ export async function POST(request: NextRequest) {
 ${knowledgeBase}
 
 ## Baby Information
-- **Name:** ${baby.name}
+- **Name:** ${safeBabyName}
 - **Age:** ${age.months} months (${age.weeks} weeks)
 ${baby.premature_weeks > 0 ? `- **Adjusted Age:** ${age.adjustedMonths} months (born ${baby.premature_weeks} weeks early)` : ''}
     - **Temperament:** ${formatTemperament(baby.temperament)}
-    ${baby.temperament_notes ? `- **Temperament Notes:** ${baby.temperament_notes}` : ''}
-${baby.medical_conditions ? `- **Medical Notes:** ${baby.medical_conditions}` : ''}
+    ${safeTemperamentNotes ? `- **Temperament Notes:** ${safeTemperamentNotes}` : ''}
+${safeMedicalConditions ? `- **Medical Notes:** ${safeMedicalConditions}` : ''}
 
 ## Current Sleep Situation
 - **Current Bedtime:** ${intake.current_bedtime || 'Not specified'}
@@ -451,8 +480,8 @@ ${additionalSleepTimesLine}
 ## Night Sleep
 - **Night Wakings:** ${intake.night_wakings_count ?? 'Not specified'} times per night
 - **Waking Duration:** ${formatDuration(intake.night_waking_duration)}
-- **What Happens:** ${intake.night_wakings_description || 'Not specified'}
-- **Pattern:** ${intake.night_waking_pattern || 'Not specified'}
+- **What Happens:** ${safeNightWakingsDesc}
+- **Pattern:** ${safeNightWakingPattern}
 
 ## Naps
 - **Naps Per Day:** ${intake.nap_count ?? 'Not specified'}
@@ -462,15 +491,15 @@ ${additionalSleepTimesLine}
 
 ## Sleep Challenges
 ${formatProblems(intake.problems)}
-${intake.problem_description ? `\nDetails: ${intake.problem_description}` : ''}
+${safeProblemDescription ? `\nDetails: ${safeProblemDescription}` : ''}
 
 ## Parent Preferences
 - **Comfort with Crying:** ${formatCryingLevel(intake.crying_comfort_level)}
-${intake.parent_constraints ? `- **Constraints:** ${intake.parent_constraints}` : ''}
+${safeParentConstraints ? `- **Constraints:** ${safeParentConstraints}` : ''}
 
 ## Goals
-${intake.success_description ? `- **What Success Looks Like:** ${intake.success_description}` : 'Not specified'}
-${intake.additional_notes ? `- **Additional Notes:** ${intake.additional_notes}` : ''}
+${safeSuccessDescription ? `- **What Success Looks Like:** ${safeSuccessDescription}` : 'Not specified'}
+${safeAdditionalNotes ? `- **Additional Notes:** ${safeAdditionalNotes}` : ''}
 
 ---
 
@@ -481,7 +510,7 @@ Create a warm, personalized sleep plan in Markdown format. Write like a supporti
 ### Writing Style:
 - Write in flowing paragraphs, NOT bullet point lists
 - Use a warm, encouraging tone like you're chatting over coffee
-- Keep it personal - use ${baby.name}'s name naturally throughout
+- Keep it personal - use ${safeBabyName}'s name naturally throughout
 - Be specific with times and durations (bold key numbers)
 - Avoid clinical/medical language - keep it friendly
 - DO NOT use emojis anywhere in the text
@@ -497,7 +526,7 @@ Create a warm, personalized sleep plan in Markdown format. Write like a supporti
 
 ### Content Structure:
 
-# ${baby.name}'s Sleep Plan
+# ${safeBabyName}'s Sleep Plan
 
 ## Your Plan at a Glance
 
@@ -505,13 +534,13 @@ Write 2-3 friendly paragraphs explaining what this plan covers and what the fami
 
 ---
 
-## Understanding ${baby.name}'s Sleep
+## Understanding ${safeBabyName}'s Sleep
 
 Write 2-3 paragraphs about what's developmentally appropriate for this age, what's going well, and what we'll work on. Make parents feel understood, not judged.
 
 ---
 
-## ${baby.name}'s Daily Rhythm
+## ${safeBabyName}'s Daily Rhythm
 
 ### Wake Windows
 One brief paragraph explaining wake windows, then a simple table:
@@ -676,7 +705,7 @@ Remember: Write like a friend, not a textbook. Paragraphs over bullets. Keep it 
     }
 
     return NextResponse.json(
-      { error: 'Failed to generate plan', details: error instanceof Error ? error.message : 'Unknown error' },
+      { error: 'An unexpected error occurred' },
       { status: 500 }
     )
   }
