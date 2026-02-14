@@ -10,6 +10,11 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import Link from 'next/link'
 import { toast } from 'sonner'
 import { KeyRound, Loader2 } from 'lucide-react'
+import {
+  getPasswordPolicyErrors,
+  PASSWORD_POLICY_HINT,
+  PASSWORD_POLICY_REGEX,
+} from '@/lib/password-policy'
 
 export function UpdatePasswordForm() {
   const router = useRouter()
@@ -47,8 +52,9 @@ export function UpdatePasswordForm() {
       return
     }
 
-    if (formData.password.length < 8) {
-      toast.error('Password must be at least 8 characters')
+    const passwordErrors = getPasswordPolicyErrors(formData.password)
+    if (passwordErrors.length > 0) {
+      toast.error(`Password must include ${passwordErrors.join(', ')}`)
       return
     }
 
@@ -124,8 +130,11 @@ export function UpdatePasswordForm() {
               }
               required
               minLength={8}
+              pattern={PASSWORD_POLICY_REGEX.source}
+              title={PASSWORD_POLICY_HINT}
               className="bg-white/70 border-slate-200 focus:border-sky-400 focus:ring-sky-400/20"
             />
+            <p className="text-xs text-slate-500">{PASSWORD_POLICY_HINT}</p>
           </div>
 
           <div className="space-y-2">
@@ -140,6 +149,8 @@ export function UpdatePasswordForm() {
               }
               required
               minLength={8}
+              pattern={PASSWORD_POLICY_REGEX.source}
+              title={PASSWORD_POLICY_HINT}
               className="bg-white/70 border-slate-200 focus:border-sky-400 focus:ring-sky-400/20"
             />
           </div>

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { AnimateOnScroll } from '@/components/ui/animate-on-scroll'
@@ -6,25 +7,11 @@ import { Moon, Star, Heart, Sparkles, CheckCircle, X, BookOpen, Shield } from 'l
 
 export default function HomePage() {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-sky-50 via-white to-rose-50 text-slate-900">
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-sky-50 via-white to-rose-50 text-slate-900 pb-24 md:pb-0">
       {/* Ambient background blobs with color morphing */}
-      <div className="pointer-events-none absolute -top-48 -right-56 h-[30rem] w-[30rem] rounded-full bg-gradient-to-br from-rose-300/80 via-pink-300/70 to-amber-200/70 float-reverse blob-morph" />
-      <div className="pointer-events-none absolute top-16 -left-60 h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-sky-300/85 via-cyan-200/70 to-indigo-200/60 float blob-morph-alt" />
-      <div className="pointer-events-none absolute -bottom-24 right-6 h-[32rem] w-[32rem] rounded-full bg-gradient-to-br from-amber-200/80 via-rose-200/70 to-sky-200/60 float-slow blob-morph" />
-
-      {/* Twinkling star field */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-        <div className="absolute top-[8%] left-[15%] h-1.5 w-1.5 rounded-full bg-sky-400/40 twinkle" style={{ animationDelay: '0s' }} />
-        <div className="absolute top-[12%] right-[20%] h-1 w-1 rounded-full bg-amber-400/40 twinkle-slow" style={{ animationDelay: '0.7s' }} />
-        <div className="absolute top-[25%] left-[8%] h-1 w-1 rounded-full bg-rose-400/30 twinkle-fast" style={{ animationDelay: '1.2s' }} />
-        <div className="absolute top-[18%] right-[35%] h-1.5 w-1.5 rounded-full bg-violet-400/30 twinkle" style={{ animationDelay: '2s' }} />
-        <div className="absolute top-[30%] left-[45%] h-1 w-1 rounded-full bg-sky-300/40 twinkle-slow" style={{ animationDelay: '0.3s' }} />
-        <div className="absolute top-[5%] left-[55%] h-1 w-1 rounded-full bg-amber-300/30 twinkle-fast" style={{ animationDelay: '1.8s' }} />
-        <div className="absolute top-[22%] right-[8%] h-1.5 w-1.5 rounded-full bg-rose-300/30 twinkle" style={{ animationDelay: '0.5s' }} />
-        <div className="absolute top-[35%] left-[25%] h-1 w-1 rounded-full bg-indigo-300/30 twinkle-slow" style={{ animationDelay: '1.5s' }} />
-        <div className="absolute top-[15%] left-[70%] h-1 w-1 rounded-full bg-sky-400/30 twinkle-fast" style={{ animationDelay: '2.5s' }} />
-        <div className="absolute top-[40%] right-[45%] h-1 w-1 rounded-full bg-amber-400/25 twinkle" style={{ animationDelay: '3s' }} />
-      </div>
+      <div className="pointer-events-none absolute -top-48 -right-56 hidden md:block h-[30rem] w-[30rem] rounded-full bg-gradient-to-br from-rose-300/55 via-pink-300/45 to-amber-200/45 float-reverse blob-morph" />
+      <div className="pointer-events-none absolute top-16 -left-60 hidden md:block h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-sky-300/55 via-cyan-200/45 to-indigo-200/40 float blob-morph-alt" />
+      <div className="pointer-events-none absolute -bottom-24 right-6 hidden lg:block h-[32rem] w-[32rem] rounded-full bg-gradient-to-br from-amber-200/55 via-rose-200/45 to-sky-200/40 float-slow blob-morph" />
 
       <div className="relative">
         {/* 1. Nav */}
@@ -34,59 +21,79 @@ export default function HomePage() {
               <Moon className="h-7 w-7 text-sky-700" />
               <span className="text-lg font-semibold tracking-tight">LunaCradle</span>
             </div>
-            <div className="flex items-center gap-4 text-sm">
-              <Link href="/blog" className="text-slate-600 hover:text-slate-900">
+            <div className="flex items-center gap-3 sm:gap-4 text-sm">
+              <Link href="/blog" className="hidden md:inline-flex text-slate-600 hover:text-slate-900">
                 Blog
               </Link>
               <Link href="/login" className="text-slate-600 hover:text-slate-900">
                 Log in
               </Link>
               <Button asChild className="bg-sky-700 text-white hover:bg-sky-800 cta-bounce">
-                <Link href="/signup">Start Free Trial</Link>
+                <Link href="/signup">
+                  <span className="sm:hidden">Get Plan</span>
+                  <span className="hidden sm:inline">Get Plan Tonight</span>
+                </Link>
               </Button>
             </div>
           </nav>
         </header>
 
         {/* 2. Hero */}
-        <section className="container mx-auto px-4 pt-16 pb-20">
-          <div className="relative text-center">
-            {/* Floating decorative icons — larger and more visible */}
-            <div className="pointer-events-none absolute inset-0 hidden md:block" aria-hidden="true">
-              <Moon className="absolute -top-6 left-[10%] h-9 w-9 text-sky-300/50 float-gentle" style={{ animationDelay: '0s' }} />
-              <Star className="absolute top-6 right-[8%] h-8 w-8 text-amber-300/50 float-drift" style={{ animationDelay: '1s' }} />
-              <Heart className="absolute bottom-2 left-[6%] h-7 w-7 text-rose-300/50 float-orbit" style={{ animationDelay: '0.5s' }} />
-              <Sparkles className="absolute bottom-6 right-[12%] h-8 w-8 text-violet-300/40 float-gentle" style={{ animationDelay: '1.5s' }} />
-              <Star className="absolute top-1/2 left-[2%] h-6 w-6 text-sky-200/40 float-drift" style={{ animationDelay: '2s' }} />
-              <Moon className="absolute top-1/3 right-[3%] h-7 w-7 text-indigo-200/40 float-orbit" style={{ animationDelay: '0.8s' }} />
-              <Heart className="absolute -top-2 right-[30%] h-5 w-5 text-rose-200/40 float-drift" style={{ animationDelay: '3s' }} />
-              <Sparkles className="absolute bottom-0 left-[30%] h-5 w-5 text-amber-200/40 float-orbit" style={{ animationDelay: '2.5s' }} />
-            </div>
-
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold leading-tight hero-load">
-              Better sleep starts tonight.
-            </h1>
-            <p className="mt-5 text-lg md:text-2xl text-shimmer font-medium max-w-2xl mx-auto hero-load hero-load-1">
-              A plan built on leading sleep research, that adapts as your baby grows.
+        <section className="container mx-auto px-4 pt-10 pb-14 md:pt-16 md:pb-20">
+          <div className="relative mx-auto max-w-5xl text-center">
+            <p className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-4 py-1.5 text-sm font-medium text-sky-700 hero-load">
+              Waking every 60-90 minutes?
             </p>
-            <div className="mt-6 min-h-[8.5rem] hero-load hero-load-2">
+            <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight hero-load hero-load-1">
+              Stop the 3am wake-ups with a personalized plan tonight.
+            </h1>
+            <p className="mt-5 text-base sm:text-lg md:text-xl text-shimmer font-medium max-w-3xl mx-auto hero-load hero-load-2">
+              For babies 4-36 months. Gentle or structured methods. Updated weekly.
+            </p>
+            <div className="mt-6 flex flex-wrap justify-center gap-2 hero-load hero-load-2">
+              {[
+                'Personalized for 4-36 months',
+                'No-cry to structured options',
+              ].map((item) => (
+                <span key={item} className="rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-xs text-slate-700">
+                  {item}
+                </span>
+              ))}
+            </div>
+            <div className="mt-7 hero-load hero-load-3">
               <p className="text-base md:text-lg text-slate-600">
                 $0 for 5 days. Then $19/month. Cancel anytime.
               </p>
-              <div className="mt-8">
-                <Button size="lg" asChild className="bg-sky-700 text-white hover:bg-sky-800 cta-smooth cta-fancy text-base px-8 py-6">
-                  <Link href="/signup">Start Free Trial</Link>
+              <div className="mt-5">
+                <Button size="lg" asChild className="w-full sm:w-auto max-w-sm mx-auto bg-sky-700 text-white hover:bg-sky-800 cta-smooth cta-fancy text-base px-6 py-6">
+                  <Link href="/signup">
+                    <span className="sm:hidden">Get Plan Tonight</span>
+                    <span className="hidden sm:inline">Get Your Sleep Plan Tonight</span>
+                  </Link>
                 </Button>
               </div>
-              <p className="mt-3 text-sm text-slate-400">
+              <p className="mt-3 text-sm text-slate-500">
                 Credit card required to start trial.
               </p>
             </div>
-
-            {/* Research credibility badge */}
-            <div className="mt-8 flex items-center justify-center gap-2 text-xs text-slate-500 hero-load hero-load-3">
+            <div className="mt-6 flex items-center justify-center gap-2 text-xs text-slate-500 hero-load hero-load-3">
               <BookOpen className="h-3.5 w-3.5" />
-              <span>Based on research from the AAP, NHS, and leading pediatric sleep organizations</span>
+              <span>Grounded in AAP, NHS, and peer-reviewed pediatric sleep research</span>
+            </div>
+            <div className="mt-8 md:mt-10 hero-load hero-load-3">
+              <div className="relative overflow-hidden rounded-3xl border border-white/70 bg-white/85 p-3 shadow-xl shadow-sky-100/60 backdrop-blur">
+                <Image
+                  src="/landing/sample-report-preview.svg"
+                  alt="Sample LunaCradle report preview based on actual plan format"
+                  width={1280}
+                  height={920}
+                  className="h-auto w-full rounded-2xl border border-slate-100"
+                  priority
+                />
+              </div>
+              <p className="mt-3 text-center text-xs text-slate-500">
+                Sample report preview using test data and your real output structure
+              </p>
             </div>
           </div>
         </section>
@@ -106,12 +113,12 @@ export default function HomePage() {
                   <span>Evidence-based guidance</span>
                 </div>
                 <div className="hidden sm:block h-3 w-px bg-slate-300" />
-                <div className="flex items-center gap-1.5">
+                <div className="hidden sm:flex items-center gap-1.5">
                   <Heart className="h-3.5 w-3.5 text-sky-600" />
                   <span>Gentle &amp; structured options</span>
                 </div>
-                <div className="hidden sm:block h-3 w-px bg-slate-300" />
-                <div className="flex items-center gap-1.5">
+                <div className="hidden md:block h-3 w-px bg-slate-300" />
+                <div className="hidden md:flex items-center gap-1.5">
                   <Sparkles className="h-3.5 w-3.5 text-sky-600" />
                   <span>Updated with latest research</span>
                 </div>
@@ -121,7 +128,7 @@ export default function HomePage() {
         </AnimateOnScroll>
 
         {/* 3. How It Works */}
-        <section id="how-it-works" className="py-20">
+        <section id="how-it-works" className="py-16 md:py-20">
           <div className="container mx-auto px-4">
             <AnimateOnScroll>
               <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
@@ -149,39 +156,71 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 4. Social Proof — scrolling marquee */}
-        <section className="py-8 border-y border-white/60 bg-sky-50/50 overflow-hidden">
-          <div className="marquee-track">
-            {/* Duplicate the items for seamless loop */}
-            {[...Array(2)].map((_, setIndex) => (
-              <div key={setIndex} className="flex items-center gap-10 px-5 shrink-0">
-                {[
-                  { quote: 'Simple plan, started the same night.', author: 'Sarah M.' },
-                  { quote: 'Matched our comfort level from day one.', author: 'Jessica T.' },
-                  { quote: 'The daily checklist kept us on track.', author: 'Michael R.' },
-                  { quote: 'Our 8-month-old sleeps through the night now.', author: 'Emily K.' },
-                  { quote: 'The weekly updates are a game changer.', author: 'David L.' },
-                  { quote: 'Finally, advice backed by real research.', author: 'Anna W.' },
-                ].map((t, i) => (
-                  <div key={i} className="flex items-center gap-3 text-sm whitespace-nowrap">
-                    <div className="flex shrink-0">
-                      {[1, 2, 3, 4, 5].map((s) => (
-                        <Star key={s} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
-                      ))}
-                    </div>
-                    <p className="text-slate-600">
-                      &ldquo;{t.quote}&rdquo;
-                      <span className="ml-1 font-medium text-slate-800">&mdash; {t.author}</span>
-                    </p>
-                  </div>
-                ))}
+        {/* 4. Social Proof */}
+        <section className="py-16 md:py-20 border-y border-white/60 bg-sky-50/50">
+          <div className="container mx-auto px-4">
+            <AnimateOnScroll>
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+                <span className="heading-underline">Parents Who Needed Sleep Fast</span>
+              </h2>
+              <p className="text-center text-slate-500 mb-12 max-w-2xl mx-auto">
+                Real parents, different sleep styles, one common outcome: calmer nights and clearer next steps.
+              </p>
+            </AnimateOnScroll>
+            <div className="grid gap-6 md:grid-cols-3 max-w-6xl mx-auto">
+              {[
+                {
+                  quote: 'Night 2 already felt different. We had a clear plan, and bedtime stopped feeling chaotic.',
+                  author: 'Sarah M.',
+                  role: 'Mom of 7-month-old',
+                },
+                {
+                  quote: 'We wanted a gentler approach and it matched our comfort level perfectly from day one.',
+                  author: 'James + Priya',
+                  role: 'Parents of 10-month-old',
+                },
+                {
+                  quote: 'The weekly updates kept us from getting stuck. We always knew what to adjust next.',
+                  author: 'Elena R.',
+                  role: 'Mom of 18-month-old',
+                },
+              ].map((item, index) => (
+                <AnimateOnScroll key={item.author} delay={index * 120}>
+                  <Card className="h-full border-slate-200 bg-white/85 shadow-sm card-hover">
+                    <CardContent className="p-6">
+                      <div className="mb-4 flex">
+                        {[1, 2, 3, 4, 5].map((s) => (
+                          <Star key={s} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                        ))}
+                      </div>
+                      <p className="text-slate-700 text-sm leading-relaxed">&ldquo;{item.quote}&rdquo;</p>
+                      <div className="mt-5 flex items-center gap-3">
+                        <div className="h-10 w-10 rounded-full bg-gradient-to-br from-sky-600 to-sky-400 text-white text-sm font-semibold grid place-items-center">
+                          {item.author.slice(0, 1)}
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-slate-900">{item.author}</p>
+                          <p className="text-xs text-slate-500">{item.role}</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </AnimateOnScroll>
+              ))}
+            </div>
+            <AnimateOnScroll delay={140}>
+              <div className="mt-10 text-center">
+                <p className="text-sm text-slate-600">Ready for a calmer night?</p>
+                <Button size="lg" asChild className="mt-4 w-full sm:w-auto bg-sky-700 text-white hover:bg-sky-800 cta-smooth">
+                  <Link href="/signup">Get Your Sleep Plan Tonight</Link>
+                </Button>
               </div>
-            ))}
+            </AnimateOnScroll>
           </div>
         </section>
 
         {/* 5. Comparison */}
-        <section className="container mx-auto px-4 py-20">
+        <section className="container mx-auto px-4 py-16 md:py-20">
           <AnimateOnScroll>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
               <span className="heading-underline">Why Not a Sleep Consultant?</span>
@@ -222,7 +261,7 @@ export default function HomePage() {
 
         {/* 6. Pricing + CTA with animated gradient border */}
         <AnimateOnScroll>
-          <section id="pricing" className="bg-white/70 py-20">
+          <section id="pricing" className="bg-white/70 py-16 md:py-20">
             <div className="container mx-auto px-4">
               <div className="max-w-lg mx-auto">
                 <Card className="border-sky-200 bg-white shadow-lg gradient-border rounded-2xl overflow-hidden">
@@ -258,7 +297,7 @@ export default function HomePage() {
                       </li>
                     </ul>
                     <Button className="w-full bg-sky-700 text-white hover:bg-sky-800 cta-smooth cta-fancy text-base py-6" size="lg" asChild>
-                      <Link href="/signup">Start Free Trial</Link>
+                      <Link href="/signup">Get Your Sleep Plan Tonight</Link>
                     </Button>
                     <p className="text-xs text-center text-slate-400">Credit card required. Cancel anytime.</p>
                   </CardContent>
@@ -269,7 +308,7 @@ export default function HomePage() {
         </AnimateOnScroll>
 
         {/* 7. FAQ */}
-        <section className="py-20">
+        <section className="py-16 md:py-20">
           <div className="container mx-auto px-4">
             <AnimateOnScroll>
               <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
@@ -278,6 +317,10 @@ export default function HomePage() {
             </AnimateOnScroll>
             <div className="max-w-2xl mx-auto space-y-4">
               {[
+                {
+                  q: 'Will this work for my baby?',
+                  a: 'Plans are personalized to your child&apos;s age, temperament, and current sleep patterns. You can choose gentle or more structured methods and change course anytime.'
+                },
                 {
                   q: 'What age is this for?',
                   a: 'Best for 4 months to 3 years. We adjust for your child\u2019s age and development.'
@@ -335,6 +378,18 @@ export default function HomePage() {
             </div>
           </footer>
         </AnimateOnScroll>
+
+        <div className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200/80 bg-white/95 px-3 py-3 backdrop-blur md:hidden">
+          <div className="mx-auto flex max-w-lg items-center justify-between gap-3">
+            <div>
+              <p className="text-sm font-semibold text-slate-900">$0 for 5 days</p>
+              <p className="text-xs text-slate-500">Then $19/month, cancel anytime</p>
+            </div>
+            <Button asChild className="bg-sky-700 text-white hover:bg-sky-800">
+              <Link href="/signup">Start Tonight</Link>
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   )

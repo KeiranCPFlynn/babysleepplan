@@ -1,0 +1,88 @@
+<svg width="1280" height="920" viewBox="0 0 1280 920" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="120" y1="80" x2="1160" y2="860" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5F3FF"/>
+      <stop offset="0.52" stop-color="#F8FAFF"/>
+      <stop offset="1" stop-color="#FFF7ED"/>
+    </linearGradient>
+    <linearGradient id="header" x1="158" y1="120" x2="1120" y2="276" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E9D5FF"/>
+      <stop offset="1" stop-color="#E0E7FF"/>
+    </linearGradient>
+    <filter id="shadow" x="90" y="70" width="1100" height="790" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="18"/>
+      <feGaussianBlur stdDeviation="24"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.3529 0 0 0 0 0.3373 0 0 0 0 0.7765 0 0 0 0.16 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_1"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_1" result="shape"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="920" fill="url(#bg)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="130" y="100" width="1020" height="720" rx="30" fill="#FFFFFF"/>
+  </g>
+
+  <rect x="130" y="100" width="1020" height="166" rx="30" fill="url(#header)"/>
+  <rect x="130" y="236" width="1020" height="30" fill="url(#header)"/>
+
+  <circle cx="196" cy="156" r="8" fill="#F472B6"/>
+  <circle cx="228" cy="156" r="11" fill="#8B5CF6"/>
+  <circle cx="262" cy="156" r="8" fill="#F472B6"/>
+
+  <text x="640" y="155" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" letter-spacing="2.5" fill="#7C3AED">LUNACRADLE SLEEP PLAN</text>
+  <text x="640" y="200" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="46" font-weight="700" fill="#6D28D9">Ava's Sleep Journey</text>
+  <text x="640" y="232" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="19" fill="#6B7280">10 months  |  Created 02/14/2026</text>
+
+  <rect x="176" y="286" width="928" height="74" rx="16" fill="#FFF7E8" stroke="#F7CFA6" stroke-width="2"/>
+  <text x="640" y="329" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="19" fill="#5B6575">This plan was made for Ava and your family. Follow it one step at a time.</text>
+
+  <rect x="176" y="386" width="450" height="54" rx="12" fill="#EFF6FF"/>
+  <rect x="176" y="454" width="450" height="126" rx="14" fill="#FFFFFF" stroke="#E5E7EB"/>
+  <rect x="176" y="594" width="450" height="202" rx="14" fill="#FFFFFF" stroke="#E5E7EB"/>
+
+  <rect x="654" y="386" width="450" height="54" rx="12" fill="#F5F3FF"/>
+  <rect x="654" y="454" width="450" height="166" rx="14" fill="#FFFFFF" stroke="#E5E7EB"/>
+  <rect x="654" y="634" width="450" height="162" rx="14" fill="#FFFFFF" stroke="#E5E7EB"/>
+
+  <text x="198" y="421" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#5B21B6">Your Plan at a Glance</text>
+  <text x="676" y="421" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#5B21B6">Ava's Daily Rhythm</text>
+
+  <rect x="198" y="473" width="405" height="12" rx="6" fill="#E5E7EB"/>
+  <rect x="198" y="494" width="380" height="12" rx="6" fill="#E5E7EB"/>
+  <rect x="198" y="515" width="356" height="12" rx="6" fill="#E5E7EB"/>
+  <rect x="198" y="536" width="401" height="12" rx="6" fill="#E5E7EB"/>
+  <rect x="198" y="557" width="318" height="12" rx="6" fill="#E5E7EB"/>
+
+  <rect x="676" y="474" width="406" height="28" rx="8" fill="#F9FAFB"/>
+  <rect x="676" y="504" width="406" height="28" rx="8" fill="#FFFFFF" stroke="#F3F4F6"/>
+  <rect x="676" y="534" width="406" height="28" rx="8" fill="#F9FAFB"/>
+  <rect x="676" y="564" width="406" height="28" rx="8" fill="#FFFFFF" stroke="#F3F4F6"/>
+
+  <text x="694" y="493" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="#6B7280">Time</text>
+  <text x="822" y="493" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="#6B7280">Activity</text>
+  <text x="694" y="523" font-family="Inter, Arial, sans-serif" font-size="13" fill="#374151">7:00 AM</text>
+  <text x="822" y="523" font-family="Inter, Arial, sans-serif" font-size="13" fill="#374151">Wake + feed</text>
+  <text x="694" y="553" font-family="Inter, Arial, sans-serif" font-size="13" fill="#374151">9:40 AM</text>
+  <text x="822" y="553" font-family="Inter, Arial, sans-serif" font-size="13" fill="#374151">Nap 1</text>
+  <text x="694" y="583" font-family="Inter, Arial, sans-serif" font-size="13" fill="#374151">7:40 PM</text>
+  <text x="822" y="583" font-family="Inter, Arial, sans-serif" font-size="13" fill="#374151">Bedtime routine</text>
+
+  <text x="198" y="626" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#5B21B6">The Bedtime Routine</text>
+  <rect x="198" y="644" width="405" height="136" rx="12" fill="#ECFDF5" stroke="#C7F0DE"/>
+  <text x="218" y="676" font-family="Inter, Arial, sans-serif" font-size="15" fill="#166534">1. Bath, dim lights, and feed</text>
+  <text x="218" y="708" font-family="Inter, Arial, sans-serif" font-size="15" fill="#166534">2. Story, song, then into crib drowsy</text>
+  <text x="218" y="740" font-family="Inter, Arial, sans-serif" font-size="15" fill="#166534">3. Pause, then gentle check-ins every 5-10 min</text>
+
+  <text x="676" y="666" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#5B21B6">Troubleshooting</text>
+  <rect x="676" y="684" width="406" height="96" rx="12" fill="#FFF7ED" stroke="#FED7AA"/>
+  <text x="696" y="716" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#9A3412">If early waking happens:</text>
+  <text x="696" y="742" font-family="Inter, Arial, sans-serif" font-size="14" fill="#9A3412">Treat before 6:00 AM as night and keep lights low.</text>
+  <text x="696" y="766" font-family="Inter, Arial, sans-serif" font-size="14" fill="#9A3412">Shift first nap earlier by 10 minutes for 2-3 days.</text>
+
+  <rect x="886" y="118" width="218" height="34" rx="17" fill="#FFFFFF" stroke="#DDD6FE"/>
+  <text x="995" y="140" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#6D28D9">Sample report (test data)</text>
+</svg>

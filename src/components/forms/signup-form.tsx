@@ -10,6 +10,11 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import Link from 'next/link'
 import { toast } from 'sonner'
 import { Mail, Sparkles } from 'lucide-react'
+import {
+  getPasswordPolicyErrors,
+  PASSWORD_POLICY_HINT,
+  PASSWORD_POLICY_REGEX,
+} from '@/lib/password-policy'
 
 export function SignupForm() {
   const router = useRouter()
@@ -32,8 +37,9 @@ export function SignupForm() {
       return
     }
 
-    if (formData.password.length < 8) {
-      toast.error('Password must be at least 8 characters')
+    const passwordErrors = getPasswordPolicyErrors(formData.password)
+    if (passwordErrors.length > 0) {
+      toast.error(`Password must include ${passwordErrors.join(', ')}`)
       setLoading(false)
       return
     }
@@ -105,7 +111,7 @@ export function SignupForm() {
         </div>
         <h1 className="text-2xl font-bold text-slate-900">Create an account</h1>
         <p className="text-sm text-slate-500 mt-1">
-          Get personalized sleep plans for your baby
+          Start your 5-day trial and get your sleep plan tonight
         </p>
       </CardHeader>
       <form onSubmit={handleSubmit}>
@@ -120,6 +126,7 @@ export function SignupForm() {
               onChange={(e) =>
                 setFormData({ ...formData, fullName: e.target.value })
               }
+              autoComplete="name"
               required
               className="bg-white/70 border-slate-200 focus:border-sky-400 focus:ring-sky-400/20"
             />
@@ -135,6 +142,8 @@ export function SignupForm() {
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
               }
+              autoComplete="email"
+              inputMode="email"
               required
               className="bg-white/70 border-slate-200 focus:border-sky-400 focus:ring-sky-400/20"
             />
@@ -150,10 +159,14 @@ export function SignupForm() {
               onChange={(e) =>
                 setFormData({ ...formData, password: e.target.value })
               }
+              autoComplete="new-password"
               required
               minLength={8}
+              pattern={PASSWORD_POLICY_REGEX.source}
+              title={PASSWORD_POLICY_HINT}
               className="bg-white/70 border-slate-200 focus:border-sky-400 focus:ring-sky-400/20"
             />
+            <p className="text-xs text-slate-500">{PASSWORD_POLICY_HINT}</p>
           </div>
 
           <div className="space-y-2">
@@ -166,8 +179,11 @@ export function SignupForm() {
               onChange={(e) =>
                 setFormData({ ...formData, confirmPassword: e.target.value })
               }
+              autoComplete="new-password"
               required
               minLength={8}
+              pattern={PASSWORD_POLICY_REGEX.source}
+              title={PASSWORD_POLICY_HINT}
               className="bg-white/70 border-slate-200 focus:border-sky-400 focus:ring-sky-400/20"
             />
           </div>
@@ -179,8 +195,11 @@ export function SignupForm() {
             className="w-full bg-sky-700 hover:bg-sky-800 text-white"
             disabled={loading}
           >
-            {loading ? 'Creating account...' : 'Sign up'}
+            {loading ? 'Creating account...' : 'Start Free 5-Day Trial'}
           </Button>
+          <p className="text-xs text-center text-slate-500">
+            Then $19/month. Cancel anytime.
+          </p>
 
           <p className="text-sm text-center text-slate-500">
             Already have an account?{' '}
