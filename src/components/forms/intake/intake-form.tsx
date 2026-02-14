@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm, FormProvider } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -42,28 +42,33 @@ const stepTitles = [
 
 export function IntakeForm({ babies, intake, hasUsedTrial }: IntakeFormProps) {
   const router = useRouter()
+  const intakeData = useMemo(() => {
+    return (intake.data && typeof intake.data === 'object')
+      ? intake.data as Record<string, unknown>
+      : {}
+  }, [intake.data])
+  const storedAdditionalSleepTimes = useMemo(() => {
+    return Array.isArray(intakeData.additional_sleep_times)
+      ? intakeData.additional_sleep_times as Array<{ bedtime?: string; waketime?: string }>
+      : []
+  }, [intakeData])
+  const isAdminSeededDraft = intake.status === 'draft' && intakeData.admin_seeded === true
+
   // Start at step 2 if baby is already selected (from intake creation page)
-  const [currentStep, setCurrentStep] = useState(intake.baby_id ? 2 : 1)
+  const [currentStep, setCurrentStep] = useState(isAdminSeededDraft ? TOTAL_STEPS : intake.baby_id ? 2 : 1)
   const [saving, setSaving] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [lastSaved, setLastSaved] = useState<Date | null>(null)
 
   // Track intake status - if not draft, don't allow saves
   // Treat null/undefined as 'draft' for backwards compatibility
-  const [intakeStatus, setIntakeStatus] = useState(intake.status || 'draft')
+  const intakeStatus = intake.status || 'draft'
 
   // Ref to track if form is still active (not submitted/unmounted)
   const isActiveRef = useRef(true)
 
   // Ref to store pending save timer so we can cancel it
   const saveTimerRef = useRef<NodeJS.Timeout | null>(null)
-
-  const intakeData = (intake.data && typeof intake.data === 'object')
-    ? intake.data as Record<string, unknown>
-    : {}
-  const storedAdditionalSleepTimes = Array.isArray(intakeData.additional_sleep_times)
-    ? intakeData.additional_sleep_times as Array<{ bedtime?: string; waketime?: string }>
-    : []
 
   const methods = useForm<IntakeFormData>({
     resolver: zodResolver(intakeSchema),
@@ -242,7 +247,7 @@ export function IntakeForm({ babies, intake, hasUsedTrial }: IntakeFormProps) {
       clearTimeout(saveTimerRef.current)
     }
     saveForm()
-  }, [currentStep]) // Intentionally not including saveForm to avoid loops
+  }, [currentStep, saveForm])
 
   const validateCurrentStep = async () => {
     const values = methods.getValues()

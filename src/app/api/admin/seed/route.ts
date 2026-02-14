@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { createClient as createAdminClient } from '@supabase/supabase-js'
-import { TRIAL_DAYS } from '@/lib/stripe'
 import { isAdminToolsEnabled } from '@/lib/admin'
 
 function getSupabaseAdmin() {
@@ -105,8 +104,11 @@ export async function POST(request: NextRequest) {
           problem_description: 'Our baby wakes up 3+ times per night and can only fall asleep while being rocked. Naps are short (30-40 min) and only happen in our arms. We are exhausted and would like to help baby learn to fall asleep more independently while being gentle about it.',
           crying_comfort_level: 3,
           success_description: 'We would love for baby to fall asleep independently at bedtime, sleep through the night with maybe one feed, and take longer naps in the crib. We want a gentle approach that minimizes crying.',
-          status: 'paid',
-          data: {},
+          // Keep as draft so user can manually submit and test checkout flow.
+          status: 'draft',
+          data: {
+            admin_seeded: true,
+          },
         })
         .select()
         .single()
@@ -116,21 +118,13 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: intakeError.message }, { status: 500 })
       }
 
-      // If subscription is not active, set to trialing
-      if (profile.subscription_status !== 'active' && profile.subscription_status !== 'trialing') {
-        const periodEnd = new Date()
-        periodEnd.setDate(periodEnd.getDate() + TRIAL_DAYS)
-        await adminSupabase
-          .from('profiles')
-          .update({
-            subscription_status: 'trialing',
-            subscription_period_end: periodEnd.toISOString(),
-            has_used_trial: true,
-          })
-          .eq('id', user.id)
-      }
-
-      return NextResponse.json({ success: true, babyId: baby.id, intakeId: intake.id })
+      return NextResponse.json({
+        success: true,
+        babyId: baby.id,
+        intakeId: intake.id,
+        intakeStatus: 'draft',
+        openUrl: `/dashboard/intake/${intake.id}`,
+      })
     }
 
     return NextResponse.json({ error: 'Invalid action. Use "baby" or "intake".' }, { status: 400 })

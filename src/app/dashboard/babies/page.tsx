@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Baby, Plus, Edit, CreditCard } from 'lucide-react'
 import { formatBabyAge } from '@/lib/age'
 import { hasActiveSubscription, MONTHLY_PRICE, ADDITIONAL_BABY_PRICE } from '@/lib/subscription'
+import { formatUniversalDate } from '@/lib/date-format'
 import { DeleteBabyButton } from './delete-baby-button'
 
 const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
@@ -89,7 +90,7 @@ export default async function BabiesPage() {
               <CardContent className="space-y-2 text-sm">
                 <div>
                   <span className="font-medium">Born:</span>{' '}
-                  {new Date(baby.date_of_birth).toLocaleDateString()}
+                  {formatUniversalDate(baby.date_of_birth)}
                 </div>
                 {baby.premature_weeks > 0 && (
                   <div>
@@ -142,7 +143,7 @@ export default async function BabiesPage() {
           <CardHeader>
             <CardTitle>No babies yet</CardTitle>
             <CardDescription>
-              Add your baby's information to start creating personalized sleep plans
+              Add your baby&apos;s information to start creating personalized sleep plans
             </CardDescription>
           </CardHeader>
           <CardContent>

@@ -3,13 +3,14 @@ import { requireAuth } from '@/lib/auth'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Baby, FileText, Plus, BookOpen, CreditCard, Wrench, Moon, Star, Heart } from 'lucide-react'
+import { Baby, FileText, Plus, BookOpen, CreditCard, Moon, Star, Heart, Sparkles } from 'lucide-react'
 import { DeleteIntakeButton } from './delete-intake-button'
 import { getDaysRemaining, getSubscriptionLabel, hasActiveSubscription } from '@/lib/subscription'
 import { SubscriptionStatusDebug } from '@/components/subscription/subscription-status-debug'
 import { TestSubscriptionControls } from '@/components/subscription/test-subscription-controls'
 import { DeleteUserControls } from '@/components/admin/delete-user-controls'
 import { AnimateOnScroll } from '@/components/ui/animate-on-scroll'
+import { formatUniversalDate } from '@/lib/date-format'
 
 const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
 
@@ -36,6 +37,17 @@ export default async function DashboardPage() {
     .select('*', { count: 'exact', head: true })
     .eq('user_id', user.id)
 
+  const shouldShowAdminTestControls = process.env.NODE_ENV !== 'production' && profile?.is_admin === true
+
+  const { data: adminPlanOptions } = shouldShowAdminTestControls
+    ? await supabase
+        .from('plans')
+        .select('id, status, created_at, baby:babies(name)')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
+        .limit(50)
+    : { data: [] }
+
   const subscriptionStatus = profile?.subscription_status
 
   // Get recent plans
@@ -61,17 +73,91 @@ export default async function DashboardPage() {
     .order('created_at', { ascending: false })
     .limit(5)
 
-  const todayStr = new Date().toISOString().split('T')[0]
+  const toIsoDate = (value: Date) => value.toISOString().split('T')[0]
+  const today = new Date()
+  const todayStr = toIsoDate(today)
+  const currentWeekStart = new Date(today)
+  currentWeekStart.setDate(today.getDate() - today.getDay())
+  const currentWeekStartStr = toIsoDate(currentWeekStart)
+  const currentWeekEnd = new Date(currentWeekStart)
+  currentWeekEnd.setDate(currentWeekStart.getDate() + 6)
+  const currentWeekEndStr = toIsoDate(currentWeekEnd)
+  const last7Start = new Date(today)
+  last7Start.setDate(today.getDate() - 6)
+  const last7StartStr = toIsoDate(last7Start)
+  const entryWindowStart = currentWeekStartStr < last7StartStr ? currentWeekStartStr : last7StartStr
+
   const completedPlanIds = (completedPlans || []).map((plan) => plan.id)
-  const { data: todaysDiaryEntries } = completedPlanIds.length > 0
-    ? await supabase
-      .from('sleep_diary_entries')
-      .select('id, plan_id')
-      .eq('user_id', user.id)
-      .eq('date', todayStr)
-      .in('plan_id', completedPlanIds)
-    : { data: [] }
-  const todaysEntryPlanIds = new Set((todaysDiaryEntries || []).map((entry) => entry.plan_id))
+  const [{ data: relevantDiaryEntries }, { data: currentWeekReviews }, { data: currentWeekUpdates }] =
+    completedPlanIds.length > 0
+      ? await Promise.all([
+          supabase
+            .from('sleep_diary_entries')
+            .select('plan_id, date')
+            .eq('user_id', user.id)
+            .in('plan_id', completedPlanIds)
+            .gte('date', entryWindowStart)
+            .lte('date', todayStr),
+          supabase
+            .from('weekly_reviews')
+            .select('plan_id')
+            .eq('user_id', user.id)
+            .in('plan_id', completedPlanIds)
+            .eq('week_start', currentWeekStartStr),
+          supabase
+            .from('plan_revisions')
+            .select('plan_id')
+            .eq('user_id', user.id)
+            .in('plan_id', completedPlanIds)
+            .eq('source', 'weekly-review')
+            .eq('week_start', last7StartStr),
+        ])
+      : [{ data: [] }, { data: [] }, { data: [] }]
+
+  const entriesByPlan = new Map<string, Set<string>>()
+  for (const entry of (relevantDiaryEntries || []) as Array<{ plan_id: string; date: string }>) {
+    const existingDates = entriesByPlan.get(entry.plan_id) || new Set<string>()
+    existingDates.add(entry.date)
+    entriesByPlan.set(entry.plan_id, existingDates)
+  }
+
+  const todaysEntryPlanIds = new Set(
+    completedPlanIds.filter((planId) => entriesByPlan.get(planId)?.has(todayStr))
+  )
+
+  const reviewReadyPlanIds = new Set(
+    ((currentWeekReviews || []) as Array<{ plan_id: string }>).map((review) => review.plan_id)
+  )
+  const updatedForLast7PlanIds = new Set(
+    ((currentWeekUpdates || []) as Array<{ plan_id: string }>).map((update) => update.plan_id)
+  )
+
+  const readyCheckins = (completedPlans || [])
+    .map((plan) => {
+      const entryDates = entriesByPlan.get(plan.id) || new Set<string>()
+      let currentWeekEntryCount = 0
+      let last7EntryCount = 0
+
+      entryDates.forEach((date) => {
+        if (date >= currentWeekStartStr && date <= currentWeekEndStr) {
+          currentWeekEntryCount += 1
+        }
+        if (date >= last7StartStr && date <= todayStr) {
+          last7EntryCount += 1
+        }
+      })
+
+      const reviewReady = currentWeekEntryCount >= 3 && !reviewReadyPlanIds.has(plan.id)
+      const updateReady = last7EntryCount >= 7 && !updatedForLast7PlanIds.has(plan.id)
+
+      return {
+        planId: plan.id,
+        babyName: plan.baby?.name || 'Baby',
+        reviewReady,
+        updateReady,
+      }
+    })
+    .filter((item) => item.reviewReady || item.updateReady)
 
   // Get draft intakes that don't already have a plan
   const { data: allDraftIntakes } = await supabase
@@ -186,7 +272,7 @@ export default async function DashboardPage() {
       )}
 
       {/* Admin Test Controls (Dev Only) */}
-      {process.env.NODE_ENV !== 'production' && profile?.is_admin === true && <TestSubscriptionControls babies={babies || []} />}
+      {shouldShowAdminTestControls && <TestSubscriptionControls babies={babies || []} plans={adminPlanOptions || []} />}
 
       {/* Admin Delete User (Dev Only) */}
       {process.env.NODE_ENV !== 'production' && profile?.is_admin === true && <DeleteUserControls />}
@@ -248,6 +334,56 @@ export default async function DashboardPage() {
         </Card>
       )}
 
+      {/* Check-ins ready */}
+      {readyCheckins.length > 0 && (
+        <Card className="border-white/60 bg-gradient-to-br from-violet-50/80 via-white/70 to-emerald-50/80 backdrop-blur">
+          <CardHeader>
+            <CardTitle className="text-lg text-slate-900 flex items-center gap-2">
+              <Sparkles className="h-5 w-5 text-violet-500" />
+              Reviews & Updates Ready
+            </CardTitle>
+            <CardDescription className="text-slate-500">
+              Take the next best action for each plan.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {readyCheckins.map((item) => (
+              <div
+                key={item.planId}
+                className="flex flex-col gap-3 rounded-lg bg-white/70 backdrop-blur px-4 py-3 border border-white/60"
+              >
+                <div>
+                  <p className="text-sm font-medium text-slate-900">{item.babyName}&apos;s Plan</p>
+                  <p className="text-xs text-slate-500">
+                    {item.reviewReady && item.updateReady
+                      ? '3-day review and 7-day update are both ready.'
+                      : item.reviewReady
+                        ? '3-day review is ready.'
+                        : '7-day update is ready.'}
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {item.reviewReady && (
+                    <Button asChild size="sm" className="bg-violet-600 hover:bg-violet-700">
+                      <Link href={`/dashboard/plans/${item.planId}/diary`}>
+                        Generate 3-Day Review
+                      </Link>
+                    </Button>
+                  )}
+                  {item.updateReady && (
+                    <Button asChild size="sm" className="bg-emerald-600 hover:bg-emerald-700">
+                      <Link href={`/dashboard/plans/${item.planId}/diary`}>
+                        Apply 7-Day Update
+                      </Link>
+                    </Button>
+                  )}
+                </div>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+      )}
+
       {/* Draft intakes */}
       {draftIntakes && draftIntakes.length > 0 && (
         <AnimateOnScroll>
@@ -261,7 +397,7 @@ export default async function DashboardPage() {
                       <div>
                         <CardTitle>{intake.baby?.name || 'Unknown Baby'}&apos;s Questionnaire</CardTitle>
                         <CardDescription>
-                          Last updated {new Date(intake.updated_at).toLocaleDateString()}
+                          Last updated {formatUniversalDate(intake.updated_at)}
                         </CardDescription>
                       </div>
                       <div className="flex gap-2 items-center">
@@ -300,7 +436,7 @@ export default async function DashboardPage() {
                       <div>
                         <CardTitle>{plan.baby?.name || 'Baby'}&apos;s Sleep Plan</CardTitle>
                         <CardDescription>
-                          Created {new Date(plan.created_at).toLocaleDateString()}
+                          Created {formatUniversalDate(plan.created_at)}
                         </CardDescription>
                       </div>
                       <div className="flex gap-2 items-center">

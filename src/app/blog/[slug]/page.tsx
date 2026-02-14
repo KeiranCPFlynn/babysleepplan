@@ -6,6 +6,7 @@ import { getAllPosts, getPostBySlug, getPostSlugs } from '@/lib/blog'
 import { PostContent } from '@/components/blog/post-content'
 import { PostCard } from '@/components/blog/post-card'
 import { AnimateOnScroll } from '@/components/ui/animate-on-scroll'
+import { formatUniversalDate } from '@/lib/date-format'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://lunacradle.com'
 
@@ -151,11 +152,7 @@ export default async function BlogPostPage({
             </h1>
             <div className="flex flex-wrap items-center gap-3 text-sm text-slate-500 mb-4">
               <time dateTime={post.date}>
-                {new Date(post.date).toLocaleDateString('en-US', {
-                  month: 'long',
-                  day: 'numeric',
-                  year: 'numeric',
-                })}
+                {formatUniversalDate(post.date)}
               </time>
               <span>&middot;</span>
               <span>{post.author}</span>

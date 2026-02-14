@@ -11,6 +11,7 @@ import { DeleteUserControls } from '@/components/admin/delete-user-controls'
 import { ManageSubscriptionButton } from '@/components/subscription/manage-subscription-button'
 import { stripe } from '@/lib/stripe'
 import { isAdminToolsEnabled } from '@/lib/admin'
+import { formatUniversalDate } from '@/lib/date-format'
 
 export const dynamic = 'force-dynamic'
 
@@ -164,7 +165,7 @@ export default async function SubscriptionPage() {
                       : 'Your subscription is active'
                     : status === 'cancelled'
                       ? daysRemaining !== null && daysRemaining > 0
-                        ? `Access until ${new Date(profile!.subscription_period_end!).toLocaleDateString()}`
+                        ? `Access until ${formatUniversalDate(profile!.subscription_period_end!)}`
                         : 'Your subscription has been cancelled'
                       : 'No active subscription'}
               </CardDescription>
@@ -202,7 +203,7 @@ export default async function SubscriptionPage() {
                   {status === 'trialing' ? 'Trial ends' : status === 'cancelled' ? 'Access until' : 'Renews'}
                 </span>
                 <span className="text-sm font-medium text-purple-800">
-                  {new Date(profile.subscription_period_end).toLocaleDateString()}
+                  {formatUniversalDate(profile.subscription_period_end)}
                 </span>
               </div>
             )}

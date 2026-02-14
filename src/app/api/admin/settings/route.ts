@@ -153,6 +153,87 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ success: true })
       }
 
+      case 'purgePlansAndDiaries': {
+        const confirm = typeof value === 'string' ? value : ''
+        if (confirm !== 'PURGE') {
+          return NextResponse.json({ error: 'Confirmation required' }, { status: 400 })
+        }
+
+        // Collect plan ids first so we can clean related tables explicitly.
+        const { data: userPlans, error: plansFetchError } = await adminSupabase
+          .from('plans')
+          .select('id')
+          .eq('user_id', user.id)
+
+        if (plansFetchError) {
+          console.error('Failed to fetch plans for purge:', plansFetchError)
+          return NextResponse.json({ error: 'Failed to fetch plans' }, { status: 500 })
+        }
+
+        const planIds = (userPlans || []).map((p) => p.id)
+        if (planIds.length === 0) {
+          return NextResponse.json({
+            success: true,
+            deleted: { plans: 0, diaryEntries: 0, weeklyReviews: 0, planRevisions: 0 },
+          })
+        }
+
+        const [{ count: diaryCount }, { count: reviewCount }, { count: revisionCount }] = await Promise.all([
+          adminSupabase
+            .from('sleep_diary_entries')
+            .select('*', { count: 'exact', head: true })
+            .in('plan_id', planIds),
+          adminSupabase
+            .from('weekly_reviews')
+            .select('*', { count: 'exact', head: true })
+            .in('plan_id', planIds),
+          adminSupabase
+            .from('plan_revisions')
+            .select('*', { count: 'exact', head: true })
+            .in('plan_id', planIds),
+        ])
+
+        // Explicitly delete dependents first, then plans.
+        const [
+          { error: deleteDiaryError },
+          { error: deleteReviewsError },
+          { error: deleteRevisionsError },
+        ] = await Promise.all([
+          adminSupabase.from('sleep_diary_entries').delete().in('plan_id', planIds),
+          adminSupabase.from('weekly_reviews').delete().in('plan_id', planIds),
+          adminSupabase.from('plan_revisions').delete().in('plan_id', planIds),
+        ])
+
+        if (deleteDiaryError || deleteReviewsError || deleteRevisionsError) {
+          console.error('Failed deleting dependent plan data during purge:', {
+            deleteDiaryError,
+            deleteReviewsError,
+            deleteRevisionsError,
+          })
+          return NextResponse.json({ error: 'Failed to purge dependent plan data' }, { status: 500 })
+        }
+
+        const { error: deletePlansError } = await adminSupabase
+          .from('plans')
+          .delete()
+          .in('id', planIds)
+
+        if (deletePlansError) {
+          console.error('Failed to delete plans during purge:', deletePlansError)
+          return NextResponse.json({ error: 'Failed to purge plan data' }, { status: 500 })
+        }
+
+        return NextResponse.json({
+          success: true,
+          deleted: {
+            plans: planIds.length,
+            diaryEntries: diaryCount || 0,
+            weeklyReviews: reviewCount || 0,
+            planRevisions: revisionCount || 0,
+          },
+        })
+      }
+
       default:
         return NextResponse.json({ error: 'Unknown action' }, { status: 400 })
     }

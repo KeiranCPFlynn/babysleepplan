@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import type { BlogPost } from '@/lib/blog'
+import { formatUniversalDate } from '@/lib/date-format'
 
 export function PostCard({ post }: { post: BlogPost }) {
   return (
@@ -24,11 +25,7 @@ export function PostCard({ post }: { post: BlogPost }) {
           </p>
           <div className="flex items-center gap-3 text-xs text-slate-400">
             <time dateTime={post.date}>
-              {new Date(post.date).toLocaleDateString('en-US', {
-                month: 'short',
-                day: 'numeric',
-                year: 'numeric',
-              })}
+              {formatUniversalDate(post.date)}
             </time>
             <span>&middot;</span>
             <span>{post.readingTime} min read</span>

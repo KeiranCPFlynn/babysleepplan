@@ -7,21 +7,32 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Wrench } from 'lucide-react'
+import Link from 'next/link'
 
 interface Baby {
     id: string
     name: string
 }
 
-interface TestSubscriptionControlsProps {
-    babies?: Baby[]
+interface PlanOption {
+    id: string
+    status: string
+    created_at: string
+    baby?: { name?: string | null } | null
 }
 
-export function TestSubscriptionControls({ babies = [] }: TestSubscriptionControlsProps) {
+interface TestSubscriptionControlsProps {
+    babies?: Baby[]
+    plans?: PlanOption[]
+}
+
+export function TestSubscriptionControls({ babies = [], plans = [] }: TestSubscriptionControlsProps) {
     const [trialOverride, setTrialOverride] = useState('0')
     const [isLoading, setIsLoading] = useState(false)
     const [message, setMessage] = useState('')
     const [selectedBabyId, setSelectedBabyId] = useState('')
+    const [selectedPlanId, setSelectedPlanId] = useState('')
+    const [seededIntakeId, setSeededIntakeId] = useState<string | null>(null)
 
     const handleSetTrialOverride = async () => {
         try {
@@ -112,6 +123,7 @@ export function TestSubscriptionControls({ babies = [] }: TestSubscriptionContro
         try {
             setIsLoading(true)
             setMessage('')
+            setSeededIntakeId(null)
 
             const response = await fetch('/api/admin/seed', {
                 method: 'POST',
@@ -124,7 +136,8 @@ export function TestSubscriptionControls({ babies = [] }: TestSubscriptionContro
             if (!response.ok) {
                 setMessage(`Error: ${data.error}`)
             } else {
-                setMessage('Mock intake created (status: paid). You can now generate a plan from it.')
+                setSeededIntakeId(data.intakeId)
+                setMessage('Mock intake created (status: draft). Open it to review and submit when ready.')
             }
         } catch (error) {
             setMessage(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`)
@@ -151,6 +164,70 @@ export function TestSubscriptionControls({ babies = [] }: TestSubscriptionContro
             } else {
                 setMessage('Subscription reset. You can now re-test the full intake flow.')
                 setTimeout(() => window.location.reload(), 1500)
+            }
+        } catch (error) {
+            setMessage(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`)
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
+    const handlePurgePlansAndDiaries = async () => {
+        const confirmed = window.confirm(
+            'Delete all plans and related diary data for your account? This cannot be undone.'
+        )
+        if (!confirmed) return
+
+        try {
+            setIsLoading(true)
+            setMessage('')
+
+            const response = await fetch('/api/admin/settings', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'purgePlansAndDiaries', value: 'PURGE' }),
+            })
+
+            const data = await response.json()
+
+            if (!response.ok) {
+                setMessage(`Error: ${data.error}`)
+            } else {
+                const deleted = data.deleted || {}
+                setMessage(
+                    `Purged plans (${deleted.plans || 0}), diary entries (${deleted.diaryEntries || 0}), weekly reviews (${deleted.weeklyReviews || 0}), and plan revisions (${deleted.planRevisions || 0}). Refreshing...`
+                )
+                setTimeout(() => window.location.reload(), 1500)
+            }
+        } catch (error) {
+            setMessage(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`)
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
+    const handleSeedDiaryDays = async (days: number) => {
+        if (!selectedPlanId) {
+            setMessage('Please select a plan first.')
+            return
+        }
+
+        try {
+            setIsLoading(true)
+            setMessage('')
+
+            const response = await fetch('/api/diary/seed', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ planId: selectedPlanId, days }),
+            })
+
+            const data = await response.json()
+
+            if (!response.ok) {
+                setMessage(`Error: ${data.error}`)
+            } else {
+                setMessage(`Seeded ${data.days || days} days of diary entries for the selected plan.`)
             }
         } catch (error) {
             setMessage(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`)
@@ -228,6 +305,19 @@ export function TestSubscriptionControls({ babies = [] }: TestSubscriptionContro
                     </p>
                 </div>
 
+                <div className="border-t border-red-200 pt-4">
+                    <Button
+                        onClick={handlePurgePlansAndDiaries}
+                        disabled={isLoading}
+                        variant="destructive"
+                    >
+                        {isLoading ? 'Purging...' : 'Purge Plans & Diaries'}
+                    </Button>
+                    <p className="text-xs text-red-700 mt-2">
+                        Admin-only cleanup for test accounts. Deletes all plans and associated diary data.
+                    </p>
+                </div>
+
                 <div className="border-t border-orange-200 pt-4 space-y-3">
                     <Label className="text-orange-800 font-medium">Seed Test Data</Label>
                     <div className="flex gap-2">
@@ -266,13 +356,55 @@ export function TestSubscriptionControls({ babies = [] }: TestSubscriptionContro
                         </Button>
                     </div>
                     <p className="text-xs text-orange-600">
-                        Creates a paid mock intake for the selected baby. Sets subscription to trialing if needed.
+                        Creates a pre-filled draft intake so you can test submit/payment without typing everything.
+                    </p>
+                </div>
+
+                <div className="border-t border-orange-200 pt-4 space-y-3">
+                    <Label className="text-orange-800 font-medium">Seed Diary Entries</Label>
+                    <div className="flex gap-2 items-center">
+                        <Select value={selectedPlanId} onValueChange={setSelectedPlanId}>
+                            <SelectTrigger className="w-56 border-orange-200">
+                                <SelectValue placeholder="Select plan" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {plans.map((plan) => (
+                                    <SelectItem key={plan.id} value={plan.id}>
+                                        {(plan.baby?.name || 'Baby') + ` (${plan.status})`}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                        <Button
+                            onClick={() => handleSeedDiaryDays(3)}
+                            disabled={isLoading || !selectedPlanId}
+                            variant="outline"
+                            className="border-orange-300 text-orange-800 hover:bg-orange-100"
+                        >
+                            {isLoading ? 'Seeding...' : 'Seed 3 Days'}
+                        </Button>
+                    </div>
+                    <p className="text-xs text-orange-600">
+                        Adds 3 days of diary data so you can test the 3-day review/update flow quickly.
                     </p>
                 </div>
 
                 {message && (
                     <div className="p-3 bg-orange-100 border border-orange-200 rounded-lg">
                         <p className="text-sm text-orange-800">{message}</p>
+                        {seededIntakeId && (
+                            <div className="mt-3">
+                                    <Button
+                                    asChild
+                                    size="sm"
+                                    className="bg-orange-600 hover:bg-orange-700"
+                                >
+                                    <Link href={`/dashboard/intake/${seededIntakeId}`}>
+                                        Open Seeded Intake
+                                    </Link>
+                                </Button>
+                            </div>
+                        )}
                     </div>
                 )}
             </CardContent>

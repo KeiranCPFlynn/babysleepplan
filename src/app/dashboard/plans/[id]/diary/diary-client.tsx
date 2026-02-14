@@ -7,6 +7,12 @@ import { DiaryEntryForm } from '@/components/diary/diary-entry-form'
 import { PlanContent } from '../plan-content'
 import { Calendar, ChevronLeft, ChevronRight, Loader2, Sparkles } from 'lucide-react'
 import type { SleepDiaryEntry, WeeklyReview } from '@/types/database.types'
+import {
+  formatUniversalDate,
+  formatUniversalMonthDay,
+  formatUniversalWeekdayMonthDay,
+  formatUniversalWeekdayShort,
+} from '@/lib/date-format'
 
 interface DiaryClientProps {
   planId: string
@@ -86,7 +92,7 @@ export function DiaryClient({
   const formatDayLabel = (dateStr: string) => {
     const date = new Date(dateStr + 'T12:00:00')
     return {
-      day: date.toLocaleDateString('en-US', { weekday: 'short' }),
+      day: formatUniversalWeekdayShort(date),
       num: date.getDate(),
     }
   }
@@ -95,17 +101,11 @@ export function DiaryClient({
   const formatWeekRange = () => {
     const start = new Date(weekDates[0] + 'T12:00:00')
     const end = new Date(weekDates[6] + 'T12:00:00')
-    const opts: Intl.DateTimeFormatOptions = { month: 'short', day: 'numeric' }
-    return `${start.toLocaleDateString('en-US', opts)} - ${end.toLocaleDateString('en-US', opts)}`
+    return `${formatUniversalMonthDay(start)} - ${formatUniversalMonthDay(end)}`
   }
 
   const formatFullDate = (dateStr: string) => {
-    const date = new Date(dateStr + 'T12:00:00')
-    return date.toLocaleDateString('en-US', {
-      weekday: 'short',
-      month: 'short',
-      day: 'numeric',
-    })
+    return formatUniversalWeekdayMonthDay(dateStr)
   }
 
   // Refresh entries from server
@@ -511,7 +511,7 @@ export function DiaryClient({
             {currentWeekReview ? (
               <div className="space-y-4">
                 <p className="text-xs text-gray-500">
-                  Generated {new Date(currentWeekReview.created_at).toLocaleDateString()}
+                  Generated {formatUniversalDate(currentWeekReview.created_at)}
                 </p>
                 <PlanContent content={currentWeekReview.review_content} />
                 <p className="text-xs text-gray-400">
@@ -552,7 +552,7 @@ export function DiaryClient({
               .map((review) => (
                 <div key={review.id} className="border-l-2 border-purple-200 pl-4">
                   <p className="text-sm font-medium text-gray-700">
-                    Week of {new Date(review.week_start + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                    Week of {formatUniversalMonthDay(review.week_start)}
                   </p>
                   <p className="text-sm text-gray-600 mt-1 line-clamp-3">
                     {review.review_content.split('\n\n')[0]}

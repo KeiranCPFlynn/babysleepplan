@@ -505,14 +505,18 @@ ${safeAdditionalNotes ? `- **Additional Notes:** ${safeAdditionalNotes}` : ''}
 
 ## Instructions
 
-Create a warm, personalized sleep plan in Markdown format. Write like a supportive friend who happens to be a sleep consultant - conversational, encouraging, and practical.
+Create a warm, personalized sleep plan in Markdown format. Write like a supportive sleep consultant: conversational, practical, and honest about uncertainty.
 
 ### Writing Style:
 - Write in flowing paragraphs, NOT bullet point lists
-- Use a warm, encouraging tone like you're chatting over coffee
+- Use a warm, steady tone without hype
 - Keep it personal - use ${safeBabyName}'s name naturally throughout
 - Be specific with times and durations (bold key numbers)
 - Avoid clinical/medical language - keep it friendly
+- Anchor encouragement to concrete details from the intake and age context
+- If you reassure, tie it to one observable fact and one next step
+- Use calibrated language where needed (for example: "based on what you shared", "a likely pattern", "we'll adjust after a few days of logs")
+- Avoid generic praise or certainty claims. Do NOT use phrases like "you're doing amazing", "you're doing great", or "you've got this"
 - DO NOT use emojis anywhere in the text
 
 ### Formatting Rules:
@@ -530,7 +534,7 @@ Create a warm, personalized sleep plan in Markdown format. Write like a supporti
 
 ## Your Plan at a Glance
 
-Write 2-3 friendly paragraphs explaining what this plan covers and what the family can expect. End with an encouraging summary in a blockquote.
+Write 2-3 friendly paragraphs explaining what this plan covers and what the family can expect. End with a short grounded reassurance in a blockquote that references one concrete family goal or constraint.
 
 ---
 
@@ -576,9 +580,9 @@ For each challenge, write a short paragraph explaining what's happening and why,
 
 ## Your First Few Weeks
 
-Write this section in paragraphs, not lists. Describe what Week 1 looks like, then Week 2, then beyond. Include encouragement throughout.
+Write this section in paragraphs, not lists. Describe what Week 1 looks like, then Week 2, then beyond. Keep encouragement realistic and tied to observable progress markers.
 
-> Remember: [Encouraging message about progress]
+> Remember: [Grounded reassurance linked to a specific progress marker]
 
 ---
 
@@ -591,13 +595,13 @@ Write 2-3 common scenarios as short paragraphs using the format:
 
 ## Taking Care of You
 
-A warm paragraph about self-care and when to reach out for help. End with an encouraging closing message.
+A warm paragraph about self-care and when to reach out for help. End with a grounded closing message that avoids generic praise.
 
-> You've got this: [Final warm, personal encouragement]
+> Next step: [Specific, manageable action for this week]
 
 ---
 
-Remember: Write like a friend, not a textbook. Paragraphs over bullets. Keep it warm and readable.`
+Remember: Write like a skilled, supportive human coach, not a cheerleader. Paragraphs over bullets. Keep it warm, specific, and credible.`
 
     // Generate the plan with timeout
     if (isDev) {

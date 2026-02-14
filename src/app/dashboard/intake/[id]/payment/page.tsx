@@ -6,10 +6,15 @@ import { getBabyByIdServer } from '@/lib/api/babies.server'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import Link from 'next/link'
 import { CheckoutButton } from './checkout-button'
-import { CheckCircle } from 'lucide-react'
+import { CheckCircle, Shield, Sparkles, Ticket } from 'lucide-react'
 import { hasActiveSubscription, ADDITIONAL_BABY_PRICE, MONTHLY_PRICE, TRIAL_DAYS } from '@/lib/subscription'
 
 const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
+const foundingOffer = {
+  active: true,
+  code: 'FOUNDING50',
+  discount: '50% off your first 3 months',
+}
 
 export default async function PaymentPage({
   params,
@@ -46,8 +51,10 @@ export default async function PaymentPage({
     const isAdditionalBaby = hasActiveSubscription(profile?.subscription_status, isStripeEnabled)
     const isReturningUser = !isAdditionalBaby && profile?.has_used_trial === true
 
+    const showFoundingOffer = foundingOffer.active && isStripeEnabled && !isAdditionalBaby
+
     return (
-      <div className="max-w-lg mx-auto space-y-6">
+      <div className="max-w-3xl mx-auto space-y-6">
         {!isStripeEnabled && (
           <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
             <p className="text-yellow-800 text-sm font-medium">
@@ -56,87 +63,149 @@ export default async function PaymentPage({
           </div>
         )}
 
-        <div className="text-center">
-          <h1 className="text-3xl font-bold">
+        <div className="text-center space-y-2">
+          <p className="text-xs font-semibold uppercase tracking-widest text-sky-700">
+            One step left
+          </p>
+          <h1 className="text-3xl font-bold text-slate-900">
             {isAdditionalBaby ? 'Add Another Baby' : isReturningUser ? 'Resubscribe' : 'Start Your Free Trial'}
           </h1>
-          <p className="text-gray-600 mt-2">
+          <p className="text-slate-600">
             {isAdditionalBaby
               ? `Add ${baby.name}'s personalized sleep plan to your subscription.`
               : isReturningUser
                 ? `Get ${baby.name}'s personalized sleep plan and full access.`
-                : `Get ${baby.name}'s personalized sleep plan and full access for ${TRIAL_DAYS} days free.`
+                : `Get ${baby.name}'s personalized sleep plan and full access with ${TRIAL_DAYS} days free.`
             }
           </p>
         </div>
 
-        <Card className="border-sky-200 shadow-sm">
-          <CardHeader className="text-center">
-            <CardTitle className="text-2xl">
-              {isAdditionalBaby ? 'Additional Baby Plan' : 'LunaCradle'}
-            </CardTitle>
-            <CardDescription>Everything you need for better sleep</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="text-center">
-              {isAdditionalBaby ? (
+        {showFoundingOffer && (
+          <Card className="border-amber-200 bg-gradient-to-r from-amber-50 to-rose-50 shadow-sm">
+            <CardContent className="py-3">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-center">
+                <div className="inline-flex items-center gap-1 rounded-full border border-amber-200 bg-white/80 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-amber-800">
+                  <Ticket className="h-3.5 w-3.5" />
+                  Founding Families
+                </div>
+                <p className="text-sm text-slate-700">
+                  <span className="font-semibold">{foundingOffer.discount}</span> with code{' '}
+                    <span className="font-bold text-amber-900">{foundingOffer.code}</span> on checkout.
+                  </p>
+                </div>
+              </CardContent>
+          </Card>
+        )}
+
+        <div className="grid gap-6 md:grid-cols-2">
+          <Card className="border-sky-200 bg-gradient-to-br from-sky-50 via-white to-rose-50 shadow-md">
+            <CardHeader className="text-center pb-3">
+              <CardTitle className="text-2xl text-slate-900">
+                {isAdditionalBaby ? 'Additional Baby Plan' : 'LunaCradle'}
+              </CardTitle>
+              <CardDescription className="text-slate-600">Everything you need for better sleep</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="text-center">
+                {isAdditionalBaby ? (
+                  <>
+                    <p className="text-4xl font-bold text-slate-900">
+                      ${ADDITIONAL_BABY_PRICE}<span className="text-lg font-normal text-slate-500">/month</span>
+                    </p>
+                    <p className="text-sm text-slate-600 mt-1">
+                      Added to your existing subscription. Cancel anytime.
+                    </p>
+                  </>
+                ) : isReturningUser ? (
+                  <>
+                    <p className="text-4xl font-bold text-slate-900">
+                      ${MONTHLY_PRICE}<span className="text-lg font-normal text-slate-500">/month</span>
+                    </p>
+                    <p className="text-sm text-slate-600 mt-1">
+                      Billed monthly. Cancel anytime.
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-4xl font-bold text-slate-900">$0 <span className="text-lg font-normal text-slate-500">today</span></p>
+                    <p className="text-sm text-slate-600 mt-1">then ${MONTHLY_PRICE}/month after {TRIAL_DAYS} days. Cancel anytime.</p>
+                  </>
+                )}
+              </div>
+              <ul className="space-y-2 text-sm text-slate-700">
+                <li className="flex items-center gap-2 rounded-lg bg-white/80 px-2.5 py-1.5">
+                  <CheckCircle className="h-4 w-4 text-sky-600" />
+                  Personalized sleep plan ready tonight
+                </li>
+                <li className="flex items-center gap-2 rounded-lg bg-white/80 px-2.5 py-1.5">
+                  <CheckCircle className="h-4 w-4 text-sky-600" />
+                  Living sleep diary and daily logging
+                </li>
+                <li className="flex items-center gap-2 rounded-lg bg-white/80 px-2.5 py-1.5">
+                  <CheckCircle className="h-4 w-4 text-sky-600" />
+                  Weekly plan updates from your logs
+                </li>
+                <li className="flex items-center gap-2 rounded-lg bg-white/80 px-2.5 py-1.5">
+                  <CheckCircle className="h-4 w-4 text-sky-600" />
+                  Troubleshooting + daily checklist
+                </li>
+              </ul>
+            </CardContent>
+            <CardFooter className="flex flex-col gap-3">
+              <CheckoutButton
+                intakeId={id}
+                babyName={baby.name}
+                isAdditionalBaby={isAdditionalBaby}
+                isReturningUser={isReturningUser}
+              />
+              {isStripeEnabled && !isAdditionalBaby && (
                 <>
-                  <p className="text-4xl font-bold text-gray-900">
-                    ${ADDITIONAL_BABY_PRICE}<span className="text-lg font-normal text-gray-500">/month</span>
+                  <div className="w-full rounded-lg border border-sky-200 bg-sky-50/70 px-3 py-2 text-center">
+                    <p className="text-xs text-slate-700">
+                      Have a coupon code? Enter it on the secure Stripe checkout page after you continue.
+                    </p>
+                  </div>
+                  <p className="text-xs text-center text-gray-400">
+                    Credit card required. Cancel anytime. Secure payment powered by Stripe.
                   </p>
-                  <p className="text-sm text-gray-500 mt-1">
-                    Added to your existing subscription. Cancel anytime.
-                  </p>
-                </>
-              ) : isReturningUser ? (
-                <>
-                  <p className="text-4xl font-bold text-gray-900">
-                    ${MONTHLY_PRICE}<span className="text-lg font-normal text-gray-500">/month</span>
-                  </p>
-                  <p className="text-sm text-gray-500 mt-1">
-                    Billed monthly. Cancel anytime.
-                  </p>
-                </>
-              ) : (
-                <>
-                  <p className="text-4xl font-bold text-gray-900">$0 <span className="text-lg font-normal text-gray-500">today</span></p>
-                  <p className="text-sm text-gray-500 mt-1">then ${MONTHLY_PRICE}/month after {TRIAL_DAYS} days. Cancel anytime.</p>
                 </>
               )}
-            </div>
-            <ul className="space-y-2 text-sm text-gray-700">
-              <li className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4 text-sky-600" />
-                Personalized sleep plan, ready tonight
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4 text-sky-600" />
-                Living sleep diary + daily logging
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4 text-sky-600" />
-                Weekly plan updates based on your logs
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4 text-sky-600" />
-                Troubleshooting guidance + daily checklist
-              </li>
-            </ul>
-          </CardContent>
-          <CardFooter className="flex flex-col gap-4">
-            <CheckoutButton
-              intakeId={id}
-              babyName={baby.name}
-              isAdditionalBaby={isAdditionalBaby}
-              isReturningUser={isReturningUser}
-            />
-            {isStripeEnabled && !isAdditionalBaby && (
-              <p className="text-xs text-center text-gray-400">
-                Credit card required. Cancel anytime. Secure payment powered by Stripe.
-              </p>
-            )}
-          </CardFooter>
-        </Card>
+            </CardFooter>
+          </Card>
+
+          <Card className="border-sky-200 bg-gradient-to-br from-white via-sky-50/40 to-rose-50/40">
+            <CardHeader>
+              <CardTitle className="text-lg text-slate-900">Why Parents Start Now</CardTitle>
+              <CardDescription className="text-slate-600">What happens after you enter payment details.</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4 text-sm text-slate-700">
+              <div className="flex items-start gap-2">
+                <Sparkles className="h-4 w-4 mt-0.5 text-sky-600" />
+                <p>
+                  Your payment is confirmed and plan generation starts immediately.
+                </p>
+              </div>
+              <div className="flex items-start gap-2">
+                <CheckCircle className="h-4 w-4 mt-0.5 text-sky-600" />
+                <p>
+                  Most families receive their personalized plan in 1-2 minutes.
+                </p>
+              </div>
+              <div className="flex items-start gap-2">
+                <Shield className="h-4 w-4 mt-0.5 text-sky-600" />
+                <p>
+                  No long-term contract. Cancel anytime from your account.
+                </p>
+              </div>
+              <div className="rounded-xl border border-sky-200 bg-white p-4">
+                <p className="font-medium text-slate-900">
+                  &ldquo;Night 2 already felt calmer. We finally had a clear plan.&rdquo;
+                </p>
+                <p className="mt-1 text-xs text-slate-500">- Sarah M., mom of 7-month-old</p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
         <div className="text-center">
           <Link

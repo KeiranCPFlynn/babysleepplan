@@ -4,6 +4,7 @@ import { getModel } from '@/lib/gemini'
 import { hasActiveSubscription } from '@/lib/subscription'
 import { sanitizeForPrompt } from '@/lib/sanitize'
 import { weeklyReviewLimiter } from '@/lib/rate-limit'
+import { formatUniversalWeekdayLongMonthDay } from '@/lib/date-format'
 import fs from 'fs'
 import path from 'path'
 
@@ -97,7 +98,7 @@ function formatDiaryEntries(entries: Array<{
   return entries
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
     .map(entry => {
-      const date = new Date(entry.date).toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })
+      const date = formatUniversalWeekdayLongMonthDay(entry.date)
       const lines = [`**${date}**`]
 
       if (entry.bedtime) lines.push(`- Bedtime: ${entry.bedtime}`)
@@ -213,6 +214,7 @@ export async function POST(request: NextRequest) {
 
     // Build the prompt
     const prompt = `You are a supportive sleep consultant reviewing a week of sleep diary entries.
+Your tone should be warm but evidence-grounded.
 
 ## Knowledge Base
 ${knowledgeBase}
@@ -239,7 +241,7 @@ Write a brief, warm review in Markdown that matches the tone and structure of th
 ## Weekly Review
 
 ### This Week's Wins
-2-3 sentences highlighting positives.
+2-3 sentences highlighting positives, each tied to something visible in the diary.
 
 ### Patterns from the Diary
 2-3 sentences that clearly reference the diary entries (bedtime/wake time, night wakings, naps, mood, notes). Include at least TWO specific observations tied to the log.
@@ -247,10 +249,12 @@ Write a brief, warm review in Markdown that matches the tone and structure of th
 ### Focus for Next Week
 2-3 sentences with ONE specific, actionable suggestion.
 
-End with a blockquote encouragement like:
-> You're doing great. Consistency now will pay off soon.
+End with a short blockquote reassurance that includes:
+1) one concrete observation from this week's diary, and
+2) one clear next step for the coming days.
 
-Keep it conversational and supportive. No emojis.`
+Avoid generic praise phrases such as "you're doing amazing", "you're doing great", or "you've got this".
+Keep it conversational, specific, and supportive. No emojis.`
 
     // Generate the review
     if (isDev) {

@@ -4,9 +4,7 @@ import {
   Text,
   View,
   StyleSheet,
-  Font,
   Svg,
-  Circle,
   Path,
 } from '@react-pdf/renderer'
 
@@ -70,15 +68,6 @@ function cleanText(text: string): string {
   return cleaned
 }
 
-// Register fonts
-Font.register({
-  family: 'Roboto',
-  fonts: [
-    { src: 'https://cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/fonts/Roboto/roboto-regular-webfont.ttf', fontWeight: 400 },
-    { src: 'https://cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/fonts/Roboto/roboto-bold-webfont.ttf', fontWeight: 700 },
-  ],
-})
-
 // Soft, baby-friendly color palette
 const colors = {
   // Primary pastels
@@ -109,7 +98,7 @@ const colors = {
 
 const styles = StyleSheet.create({
   page: {
-    fontFamily: 'Roboto',
+    fontFamily: 'Helvetica',
     fontSize: 11,
     paddingTop: 40,
     paddingBottom: 60,
@@ -655,8 +644,8 @@ export function SleepPlanPDF({ babyName, babyAge, createdDate, content }: SleepP
         {/* Welcome message */}
         <View style={styles.welcomeBox}>
           <Text style={styles.welcomeText}>
-            This plan was made especially for {cleanName} and your family.
-            Take it one step at a time, trust your instincts, and remember — you&apos;re doing amazing!
+            This plan is based on what you shared about {cleanName} and can be refined as you log sleep.
+            Start with one or two changes this week, then adjust based on what the diary shows.
           </Text>
         </View>
 

@@ -5,6 +5,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { AnimateOnScroll } from '@/components/ui/animate-on-scroll'
 import { Moon, Star, Heart, Sparkles, CheckCircle, X, BookOpen, Shield } from 'lucide-react'
 
+const foundingOffer = {
+  active: true,
+  code: 'FOUNDING50',
+  discount: '50% off your first 3 months',
+  seats: 50,
+}
+
 export default function HomePage() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-sky-50 via-white to-rose-50 text-slate-900 pb-24 md:pb-0">
@@ -97,6 +104,27 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        {/* Founding families offer */}
+        {foundingOffer.active && (
+          <AnimateOnScroll>
+            <section className="pb-6 md:pb-10">
+              <div className="container mx-auto px-4">
+                <div className="mx-auto max-w-3xl rounded-2xl border border-amber-200 bg-gradient-to-r from-amber-50 to-rose-50 px-5 py-5 md:px-6">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-amber-700">
+                    Founding Families
+                  </p>
+                  <p className="mt-2 text-slate-800 font-medium">
+                    We&apos;re opening LunaCradle to our first {foundingOffer.seats} families. Get {foundingOffer.discount} and help shape the product.
+                  </p>
+                  <p className="mt-2 text-sm text-slate-600">
+                    Use code <span className="font-semibold text-slate-800">{foundingOffer.code}</span> at checkout. Limited to first {foundingOffer.seats} redemptions.
+                  </p>
+                </div>
+              </div>
+            </section>
+          </AnimateOnScroll>
+        )}
 
         {/* Research trust strip */}
         <AnimateOnScroll>
@@ -274,6 +302,14 @@ export default function HomePage() {
                       <p className="text-5xl font-bold text-slate-900">$0 <span className="text-lg font-normal text-slate-500">for 5 days</span></p>
                       <p className="text-sm text-slate-500 mt-1">then $19/month &middot; cancel anytime</p>
                     </div>
+                    {foundingOffer.active && (
+                      <div className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-slate-700">
+                        <p className="font-semibold text-amber-800">Founding Families: {foundingOffer.discount}</p>
+                        <p className="mt-1">
+                          Use code <span className="font-semibold text-slate-800">{foundingOffer.code}</span> at checkout.
+                        </p>
+                      </div>
+                    )}
                     <ul className="space-y-2.5 text-slate-600 text-sm">
                       <li className="flex items-start gap-2">
                         <CheckCircle className="h-4 w-4 text-sky-600 mt-0.5 shrink-0" />

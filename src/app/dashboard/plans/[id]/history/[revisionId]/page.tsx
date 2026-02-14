@@ -5,6 +5,7 @@ import { createClient } from '@/lib/supabase/server'
 import { requireAuth } from '@/lib/auth'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { PlanContent } from '../../plan-content'
+import { formatUniversalDate } from '@/lib/date-format'
 
 export default async function PlanRevisionPage({
   params,
@@ -37,9 +38,9 @@ export default async function PlanRevisionPage({
         .single()
     : { data: null }
 
-  const createdAt = new Date(revision.created_at).toLocaleDateString()
+  const createdAt = formatUniversalDate(revision.created_at)
   const weekLabel = revision.week_start
-    ? `Week of ${new Date(revision.week_start + 'T12:00:00').toLocaleDateString()}`
+    ? `Week of ${formatUniversalDate(revision.week_start)}`
     : null
 
   let updateContent: string | null = null

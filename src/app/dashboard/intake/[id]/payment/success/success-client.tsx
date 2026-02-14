@@ -208,8 +208,8 @@ export function SuccessClient({ intakeId, babyName, isDevMode, isAdditionalBaby,
         </CardHeader>
       </Card>
 
-      <Card className="border-purple-100 overflow-hidden">
-        <div className="relative bg-gradient-to-br from-purple-100 via-sky-50 to-pink-50 px-8 py-12 text-center">
+      <Card className="border-purple-100 overflow-hidden py-0 gap-0">
+        <div className="relative bg-gradient-to-br from-purple-100 via-sky-50 to-pink-50 px-8 py-10 text-center">
           {/* Floating decorative icons */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <Moon className="absolute top-6 left-[15%] h-6 w-6 text-purple-300/60 float-gentle" />

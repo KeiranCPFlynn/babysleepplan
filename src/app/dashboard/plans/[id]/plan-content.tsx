@@ -87,14 +87,14 @@ export function PlanContent({ content }: PlanContentProps) {
             </h1>
           ),
           h2: ({ children }) => (
-            <div className="bg-sky-50 border-l-4 border-sky-400 rounded-r-xl py-4 px-6 mt-12 mb-6">
+            <div className="bg-[#E3F2FD] border-l-[5px] border-[#64B5F6] rounded-xl py-4 px-6 mt-10 mb-6 shadow-sm">
               <h2 className="text-xl font-bold text-purple-700 m-0">
                 {children}
               </h2>
             </div>
           ),
           h3: ({ children }) => (
-            <h3 className="text-lg font-bold text-purple-600 mt-8 mb-4 pb-2 border-b border-purple-100">
+            <h3 className="text-lg font-bold text-[#9B7BB8] mt-8 mb-4 pb-2 border-b border-purple-100">
               {children}
             </h3>
           ),
@@ -112,7 +112,7 @@ export function PlanContent({ content }: PlanContentProps) {
                     {label}
                   </span>
                 )}
-                <div className="text-gray-600 text-base leading-relaxed [&>p]:m-0">
+                <div className="text-slate-600 text-base leading-relaxed [&>p]:m-0">
                   {children}
                 </div>
               </blockquote>
@@ -190,7 +190,7 @@ export function PlanContent({ content }: PlanContentProps) {
                 </div>
               )
             }
-            return <p className="text-gray-600 text-base leading-relaxed my-4">{children}</p>
+            return <p className="text-slate-600 text-base leading-relaxed my-4">{children}</p>
           },
           a: ({ href, children }) => (
             <a href={href} className="text-purple-600 hover:text-purple-800 underline">

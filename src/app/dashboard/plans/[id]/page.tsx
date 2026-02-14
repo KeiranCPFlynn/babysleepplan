@@ -13,6 +13,7 @@ import { PrintButton } from './print-button'
 import { DownloadPdfButton } from './download-pdf-button'
 import { RegenerateButton } from './regenerate-button'
 import { formatBabyAge } from '@/lib/age'
+import { formatUniversalDate } from '@/lib/date-format'
 
 const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
 const isDevMode = !isStripeEnabled
@@ -58,7 +59,7 @@ export default async function PlanViewPage({
 
   if (plan.status === 'generating') {
     return (
-      <div className="max-w-3xl mx-auto space-y-6">
+      <div className="max-w-3xl mx-auto space-y-5">
         <Link
           href="/dashboard/plans"
           className="inline-flex items-center text-sm text-purple-600 hover:text-purple-800"
@@ -67,8 +68,8 @@ export default async function PlanViewPage({
           Back to Plans
         </Link>
 
-        <Card className="overflow-hidden">
-          <div className="bg-purple-100 px-8 py-8 text-center">
+        <Card className="overflow-hidden border-white/70 bg-white/90 backdrop-blur py-0 gap-0">
+          <div className="bg-[#E8E0F0] px-8 py-8 text-center">
             <div className="flex justify-center gap-2 mb-4">
               <Star className="h-5 w-5 text-pink-400" />
               <Moon className="h-6 w-6 text-purple-500" />
@@ -81,7 +82,7 @@ export default async function PlanViewPage({
               Creating something special...
             </p>
           </div>
-          <CardContent className="py-12 text-center">
+          <CardContent className="py-8 text-center">
             <div className="flex justify-center mb-6">
               <RefreshCw className="h-12 w-12 text-purple-400 animate-spin" />
             </div>
@@ -104,7 +105,7 @@ export default async function PlanViewPage({
 
   if (plan.status === 'failed') {
     return (
-      <div className="max-w-3xl mx-auto space-y-6">
+      <div className="max-w-3xl mx-auto space-y-5">
         <Link
           href="/dashboard/plans"
           className="inline-flex items-center text-sm text-purple-600 hover:text-purple-800"
@@ -137,7 +138,7 @@ export default async function PlanViewPage({
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <div className="max-w-5xl mx-auto space-y-5">
       <div className="space-y-3 print:hidden">
         <Link
           href="/dashboard/plans"
@@ -155,18 +156,15 @@ export default async function PlanViewPage({
           </Button>
           {isDevMode && <RegenerateButton planId={plan.id} />}
           <DownloadPdfButton
-            babyName={plan.baby?.name || 'Baby'}
-            babyAge={plan.baby?.date_of_birth ? formatBabyAge(plan.baby.date_of_birth) : ''}
-            createdDate={new Date(plan.created_at).toLocaleDateString()}
-            planContent={plan.plan_content || ''}
+            planId={plan.id}
           />
           <PrintButton />
         </div>
       </div>
 
-      <Card className="print:shadow-none print:border-none overflow-hidden">
+      <Card className="print:shadow-none print:border-none overflow-hidden border-white/70 bg-white/90 backdrop-blur py-0 gap-0">
         {/* Baby-friendly header matching PDF design */}
-        <div className="bg-purple-100 px-8 py-8 print:bg-purple-50 rounded-b-3xl">
+        <div className="bg-[#E8E0F0] px-8 py-8 print:bg-purple-50 rounded-b-3xl">
           <div className="flex justify-center gap-2 mb-4">
             <Star className="h-5 w-5 text-pink-400" />
             <Moon className="h-6 w-6 text-purple-500" />
@@ -181,47 +179,49 @@ export default async function PlanViewPage({
           <p className="text-purple-600 text-sm text-center">
             {plan.baby?.date_of_birth && formatBabyAge(plan.baby.date_of_birth)}
             {plan.baby?.date_of_birth && ' · '}
-            Created {new Date(plan.created_at).toLocaleDateString()}
+            Created {formatUniversalDate(plan.created_at)}
           </p>
         </div>
 
         {/* Welcome message */}
-        <div className="mx-8 -mt-4 mb-8 bg-amber-50 border-2 border-amber-200 rounded-xl p-6 print:hidden">
+        <div className="mx-8 -mt-4 mb-8 bg-[#FFF8E7] border-2 border-[#FFCCBC] rounded-xl p-6 print:hidden">
           <p className="text-gray-600 text-base text-center leading-relaxed">
-            This plan was made especially for {plan.baby?.name || 'your baby'} and your family.
-            Take it one step at a time, trust your instincts, and remember — you&apos;re doing amazing!
+            This plan is based on what you shared about {plan.baby?.name || 'your baby'} and can be refined as you log sleep.
+            Start with one or two changes this week, then adjust based on what the diary shows.
           </p>
         </div>
 
-        <CardContent className="py-6 px-8">
-          {latestRevision && (
-            <div className="mb-6 rounded-xl border border-purple-100 bg-purple-50/60 px-5 py-4">
-              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <p className="text-sm font-semibold text-purple-800">
-                    Current Revision: {latestRevision.revision_number}
-                  </p>
-                  <p className="text-xs text-purple-600">
-                    {latestRevision.summary || 'Latest plan update'} · {new Date(latestRevision.created_at).toLocaleDateString()}
-                  </p>
+        <CardContent className="px-5 pb-8 pt-6 md:px-8">
+          <div className="mx-auto max-w-3xl">
+            {latestRevision && (
+              <div className="mb-6 rounded-xl border border-purple-100 bg-purple-50/60 px-5 py-4">
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <p className="text-sm font-semibold text-purple-800">
+                      Current Revision: {latestRevision.revision_number}
+                    </p>
+                    <p className="text-xs text-purple-600">
+                      {latestRevision.summary || 'Latest plan update'} · {formatUniversalDate(latestRevision.created_at)}
+                    </p>
+                  </div>
+                  <Button variant="outline" size="sm" asChild>
+                    <Link href={`/dashboard/plans/${plan.id}/history/${latestRevision.id}`}>
+                      View Revision
+                    </Link>
+                  </Button>
                 </div>
-                <Button variant="outline" size="sm" asChild>
-                  <Link href={`/dashboard/plans/${plan.id}/history/${latestRevision.id}`}>
-                    View Revision
-                  </Link>
-                </Button>
+                {latestUpdateContent && (
+                  <div className="mt-4">
+                    <p className="text-xs font-semibold text-purple-700 uppercase tracking-wide">
+                      Latest Update
+                    </p>
+                    <PlanContent content={latestUpdateContent} />
+                  </div>
+                )}
               </div>
-              {latestUpdateContent && (
-                <div className="mt-4">
-                  <p className="text-xs font-semibold text-purple-700 uppercase tracking-wide">
-                    Latest Update
-                  </p>
-                  <PlanContent content={latestUpdateContent} />
-                </div>
-              )}
-            </div>
-          )}
-          <PlanContent content={plan.plan_content} />
+            )}
+            <PlanContent content={plan.plan_content} />
+          </div>
         </CardContent>
 
         {/* Footer decoration */}
@@ -243,9 +243,9 @@ export default async function PlanViewPage({
           <CardContent className="space-y-3">
             {revisions.map((revision, index) => {
               const isCurrent = index === 0
-              const createdAt = new Date(revision.created_at).toLocaleDateString()
+              const createdAt = formatUniversalDate(revision.created_at)
               const weekLabel = revision.week_start
-                ? `Week of ${new Date(revision.week_start + 'T12:00:00').toLocaleDateString()}`
+                ? `Week of ${formatUniversalDate(revision.week_start)}`
                 : null
               return (
                 <div key={revision.id} className="flex items-center justify-between gap-4 border rounded-lg px-4 py-3">

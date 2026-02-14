@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Plus } from 'lucide-react'
+import { formatUniversalDate } from '@/lib/date-format'
 
 const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
 
@@ -93,7 +94,7 @@ export default async function PlansPage() {
                     <div>
                       <CardTitle>{plan.baby?.name || 'Unknown Baby'}&apos;s Sleep Plan</CardTitle>
                       <CardDescription>
-                        Created {new Date(plan.created_at).toLocaleDateString()}
+                        Created {formatUniversalDate(plan.created_at)}
                       </CardDescription>
                     </div>
                     <div className="flex gap-2 items-center">
@@ -130,8 +131,8 @@ export default async function PlansPage() {
           <CardHeader>
             <CardTitle>No Plans Yet</CardTitle>
             <CardDescription>
-              You haven't created any sleep plans yet. Start by completing a questionnaire
-              about your baby's sleep habits.
+              You haven&apos;t created any sleep plans yet. Start by completing a questionnaire
+              about your baby&apos;s sleep habits.
             </CardDescription>
           </CardHeader>
           <CardContent>

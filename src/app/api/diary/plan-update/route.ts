@@ -4,6 +4,7 @@ import { getModel } from '@/lib/gemini'
 import { hasActiveSubscription } from '@/lib/subscription'
 import { sanitizeForPrompt } from '@/lib/sanitize'
 import { planUpdateLimiter } from '@/lib/rate-limit'
+import { formatUniversalDate, formatUniversalWeekdayLongMonthDay } from '@/lib/date-format'
 
 function calculateAgeMonths(dob: string): number {
   const birth = new Date(dob)
@@ -14,8 +15,7 @@ function calculateAgeMonths(dob: string): number {
 }
 
 function formatWeekLabel(weekStart: string) {
-  const date = new Date(weekStart + 'T12:00:00')
-  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+  return formatUniversalDate(weekStart)
 }
 
 function formatDiaryEntries(entries: Array<{
@@ -34,7 +34,7 @@ function formatDiaryEntries(entries: Array<{
   return entries
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
     .map(entry => {
-      const date = new Date(entry.date).toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })
+      const date = formatUniversalWeekdayLongMonthDay(entry.date)
       const lines = [`**${date}**`]
 
       if (entry.bedtime) lines.push(`- Bedtime: ${entry.bedtime}`)
@@ -294,7 +294,10 @@ Then write 3-5 short paragraphs:
 4) Any caution or context for the next week
 
 You may include ONE short numbered routine (max 3 steps) if it helps.
-No bullet lists otherwise. No emojis. Keep it warm, specific, and supportive.
+No bullet lists otherwise. No emojis.
+Keep the tone warm, specific, and evidence-grounded.
+If you include encouragement, tie it to one concrete observation and one clear next action.
+Avoid generic praise phrases such as "you're doing amazing", "you're doing great", or "you've got this".
 Return ONLY the Markdown for the new section.`
 
     const model = getModel()

@@ -9,6 +9,7 @@ import { TimePicker } from '@/components/ui/time-picker'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Loader2, Minus, Plus } from 'lucide-react'
 import type { SleepDiaryEntry, DiaryMood } from '@/types/database.types'
+import { formatUniversalWeekdayLongMonthDay } from '@/lib/date-format'
 
 interface DiaryEntryFormProps {
   planId: string
@@ -51,12 +52,7 @@ export function DiaryEntryForm({
   const [notes, setNotes] = useState(existingEntry?.notes || '')
 
   const formatDateDisplay = (dateStr: string) => {
-    const d = new Date(dateStr + 'T12:00:00')
-    return d.toLocaleDateString('en-US', {
-      weekday: 'long',
-      month: 'long',
-      day: 'numeric',
-    })
+    return formatUniversalWeekdayLongMonthDay(dateStr)
   }
 
   const handleSubmit = async (e: React.FormEvent) => {

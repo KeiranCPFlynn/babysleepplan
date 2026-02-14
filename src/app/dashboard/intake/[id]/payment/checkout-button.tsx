@@ -53,7 +53,7 @@ export function CheckoutButton({ intakeId, babyName, isAdditionalBaby, isReturni
 
   return (
     <Button
-      className="w-full"
+      className="w-full bg-sky-700 text-white shadow-lg shadow-sky-200 transition-all hover:-translate-y-0.5 hover:bg-sky-800"
       size="lg"
       onClick={handleCheckout}
       disabled={loading}

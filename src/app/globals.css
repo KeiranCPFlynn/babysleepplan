@@ -540,6 +540,15 @@
 /* Plan content styles */
 .plan-content {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: #475569;
+}
+
+.plan-content > :first-child {
+  margin-top: 0 !important;
+}
+
+.plan-content > :last-child {
+  margin-bottom: 0 !important;
 }
 
 .plan-content h1,

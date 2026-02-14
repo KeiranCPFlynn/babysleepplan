@@ -6,38 +6,44 @@ import { Download, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
 
 interface DownloadPdfButtonProps {
-  babyName: string
-  babyAge: string
-  createdDate: string
-  planContent: string
+  planId: string
 }
 
-export function DownloadPdfButton({ babyName, babyAge, createdDate, planContent }: DownloadPdfButtonProps) {
+function parseDownloadFilename(contentDisposition: string | null) {
+  if (!contentDisposition) return null
+  const match = contentDisposition.match(/filename="?([^"]+)"?$/i)
+  return match?.[1] || null
+}
+
+export function DownloadPdfButton({ planId }: DownloadPdfButtonProps) {
   const [loading, setLoading] = useState(false)
 
   const handleDownload = async () => {
     setLoading(true)
 
     try {
-      // Dynamic imports for client-side only
-      const { pdf } = await import('@react-pdf/renderer')
-      const { SleepPlanPDF } = await import('@/components/pdf/sleep-plan-pdf')
+      const response = await fetch(`/api/plans/${planId}/pdf`)
+      if (!response.ok) {
+        let message = 'Failed to generate PDF'
+        try {
+          const data = await response.json()
+          if (data?.error) message = data.error
+        } catch {
+          // Keep generic message when response is not JSON
+        }
+        throw new Error(message)
+      }
 
-      // Generate PDF blob
-      const blob = await pdf(
-        <SleepPlanPDF
-          babyName={babyName}
-          babyAge={babyAge}
-          createdDate={createdDate}
-          content={planContent}
-        />
-      ).toBlob()
+      const blob = await response.blob()
+      if (!blob || blob.size === 0) {
+        throw new Error('PDF file is empty')
+      }
 
-      // Create download link
       const url = URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.href = url
-      link.download = `${babyName.replace(/[^a-z0-9]/gi, '_')}_Sleep_Plan.pdf`
+      const fileName = parseDownloadFilename(response.headers.get('content-disposition'))
+      link.download = fileName || 'Sleep_Plan.pdf'
       document.body.appendChild(link)
       link.click()
       document.body.removeChild(link)
@@ -46,7 +52,7 @@ export function DownloadPdfButton({ babyName, babyAge, createdDate, planContent 
       toast.success('PDF downloaded successfully!')
     } catch (error) {
       console.error('PDF generation error:', error)
-      toast.error('Failed to generate PDF. Please try the Print option instead.')
+      toast.error(error instanceof Error ? error.message : 'Failed to generate PDF')
     } finally {
       setLoading(false)
     }
