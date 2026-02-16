@@ -201,6 +201,7 @@ Behavior:
 - Public traffic is redirected to `/maintenance` when the runtime flag is enabled.
 - API routes remain available (including Stripe webhooks).
 - Changes apply in about 10 seconds (edge cache TTL).
+- Local/dev (`NODE_ENV !== 'production'`) always ignores maintenance mode.
 
 Bypass for internal testing:
 - Set `MAINTENANCE_BYPASS_TOKEN`.

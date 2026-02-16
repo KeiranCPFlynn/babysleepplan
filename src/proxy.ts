@@ -19,6 +19,9 @@ function parseMaintenanceEnabled(payload: unknown): boolean {
 }
 
 async function isMaintenanceEnabled() {
+  // Keep local/dev environments always available.
+  if (process.env.NODE_ENV !== 'production') return false
+
   // Emergency env override (still requires redeploy).
   if (process.env.MAINTENANCE_MODE === 'true') return true
 
