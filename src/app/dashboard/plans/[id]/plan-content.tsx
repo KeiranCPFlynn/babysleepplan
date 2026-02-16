@@ -8,6 +8,11 @@ interface PlanContentProps {
   content: string
 }
 
+const LEGACY_EVIDENCE_LINK_REPLACEMENTS: Record<string, string> = {
+  'https://www.who.int/tools/your-life-your-health/life-phase/newborns-and-children-under-5-years/making-sure-newborns-and-children-under-5-years-sleep-safely':
+    'https://apps.who.int/iris/bitstream/handle/10665/352658/9789240045989-eng.pdf',
+}
+
 // Detect blockquote type based on content
 function getTextFromNode(node: ReactNode): string {
   if (node === null || node === undefined || typeof node === 'boolean') return ''
@@ -54,6 +59,16 @@ function getBlockquoteStyle(children: ReactNode): { className: string; label: st
 }
 
 export function PlanContent({ content }: PlanContentProps) {
+  const normalizeLegacyEvidenceLinks = (input: string) => {
+    let normalized = input
+
+    for (const [legacyUrl, replacementUrl] of Object.entries(LEGACY_EVIDENCE_LINK_REPLACEMENTS)) {
+      normalized = normalized.split(legacyUrl).join(replacementUrl)
+    }
+
+    return normalized
+  }
+
   const normalizeNumberedLists = (input: string) => {
     const lines = input.replace(/^(\s*)(\d+)\)\s+/gm, '$1$2. ').split('\n')
     const normalized: string[] = []
@@ -74,7 +89,7 @@ export function PlanContent({ content }: PlanContentProps) {
     return normalized.join('\n')
   }
 
-  const normalizedContent = normalizeNumberedLists(content)
+  const normalizedContent = normalizeNumberedLists(normalizeLegacyEvidenceLinks(content))
 
   return (
     <div id="plan-content" className="plan-content max-w-none">

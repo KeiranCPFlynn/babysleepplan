@@ -49,9 +49,9 @@ export default async function DashboardPage() {
     .select('*', { count: 'exact', head: true })
     .eq('user_id', user.id)
 
-  const shouldShowAdminTestControls = process.env.NODE_ENV !== 'production' && profile?.is_admin === true
+  const showAdminTools = profile?.is_admin === true
 
-  const { data: adminPlanOptions } = shouldShowAdminTestControls
+  const { data: adminPlanOptions } = showAdminTools
     ? await supabase
         .from('plans')
         .select('id, status, created_at, baby:babies(name)')
@@ -321,19 +321,19 @@ export default async function DashboardPage() {
         </div>
       </AnimateOnScroll>
 
-      {/* Subscription Status Debug (Admin Only, Dev Only) */}
-      {process.env.NODE_ENV !== 'production' && isStripeEnabled && profile?.is_admin === true && (
+      {/* Subscription Status Debug (Admin Only) */}
+      {showAdminTools && isStripeEnabled && (
         <SubscriptionStatusDebug
           serverStatus={subscriptionStatus}
           isStripeEnabled={isStripeEnabled}
         />
       )}
 
-      {/* Admin Test Controls (Dev Only) */}
-      {shouldShowAdminTestControls && <TestSubscriptionControls babies={babies || []} plans={normalizedAdminPlanOptions} />}
+      {/* Admin Test Controls */}
+      {showAdminTools && <TestSubscriptionControls babies={babies || []} plans={normalizedAdminPlanOptions} />}
 
-      {/* Admin Delete User (Dev Only) */}
-      {process.env.NODE_ENV !== 'production' && profile?.is_admin === true && <DeleteUserControls />}
+      {/* Admin Delete User */}
+      {showAdminTools && <DeleteUserControls />}
 
       {/* Night-time quick access */}
       {primaryPlan && (

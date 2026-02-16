@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { AnimateOnScroll } from '@/components/ui/animate-on-scroll'
-import { Moon, Star, Heart, Sparkles, CheckCircle, X, BookOpen, Shield } from 'lucide-react'
+import { Moon, Star, CheckCircle, BookOpen } from 'lucide-react'
 
 const foundingOffer = {
   active: true,
@@ -14,7 +14,7 @@ const foundingOffer = {
 
 export default function HomePage() {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-sky-50 via-white to-rose-50 text-slate-900 pb-24 md:pb-0">
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-sky-50 via-white to-rose-50 text-slate-900 pb-24 pt-[max(0.5rem,env(safe-area-inset-top))] md:pb-0 md:pt-3">
       {/* Ambient background blobs with color morphing */}
       <div className="pointer-events-none absolute -top-48 -right-56 hidden md:block h-[30rem] w-[30rem] rounded-full bg-gradient-to-br from-rose-300/55 via-pink-300/45 to-amber-200/45 float-reverse blob-morph" />
       <div className="pointer-events-none absolute top-16 -left-60 hidden md:block h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-sky-300/55 via-cyan-200/45 to-indigo-200/40 float blob-morph-alt" />
@@ -55,18 +55,8 @@ export default function HomePage() {
               Stop the 3am wake-ups with a personalized plan tonight.
             </h1>
             <p className="mt-5 text-base sm:text-lg md:text-xl text-shimmer font-medium max-w-3xl mx-auto hero-load hero-load-2">
-              For babies 4-36 months. Gentle or structured methods. Updated weekly.
+              For babies and toddlers 0-5 years, with gentle or structured options.
             </p>
-            <div className="mt-6 flex flex-wrap justify-center gap-2 hero-load hero-load-2">
-              {[
-                'Personalized for 4-36 months',
-                'No-cry to structured options',
-              ].map((item) => (
-                <span key={item} className="rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-xs text-slate-700">
-                  {item}
-                </span>
-              ))}
-            </div>
             <div className="mt-7 hero-load hero-load-3">
               <p className="text-base md:text-lg text-slate-600">
                 $0 for 5 days. Then $19/month. Cancel anytime.
@@ -85,7 +75,7 @@ export default function HomePage() {
             </div>
             <div className="mt-6 flex items-center justify-center gap-2 text-xs text-slate-500 hero-load hero-load-3">
               <BookOpen className="h-3.5 w-3.5" />
-              <span>Grounded in AAP, NHS, and peer-reviewed pediatric sleep research</span>
+              <span>Informed by AAP, NHS, NICE, WHO guidance, and peer-reviewed studies</span>
             </div>
             <div className="mt-8 md:mt-10 hero-load hero-load-3">
               <div className="relative overflow-hidden rounded-3xl border border-white/70 bg-white/85 p-3 shadow-xl shadow-sky-100/60 backdrop-blur">
@@ -99,7 +89,7 @@ export default function HomePage() {
                 />
               </div>
               <p className="mt-3 text-center text-xs text-slate-500">
-                Sample report preview using test data and your real output structure
+                Sample report preview from the real plan format
               </p>
             </div>
           </div>
@@ -126,35 +116,6 @@ export default function HomePage() {
           </AnimateOnScroll>
         )}
 
-        {/* Research trust strip */}
-        <AnimateOnScroll>
-          <section className="py-6 border-y border-white/50 bg-white/40 backdrop-blur-sm">
-            <div className="container mx-auto px-4">
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-xs text-slate-500">
-                <div className="flex items-center gap-1.5">
-                  <Shield className="h-3.5 w-3.5 text-sky-600" />
-                  <span>AAP safe sleep aligned</span>
-                </div>
-                <div className="hidden sm:block h-3 w-px bg-slate-300" />
-                <div className="flex items-center gap-1.5">
-                  <BookOpen className="h-3.5 w-3.5 text-sky-600" />
-                  <span>Evidence-based guidance</span>
-                </div>
-                <div className="hidden sm:block h-3 w-px bg-slate-300" />
-                <div className="hidden sm:flex items-center gap-1.5">
-                  <Heart className="h-3.5 w-3.5 text-sky-600" />
-                  <span>Gentle &amp; structured options</span>
-                </div>
-                <div className="hidden md:block h-3 w-px bg-slate-300" />
-                <div className="hidden md:flex items-center gap-1.5">
-                  <Sparkles className="h-3.5 w-3.5 text-sky-600" />
-                  <span>Updated with latest research</span>
-                </div>
-              </div>
-            </div>
-          </section>
-        </AnimateOnScroll>
-
         {/* 3. How It Works */}
         <section id="how-it-works" className="py-16 md:py-20">
           <div className="container mx-auto px-4">
@@ -166,9 +127,9 @@ export default function HomePage() {
             </AnimateOnScroll>
             <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
               {[
-                { step: '1', title: 'Tell us about your baby', description: 'Age, sleep habits, and your comfort level — takes about 3 minutes.' },
-                { step: '2', title: 'Get your plan tonight', description: 'A personalized plan grounded in sleep science, ready in minutes.' },
-                { step: '3', title: 'Track, adapt, improve', description: 'Log sleep daily. Your plan updates weekly based on real patterns.' },
+                { step: '1', title: 'Tell us about your baby', description: 'A short intake on age, current sleep, and your comfort level.' },
+                { step: '2', title: 'Get your plan tonight', description: 'A personalized plan in minutes, with clear bedtime and night steps.' },
+                { step: '3', title: 'Track and refine', description: 'Log sleep and get practical weekly adjustments from your real patterns.' },
               ].map((item, index) => (
                 <AnimateOnScroll key={item.step} delay={index * 150}>
                   <div className="rounded-3xl border border-white/70 bg-white/80 p-6 text-center shadow-sm card-hover">
@@ -192,23 +153,23 @@ export default function HomePage() {
                 <span className="heading-underline">Parents Who Needed Sleep Fast</span>
               </h2>
               <p className="text-center text-slate-500 mb-12 max-w-2xl mx-auto">
-                Real parents, different sleep styles, one common outcome: calmer nights and clearer next steps.
+                Different sleep styles, one outcome: calmer nights and clearer next steps.
               </p>
             </AnimateOnScroll>
             <div className="grid gap-6 md:grid-cols-3 max-w-6xl mx-auto">
               {[
                 {
-                  quote: 'Night 2 already felt different. We had a clear plan, and bedtime stopped feeling chaotic.',
+                  quote: 'Night 2 felt calmer. Bedtime stopped feeling chaotic.',
                   author: 'Sarah M.',
                   role: 'Mom of 7-month-old',
                 },
                 {
-                  quote: 'We wanted a gentler approach and it matched our comfort level perfectly from day one.',
+                  quote: 'The gentle approach matched our comfort level from day one.',
                   author: 'James + Priya',
                   role: 'Parents of 10-month-old',
                 },
                 {
-                  quote: 'The weekly updates kept us from getting stuck. We always knew what to adjust next.',
+                  quote: 'Weekly updates kept us moving. We always knew the next adjustment.',
                   author: 'Elena R.',
                   role: 'Mom of 18-month-old',
                 },
@@ -247,47 +208,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 5. Comparison */}
-        <section className="container mx-auto px-4 py-16 md:py-20">
-          <AnimateOnScroll>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-              <span className="heading-underline">Why Not a Sleep Consultant?</span>
-            </h2>
-            <p className="text-center text-slate-500 mb-12 max-w-lg mx-auto">Same research. Fraction of the cost.</p>
-          </AnimateOnScroll>
-          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-            <AnimateOnScroll delay={0}>
-              <Card className="border-slate-200 bg-white/80 card-hover">
-                <CardHeader>
-                  <CardTitle className="text-lg">Sleep Consultant</CardTitle>
-                  <p className="text-sm text-slate-500">$300+ / 2-week wait</p>
-                </CardHeader>
-                <CardContent className="space-y-2.5 text-sm text-slate-600">
-                  <div className="flex items-center gap-2"><X className="h-4 w-4 text-slate-400" /> Scheduling delays</div>
-                  <div className="flex items-center gap-2"><X className="h-4 w-4 text-slate-400" /> Manual tracking</div>
-                  <div className="flex items-center gap-2"><X className="h-4 w-4 text-slate-400" /> Updates cost extra</div>
-                  <div className="flex items-center gap-2"><X className="h-4 w-4 text-slate-400" /> One-size approach</div>
-                </CardContent>
-              </Card>
-            </AnimateOnScroll>
-            <AnimateOnScroll delay={150}>
-              <Card className="border-sky-200 bg-gradient-to-br from-sky-50 via-white to-rose-50 shadow-md card-hover">
-                <CardHeader>
-                  <CardTitle className="text-lg">LunaCradle</CardTitle>
-                  <p className="text-sm text-sky-600 font-medium">Free 5 days, then $19/mo</p>
-                </CardHeader>
-                <CardContent className="space-y-2.5 text-sm text-slate-600">
-                  <div className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-sky-600" /> Start tonight</div>
-                  <div className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-sky-600" /> Built-in diary &amp; tracking</div>
-                  <div className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-sky-600" /> Weekly updates included</div>
-                  <div className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-sky-600" /> Based on leading research</div>
-                </CardContent>
-              </Card>
-            </AnimateOnScroll>
-          </div>
-        </section>
-
-        {/* 6. Pricing + CTA with animated gradient border */}
+        {/* 5. Pricing + CTA */}
         <AnimateOnScroll>
           <section id="pricing" className="bg-white/70 py-16 md:py-20">
             <div className="container mx-auto px-4">
@@ -295,7 +216,7 @@ export default function HomePage() {
                 <Card className="border-sky-200 bg-white shadow-lg gradient-border rounded-2xl overflow-hidden">
                   <CardHeader className="text-center pb-2">
                     <CardTitle className="text-2xl font-bold">LunaCradle</CardTitle>
-                    <p className="text-xs text-slate-500 mt-1">Grounded in AAP, NHS &amp; pediatric sleep research</p>
+                    <p className="text-xs text-slate-500 mt-1">Informed by AAP, NHS, NICE, WHO, and peer-reviewed sleep research</p>
                   </CardHeader>
                   <CardContent className="space-y-5">
                     <div className="text-center">
@@ -327,10 +248,6 @@ export default function HomePage() {
                         <CheckCircle className="h-4 w-4 text-sky-600 mt-0.5 shrink-0" />
                         Daily checklist &amp; troubleshooting tips
                       </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="h-4 w-4 text-sky-600 mt-0.5 shrink-0" />
-                        Built on research from leading sleep organizations
-                      </li>
                     </ul>
                     <Button className="w-full bg-sky-700 text-white hover:bg-sky-800 cta-smooth cta-fancy text-base py-6" size="lg" asChild>
                       <Link href="/signup">Get Your Sleep Plan Tonight</Link>
@@ -343,7 +260,7 @@ export default function HomePage() {
           </section>
         </AnimateOnScroll>
 
-        {/* 7. FAQ */}
+        {/* 6. FAQ */}
         <section className="py-16 md:py-20">
           <div className="container mx-auto px-4">
             <AnimateOnScroll>
@@ -355,23 +272,15 @@ export default function HomePage() {
               {[
                 {
                   q: 'Will this work for my baby?',
-                  a: 'Plans are personalized to your child&apos;s age, temperament, and current sleep patterns. You can choose gentle or more structured methods and change course anytime.'
+                  a: 'Plans are personalized to age, temperament, current sleep patterns, and your preferred approach.'
                 },
                 {
                   q: 'What age is this for?',
-                  a: 'Best for 4 months to 3 years. We adjust for your child\u2019s age and development.'
+                  a: 'Built for babies and toddlers from birth through 5 years, with age-appropriate guidance.'
                 },
                 {
                   q: 'What research is this based on?',
-                  a: 'Our guidance draws from the American Academy of Pediatrics (AAP), NHS, and peer-reviewed pediatric sleep research. We stay current as new findings are published.'
-                },
-                {
-                  q: 'Do I have to let my baby cry?',
-                  a: 'No. We offer methods from completely no-cry to more structured. You choose what fits your family.'
-                },
-                {
-                  q: 'Is this medical advice?',
-                  a: 'No. This is educational guidance based on established research. Always consult your pediatrician for medical concerns.'
+                  a: 'Guidance is informed by AAP, NHS, NICE, WHO, and peer-reviewed pediatric sleep research.'
                 },
                 {
                   q: 'What happens after the free trial?',

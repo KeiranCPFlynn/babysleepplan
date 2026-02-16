@@ -165,6 +165,8 @@ const KNOWLEDGE_FILE_SOURCE_MAP: Record<string, string[]> = {
   'age-9-12-months.txt': ['aap-safe-sleep-2022', 'nhs-sleep-patterns'],
   'age-12-18-months.txt': ['aap-safe-sleep-2022', 'nhs-sleep-patterns'],
   'age-18-24-months.txt': ['aap-safe-sleep-2022', 'nhs-sleep-patterns'],
+  'age-24-36-months.txt': ['nhs-sleep-patterns', 'mindell-behavioral-2006', 'mindell-bedtime-routine-2015'],
+  'age-36-60-months.txt': ['nhs-sleep-patterns', 'mindell-behavioral-2006', 'mindell-bedtime-routine-2015'],
 }
 
 function getEvidenceOrder(sourceId: string) {

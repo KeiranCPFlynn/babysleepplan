@@ -140,6 +140,10 @@ RESEND_API_KEY=                  # Required
 
 # App
 NEXT_PUBLIC_APP_URL=http://localhost:3000
+# Emergency force override (requires redeploy). Prefer runtime flag toggle in admin controls.
+MAINTENANCE_MODE=false
+# Optional bypass token for internal testing while maintenance mode is on
+MAINTENANCE_BYPASS_TOKEN=
 ```
 
 Environment variables are validated at runtime by `src/lib/env.ts` (imported in the root layout). The app will throw a clear error on startup if any required variable is missing. The validation is skipped during the Next.js build phase since server-only env vars aren't available at build time.
@@ -180,6 +184,31 @@ Set `NEXT_PUBLIC_STRIPE_ENABLED=false` to skip payment flow. This enables:
 - Admin debug panels and test controls (visible to admin users only)
 
 The Stripe dev bypass is blocked in production (`NODE_ENV=production`) with a 503 error to prevent accidental free plan generation.
+
+### Maintenance Mode
+
+Maintenance mode can be toggled live (no redeploy) using the admin Test Controls panel.
+
+Requirements:
+- Run migration `supabase/migrations/013_add_runtime_flags.sql` once.
+- Use an admin account (`profiles.is_admin = true`).
+
+How to toggle:
+- Go to `/dashboard/subscription`.
+- In **Test Controls** > **Site Maintenance Mode**, click **Enable Maintenance** or **Disable Maintenance**.
+
+Behavior:
+- Public traffic is redirected to `/maintenance` when the runtime flag is enabled.
+- API routes remain available (including Stripe webhooks).
+- Changes apply in about 10 seconds (edge cache TTL).
+
+Bypass for internal testing:
+- Set `MAINTENANCE_BYPASS_TOKEN`.
+- Open `/maintenance`, expand **Staff access**, and enter the token to unlock that browser.
+- Optional fallback: open any URL once with `?bypass=YOUR_TOKEN` to set the bypass cookie.
+
+Emergency override:
+- Set `MAINTENANCE_MODE=true` to force maintenance mode via env (requires redeploy).
 
 ### Password Requirements
 
@@ -235,6 +264,7 @@ See `PLAN-sleep-diary.md` for the sleep diary iteration plan and future enhancem
 | `/api/stripe/cancel` | POST | User | Cancel Stripe subscription |
 | `/api/contact` | POST | None (rate-limited) | Submit contact form |
 | `/api/admin/settings` | GET, POST | Admin | Admin settings management |
+| `/api/admin/runtime-flags` | GET, POST | Admin | Toggle runtime maintenance mode |
 | `/api/verify-subscription` | GET | User | Check subscription status |
 
 ## Testing

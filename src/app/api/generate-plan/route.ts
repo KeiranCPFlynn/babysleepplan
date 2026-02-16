@@ -84,8 +84,13 @@ function loadKnowledgeBase(context: KnowledgeContext): { content: string; loaded
     filesToLoad.push('age-9-12-months.txt')
   } else if (ageMonths < 18) {
     filesToLoad.push('age-12-18-months.txt')
-  } else {
+  } else if (ageMonths < 24) {
     filesToLoad.push('age-18-24-months.txt')
+  } else if (ageMonths < 36) {
+    filesToLoad.push('age-24-36-months.txt')
+  } else {
+    // Fallback for older toddlers/preschoolers (and older if entered)
+    filesToLoad.push('age-36-60-months.txt')
   }
 
   // Load problem-specific files based on selected problems

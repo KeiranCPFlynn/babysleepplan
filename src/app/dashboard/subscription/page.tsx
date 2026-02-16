@@ -10,13 +10,11 @@ import { TestSubscriptionControls } from '@/components/subscription/test-subscri
 import { DeleteUserControls } from '@/components/admin/delete-user-controls'
 import { ManageSubscriptionButton } from '@/components/subscription/manage-subscription-button'
 import { stripe } from '@/lib/stripe'
-import { isAdminToolsEnabled } from '@/lib/admin'
 import { formatUniversalDate } from '@/lib/date-format'
 
 export const dynamic = 'force-dynamic'
 
 const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
-const adminToolsEnabled = isAdminToolsEnabled()
 
 function getSupabaseAdmin() {
   return createAdminClient(
@@ -93,7 +91,7 @@ export default async function SubscriptionPage() {
   const label = getSubscriptionLabel(status)
   const isActive = hasActiveSubscription(status, isStripeEnabled)
   const isAdmin = profile?.is_admin === true
-  const showAdminTools = isAdmin && adminToolsEnabled
+  const showAdminTools = isAdmin
   const daysRemaining = getDaysRemaining(profile?.subscription_period_end ?? null)
 
   return (

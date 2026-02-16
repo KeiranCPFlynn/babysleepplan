@@ -194,7 +194,8 @@ BEGIN
   NEW.updated_at = NOW();
   RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql
+SET search_path = public;
 
 CREATE TRIGGER update_profiles_updated_at BEFORE UPDATE ON profiles
   FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
@@ -220,7 +221,8 @@ BEGIN
   );
   RETURN NEW;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY DEFINER
+SET search_path = public;
 
 CREATE TRIGGER on_auth_user_created
   AFTER INSERT ON auth.users
@@ -319,5 +321,8 @@ CREATE TABLE contact_messages (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- No RLS needed — only the service role key inserts into this table.
--- No user-facing read access.
+ALTER TABLE contact_messages ENABLE ROW LEVEL SECURITY;
+
+-- Locked down for client roles; accessed by server-side service role only.
+REVOKE ALL ON TABLE contact_messages FROM anon, authenticated;
+GRANT SELECT, INSERT ON TABLE contact_messages TO service_role;

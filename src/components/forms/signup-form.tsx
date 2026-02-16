@@ -111,7 +111,7 @@ export function SignupForm() {
         </div>
         <h1 className="text-2xl font-bold text-slate-900">Create an account</h1>
         <p className="text-sm text-slate-500 mt-1">
-          Start your 5-day trial and get your sleep plan tonight
+          Create your account to get started
         </p>
       </CardHeader>
       <form onSubmit={handleSubmit}>
@@ -195,11 +195,8 @@ export function SignupForm() {
             className="w-full bg-sky-700 hover:bg-sky-800 text-white"
             disabled={loading}
           >
-            {loading ? 'Creating account...' : 'Start Free 5-Day Trial'}
+            {loading ? 'Creating account...' : 'Create Account'}
           </Button>
-          <p className="text-xs text-center text-slate-500">
-            Then $19/month. Cancel anytime.
-          </p>
 
           <p className="text-sm text-center text-slate-500">
             Already have an account?{' '}

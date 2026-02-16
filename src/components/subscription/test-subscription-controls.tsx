@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -33,6 +33,28 @@ export function TestSubscriptionControls({ babies = [], plans = [] }: TestSubscr
     const [selectedBabyId, setSelectedBabyId] = useState('')
     const [selectedPlanId, setSelectedPlanId] = useState('')
     const [seededIntakeId, setSeededIntakeId] = useState<string | null>(null)
+    const [maintenanceMode, setMaintenanceMode] = useState<boolean | null>(null)
+    const [maintenanceStatusLoading, setMaintenanceStatusLoading] = useState(true)
+
+    useEffect(() => {
+        const loadMaintenanceMode = async () => {
+            try {
+                const response = await fetch('/api/admin/runtime-flags', { method: 'GET' })
+                if (!response.ok) {
+                    setMaintenanceMode(null)
+                    return
+                }
+                const data = await response.json()
+                setMaintenanceMode(Boolean(data.maintenanceMode))
+            } catch {
+                setMaintenanceMode(null)
+            } finally {
+                setMaintenanceStatusLoading(false)
+            }
+        }
+
+        loadMaintenanceMode()
+    }, [])
 
     const handleSetTrialOverride = async () => {
         try {
@@ -236,6 +258,32 @@ export function TestSubscriptionControls({ babies = [], plans = [] }: TestSubscr
         }
     }
 
+    const handleSetMaintenanceMode = async (enabled: boolean) => {
+        try {
+            setIsLoading(true)
+            setMessage('')
+
+            const response = await fetch('/api/admin/runtime-flags', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ enabled }),
+            })
+
+            const data = await response.json()
+            if (!response.ok) {
+                setMessage(`Error: ${data.error}`)
+                return
+            }
+
+            setMaintenanceMode(Boolean(data.maintenanceMode))
+            setMessage(`Maintenance mode ${enabled ? 'enabled' : 'disabled'}.`)
+        } catch (error) {
+            setMessage(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`)
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
     return (
         <Card className="border-orange-200 bg-orange-50/50">
             <CardHeader>
@@ -250,6 +298,42 @@ export function TestSubscriptionControls({ babies = [], plans = [] }: TestSubscr
                 </div>
             </CardHeader>
             <CardContent className="space-y-4">
+                <div className="space-y-2">
+                    <Label className="text-orange-800">Site Maintenance Mode</Label>
+                    <p className="text-xs text-orange-600">
+                        Status:{' '}
+                        <span className="font-semibold">
+                            {maintenanceStatusLoading
+                                ? 'Checking...'
+                                : maintenanceMode === null
+                                    ? 'Unknown'
+                                    : maintenanceMode
+                                        ? 'Enabled'
+                                        : 'Disabled'}
+                        </span>
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                        <Button
+                            onClick={() => handleSetMaintenanceMode(true)}
+                            disabled={isLoading || maintenanceMode === true}
+                            className="bg-orange-600 hover:bg-orange-700"
+                        >
+                            {isLoading && maintenanceMode !== true ? 'Saving...' : 'Enable Maintenance'}
+                        </Button>
+                        <Button
+                            onClick={() => handleSetMaintenanceMode(false)}
+                            disabled={isLoading || maintenanceMode === false}
+                            variant="outline"
+                            className="border-orange-300 text-orange-800 hover:bg-orange-100"
+                        >
+                            {isLoading && maintenanceMode !== false ? 'Saving...' : 'Disable Maintenance'}
+                        </Button>
+                    </div>
+                    <p className="text-xs text-orange-600">
+                        Applies live in about 10 seconds without redeploy. API routes remain accessible.
+                    </p>
+                </div>
+
                 <div className="space-y-2">
                     <Label htmlFor="trial-override" className="text-orange-800">
                         Trial Days Override
