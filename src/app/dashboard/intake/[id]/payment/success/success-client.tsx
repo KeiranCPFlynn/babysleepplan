@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -50,6 +50,24 @@ export function SuccessClient({ intakeId, babyName, isDevMode, isAdditionalBaby,
   const [pollCount, setPollCount] = useState(0)
   const [error, setError] = useState<string | null>(null)
   const [currentStage, setCurrentStage] = useState(0)
+  const clientTriggerAttempted = useRef(false)
+
+  const triggerGeneration = useCallback(async (planId: string) => {
+    try {
+      const response = await fetch('/api/generate-plan', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ planId }),
+      })
+
+      if (!response.ok) {
+        const payload = await response.json().catch(() => ({}))
+        console.error('Client generation trigger failed:', response.status, payload)
+      }
+    } catch (err) {
+      console.error('Client generation trigger request failed:', err)
+    }
+  }, [])
 
   const poll = useCallback(async () => {
     try {
@@ -70,6 +88,17 @@ export function SuccessClient({ intakeId, babyName, isDevMode, isAdditionalBaby,
     }
   }, [intakeId, isDevMode])
 
+  // Reliability fallback: trigger generation from the authenticated browser session
+  // so we don't rely only on fire-and-forget server-side fetches.
+  useEffect(() => {
+    if (!plan?.id) return
+    if (plan.status !== 'generating' && plan.status !== 'failed') return
+    if (clientTriggerAttempted.current) return
+
+    clientTriggerAttempted.current = true
+    void triggerGeneration(plan.id)
+  }, [plan?.id, plan?.status, triggerGeneration])
+
   // Poll every 2 seconds with better status handling
   useEffect(() => {
     if (plan?.status === 'completed' || plan?.status === 'failed') return
@@ -87,7 +116,7 @@ export function SuccessClient({ intakeId, babyName, isDevMode, isAdditionalBaby,
       } else if (data.plan?.status === 'failed') {
         setError('Failed to generate sleep plan. Please contact support.')
         if (isDevMode) console.log('Plan generation failed')
-      } else if (pollCount > 30) { // Timeout after ~1 minute
+      } else if (pollCount > 90) { // Timeout after ~3 minutes
         setError('Plan generation is taking longer than expected. Please refresh the page.')
         if (isDevMode) console.log('Poll timeout reached')
       }

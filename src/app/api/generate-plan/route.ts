@@ -421,12 +421,14 @@ export async function POST(request: NextRequest) {
     if (!planId) {
       return NextResponse.json({ error: 'Missing planId' }, { status: 400 })
     }
+    console.log('[generate-plan] request received', { planId, isInternalCall })
 
     // If not an internal call, verify user owns the plan
     if (!isInternalCall) {
       const userSupabase = await createServerClient()
       const { data: { user } } = await userSupabase.auth.getUser()
       if (!user) {
+        console.error('[generate-plan] unauthorized request (no user)', { planId })
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
       }
 
@@ -447,6 +449,7 @@ export async function POST(request: NextRequest) {
         .eq('user_id', user.id)
         .single()
       if (!ownedPlan) {
+        console.error('[generate-plan] unauthorized request (ownership check failed)', { planId, userId: user.id })
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
       }
     }
@@ -789,6 +792,7 @@ Remember: Write like a skilled, supportive human coach, not a cheerleader. Parag
     if (revisionError) {
       console.error('Failed to save plan revision:', revisionError)
     }
+    console.log('[generate-plan] completed', { planId })
 
     return NextResponse.json({ success: true, planId })
   } catch (error) {
