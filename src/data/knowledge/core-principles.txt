@@ -16,7 +16,7 @@ To reduce the risk of Sudden Infant Death Syndrome (SIDS) and accidents, follow 
 ### Circadian Rhythms
 *   **Newborns:** Have no established circadian rhythm and cannot distinguish day from night. They produce melatonin irregularly.
 *   **Development:** Around 3–4 months, babies begin developing a 24-hour sleep-wake cycle.
-*   **Light Cues:** Darkness stimulates melatonin (sleep hormone). Daylight signals wakefulness. Morning light exposure and evening darkness are crucial for setting this internal clock.
+*   **Light Cues:** Lower evening/night light supports melatonin timing, and daytime light supports wakefulness. Consistent light-dark patterns help set the internal clock over time.
 
 ### Sleep Cycles and Pressure
 *   **Sleep Pressure (Homeostatic Drive):** The longer a baby is awake, the more "sleep pressure" builds. If awake too long, cortisol (stress hormone) is released, causing a "second wind" and making sleep difficult (overtiredness).

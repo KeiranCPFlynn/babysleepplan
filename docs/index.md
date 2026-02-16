@@ -15,6 +15,7 @@
 
 ## Planned Features
 - [Sleep Diary Plan](../PLAN-sleep-diary.md) - Diary iteration plan + future enhancements
+- [V2 Conversational Experience Plan](./PLAN-v2-conversational-experience.md) - Chat intake, plan follow-up chat, voice mode, and animation/UX architecture
 
 ## Key Files
 

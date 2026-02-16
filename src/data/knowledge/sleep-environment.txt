@@ -1,19 +1,20 @@
 # Optimizing the Sleep Environment
 
 ## Overview
-Before attempting any training, ensure the physical space supports sleep. A perfect environment can solve many "sleep problems" on its own.
+Before attempting any training, ensure the physical space supports sleep. A well-set-up environment can improve many common sleep challenges.
 
 ## The Checklist
 
 ### 1. Darkness
-*   **Goal:** Pitch black. You shouldn't be able to see your hand in front of your face.
-*   **Why:** Light signals the brain to wake up. Even a sliver of morning light can cause 5 AM wakings.
-*   **Tools:** Blackout curtains, portable blinds, or taping foil/garbage bags on windows.
+*   **Goal:** Keep the room low-light and consistent at sleep times; very bright, direct light is not ideal.
+*   **Why:** Light cues wakefulness, and reducing evening/night light may support melatonin timing and sleep continuity.
+*   **Tools:** Blackout curtains or portable blinds can help. A dim, warm nightlight can still be practical for feeds/comfort if kept indirect.
 
 ### 2. White Noise
 *   **Goal:** Continuous, non-looping sound.
-*   **Volume:** ~50 dB (shower loudness) at the crib.
-*   **Why:** Masks household noise (dogs, floors creaking) and mimics the womb. It cues the brain that it is sleep time.
+*   **Volume:** Keep it moderate (about 50 dB or lower at the crib level).
+*   **Placement:** Place the machine away from the crib (around 7 feet / 2 meters when possible), pointed away from baby's ears.
+*   **Why:** It may mask household noise (dogs, floors creaking) and provide a consistent sleep cue.
 *   **Note:** Use plain white noise, pink noise, or rain. Avoid music/lullabies that change pitch/rhythm.
 
 ### 3. Temperature
@@ -33,6 +34,10 @@ Before attempting any training, ensure the physical space supports sleep. A perf
 ## Room Sharing vs. Own Room
 *   **Safety:** Room sharing recommended for first 6 months.
 *   **Sleep Quality:** Studies show babies (and parents) often sleep longer stretches once baby is in their own room (after 4-6 months), as they don't wake each other up with minor noises. Moving baby to their own room is a personal choice after 6 months.
+
+## Real-World Flexibility
+*   Every home and baby is different; adjust setup details based on what supports restful sleep and comfort while keeping safety standards in place.
+*   If the environment is not "perfect," focus on the highest-impact changes first (consistent low light, manageable noise, and safe sleep setup).
 
 ## Transitioning Locations
 *   If moving baby from your room to theirs, spend time playing in the new room during the day so it feels safe.

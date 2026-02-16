@@ -793,6 +793,9 @@ Create a warm, personalized sleep plan in Markdown format. Write like a supporti
 - Anchor encouragement to concrete details from the intake and age context
 - If you reassure, tie it to one observable fact and one next step
 - Use calibrated language where needed (for example: "based on what you shared", "a likely pattern", "we'll adjust after a few days of logs")
+- For light/noise environment guidance, avoid absolutes like "must", "always", "never", or "pitch black"; use evidence-aligned wording such as "may help", "is associated with", or "aim for"
+- Include safe-use qualifiers when recommending white noise (moderate volume and machine placement away from the crib)
+- Explicitly acknowledge real-world variability (different homes and babies may need small adjustments while preserving safety basics)
 - Avoid generic praise or certainty claims. Do NOT use phrases like "you're doing amazing", "you're doing great", or "you've got this"
 - DO NOT use emojis anywhere in the text
 

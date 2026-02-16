@@ -12,8 +12,8 @@ A "short nap" is typically one sleep cycle (30–45 minutes). While normal for y
     *   *Overtired:* Wake window too long; cortisol prevents settling into deep sleep.
 
 ## How to Extend Naps
-*   **Darkness:** Use blackout curtains. Room should be pitch black.
-*   **White Noise:** Continuous noise masks household sounds that trigger waking.
+*   **Light:** Aim for a low-light, consistent nap environment. Blackout curtains may help if the room is bright.
+*   **White Noise:** Continuous noise may mask household sounds that trigger waking; keep volume moderate and the machine at a safe distance from the crib.
 *   **"Crib Hour":** (For sleep trained babies 6m+) Leave baby in crib for a full hour even if they wake at 45 mins. Give them space to try and fall back asleep.
 *   **Wake-to-Sleep:** Gently stir baby at the 30-minute mark (just enough to make them move/sigh). This can reset the sleep cycle and bridge the 45-minute gap.
 *   **Timing Tweak:** Extend wake window by 10–15 minutes to increase sleep pressure.
@@ -29,4 +29,4 @@ A "short nap" is typically one sleep cycle (30–45 minutes). While normal for y
 
 ## Common Mistakes
 *   **Rushing in:** Going to get baby the second they make a peep at 45 minutes denies them the chance to link cycles.
-*   **Too much light:** Even a sliver of light can wake a baby in light sleep.
+*   **Too much light:** Bright or direct light can wake some babies during light sleep transitions.

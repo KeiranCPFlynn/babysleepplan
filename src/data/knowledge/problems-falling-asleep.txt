@@ -6,7 +6,7 @@ If a baby cannot fall asleep without help at bedtime, they typically cannot stay
 ## What Are Sleep Associations?
 Conditions or objects a baby connects with sleep.
 *   **Dependent (Negative):** Requires a parent. E.g., nursing, rocking, bouncing, car ride, being held, replacing a pacifier (for young babies).
-*   **Independent (Positive):** Can be sustained by baby. E.g., sleep sack, white noise, dark room, lovey, sucking thumb.
+*   **Independent (Positive):** Can be sustained by baby. E.g., sleep sack, white noise, low-light room, lovey, sucking thumb.
 
 ## The Problem
 When a baby wakes between sleep cycles, they check their environment. If they fell asleep sucking a bottle but wake up without it, they are startled and cry. They need the "conditions of onset" recreated to return to sleep.
