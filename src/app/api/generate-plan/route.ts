@@ -9,6 +9,8 @@ import fs from 'fs'
 import path from 'path'
 
 const isDev = process.env.NODE_ENV !== 'production'
+export const runtime = 'nodejs'
+export const maxDuration = 300
 
 const knowledgeFileCache = new Map<string, string | null>()
 
@@ -476,7 +478,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Add timeout protection for plan generation
-    const generationTimeout = setTimeout(async () => {
+    generationTimeout = setTimeout(async () => {
       if (isDev) {
         console.log(`Plan generation timeout for plan ${planId} - marking as failed`)
       }
