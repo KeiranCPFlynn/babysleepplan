@@ -2,8 +2,7 @@
   "crons": [
     {
       "path": "/api/internal/retry-plan-generation",
-      "schedule": "*/2 * * * *"
+      "schedule": "0 3 * * *"
     }
   ]
 }
-

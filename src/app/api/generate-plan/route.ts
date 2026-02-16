@@ -13,6 +13,9 @@ const isDev = process.env.NODE_ENV !== 'production'
 export const runtime = 'nodejs'
 export const maxDuration = 300
 const PLAN_LOCK_LEASE_SECONDS = 8 * 60
+const GEMINI_MAX_ATTEMPTS = 2
+const GEMINI_ATTEMPT_TIMEOUT_MS = 100 * 1000
+const GEMINI_BASE_BACKOFF_MS = 1500
 
 const knowledgeFileCache = new Map<string, string | null>()
 
@@ -81,6 +84,105 @@ async function releasePlanGenerationLock(supabase: ReturnType<typeof getSupabase
   if (error && !isMissingLockFunctionError(error)) {
     throw error
   }
+}
+
+function getErrorField(error: unknown, key: string) {
+  if (!error || typeof error !== 'object' || !(key in error)) return undefined
+  return (error as Record<string, unknown>)[key]
+}
+
+function getErrorMessage(error: unknown) {
+  if (error instanceof Error) return error.message
+  if (typeof error === 'string') return error
+  const message = getErrorField(error, 'message')
+  if (typeof message === 'string') return message
+  return String(error)
+}
+
+function isTransientGeminiError(error: unknown) {
+  const status = Number(getErrorField(error, 'status') ?? getErrorField(error, 'statusCode'))
+  if (!Number.isNaN(status) && [408, 429, 500, 502, 503, 504].includes(status)) {
+    return true
+  }
+
+  const code = String(getErrorField(error, 'code') ?? '').toLowerCase()
+  if (
+    code.includes('resource_exhausted')
+    || code.includes('unavailable')
+    || code.includes('deadline_exceeded')
+    || code.includes('internal')
+  ) {
+    return true
+  }
+
+  const message = getErrorMessage(error).toLowerCase()
+  return (
+    message.includes('timeout')
+    || message.includes('timed out')
+    || message.includes('rate limit')
+    || message.includes('resource exhausted')
+    || message.includes('temporarily unavailable')
+    || message.includes('service unavailable')
+    || message.includes('internal error')
+    || message.includes('network')
+  )
+}
+
+function sleep(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+type GeminiModel = ReturnType<typeof getModel>
+type GeminiResult = Awaited<ReturnType<GeminiModel['generateContent']>>
+
+async function callGeminiWithTimeout(model: GeminiModel, prompt: string): Promise<GeminiResult> {
+  let timeoutId: ReturnType<typeof setTimeout> | undefined
+  const timeoutPromise = new Promise<never>((_, reject) => {
+    timeoutId = setTimeout(() => {
+      reject(new Error(`Gemini API timeout after ${GEMINI_ATTEMPT_TIMEOUT_MS / 1000} seconds`))
+    }, GEMINI_ATTEMPT_TIMEOUT_MS)
+  })
+
+  try {
+    const result = await Promise.race([
+      model.generateContent(prompt),
+      timeoutPromise,
+    ])
+    return result as GeminiResult
+  } finally {
+    if (timeoutId) clearTimeout(timeoutId)
+  }
+}
+
+async function generateWithRetry(prompt: string): Promise<GeminiResult> {
+  const model = getModel()
+  let lastError: unknown
+
+  for (let attempt = 1; attempt <= GEMINI_MAX_ATTEMPTS; attempt++) {
+    try {
+      if (isDev) {
+        console.log('[generate-plan] Gemini attempt', { attempt, maxAttempts: GEMINI_MAX_ATTEMPTS })
+      }
+      return await callGeminiWithTimeout(model, prompt)
+    } catch (error) {
+      lastError = error
+      const shouldRetry = attempt < GEMINI_MAX_ATTEMPTS && isTransientGeminiError(error)
+      console.error('[generate-plan] Gemini attempt failed', {
+        attempt,
+        shouldRetry,
+        error: getErrorMessage(error),
+      })
+
+      if (!shouldRetry) {
+        throw error
+      }
+
+      const backoffMs = GEMINI_BASE_BACKOFF_MS * attempt
+      await sleep(backoffMs)
+    }
+  }
+
+  throw lastError instanceof Error ? lastError : new Error('Gemini generation failed')
 }
 
 // Smart knowledge base loader - only loads relevant files
@@ -778,20 +880,8 @@ A warm paragraph about self-care and when to reach out for help. End with a grou
 
 Remember: Write like a skilled, supportive human coach, not a cheerleader. Paragraphs over bullets. Keep it warm, specific, and credible.`
 
-    // Generate the plan with timeout
-    if (isDev) {
-      console.log('Calling Gemini API...')
-    }
-    const model = getModel()
-
-    const timeoutPromise = new Promise<never>((_, reject) => {
-      setTimeout(() => reject(new Error('Gemini API timeout after 120 seconds')), 120000)
-    })
-
-    const result = await Promise.race([
-      model.generateContent(prompt),
-      timeoutPromise
-    ])
+    // Generate the plan with one bounded retry on transient failures.
+    const result = await generateWithRetry(prompt)
 
     if (isDev) {
       console.log('Gemini API response received')
