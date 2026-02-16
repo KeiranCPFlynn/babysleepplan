@@ -90,7 +90,7 @@ export default async function PlanRevisionPage({
       </Card>
 
       {revision.source !== 'initial' && (
-        <Card className="border-emerald-100 bg-emerald-50">
+        <Card id="update-details" className="border-emerald-100 bg-emerald-50">
           <CardHeader>
             <CardTitle className="text-lg text-emerald-900">Changes in this update</CardTitle>
             <CardDescription className="text-emerald-700">

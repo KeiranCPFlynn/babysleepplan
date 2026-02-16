@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { DiaryEntryForm } from '@/components/diary/diary-entry-form'
@@ -20,6 +21,8 @@ interface DiaryClientProps {
   initialEntries: SleepDiaryEntry[]
   initialReviews: WeeklyReview[]
   initialSelectedDate?: string | null
+  initialThreeDayCooldownUntil?: string | null
+  initialUpdatedForLast3?: boolean
   initialUpdatedForLast7?: boolean
 }
 
@@ -31,12 +34,33 @@ const moodColors: Record<string, string> = {
   terrible: 'bg-red-100 text-red-700',
 }
 
+function extractLatestUpdateSection(planContent: string | null | undefined) {
+  if (!planContent) return null
+
+  const trimmed = planContent.trim()
+  const dividerIndex = trimmed.lastIndexOf('\n---\n')
+  if (dividerIndex >= 0) {
+    const section = trimmed.slice(dividerIndex + 5).trim()
+    return section || null
+  }
+
+  const markerIndex = trimmed.lastIndexOf('## Plan Update')
+  if (markerIndex >= 0) {
+    const section = trimmed.slice(markerIndex).trim()
+    return section || null
+  }
+
+  return null
+}
+
 export function DiaryClient({
   planId,
   babyName,
   initialEntries,
   initialReviews,
   initialSelectedDate = null,
+  initialThreeDayCooldownUntil = null,
+  initialUpdatedForLast3 = false,
   initialUpdatedForLast7 = false,
 }: DiaryClientProps) {
   const [entries, setEntries] = useState<SleepDiaryEntry[]>(initialEntries)
@@ -47,9 +71,25 @@ export function DiaryClient({
   const [reviewError, setReviewError] = useState<string | null>(null)
   const [updatingPlan, setUpdatingPlan] = useState(false)
   const [updateMessage, setUpdateMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
+  const [updateWindow, setUpdateWindow] = useState<3 | 7 | null>(null)
+  const [latestAppliedUpdate, setLatestAppliedUpdate] = useState<{
+    windowDays: 3 | 7
+    content: string
+    revisionId: string | null
+  } | null>(null)
   const [seeding, setSeeding] = useState(false)
+  const [updatedForLast3, setUpdatedForLast3] = useState(initialUpdatedForLast3)
   const [updatedForLast7, setUpdatedForLast7] = useState(initialUpdatedForLast7)
   const isDevMode = process.env.NEXT_PUBLIC_STRIPE_ENABLED === 'false'
+  const threeDayCooldownUntil = initialThreeDayCooldownUntil ? new Date(initialThreeDayCooldownUntil) : null
+  const isThreeDayOnCooldown = Boolean(threeDayCooldownUntil && Date.now() < threeDayCooldownUntil.getTime())
+  const latestAppliedUpdateRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    if (latestAppliedUpdate) {
+      latestAppliedUpdateRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [latestAppliedUpdate])
 
   // Calculate week dates based on offset
   const getWeekDates = () => {
@@ -73,6 +113,11 @@ export function DiaryClient({
     date.setDate(date.getDate() - (6 - index))
     return date.toISOString().split('T')[0]
   })
+  const last3Dates = Array.from({ length: 3 }).map((_, index) => {
+    const date = new Date()
+    date.setDate(date.getDate() - (2 - index))
+    return date.toISOString().split('T')[0]
+  })
 
   // Get entry for a specific date
   const getEntryForDate = (date: string) => {
@@ -85,6 +130,9 @@ export function DiaryClient({
     .filter(Boolean)
 
   const last7Entries = last7Dates
+    .map((d) => getEntryForDate(d))
+    .filter(Boolean)
+  const last3Entries = last3Dates
     .map((d) => getEntryForDate(d))
     .filter(Boolean)
 
@@ -193,9 +241,12 @@ export function DiaryClient({
     }
   }
 
-  const updatePlan = async (force: boolean = false) => {
+  const updatePlan = async (windowDays: 3 | 7, force: boolean = false) => {
     setUpdatingPlan(true)
     setUpdateMessage(null)
+    setUpdateWindow(windowDays)
+
+    const rangeDates = windowDays === 3 ? last3Dates : last7Dates
 
     try {
       const response = await fetch(`/api/diary/plan-update${force ? '?force=true' : ''}`, {
@@ -203,8 +254,9 @@ export function DiaryClient({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           planId,
-          weekStart: last7Dates[0],
-          weekEnd: last7Dates[6],
+          weekStart: rangeDates[0],
+          weekEnd: rangeDates[rangeDates.length - 1],
+          windowDays,
         }),
       })
 
@@ -214,8 +266,22 @@ export function DiaryClient({
         throw new Error(data.error || 'Failed to update plan')
       }
 
-      setUpdateMessage({ type: 'success', text: 'Plan updated and saved to history.' })
-      setUpdatedForLast7(true)
+      setUpdateMessage({ type: 'success', text: `${windowDays}-day plan update saved to history.` })
+      const updateSection = typeof data.updateSection === 'string'
+        ? data.updateSection
+        : extractLatestUpdateSection(data.revision?.plan_content)
+      if (updateSection) {
+        setLatestAppliedUpdate({
+          windowDays,
+          content: updateSection,
+          revisionId: typeof data.revision?.id === 'string' ? data.revision.id : null,
+        })
+      }
+      if (windowDays === 3) {
+        setUpdatedForLast3(true)
+      } else {
+        setUpdatedForLast7(true)
+      }
     } catch (err) {
       setUpdateMessage({ type: 'error', text: err instanceof Error ? err.message : 'Failed to update plan' })
     } finally {
@@ -363,64 +429,166 @@ export function DiaryClient({
         </Card>
       )}
 
-      {/* 7-day Plan Update */}
-      {!selectedDate && !updatedForLast7 && (
-        <Card className="border-emerald-200 bg-emerald-50">
-          <CardHeader>
-            <h3 className="font-semibold text-emerald-900">7-Day Plan Update</h3>
-            <p className="text-sm text-emerald-700">
-              Based on the last 7 days of diary entries.
-            </p>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            {last7Entries.length < 7 ? (
-              <div>
-                <p className="text-sm text-emerald-800">
-                  {last7Entries.length}/7 days logged
+      {/* Plan Updates */}
+      {!selectedDate && (
+        <div className="space-y-6">
+          {!updatedForLast3 && (
+            <Card className="border-violet-200 bg-violet-50">
+              <CardHeader>
+                <h3 className="font-semibold text-violet-900">3-Day Plan Update</h3>
+                <p className="text-sm text-violet-700">
+                  A quick adjustment based on the last 3 days.
                 </p>
-                <p className="text-xs text-emerald-700">
-                  Once you log 7 days, you&apos;ll be able to apply a plan update.
+              </CardHeader>
+              <CardContent className="space-y-3">
+                {last3Entries.length < 3 ? (
+                  <div>
+                    <p className="text-sm text-violet-800">
+                      {last3Entries.length}/3 days logged
+                    </p>
+                    <p className="text-xs text-violet-700">
+                      Once you log 3 days, you&apos;ll be able to apply a quick update.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <div>
+                      <p className="text-sm font-medium text-violet-900">
+                        Ready for a quick update
+                      </p>
+                      <p className="text-xs text-violet-700">
+                        We&apos;ll add one focused adjustment from your latest 3 logs.
+                      </p>
+                    </div>
+                    <Button
+                      onClick={() => updatePlan(3)}
+                      disabled={updatingPlan || isThreeDayOnCooldown}
+                      className="bg-violet-600 hover:bg-violet-700"
+                    >
+                      {updatingPlan ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Updating...
+                        </>
+                      ) : isThreeDayOnCooldown ? (
+                        'Available Soon'
+                      ) : (
+                        'Apply 3-Day Update'
+                      )}
+                    </Button>
+                  </div>
+                )}
+                {isThreeDayOnCooldown && threeDayCooldownUntil && (
+                  <p className="text-xs text-violet-700">
+                    Next 3-day update available after {threeDayCooldownUntil.toLocaleString()}.
+                  </p>
+                )}
+                {updateMessage && updateWindow === 3 && (
+                  <p
+                    className={`text-sm rounded px-3 py-2 ${
+                      updateMessage.type === 'success'
+                        ? 'bg-violet-100 text-violet-900'
+                        : 'bg-red-50 text-red-600'
+                    }`}
+                  >
+                    {updateMessage.text}
+                  </p>
+                )}
+              </CardContent>
+            </Card>
+          )}
+
+          {!updatedForLast7 && (
+            <Card className="border-emerald-200 bg-emerald-50">
+              <CardHeader>
+                <h3 className="font-semibold text-emerald-900">7-Day Plan Update</h3>
+                <p className="text-sm text-emerald-700">
+                  Based on the last 7 days of diary entries.
                 </p>
-              </div>
-            ) : (
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                <div>
-                  <p className="text-sm font-medium text-emerald-900">
-                    Ready to update the plan
+              </CardHeader>
+              <CardContent className="space-y-3">
+                {last7Entries.length < 7 ? (
+                  <div>
+                    <p className="text-sm text-emerald-800">
+                      {last7Entries.length}/7 days logged
+                    </p>
+                    <p className="text-xs text-emerald-700">
+                      Once you log 7 days, you&apos;ll be able to apply a plan update.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <div>
+                      <p className="text-sm font-medium text-emerald-900">
+                        Ready to update the plan
+                      </p>
+                      <p className="text-xs text-emerald-700">
+                        We&apos;ll add a focused update based on the past week.
+                      </p>
+                    </div>
+                    <Button
+                      onClick={() => updatePlan(7)}
+                      disabled={updatingPlan}
+                      className="bg-emerald-600 hover:bg-emerald-700"
+                    >
+                      {updatingPlan ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Updating...
+                        </>
+                      ) : (
+                        'Update Plan'
+                      )}
+                    </Button>
+                  </div>
+                )}
+                {updateMessage && updateWindow === 7 && (
+                  <p
+                    className={`text-sm rounded px-3 py-2 ${
+                      updateMessage.type === 'success'
+                        ? 'bg-emerald-100 text-emerald-900'
+                        : 'bg-red-50 text-red-600'
+                    }`}
+                  >
+                    {updateMessage.text}
                   </p>
-                  <p className="text-xs text-emerald-700">
-                    We&apos;ll add a focused update based on the past week.
-                  </p>
-                </div>
-                <Button
-                  onClick={() => updatePlan()}
-                  disabled={updatingPlan}
-                  className="bg-emerald-600 hover:bg-emerald-700"
-                >
-                  {updatingPlan ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Updating...
-                    </>
-                  ) : (
-                    'Update Plan'
-                  )}
-                </Button>
-              </div>
-            )}
-            {updateMessage && (
-              <p
-                className={`text-sm rounded px-3 py-2 ${
-                  updateMessage.type === 'success'
-                    ? 'bg-emerald-100 text-emerald-900'
-                    : 'bg-red-50 text-red-600'
-                }`}
-              >
-                {updateMessage.text}
+                )}
+              </CardContent>
+            </Card>
+          )}
+        </div>
+      )}
+
+      {!selectedDate && latestAppliedUpdate && (
+        <div ref={latestAppliedUpdateRef}>
+          <Card className="border-sky-200 bg-sky-50">
+            <CardHeader>
+              <h3 className="font-semibold text-sky-900">
+                {latestAppliedUpdate.windowDays}-Day Update Applied
+              </h3>
+              <p className="text-sm text-sky-700">
+                Your latest update is shown below and has already been added to your plan.
               </p>
-            )}
-          </CardContent>
-        </Card>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <PlanContent content={latestAppliedUpdate.content} />
+              <div className="flex flex-wrap gap-2">
+                <Button asChild className="bg-sky-600 hover:bg-sky-700">
+                  <Link href={`/dashboard/plans/${planId}`}>
+                    View Updated Plan
+                  </Link>
+                </Button>
+                {latestAppliedUpdate.revisionId && (
+                  <Button asChild variant="outline">
+                    <Link href={`/dashboard/plans/${planId}/history/${latestAppliedUpdate.revisionId}`}>
+                      View Revision
+                    </Link>
+                  </Button>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       )}
 
       {/* Weekly Review Section */}
@@ -479,7 +647,7 @@ export function DiaryClient({
                       Seed 7 Days
                     </Button>
                     <Button
-                      onClick={() => updatePlan(true)}
+                      onClick={() => updatePlan(7, true)}
                       disabled={updatingPlan || last7Entries.length < 7}
                       size="sm"
                       variant="ghost"
@@ -515,7 +683,7 @@ export function DiaryClient({
                 </p>
                 <PlanContent content={currentWeekReview.review_content} />
                 <p className="text-xs text-gray-400">
-                  Plan updates unlock after 7 logged days.
+                  Quick updates unlock after 3 logged days. Full weekly updates unlock after 7 logged days.
                 </p>
               </div>
             ) : weekEntries.length < 3 ? (

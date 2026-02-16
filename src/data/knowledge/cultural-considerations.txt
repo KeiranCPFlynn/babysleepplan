@@ -1,24 +1,25 @@
 # Cultural Considerations in Sleep
 
 ## Overview
-Sleep norms are culturally constructed. "Western" pediatric sleep advice often emphasizes early independence and consolidated sleep, while many other cultures prioritize co-sleeping and interdependence. There is no single "right" way, provided safety is maintained.
+Infant sleep practices vary widely across families and cultures. Some families prioritize independent sleep early, while others prioritize close nighttime proximity and co-regulation. Guidance should be practical, respectful, and free of blame.
 
-## Co-Sleeping Norms
-*   **Global Context:** In Japan, India, and many cultures, bed-sharing is the norm and is not viewed as a problem.
-*   **Safety Paradox:** Some countries with high bed-sharing rates (e.g., Japan) have low SIDS rates. This is often attributed to firm sleeping surfaces (futons), lower parental smoking rates, and breastfeeding norms.
-*   **Advice:** If your culture values co-sleeping, you do not need to stop to have a "good sleeper." Focus on **safe co-sleeping** (no soft bedding, firm mattress, sober parents).
+## Culturally Responsive Framing
+*   Ask about family goals first: safety, rest, breastfeeding, work schedules, and caregiving support.
+*   Use neutral language (for example, "family sleep plan" rather than "good" or "bad" habits).
+*   Adapt recommendations to real living conditions, including multigenerational homes and limited space.
+*   Give one clear plan for all caregivers to reduce mixed messages at bedtime and overnight.
 
-## Independence vs. Interdependence
-*   **Western Model:** Focuses on "self-soothing" and independent sleep as developmental milestones.
-*   **Attachment/Collectivist Model:** Focuses on co-regulation. Baby relying on parent for sleep is seen as natural signaling, not a "bad habit."
-*   **Balancing:** It is okay to choose a method that fits your values. If you value co-sleeping but are exhausted, look for compromises like a side-car crib (baby is next to you but on separate surface).
+## What Safety Guidance Should Always Stay Constant
+*   Follow core safe-sleep guidance: back to sleep, firm flat surface, and no loose bedding.
+*   For infants under 1 year, the safest arrangement is room-sharing without bed-sharing.
+*   Keep counseling nonjudgmental while still being explicit about avoidable risk factors.
 
-## Extended Family
-*   **Scenario:** Grandparents or extended family live in the home and care for baby.
-*   **Challenge:** Generational differences in advice (e.g., "Put rice cereal in the bottle" or "Don't let the baby cry").
-*   **Strategy:** Respectfully educate on safety (Back to Sleep). Try to get all caregivers on the same page regarding the schedule, even if the soothing method varies slightly.
+## If a Family Is Bed-Sharing or Likely to Fall Asleep While Feeding
+*   Use harm-reduction language without endorsing bed-sharing as equivalent to a separate infant sleep surface.
+*   Emphasize "never bed-share" conditions: if the infant is under 4 months, preterm/low birth weight, or if any adult has smoked, used alcohol, cannabis, sedatives, or other substances.
+*   Never sleep with an infant on a sofa, recliner, or heavily cushioned surface.
+*   Remove pillows, duvets, and loose blankets near the infant and return infant to their own sleep space when possible.
 
-## Presenting Advice without Bias
-*   **Avoid:** Terms like "spoiling" or "bad habits."
-*   **Use:** Terms like "sustainable sleep associations" or "family sleep goals."
-*   **Bottom Line:** Research shows children raised with independent sleep training AND children raised with co-sleeping/responsive settling both turn out to be emotionally healthy and securely attached. The best method is the one that works for the *whole* family's well-being.
+## Bedtime Expectations Across Cultures
+*   Later bedtimes, more room-sharing, and higher parental involvement at sleep onset are common in many regions.
+*   Focus plan success on workable outcomes for this family (fewer prolonged wakings, safer routines, and improved caregiver sleep), not one rigid cultural standard.

@@ -7,6 +7,34 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { CheckCircle, Moon, Star, Sparkles, Heart } from 'lucide-react'
 
+const generationStages = [
+  {
+    title: 'Reviewing your sleep questionnaire',
+    detail: 'Checking routines, wake windows, and current challenges.',
+    progress: 18,
+  },
+  {
+    title: 'Matching age-appropriate sleep guidance',
+    detail: "Selecting evidence-based recommendations for your baby's stage.",
+    progress: 36,
+  },
+  {
+    title: 'Building your personalized daily schedule',
+    detail: 'Drafting bedtime, nap timing, and overnight support steps.',
+    progress: 57,
+  },
+  {
+    title: 'Tailoring settling and wake-up strategies',
+    detail: 'Adjusting methods to your family preferences and comfort level.',
+    progress: 78,
+  },
+  {
+    title: 'Finalizing your plan and next steps',
+    detail: 'Preparing your report layout and finishing touches.',
+    progress: 94,
+  },
+]
+
 interface SuccessClientProps {
   intakeId: string
   babyName: string
@@ -21,6 +49,7 @@ export function SuccessClient({ intakeId, babyName, isDevMode, isAdditionalBaby,
   const [dots, setDots] = useState(0)
   const [pollCount, setPollCount] = useState(0)
   const [error, setError] = useState<string | null>(null)
+  const [currentStage, setCurrentStage] = useState(0)
 
   const poll = useCallback(async () => {
     try {
@@ -71,6 +100,17 @@ export function SuccessClient({ intakeId, babyName, isDevMode, isAdditionalBaby,
   useEffect(() => {
     if (plan?.status === 'completed') return
     const interval = setInterval(() => setDots(d => (d + 1) % 4), 500)
+    return () => clearInterval(interval)
+  }, [plan?.status])
+
+  // Rotate stage messages so generation feels active and progressing
+  useEffect(() => {
+    if (plan?.status === 'completed' || plan?.status === 'failed') return
+
+    const interval = setInterval(() => {
+      setCurrentStage(prev => Math.min(prev + 1, generationStages.length - 1))
+    }, 9000)
+
     return () => clearInterval(interval)
   }, [plan?.status])
 
@@ -170,6 +210,8 @@ export function SuccessClient({ intakeId, babyName, isDevMode, isAdditionalBaby,
     )
   }
 
+  const activeStage = generationStages[currentStage] ?? generationStages[0]
+
   // Generating state - beautiful animation
   return (
     <div className="max-w-2xl mx-auto space-y-6">
@@ -235,11 +277,14 @@ export function SuccessClient({ intakeId, babyName, isDevMode, isAdditionalBaby,
           <h2 className="text-xl font-semibold text-purple-800 mb-2">
             Creating {babyName}&apos;s Sleep Plan{'.'.repeat(dots)}
           </h2>
-          <p className="text-purple-600 text-sm mb-1">
-            Our AI is analyzing your questionnaire and crafting personalized guidance.
+          <p className="text-purple-700 text-sm font-medium mb-1">
+            Step {currentStage + 1} of {generationStages.length}: {activeStage.title}
+          </p>
+          <p className="text-purple-600 text-xs mb-1">
+            {activeStage.detail}
           </p>
           <p className="text-purple-500 text-xs">
-            This usually takes 1-2 minutes.
+            This usually takes 1-2 minutes. We&apos;ll keep updating progress as we go.
           </p>
 
           {/* Animated progress bar */}
@@ -247,10 +292,39 @@ export function SuccessClient({ intakeId, babyName, isDevMode, isAdditionalBaby,
             <div
               className="h-full bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 rounded-full animate-pulse"
               style={{
-                width: '70%',
+                width: `${activeStage.progress}%`,
                 animation: 'shimmerBar 2.5s ease-in-out infinite',
+                transition: 'width 800ms ease-in-out',
               }}
             />
+          </div>
+
+          <div className="mt-5 mx-auto max-w-md space-y-2 text-left">
+            {generationStages.map((stage, index) => {
+              const isComplete = index < currentStage
+              const isActive = index === currentStage
+
+              return (
+                <div key={stage.title} className="flex items-center gap-2">
+                  <span
+                    className={`h-2.5 w-2.5 rounded-full ${
+                      isComplete
+                        ? 'bg-emerald-500'
+                        : isActive
+                          ? 'bg-purple-500 animate-pulse'
+                          : 'bg-purple-200'
+                    }`}
+                  />
+                  <p
+                    className={`text-xs ${
+                      isComplete || isActive ? 'text-purple-700' : 'text-purple-400'
+                    }`}
+                  >
+                    {stage.title}
+                  </p>
+                </div>
+              )
+            })}
           </div>
         </div>
 

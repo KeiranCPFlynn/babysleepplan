@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { requireAuth } from '@/lib/auth'
+import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -33,6 +34,10 @@ export default async function DiaryHubPage() {
   const isActive = hasActiveSubscription(subscriptionStatus, isStripeEnabled)
 
   const todayStr = new Date().toISOString().split('T')[0]
+  if (isActive && completedPlans && completedPlans.length === 1) {
+    redirect(`/dashboard/plans/${completedPlans[0].id}/diary?date=${todayStr}`)
+  }
+
   const planIds = isActive ? (completedPlans || []).map((plan) => plan.id) : []
   const { data: todaysEntries } = planIds.length > 0
     ? await supabase

@@ -50,6 +50,7 @@ export default async function PlanViewPage({
   }
 
   const latestRevision = revisions && revisions.length > 0 ? revisions[0] : null
+  const hasDistinctRevisionHistory = (revisions || []).some((revision) => revision.source !== 'initial')
   const lastDividerIndex = plan.plan_content ? plan.plan_content.lastIndexOf('\n---\n') : -1
   const latestUpdateContent = latestRevision && latestRevision.source !== 'initial' && plan.plan_content
     ? (lastDividerIndex >= 0
@@ -193,7 +194,7 @@ export default async function PlanViewPage({
 
         <CardContent className="px-5 pb-8 pt-6 md:px-8">
           <div className="mx-auto max-w-3xl">
-            {latestRevision && (
+            {latestRevision && hasDistinctRevisionHistory && (
               <div className="mb-6 rounded-xl border border-purple-100 bg-purple-50/60 px-5 py-4">
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                   <div>
@@ -205,8 +206,14 @@ export default async function PlanViewPage({
                     </p>
                   </div>
                   <Button variant="outline" size="sm" asChild>
-                    <Link href={`/dashboard/plans/${plan.id}/history/${latestRevision.id}`}>
-                      View Revision
+                    <Link
+                      href={
+                        latestRevision.source !== 'initial'
+                          ? `/dashboard/plans/${plan.id}/history/${latestRevision.id}#update-details`
+                          : `/dashboard/plans/${plan.id}/history/${latestRevision.id}`
+                      }
+                    >
+                      {latestRevision.source !== 'initial' ? 'View Update Details' : 'View Revision'}
                     </Link>
                   </Button>
                 </div>
@@ -232,7 +239,7 @@ export default async function PlanViewPage({
         </div>
       </Card>
 
-      {revisions && revisions.length > 0 && (
+      {revisions && hasDistinctRevisionHistory && (
         <Card className="print:hidden">
           <CardHeader>
             <CardTitle>Plan History</CardTitle>
@@ -258,7 +265,13 @@ export default async function PlanViewPage({
                     </p>
                   </div>
                   <Button variant="outline" size="sm" asChild>
-                    <Link href={`/dashboard/plans/${plan.id}/history/${revision.id}`}>
+                    <Link
+                      href={
+                        revision.source !== 'initial'
+                          ? `/dashboard/plans/${plan.id}/history/${revision.id}#update-details`
+                          : `/dashboard/plans/${plan.id}/history/${revision.id}`
+                      }
+                    >
                       View
                     </Link>
                   </Button>

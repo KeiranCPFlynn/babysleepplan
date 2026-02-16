@@ -18,6 +18,24 @@ function formatWeekLabel(weekStart: string) {
   return formatUniversalDate(weekStart)
 }
 
+function getWindowDays(value: unknown) {
+  return value === 3 ? 3 : 7
+}
+
+const THREE_DAY_COOLDOWN_HOURS = 72
+
+function diffDaysBetween(start: string | null, end: string | null) {
+  if (!start || !end) return null
+  const startDate = new Date(start + 'T12:00:00Z')
+  const endDate = new Date(end + 'T12:00:00Z')
+  const diffMs = endDate.getTime() - startDate.getTime()
+  return Math.round(diffMs / (1000 * 60 * 60 * 24))
+}
+
+function isThreeDayWindowRevision(weekStart: string | null, weekEnd: string | null) {
+  return diffDaysBetween(weekStart, weekEnd) === 2
+}
+
 function formatDiaryEntries(entries: Array<{
   date: string
   bedtime: string | null
@@ -146,6 +164,8 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json()
     const { planId, weekStart, weekEnd } = body
+    const windowDays = getWindowDays(body.windowDays)
+    const windowLabel = windowDays === 3 ? 'last 3 days' : 'last 7 days'
     const isDevMode = process.env.NEXT_PUBLIC_STRIPE_ENABLED === 'false'
     const force = isDevMode && new URL(request.url).searchParams.get('force') === 'true'
 
@@ -201,11 +221,45 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Failed to fetch entries' }, { status: 500 })
     }
 
-    if (!entries || entries.length < 7) {
+    if (!entries || entries.length < windowDays) {
       return NextResponse.json(
-        { error: 'Need at least 7 days logged to update the plan' },
+        { error: `Need at least ${windowDays} days logged to update the plan` },
         { status: 400 }
       )
+    }
+
+    if (windowDays === 3 && !force) {
+      const { data: recentUpdates, error: recentUpdatesError } = await supabase
+        .from('plan_revisions')
+        .select('id, created_at, week_start, week_end')
+        .eq('plan_id', planId)
+        .eq('user_id', user.id)
+        .eq('source', 'weekly-review')
+        .order('created_at', { ascending: false })
+        .limit(20)
+
+      if (recentUpdatesError) {
+        console.error('Failed to check recent 3-day updates:', recentUpdatesError)
+        return NextResponse.json({ error: 'Failed to check update cooldown' }, { status: 500 })
+      }
+
+      const latestThreeDayUpdate = (recentUpdates || []).find((revision) =>
+        isThreeDayWindowRevision(revision.week_start, revision.week_end)
+      )
+
+      if (latestThreeDayUpdate?.created_at) {
+        const createdAt = new Date(latestThreeDayUpdate.created_at)
+        const cooldownUntil = new Date(createdAt.getTime() + (THREE_DAY_COOLDOWN_HOURS * 60 * 60 * 1000))
+        if (Date.now() < cooldownUntil.getTime()) {
+          return NextResponse.json(
+            {
+              error: '3-day update is on cooldown. Please try again in 72 hours.',
+              cooldown_until: cooldownUntil.toISOString(),
+            },
+            { status: 429 }
+          )
+        }
+      }
     }
 
     const { data: review } = await supabase
@@ -226,7 +280,7 @@ export async function POST(request: NextRequest) {
       .maybeSingle()
 
     if (existingUpdate && !force) {
-      return NextResponse.json({ error: 'Plan already updated for this week' }, { status: 400 })
+      return NextResponse.json({ error: `Plan already updated for this ${windowDays}-day window` }, { status: 400 })
     }
 
     const { data: latestRevision } = await supabase
@@ -262,12 +316,16 @@ export async function POST(request: NextRequest) {
 
     const ageMonths = calculateAgeMonths(plan.baby.date_of_birth)
     const weekLabel = formatWeekLabel(weekStart)
+    const weekEndLabel = formatUniversalDate(weekEnd)
+    const heading = windowDays === 3
+      ? `## Plan Update - Last 3 Days (through ${weekEndLabel})`
+      : `## Plan Update — Week of ${weekLabel}`
     const planContent = plan.plan_content || ''
 
     // Sanitize user-controlled fields
     const safeBabyName = sanitizeForPrompt(plan.baby.name, 100)
 
-    const prompt = `You are updating an existing baby sleep plan based on a week of diary entries${review ? ' and the weekly review' : ''}. Do NOT rewrite the full plan. Write a concise update section that will be appended to the plan.
+    const prompt = `You are updating an existing baby sleep plan based on ${windowLabel} of diary entries${review ? ' and the weekly review' : ''}. Do NOT rewrite the full plan. Write a concise update section that will be appended to the plan.
 
 ## Baby Info
 - Name: ${safeBabyName}
@@ -279,19 +337,19 @@ ${planContent}
 
 ${review ? `## Weekly Review\n${review.review_content}\n` : ''}
 
-## This Week's Sleep Log
+## Sleep Log (${windowLabel})
 ${formatDiaryEntries(entries)}
 
 ---
 
 Write a new section in Markdown that starts with this exact heading:
-## Plan Update — Week of ${weekLabel}
+${heading}
 
 Then write 3-5 short paragraphs:
 1) What to keep doing (what's working)
 2) What to adjust (one specific change)
 3) A paragraph that starts with "**Why this change:**" and explicitly references the diary with at least TWO concrete observations
-4) Any caution or context for the next week
+4) Any caution or context for the next ${windowDays === 3 ? 'few days' : 'week'}
 
 You may include ONE short numbered routine (max 3 steps) if it helps.
 No bullet lists otherwise. No emojis.
@@ -340,7 +398,9 @@ Return ONLY the Markdown for the new section.`
         user_id: user.id,
         revision_number: nextRevisionNumber,
         plan_content: updatedPlanContent,
-        summary: `Update for week of ${weekLabel}`,
+        summary: windowDays === 3
+          ? `3-day update through ${weekEndLabel}`
+          : `Update for week of ${weekLabel}`,
         source: 'weekly-review',
         week_start: weekStart,
         week_end: weekEnd,
@@ -353,7 +413,7 @@ Return ONLY the Markdown for the new section.`
       return NextResponse.json({ error: 'Failed to save plan revision' }, { status: 500 })
     }
 
-    return NextResponse.json({ revision })
+    return NextResponse.json({ revision, updateSection: updateSectionWithWhy })
   } catch (error) {
     console.error('Plan update error:', error)
     return NextResponse.json(

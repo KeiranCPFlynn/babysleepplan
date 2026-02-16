@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { createClient as createServerClient } from '@/lib/supabase/server'
 import { getModel } from '@/lib/gemini'
-import { sendPlanReadyEmail } from '@/lib/email/send'
+import { appendEvidenceSection, collectEvidenceSourcesForKnowledgeFiles } from '@/lib/plan-evidence'
 import { sanitizeForPrompt } from '@/lib/sanitize'
 import { planGenerationLimiter } from '@/lib/rate-limit'
 import fs from 'fs'
@@ -47,9 +47,25 @@ interface KnowledgeContext {
   ageMonths: number
   problems: string[] | null
   cryingComfortLevel: number | null
+  fallingAsleepMethod: string | null
+  napMethod: string | null
+  napLocation: string | null
+  napDuration: string | null
+  napCount: number | null
+  nightWakingsCount: number | null
+  nightWakingsDescription: string | null
+  nightWakingPattern: string | null
+  problemDescription: string | null
+  parentConstraints: string | null
+  additionalNotes: string | null
+  medicalConditions: string | null
 }
 
-function loadKnowledgeBase(context: KnowledgeContext): string {
+function includesAny(text: string, terms: string[]) {
+  return terms.some((term) => text.includes(term))
+}
+
+function loadKnowledgeBase(context: KnowledgeContext): { content: string; loadedFiles: string[] } {
   const knowledgeDir = path.join(process.cwd(), 'src/data/knowledge')
   const filesToLoad: string[] = []
 
@@ -95,6 +111,90 @@ function loadKnowledgeBase(context: KnowledgeContext): string {
     }
   }
 
+  // Heuristic boosts for common scenarios not always captured by checkbox problems.
+  const combinedFreeText = [
+    context.nightWakingsDescription || '',
+    context.nightWakingPattern || '',
+    context.problemDescription || '',
+    context.parentConstraints || '',
+    context.additionalNotes || '',
+    context.medicalConditions || '',
+  ]
+    .join(' ')
+    .toLowerCase()
+
+  const sleepAssociationMethods = new Set(['nursing', 'rocking', 'holding', 'patting', 'cosleeping', 'stroller', 'other'])
+  if (
+    (context.fallingAsleepMethod && sleepAssociationMethods.has(context.fallingAsleepMethod)) ||
+    (context.napMethod && sleepAssociationMethods.has(context.napMethod))
+  ) {
+    filesToLoad.push('problems-falling-asleep.txt')
+  }
+
+  const frequentNightWakeKeywords = ['hourly', 'every hour', 'every 45', 'every 60', 'multiple wakings', 'wakes often']
+  if (
+    (context.nightWakingsCount ?? 0) >= 3 ||
+    includesAny(combinedFreeText, frequentNightWakeKeywords)
+  ) {
+    filesToLoad.push('problems-night-wakings.txt')
+  }
+
+  const shortNapKeywords = ['short nap', 'short naps', 'cat nap', 'catnap', 'nap refusal', 'nap resistant']
+  if (
+    context.napDuration === 'under_30' ||
+    context.napDuration === '30_60' ||
+    includesAny(combinedFreeText, shortNapKeywords)
+  ) {
+    filesToLoad.push('problems-short-naps.txt')
+  }
+
+  const likelyNightFeedWords = ['night feed', 'night feeding', 'overnight feed', 'overnight feeding', 'nurse to sleep', 'bottle to sleep', 'feed to sleep']
+  if (
+    context.ageMonths >= 6 &&
+    (
+      (context.problems || []).includes('night_feeds') ||
+      includesAny(combinedFreeText, likelyNightFeedWords) ||
+      (context.fallingAsleepMethod === 'nursing' && (context.nightWakingsCount ?? 0) >= 2)
+    )
+  ) {
+    filesToLoad.push('night-weaning.txt')
+  }
+
+  const ageSuggestsNapTransition =
+    (context.ageMonths >= 6 && context.ageMonths <= 11 && (context.napCount ?? 0) >= 3) ||
+    (context.ageMonths >= 13 && context.ageMonths <= 20 && (context.napCount ?? 0) >= 2)
+
+  if (ageSuggestsNapTransition) {
+    filesToLoad.push('nap-transitions.txt')
+  }
+
+  const culturalKeywords = [
+    'co-sleep',
+    'cosleep',
+    'bed share',
+    'bed-sharing',
+    'same bed',
+    'room share',
+    'room-sharing',
+    'grandparent',
+    'grandmother',
+    'grandfather',
+    'culture',
+    'cultural',
+    'tradition',
+    'traditional',
+    'religion',
+    'religious',
+  ]
+
+  if (
+    context.fallingAsleepMethod === 'cosleeping' ||
+    context.napLocation === 'parent_bed' ||
+    includesAny(combinedFreeText, culturalKeywords)
+  ) {
+    filesToLoad.push('cultural-considerations.txt')
+  }
+
   // Load method file based on crying comfort level (1-5)
   const cryingLevel = context.cryingComfortLevel ?? 3
   if (cryingLevel <= 2) {
@@ -117,12 +217,14 @@ function loadKnowledgeBase(context: KnowledgeContext): string {
   // Load the selected files
   let knowledge = ''
   let loadedCount = 0
+  const loadedFiles: string[] = []
 
   for (const file of uniqueFiles) {
     const content = loadKnowledgeFile(knowledgeDir, file)
     if (content) {
       knowledge += `\n\n--- ${file} ---\n${content}`
       loadedCount++
+      loadedFiles.push(file)
     } else if (isDev) {
       console.warn(`Knowledge file not found: ${file}`)
     }
@@ -137,7 +239,7 @@ function loadKnowledgeBase(context: KnowledgeContext): string {
     throw new Error('Failed to load any knowledge files')
   }
 
-  return knowledge
+  return { content: knowledge, loadedFiles }
 }
 
 // Calculate baby's age
@@ -436,10 +538,22 @@ export async function POST(request: NextRequest) {
     const age = calculateAge(baby.date_of_birth, baby.premature_weeks || 0)
 
     // Load relevant knowledge base files based on context
-    const knowledgeBase = loadKnowledgeBase({
+    const { content: knowledgeBase, loadedFiles } = loadKnowledgeBase({
       ageMonths: baby.premature_weeks > 0 ? age.adjustedMonths : age.months,
       problems: intake.problems,
       cryingComfortLevel: intake.crying_comfort_level,
+      fallingAsleepMethod: intake.falling_asleep_method,
+      napMethod: intake.nap_method,
+      napLocation: intake.nap_location,
+      napDuration: intake.nap_duration,
+      napCount: intake.nap_count,
+      nightWakingsCount: intake.night_wakings_count,
+      nightWakingsDescription: intake.night_wakings_description,
+      nightWakingPattern: intake.night_waking_pattern,
+      problemDescription: intake.problem_description,
+      parentConstraints: intake.parent_constraints,
+      additionalNotes: intake.additional_notes,
+      medicalConditions: baby.medical_conditions,
     })
     const additionalSleepTimes = getAdditionalSleepTimes(intake.data)
     const additionalSleepTimesLine = additionalSleepTimes.length > 0
@@ -621,7 +735,9 @@ Remember: Write like a skilled, supportive human coach, not a cheerleader. Parag
     if (isDev) {
       console.log('Gemini API response received')
     }
-    const planContent = result.response.text()
+    const rawPlanContent = result.response.text()
+    const evidenceSources = collectEvidenceSourcesForKnowledgeFiles(loadedFiles)
+    const planContent = appendEvidenceSection(rawPlanContent, evidenceSources)
 
     // Clear the timeout since generation completed successfully
     clearTimeout(generationTimeout)
@@ -665,22 +781,6 @@ Remember: Write like a skilled, supportive human coach, not a cheerleader. Parag
 
     if (revisionError) {
       console.error('Failed to save plan revision:', revisionError)
-    }
-
-    // Send plan ready email
-    try {
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('email')
-        .eq('id', plan.user_id)
-        .single()
-
-      if (profile?.email) {
-        await sendPlanReadyEmail(profile.email, baby.name, planId)
-      }
-    } catch (emailError) {
-      console.error('Failed to send plan ready email:', emailError)
-      // Don't fail the request if email fails
     }
 
     return NextResponse.json({ success: true, planId })

@@ -193,7 +193,12 @@ export function PlanContent({ content }: PlanContentProps) {
             return <p className="text-slate-600 text-base leading-relaxed my-4">{children}</p>
           },
           a: ({ href, children }) => (
-            <a href={href} className="text-purple-600 hover:text-purple-800 underline">
+            <a
+              href={href}
+              target={href?.startsWith('http') ? '_blank' : undefined}
+              rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+              className="text-purple-600 hover:text-purple-800 underline"
+            >
               {children}
             </a>
           ),

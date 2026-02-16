@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils'
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: Home },
   { name: 'My Babies', href: '/dashboard/babies', icon: Baby },
-  { name: 'My Plans', href: '/dashboard/plans', icon: FileText },
+  { name: 'My Plans', href: '/dashboard/plans/current', icon: FileText },
   { name: 'Sleep Diary', href: '/dashboard/diary', icon: BookOpen },
   { name: 'New Plan', href: '/dashboard/intake/new', icon: Plus },
 ]
@@ -60,8 +60,8 @@ export function DashboardNav({ open = false, onClose }: DashboardNavProps) {
             ? pathname === '/dashboard'
             : item.href === '/dashboard/diary'
             ? isDiaryPath
-            : item.href === '/dashboard/plans'
-            ? (pathname === item.href || pathname?.startsWith(item.href + '/')) && !isDiaryPath
+            : item.href === '/dashboard/plans/current'
+            ? pathname?.startsWith('/dashboard/plans') && !isDiaryPath
             : pathname === item.href || pathname?.startsWith(item.href + '/')
 
           return (
