@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useEffect } from 'react'
+import { useMemo } from 'react'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import {
@@ -57,28 +57,19 @@ export function SelectWithOther({
     return ''
   }, [value, isOtherValue])
 
-  const [showOtherInput, setShowOtherInput] = useState(isOtherValue)
-  const [otherText, setOtherText] = useState(initialOtherText)
-
-  useEffect(() => {
-    setShowOtherInput(isOtherValue)
-    setOtherText(initialOtherText)
-  }, [isOtherValue, initialOtherText])
+  const showOtherInput = isOtherValue
+  const otherText = initialOtherText
 
   const handleSelectChange = (newValue: string) => {
     if (newValue === 'other') {
-      setShowOtherInput(true)
       // Keep the custom text if they already entered something
       onChange(otherText ? `other: ${otherText}` : 'other')
     } else {
-      setShowOtherInput(false)
-      setOtherText('')
       onChange(newValue)
     }
   }
 
   const handleOtherTextChange = (text: string) => {
-    setOtherText(text)
     if (text) {
       onChange(`other: ${text}`)
     } else {

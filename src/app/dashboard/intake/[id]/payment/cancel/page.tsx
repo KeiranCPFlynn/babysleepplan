@@ -37,7 +37,7 @@ export default async function PaymentCancelPage({
         <CardContent className="space-y-4">
           <p className="text-center text-gray-600">
             Your questionnaire responses have been saved. You can complete your
-            purchase whenever you're ready.
+            purchase whenever you&apos;re ready.
           </p>
 
           <div className="flex gap-4 justify-center pt-4">
@@ -61,7 +61,7 @@ export default async function PaymentCancelPage({
             Why choose LunaCradle?
           </h3>
           <ul className="space-y-2 text-sm text-blue-800">
-            <li>• Personalized plan based on your baby's unique needs</li>
+            <li>• Personalized plan based on your baby&apos;s unique needs</li>
             <li>• Evidence-based sleep science approach</li>
             <li>• Methods tailored to your comfort level</li>
             <li>• 30-day money-back guarantee</li>

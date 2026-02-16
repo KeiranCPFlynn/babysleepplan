@@ -23,7 +23,7 @@ export function Step1Baby({ babies }: Step1Props) {
       <div className="space-y-2">
         <h2 className="text-2xl font-bold">Which baby is this plan for?</h2>
         <p className="text-gray-600">
-          Select the baby you'd like to create a sleep plan for.
+          Select the baby you&apos;d like to create a sleep plan for.
         </p>
       </div>
 

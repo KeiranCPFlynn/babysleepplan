@@ -14,7 +14,7 @@ export default async function NewBabyPage({
         <div>
           <h1 className="text-3xl font-bold">Create Your Sleep Plan</h1>
           <p className="text-gray-600 mt-2">
-            Let's get started! First, tell us about your baby.
+            Let&apos;s get started! First, tell us about your baby.
           </p>
         </div>
       )}

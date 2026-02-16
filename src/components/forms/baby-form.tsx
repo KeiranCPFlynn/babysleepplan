@@ -111,11 +111,11 @@ export function BabyForm({ baby, mode, returnTo }: BabyFormProps) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="name">Baby's Name</Label>
+            <Label htmlFor="name">Baby&apos;s Name</Label>
             <Input
               id="name"
               {...register('name')}
-              placeholder="Enter baby's name"
+              placeholder="Enter baby&apos;s name"
             />
             {errors.name && (
               <p className="text-sm text-red-500">{errors.name.message}</p>

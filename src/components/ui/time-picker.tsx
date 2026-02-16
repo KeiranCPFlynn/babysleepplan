@@ -1,6 +1,5 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
 import { cn } from '@/lib/utils'
 
 interface TimePickerProps {
@@ -31,47 +30,23 @@ function to24(hour: string, minute: string, period: string): string {
 }
 
 export function TimePicker({ value, onChange, id, disabled, className }: TimePickerProps) {
-  const initial = parse24(value)
-  const [hour, setHour] = useState(initial.hour)
-  const [minute, setMinute] = useState(initial.minute)
-  const [period, setPeriod] = useState(initial.period)
-  const lastEmitted = useRef(value || '')
-
-  // Sync inbound prop → local state (only when prop changes externally)
-  useEffect(() => {
-    const incoming = value || ''
-    if (incoming !== lastEmitted.current) {
-      const p = parse24(incoming)
-      setHour(p.hour)
-      setMinute(p.minute)
-      setPeriod(p.period)
-      lastEmitted.current = incoming
-    }
-  }, [value])
-
-  function emitChange(h: string, m: string, p: string) {
-    const result = to24(h, m, p)
-    lastEmitted.current = result
-    onChange(result)
-  }
+  const parsed = parse24(value)
+  const hour = parsed.hour
+  const minute = parsed.minute
+  const period = parsed.period
 
   function handleHour(h: string) {
-    setHour(h)
     const m = minute || '00'
-    if (!minute) setMinute(m)
-    emitChange(h, m, period)
+    onChange(to24(h, m, period))
   }
 
   function handleMinute(m: string) {
-    setMinute(m)
-    emitChange(hour, m, period)
+    onChange(to24(hour, m, period))
   }
 
   function handlePeriod(p: string) {
-    setPeriod(p as 'AM' | 'PM')
     const m = minute || '00'
-    if (!minute) setMinute(m)
-    emitChange(hour, m, p)
+    onChange(to24(hour, m, p))
   }
 
   const selectClass = cn(

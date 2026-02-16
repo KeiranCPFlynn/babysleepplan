@@ -61,7 +61,7 @@ export function Step6Preferences() {
             <p className="text-sm text-blue-700">{currentLevel.description}</p>
           </div>
           <p className="text-sm text-gray-500">
-            We'll tailor methods to match your comfort level. There's no wrong answer.
+            We&apos;ll tailor methods to match your comfort level. There&apos;s no wrong answer.
           </p>
           {errors.crying_comfort_level && (
             <p className="text-sm text-red-500">{errors.crying_comfort_level.message}</p>

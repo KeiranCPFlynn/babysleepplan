@@ -33,7 +33,7 @@ export function Step5Problems() {
       <div className="space-y-2">
         <h2 className="text-2xl font-bold">Sleep Challenges</h2>
         <p className="text-gray-600">
-          What are the main sleep challenges you're facing? Select all that apply.
+          What are the main sleep challenges you&apos;re facing? Select all that apply.
         </p>
       </div>
 
@@ -84,7 +84,7 @@ export function Step5Problems() {
           <Textarea
             id="problem_description"
             {...register('problem_description')}
-            placeholder="Describe your biggest sleep challenges in detail. What have you tried? What hasn't worked?"
+            placeholder="Describe your biggest sleep challenges in detail. What have you tried? What hasn&apos;t worked?"
             rows={5}
           />
           <p className="text-sm text-gray-500">
