@@ -1,4 +1,4 @@
-import { getResend, FROM_EMAIL } from './resend'
+import { getResend, getFromEmail } from './resend'
 import { escapeHtml, sanitizeEmailSubject } from '@/lib/sanitize'
 
 interface SendEmailOptions {
@@ -11,10 +11,11 @@ interface SendEmailOptions {
 
 export async function sendEmail({ to, subject, html, text, replyTo }: SendEmailOptions) {
   const resend = getResend()
+  const fromEmail = getFromEmail()
 
   try {
     const { data, error } = await resend.emails.send({
-      from: FROM_EMAIL,
+      from: fromEmail,
       to,
       subject,
       html,

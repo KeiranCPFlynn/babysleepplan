@@ -46,6 +46,7 @@ function validateEnv() {
   requireEnvInProduction('INTERNAL_API_KEY')
   requireEnvInProduction('NEXT_PUBLIC_APP_URL')
   requireEnvInProduction('NEXT_PUBLIC_SITE_URL')
+  requireEnvInProduction('RESEND_FROM_EMAIL')
 
   // Required when Stripe is enabled
   if (isStripeEnabled) {

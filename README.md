@@ -137,6 +137,7 @@ STRIPE_ADDITIONAL_BABY_PRICE_ID_LIVE=
 
 # Email
 RESEND_API_KEY=                  # Required
+RESEND_FROM_EMAIL=               # Required in production, e.g. "LunaCradle <noreply@yourdomain.com>"
 
 # App
 NEXT_PUBLIC_APP_URL=http://localhost:3000

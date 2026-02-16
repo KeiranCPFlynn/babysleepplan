@@ -3,7 +3,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 // Mock the resend module before importing anything that uses it
 vi.mock('@/lib/email/resend', () => ({
   getResend: vi.fn(),
-  FROM_EMAIL: 'LunaCradle <noreply@lunacradle.com>',
+  getFromEmail: vi.fn(() => 'LunaCradle <noreply@lunacradle.com>'),
 }))
 
 import {

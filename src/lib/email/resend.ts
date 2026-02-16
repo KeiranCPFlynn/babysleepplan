@@ -12,4 +12,8 @@ export function getResend(): Resend {
   return resendClient
 }
 
-export const FROM_EMAIL = 'LunaCradle <noreply@lunacradle.com>'
+const DEFAULT_FROM_EMAIL = 'LunaCradle <noreply@lunacradle.com>'
+
+export function getFromEmail(): string {
+  return process.env.RESEND_FROM_EMAIL || DEFAULT_FROM_EMAIL
+}
