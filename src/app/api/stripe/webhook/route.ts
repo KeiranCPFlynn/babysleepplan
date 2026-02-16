@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { headers } from 'next/headers'
-import { stripe } from '@/lib/stripe'
+import { stripe, STRIPE_MODE, STRIPE_WEBHOOK_SECRET } from '@/lib/stripe'
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
 import Stripe from 'stripe'
 import { sendPaymentConfirmationEmail } from '@/lib/email/send'
@@ -31,11 +31,16 @@ export async function POST(request: NextRequest) {
 
   let event: Stripe.Event
 
+  if (!STRIPE_WEBHOOK_SECRET) {
+    console.error(`Missing STRIPE_WEBHOOK_SECRET for mode "${STRIPE_MODE}"`)
+    return NextResponse.json({ error: 'Server configuration error' }, { status: 500 })
+  }
+
   try {
     event = stripe.webhooks.constructEvent(
       body,
       signature,
-      process.env.STRIPE_WEBHOOK_SECRET!
+      STRIPE_WEBHOOK_SECRET
     )
   } catch (err) {
     console.error('Webhook signature verification failed:', err)

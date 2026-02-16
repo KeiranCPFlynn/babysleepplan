@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
-import { createElement } from 'react'
-import { renderToBuffer } from '@react-pdf/renderer'
+import { createElement, type ReactElement } from 'react'
+import { renderToBuffer, type DocumentProps } from '@react-pdf/renderer'
 import { createClient } from '@/lib/supabase/server'
 import { formatBabyAge } from '@/lib/age'
 import { formatUniversalDate } from '@/lib/date-format'
@@ -40,8 +40,9 @@ export async function GET(
       return NextResponse.json({ error: 'Plan not found' }, { status: 404 })
     }
 
-    const babyName = plan.baby?.name || 'Baby'
-    const babyAge = plan.baby?.date_of_birth ? formatBabyAge(plan.baby.date_of_birth) : ''
+    const baby = Array.isArray(plan.baby) ? plan.baby[0] : plan.baby
+    const babyName = baby?.name || 'Baby'
+    const babyAge = baby?.date_of_birth ? formatBabyAge(baby.date_of_birth) : ''
     const createdDate = formatUniversalDate(plan.created_at)
     const content = plan.plan_content || ''
 
@@ -54,12 +55,13 @@ export async function GET(
       babyAge,
       createdDate,
       content,
-    })
+    }) as ReactElement<DocumentProps>
     const pdfBuffer = await renderToBuffer(doc)
+    const pdfBytes = new Uint8Array(pdfBuffer)
 
     const safeFileName = babyName.replace(/[^a-z0-9]/gi, '_') || 'sleep_plan'
 
-    return new NextResponse(pdfBuffer, {
+    return new NextResponse(pdfBytes, {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',

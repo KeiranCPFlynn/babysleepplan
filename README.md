@@ -116,10 +116,24 @@ INTERNAL_API_KEY=                # Required in production
 
 # Stripe (optional — set NEXT_PUBLIC_STRIPE_ENABLED=false to skip)
 NEXT_PUBLIC_STRIPE_ENABLED=true
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
-STRIPE_SECRET_KEY=               # Required when Stripe enabled
-STRIPE_WEBHOOK_SECRET=           # Required when Stripe enabled
-STRIPE_PRICE_ID=
+# Stripe mode toggle: set to `test` or `live`
+STRIPE_MODE=test
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_TEST=
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_LIVE=
+STRIPE_SECRET_KEY_TEST=
+STRIPE_SECRET_KEY_LIVE=
+STRIPE_WEBHOOK_SECRET_TEST=
+STRIPE_WEBHOOK_SECRET_LIVE=
+STRIPE_PRICE_ID_TEST=
+STRIPE_PRICE_ID_LIVE=
+STRIPE_ADDITIONAL_BABY_PRICE_ID_TEST=
+STRIPE_ADDITIONAL_BABY_PRICE_ID_LIVE=
+# Legacy single-mode fallback (optional)
+# NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
+# STRIPE_SECRET_KEY=
+# STRIPE_WEBHOOK_SECRET=
+# STRIPE_PRICE_ID=
+# STRIPE_ADDITIONAL_BABY_PRICE_ID=
 
 # Email
 RESEND_API_KEY=                  # Required
@@ -129,6 +143,8 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
 Environment variables are validated at runtime by `src/lib/env.ts` (imported in the root layout). The app will throw a clear error on startup if any required variable is missing. The validation is skipped during the Next.js build phase since server-only env vars aren't available at build time.
+
+When Stripe is enabled, the app reads mode-specific keys using `STRIPE_MODE` (`test` or `live`) and falls back to legacy single-mode keys if needed.
 
 ### Generating INTERNAL_API_KEY
 
@@ -241,11 +257,12 @@ Designed for Vercel deployment.
 
 1. Set all required environment variables in Vercel dashboard (see Environment Variables above)
 2. Generate a strong `INTERNAL_API_KEY` (`openssl rand -base64 32`)
-3. Configure Stripe webhook endpoint to point to `/api/stripe/webhook`
-4. Verify security headers with `curl -I https://your-domain.com`
-5. Confirm admin debug panels are not visible in production
-6. Test the full auth flow (signup, login, password reset)
-7. Test plan generation end-to-end (intake, payment, plan delivery)
+3. Set `STRIPE_MODE=live` for real billing (`test` for sandbox)
+4. Configure Stripe webhook endpoint to point to `/api/stripe/webhook` in the same Stripe mode
+5. Verify security headers with `curl -I https://your-domain.com`
+6. Confirm admin debug panels are not visible in production
+7. Test the full auth flow (signup, login, password reset)
+8. Test plan generation end-to-end (intake, payment, plan delivery)
 
 ## License
 

@@ -160,8 +160,11 @@ Debug panels showing user IDs, Stripe customer IDs, and subscription internals a
 - `INTERNAL_API_KEY`
 
 **Required when Stripe is enabled:**
-- `STRIPE_SECRET_KEY`
-- `STRIPE_WEBHOOK_SECRET`
+- `STRIPE_MODE` (optional but recommended: `test` or `live`)
+- `STRIPE_SECRET_KEY_<MODE>` or legacy `STRIPE_SECRET_KEY`
+- `STRIPE_WEBHOOK_SECRET_<MODE>` or legacy `STRIPE_WEBHOOK_SECRET`
+- `STRIPE_PRICE_ID_<MODE>` or legacy `STRIPE_PRICE_ID`
+- `STRIPE_ADDITIONAL_BABY_PRICE_ID_<MODE>` or legacy `STRIPE_ADDITIONAL_BABY_PRICE_ID`
 
 The validation is skipped during the Next.js build phase (where server-only env vars aren't available) and on the client.
 
@@ -170,13 +173,14 @@ The validation is skipped during the Next.js build phase (where server-only env 
 1. Generate a strong `INTERNAL_API_KEY`: `openssl rand -base64 32`
 2. Set all required env vars in hosting dashboard
 3. Verify `NEXT_PUBLIC_STRIPE_ENABLED=true` in production
-4. Verify security headers: `curl -I https://your-domain.com`
-5. Confirm admin debug panels are not visible (test with admin account)
-6. Test signup with password < 8 chars (should be rejected)
-7. Test contact form with HTML in name field (should be stripped)
-8. Test with `INTERNAL_API_KEY` unset (should fail with clear error)
-9. Verify error responses don't contain stack traces or DB details
-10. Configure Supabase auth minimum password to 8 characters
+4. Verify `STRIPE_MODE` is set intentionally (`live` for real billing, `test` for sandbox)
+5. Verify security headers: `curl -I https://your-domain.com`
+6. Confirm admin debug panels are not visible (test with admin account)
+7. Test signup with password < 8 chars (should be rejected)
+8. Test contact form with HTML in name field (should be stripped)
+9. Test with `INTERNAL_API_KEY` unset (should fail with clear error)
+10. Verify error responses don't contain stack traces or DB details
+11. Configure Supabase auth minimum password to 8 characters
 
 ## Files Reference
 

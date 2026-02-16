@@ -16,8 +16,21 @@ describe('env validation', () => {
     process.env.RESEND_API_KEY = 'test-resend-key'
     // Disable Stripe by default
     process.env.NEXT_PUBLIC_STRIPE_ENABLED = 'false'
+    delete process.env.STRIPE_MODE
+    delete process.env.STRIPE_SECRET_KEY
+    delete process.env.STRIPE_SECRET_KEY_TEST
+    delete process.env.STRIPE_SECRET_KEY_LIVE
+    delete process.env.STRIPE_WEBHOOK_SECRET
+    delete process.env.STRIPE_WEBHOOK_SECRET_TEST
+    delete process.env.STRIPE_WEBHOOK_SECRET_LIVE
+    delete process.env.STRIPE_PRICE_ID
+    delete process.env.STRIPE_PRICE_ID_TEST
+    delete process.env.STRIPE_PRICE_ID_LIVE
+    delete process.env.STRIPE_ADDITIONAL_BABY_PRICE_ID
+    delete process.env.STRIPE_ADDITIONAL_BABY_PRICE_ID_TEST
+    delete process.env.STRIPE_ADDITIONAL_BABY_PRICE_ID_LIVE
     // Not production by default
-    process.env.NODE_ENV = 'test'
+    ;(process.env as Record<string, string | undefined>).NODE_ENV = 'test'
     // Clear build phase
     delete process.env.NEXT_PHASE
   })
@@ -52,7 +65,7 @@ describe('env validation', () => {
   })
 
   it('throws for production-only vars in production mode', async () => {
-    process.env.NODE_ENV = 'production'
+    ;(process.env as Record<string, string | undefined>).NODE_ENV = 'production'
     delete process.env.INTERNAL_API_KEY
     delete process.env.NEXT_PUBLIC_APP_URL
     delete process.env.NEXT_PUBLIC_SITE_URL
@@ -61,17 +74,27 @@ describe('env validation', () => {
 
   it('throws for Stripe vars when Stripe is enabled', async () => {
     process.env.NEXT_PUBLIC_STRIPE_ENABLED = 'true'
-    delete process.env.STRIPE_SECRET_KEY
-    delete process.env.STRIPE_WEBHOOK_SECRET
-    delete process.env.STRIPE_PRICE_ID
-    delete process.env.STRIPE_ADDITIONAL_BABY_PRICE_ID
     await expect(import('@/lib/env')).rejects.toThrow('STRIPE_SECRET_KEY')
+  })
+
+  it('does NOT throw when mode-scoped Stripe vars are set', async () => {
+    process.env.NEXT_PUBLIC_STRIPE_ENABLED = 'true'
+    process.env.STRIPE_MODE = 'live'
+    process.env.STRIPE_SECRET_KEY_LIVE = 'sk_live_test_key'
+    process.env.STRIPE_WEBHOOK_SECRET_LIVE = 'whsec_live_test_key'
+    process.env.STRIPE_PRICE_ID_LIVE = 'price_live_main'
+    process.env.STRIPE_ADDITIONAL_BABY_PRICE_ID_LIVE = 'price_live_extra'
+    await expect(import('@/lib/env')).resolves.not.toThrow()
+  })
+
+  it('throws when STRIPE_MODE is invalid', async () => {
+    process.env.NEXT_PUBLIC_STRIPE_ENABLED = 'true'
+    process.env.STRIPE_MODE = 'staging'
+    await expect(import('@/lib/env')).rejects.toThrow('STRIPE_MODE')
   })
 
   it('does NOT throw for Stripe vars when Stripe is disabled', async () => {
     process.env.NEXT_PUBLIC_STRIPE_ENABLED = 'false'
-    delete process.env.STRIPE_SECRET_KEY
-    delete process.env.STRIPE_WEBHOOK_SECRET
     await expect(import('@/lib/env')).resolves.not.toThrow()
   })
 

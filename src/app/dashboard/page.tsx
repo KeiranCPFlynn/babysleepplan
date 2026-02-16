@@ -59,6 +59,10 @@ export default async function DashboardPage() {
         .order('created_at', { ascending: false })
         .limit(50)
     : { data: [] }
+  const normalizedAdminPlanOptions = (adminPlanOptions || []).map((plan) => ({
+    ...plan,
+    baby: Array.isArray(plan.baby) ? (plan.baby[0] ?? null) : (plan.baby ?? null),
+  }))
 
   const subscriptionStatus = profile?.subscription_status
 
@@ -326,7 +330,7 @@ export default async function DashboardPage() {
       )}
 
       {/* Admin Test Controls (Dev Only) */}
-      {shouldShowAdminTestControls && <TestSubscriptionControls babies={babies || []} plans={adminPlanOptions || []} />}
+      {shouldShowAdminTestControls && <TestSubscriptionControls babies={babies || []} plans={normalizedAdminPlanOptions} />}
 
       {/* Admin Delete User (Dev Only) */}
       {process.env.NODE_ENV !== 'production' && profile?.is_admin === true && <DeleteUserControls />}

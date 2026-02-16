@@ -5,6 +5,7 @@
  * The validation runs only on the server and is skipped during the Next.js
  * build phase (where server-only env vars aren't available).
  */
+import { getStripeMode, type StripeMode } from '@/lib/stripe-config'
 
 function validateEnv() {
   // Skip during build phase or on the client
@@ -27,6 +28,13 @@ function validateEnv() {
     }
   }
 
+  function requireStripeEnv(name: string, mode: StripeMode) {
+    const modeKey = `${name}_${mode.toUpperCase()}`
+    if (!process.env[name] && !process.env[modeKey]) {
+      missing.push(`${name} (set ${modeKey} or ${name})`)
+    }
+  }
+
   // Always required
   requireEnv('NEXT_PUBLIC_SUPABASE_URL')
   requireEnv('NEXT_PUBLIC_SUPABASE_ANON_KEY')
@@ -41,10 +49,18 @@ function validateEnv() {
 
   // Required when Stripe is enabled
   if (isStripeEnabled) {
-    requireEnv('STRIPE_SECRET_KEY')
-    requireEnv('STRIPE_WEBHOOK_SECRET')
-    requireEnv('STRIPE_PRICE_ID')
-    requireEnv('STRIPE_ADDITIONAL_BABY_PRICE_ID')
+    let stripeMode: StripeMode
+    try {
+      stripeMode = getStripeMode()
+    } catch {
+      missing.push('STRIPE_MODE (must be "test" or "live" when set)')
+      stripeMode = 'test'
+    }
+
+    requireStripeEnv('STRIPE_SECRET_KEY', stripeMode)
+    requireStripeEnv('STRIPE_WEBHOOK_SECRET', stripeMode)
+    requireStripeEnv('STRIPE_PRICE_ID', stripeMode)
+    requireStripeEnv('STRIPE_ADDITIONAL_BABY_PRICE_ID', stripeMode)
   }
 
   if (missing.length > 0) {
