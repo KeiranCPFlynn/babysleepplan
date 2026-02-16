@@ -7,10 +7,12 @@ import { sanitizeForPrompt } from '@/lib/sanitize'
 import { planGenerationLimiter } from '@/lib/rate-limit'
 import fs from 'fs'
 import path from 'path'
+import { randomUUID } from 'crypto'
 
 const isDev = process.env.NODE_ENV !== 'production'
 export const runtime = 'nodejs'
 export const maxDuration = 300
+const PLAN_LOCK_LEASE_SECONDS = 8 * 60
 
 const knowledgeFileCache = new Map<string, string | null>()
 
@@ -42,6 +44,43 @@ function getSupabaseAdmin() {
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!
   )
+}
+
+function isMissingLockFunctionError(error: { code?: string; message?: string } | null) {
+  const message = (error?.message || '').toLowerCase()
+  return error?.code === '42883' || message.includes('acquire_plan_generation_lock') || message.includes('release_plan_generation_lock')
+}
+
+async function acquirePlanGenerationLock(supabase: ReturnType<typeof getSupabaseAdmin>, planId: string, lockToken: string) {
+  const { data, error } = await supabase.rpc('acquire_plan_generation_lock', {
+    p_plan_id: planId,
+    p_lock_token: lockToken,
+    p_lease_seconds: PLAN_LOCK_LEASE_SECONDS,
+  })
+
+  if (error) {
+    if (isMissingLockFunctionError(error)) {
+      if (isDev) {
+        console.warn('[generate-plan] lock function missing in dev; continuing without lock')
+        return true
+      }
+      throw new Error('Missing database function acquire_plan_generation_lock. Run migration 016.')
+    }
+    throw error
+  }
+
+  return Boolean(data)
+}
+
+async function releasePlanGenerationLock(supabase: ReturnType<typeof getSupabaseAdmin>, planId: string, lockToken: string) {
+  const { error } = await supabase.rpc('release_plan_generation_lock', {
+    p_plan_id: planId,
+    p_lock_token: lockToken,
+  })
+
+  if (error && !isMissingLockFunctionError(error)) {
+    throw error
+  }
 }
 
 // Smart knowledge base loader - only loads relevant files
@@ -404,6 +443,8 @@ function formatCryingLevel(level: number | null): string {
 export async function POST(request: NextRequest) {
   let planId: string | undefined
   let generationTimeout: NodeJS.Timeout | undefined
+  let lockToken: string | undefined
+  let lockAcquired = false
 
   try {
     // Verify authorization: internal API key OR authenticated user who owns the plan
@@ -432,25 +473,29 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
       }
 
-      // Rate limit user-initiated plan generations
-      const rateCheck = planGenerationLimiter.check(user.id)
-      if (rateCheck.limited) {
-        return NextResponse.json(
-          { error: 'Too many plan generation requests. Please try again later.' },
-          { status: 429 }
-        )
-      }
-
       // Verify plan ownership
       const { data: ownedPlan } = await userSupabase
         .from('plans')
-        .select('id')
+        .select('id, status')
         .eq('id', planId)
         .eq('user_id', user.id)
         .single()
       if (!ownedPlan) {
         console.error('[generate-plan] unauthorized request (ownership check failed)', { planId, userId: user.id })
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      }
+
+      const isRetryableStatus = ownedPlan.status === 'generating' || ownedPlan.status === 'failed'
+      // Allow retries for in-progress/failed plans (success-page fallback) without
+      // counting against user generation limits.
+      if (!isRetryableStatus) {
+        const rateCheck = planGenerationLimiter.check(user.id)
+        if (rateCheck.limited) {
+          return NextResponse.json(
+            { error: 'Too many plan generation requests. Please try again later.' },
+            { status: 429 }
+          )
+        }
       }
     }
 
@@ -478,6 +523,17 @@ export async function POST(request: NextRequest) {
 
     if (isDev) {
       console.log('Fetched plan:', { id: plan.id, status: plan.status, baby_id: plan.baby_id, intake_submission_id: plan.intake_submission_id })
+    }
+
+    // Skip if already completed before attempting to lock.
+    if (plan.status === 'completed') {
+      return NextResponse.json({ error: 'Plan already generated' }, { status: 400 })
+    }
+
+    lockToken = randomUUID()
+    lockAcquired = await acquirePlanGenerationLock(supabase, planId, lockToken)
+    if (!lockAcquired) {
+      return NextResponse.json({ success: true, queued: true, message: 'Generation already in progress' }, { status: 202 })
     }
 
     // Add timeout protection for plan generation
@@ -521,11 +577,6 @@ export async function POST(request: NextRequest) {
 
     if (isDev) {
       console.log('Fetched related data:', { hasBaby: !!baby, hasIntake: !!intake })
-    }
-
-    // Allow retry if failed, skip if already completed
-    if (plan.status === 'completed') {
-      return NextResponse.json({ error: 'Plan already generated' }, { status: 400 })
     }
 
     // If failed, reset to generating
@@ -823,5 +874,18 @@ Remember: Write like a skilled, supportive human coach, not a cheerleader. Parag
       { error: 'An unexpected error occurred' },
       { status: 500 }
     )
+  } finally {
+    if (generationTimeout) {
+      clearTimeout(generationTimeout)
+    }
+
+    if (planId && lockToken && lockAcquired) {
+      try {
+        const supabase = getSupabaseAdmin()
+        await releasePlanGenerationLock(supabase, planId, lockToken)
+      } catch (releaseError) {
+        console.error('[generate-plan] failed to release lock:', releaseError)
+      }
+    }
   }
 }

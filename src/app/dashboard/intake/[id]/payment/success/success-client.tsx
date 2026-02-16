@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useCallback, useRef } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -50,7 +50,6 @@ export function SuccessClient({ intakeId, babyName, isDevMode, isAdditionalBaby,
   const [pollCount, setPollCount] = useState(0)
   const [error, setError] = useState<string | null>(null)
   const [currentStage, setCurrentStage] = useState(0)
-  const clientTriggerAttempted = useRef(false)
 
   const triggerGeneration = useCallback(async (planId: string) => {
     try {
@@ -88,15 +87,34 @@ export function SuccessClient({ intakeId, babyName, isDevMode, isAdditionalBaby,
     }
   }, [intakeId, isDevMode])
 
-  // Reliability fallback: trigger generation from the authenticated browser session
+  // Reliability fallback: retry generation from the authenticated browser session
   // so we don't rely only on fire-and-forget server-side fetches.
   useEffect(() => {
     if (!plan?.id) return
     if (plan.status !== 'generating' && plan.status !== 'failed') return
-    if (clientTriggerAttempted.current) return
 
-    clientTriggerAttempted.current = true
-    void triggerGeneration(plan.id)
+    let cancelled = false
+    let timer: ReturnType<typeof setTimeout> | null = null
+    let attempts = 0
+
+    const triggerWithRetry = async () => {
+      if (cancelled || attempts >= 6) return
+      attempts += 1
+      await triggerGeneration(plan.id)
+
+      if (!cancelled && attempts < 6) {
+        timer = setTimeout(() => {
+          void triggerWithRetry()
+        }, 15000)
+      }
+    }
+
+    void triggerWithRetry()
+
+    return () => {
+      cancelled = true
+      if (timer) clearTimeout(timer)
+    }
   }, [plan?.id, plan?.status, triggerGeneration])
 
   // Poll every 2 seconds with better status handling

@@ -140,6 +140,8 @@ RESEND_API_KEY=                  # Required
 
 # App
 NEXT_PUBLIC_APP_URL=http://localhost:3000
+INTERNAL_API_KEY=                # Required in production
+CRON_SECRET=                     # Recommended in production (Vercel Cron auth)
 # Emergency force override (requires redeploy). Prefer runtime flag toggle in admin controls.
 MAINTENANCE_MODE=false
 # Optional bypass token for internal testing while maintenance mode is on
@@ -211,6 +213,19 @@ Bypass for internal testing:
 Emergency override:
 - Set `MAINTENANCE_MODE=true` to force maintenance mode via env (requires redeploy).
 
+### Plan Generation Reliability
+
+Plan generation has multiple fallbacks to reduce dropped-trigger risk:
+- Server trigger from checkout/webhook/success flows.
+- Client-side retry trigger on the payment success page.
+- Vercel cron safety net (`vercel.json`) calling `/api/internal/retry-plan-generation` every 2 minutes.
+- DB lock lease to prevent concurrent generation for the same plan (avoids redundant Gemini calls).
+
+Production setup:
+- Set `INTERNAL_API_KEY`.
+- Set `CRON_SECRET` in Vercel so cron requests are authorized.
+- Run migration `supabase/migrations/016_add_plan_generation_lock.sql`.
+
 ### Password Requirements
 
 Minimum password length is 8 characters (enforced both client-side and by Supabase auth config).
@@ -253,6 +268,7 @@ See `PLAN-sleep-diary.md` for the sleep diary iteration plan and future enhancem
 | `/api/intake/create` | POST | User | Create new intake submission |
 | `/api/intake/[id]` | GET, PATCH, POST | User | Read/update intake |
 | `/api/generate-plan` | POST | Internal key or User | Trigger AI plan generation |
+| `/api/internal/retry-plan-generation` | GET | Cron secret or Internal key | Retry stale `generating` plans |
 | `/api/plans/[id]/reset` | POST | User | Reset plan for regeneration (dev only) |
 | `/api/plans/[id]/cancel` | POST | User | Cancel plan generation |
 | `/api/diary` | GET, POST | User | Fetch/save diary entries |

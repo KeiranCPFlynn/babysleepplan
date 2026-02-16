@@ -1,0 +1,9 @@
+{
+  "crons": [
+    {
+      "path": "/api/internal/retry-plan-generation",
+      "schedule": "*/2 * * * *"
+    }
+  ]
+}
+
