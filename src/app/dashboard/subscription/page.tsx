@@ -128,7 +128,7 @@ async function getSubscriptionPriceDisplay(
   subscription: Stripe.Subscription
 ) {
   try {
-    const upcomingInvoice = await stripe.invoices.retrieveUpcoming({
+    const upcomingInvoice = await stripe.invoices.createPreview({
       customer: customerId,
       subscription: subscription.id,
     })
