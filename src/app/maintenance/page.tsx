@@ -4,12 +4,12 @@ import { MaintenanceUnlockForm } from './unlock-form'
 
 export default function MaintenancePage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-sky-50 px-4 py-16">
+    <main className="marketing-shell min-h-screen bg-gradient-to-b from-slate-50 via-white to-sky-50 px-4 py-16 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
       <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
-        <div className="mb-5 rounded-full bg-sky-100 p-4">
+        <div className="mb-5 rounded-full bg-sky-100 p-4 dark:bg-slate-800/90">
           <Wrench className="h-8 w-8 text-sky-700" />
         </div>
-        <h1 className="text-3xl font-bold text-slate-900">Under Construction</h1>
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100">Under Construction</h1>
         <p className="mt-3 text-slate-600">
           LunaCradle is temporarily in maintenance mode while we complete updates.
           Please check back shortly.

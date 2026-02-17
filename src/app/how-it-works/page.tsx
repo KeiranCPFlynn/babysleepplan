@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { AnimateOnScroll } from '@/components/ui/animate-on-scroll'
-import { Moon, ArrowLeft, ClipboardList, Sparkles, BarChart3, BookOpen, CalendarDays, TrendingUp } from 'lucide-react'
+import { ArrowLeft, ClipboardList, Sparkles, BarChart3, BookOpen, CalendarDays, TrendingUp } from 'lucide-react'
+import { BrandLogo } from '@/components/brand/brand-logo'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://lunacradle.com'
 
@@ -92,28 +93,28 @@ const steps = [
 
 export default function HowItWorksPage() {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-sky-50 via-white to-rose-50 text-slate-900 pb-24 pt-[max(0.5rem,env(safe-area-inset-top))] md:pb-0 md:pt-3">
+    <div className="marketing-shell relative min-h-screen overflow-hidden bg-gradient-to-b from-sky-50 via-white to-rose-50 text-slate-900 pb-24 pt-[max(0.5rem,env(safe-area-inset-top))] md:pb-0 md:pt-3 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 dark:text-slate-100">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <div className="pointer-events-none absolute -top-48 -right-56 hidden md:block h-[30rem] w-[30rem] rounded-full bg-gradient-to-br from-rose-300/55 via-pink-300/45 to-amber-200/45 float-reverse blob-morph" />
-      <div className="pointer-events-none absolute top-16 -left-60 hidden md:block h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-sky-300/55 via-cyan-200/45 to-indigo-200/40 float blob-morph-alt" />
+      <div className="pointer-events-none absolute -top-48 -right-56 hidden md:block h-[30rem] w-[30rem] rounded-full bg-gradient-to-br from-rose-300/55 via-pink-300/45 to-amber-200/45 float-reverse blob-morph dark:from-rose-500/20 dark:via-fuchsia-500/15 dark:to-amber-500/10" />
+      <div className="pointer-events-none absolute top-16 -left-60 hidden md:block h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-sky-300/55 via-cyan-200/45 to-indigo-200/40 float blob-morph-alt dark:from-sky-500/20 dark:via-cyan-500/15 dark:to-indigo-500/10" />
 
       <div className="relative">
         {/* Nav */}
         <header className="container mx-auto px-4 py-6">
-          <nav className="flex items-center justify-between rounded-3xl border border-white/60 bg-white/70 px-4 py-3 shadow-sm backdrop-blur">
+          <nav className="flex items-center justify-between rounded-3xl border border-white/60 bg-white/70 px-4 py-3 shadow-sm backdrop-blur dark:border-slate-700/70 dark:bg-slate-900/75">
             <Link href="/" className="flex items-center gap-2">
-              <Moon className="h-7 w-7 text-sky-700" />
-              <span className="text-lg font-semibold tracking-tight">LunaCradle</span>
+              <BrandLogo size={28} className="h-7 w-7" />
+              <span className="text-lg font-semibold tracking-tight text-sky-800 dark:text-sky-200">LunaCradle</span>
             </Link>
             <div className="flex items-center gap-3 sm:gap-4 text-sm">
-              <Link href="/science" className="hidden md:inline-flex text-slate-600 hover:text-slate-900">
+              <Link href="/science" className="hidden md:inline-flex text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100">
                 Science
               </Link>
-              <Link href="/blog" className="hidden md:inline-flex text-slate-600 hover:text-slate-900">
+              <Link href="/blog" className="hidden md:inline-flex text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100">
                 Blog
               </Link>
-              <Link href="/login" className="text-slate-600 hover:text-slate-900">
+              <Link href="/login" className="text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100">
                 Log in
               </Link>
               <Button asChild className="bg-sky-700 text-white hover:bg-sky-800">
@@ -173,7 +174,7 @@ export default function HowItWorksPage() {
         </section>
 
         {/* Sleep Diary Deep Dive */}
-        <section id="sleep-diary" className="py-16 md:py-20 border-y border-white/60 bg-sky-50/50">
+        <section id="sleep-diary" className="py-16 md:py-20 border-y border-white/60 bg-sky-50/50 dark:border-slate-800 dark:bg-slate-900/70">
           <div className="container mx-auto px-4">
             <AnimateOnScroll>
               <div className="mx-auto max-w-3xl">
@@ -249,8 +250,8 @@ export default function HowItWorksPage() {
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <Link href="/" className="flex items-center gap-2">
-                <Moon className="h-6 w-6 text-sky-700" />
-                <span className="font-semibold">LunaCradle</span>
+                <BrandLogo size={24} className="h-6 w-6" />
+                <span className="font-semibold text-sky-800">LunaCradle</span>
               </Link>
               <p className="text-sm text-slate-500">
                 &copy; {new Date().getFullYear()} LunaCradle. All rights reserved.

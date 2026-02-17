@@ -45,7 +45,7 @@ export default async function NewIntakePage({
     }
 
     return (
-      <div className="space-y-6">
+      <div className="dashboard-surface space-y-6 p-5 sm:p-6">
         <div>
           <h1 className="text-3xl font-bold text-sky-900">Create Sleep Plan</h1>
           <p className="text-slate-600 mt-2">
@@ -59,7 +59,7 @@ export default async function NewIntakePage({
 
   // Otherwise, show baby selection page
   return (
-    <div className="space-y-6">
+    <div className="dashboard-surface space-y-6 p-5 sm:p-6">
       <div>
         <h1 className="text-3xl font-bold text-sky-900">Create Sleep Plan</h1>
         <p className="text-slate-600 mt-2">

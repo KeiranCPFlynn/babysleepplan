@@ -97,19 +97,19 @@ export function SignupForm() {
 
   if (confirmEmail) {
     return (
-      <Card className="w-full max-w-md border-white/60 bg-white/80 backdrop-blur-sm shadow-lg">
+      <Card className="w-full max-w-md border-white/60 bg-white/80 backdrop-blur-sm shadow-lg dark:border-slate-700/70 dark:bg-slate-900/80">
         <CardHeader className="text-center pb-2">
           <div className="flex justify-center mb-3">
             <Mail className="h-8 w-8 text-sky-600" />
           </div>
-          <h1 className="text-2xl font-bold text-slate-900">Check your email</h1>
-          <p className="text-sm text-slate-500 mt-1">
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Check your email</h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
             We&apos;ve sent a confirmation link to
           </p>
-          <p className="text-sm font-medium text-slate-900 mt-1">{confirmEmail}</p>
+          <p className="text-sm font-medium text-slate-900 dark:text-slate-100 mt-1">{confirmEmail}</p>
         </CardHeader>
         <CardContent className="text-center space-y-4">
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-slate-500 dark:text-slate-400">
             Click the link in your email to verify your account, then you can log in.
           </p>
           <Button asChild variant="outline" className="w-full">
@@ -121,20 +121,20 @@ export function SignupForm() {
   }
 
   return (
-    <Card className="w-full max-w-md border-white/60 bg-white/80 backdrop-blur-sm shadow-lg">
+    <Card className="w-full max-w-md border-white/60 bg-white/80 backdrop-blur-sm shadow-lg dark:border-slate-700/70 dark:bg-slate-900/80">
       <CardHeader className="text-center pb-2">
         <div className="flex justify-center mb-3">
           <Sparkles className="h-5 w-5 text-sky-600" />
         </div>
-        <h1 className="text-2xl font-bold text-slate-900">Create an account</h1>
-        <p className="text-sm text-slate-500 mt-1">
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Create an account</h1>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
           Create your account to get started
         </p>
       </CardHeader>
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="fullName" className="text-slate-700">Full Name</Label>
+            <Label htmlFor="fullName" className="text-slate-700 dark:text-slate-200">Full Name</Label>
             <Input
               id="fullName"
               type="text"
@@ -145,12 +145,12 @@ export function SignupForm() {
               }
               autoComplete="name"
               required
-              className="bg-white/70 border-slate-200 focus:border-sky-400 focus:ring-sky-400/20"
+              className="bg-white/70 border-slate-200 focus:border-sky-400 focus:ring-sky-400/20 dark:bg-slate-800/80 dark:border-slate-600 dark:text-slate-100 dark:placeholder:text-slate-400"
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-slate-700">Email</Label>
+            <Label htmlFor="email" className="text-slate-700 dark:text-slate-200">Email</Label>
             <Input
               id="email"
               type="email"
@@ -162,12 +162,12 @@ export function SignupForm() {
               autoComplete="email"
               inputMode="email"
               required
-              className="bg-white/70 border-slate-200 focus:border-sky-400 focus:ring-sky-400/20"
+              className="bg-white/70 border-slate-200 focus:border-sky-400 focus:ring-sky-400/20 dark:bg-slate-800/80 dark:border-slate-600 dark:text-slate-100 dark:placeholder:text-slate-400"
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="password" className="text-slate-700">Password</Label>
+            <Label htmlFor="password" className="text-slate-700 dark:text-slate-200">Password</Label>
             <Input
               id="password"
               type="password"
@@ -181,13 +181,13 @@ export function SignupForm() {
               minLength={8}
               pattern={PASSWORD_POLICY_REGEX.source}
               title={PASSWORD_POLICY_HINT}
-              className="bg-white/70 border-slate-200 focus:border-sky-400 focus:ring-sky-400/20"
+              className="bg-white/70 border-slate-200 focus:border-sky-400 focus:ring-sky-400/20 dark:bg-slate-800/80 dark:border-slate-600 dark:text-slate-100 dark:placeholder:text-slate-400"
             />
-            <p className="text-xs text-slate-500">{PASSWORD_POLICY_HINT}</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">{PASSWORD_POLICY_HINT}</p>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="confirmPassword" className="text-slate-700">Confirm Password</Label>
+            <Label htmlFor="confirmPassword" className="text-slate-700 dark:text-slate-200">Confirm Password</Label>
             <Input
               id="confirmPassword"
               type="password"
@@ -201,7 +201,7 @@ export function SignupForm() {
               minLength={8}
               pattern={PASSWORD_POLICY_REGEX.source}
               title={PASSWORD_POLICY_HINT}
-              className="bg-white/70 border-slate-200 focus:border-sky-400 focus:ring-sky-400/20"
+              className="bg-white/70 border-slate-200 focus:border-sky-400 focus:ring-sky-400/20 dark:bg-slate-800/80 dark:border-slate-600 dark:text-slate-100 dark:placeholder:text-slate-400"
             />
           </div>
         </CardContent>
@@ -217,15 +217,15 @@ export function SignupForm() {
 
           <div className="relative w-full">
             <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t border-slate-200" />
+              <span className="w-full border-t border-slate-200 dark:border-slate-700" />
             </div>
-            <span className="relative block mx-auto w-fit bg-white/80 px-2 text-xs text-slate-400">or</span>
+            <span className="relative block mx-auto w-fit bg-white/80 px-2 text-xs text-slate-400 dark:bg-slate-900/80 dark:text-slate-500">or</span>
           </div>
 
           <Button
             type="button"
             variant="outline"
-            className="w-full border-slate-300 bg-white hover:bg-slate-50"
+            className="w-full border-slate-300 bg-white hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700"
             onClick={handleGoogleSignup}
             disabled={loading}
           >
@@ -238,7 +238,7 @@ export function SignupForm() {
             Continue with Google
           </Button>
 
-          <p className="text-sm text-center text-slate-500">
+          <p className="text-sm text-center text-slate-500 dark:text-slate-400">
             Already have an account?{' '}
             <Link href="/login" className="text-sky-700 font-medium hover:text-sky-800 hover:underline">
               Log in

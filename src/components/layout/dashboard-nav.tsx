@@ -2,11 +2,12 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Baby, FileText, Plus, BookOpen, LogOut, Moon, X } from 'lucide-react'
+import { Home, Baby, FileText, Plus, BookOpen, LogOut, X } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { BrandLogo } from '@/components/brand/brand-logo'
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: Home },
@@ -38,14 +39,14 @@ export function DashboardNav({ open = false, onClose }: DashboardNavProps) {
       <div className="p-6">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <Moon className="h-6 w-6 text-sky-700" />
-            <h1 className="text-2xl font-bold text-slate-900">LunaCradle</h1>
+            <BrandLogo size={24} className="h-6 w-6" />
+            <h1 className="text-2xl font-bold text-sky-800 dark:text-sky-200">LunaCradle</h1>
           </Link>
           {/* Close button visible only in mobile drawer */}
           {onClose && (
             <button
               onClick={onClose}
-              className="md:hidden p-1 rounded-md text-slate-500 hover:text-slate-900 hover:bg-white/50"
+              className="md:hidden p-1 rounded-md text-slate-500 hover:text-slate-900 hover:bg-white/60 dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-800"
             >
               <X className="h-5 w-5" />
             </button>
@@ -72,8 +73,8 @@ export function DashboardNav({ open = false, onClose }: DashboardNavProps) {
               className={cn(
                 'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors',
                 isActive
-                  ? 'bg-white/70 backdrop-blur text-sky-800 shadow-sm border border-white/60'
-                  : 'text-slate-600 hover:bg-white/50 hover:text-slate-900'
+                  ? 'bg-white/75 backdrop-blur text-sky-800 shadow-sm border border-white/70 dark:bg-slate-800 dark:text-sky-200 dark:border-slate-700'
+                  : 'text-slate-600 hover:bg-white/60 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-slate-100'
               )}
             >
               <Icon className="h-5 w-5" />
@@ -83,10 +84,10 @@ export function DashboardNav({ open = false, onClose }: DashboardNavProps) {
         })}
       </nav>
 
-      <div className="p-4 border-t border-white/40">
+      <div className="p-4 border-t border-white/40 dark:border-slate-700/60">
         <Button
           variant="ghost"
-          className="w-full justify-start text-slate-600 hover:text-slate-900 hover:bg-white/50"
+          className="w-full justify-start text-slate-600 hover:text-slate-900 hover:bg-white/60 dark:text-slate-300 dark:hover:text-slate-100 dark:hover:bg-slate-800"
           onClick={handleLogout}
         >
           <LogOut className="h-5 w-5 mr-3" />
@@ -99,7 +100,7 @@ export function DashboardNav({ open = false, onClose }: DashboardNavProps) {
   return (
     <>
       {/* Desktop: static sidebar (hidden on mobile) */}
-      <div className="hidden md:flex flex-col h-full w-64 bg-white/30 backdrop-blur-xl text-slate-800 border-r border-white/50">
+      <div className="hidden md:flex flex-col h-full w-64 bg-white/45 backdrop-blur-xl text-slate-800 border-r border-white/70 dark:bg-slate-950/88 dark:text-slate-200 dark:border-slate-800">
         {navContent}
       </div>
 
@@ -116,7 +117,7 @@ export function DashboardNav({ open = false, onClose }: DashboardNavProps) {
         {/* Drawer */}
         <div
           className={cn(
-            'fixed inset-y-0 left-0 z-50 w-64 flex flex-col bg-white/95 backdrop-blur-xl text-slate-800 border-r border-white/50 transform transition-transform duration-200 ease-in-out',
+            'fixed inset-y-0 left-0 z-50 w-64 flex flex-col bg-white/95 backdrop-blur-xl text-slate-800 border-r border-white/70 transform transition-transform duration-200 ease-in-out dark:bg-slate-950/95 dark:text-slate-200 dark:border-slate-800',
             open ? 'translate-x-0' : '-translate-x-full'
           )}
         >

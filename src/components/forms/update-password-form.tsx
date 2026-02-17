@@ -79,7 +79,7 @@ export function UpdatePasswordForm() {
 
   if (checking) {
     return (
-      <Card className="w-full max-w-md border-white/60 bg-white/80 backdrop-blur-sm shadow-lg">
+      <Card className="w-full max-w-md border-white/60 bg-white/80 backdrop-blur-sm shadow-lg dark:border-slate-700/70 dark:bg-slate-900/80">
         <CardContent className="flex items-center justify-center py-12">
           <Loader2 className="h-6 w-6 text-sky-600 animate-spin" />
         </CardContent>
@@ -89,10 +89,10 @@ export function UpdatePasswordForm() {
 
   if (!sessionValid) {
     return (
-      <Card className="w-full max-w-md border-white/60 bg-white/80 backdrop-blur-sm shadow-lg">
+      <Card className="w-full max-w-md border-white/60 bg-white/80 backdrop-blur-sm shadow-lg dark:border-slate-700/70 dark:bg-slate-900/80">
         <CardHeader className="text-center pb-2">
-          <h1 className="text-2xl font-bold text-slate-900">Invalid or expired link</h1>
-          <p className="text-sm text-slate-500 mt-1">
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Invalid or expired link</h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
             This password reset link is no longer valid. Please request a new one.
           </p>
         </CardHeader>
@@ -106,20 +106,20 @@ export function UpdatePasswordForm() {
   }
 
   return (
-    <Card className="w-full max-w-md border-white/60 bg-white/80 backdrop-blur-sm shadow-lg">
+    <Card className="w-full max-w-md border-white/60 bg-white/80 backdrop-blur-sm shadow-lg dark:border-slate-700/70 dark:bg-slate-900/80">
       <CardHeader className="text-center pb-2">
         <div className="flex justify-center mb-3">
           <KeyRound className="h-5 w-5 text-sky-600" />
         </div>
-        <h1 className="text-2xl font-bold text-slate-900">Set new password</h1>
-        <p className="text-sm text-slate-500 mt-1">
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Set new password</h1>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
           Enter your new password below
         </p>
       </CardHeader>
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="password" className="text-slate-700">New Password</Label>
+            <Label htmlFor="password" className="text-slate-700 dark:text-slate-200">New Password</Label>
             <Input
               id="password"
               type="password"
@@ -132,13 +132,13 @@ export function UpdatePasswordForm() {
               minLength={8}
               pattern={PASSWORD_POLICY_REGEX.source}
               title={PASSWORD_POLICY_HINT}
-              className="bg-white/70 border-slate-200 focus:border-sky-400 focus:ring-sky-400/20"
+              className="bg-white/70 border-slate-200 focus:border-sky-400 focus:ring-sky-400/20 dark:bg-slate-800/80 dark:border-slate-600 dark:text-slate-100 dark:placeholder:text-slate-400"
             />
-            <p className="text-xs text-slate-500">{PASSWORD_POLICY_HINT}</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">{PASSWORD_POLICY_HINT}</p>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="confirmPassword" className="text-slate-700">Confirm New Password</Label>
+            <Label htmlFor="confirmPassword" className="text-slate-700 dark:text-slate-200">Confirm New Password</Label>
             <Input
               id="confirmPassword"
               type="password"
@@ -151,7 +151,7 @@ export function UpdatePasswordForm() {
               minLength={8}
               pattern={PASSWORD_POLICY_REGEX.source}
               title={PASSWORD_POLICY_HINT}
-              className="bg-white/70 border-slate-200 focus:border-sky-400 focus:ring-sky-400/20"
+              className="bg-white/70 border-slate-200 focus:border-sky-400 focus:ring-sky-400/20 dark:bg-slate-800/80 dark:border-slate-600 dark:text-slate-100 dark:placeholder:text-slate-400"
             />
           </div>
         </CardContent>

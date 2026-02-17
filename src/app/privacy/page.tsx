@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import { Moon } from 'lucide-react'
 import type { Metadata } from 'next'
+import { BrandLogo } from '@/components/brand/brand-logo'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy - LunaCradle',
@@ -9,16 +9,16 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-rose-50 text-slate-900">
+    <div className="marketing-shell min-h-screen bg-gradient-to-b from-sky-50 via-white to-rose-50 text-slate-900 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 dark:text-slate-100">
       <header className="container mx-auto px-4 py-6">
-        <nav className="flex items-center justify-between rounded-3xl border border-white/60 bg-white/70 px-4 py-3 shadow-sm backdrop-blur">
+        <nav className="flex items-center justify-between rounded-3xl border border-white/60 bg-white/70 px-4 py-3 shadow-sm backdrop-blur dark:border-slate-700/70 dark:bg-slate-900/75">
           <Link href="/" className="flex items-center gap-2">
-            <Moon className="h-7 w-7 text-sky-700" />
-            <span className="text-lg font-semibold tracking-tight">LunaCradle</span>
+            <BrandLogo size={28} className="h-7 w-7" />
+            <span className="text-lg font-semibold tracking-tight text-sky-800 dark:text-sky-200">LunaCradle</span>
           </Link>
           <div className="flex items-center gap-4 text-sm">
-            <Link href="/terms" className="text-slate-600 hover:text-slate-900">Terms</Link>
-            <Link href="/contact" className="text-slate-600 hover:text-slate-900">Contact</Link>
+            <Link href="/terms" className="text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100">Terms</Link>
+            <Link href="/contact" className="text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100">Contact</Link>
           </div>
         </nav>
       </header>

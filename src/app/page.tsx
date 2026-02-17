@@ -4,7 +4,8 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { AnimateOnScroll } from '@/components/ui/animate-on-scroll'
-import { Moon, Star, CheckCircle, BookOpen } from 'lucide-react'
+import { Star, CheckCircle, BookOpen } from 'lucide-react'
+import { BrandLogo } from '@/components/brand/brand-logo'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://lunacradle.com'
 
@@ -85,36 +86,36 @@ const jsonLd = {
 
 export default function HomePage() {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-sky-50 via-white to-rose-50 text-slate-900 pb-24 pt-[max(0.5rem,env(safe-area-inset-top))] md:pb-0 md:pt-3">
+    <div className="marketing-shell relative min-h-screen overflow-hidden bg-gradient-to-b from-sky-50 via-white to-rose-50 text-slate-900 pb-24 pt-[max(0.5rem,env(safe-area-inset-top))] md:pb-0 md:pt-3 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 dark:text-slate-100">
       {/* Structured data */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd.website) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd.organization) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd.faqPage) }} />
 
       {/* Ambient background blobs with color morphing */}
-      <div className="pointer-events-none absolute -top-48 -right-56 hidden md:block h-[30rem] w-[30rem] rounded-full bg-gradient-to-br from-rose-300/55 via-pink-300/45 to-amber-200/45 float-reverse blob-morph" />
-      <div className="pointer-events-none absolute top-16 -left-60 hidden md:block h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-sky-300/55 via-cyan-200/45 to-indigo-200/40 float blob-morph-alt" />
-      <div className="pointer-events-none absolute -bottom-24 right-6 hidden lg:block h-[32rem] w-[32rem] rounded-full bg-gradient-to-br from-amber-200/55 via-rose-200/45 to-sky-200/40 float-slow blob-morph" />
+      <div className="pointer-events-none absolute -top-48 -right-56 hidden md:block h-[30rem] w-[30rem] rounded-full bg-gradient-to-br from-rose-300/55 via-pink-300/45 to-amber-200/45 float-reverse blob-morph dark:from-rose-500/20 dark:via-fuchsia-500/15 dark:to-amber-500/10" />
+      <div className="pointer-events-none absolute top-16 -left-60 hidden md:block h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-sky-300/55 via-cyan-200/45 to-indigo-200/40 float blob-morph-alt dark:from-sky-500/20 dark:via-cyan-500/15 dark:to-indigo-500/10" />
+      <div className="pointer-events-none absolute -bottom-24 right-6 hidden lg:block h-[32rem] w-[32rem] rounded-full bg-gradient-to-br from-amber-200/55 via-rose-200/45 to-sky-200/40 float-slow blob-morph dark:from-amber-500/15 dark:via-rose-500/12 dark:to-sky-500/12" />
 
       <div className="relative">
         {/* 1. Nav */}
         <header className="container mx-auto px-4 py-6">
-          <nav className="flex items-center justify-between rounded-3xl border border-white/60 bg-white/70 px-4 py-3 shadow-sm backdrop-blur">
+          <nav className="flex items-center justify-between rounded-3xl border border-white/60 bg-white/70 px-4 py-3 shadow-sm backdrop-blur dark:border-slate-700/70 dark:bg-slate-900/75">
             <Link href="/" className="flex items-center gap-2">
-              <Moon className="h-7 w-7 text-sky-700" />
-              <span className="text-lg font-semibold tracking-tight">LunaCradle</span>
+              <BrandLogo size={28} className="h-7 w-7" />
+              <span className="text-lg font-semibold tracking-tight text-sky-800 dark:text-sky-300">LunaCradle</span>
             </Link>
             <div className="flex items-center gap-3 sm:gap-4 text-sm">
-              <Link href="/how-it-works" className="hidden md:inline-flex text-slate-600 hover:text-slate-900">
+              <Link href="/how-it-works" className="hidden md:inline-flex text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100">
                 How It Works
               </Link>
-              <Link href="/science" className="hidden md:inline-flex text-slate-600 hover:text-slate-900">
+              <Link href="/science" className="hidden md:inline-flex text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100">
                 Science
               </Link>
-              <Link href="/blog" className="hidden md:inline-flex text-slate-600 hover:text-slate-900">
+              <Link href="/blog" className="hidden md:inline-flex text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100">
                 Blog
               </Link>
-              <Link href="/login" className="text-slate-600 hover:text-slate-900">
+              <Link href="/login" className="text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100">
                 Log in
               </Link>
               <Button asChild className="bg-sky-700 text-white hover:bg-sky-800 cta-bounce">
@@ -140,7 +141,7 @@ export default function HomePage() {
               For babies and toddlers 0-5 years, with gentle or structured options.
             </p>
             <div className="mt-7 hero-load hero-load-3">
-              <p className="text-base md:text-lg text-slate-600">
+              <p className="text-base md:text-lg text-slate-600 dark:text-slate-300">
                 $0 for 5 days. Then $19/month. Cancel anytime.
               </p>
               <div className="mt-5">
@@ -151,26 +152,26 @@ export default function HomePage() {
                   </Link>
                 </Button>
               </div>
-              <p className="mt-3 text-sm text-slate-500">
+              <p className="mt-3 text-sm text-slate-500 dark:text-slate-400">
                 Credit card required to start trial.
               </p>
             </div>
-            <div className="mt-6 flex items-center justify-center gap-2 text-xs text-slate-500 hero-load hero-load-3">
+            <div className="mt-6 flex items-center justify-center gap-2 text-xs text-slate-500 hero-load hero-load-3 dark:text-slate-400">
               <BookOpen className="h-3.5 w-3.5" />
               <span>Informed by AAP, NHS, NICE, WHO guidance, and peer-reviewed studies</span>
             </div>
             <div className="mt-8 md:mt-10 hero-load hero-load-3">
-              <div className="relative overflow-hidden rounded-3xl border border-white/70 bg-white/85 p-3 shadow-xl shadow-sky-100/60 backdrop-blur">
+              <div className="relative overflow-hidden rounded-3xl border border-white/70 bg-white/85 p-3 shadow-xl shadow-sky-100/60 backdrop-blur dark:border-slate-700/70 dark:bg-slate-900/85 dark:shadow-none">
                 <Image
                   src="/landing/sample-report-preview.svg"
                   alt="Sample LunaCradle report preview based on actual plan format"
                   width={1280}
                   height={920}
-                  className="h-auto w-full rounded-2xl border border-slate-100"
+                  className="h-auto w-full rounded-2xl border border-slate-100 dark:border-slate-700"
                   priority
                 />
               </div>
-              <p className="mt-3 text-center text-xs text-slate-500">
+              <p className="mt-3 text-center text-xs text-slate-500 dark:text-slate-400">
                 Sample report preview from the real plan format
               </p>
             </div>
@@ -228,13 +229,13 @@ export default function HomePage() {
         </section>
 
         {/* 4. Social Proof */}
-        <section className="py-16 md:py-20 border-y border-white/60 bg-sky-50/50">
+        <section className="py-16 md:py-20 border-y border-white/60 bg-sky-50/50 dark:border-slate-800 dark:bg-slate-900/70">
           <div className="container mx-auto px-4">
             <AnimateOnScroll>
               <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
                 <span className="heading-underline">Parents Who Needed Sleep Fast</span>
               </h2>
-              <p className="text-center text-slate-500 mb-12 max-w-2xl mx-auto">
+              <p className="text-center text-slate-500 mb-12 max-w-2xl mx-auto dark:text-slate-300">
                 Different sleep styles, one outcome: calmer nights and clearer next steps.
               </p>
             </AnimateOnScroll>
@@ -257,21 +258,21 @@ export default function HomePage() {
                 },
               ].map((item, index) => (
                 <AnimateOnScroll key={item.author} delay={index * 120}>
-                  <Card className="h-full border-slate-200 bg-white/85 shadow-sm card-hover">
+                  <Card className="h-full border-slate-200 bg-white/85 shadow-sm card-hover dark:border-slate-700 dark:bg-slate-900/85 dark:shadow-black/30">
                     <CardContent className="p-6">
                       <div className="mb-4 flex">
                         {[1, 2, 3, 4, 5].map((s) => (
                           <Star key={s} className="h-4 w-4 fill-amber-400 text-amber-400" />
                         ))}
                       </div>
-                      <p className="text-slate-700 text-sm leading-relaxed">&ldquo;{item.quote}&rdquo;</p>
+                      <p className="text-slate-700 text-sm leading-relaxed dark:text-slate-200">&ldquo;{item.quote}&rdquo;</p>
                       <div className="mt-5 flex items-center gap-3">
                         <div className="h-10 w-10 rounded-full bg-gradient-to-br from-sky-600 to-sky-400 text-white text-sm font-semibold grid place-items-center">
                           {item.author.slice(0, 1)}
                         </div>
                         <div>
-                          <p className="text-sm font-semibold text-slate-900">{item.author}</p>
-                          <p className="text-xs text-slate-500">{item.role}</p>
+                          <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{item.author}</p>
+                          <p className="text-xs text-slate-500 dark:text-slate-300">{item.role}</p>
                         </div>
                       </div>
                     </CardContent>
@@ -281,7 +282,7 @@ export default function HomePage() {
             </div>
             <AnimateOnScroll delay={140}>
               <div className="mt-10 text-center">
-                <p className="text-sm text-slate-600">Ready for a calmer night?</p>
+                <p className="text-sm text-slate-600 dark:text-slate-300">Ready for a calmer night?</p>
                 <Button size="lg" asChild className="mt-4 w-full sm:w-auto bg-sky-700 text-white hover:bg-sky-800 cta-smooth">
                   <Link href="/signup">Get Your Sleep Plan Tonight</Link>
                 </Button>
@@ -297,7 +298,7 @@ export default function HomePage() {
               <div className="max-w-lg mx-auto">
                 <Card className="border-sky-200 bg-white shadow-lg gradient-border rounded-2xl overflow-hidden">
                   <CardHeader className="text-center pb-2">
-                    <CardTitle className="text-2xl font-bold">LunaCradle</CardTitle>
+                    <CardTitle className="text-2xl font-bold text-sky-800">LunaCradle</CardTitle>
                     <p className="text-xs text-slate-500 mt-1">Informed by AAP, NHS, NICE, WHO, and peer-reviewed sleep research</p>
                   </CardHeader>
                   <CardContent className="space-y-5">
@@ -353,9 +354,9 @@ export default function HomePage() {
             <div className="max-w-2xl mx-auto space-y-4">
               {faqs.map((faq, index) => (
                 <AnimateOnScroll key={index} delay={index * 80}>
-                  <div className="rounded-2xl border border-white/70 bg-white/80 p-5 shadow-sm card-hover">
-                    <h3 className="font-semibold text-base mb-1">{faq.q}</h3>
-                    <p className="text-slate-600 text-sm">{faq.a}</p>
+                  <div className="rounded-2xl border border-white/70 bg-white/80 p-5 shadow-sm card-hover dark:border-slate-700 dark:bg-slate-900/85 dark:shadow-black/30">
+                    <h3 className="font-semibold text-base mb-1 dark:text-slate-100">{faq.q}</h3>
+                    <p className="text-slate-600 text-sm dark:text-slate-300">{faq.a}</p>
                   </div>
                 </AnimateOnScroll>
               ))}
@@ -369,8 +370,8 @@ export default function HomePage() {
             <div className="container mx-auto px-4">
               <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                 <Link href="/" className="flex items-center gap-2">
-                  <Moon className="h-6 w-6 text-sky-700" />
-                  <span className="font-semibold">LunaCradle</span>
+                  <BrandLogo size={24} className="h-6 w-6" />
+                  <span className="font-semibold text-sky-800">LunaCradle</span>
                 </Link>
                 <p className="text-sm text-slate-500">
                   &copy; {new Date().getFullYear()} LunaCradle. All rights reserved.

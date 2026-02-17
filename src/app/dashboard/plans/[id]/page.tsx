@@ -60,7 +60,7 @@ export default async function PlanViewPage({
 
   if (plan.status === 'generating') {
     return (
-      <div className="max-w-3xl mx-auto space-y-5">
+      <div className="dashboard-surface max-w-3xl mx-auto space-y-5 p-5 sm:p-6">
         <Link
           href="/dashboard/plans"
           className="inline-flex items-center text-sm text-purple-600 hover:text-purple-800"
@@ -106,7 +106,7 @@ export default async function PlanViewPage({
 
   if (plan.status === 'failed') {
     return (
-      <div className="max-w-3xl mx-auto space-y-5">
+      <div className="dashboard-surface max-w-3xl mx-auto space-y-5 p-5 sm:p-6">
         <Link
           href="/dashboard/plans"
           className="inline-flex items-center text-sm text-purple-600 hover:text-purple-800"
@@ -139,7 +139,7 @@ export default async function PlanViewPage({
   }
 
   return (
-    <div className="max-w-5xl mx-auto space-y-5">
+    <div className="dashboard-surface max-w-5xl mx-auto space-y-5 p-5 sm:p-6">
       <div className="space-y-3 print:hidden">
         <Link
           href="/dashboard/plans"

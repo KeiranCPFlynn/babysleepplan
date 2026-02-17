@@ -64,7 +64,7 @@ export function DisplayNameForm({ initialName }: DisplayNameFormProps) {
 
   return (
     <form className="space-y-2" onSubmit={onSubmit}>
-      <Label htmlFor="display-name" className="text-slate-700">
+      <Label htmlFor="display-name" className="text-slate-700 dark:text-slate-200">
         Display name
       </Label>
       <div className="flex flex-col gap-2 sm:flex-row">
@@ -74,7 +74,7 @@ export function DisplayNameForm({ initialName }: DisplayNameFormProps) {
           onChange={(event) => setName(event.target.value)}
           maxLength={100}
           placeholder="Your name"
-          className="bg-white/85 border-sky-100"
+          className="bg-white/85 border-sky-100 dark:bg-slate-800/90 dark:border-slate-600 dark:text-slate-100 dark:placeholder:text-slate-400"
         />
         <Button
           type="submit"
@@ -84,8 +84,7 @@ export function DisplayNameForm({ initialName }: DisplayNameFormProps) {
           {loading ? 'Saving...' : 'Save'}
         </Button>
       </div>
-      <p className="text-xs text-slate-500">This is shown in your dashboard welcome message.</p>
+      <p className="text-xs text-slate-500 dark:text-slate-400">This is shown in your dashboard welcome message.</p>
     </form>
   )
 }
-

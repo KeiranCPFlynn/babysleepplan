@@ -38,7 +38,29 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function () {
+                var root = document.documentElement;
+                var media = window.matchMedia('(prefers-color-scheme: dark)');
+                function applyTheme(isDark) {
+                  root.classList.toggle('dark', isDark);
+                  root.style.colorScheme = isDark ? 'dark' : 'light';
+                }
+                applyTheme(media.matches);
+                if (media.addEventListener) {
+                  media.addEventListener('change', function (event) { applyTheme(event.matches); });
+                } else if (media.addListener) {
+                  media.addListener(function (event) { applyTheme(event.matches); });
+                }
+              })();
+            `,
+          }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
