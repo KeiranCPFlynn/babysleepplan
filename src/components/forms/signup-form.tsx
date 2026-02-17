@@ -10,6 +10,7 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import Link from 'next/link'
 import { toast } from 'sonner'
 import { Mail, Sparkles } from 'lucide-react'
+import { buildAuthCallbackUrl } from '@/lib/auth-redirect'
 import {
   getPasswordPolicyErrors,
   PASSWORD_POLICY_HINT,
@@ -45,7 +46,7 @@ export function SignupForm() {
     }
 
     const supabase = createClient()
-    const emailRedirectTo = `${window.location.origin}/auth/callback?next=/dashboard`
+    const emailRedirectTo = buildAuthCallbackUrl('/dashboard')
 
     const { data, error } = await supabase.auth.signUp({
       email: formData.email,
@@ -87,7 +88,7 @@ export function SignupForm() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${window.location.origin}/auth/callback?next=/dashboard`,
+        redirectTo: buildAuthCallbackUrl('/dashboard'),
       },
     })
 

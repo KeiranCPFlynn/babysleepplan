@@ -9,6 +9,7 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import Link from 'next/link'
 import { toast } from 'sonner'
 import { KeyRound, CheckCircle } from 'lucide-react'
+import { buildAuthCallbackUrl } from '@/lib/auth-redirect'
 
 export function ResetPasswordForm() {
   const [loading, setLoading] = useState(false)
@@ -22,7 +23,7 @@ export function ResetPasswordForm() {
     const supabase = createClient()
 
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/auth/callback?next=/reset-password/confirm`,
+      redirectTo: buildAuthCallbackUrl('/reset-password/confirm'),
     })
 
     if (error) {

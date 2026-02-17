@@ -10,6 +10,7 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import Link from 'next/link'
 import { toast } from 'sonner'
 import { CheckCircle, Star } from 'lucide-react'
+import { buildAuthCallbackUrl } from '@/lib/auth-redirect'
 
 export function LoginForm() {
   const router = useRouter()
@@ -56,7 +57,7 @@ export function LoginForm() {
     const { error } = await supabase.auth.signInWithOtp({
       email: formData.email,
       options: {
-        emailRedirectTo: `${window.location.origin}/auth/callback?next=/dashboard`,
+        emailRedirectTo: buildAuthCallbackUrl('/dashboard'),
       },
     })
 
@@ -79,7 +80,7 @@ export function LoginForm() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${window.location.origin}/auth/callback?next=/dashboard`,
+        redirectTo: buildAuthCallbackUrl('/dashboard'),
       },
     })
 
