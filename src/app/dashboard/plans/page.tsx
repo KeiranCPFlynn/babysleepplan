@@ -37,8 +37,8 @@ export default async function PlansPage() {
     <div className="dashboard-surface space-y-8 p-5 sm:p-6">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-sky-900">My Sleep Plans</h1>
-          <p className="text-slate-600 mt-2">
+          <h1 className="text-3xl font-bold text-sky-900 dark:text-sky-100">My Sleep Plans</h1>
+          <p className="text-slate-600 dark:text-slate-300 mt-2">
             View and manage your baby&apos;s personalized sleep plans.
           </p>
         </div>
@@ -53,17 +53,20 @@ export default async function PlansPage() {
       {/* Pending intakes */}
       {pendingIntakes && pendingIntakes.length > 0 && (
         <div>
-          <h2 className="text-xl font-semibold text-sky-900 mb-4">
+          <h2 className="text-xl font-semibold text-sky-900 dark:text-sky-100 mb-4">
             {isStripeEnabled ? 'Awaiting Payment' : 'Ready to Generate'}
           </h2>
           <div className="space-y-4">
             {pendingIntakes.map((intake) => (
-              <Card key={intake.id} className="border-amber-200/80 bg-gradient-to-br from-amber-50/85 via-white to-rose-50/65">
+              <Card
+                key={intake.id}
+                className="border-amber-200/80 bg-gradient-to-br from-amber-50/85 via-white to-rose-50/65 dark:border-amber-700/60 dark:from-slate-900/70 dark:via-slate-900/75 dark:to-rose-950/25"
+              >
                 <CardHeader>
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
                     <div>
-                      <CardTitle className="text-slate-900">{intake.baby?.name || 'Unknown Baby'}&apos;s Plan</CardTitle>
-                      <CardDescription className="text-slate-600">
+                      <CardTitle className="text-slate-900 dark:text-slate-100">{intake.baby?.name || 'Unknown Baby'}&apos;s Plan</CardTitle>
+                      <CardDescription className="text-slate-600 dark:text-slate-300">
                         {isStripeEnabled
                           ? 'Questionnaire completed - ready for payment'
                           : 'Questionnaire completed - ready to generate'}
@@ -85,15 +88,15 @@ export default async function PlansPage() {
       {/* Completed plans */}
       {plans && plans.length > 0 ? (
         <div>
-          <h2 className="text-xl font-semibold text-sky-900 mb-4">Your Plans</h2>
+          <h2 className="text-xl font-semibold text-sky-900 dark:text-sky-100 mb-4">Your Plans</h2>
           <div className="space-y-4">
             {plans.map((plan) => (
               <Card key={plan.id} className="dashboard-card-soft">
                 <CardHeader>
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
                     <div>
-                      <CardTitle className="text-slate-900">{plan.baby?.name || 'Unknown Baby'}&apos;s Sleep Plan</CardTitle>
-                      <CardDescription className="text-slate-600">
+                      <CardTitle className="text-slate-900 dark:text-slate-100">{plan.baby?.name || 'Unknown Baby'}&apos;s Sleep Plan</CardTitle>
+                      <CardDescription className="text-slate-600 dark:text-slate-300">
                         Created {formatUniversalDate(plan.created_at)}
                       </CardDescription>
                     </div>
@@ -101,16 +104,21 @@ export default async function PlansPage() {
                       <span
                         className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
                           plan.status === 'completed'
-                            ? 'bg-green-100 text-green-800'
+                            ? 'bg-green-100 text-green-800 dark:bg-green-900/35 dark:text-green-200'
                             : plan.status === 'generating'
-                            ? 'bg-blue-100 text-blue-800'
-                            : 'bg-red-100 text-red-800'
+                            ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/35 dark:text-blue-200'
+                            : 'bg-red-100 text-red-800 dark:bg-red-900/35 dark:text-red-200'
                         }`}
                       >
                         {plan.status === 'generating' ? 'Generating...' : plan.status}
                       </span>
                       {plan.status === 'completed' && (
-                        <Button variant="outline" size="sm" asChild className="border-sky-200 bg-white/80 text-slate-700 hover:bg-sky-50">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          asChild
+                          className="border-sky-200 bg-white/80 text-slate-700 hover:bg-sky-50 dark:border-slate-600 dark:bg-slate-800/60 dark:text-slate-100 dark:hover:bg-slate-700/70"
+                        >
                           <Link href={`/dashboard/plans/${plan.id}`}>View Plan</Link>
                         </Button>
                       )}
@@ -119,7 +127,7 @@ export default async function PlansPage() {
                 </CardHeader>
                 {plan.status === 'failed' && plan.error_message && (
                   <CardContent>
-                    <p className="text-sm text-red-600">{plan.error_message}</p>
+                    <p className="text-sm text-red-600 dark:text-red-300">{plan.error_message}</p>
                   </CardContent>
                 )}
               </Card>
@@ -127,10 +135,10 @@ export default async function PlansPage() {
           </div>
         </div>
       ) : (
-        <Card className="border-sky-200/80 bg-gradient-to-br from-sky-50/80 via-white to-rose-50/70">
+        <Card className="border-sky-200/80 bg-gradient-to-br from-sky-50/80 via-white to-rose-50/70 dark:border-slate-700 dark:from-slate-900/70 dark:via-slate-900/75 dark:to-rose-950/25">
           <CardHeader>
-            <CardTitle className="text-sky-900">No Plans Yet</CardTitle>
-            <CardDescription className="text-slate-600">
+            <CardTitle className="text-sky-900 dark:text-sky-100">No Plans Yet</CardTitle>
+            <CardDescription className="text-slate-600 dark:text-slate-300">
               You haven&apos;t created any sleep plans yet. Start by completing a questionnaire
               about your baby&apos;s sleep habits.
             </CardDescription>

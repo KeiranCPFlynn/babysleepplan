@@ -29,31 +29,31 @@ function getBlockquoteStyle(children: ReactNode): { className: string; label: st
 
   if (text.includes('tip:') || text.includes('tip')) {
     return {
-      className: 'bg-amber-50 border-2 border-dashed border-amber-200 py-4 px-5 rounded-xl my-6 not-italic',
+      className: 'bg-amber-50 border-2 border-dashed border-amber-200 py-4 px-5 rounded-xl my-6 not-italic dark:bg-amber-950/35 dark:border-amber-700/60',
       label: 'Helpful Tip'
     }
   }
   if (text.includes('good to know') || text.includes('warning')) {
     return {
-      className: 'bg-orange-50 border-l-4 border-orange-300 py-4 px-5 rounded-r-xl my-6 not-italic',
+      className: 'bg-orange-50 border-l-4 border-orange-300 py-4 px-5 rounded-r-xl my-6 not-italic dark:bg-orange-950/35 dark:border-orange-700/65',
       label: null
     }
   }
   if (text.includes('remember') || text.includes("you've got this") || text.includes('you can do')) {
     return {
-      className: 'bg-pink-50 border-2 border-pink-200 py-4 px-5 rounded-xl my-6 not-italic',
+      className: 'bg-pink-50 border-2 border-pink-200 py-4 px-5 rounded-xl my-6 not-italic dark:bg-pink-950/30 dark:border-pink-700/60',
       label: null
     }
   }
   if (text.includes('short version') || text.includes('milestone')) {
     return {
-      className: 'bg-sky-50 border-l-4 border-sky-300 py-4 px-5 rounded-r-xl my-6 not-italic',
+      className: 'bg-sky-50 border-l-4 border-sky-300 py-4 px-5 rounded-r-xl my-6 not-italic dark:bg-sky-950/30 dark:border-sky-700/60',
       label: null
     }
   }
 
   return {
-    className: 'bg-sky-50 border-l-4 border-sky-300 py-4 px-5 rounded-r-xl my-6 not-italic',
+    className: 'bg-sky-50 border-l-4 border-sky-300 py-4 px-5 rounded-r-xl my-6 not-italic dark:bg-sky-950/30 dark:border-sky-700/60',
     label: null
   }
 }
@@ -97,24 +97,24 @@ export function PlanContent({ content }: PlanContentProps) {
         remarkPlugins={[remarkGfm]}
         components={{
           h1: ({ children }) => (
-            <h1 className="text-3xl font-bold text-purple-700 text-center mb-8 pb-4 border-b-2 border-purple-100">
+            <h1 className="text-3xl font-bold text-purple-700 dark:text-purple-200 text-center mb-8 pb-4 border-b-2 border-purple-100 dark:border-purple-700/50">
               {children}
             </h1>
           ),
           h2: ({ children }) => (
-            <div className="bg-[#E3F2FD] border-l-[5px] border-[#64B5F6] rounded-xl py-4 px-6 mt-10 mb-6 shadow-sm">
-              <h2 className="text-xl font-bold text-purple-700 m-0">
+            <div className="bg-sky-100/75 border-l-[5px] border-sky-300 rounded-xl py-4 px-6 mt-10 mb-6 shadow-sm dark:bg-sky-900/35 dark:border-sky-600/70">
+              <h2 className="text-xl font-bold text-purple-700 dark:text-purple-200 m-0">
                 {children}
               </h2>
             </div>
           ),
           h3: ({ children }) => (
-            <h3 className="text-lg font-bold text-[#9B7BB8] mt-8 mb-4 pb-2 border-b border-purple-100">
+            <h3 className="text-lg font-bold text-purple-600 dark:text-purple-200 mt-8 mb-4 pb-2 border-b border-purple-100 dark:border-purple-700/50">
               {children}
             </h3>
           ),
           h4: ({ children }) => (
-            <h4 className="text-base font-bold text-gray-700 mt-5 mb-3">
+            <h4 className="text-base font-bold text-gray-700 dark:text-slate-200 mt-5 mb-3">
               {children}
             </h4>
           ),
@@ -123,45 +123,45 @@ export function PlanContent({ content }: PlanContentProps) {
             return (
               <blockquote className={className}>
                 {label && (
-                  <span className="block text-sm font-bold text-pink-500 uppercase tracking-wide mb-2">
+                  <span className="block text-sm font-bold text-pink-500 dark:text-pink-300 uppercase tracking-wide mb-2">
                     {label}
                   </span>
                 )}
-                <div className="text-slate-600 text-base leading-relaxed [&>p]:m-0">
+                <div className="text-slate-600 dark:text-slate-200 text-base leading-relaxed [&>p]:m-0">
                   {children}
                 </div>
               </blockquote>
             )
           },
           table: ({ children }) => (
-            <div className="overflow-x-auto my-6 rounded-xl border border-gray-200">
+            <div className="overflow-x-auto my-6 rounded-xl border border-gray-200 dark:border-slate-700">
               <table className="min-w-full">
                 {children}
               </table>
             </div>
           ),
           thead: ({ children }) => (
-            <thead className="bg-purple-50">
+            <thead className="bg-purple-50 dark:bg-purple-900/35">
               {children}
             </thead>
           ),
           th: ({ children }) => (
-            <th className="px-5 py-4 text-left text-sm font-bold text-purple-700 uppercase tracking-wide">
+            <th className="px-5 py-4 text-left text-sm font-bold text-purple-700 dark:text-purple-200 uppercase tracking-wide">
               {children}
             </th>
           ),
           tbody: ({ children }) => (
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-gray-100 dark:divide-slate-700/80">
               {children}
             </tbody>
           ),
           tr: ({ children }) => (
-            <tr className="even:bg-amber-50/50">
+            <tr className="even:bg-amber-50/50 dark:even:bg-amber-900/20">
               {children}
             </tr>
           ),
           td: ({ children }) => (
-            <td className="px-5 py-4 text-base text-gray-600">
+            <td className="px-5 py-4 text-base text-gray-600 dark:text-slate-200">
               {children}
             </td>
           ),
@@ -177,13 +177,13 @@ export function PlanContent({ content }: PlanContentProps) {
           ),
           hr: () => (
             <div className="flex items-center justify-center gap-3 my-10">
-              <div className="flex-1 h-0.5 bg-purple-100"></div>
-              <div className="w-2 h-2 rounded-full bg-pink-300"></div>
-              <div className="flex-1 h-0.5 bg-purple-100"></div>
+              <div className="flex-1 h-0.5 bg-purple-100 dark:bg-purple-700/40"></div>
+              <div className="w-2 h-2 rounded-full bg-pink-300 dark:bg-pink-400/70"></div>
+              <div className="flex-1 h-0.5 bg-purple-100 dark:bg-purple-700/40"></div>
             </div>
           ),
           strong: ({ children }) => (
-            <strong className="font-semibold text-gray-800">{children}</strong>
+            <strong className="font-semibold text-gray-800 dark:text-slate-100">{children}</strong>
           ),
           p: ({ children }) => {
             const text = getTextFromNode(children).trim()
@@ -191,28 +191,28 @@ export function PlanContent({ content }: PlanContentProps) {
             // Special formatting for troubleshooting patterns
             if (text.startsWith('If ') || text.match(/^If [^:]+:/)) {
               return (
-                <p className="text-gray-600 text-base leading-relaxed my-4 pl-5 border-l-2 border-orange-200 bg-orange-50/50 py-3 pr-4 rounded-r">
+                <p className="text-gray-600 dark:text-slate-200 text-base leading-relaxed my-4 pl-5 border-l-2 border-orange-200 bg-orange-50/50 py-3 pr-4 rounded-r dark:border-orange-700/60 dark:bg-orange-900/25">
                   {children}
                 </p>
               )
             }
             if (lowerText.startsWith('why this change') || lowerText.startsWith('**why this change') || lowerText.includes('why this change')) {
               return (
-                <div className="my-4 rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-4">
-                  <p className="text-emerald-900 text-base leading-relaxed m-0">
+                <div className="my-4 rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-4 dark:border-emerald-700/60 dark:bg-emerald-900/25">
+                  <p className="text-emerald-900 dark:text-emerald-200 text-base leading-relaxed m-0">
                     {children}
                   </p>
                 </div>
               )
             }
-            return <p className="text-slate-600 text-base leading-relaxed my-4">{children}</p>
+            return <p className="text-slate-600 dark:text-slate-200 text-base leading-relaxed my-4">{children}</p>
           },
           a: ({ href, children }) => (
             <a
               href={href}
               target={href?.startsWith('http') ? '_blank' : undefined}
               rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className="text-purple-600 hover:text-purple-800 underline"
+              className="text-purple-600 hover:text-purple-800 underline dark:text-purple-300 dark:hover:text-purple-200"
             >
               {children}
             </a>

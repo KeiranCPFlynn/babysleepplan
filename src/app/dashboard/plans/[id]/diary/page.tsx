@@ -35,16 +35,16 @@ export default async function DiaryPage({
 
   if (plan.status !== 'completed') {
     return (
-      <div className="max-w-3xl mx-auto space-y-6">
+      <div className="dashboard-surface max-w-3xl mx-auto space-y-6 p-5 sm:p-6">
         <Link
           href={`/dashboard/plans/${id}`}
-          className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700"
+          className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700 dark:text-slate-300 dark:hover:text-slate-100"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Plan
         </Link>
         <div className="text-center py-12">
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-slate-200">
             The sleep diary is available once your plan is ready.
           </p>
         </div>
@@ -62,16 +62,16 @@ export default async function DiaryPage({
 
   if (!hasActiveSubscription(profile?.subscription_status, isStripeEnabled)) {
     return (
-      <div className="max-w-3xl mx-auto space-y-6">
+      <div className="dashboard-surface max-w-3xl mx-auto space-y-6 p-5 sm:p-6">
         <Link
           href={`/dashboard/plans/${id}`}
-          className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700"
+          className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700 dark:text-slate-300 dark:hover:text-slate-100"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Plan
         </Link>
 
-        <Card className="border-amber-200 bg-amber-50">
+        <Card className="border-amber-200 bg-amber-50 dark:border-amber-700/60 dark:bg-amber-950/35">
           <CardHeader>
             <CardTitle>Subscription Inactive</CardTitle>
             <CardDescription>
@@ -79,7 +79,7 @@ export default async function DiaryPage({
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-amber-800">
+            <p className="text-sm text-amber-800 dark:text-amber-200">
               Your plan is still available to view.
             </p>
           </CardContent>
@@ -127,26 +127,26 @@ export default async function DiaryPage({
   const initialAutoApplySevenDayUpdate = searchParams?.autoUpdate7 === '1' || searchParams?.autoUpdate7 === 'true'
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
+    <div className="dashboard-surface max-w-3xl mx-auto space-y-6 p-5 sm:p-6">
       <Link
         href={`/dashboard/plans/${id}`}
-        className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700"
+        className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700 dark:text-slate-300 dark:hover:text-slate-100"
       >
         <ArrowLeft className="mr-2 h-4 w-4" />
         Back to Plan
       </Link>
 
       {/* Header */}
-      <div className="bg-purple-100 rounded-2xl px-6 py-6 text-center">
+      <div className="bg-purple-100 rounded-2xl px-6 py-6 text-center dark:bg-purple-900/35">
         <div className="flex justify-center gap-2 mb-3">
           <Star className="h-4 w-4 text-pink-400" />
-          <Moon className="h-5 w-5 text-purple-500" />
+          <Moon className="h-5 w-5 text-purple-500 dark:text-purple-300" />
           <Star className="h-4 w-4 text-pink-400" />
         </div>
-        <h1 className="text-2xl font-bold text-purple-700">
+        <h1 className="text-2xl font-bold text-purple-700 dark:text-purple-200">
           {plan.baby?.name}&apos;s Sleep Diary
         </h1>
-        <p className="text-purple-600 text-sm mt-1">
+        <p className="text-purple-600 dark:text-purple-300 text-sm mt-1">
           Track sleep patterns and get regular check-ins
         </p>
       </div>

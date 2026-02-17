@@ -71,14 +71,14 @@ export default async function PlanRevisionPage({
     <div className="max-w-4xl mx-auto space-y-6">
       <Link
         href={`/dashboard/plans/${id}`}
-        className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700"
+        className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700 dark:text-slate-300 dark:hover:text-slate-100"
       >
         <ArrowLeft className="mr-2 h-4 w-4" />
         Back to Plan
       </Link>
 
       <Card className="overflow-hidden">
-        <CardHeader className="border-b bg-purple-50">
+        <CardHeader className="border-b bg-purple-50 dark:bg-purple-900/30 dark:border-slate-700">
           <CardTitle>Plan Revision {revision.revision_number}</CardTitle>
           <CardDescription>
             {revision.summary || weekLabel || 'Plan update'} · {createdAt}
@@ -90,10 +90,10 @@ export default async function PlanRevisionPage({
       </Card>
 
       {revision.source !== 'initial' && (
-        <Card id="update-details" className="border-emerald-100 bg-emerald-50">
+        <Card id="update-details" className="border-emerald-100 bg-emerald-50 dark:border-emerald-700/60 dark:bg-emerald-900/25">
           <CardHeader>
-            <CardTitle className="text-lg text-emerald-900">Changes in this update</CardTitle>
-            <CardDescription className="text-emerald-700">
+            <CardTitle className="text-lg text-emerald-900 dark:text-emerald-200">Changes in this update</CardTitle>
+            <CardDescription className="text-emerald-700 dark:text-emerald-300">
               The newest section added in this revision.
             </CardDescription>
           </CardHeader>
@@ -101,7 +101,7 @@ export default async function PlanRevisionPage({
             {updateContent ? (
               <PlanContent content={updateContent} />
             ) : (
-              <p className="text-sm text-emerald-800">
+              <p className="text-sm text-emerald-800 dark:text-emerald-200">
                 No isolated update section was found for this revision.
               </p>
             )}

@@ -36,6 +36,7 @@ export const stripe = {
   get billingPortal() { return getStripe().billingPortal },
   get subscriptions() { return getStripe().subscriptions },
   get subscriptionItems() { return getStripe().subscriptionItems },
+  get invoices() { return getStripe().invoices },
 }
 
 export const MONTHLY_PRICE_CENTS = 1900 // $19.00/month in cents

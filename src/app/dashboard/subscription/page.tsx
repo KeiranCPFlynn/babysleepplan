@@ -12,6 +12,7 @@ import { ManageSubscriptionButton } from '@/components/subscription/manage-subsc
 import { stripe } from '@/lib/stripe'
 import { formatUniversalDate } from '@/lib/date-format'
 import { DisplayNameForm } from '@/components/account/display-name-form'
+import type Stripe from 'stripe'
 
 export const dynamic = 'force-dynamic'
 
@@ -25,6 +26,137 @@ function getSupabaseAdmin() {
 }
 
 const isDev = process.env.NODE_ENV !== 'production'
+
+function formatCurrency(amountCents: number, currency: string) {
+  const normalizedCurrency = (currency || 'usd').toUpperCase()
+
+  try {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: normalizedCurrency,
+    }).format(amountCents / 100)
+  } catch {
+    return `$${(amountCents / 100).toFixed(2)}`
+  }
+}
+
+function getCouponFromDiscount(discount: string | Stripe.Discount): Stripe.Coupon | null {
+  if (typeof discount === 'string') return null
+  const coupon = discount.source?.coupon
+  if (!coupon || typeof coupon === 'string') return null
+  return coupon
+}
+
+function applyDiscounts(
+  amountCents: number,
+  currency: string,
+  discounts: Array<string | Stripe.Discount>
+) {
+  let total = amountCents
+
+  for (const discount of discounts) {
+    const coupon = getCouponFromDiscount(discount)
+    if (!coupon) continue
+
+    if (coupon.percent_off !== null) {
+      total -= Math.round((total * coupon.percent_off) / 100)
+    } else if (coupon.amount_off !== null) {
+      if (coupon.currency && coupon.currency !== currency) continue
+      total -= coupon.amount_off
+    }
+
+    if (total <= 0) return 0
+  }
+
+  return total
+}
+
+function getFallbackSubscriptionPricing(subscription: Stripe.Subscription): {
+  subtotalCents: number
+  totalCents: number
+  currency: string
+} | null {
+  let subtotalCents = 0
+  let discountedSubtotalCents = 0
+  let currency = subscription.currency || 'usd'
+
+  for (const item of subscription.items.data) {
+    const unitAmount = item.price.unit_amount
+    if (unitAmount === null) continue
+
+    const quantity = item.quantity ?? 1
+    const itemSubtotal = unitAmount * quantity
+    const itemCurrency = item.price.currency || currency
+
+    currency = itemCurrency
+    subtotalCents += itemSubtotal
+    discountedSubtotalCents += applyDiscounts(
+      itemSubtotal,
+      itemCurrency,
+      item.discounts ?? []
+    )
+  }
+
+  if (subtotalCents <= 0) return null
+
+  return {
+    subtotalCents,
+    totalCents: applyDiscounts(discountedSubtotalCents, currency, subscription.discounts ?? []),
+    currency,
+  }
+}
+
+async function getCurrentStripeSubscription(customerId: string) {
+  const subscriptions = await stripe.subscriptions.list({
+    customer: customerId,
+    limit: 10,
+    expand: [
+      'data.discounts',
+      'data.discounts.source.coupon',
+      'data.items.data.discounts',
+      'data.items.data.discounts.source.coupon',
+    ],
+  })
+
+  return subscriptions.data.find(
+    (s) => s.status === 'active' || s.status === 'trialing'
+  ) ?? null
+}
+
+async function getSubscriptionPriceDisplay(
+  customerId: string,
+  subscription: Stripe.Subscription
+) {
+  try {
+    const upcomingInvoice = await stripe.invoices.retrieveUpcoming({
+      customer: customerId,
+      subscription: subscription.id,
+    })
+
+    const currency = upcomingInvoice.currency || subscription.currency || 'usd'
+    const subtotalCents = upcomingInvoice.subtotal_excluding_tax ?? upcomingInvoice.subtotal
+    const totalCents = upcomingInvoice.total_excluding_tax ?? upcomingInvoice.total
+
+    return {
+      current: formatCurrency(totalCents, currency),
+      original: totalCents < subtotalCents
+        ? formatCurrency(subtotalCents, currency)
+        : null,
+    }
+  } catch (error) {
+    console.error('[subscription] Failed to load upcoming invoice for price display:', error)
+  }
+
+  const fallbackPricing = getFallbackSubscriptionPricing(subscription)
+  if (!fallbackPricing) return null
+
+  return {
+    current: formatCurrency(fallbackPricing.totalCents, fallbackPricing.currency),
+    original: fallbackPricing.totalCents < fallbackPricing.subtotalCents
+      ? formatCurrency(fallbackPricing.subtotalCents, fallbackPricing.currency)
+      : null,
+  }
+}
 
 export default async function SubscriptionPage() {
   const user = await requireAuth()
@@ -42,30 +174,24 @@ export default async function SubscriptionPage() {
 
   let status = profile?.subscription_status
   const stripeCustomerId = profile?.stripe_customer_id
+  let activeStripeSubscription: Stripe.Subscription | null = null
 
   // Self-healing: if DB says inactive but user has a Stripe customer, check Stripe directly
   const shouldSync = isStripeEnabled && stripeCustomerId && !hasActiveSubscription(status, isStripeEnabled)
 
   if (shouldSync) {
     try {
-      const subscriptions = await stripe.subscriptions.list({
-        customer: stripeCustomerId,
-        limit: 10,
-      })
+      activeStripeSubscription = await getCurrentStripeSubscription(stripeCustomerId)
 
       if (isDev) {
-        console.log('[sub-sync] Stripe returned', subscriptions.data.length, 'subscriptions:',
-          subscriptions.data.map(s => ({ id: s.id, status: s.status }))
+        console.log('[sub-sync] Stripe current subscription:',
+          activeStripeSubscription ? { id: activeStripeSubscription.id, status: activeStripeSubscription.status } : 'none'
         )
       }
 
-      const activeSub = subscriptions.data.find(
-        (s: { status: string }) => s.status === 'active' || s.status === 'trialing'
-      )
-
-      if (activeSub) {
-        const ourStatus = activeSub.status === 'trialing' ? 'trialing' : 'active'
-        const endTimestamp = activeSub.trial_end ?? activeSub.items.data[0]?.current_period_end
+      if (activeStripeSubscription) {
+        const ourStatus = activeStripeSubscription.status === 'trialing' ? 'trialing' : 'active'
+        const endTimestamp = activeStripeSubscription.trial_end ?? activeStripeSubscription.items.data[0]?.current_period_end
         const periodEnd = endTimestamp ? new Date(endTimestamp * 1000).toISOString() : null
 
         const adminClient = getSupabaseAdmin()
@@ -94,6 +220,29 @@ export default async function SubscriptionPage() {
   const isAdmin = profile?.is_admin === true
   const showAdminTools = isAdmin
   const daysRemaining = getDaysRemaining(profile?.subscription_period_end ?? null)
+  let monthlyPriceDisplay = `$${MONTHLY_PRICE}`
+  let originalMonthlyPriceDisplay: string | null = null
+
+  if (isActive && isStripeEnabled && stripeCustomerId) {
+    if (!activeStripeSubscription) {
+      try {
+        activeStripeSubscription = await getCurrentStripeSubscription(stripeCustomerId)
+      } catch (error) {
+        console.error('[subscription] Failed to load active subscription:', error)
+      }
+    }
+
+    if (activeStripeSubscription) {
+      const priceDisplay = await getSubscriptionPriceDisplay(
+        stripeCustomerId,
+        activeStripeSubscription
+      )
+      if (priceDisplay) {
+        monthlyPriceDisplay = priceDisplay.current
+        originalMonthlyPriceDisplay = priceDisplay.original
+      }
+    }
+  }
 
   return (
     <div className="dashboard-surface max-w-2xl mx-auto space-y-6 p-5 sm:p-6">
@@ -186,7 +335,19 @@ export default async function SubscriptionPage() {
             </div>
             <div className="flex justify-between items-center py-2 border-b border-slate-100">
               <span className="text-sm text-slate-600">Price</span>
-              <span className="text-sm font-medium text-slate-800">${MONTHLY_PRICE}/month</span>
+              <span className="text-sm font-medium text-slate-800">
+                {monthlyPriceDisplay}/month
+                {originalMonthlyPriceDisplay && (
+                  <>
+                    <span className="ml-2 text-xs font-normal text-slate-500 line-through">
+                      {originalMonthlyPriceDisplay}/month
+                    </span>
+                    <span className="ml-2 inline-flex items-center rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-700">
+                      Promo applied
+                    </span>
+                  </>
+                )}
+              </span>
             </div>
             <div className="flex justify-between items-center py-2 border-b border-slate-100">
               <span className="text-sm text-slate-600">Status</span>

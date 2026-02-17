@@ -92,7 +92,7 @@ export function BabyForm({ baby, mode, returnTo }: BabyFormProps) {
 
   return (
     <Card className="family-form family-form-shell max-w-2xl overflow-hidden">
-      <CardHeader className="border-b border-sky-100/70 bg-white/70">
+      <CardHeader className="border-b border-sky-100/70 bg-white/70 pt-6">
         <CardTitle className="text-sky-900">
           {mode === 'create'
             ? returnTo
