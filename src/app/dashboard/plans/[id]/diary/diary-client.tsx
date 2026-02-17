@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
@@ -21,8 +21,8 @@ interface DiaryClientProps {
   initialEntries: SleepDiaryEntry[]
   initialReviews: WeeklyReview[]
   initialSelectedDate?: string | null
-  initialThreeDayCooldownUntil?: string | null
-  initialUpdatedForLast3?: boolean
+  initialAutoGenerateReview?: boolean
+  initialAutoApplySevenDayUpdate?: boolean
   initialUpdatedForLast7?: boolean
 }
 
@@ -59,8 +59,8 @@ export function DiaryClient({
   initialEntries,
   initialReviews,
   initialSelectedDate = null,
-  initialThreeDayCooldownUntil = null,
-  initialUpdatedForLast3 = false,
+  initialAutoGenerateReview = false,
+  initialAutoApplySevenDayUpdate = false,
   initialUpdatedForLast7 = false,
 }: DiaryClientProps) {
   const [entries, setEntries] = useState<SleepDiaryEntry[]>(initialEntries)
@@ -71,19 +71,18 @@ export function DiaryClient({
   const [reviewError, setReviewError] = useState<string | null>(null)
   const [updatingPlan, setUpdatingPlan] = useState(false)
   const [updateMessage, setUpdateMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
-  const [updateWindow, setUpdateWindow] = useState<3 | 7 | null>(null)
+  const [updateWindow, setUpdateWindow] = useState<7 | null>(null)
   const [latestAppliedUpdate, setLatestAppliedUpdate] = useState<{
     windowDays: 3 | 7
     content: string
     revisionId: string | null
   } | null>(null)
   const [seeding, setSeeding] = useState(false)
-  const [updatedForLast3, setUpdatedForLast3] = useState(initialUpdatedForLast3)
   const [updatedForLast7, setUpdatedForLast7] = useState(initialUpdatedForLast7)
   const isDevMode = process.env.NEXT_PUBLIC_STRIPE_ENABLED === 'false'
-  const threeDayCooldownUntil = initialThreeDayCooldownUntil ? new Date(initialThreeDayCooldownUntil) : null
-  const isThreeDayOnCooldown = Boolean(threeDayCooldownUntil && Date.now() < threeDayCooldownUntil.getTime())
   const latestAppliedUpdateRef = useRef<HTMLDivElement | null>(null)
+  const autoReviewTriggeredRef = useRef(false)
+  const autoUpdateTriggeredRef = useRef(false)
 
   useEffect(() => {
     if (latestAppliedUpdate) {
@@ -107,17 +106,16 @@ export function DiaryClient({
   }
 
   const weekDates = getWeekDates()
+  const currentWeekStart = weekDates[0]
+  const currentWeekEnd = weekDates[6]
   const todayStr = new Date().toISOString().split('T')[0]
   const last7Dates = Array.from({ length: 7 }).map((_, index) => {
     const date = new Date()
     date.setDate(date.getDate() - (6 - index))
     return date.toISOString().split('T')[0]
   })
-  const last3Dates = Array.from({ length: 3 }).map((_, index) => {
-    const date = new Date()
-    date.setDate(date.getDate() - (2 - index))
-    return date.toISOString().split('T')[0]
-  })
+  const last7Start = last7Dates[0]
+  const last7End = last7Dates[last7Dates.length - 1]
 
   // Get entry for a specific date
   const getEntryForDate = (date: string) => {
@@ -130,9 +128,6 @@ export function DiaryClient({
     .filter(Boolean)
 
   const last7Entries = last7Dates
-    .map((d) => getEntryForDate(d))
-    .filter(Boolean)
-  const last3Entries = last3Dates
     .map((d) => getEntryForDate(d))
     .filter(Boolean)
 
@@ -180,8 +175,8 @@ export function DiaryClient({
     refreshEntries()
   }
 
-  // Generate weekly review
-  const requestReview = async () => {
+  // Generate check-in review
+  const requestReview = useCallback(async () => {
     setGeneratingReview(true)
     setReviewError(null)
 
@@ -191,8 +186,8 @@ export function DiaryClient({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           planId,
-          weekStart: weekDates[0],
-          weekEnd: weekDates[6],
+          weekStart: currentWeekStart,
+          weekEnd: currentWeekEnd,
         }),
       })
 
@@ -209,7 +204,7 @@ export function DiaryClient({
     } finally {
       setGeneratingReview(false)
     }
-  }
+  }, [planId, currentWeekStart, currentWeekEnd])
 
   const generateReview = () => requestReview()
   const regenerateReview = () => requestReview()
@@ -241,12 +236,10 @@ export function DiaryClient({
     }
   }
 
-  const updatePlan = async (windowDays: 3 | 7, force: boolean = false) => {
+  const updatePlan = useCallback(async (force: boolean = false) => {
     setUpdatingPlan(true)
     setUpdateMessage(null)
-    setUpdateWindow(windowDays)
-
-    const rangeDates = windowDays === 3 ? last3Dates : last7Dates
+    setUpdateWindow(7)
 
     try {
       const response = await fetch(`/api/diary/plan-update${force ? '?force=true' : ''}`, {
@@ -254,9 +247,9 @@ export function DiaryClient({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           planId,
-          weekStart: rangeDates[0],
-          weekEnd: rangeDates[rangeDates.length - 1],
-          windowDays,
+          weekStart: last7Start,
+          weekEnd: last7End,
+          windowDays: 7,
         }),
       })
 
@@ -266,31 +259,60 @@ export function DiaryClient({
         throw new Error(data.error || 'Failed to update plan')
       }
 
-      setUpdateMessage({ type: 'success', text: `${windowDays}-day plan update saved to history.` })
+      setUpdateMessage({ type: 'success', text: '7-day plan update saved to history.' })
       const updateSection = typeof data.updateSection === 'string'
         ? data.updateSection
         : extractLatestUpdateSection(data.revision?.plan_content)
       if (updateSection) {
         setLatestAppliedUpdate({
-          windowDays,
+          windowDays: 7,
           content: updateSection,
           revisionId: typeof data.revision?.id === 'string' ? data.revision.id : null,
         })
       }
-      if (windowDays === 3) {
-        setUpdatedForLast3(true)
-      } else {
-        setUpdatedForLast7(true)
-      }
+      setUpdatedForLast7(true)
     } catch (err) {
       setUpdateMessage({ type: 'error', text: err instanceof Error ? err.message : 'Failed to update plan' })
     } finally {
       setUpdatingPlan(false)
     }
-  }
+  }, [planId, last7Start, last7End])
 
   // Get review for current week
-  const currentWeekReview = reviews.find((r) => r.week_start === weekDates[0])
+  const currentWeekReview = reviews.find((r) => r.week_start === currentWeekStart)
+
+  useEffect(() => {
+    if (!initialAutoGenerateReview) return
+    if (autoReviewTriggeredRef.current) return
+    if (weekOffset !== 0) return
+    if (currentWeekReview) return
+
+    if (weekEntries.length < 3) {
+      autoReviewTriggeredRef.current = true
+      setReviewError('Log at least 3 days this week before generating a check-in.')
+      return
+    }
+
+    autoReviewTriggeredRef.current = true
+    void requestReview()
+  }, [initialAutoGenerateReview, currentWeekReview, weekEntries.length, weekOffset, requestReview])
+
+  useEffect(() => {
+    if (!initialAutoApplySevenDayUpdate) return
+    if (autoUpdateTriggeredRef.current) return
+    if (selectedDate) return
+    if (updatedForLast7) return
+
+    if (last7Entries.length < 7) {
+      autoUpdateTriggeredRef.current = true
+      setUpdateWindow(7)
+      setUpdateMessage({ type: 'error', text: 'Log at least 7 days before applying a 7-day plan update.' })
+      return
+    }
+
+    autoUpdateTriggeredRef.current = true
+    void updatePlan()
+  }, [initialAutoApplySevenDayUpdate, selectedDate, updatedForLast7, last7Entries.length, updatePlan])
 
   // Check if date is in the future
   const isFutureDate = (dateStr: string) => dateStr > todayStr
@@ -432,72 +454,6 @@ export function DiaryClient({
       {/* Plan Updates */}
       {!selectedDate && (
         <div className="space-y-6">
-          {!updatedForLast3 && (
-            <Card className="border-violet-200 bg-violet-50">
-              <CardHeader>
-                <h3 className="font-semibold text-violet-900">3-Day Plan Update</h3>
-                <p className="text-sm text-violet-700">
-                  A quick adjustment based on the last 3 days.
-                </p>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                {last3Entries.length < 3 ? (
-                  <div>
-                    <p className="text-sm text-violet-800">
-                      {last3Entries.length}/3 days logged
-                    </p>
-                    <p className="text-xs text-violet-700">
-                      Once you log 3 days, you&apos;ll be able to apply a quick update.
-                    </p>
-                  </div>
-                ) : (
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                    <div>
-                      <p className="text-sm font-medium text-violet-900">
-                        Ready for a quick update
-                      </p>
-                      <p className="text-xs text-violet-700">
-                        We&apos;ll add one focused adjustment from your latest 3 logs.
-                      </p>
-                    </div>
-                    <Button
-                      onClick={() => updatePlan(3)}
-                      disabled={updatingPlan || isThreeDayOnCooldown}
-                      className="bg-violet-600 hover:bg-violet-700"
-                    >
-                      {updatingPlan ? (
-                        <>
-                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          Updating...
-                        </>
-                      ) : isThreeDayOnCooldown ? (
-                        'Available Soon'
-                      ) : (
-                        'Apply 3-Day Update'
-                      )}
-                    </Button>
-                  </div>
-                )}
-                {isThreeDayOnCooldown && threeDayCooldownUntil && (
-                  <p className="text-xs text-violet-700">
-                    Next 3-day update available after {threeDayCooldownUntil.toLocaleString()}.
-                  </p>
-                )}
-                {updateMessage && updateWindow === 3 && (
-                  <p
-                    className={`text-sm rounded px-3 py-2 ${
-                      updateMessage.type === 'success'
-                        ? 'bg-violet-100 text-violet-900'
-                        : 'bg-red-50 text-red-600'
-                    }`}
-                  >
-                    {updateMessage.text}
-                  </p>
-                )}
-              </CardContent>
-            </Card>
-          )}
-
           {!updatedForLast7 && (
             <Card className="border-emerald-200 bg-emerald-50">
               <CardHeader>
@@ -527,7 +483,7 @@ export function DiaryClient({
                       </p>
                     </div>
                     <Button
-                      onClick={() => updatePlan(7)}
+                      onClick={() => updatePlan()}
                       disabled={updatingPlan}
                       className="bg-emerald-600 hover:bg-emerald-700"
                     >
@@ -591,14 +547,14 @@ export function DiaryClient({
         </div>
       )}
 
-      {/* Weekly Review Section */}
+      {/* 3-Day Check-In Section */}
       {!selectedDate && (
         <Card>
           <CardHeader>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Sparkles className="h-5 w-5 text-purple-500" />
-                <h3 className="font-semibold text-gray-800">Weekly Review</h3>
+                <h3 className="font-semibold text-gray-800">3-Day Check-In</h3>
               </div>
               <div className="flex items-center gap-2 flex-wrap justify-end">
                 {weekEntries.length >= 3 && !currentWeekReview && (
@@ -614,7 +570,7 @@ export function DiaryClient({
                         Generating...
                       </>
                     ) : (
-                      'Get Review'
+                      'Generate Check-In'
                     )}
                   </Button>
                 )}
@@ -625,7 +581,7 @@ export function DiaryClient({
                     size="sm"
                     variant="ghost"
                   >
-                    {generatingReview ? 'Regenerating...' : 'Regenerate Review'}
+                    {generatingReview ? 'Regenerating...' : 'Regenerate Check-In'}
                   </Button>
                 )}
                 {isDevMode && (
@@ -647,7 +603,7 @@ export function DiaryClient({
                       Seed 7 Days
                     </Button>
                     <Button
-                      onClick={() => updatePlan(7, true)}
+                      onClick={() => updatePlan(true)}
                       disabled={updatingPlan || last7Entries.length < 7}
                       size="sm"
                       variant="ghost"
@@ -663,10 +619,10 @@ export function DiaryClient({
             {!currentWeekReview && weekEntries.length >= 3 && (
               <div className="mb-4 rounded-xl border border-purple-200 bg-purple-50 p-4">
                 <p className="text-sm font-medium text-purple-800">
-                  This week&apos;s review is ready to generate.
+                  Your 3-day check-in is ready to generate.
                 </p>
                 <p className="text-xs text-purple-600 mt-1">
-                  We&apos;ll summarize patterns from the diary and highlight wins.
+                  We&apos;ll summarize patterns from the latest logs and suggest a small next step.
                 </p>
               </div>
             )}
@@ -683,13 +639,13 @@ export function DiaryClient({
                 </p>
                 <PlanContent content={currentWeekReview.review_content} />
                 <p className="text-xs text-gray-400">
-                  Quick updates unlock after 3 logged days. Full weekly updates unlock after 7 logged days.
+                  Plan updates unlock after 7 logged days.
                 </p>
               </div>
             ) : weekEntries.length < 3 ? (
               <div className="text-center py-6">
                 <p className="text-gray-500">
-                  Log at least 3 days this week to get your AI review.
+                  Log at least 3 days this week to get your AI check-in.
                 </p>
                 <p className="text-sm text-gray-400 mt-1">
                   {weekEntries.length}/3 days logged
@@ -711,7 +667,7 @@ export function DiaryClient({
       {!selectedDate && reviews.length > 0 && reviews.some(r => r.week_start !== weekDates[0]) && (
         <Card>
           <CardHeader>
-            <h3 className="font-semibold text-gray-800">Past Reviews</h3>
+            <h3 className="font-semibold text-gray-800">Past Check-Ins</h3>
           </CardHeader>
           <CardContent className="space-y-4">
             {reviews

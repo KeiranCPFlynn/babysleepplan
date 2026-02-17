@@ -13,18 +13,6 @@ import { AnimateOnScroll } from '@/components/ui/animate-on-scroll'
 import { formatUniversalDate } from '@/lib/date-format'
 
 const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
-const THREE_DAY_COOLDOWN_MS = 72 * 60 * 60 * 1000
-
-function diffDaysBetween(start: string | null, end: string | null) {
-  if (!start || !end) return null
-  const startDate = new Date(start + 'T12:00:00Z')
-  const endDate = new Date(end + 'T12:00:00Z')
-  return Math.round((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24))
-}
-
-function isThreeDayWindowRevision(weekStart: string | null, weekEnd: string | null) {
-  return diffDaysBetween(weekStart, weekEnd) === 2
-}
 
 export default async function DashboardPage() {
   const user = await requireAuth()
@@ -91,7 +79,6 @@ export default async function DashboardPage() {
 
   const toIsoDate = (value: Date) => value.toISOString().split('T')[0]
   const today = new Date()
-  const nowMs = today.getTime()
   const todayStr = toIsoDate(today)
   const currentWeekStart = new Date(today)
   currentWeekStart.setDate(today.getDate() - today.getDay())
@@ -102,14 +89,10 @@ export default async function DashboardPage() {
   const last7Start = new Date(today)
   last7Start.setDate(today.getDate() - 6)
   const last7StartStr = toIsoDate(last7Start)
-  const last3Start = new Date(today)
-  last3Start.setDate(today.getDate() - 2)
-  const last3StartStr = toIsoDate(last3Start)
-  const threeDayCooldownStartIso = new Date(nowMs - THREE_DAY_COOLDOWN_MS).toISOString()
   const entryWindowStart = currentWeekStartStr < last7StartStr ? currentWeekStartStr : last7StartStr
 
   const completedPlanIds = (completedPlans || []).map((plan) => plan.id)
-  const [{ data: relevantDiaryEntries }, { data: currentWeekReviews }, { data: current3DayUpdates }, { data: current7DayUpdates }, { data: recentRollingUpdates }] =
+  const [{ data: relevantDiaryEntries }, { data: currentWeekReviews }, { data: current7DayUpdates }] =
     completedPlanIds.length > 0
       ? await Promise.all([
           supabase
@@ -131,23 +114,9 @@ export default async function DashboardPage() {
             .eq('user_id', user.id)
             .in('plan_id', completedPlanIds)
             .eq('source', 'weekly-review')
-            .eq('week_start', last3StartStr),
-          supabase
-            .from('plan_revisions')
-            .select('plan_id')
-            .eq('user_id', user.id)
-            .in('plan_id', completedPlanIds)
-            .eq('source', 'weekly-review')
             .eq('week_start', last7StartStr),
-          supabase
-            .from('plan_revisions')
-            .select('plan_id, created_at, week_start, week_end')
-            .eq('user_id', user.id)
-            .in('plan_id', completedPlanIds)
-            .eq('source', 'weekly-review')
-            .gte('created_at', threeDayCooldownStartIso),
         ])
-      : [{ data: [] }, { data: [] }, { data: [] }, { data: [] }, { data: [] }]
+      : [{ data: [] }, { data: [] }, { data: [] }]
 
   const entriesByPlan = new Map<string, Set<string>>()
   for (const entry of (relevantDiaryEntries || []) as Array<{ plan_id: string; date: string }>) {
@@ -163,34 +132,19 @@ export default async function DashboardPage() {
   const reviewReadyPlanIds = new Set(
     ((currentWeekReviews || []) as Array<{ plan_id: string }>).map((review) => review.plan_id)
   )
-  const updatedForLast3PlanIds = new Set(
-    ((current3DayUpdates || []) as Array<{ plan_id: string }>).map((update) => update.plan_id)
-  )
   const updatedForLast7PlanIds = new Set(
     ((current7DayUpdates || []) as Array<{ plan_id: string }>).map((update) => update.plan_id)
-  )
-  const plansOn3DayCooldown = new Set(
-    ((recentRollingUpdates || []) as Array<{ plan_id: string; created_at: string; week_start: string | null; week_end: string | null }>)
-      .filter((revision) =>
-        isThreeDayWindowRevision(revision.week_start, revision.week_end) &&
-        (nowMs - new Date(revision.created_at).getTime()) < THREE_DAY_COOLDOWN_MS
-      )
-      .map((revision) => revision.plan_id)
   )
 
   const readyCheckins = (completedPlans || [])
     .map((plan) => {
       const entryDates = entriesByPlan.get(plan.id) || new Set<string>()
       let currentWeekEntryCount = 0
-      let last3EntryCount = 0
       let last7EntryCount = 0
 
       entryDates.forEach((date) => {
         if (date >= currentWeekStartStr && date <= currentWeekEndStr) {
           currentWeekEntryCount += 1
-        }
-        if (date >= last3StartStr && date <= todayStr) {
-          last3EntryCount += 1
         }
         if (date >= last7StartStr && date <= todayStr) {
           last7EntryCount += 1
@@ -198,18 +152,16 @@ export default async function DashboardPage() {
       })
 
       const reviewReady = currentWeekEntryCount >= 3 && !reviewReadyPlanIds.has(plan.id)
-      const update3Ready = last3EntryCount >= 3 && !updatedForLast3PlanIds.has(plan.id) && !plansOn3DayCooldown.has(plan.id)
       const update7Ready = last7EntryCount >= 7 && !updatedForLast7PlanIds.has(plan.id)
 
       return {
         planId: plan.id,
         babyName: plan.baby?.name || 'Baby',
         reviewReady,
-        update3Ready,
         update7Ready,
       }
     })
-    .filter((item) => item.reviewReady || item.update3Ready || item.update7Ready)
+    .filter((item) => item.reviewReady || item.update7Ready)
 
   // Get draft intakes that don't already have a plan
   const { data: allDraftIntakes } = await supabase
@@ -431,7 +383,7 @@ export default async function DashboardPage() {
           <CardHeader>
             <CardTitle className="text-lg text-slate-900 flex items-center gap-2">
               <Sparkles className="h-5 w-5 text-violet-500" />
-              Reviews & Updates Ready
+              Check-Ins & Updates Ready
             </CardTitle>
             <CardDescription className="text-slate-500">
               Take the next best action for each plan.
@@ -446,37 +398,24 @@ export default async function DashboardPage() {
                 <div>
                   <p className="text-sm font-medium text-slate-900">{item.babyName}&apos;s Plan</p>
                   <p className="text-xs text-slate-500">
-                    {item.reviewReady && item.update3Ready && item.update7Ready
-                      ? '3-day review, 3-day update, and 7-day update are ready.'
-                      : item.reviewReady && item.update3Ready
-                        ? '3-day review and 3-day update are ready.'
-                        : item.reviewReady && item.update7Ready
-                          ? '3-day review and 7-day update are ready.'
+                    {item.reviewReady && item.update7Ready
+                        ? '3-day check-in and 7-day update are ready.'
                       : item.reviewReady
-                        ? '3-day review is ready.'
-                        : item.update3Ready
-                          ? '3-day update is ready.'
+                        ? '3-day check-in is ready.'
                           : '7-day update is ready.'}
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {item.reviewReady && (
                     <Button asChild size="sm" className="bg-violet-600 hover:bg-violet-700">
-                      <Link href={`/dashboard/plans/${item.planId}/diary`}>
-                        Generate 3-Day Review
-                      </Link>
-                    </Button>
-                  )}
-                  {item.update3Ready && (
-                    <Button asChild size="sm" className="bg-indigo-600 hover:bg-indigo-700">
-                      <Link href={`/dashboard/plans/${item.planId}/diary`}>
-                        Apply 3-Day Update
+                      <Link href={`/dashboard/plans/${item.planId}/diary?autoReview=1`}>
+                        Generate 3-Day Check-In
                       </Link>
                     </Button>
                   )}
                   {item.update7Ready && (
                     <Button asChild size="sm" className="bg-emerald-600 hover:bg-emerald-700">
-                      <Link href={`/dashboard/plans/${item.planId}/diary`}>
+                      <Link href={`/dashboard/plans/${item.planId}/diary?autoUpdate7=1`}>
                         Apply 7-Day Update
                       </Link>
                     </Button>

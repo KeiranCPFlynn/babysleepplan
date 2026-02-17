@@ -7,25 +7,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { DiaryClient } from './diary-client'
 import { hasActiveSubscription } from '@/lib/subscription'
 
-const THREE_DAY_COOLDOWN_MS = 72 * 60 * 60 * 1000
-
-function diffDaysBetween(start: string | null, end: string | null) {
-  if (!start || !end) return null
-  const startDate = new Date(start + 'T12:00:00Z')
-  const endDate = new Date(end + 'T12:00:00Z')
-  return Math.round((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24))
-}
-
-function isThreeDayWindowRevision(weekStart: string | null, weekEnd: string | null) {
-  return diffDaysBetween(weekStart, weekEnd) === 2
-}
-
 export default async function DiaryPage({
   params,
   searchParams,
 }: {
   params: Promise<{ id: string }>
-  searchParams?: { date?: string }
+  searchParams?: { date?: string; autoReview?: string; autoUpdate7?: string }
 }) {
   const user = await requireAuth()
   const supabase = await createClient()
@@ -103,7 +90,6 @@ export default async function DiaryPage({
 
   // Get diary entries for the past 14 days
   const today = new Date()
-  const nowMs = today.getTime()
   const twoWeeksAgo = new Date(today)
   twoWeeksAgo.setDate(today.getDate() - 13)
 
@@ -127,51 +113,18 @@ export default async function DiaryPage({
   const last7Start = new Date(today)
   last7Start.setDate(today.getDate() - 6)
   const last7StartStr = last7Start.toISOString().split('T')[0]
-  const last3Start = new Date(today)
-  last3Start.setDate(today.getDate() - 2)
-  const last3StartStr = last3Start.toISOString().split('T')[0]
-
-  const [last3UpdateResult, last7UpdateResult] = await Promise.all([
-    supabase
-      .from('plan_revisions')
-      .select('id')
-      .eq('plan_id', id)
-      .eq('user_id', user.id)
-      .eq('source', 'weekly-review')
-      .eq('week_start', last3StartStr)
-      .maybeSingle(),
-    supabase
+  const { data: last7Update } = await supabase
       .from('plan_revisions')
       .select('id')
       .eq('plan_id', id)
       .eq('user_id', user.id)
       .eq('source', 'weekly-review')
       .eq('week_start', last7StartStr)
-      .maybeSingle(),
-  ])
-
-  const { data: recentUpdates } = await supabase
-    .from('plan_revisions')
-    .select('created_at, week_start, week_end')
-    .eq('plan_id', id)
-    .eq('user_id', user.id)
-    .eq('source', 'weekly-review')
-    .order('created_at', { ascending: false })
-    .limit(20)
-
-  const last3Update = last3UpdateResult.data
-  const last7Update = last7UpdateResult.data
-  const latestThreeDayUpdate = (recentUpdates || []).find((revision) =>
-    isThreeDayWindowRevision(revision.week_start, revision.week_end)
-  )
-  const threeDayCooldownUntil = latestThreeDayUpdate?.created_at
-    ? new Date(new Date(latestThreeDayUpdate.created_at).getTime() + THREE_DAY_COOLDOWN_MS)
-    : null
-  const initialThreeDayCooldownUntil = threeDayCooldownUntil && nowMs < threeDayCooldownUntil.getTime()
-    ? threeDayCooldownUntil.toISOString()
-    : null
+      .maybeSingle()
 
   const preselectDate = searchParams?.date
+  const initialAutoGenerateReview = searchParams?.autoReview === '1' || searchParams?.autoReview === 'true'
+  const initialAutoApplySevenDayUpdate = searchParams?.autoUpdate7 === '1' || searchParams?.autoUpdate7 === 'true'
 
   return (
     <div className="max-w-3xl mx-auto space-y-6">
@@ -194,7 +147,7 @@ export default async function DiaryPage({
           {plan.baby?.name}&apos;s Sleep Diary
         </h1>
         <p className="text-purple-600 text-sm mt-1">
-          Track sleep patterns and get weekly insights
+          Track sleep patterns and get regular check-ins
         </p>
       </div>
 
@@ -204,8 +157,8 @@ export default async function DiaryPage({
         initialEntries={entries || []}
         initialReviews={reviews || []}
         initialSelectedDate={preselectDate || null}
-        initialThreeDayCooldownUntil={initialThreeDayCooldownUntil}
-        initialUpdatedForLast3={Boolean(last3Update)}
+        initialAutoGenerateReview={initialAutoGenerateReview}
+        initialAutoApplySevenDayUpdate={initialAutoApplySevenDayUpdate}
         initialUpdatedForLast7={Boolean(last7Update)}
       />
     </div>

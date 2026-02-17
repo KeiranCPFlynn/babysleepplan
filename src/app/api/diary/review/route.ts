@@ -33,7 +33,7 @@ function loadReviewFile(knowledgeDir: string, file: string) {
   }
 }
 
-// Load relevant knowledge base files for weekly review
+// Load relevant knowledge base files for diary check-ins
 function loadReviewKnowledge(ageMonths: number): string {
   const knowledgeDir = path.join(process.cwd(), 'src/data/knowledge')
   const filesToLoad: string[] = []
@@ -119,7 +119,7 @@ function formatDiaryEntries(entries: Array<{
     .join('\n\n')
 }
 
-// POST: Generate a weekly AI review
+// POST: Generate a short 3-day check-in style review
 export async function POST(request: NextRequest) {
   try {
     const supabase = await createClient()
@@ -176,7 +176,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Subscription required to generate reviews' }, { status: 402 })
     }
 
-    // Get diary entries for the week
+    // Get diary entries for the requested window
     const { data: entries, error: entriesError } = await supabase
       .from('sleep_diary_entries')
       .select('*')
@@ -213,7 +213,7 @@ export async function POST(request: NextRequest) {
     const safeAdditionalNotes = plan.intake?.additional_notes ? sanitizeForPrompt(plan.intake.additional_notes, 1000) : ''
 
     // Build the prompt
-    const prompt = `You are a supportive sleep consultant reviewing a week of sleep diary entries.
+    const prompt = `You are a supportive sleep consultant reviewing recent sleep diary entries (typically 3-7 days).
 Your tone should be warm but evidence-grounded.
 
 ## Knowledge Base
@@ -231,34 +231,36 @@ ${safeAdditionalNotes ? `\nAdditional notes: ${safeAdditionalNotes}` : ''}
 ## Original Plan Summary
 ${planSummary}
 
-## This Week's Sleep Log
+## Recent Sleep Log
 ${formatDiaryEntries(entries)}
 
 ---
 
 Write a brief, warm review in Markdown that matches the tone and structure of the plan:
 
-## Weekly Review
+## 3-Day Check-In
 
 ### This Week's Wins
 2-3 sentences highlighting positives, each tied to something visible in the diary.
 
-### Patterns from the Diary
+### Patterns from Recent Logs
 2-3 sentences that clearly reference the diary entries (bedtime/wake time, night wakings, naps, mood, notes). Include at least TWO specific observations tied to the log.
 
-### Focus for Next Week
-2-3 sentences with ONE specific, actionable suggestion.
+### Focus for the Next Few Days
+2-3 sentences with ONE specific, actionable suggestion. Keep it small and realistic.
 
 End with a short blockquote reassurance that includes:
-1) one concrete observation from this week's diary, and
+1) one concrete observation from these diary logs, and
 2) one clear next step for the coming days.
+
+Do not recommend major plan overhauls from this short check-in window.
 
 Avoid generic praise phrases such as "you're doing amazing", "you're doing great", or "you've got this".
 Keep it conversational, specific, and supportive. No emojis.`
 
     // Generate the review
     if (isDev) {
-      console.log('Generating weekly review for plan:', planId)
+      console.log('Generating check-in review for plan:', planId)
     }
 
     const model = getModel()
