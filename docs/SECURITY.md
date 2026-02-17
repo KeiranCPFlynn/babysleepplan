@@ -41,7 +41,7 @@ Configured in `next.config.ts` and applied to all routes:
 
 | Header | Value | Purpose |
 |--------|-------|---------|
-| Content-Security-Policy | `default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com; ...` | Restricts resource loading sources |
+| Content-Security-Policy | `default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com https://www.googletagmanager.com; ...` | Restricts resource loading sources |
 | Strict-Transport-Security | `max-age=31536000; includeSubDomains` | Forces HTTPS for 1 year |
 | X-Frame-Options | `DENY` | Prevents clickjacking |
 | X-Content-Type-Options | `nosniff` | Prevents MIME-type sniffing |
@@ -51,9 +51,9 @@ Configured in `next.config.ts` and applied to all routes:
 
 ### CSP Breakdown
 - `default-src 'self'` - Only allow same-origin by default
-- `script-src` - Self + inline (needed for Next.js) + Stripe.js
+- `script-src` - Self + inline (needed for Next.js) + Stripe.js + Google Tag Manager
 - `style-src` - Self + inline (needed for Tailwind)
-- `img-src` - Self + data URIs + Unsplash (for blog images)
+- `img-src` - Self + data URIs + Unsplash (blog images) + Google Analytics beacon domain
 - `frame-src` - Stripe.js only (for payment elements)
 - `connect-src` - Self + Supabase (HTTPS + WSS) + Stripe API
 

@@ -141,6 +141,8 @@ RESEND_FROM_EMAIL=               # Optional override, e.g. "LunaCradle <noreply@
 
 # App
 NEXT_PUBLIC_APP_URL=http://localhost:3000
+# Optional Google Analytics 4 measurement ID (e.g. G-XXXXXXXXXX)
+NEXT_PUBLIC_GA_MEASUREMENT_ID=
 INTERNAL_API_KEY=                # Required in production
 CRON_SECRET=                     # Recommended in production (Vercel Cron auth)
 # Emergency force override (requires redeploy). Prefer runtime flag toggle in admin controls.
