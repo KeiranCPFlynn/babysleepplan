@@ -45,11 +45,13 @@ export function SignupForm() {
     }
 
     const supabase = createClient()
+    const emailRedirectTo = `${window.location.origin}/auth/callback?next=/dashboard`
 
     const { data, error } = await supabase.auth.signUp({
       email: formData.email,
       password: formData.password,
       options: {
+        emailRedirectTo,
         data: {
           full_name: formData.fullName,
         },
