@@ -342,7 +342,7 @@ export default async function SubscriptionPage() {
                     <span className="ml-2 text-xs font-normal text-slate-500 line-through">
                       {originalMonthlyPriceDisplay}/month
                     </span>
-                    <span className="ml-2 inline-flex items-center rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-700">
+                    <span className="ml-2 inline-flex items-center rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-700 dark:bg-emerald-900/35 dark:text-emerald-200">
                       Promo applied
                     </span>
                   </>
@@ -352,8 +352,8 @@ export default async function SubscriptionPage() {
             <div className="flex justify-between items-center py-2 border-b border-slate-100">
               <span className="text-sm text-slate-600">Status</span>
               <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${status === 'trialing'
-                ? 'bg-sky-100 text-sky-700'
-                : 'bg-green-100 text-green-700'
+                ? 'bg-sky-100 text-sky-700 dark:bg-sky-900/35 dark:text-sky-200'
+                : 'bg-green-100 text-green-700 dark:bg-green-900/35 dark:text-green-200'
                 }`}>
                 {label}
               </span>
