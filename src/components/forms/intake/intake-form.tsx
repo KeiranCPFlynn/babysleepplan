@@ -409,13 +409,13 @@ export function IntakeForm({ babies, intake, hasUsedTrial }: IntakeFormProps) {
   // If intake is not a draft, show a message
   if (intakeStatus !== 'draft') {
     return (
-      <Card>
+      <Card className="family-form family-form-shell">
         <CardContent className="pt-6 text-center">
-          <p className="text-gray-600">
+          <p className="text-slate-600">
             This intake has already been submitted.
           </p>
           <Button
-            className="mt-4"
+            className="mt-4 bg-sky-700 hover:bg-sky-800"
             onClick={() => router.push(`/dashboard/intake/${intake.id}/payment`)}
           >
             {isStripeEnabled ? 'Continue to Start Trial' : 'Generate Plan'}
@@ -427,18 +427,18 @@ export function IntakeForm({ babies, intake, hasUsedTrial }: IntakeFormProps) {
 
   return (
     <FormProvider {...methods}>
-      <div className="max-w-3xl mx-auto">
+      <div className="family-form-shell max-w-3xl mx-auto p-4 sm:p-6">
         {/* Progress indicator */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm text-gray-500">
+            <span className="text-sm text-slate-600">
               Step {currentStep} of {TOTAL_STEPS}
             </span>
             {saving && (
-              <span className="text-sm text-gray-400">Saving...</span>
+              <span className="text-sm text-slate-500">Saving...</span>
             )}
             {!saving && lastSaved && (
-              <span className="text-sm text-gray-400">
+              <span className="text-sm text-slate-500">
                 Saved {lastSaved.toLocaleTimeString()}
               </span>
             )}
@@ -454,10 +454,10 @@ export function IntakeForm({ babies, intake, hasUsedTrial }: IntakeFormProps) {
                   onClick={() => handleStepClick(stepNum)}
                   className={`flex-1 h-2 rounded-full transition-colors ${
                     isActive
-                      ? 'bg-blue-600'
+                      ? 'bg-sky-600'
                       : isCompleted
-                      ? 'bg-blue-400 cursor-pointer hover:bg-blue-500'
-                      : 'bg-gray-200'
+                      ? 'bg-sky-400 cursor-pointer hover:bg-sky-500'
+                      : 'bg-slate-200'
                   }`}
                   title={title}
                   type="button"
@@ -470,7 +470,7 @@ export function IntakeForm({ babies, intake, hasUsedTrial }: IntakeFormProps) {
               <span
                 key={title}
                 className={`text-xs ${
-                  index + 1 === currentStep ? 'text-blue-600 font-medium' : 'text-gray-400'
+                  index + 1 === currentStep ? 'text-sky-700 font-medium' : 'text-slate-500'
                 }`}
               >
                 {title}
@@ -480,14 +480,15 @@ export function IntakeForm({ babies, intake, hasUsedTrial }: IntakeFormProps) {
         </div>
 
         {/* Form content */}
-        <Card>
-          <CardContent className="pt-6">
+        <Card className="family-form overflow-hidden border-sky-100/70 bg-white/60">
+          <CardContent className="pt-6 bg-white/40">
             {renderStep()}
           </CardContent>
-          <CardFooter className="flex justify-between pt-6">
+          <CardFooter className="flex justify-between pt-6 border-t border-sky-100/70 bg-white/60">
             <Button
               type="button"
               variant="outline"
+              className="border-sky-200 bg-white/80 text-slate-700 hover:bg-sky-50"
               onClick={handlePrevious}
               disabled={currentStep === 1}
             >
@@ -496,6 +497,7 @@ export function IntakeForm({ babies, intake, hasUsedTrial }: IntakeFormProps) {
             {currentStep < TOTAL_STEPS ? (
               <Button
                 type="button"
+                className="bg-sky-700 hover:bg-sky-800"
                 onClick={handleNext}
               >
                 Next
@@ -503,6 +505,7 @@ export function IntakeForm({ babies, intake, hasUsedTrial }: IntakeFormProps) {
             ) : (
               <Button
                 type="button"
+                className="bg-sky-700 hover:bg-sky-800"
                 onClick={handleSubmit}
                 disabled={submitting}
               >

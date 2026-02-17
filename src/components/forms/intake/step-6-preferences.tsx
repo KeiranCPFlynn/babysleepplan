@@ -33,8 +33,8 @@ export function Step6Preferences() {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <h2 className="text-2xl font-bold">Your Preferences</h2>
-        <p className="text-gray-600">
+        <h2 className="text-2xl font-semibold text-sky-900">Your Preferences</h2>
+        <p className="text-slate-600">
           Understanding your comfort level and constraints helps us create a plan that works for your family.
         </p>
       </div>
@@ -51,16 +51,16 @@ export function Step6Preferences() {
               step={1}
               className="w-full"
             />
-            <div className="flex justify-between text-xs text-gray-500 mt-2">
+            <div className="flex justify-between text-xs text-slate-500 mt-2">
               <span>No crying</span>
               <span>Any method</span>
             </div>
           </div>
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <p className="font-medium text-blue-900">{currentLevel.label}</p>
-            <p className="text-sm text-blue-700">{currentLevel.description}</p>
+          <div className="bg-sky-50/70 border border-sky-200 rounded-lg p-4">
+            <p className="font-medium text-sky-900">{currentLevel.label}</p>
+            <p className="text-sm text-sky-700">{currentLevel.description}</p>
           </div>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-slate-500">
             We&apos;ll tailor methods to match your comfort level. There&apos;s no wrong answer.
           </p>
           {errors.crying_comfort_level && (
@@ -76,7 +76,7 @@ export function Step6Preferences() {
             placeholder="e.g., Partner works night shifts, live in apartment with thin walls, older sibling in the house, traveling soon..."
             rows={4}
           />
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-slate-500">
             Tell us about anything that might affect how you implement a sleep plan.
           </p>
           {errors.parent_constraints && (

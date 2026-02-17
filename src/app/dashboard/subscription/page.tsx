@@ -11,6 +11,7 @@ import { DeleteUserControls } from '@/components/admin/delete-user-controls'
 import { ManageSubscriptionButton } from '@/components/subscription/manage-subscription-button'
 import { stripe } from '@/lib/stripe'
 import { formatUniversalDate } from '@/lib/date-format'
+import { DisplayNameForm } from '@/components/account/display-name-form'
 
 export const dynamic = 'force-dynamic'
 
@@ -31,7 +32,7 @@ export default async function SubscriptionPage() {
 
   const { data: profile, error: profileError } = await supabase
     .from('profiles')
-    .select('subscription_status, subscription_period_end, stripe_customer_id, is_admin, has_used_trial, created_at')
+    .select('subscription_status, subscription_period_end, stripe_customer_id, is_admin, has_used_trial, created_at, full_name')
     .eq('id', user.id)
     .single()
 
@@ -95,27 +96,28 @@ export default async function SubscriptionPage() {
   const daysRemaining = getDaysRemaining(profile?.subscription_period_end ?? null)
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <div className="dashboard-surface max-w-2xl mx-auto space-y-6 p-5 sm:p-6">
       <Link
         href="/dashboard"
-        className="inline-flex items-center text-sm text-purple-600 hover:text-purple-800"
+        className="inline-flex items-center text-sm text-sky-700 hover:text-sky-800"
       >
         <ArrowLeft className="mr-2 h-4 w-4" />
         Back to Dashboard
       </Link>
 
       <div>
-        <h1 className="text-3xl font-bold text-purple-900">Subscription</h1>
-        <p className="text-purple-600/80 mt-1">
+        <h1 className="text-3xl font-bold text-sky-900">Subscription</h1>
+        <p className="text-slate-600 mt-1">
           Manage your LunaCradle subscription.
         </p>
       </div>
 
-      <div className="rounded-md border border-purple-100 bg-purple-50/50 px-3 py-2">
+      <div className="rounded-md border border-sky-100 bg-gradient-to-r from-sky-50/75 via-white to-rose-50/55 px-4 py-3 space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
-          <span className="text-xs text-purple-700">Account email</span>
-          <span className="text-sm font-medium text-purple-900 break-all">{user.email || 'No email on account'}</span>
+          <span className="text-xs text-sky-700">Account email</span>
+          <span className="text-sm font-medium text-slate-800 break-all">{user.email || 'No email on account'}</span>
         </div>
+        <DisplayNameForm initialName={profile?.full_name ?? null} />
       </div>
 
       {/* Debug Information (Admin Only) */}
@@ -138,7 +140,7 @@ export default async function SubscriptionPage() {
       {/* Delete User (Admin Only) */}
       {showAdminTools && <DeleteUserControls />}
 
-      <Card className={isActive ? 'border-green-200 bg-green-50/50' : 'border-amber-200 bg-amber-50/50'}>
+      <Card className={`dashboard-card-soft ${isActive ? 'border-green-200 bg-green-50/60' : 'border-amber-200 bg-amber-50/60'}`}>
         <CardHeader>
           <div className="flex items-center gap-3">
             <div className={`w-10 h-10 rounded-full flex items-center justify-center ${isActive ? 'bg-green-100' : 'bg-amber-100'}`}>
@@ -173,49 +175,49 @@ export default async function SubscriptionPage() {
       </Card>
 
       {isActive && (
-        <Card>
+        <Card className="dashboard-card-soft">
           <CardHeader>
-            <CardTitle className="text-lg text-purple-900">Plan Details</CardTitle>
+            <CardTitle className="text-lg text-sky-900">Plan Details</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex justify-between items-center py-2 border-b border-gray-100">
-              <span className="text-sm text-gray-600">Plan</span>
-              <span className="text-sm font-medium text-purple-800">LunaCradle</span>
+            <div className="flex justify-between items-center py-2 border-b border-slate-100">
+              <span className="text-sm text-slate-600">Plan</span>
+              <span className="text-sm font-medium text-slate-800">LunaCradle</span>
             </div>
-            <div className="flex justify-between items-center py-2 border-b border-gray-100">
-              <span className="text-sm text-gray-600">Price</span>
-              <span className="text-sm font-medium text-purple-800">${MONTHLY_PRICE}/month</span>
+            <div className="flex justify-between items-center py-2 border-b border-slate-100">
+              <span className="text-sm text-slate-600">Price</span>
+              <span className="text-sm font-medium text-slate-800">${MONTHLY_PRICE}/month</span>
             </div>
-            <div className="flex justify-between items-center py-2 border-b border-gray-100">
-              <span className="text-sm text-gray-600">Status</span>
+            <div className="flex justify-between items-center py-2 border-b border-slate-100">
+              <span className="text-sm text-slate-600">Status</span>
               <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${status === 'trialing'
-                ? 'bg-purple-100 text-purple-700'
+                ? 'bg-sky-100 text-sky-700'
                 : 'bg-green-100 text-green-700'
                 }`}>
                 {label}
               </span>
             </div>
             {profile?.subscription_period_end && (
-              <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                <span className="text-sm text-gray-600">
+              <div className="flex justify-between items-center py-2 border-b border-slate-100">
+                <span className="text-sm text-slate-600">
                   {status === 'trialing' ? 'Trial ends' : status === 'cancelled' ? 'Access until' : 'Renews'}
                 </span>
-                <span className="text-sm font-medium text-purple-800">
+                <span className="text-sm font-medium text-slate-800">
                   {formatUniversalDate(profile.subscription_period_end)}
                 </span>
               </div>
             )}
             <div className="flex justify-between items-center py-2">
-              <span className="text-sm text-gray-600">Includes</span>
-              <span className="text-sm text-purple-800">All features</span>
+              <span className="text-sm text-slate-600">Includes</span>
+              <span className="text-sm text-slate-800">All features</span>
             </div>
           </CardContent>
         </Card>
       )}
 
-      <Card>
+      <Card className="dashboard-card-soft">
         <CardHeader>
-          <CardTitle className="text-lg text-purple-900">What&apos;s Included</CardTitle>
+          <CardTitle className="text-lg text-sky-900">What&apos;s Included</CardTitle>
         </CardHeader>
         <CardContent>
           <ul className="space-y-3">
@@ -226,8 +228,8 @@ export default async function SubscriptionPage() {
               'Troubleshooting guidance & daily checklist',
               'PDF download & print',
             ].map((feature) => (
-              <li key={feature} className="flex items-center gap-3 text-sm text-gray-700">
-                <CheckCircle className="h-4 w-4 text-purple-500 shrink-0" />
+              <li key={feature} className="flex items-center gap-3 text-sm text-slate-700">
+                <CheckCircle className="h-4 w-4 text-sky-500 shrink-0" />
                 {feature}
               </li>
             ))}
@@ -236,13 +238,13 @@ export default async function SubscriptionPage() {
       </Card>
 
       {isActive && (
-        <Card className="border-gray-200">
+        <Card className="dashboard-card-soft border-slate-200">
           <CardHeader>
             <div className="flex items-start gap-3">
-              <HelpCircle className="h-5 w-5 text-gray-400 mt-0.5" />
+              <HelpCircle className="h-5 w-5 text-slate-400 mt-0.5" />
               <div>
-                <CardTitle className="text-base text-gray-800">Need to cancel?</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-base text-slate-800">Need to cancel?</CardTitle>
+                <CardDescription className="text-slate-600">
                   You can cancel anytime. You&apos;ll keep access until the end of your current billing period.
                 </CardDescription>
               </div>
@@ -256,12 +258,12 @@ export default async function SubscriptionPage() {
 
       {!isActive && (
         <div className="text-center pt-4">
-          <Button asChild size="lg" className="bg-purple-600 hover:bg-purple-700">
+          <Button asChild size="lg" className="bg-sky-700 hover:bg-sky-800">
             <Link href="/dashboard/intake/new">
               {profile?.has_used_trial ? 'Resubscribe' : 'Start Your Free Trial'}
             </Link>
           </Button>
-          <p className="text-xs text-gray-500 mt-2">
+          <p className="text-xs text-slate-500 mt-2">
             {profile?.has_used_trial
               ? `$${MONTHLY_PRICE}/month. Cancel anytime.`
               : `${TRIAL_DAYS} days free, then $${MONTHLY_PRICE}/month. Cancel anytime.`

@@ -31,8 +31,8 @@ export function Step5Problems() {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <h2 className="text-2xl font-bold">Sleep Challenges</h2>
-        <p className="text-gray-600">
+        <h2 className="text-2xl font-semibold text-sky-900">Sleep Challenges</h2>
+        <p className="text-slate-600">
           What are the main sleep challenges you&apos;re facing? Select all that apply.
         </p>
       </div>
@@ -50,13 +50,13 @@ export function Step5Problems() {
                   type="button"
                   onClick={() => toggleProblem(problem.value)}
                   className={`flex items-start space-x-3 p-4 border rounded-lg cursor-pointer transition-colors text-left w-full ${
-                    isSelected ? 'bg-blue-50 border-blue-300' : 'hover:bg-gray-50'
+                    isSelected ? 'bg-sky-50/70 border-sky-300' : 'hover:bg-slate-50/70'
                   }`}
                 >
                   <div className={`flex items-center justify-center w-5 h-5 rounded border mt-0.5 shrink-0 ${
                     isSelected
-                      ? 'bg-blue-600 border-blue-600 text-white'
-                      : 'border-gray-300 bg-white'
+                      ? 'bg-sky-600 border-sky-600 text-white'
+                      : 'border-slate-300 bg-white'
                   }`}>
                     {isSelected && <Check className="w-3 h-3" />}
                   </div>
@@ -65,7 +65,7 @@ export function Step5Problems() {
                       {problem.label}
                     </span>
                     {problem.description && (
-                      <span className="text-xs text-gray-500 block mt-1">
+                      <span className="text-xs text-slate-500 block mt-1">
                         {problem.description}
                       </span>
                     )}
@@ -87,7 +87,7 @@ export function Step5Problems() {
             placeholder="Describe your biggest sleep challenges in detail. What have you tried? What hasn&apos;t worked?"
             rows={5}
           />
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-slate-500">
             The more details you provide, the more personalized your plan will be.
           </p>
           {errors.problem_description && (

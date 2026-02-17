@@ -23,8 +23,8 @@ export function Step2CurrentSleep() {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <h2 className="text-2xl font-bold">Night Sleep Schedule</h2>
-        <p className="text-gray-600">
+        <h2 className="text-2xl font-semibold text-sky-900">Night Sleep Schedule</h2>
+        <p className="text-slate-600">
           Tell us about your baby&apos;s current night sleep routine. We&apos;ll ask about naps separately.
         </p>
       </div>
@@ -39,7 +39,7 @@ export function Step2CurrentSleep() {
               value={currentBedtime}
               onChange={(val) => setValue('current_bedtime', val, { shouldDirty: true })}
             />
-            <p className="text-sm text-gray-500">When do you start the bedtime routine?</p>
+            <p className="text-sm text-slate-500">When do you start the bedtime routine?</p>
             {errors.current_bedtime && (
               <p className="text-sm text-red-500">{errors.current_bedtime.message}</p>
             )}
@@ -52,7 +52,7 @@ export function Step2CurrentSleep() {
               value={currentWaketime}
               onChange={(val) => setValue('current_waketime', val, { shouldDirty: true })}
             />
-            <p className="text-sm text-gray-500">When does your baby usually wake up for the day?</p>
+            <p className="text-sm text-slate-500">When does your baby usually wake up for the day?</p>
             {errors.current_waketime && (
               <p className="text-sm text-red-500">{errors.current_waketime.message}</p>
             )}
@@ -61,12 +61,12 @@ export function Step2CurrentSleep() {
 
         {/* Additional sleep times */}
         {fields.map((field, index) => (
-          <div key={field.id} className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-gray-50 rounded-lg relative">
+          <div key={field.id} className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-slate-50/70 rounded-lg relative">
             <Button
               type="button"
               variant="ghost"
               size="sm"
-              className="absolute top-2 right-2 h-6 w-6 p-0 text-gray-400 hover:text-red-500"
+              className="absolute top-2 right-2 h-6 w-6 p-0 text-slate-400 hover:text-red-500"
               onClick={() => remove(index)}
             >
               <X className="h-4 w-4" />
@@ -93,12 +93,12 @@ export function Step2CurrentSleep() {
           variant="outline"
           size="sm"
           onClick={() => append({ bedtime: '', waketime: '' })}
-          className="text-gray-600"
+          className="text-slate-600"
         >
           <Plus className="h-4 w-4 mr-2" />
           Add another sleep period
         </Button>
-        <p className="text-xs text-gray-500">
+        <p className="text-xs text-slate-500">
           Use this if your baby has multiple distinct sleep periods (e.g., split nights)
         </p>
 

@@ -236,7 +236,8 @@ export default async function DashboardPage() {
 
   const isActive = hasActiveSubscription(subscriptionStatus, isStripeEnabled)
   const daysRemaining = getDaysRemaining(profile?.subscription_period_end ?? null)
-  const subscriptionHref = isActive ? '/dashboard/subscription' : '/dashboard/intake/new'
+  const subscriptionHref = '/dashboard/subscription'
+  const babiesHref = babyCount && babyCount > 0 ? '/dashboard/babies' : '/dashboard/babies/new'
   const soleBabyId = babyCount === 1 ? babies?.[0]?.id : null
   const createPlanHref = soleBabyId
     ? `/dashboard/intake/new?baby=${encodeURIComponent(soleBabyId)}`
@@ -245,7 +246,7 @@ export default async function DashboardPage() {
   const primaryCompletedPlan = completedPlans && completedPlans.length > 0 ? completedPlans[0] : null
 
   return (
-    <div className="space-y-8">
+    <div className="dashboard-surface space-y-8 p-5 sm:p-6">
       <div className="relative">
         {/* Floating decorative icons */}
         <div className="pointer-events-none absolute inset-0 hidden md:block" aria-hidden="true">
@@ -264,8 +265,8 @@ export default async function DashboardPage() {
       {/* Stats — clickable cards */}
       <AnimateOnScroll>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Link href="/dashboard/babies" className="group">
-            <Card className="bg-white/70 backdrop-blur border-white/60 transition-all card-hover group-hover:shadow-md">
+          <Link href={babiesHref} className="group">
+            <Card className="dashboard-card-soft transition-all card-hover group-hover:shadow-md">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Babies</CardTitle>
                 <Baby className="h-4 w-4 text-sky-500" />
@@ -280,7 +281,7 @@ export default async function DashboardPage() {
           </Link>
 
           <Link href={primaryPlan ? `/dashboard/plans/${primaryPlan.id}` : '/dashboard/plans'} className="group">
-            <Card className="bg-white/70 backdrop-blur border-white/60 transition-all card-hover group-hover:shadow-md">
+            <Card className="dashboard-card-soft transition-all card-hover group-hover:shadow-md">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Sleep Plans</CardTitle>
                 <FileText className="h-4 w-4 text-sky-500" />
@@ -295,7 +296,7 @@ export default async function DashboardPage() {
           </Link>
 
           <Link href={subscriptionHref} className="group">
-            <Card className="bg-white/70 backdrop-blur border-white/60 transition-all card-hover group-hover:shadow-md">
+            <Card className="dashboard-card-soft transition-all card-hover group-hover:shadow-md">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Subscription</CardTitle>
                 <CreditCard className="h-4 w-4 text-sky-500" />
@@ -375,7 +376,7 @@ export default async function DashboardPage() {
             Create New Plan
           </Link>
         </Button>
-        <Button variant="outline" asChild className="border-white/60 bg-white/50 backdrop-blur text-slate-700 hover:bg-white/70">
+        <Button variant="outline" asChild className="border-sky-200 bg-white/80 backdrop-blur text-slate-700 hover:bg-sky-50">
           <Link href="/dashboard/babies/new">
             <Baby className="mr-2 h-4 w-4" />
             Add Baby
@@ -494,7 +495,7 @@ export default async function DashboardPage() {
             <h2 className="text-2xl font-semibold text-slate-900 mb-4">Continue Your Questionnaire</h2>
             <div className="space-y-4">
               {draftIntakes.map((intake) => (
-                <Card key={intake.id} className="border-yellow-200 bg-yellow-50">
+                <Card key={intake.id} className="border-amber-200/80 bg-gradient-to-br from-amber-50/85 via-white to-rose-50/65">
                   <CardHeader>
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
                       <div>
@@ -533,7 +534,7 @@ export default async function DashboardPage() {
             <h2 className="text-2xl font-semibold text-slate-900 mb-4">Recent Plans</h2>
             <div className="space-y-4">
               {recentPlans.map((plan) => (
-                <Card key={plan.id} className="bg-white/70 backdrop-blur border-white/60 card-hover">
+                <Card key={plan.id} className="dashboard-card-soft card-hover">
                   <CardHeader>
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
                       <div>

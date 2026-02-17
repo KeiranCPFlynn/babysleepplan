@@ -31,15 +31,15 @@ export default async function BabiesPage() {
   const babyCount = babies?.length ?? 0
 
   return (
-    <div className="space-y-6">
+    <div className="dashboard-surface space-y-6 p-5 sm:p-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-purple-900">My Babies</h1>
-          <p className="text-purple-600/80 mt-1">
+          <h1 className="text-3xl font-bold text-sky-900">My Babies</h1>
+          <p className="text-slate-600 mt-1">
             Manage information about your little ones
           </p>
         </div>
-        <Button asChild className="bg-purple-600 hover:bg-purple-700">
+        <Button asChild className="bg-sky-700 hover:bg-sky-800">
           <Link href="/dashboard/babies/new">
             <Plus className="mr-2 h-4 w-4" />
             Add Baby
@@ -48,10 +48,10 @@ export default async function BabiesPage() {
       </div>
 
       {isActive && babyCount > 0 && (
-        <Card className="border-purple-200 bg-purple-50/50">
+        <Card className="border-sky-200/80 bg-gradient-to-br from-sky-50/80 via-white to-rose-50/65">
           <CardContent className="flex items-center gap-3 py-4">
-            <CreditCard className="h-5 w-5 text-purple-600" />
-            <div className="text-sm text-purple-800">
+            <CreditCard className="h-5 w-5 text-sky-600" />
+            <div className="text-sm text-slate-700">
               {babyCount === 1 ? (
                 <span>${MONTHLY_PRICE}/month for 1 baby. Additional babies are ${ADDITIONAL_BABY_PRICE}/month each.</span>
               ) : (
@@ -65,20 +65,20 @@ export default async function BabiesPage() {
       {babies && babies.length > 0 ? (
         <div className="grid gap-6 md:grid-cols-2">
           {babies.map((baby) => (
-            <Card key={baby.id}>
+            <Card key={baby.id} className="dashboard-card-soft">
               <CardHeader>
                 <div className="flex justify-between items-start">
                   <div className="flex items-start gap-3">
-                    <Baby className="h-10 w-10 text-primary" />
+                    <Baby className="h-10 w-10 text-sky-500" />
                     <div>
-                      <CardTitle>{baby.name}</CardTitle>
-                      <CardDescription>
+                      <CardTitle className="text-sky-900">{baby.name}</CardTitle>
+                      <CardDescription className="text-slate-600">
                         {formatBabyAge(baby.date_of_birth)}
                       </CardDescription>
                     </div>
                   </div>
                   <div className="flex gap-2">
-                    <Button variant="outline" size="sm" asChild>
+                    <Button variant="outline" size="sm" asChild className="border-sky-200 bg-white/80 text-slate-700 hover:bg-sky-50">
                       <Link href={`/dashboard/babies/${baby.id}/edit`}>
                         <Edit className="h-4 w-4" />
                       </Link>
@@ -87,7 +87,7 @@ export default async function BabiesPage() {
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className="space-y-2 text-sm">
+              <CardContent className="space-y-2 text-sm text-slate-700">
                 <div>
                   <span className="font-medium">Born:</span>{' '}
                   {formatUniversalDate(baby.date_of_birth)}
@@ -139,15 +139,15 @@ export default async function BabiesPage() {
           ))}
         </div>
       ) : (
-        <Card>
+        <Card className="border-sky-200/80 bg-gradient-to-br from-sky-50/80 via-white to-rose-50/70">
           <CardHeader>
-            <CardTitle>No babies yet</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-sky-900">No babies yet</CardTitle>
+            <CardDescription className="text-slate-600">
               Add your baby&apos;s information to start creating personalized sleep plans
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button asChild className="bg-purple-600 hover:bg-purple-700">
+            <Button asChild className="bg-sky-700 hover:bg-sky-800">
               <Link href="/dashboard/babies/new">
                 <Plus className="mr-2 h-4 w-4" />
                 Add Your First Baby

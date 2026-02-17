@@ -50,8 +50,8 @@ export function TimePicker({ value, onChange, id, disabled, className }: TimePic
   }
 
   const selectClass = cn(
-    'h-10 rounded-md border border-input bg-white px-2 py-1 text-base shadow-sm outline-none cursor-pointer',
-    'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
+    'h-10 rounded-md border border-sky-100 bg-white/90 px-2 py-1 text-base text-slate-700 shadow-sm outline-none cursor-pointer',
+    'focus-visible:border-sky-300 focus-visible:ring-sky-200/70 focus-visible:ring-[3px]',
     'disabled:cursor-not-allowed disabled:opacity-50 md:text-sm'
   )
 

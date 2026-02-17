@@ -91,16 +91,16 @@ export function BabyForm({ baby, mode, returnTo }: BabyFormProps) {
   }
 
   return (
-    <Card className="max-w-2xl">
-      <CardHeader>
-        <CardTitle>
+    <Card className="family-form family-form-shell max-w-2xl overflow-hidden">
+      <CardHeader className="border-b border-sky-100/70 bg-white/70">
+        <CardTitle className="text-sky-900">
           {mode === 'create'
             ? returnTo
               ? 'Step 1: Add Your Baby'
               : 'Add Baby'
             : 'Edit Baby'}
         </CardTitle>
-        <CardDescription>
+        <CardDescription className="text-slate-600">
           {mode === 'create'
             ? returnTo
               ? "First, tell us a bit about your baby. Then we'll create your personalized sleep plan."
@@ -109,7 +109,7 @@ export function BabyForm({ baby, mode, returnTo }: BabyFormProps) {
         </CardDescription>
       </CardHeader>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4 bg-white/40">
           <div className="space-y-2">
             <Label htmlFor="name">Baby&apos;s Name</Label>
             <Input
@@ -148,7 +148,7 @@ export function BabyForm({ baby, mode, returnTo }: BabyFormProps) {
               {...register('premature_weeks', { valueAsNumber: true })}
               placeholder="0"
             />
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-slate-500">
               If your baby was born prematurely, enter how many weeks early
             </p>
             {errors.premature_weeks && (
@@ -192,7 +192,7 @@ export function BabyForm({ baby, mode, returnTo }: BabyFormProps) {
               placeholder="Describe your baby's temperament in your own words or add extra details"
               rows={3}
             />
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-slate-500">
               Share anything that doesn&apos;t fit the list above.
             </p>
             {errors.temperament_notes && (
@@ -220,8 +220,8 @@ export function BabyForm({ baby, mode, returnTo }: BabyFormProps) {
           </div>
         </CardContent>
 
-        <CardFooter className="flex gap-4 pt-2">
-          <Button type="submit" disabled={loading}>
+        <CardFooter className="flex gap-4 pt-2 bg-white/30">
+          <Button type="submit" disabled={loading} className="bg-sky-700 hover:bg-sky-800">
             {loading
               ? mode === 'create'
                 ? returnTo
@@ -238,6 +238,7 @@ export function BabyForm({ baby, mode, returnTo }: BabyFormProps) {
             <Button
               type="button"
               variant="outline"
+              className="border-sky-200 bg-white/80 text-slate-700 hover:bg-sky-50"
               onClick={() => router.back()}
             >
               Cancel

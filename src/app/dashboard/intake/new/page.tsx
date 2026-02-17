@@ -47,8 +47,8 @@ export default async function NewIntakePage({
     return (
       <div className="space-y-6">
         <div>
-          <h1 className="text-3xl font-bold">Create Sleep Plan</h1>
-          <p className="text-gray-600 mt-2">
+          <h1 className="text-3xl font-bold text-sky-900">Create Sleep Plan</h1>
+          <p className="text-slate-600 mt-2">
             Setting up your personalized questionnaire...
           </p>
         </div>
@@ -61,21 +61,21 @@ export default async function NewIntakePage({
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">Create Sleep Plan</h1>
-        <p className="text-gray-600 mt-2">
+        <h1 className="text-3xl font-bold text-sky-900">Create Sleep Plan</h1>
+        <p className="text-slate-600 mt-2">
           Select which baby you&apos;d like to create a personalized sleep plan for.
         </p>
       </div>
 
       <BabySelector babies={babies} />
 
-      <Card className="bg-gray-50">
+      <Card className="border-sky-100/80 bg-gradient-to-br from-sky-50/70 via-white to-rose-50/60">
         <CardContent className="pt-6">
-          <p className="text-center text-gray-600">
+          <p className="text-center text-slate-600">
             Don&apos;t see the right baby?{' '}
             <Link
               href="/dashboard/babies/new?returnTo=/dashboard/intake/new"
-              className="text-blue-600 hover:underline"
+              className="text-sky-700 hover:underline"
             >
               Add a new baby
             </Link>

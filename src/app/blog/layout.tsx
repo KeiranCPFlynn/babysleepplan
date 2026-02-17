@@ -27,7 +27,13 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
               <Moon className="h-7 w-7 text-sky-700" />
               <span className="text-lg font-semibold tracking-tight">LunaCradle</span>
             </Link>
-            <div className="flex items-center gap-4 text-sm">
+            <div className="flex items-center gap-3 sm:gap-4 text-sm">
+              <Link href="/how-it-works" className="hidden md:inline-flex text-slate-600 hover:text-slate-900">
+                How It Works
+              </Link>
+              <Link href="/science" className="hidden md:inline-flex text-slate-600 hover:text-slate-900">
+                Science
+              </Link>
               <Link href="/blog" className="text-slate-600 hover:text-slate-900 font-medium">
                 Blog
               </Link>
@@ -55,7 +61,10 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
               <p className="text-sm text-slate-500">
                 &copy; {new Date().getFullYear()} LunaCradle. All rights reserved.
               </p>
-              <div className="flex gap-4 text-sm text-slate-500">
+              <div className="flex flex-wrap justify-center gap-4 text-sm text-slate-500">
+                <Link href="/how-it-works" className="hover:text-slate-900">How It Works</Link>
+                <Link href="/science" className="hover:text-slate-900">Science</Link>
+                <Link href="/compare" className="hover:text-slate-900">Compare</Link>
                 <Link href="/blog" className="hover:text-slate-900">Blog</Link>
                 <Link href="/privacy" className="hover:text-slate-900">Privacy</Link>
                 <Link href="/terms" className="hover:text-slate-900">Terms</Link>

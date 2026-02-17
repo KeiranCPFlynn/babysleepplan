@@ -59,8 +59,8 @@ export function BabySelector({ babies, selectedBabyId }: BabySelectorProps) {
   if (selectedBabyId && loading) {
     return (
       <div className="flex flex-col items-center justify-center py-12">
-        <Loader2 className="h-8 w-8 animate-spin text-blue-600 mb-4" />
-        <p className="text-gray-600">Setting up your questionnaire...</p>
+        <Loader2 className="h-8 w-8 animate-spin text-sky-600 mb-4" />
+        <p className="text-slate-600">Setting up your questionnaire...</p>
       </div>
     )
   }
@@ -68,14 +68,17 @@ export function BabySelector({ babies, selectedBabyId }: BabySelectorProps) {
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       {babies.map((baby) => (
-        <Card key={baby.id} className="hover:border-blue-300 transition-colors">
+        <Card
+          key={baby.id}
+          className="family-form family-form-shell border-sky-100/80 bg-gradient-to-br from-sky-50/70 via-white to-rose-50/60 transition-colors hover:border-sky-300"
+        >
           <CardHeader>
-            <CardTitle>{baby.name}</CardTitle>
-            <CardDescription>{formatBabyAge(baby.date_of_birth)}</CardDescription>
+            <CardTitle className="text-sky-900">{baby.name}</CardTitle>
+            <CardDescription className="text-slate-600">{formatBabyAge(baby.date_of_birth)}</CardDescription>
           </CardHeader>
           <CardContent>
             <Button
-              className="w-full"
+              className="w-full bg-sky-700 hover:bg-sky-800"
               onClick={() => createIntake(baby.id)}
               disabled={loading === baby.id}
             >

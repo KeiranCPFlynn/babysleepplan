@@ -110,7 +110,7 @@ export function SelectWithOther({
       )}
 
       {description && (
-        <p className="text-sm text-gray-500">{description}</p>
+        <p className="text-sm text-slate-500">{description}</p>
       )}
       {error && (
         <p className="text-sm text-red-500">{error}</p>

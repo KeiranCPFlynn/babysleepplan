@@ -15,8 +15,8 @@ export function Step4Naps() {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <h2 className="text-2xl font-bold">Naps</h2>
-        <p className="text-gray-600">
+        <h2 className="text-2xl font-semibold text-sky-900">Naps</h2>
+        <p className="text-slate-600">
           Tell us about your baby&apos;s daytime sleep.
         </p>
       </div>
@@ -32,7 +32,7 @@ export function Step4Naps() {
             {...register('nap_count', { valueAsNumber: true })}
             placeholder="0"
           />
-          <p className="text-sm text-gray-500">On a typical day, how many naps does your baby take?</p>
+          <p className="text-sm text-slate-500">On a typical day, how many naps does your baby take?</p>
           {errors.nap_count && (
             <p className="text-sm text-red-500">{errors.nap_count.message}</p>
           )}

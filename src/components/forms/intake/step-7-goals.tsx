@@ -11,8 +11,8 @@ export function Step7Goals() {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <h2 className="text-2xl font-bold">Your Goals</h2>
-        <p className="text-gray-600">
+        <h2 className="text-2xl font-semibold text-sky-900">Your Goals</h2>
+        <p className="text-slate-600">
           What does sleep success look like for your family?
         </p>
       </div>
@@ -26,7 +26,7 @@ export function Step7Goals() {
             placeholder="e.g., Baby sleeps through the night without needing to be fed, baby falls asleep independently at bedtime, we have a consistent schedule..."
             rows={4}
           />
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-slate-500">
             Describe what you hope to achieve with this sleep plan. Be specific!
           </p>
           {errors.success_description && (
@@ -42,7 +42,7 @@ export function Step7Goals() {
             placeholder="Any other information that might help us create the perfect sleep plan for your baby..."
             rows={4}
           />
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-slate-500">
             Share any additional context, concerns, or questions you have.
           </p>
           {errors.additional_notes && (

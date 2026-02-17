@@ -50,10 +50,10 @@ export default async function DiaryHubPage() {
   const todaysEntryPlanIds = new Set((todaysEntries || []).map((entry) => entry.plan_id))
 
   return (
-    <div className="space-y-6">
+    <div className="dashboard-surface space-y-6 p-5 sm:p-6">
       <div>
-        <h1 className="text-3xl font-bold text-purple-900">Sleep Diary</h1>
-        <p className="text-purple-600/80 mt-1">
+        <h1 className="text-3xl font-bold text-sky-900">Sleep Diary</h1>
+        <p className="text-slate-600 mt-1">
           Choose a plan to log today&apos;s sleep or review past entries.
         </p>
       </div>
@@ -71,17 +71,17 @@ export default async function DiaryHubPage() {
           {completedPlans.map((plan) => {
             const hasEntry = todaysEntryPlanIds.has(plan.id)
             return (
-              <Card key={plan.id} className="border-purple-100">
+              <Card key={plan.id} className="dashboard-card-soft">
                 <CardHeader>
-                  <CardTitle className="text-lg text-purple-800">
+                  <CardTitle className="text-lg text-sky-800">
                     {plan.baby?.name || 'Baby'}&apos;s Diary
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-slate-600">
                     {hasEntry ? 'Logged today' : 'Not logged yet'}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button asChild className={hasEntry ? '' : 'bg-purple-600 hover:bg-purple-700'}>
+                  <Button asChild variant={hasEntry ? 'outline' : 'default'} className={hasEntry ? 'border-sky-200 bg-white/80 text-slate-700 hover:bg-sky-50' : 'bg-sky-700 hover:bg-sky-800'}>
                     <Link href={`/dashboard/plans/${plan.id}/diary?date=${todayStr}`}>
                       <BookOpen className="mr-2 h-4 w-4" />
                       {hasEntry ? 'View / Edit' : 'Log Today'}
@@ -107,15 +107,15 @@ export default async function DiaryHubPage() {
           </CardContent>
         </Card>
       ) : (
-        <Card>
+        <Card className="border-sky-200/80 bg-gradient-to-br from-sky-50/80 via-white to-rose-50/70">
           <CardHeader>
-            <CardTitle>No plans yet</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-sky-900">No plans yet</CardTitle>
+            <CardDescription className="text-slate-600">
               You&apos;ll be able to use the diary once a sleep plan is completed.
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button asChild className="bg-purple-600 hover:bg-purple-700">
+            <Button asChild className="bg-sky-700 hover:bg-sky-800">
               <Link href="/dashboard/intake/new">Create a Plan</Link>
             </Button>
           </CardContent>

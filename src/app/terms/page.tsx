@@ -45,7 +45,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-xl font-semibold text-slate-900 mb-3">3. Not Medical Advice</h2>
             <p className="text-sm">
-              <strong>The Service is for educational and informational purposes only.</strong> It is not a substitute for professional medical advice, diagnosis, or treatment. Always consult your pediatrician or a qualified healthcare provider with any questions about your child&apos;s health or sleep. Follow the American Academy of Pediatrics (AAP) safe sleep guidelines at all times.
+              <strong>The Service is for educational and informational purposes only.</strong> It is not a substitute for professional medical advice, diagnosis, or treatment. Always consult your GP, health visitor, paediatrician, or a qualified healthcare provider with any questions about your child&apos;s health or sleep. Follow safe sleep guidelines from the NHS, AAP, and the Lullaby Trust at all times.
             </p>
           </section>
 
@@ -99,7 +99,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-xl font-semibold text-slate-900 mb-3">9. Limitation of Liability</h2>
             <p className="text-sm">
-              To the maximum extent permitted by law, LunaCradle and its operators shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the Service. Our total liability shall not exceed the amount you paid us in the 12 months preceding the claim.
+              Nothing in these terms excludes or limits our liability for death or personal injury caused by our negligence, fraud or fraudulent misrepresentation, or any other liability that cannot be excluded or limited under English law. Subject to the foregoing, our total liability to you for all claims arising from or related to the Service shall not exceed the amount you paid us in the 12 months preceding the claim.
             </p>
           </section>
 
@@ -127,12 +127,20 @@ export default function TermsPage() {
           <section>
             <h2 className="text-xl font-semibold text-slate-900 mb-3">13. Governing Law</h2>
             <p className="text-sm">
-              These terms are governed by and construed in accordance with the laws of the jurisdiction in which LunaCradle operates, without regard to conflict of law principles.
+              These terms are governed by and construed in accordance with the laws of England and Wales. Any disputes arising from or related to these terms or the Service shall be subject to the exclusive jurisdiction of the courts of England and Wales. If you are a consumer, you may also benefit from any mandatory provisions of the law of the country in which you are resident.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-slate-900 mb-3">Contact</h2>
+            <h2 className="text-xl font-semibold text-slate-900 mb-3">14. Company Information</h2>
+            <p className="text-sm">
+              LunaCradle is operated by a company registered in England and Wales. For company registration details or to exercise your statutory rights, please contact us through our{' '}
+              <Link href="/contact" className="text-sky-700 hover:underline">contact form</Link>.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-semibold text-slate-900 mb-3">15. Contact</h2>
             <p className="text-sm">
               Questions about these terms? Reach out through our{' '}
               <Link href="/contact" className="text-sky-700 hover:underline">contact form</Link>.

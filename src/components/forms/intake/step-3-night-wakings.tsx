@@ -14,8 +14,8 @@ export function Step3NightWakings() {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <h2 className="text-2xl font-bold">Night Wakings</h2>
-        <p className="text-gray-600">
+        <h2 className="text-2xl font-semibold text-sky-900">Night Wakings</h2>
+        <p className="text-slate-600">
           Tell us about how your baby sleeps through the night.
         </p>
       </div>
@@ -31,7 +31,7 @@ export function Step3NightWakings() {
             {...register('night_wakings_count', { valueAsNumber: true })}
             placeholder="0"
           />
-          <p className="text-sm text-gray-500">On a typical night, how many times do they wake?</p>
+          <p className="text-sm text-slate-500">On a typical night, how many times do they wake?</p>
           {errors.night_wakings_count && (
             <p className="text-sm text-red-500">{errors.night_wakings_count.message}</p>
           )}
@@ -56,7 +56,7 @@ export function Step3NightWakings() {
             placeholder="e.g., They wake up crying and need to be fed/rocked back to sleep..."
             rows={3}
           />
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-slate-500">
             Describe what typically happens when your baby wakes at night.
           </p>
           {errors.night_wakings_description && (
@@ -72,7 +72,7 @@ export function Step3NightWakings() {
             placeholder="e.g., Always wakes at 2am, wakes every 2-3 hours, more frequent in second half of night..."
             rows={3}
           />
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-slate-500">
             Any patterns you&apos;ve noticed (times, frequency, triggers)?
           </p>
           {errors.night_waking_pattern && (

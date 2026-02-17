@@ -9,17 +9,20 @@ import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import Link from 'next/link'
 import { toast } from 'sonner'
-import { Star } from 'lucide-react'
+import { CheckCircle, Star } from 'lucide-react'
 
 export function LoginForm() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
+  const [loginMode, setLoginMode] = useState<'password' | 'magic'>('password')
+  const [magicLinkSent, setMagicLinkSent] = useState(false)
+  const [magicLinkEmail, setMagicLinkEmail] = useState('')
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   })
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handlePasswordSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
 
@@ -45,6 +48,96 @@ export function LoginForm() {
     setLoading(false)
   }
 
+  const handleMagicLinkSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+
+    const supabase = createClient()
+    const { error } = await supabase.auth.signInWithOtp({
+      email: formData.email,
+      options: {
+        emailRedirectTo: `${window.location.origin}/auth/callback?next=/dashboard`,
+      },
+    })
+
+    if (error) {
+      toast.error(error.message)
+      setLoading(false)
+      return
+    }
+
+    setMagicLinkEmail(formData.email)
+    setMagicLinkSent(true)
+    toast.success('Magic link sent. Check your inbox.')
+    setLoading(false)
+  }
+
+  const handleGoogleLogin = async () => {
+    setLoading(true)
+
+    const supabase = createClient()
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback?next=/dashboard`,
+      },
+    })
+
+    if (error) {
+      toast.error(error.message)
+      setLoading(false)
+      return
+    }
+  }
+
+  if (magicLinkSent) {
+    return (
+      <Card className="w-full max-w-md border-white/60 bg-white/80 backdrop-blur-sm shadow-lg">
+        <CardHeader className="text-center pb-2">
+          <div className="flex justify-center mb-3">
+            <CheckCircle className="h-5 w-5 text-green-500" />
+          </div>
+          <h1 className="text-2xl font-bold text-slate-900">Check your email</h1>
+          <p className="text-sm text-slate-500 mt-1">
+            We sent a magic login link to <strong className="text-slate-700">{magicLinkEmail}</strong>
+          </p>
+        </CardHeader>
+        <CardContent className="text-center space-y-3">
+          <p className="text-sm text-slate-500">
+            Open the link in the email to log in instantly.
+          </p>
+          <p className="text-xs text-slate-400">
+            If you don&apos;t see it, check spam/promotions.
+          </p>
+        </CardContent>
+        <CardFooter className="flex flex-col space-y-3 pt-2">
+          <Button
+            type="button"
+            variant="outline"
+            className="w-full"
+            onClick={() => {
+              setMagicLinkSent(false)
+              setLoginMode('magic')
+            }}
+          >
+            Send another link
+          </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            className="w-full text-slate-600 hover:text-slate-900"
+            onClick={() => {
+              setMagicLinkSent(false)
+              setLoginMode('password')
+            }}
+          >
+            Use password instead
+          </Button>
+        </CardFooter>
+      </Card>
+    )
+  }
+
   return (
     <Card className="w-full max-w-md border-white/60 bg-white/80 backdrop-blur-sm shadow-lg">
       <CardHeader className="text-center pb-2">
@@ -56,7 +149,35 @@ export function LoginForm() {
           Log in to access your sleep plans
         </p>
       </CardHeader>
-      <form onSubmit={handleSubmit}>
+
+      <div className="px-6 pb-1">
+        <div className="grid grid-cols-2 gap-2 rounded-lg bg-slate-100 p-1">
+          <button
+            type="button"
+            onClick={() => setLoginMode('password')}
+            className={`rounded-md px-3 py-2 text-sm font-medium transition ${
+              loginMode === 'password'
+                ? 'bg-white text-slate-900 shadow-sm'
+                : 'text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            Password
+          </button>
+          <button
+            type="button"
+            onClick={() => setLoginMode('magic')}
+            className={`rounded-md px-3 py-2 text-sm font-medium transition ${
+              loginMode === 'magic'
+                ? 'bg-white text-slate-900 shadow-sm'
+                : 'text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            Magic link
+          </button>
+        </div>
+      </div>
+
+      <form onSubmit={loginMode === 'password' ? handlePasswordSubmit : handleMagicLinkSubmit}>
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="email" className="text-slate-700">Email</Label>
@@ -73,25 +194,31 @@ export function LoginForm() {
             />
           </div>
 
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <Label htmlFor="password" className="text-slate-700">Password</Label>
-              <Link href="/reset-password" className="text-xs text-sky-700 hover:text-sky-800 hover:underline">
-                Forgot password?
-              </Link>
+          {loginMode === 'password' ? (
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="password" className="text-slate-700">Password</Label>
+                <Link href="/reset-password" className="text-xs text-sky-700 hover:text-sky-800 hover:underline">
+                  Forgot password?
+                </Link>
+              </div>
+              <Input
+                id="password"
+                type="password"
+                placeholder="••••••••"
+                value={formData.password}
+                onChange={(e) =>
+                  setFormData({ ...formData, password: e.target.value })
+                }
+                required
+                className="bg-white/70 border-slate-200 focus:border-sky-400 focus:ring-sky-400/20"
+              />
             </div>
-            <Input
-              id="password"
-              type="password"
-              placeholder="••••••••"
-              value={formData.password}
-              onChange={(e) =>
-                setFormData({ ...formData, password: e.target.value })
-              }
-              required
-              className="bg-white/70 border-slate-200 focus:border-sky-400 focus:ring-sky-400/20"
-            />
-          </div>
+          ) : (
+            <p className="text-sm text-slate-500">
+              We&apos;ll email you a one-time sign-in link.
+            </p>
+          )}
         </CardContent>
 
         <CardFooter className="flex flex-col space-y-4 pt-2">
@@ -100,7 +227,32 @@ export function LoginForm() {
             className="w-full bg-sky-700 hover:bg-sky-800 text-white"
             disabled={loading}
           >
-            {loading ? 'Logging in...' : 'Log in'}
+            {loading
+              ? (loginMode === 'password' ? 'Logging in...' : 'Sending link...')
+              : (loginMode === 'password' ? 'Log in' : 'Email me a magic link')}
+          </Button>
+
+          <div className="relative w-full">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t border-slate-200" />
+            </div>
+            <span className="relative block mx-auto w-fit bg-white/80 px-2 text-xs text-slate-400">or</span>
+          </div>
+
+          <Button
+            type="button"
+            variant="outline"
+            className="w-full border-slate-300 bg-white hover:bg-slate-50"
+            onClick={handleGoogleLogin}
+            disabled={loading}
+          >
+            <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true" className="mr-2 shrink-0">
+              <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303C33.654 32.657 29.229 36 24 36c-6.627 0-12-5.373-12-12S17.373 12 24 12c3.059 0 5.844 1.154 7.962 3.038l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.651-.389-3.917z" />
+              <path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.844 1.154 7.962 3.038l5.657-5.657C34.046 6.053 29.268 4 24 4c-7.681 0-14.297 4.337-17.694 10.691z" />
+              <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.145 35.091 26.715 36 24 36c-5.209 0-9.623-3.323-11.283-7.946l-6.522 5.025C9.558 39.556 16.227 44 24 44z" />
+              <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.044 12.044 0 0 1-4.084 5.571l.003-.002 6.19 5.238C36.971 39.183 44 34 44 24c0-1.341-.138-2.651-.389-3.917z" />
+            </svg>
+            Continue with Google
           </Button>
 
           <p className="text-sm text-center text-slate-500">

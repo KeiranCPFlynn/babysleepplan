@@ -1,9 +1,27 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { AnimateOnScroll } from '@/components/ui/animate-on-scroll'
 import { Moon, Star, CheckCircle, BookOpen } from 'lucide-react'
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://lunacradle.com'
+
+export const metadata: Metadata = {
+  title: "LunaCradle — Personalized Baby Sleep Plans, Ready Tonight",
+  description: "We built LunaCradle because every tired parent deserves expert-level sleep guidance without the $500 price tag. Evidence-based AI plans for babies 0–5 years.",
+  keywords: [
+    'baby sleep plan', 'AI sleep consultant', 'personalized baby sleep',
+    'infant sleep schedule', 'baby sleep help', 'toddler sleep plan',
+  ],
+  alternates: { canonical: siteUrl },
+  openGraph: {
+    title: "LunaCradle — Personalized Baby Sleep Plans, Ready Tonight",
+    description: "We built LunaCradle because every tired parent deserves expert-level sleep guidance without the $500 price tag.",
+    url: siteUrl,
+  },
+}
 
 const foundingOffer = {
   active: true,
@@ -12,9 +30,67 @@ const foundingOffer = {
   seats: 50,
 }
 
+const faqs = [
+  {
+    q: 'Will this work for my baby?',
+    a: 'Plans are personalized to age, temperament, current sleep patterns, and your preferred approach.',
+  },
+  {
+    q: 'What age is this for?',
+    a: 'Built for babies and toddlers from birth through 5 years, with age-appropriate guidance.',
+  },
+  {
+    q: 'What research is this based on?',
+    a: 'Guidance is informed by AAP, NHS, NICE, WHO, and peer-reviewed pediatric sleep research. See our science page for the full list of studies.',
+  },
+  {
+    q: 'How does an AI sleep planner work?',
+    a: 'You answer a short intake about your baby and preferences. Our AI builds a personalized plan grounded in peer-reviewed research, then adapts it weekly based on your Sleep Diary logs.',
+  },
+  {
+    q: 'How does the Sleep Diary work?',
+    a: 'Log bedtime, wake time, naps, and night wakings each day. After 3 days the system spots patterns and suggests targeted adjustments to your plan.',
+  },
+  {
+    q: 'What happens after the free trial?',
+    a: 'Your subscription continues at $19/month. Cancel anytime from your account.',
+  },
+]
+
+const jsonLd = {
+  website: {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'LunaCradle',
+    url: siteUrl,
+    description: 'Personalized, evidence-based baby sleep plans powered by AI.',
+  },
+  organization: {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'LunaCradle',
+    url: siteUrl,
+    logo: `${siteUrl}/logo.png`,
+  },
+  faqPage: {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.q,
+      acceptedAnswer: { '@type': 'Answer', text: faq.a },
+    })),
+  },
+}
+
 export default function HomePage() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-sky-50 via-white to-rose-50 text-slate-900 pb-24 pt-[max(0.5rem,env(safe-area-inset-top))] md:pb-0 md:pt-3">
+      {/* Structured data */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd.website) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd.organization) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd.faqPage) }} />
+
       {/* Ambient background blobs with color morphing */}
       <div className="pointer-events-none absolute -top-48 -right-56 hidden md:block h-[30rem] w-[30rem] rounded-full bg-gradient-to-br from-rose-300/55 via-pink-300/45 to-amber-200/45 float-reverse blob-morph" />
       <div className="pointer-events-none absolute top-16 -left-60 hidden md:block h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-sky-300/55 via-cyan-200/45 to-indigo-200/40 float blob-morph-alt" />
@@ -24,11 +100,17 @@ export default function HomePage() {
         {/* 1. Nav */}
         <header className="container mx-auto px-4 py-6">
           <nav className="flex items-center justify-between rounded-3xl border border-white/60 bg-white/70 px-4 py-3 shadow-sm backdrop-blur">
-            <div className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2">
               <Moon className="h-7 w-7 text-sky-700" />
               <span className="text-lg font-semibold tracking-tight">LunaCradle</span>
-            </div>
+            </Link>
             <div className="flex items-center gap-3 sm:gap-4 text-sm">
+              <Link href="/how-it-works" className="hidden md:inline-flex text-slate-600 hover:text-slate-900">
+                How It Works
+              </Link>
+              <Link href="/science" className="hidden md:inline-flex text-slate-600 hover:text-slate-900">
+                Science
+              </Link>
               <Link href="/blog" className="hidden md:inline-flex text-slate-600 hover:text-slate-900">
                 Blog
               </Link>
@@ -269,24 +351,7 @@ export default function HomePage() {
               </h2>
             </AnimateOnScroll>
             <div className="max-w-2xl mx-auto space-y-4">
-              {[
-                {
-                  q: 'Will this work for my baby?',
-                  a: 'Plans are personalized to age, temperament, current sleep patterns, and your preferred approach.'
-                },
-                {
-                  q: 'What age is this for?',
-                  a: 'Built for babies and toddlers from birth through 5 years, with age-appropriate guidance.'
-                },
-                {
-                  q: 'What research is this based on?',
-                  a: 'Guidance is informed by AAP, NHS, NICE, WHO, and peer-reviewed pediatric sleep research.'
-                },
-                {
-                  q: 'What happens after the free trial?',
-                  a: 'Your subscription continues at $19/month. Cancel anytime from your account.'
-                },
-              ].map((faq, index) => (
+              {faqs.map((faq, index) => (
                 <AnimateOnScroll key={index} delay={index * 80}>
                   <div className="rounded-2xl border border-white/70 bg-white/80 p-5 shadow-sm card-hover">
                     <h3 className="font-semibold text-base mb-1">{faq.q}</h3>
@@ -303,14 +368,17 @@ export default function HomePage() {
           <footer className="border-t border-white/70 py-10">
             <div className="container mx-auto px-4">
               <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-                <div className="flex items-center gap-2">
+                <Link href="/" className="flex items-center gap-2">
                   <Moon className="h-6 w-6 text-sky-700" />
                   <span className="font-semibold">LunaCradle</span>
-                </div>
+                </Link>
                 <p className="text-sm text-slate-500">
                   &copy; {new Date().getFullYear()} LunaCradle. All rights reserved.
                 </p>
-                <div className="flex gap-4 text-sm text-slate-500">
+                <div className="flex flex-wrap justify-center gap-4 text-sm text-slate-500">
+                  <Link href="/how-it-works" className="hover:text-slate-900">How It Works</Link>
+                  <Link href="/science" className="hover:text-slate-900">Science</Link>
+                  <Link href="/compare" className="hover:text-slate-900">Compare</Link>
                   <Link href="/blog" className="hover:text-slate-900">Blog</Link>
                   <Link href="/privacy" className="hover:text-slate-900">Privacy</Link>
                   <Link href="/terms" className="hover:text-slate-900">Terms</Link>

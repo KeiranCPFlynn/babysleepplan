@@ -34,15 +34,15 @@ export default async function PlansPage() {
     .order('updated_at', { ascending: false })
 
   return (
-    <div className="space-y-8">
+    <div className="dashboard-surface space-y-8 p-5 sm:p-6">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-purple-900">My Sleep Plans</h1>
-          <p className="text-purple-600/80 mt-2">
+          <h1 className="text-3xl font-bold text-sky-900">My Sleep Plans</h1>
+          <p className="text-slate-600 mt-2">
             View and manage your baby&apos;s personalized sleep plans.
           </p>
         </div>
-        <Button asChild className="bg-purple-600 hover:bg-purple-700 self-start sm:self-auto">
+        <Button asChild className="bg-sky-700 hover:bg-sky-800 self-start sm:self-auto">
           <Link href="/dashboard/intake/new">
             <Plus className="mr-2 h-4 w-4" />
             New Plan
@@ -53,23 +53,23 @@ export default async function PlansPage() {
       {/* Pending intakes */}
       {pendingIntakes && pendingIntakes.length > 0 && (
         <div>
-          <h2 className="text-xl font-semibold text-purple-900 mb-4">
+          <h2 className="text-xl font-semibold text-sky-900 mb-4">
             {isStripeEnabled ? 'Awaiting Payment' : 'Ready to Generate'}
           </h2>
           <div className="space-y-4">
             {pendingIntakes.map((intake) => (
-              <Card key={intake.id} className="border-orange-200 bg-orange-50">
+              <Card key={intake.id} className="border-amber-200/80 bg-gradient-to-br from-amber-50/85 via-white to-rose-50/65">
                 <CardHeader>
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
                     <div>
-                      <CardTitle>{intake.baby?.name || 'Unknown Baby'}&apos;s Plan</CardTitle>
-                      <CardDescription>
+                      <CardTitle className="text-slate-900">{intake.baby?.name || 'Unknown Baby'}&apos;s Plan</CardTitle>
+                      <CardDescription className="text-slate-600">
                         {isStripeEnabled
                           ? 'Questionnaire completed - ready for payment'
                           : 'Questionnaire completed - ready to generate'}
                       </CardDescription>
                     </div>
-                    <Button size="sm" asChild className="bg-purple-600 hover:bg-purple-700 self-start sm:self-auto">
+                    <Button size="sm" asChild className="bg-sky-700 hover:bg-sky-800 self-start sm:self-auto">
                       <Link href={`/dashboard/intake/${intake.id}/payment`}>
                         {isStripeEnabled ? 'Complete Payment' : 'Generate Plan'}
                       </Link>
@@ -85,15 +85,15 @@ export default async function PlansPage() {
       {/* Completed plans */}
       {plans && plans.length > 0 ? (
         <div>
-          <h2 className="text-xl font-semibold text-purple-900 mb-4">Your Plans</h2>
+          <h2 className="text-xl font-semibold text-sky-900 mb-4">Your Plans</h2>
           <div className="space-y-4">
             {plans.map((plan) => (
-              <Card key={plan.id}>
+              <Card key={plan.id} className="dashboard-card-soft">
                 <CardHeader>
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
                     <div>
-                      <CardTitle>{plan.baby?.name || 'Unknown Baby'}&apos;s Sleep Plan</CardTitle>
-                      <CardDescription>
+                      <CardTitle className="text-slate-900">{plan.baby?.name || 'Unknown Baby'}&apos;s Sleep Plan</CardTitle>
+                      <CardDescription className="text-slate-600">
                         Created {formatUniversalDate(plan.created_at)}
                       </CardDescription>
                     </div>
@@ -110,7 +110,7 @@ export default async function PlansPage() {
                         {plan.status === 'generating' ? 'Generating...' : plan.status}
                       </span>
                       {plan.status === 'completed' && (
-                        <Button variant="outline" size="sm" asChild>
+                        <Button variant="outline" size="sm" asChild className="border-sky-200 bg-white/80 text-slate-700 hover:bg-sky-50">
                           <Link href={`/dashboard/plans/${plan.id}`}>View Plan</Link>
                         </Button>
                       )}
@@ -127,16 +127,16 @@ export default async function PlansPage() {
           </div>
         </div>
       ) : (
-        <Card>
+        <Card className="border-sky-200/80 bg-gradient-to-br from-sky-50/80 via-white to-rose-50/70">
           <CardHeader>
-            <CardTitle>No Plans Yet</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-sky-900">No Plans Yet</CardTitle>
+            <CardDescription className="text-slate-600">
               You haven&apos;t created any sleep plans yet. Start by completing a questionnaire
               about your baby&apos;s sleep habits.
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button asChild className="bg-purple-600 hover:bg-purple-700">
+            <Button asChild className="bg-sky-700 hover:bg-sky-800">
               <Link href="/dashboard/intake/new">Create Your First Plan</Link>
             </Button>
           </CardContent>

@@ -37,10 +37,10 @@ export function DashboardNav({ open = false, onClose }: DashboardNavProps) {
     <>
       <div className="p-6">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <Moon className="h-6 w-6 text-sky-700" />
             <h1 className="text-2xl font-bold text-slate-900">LunaCradle</h1>
-          </div>
+          </Link>
           {/* Close button visible only in mobile drawer */}
           {onClose && (
             <button

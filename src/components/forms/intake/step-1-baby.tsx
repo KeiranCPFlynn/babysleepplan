@@ -21,8 +21,8 @@ export function Step1Baby({ babies }: Step1Props) {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <h2 className="text-2xl font-bold">Which baby is this plan for?</h2>
-        <p className="text-gray-600">
+        <h2 className="text-2xl font-semibold text-sky-900">Which baby is this plan for?</h2>
+        <p className="text-slate-600">
           Select the baby you&apos;d like to create a sleep plan for.
         </p>
       </div>
@@ -51,9 +51,9 @@ export function Step1Baby({ babies }: Step1Props) {
         </div>
 
         {selectedBaby && (
-          <Card className="bg-blue-50 border-blue-200">
+          <Card className="bg-sky-50/70 border-sky-200">
             <CardHeader className="pb-2">
-              <CardTitle className="text-lg">{selectedBaby.name}</CardTitle>
+              <CardTitle className="text-lg text-sky-900">{selectedBaby.name}</CardTitle>
               <CardDescription>{formatBabyAge(selectedBaby.date_of_birth)}</CardDescription>
             </CardHeader>
             <CardContent className="text-sm space-y-1">
