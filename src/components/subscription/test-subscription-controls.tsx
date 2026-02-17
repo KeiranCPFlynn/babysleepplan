@@ -467,9 +467,17 @@ export function TestSubscriptionControls({ babies = [], plans = [] }: TestSubscr
                         >
                             {isLoading ? 'Seeding...' : 'Seed 3 Days'}
                         </Button>
+                        <Button
+                            onClick={() => handleSeedDiaryDays(7)}
+                            disabled={isLoading || !selectedPlanId}
+                            variant="outline"
+                            className="border-orange-300 text-orange-800 hover:bg-orange-100"
+                        >
+                            {isLoading ? 'Seeding...' : 'Seed 7 Days'}
+                        </Button>
                     </div>
                     <p className="text-xs text-orange-600">
-                        Adds 3 days of diary data so you can test the 3-day review/update flow quickly.
+                        Adds 3 or 7 days of diary data so you can test both quick and weekly update flows.
                     </p>
                 </div>
 
