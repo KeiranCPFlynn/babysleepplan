@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import {
@@ -27,6 +27,8 @@ interface SelectWithOtherProps {
   error?: string
 }
 
+const OTHER_PREFIX_PATTERN = /^other:\s*/i
+
 export function SelectWithOther({
   label,
   description,
@@ -45,20 +47,25 @@ export function SelectWithOther({
   // Check if current value is a custom "other" value (starts with "other: ", is "other", or isn't in options)
   const isOtherValue = useMemo(() => {
     if (!value) return false
-    if (value === 'other') return true
-    if (value.startsWith('other: ')) return true
+    if (value.toLowerCase() === 'other') return true
+    if (OTHER_PREFIX_PATTERN.test(value)) return true
     return !normalizedOptions.some(opt => opt.value === value)
   }, [value, normalizedOptions])
 
-  const initialOtherText = useMemo(() => {
+  const derivedOtherText = useMemo(() => {
     if (!value) return ''
-    if (value.startsWith('other: ')) return value.replace('other: ', '')
+    if (value.toLowerCase() === 'other') return ''
+    if (OTHER_PREFIX_PATTERN.test(value)) return value.replace(OTHER_PREFIX_PATTERN, '')
     if (isOtherValue) return value
     return ''
   }, [value, isOtherValue])
 
   const showOtherInput = isOtherValue
-  const otherText = initialOtherText
+  const [otherText, setOtherText] = useState(derivedOtherText)
+
+  useEffect(() => {
+    setOtherText(derivedOtherText)
+  }, [derivedOtherText])
 
   const handleSelectChange = (newValue: string) => {
     if (newValue === 'other') {
@@ -70,10 +77,11 @@ export function SelectWithOther({
   }
 
   const handleOtherTextChange = (text: string) => {
+    setOtherText(text)
     if (text) {
       onChange(`other: ${text}`)
     } else {
-      onChange('')
+      onChange('other')
     }
   }
 

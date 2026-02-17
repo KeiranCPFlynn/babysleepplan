@@ -1,6 +1,6 @@
 'use client'
 
-import { useFormContext, useFieldArray } from 'react-hook-form'
+import { useFormContext, useFieldArray, useWatch } from 'react-hook-form'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { TimePicker } from '@/components/ui/time-picker'
@@ -9,11 +9,27 @@ import { Plus, X } from 'lucide-react'
 import { fallingAsleepMethods, type IntakeFormData } from '@/lib/validations/intake'
 
 export function Step2CurrentSleep() {
-  const { control, setValue, watch, formState: { errors } } = useFormContext<IntakeFormData>()
-  const fallingAsleepMethod = watch('falling_asleep_method')
-  const currentBedtime = watch('current_bedtime')
-  const currentWaketime = watch('current_waketime')
-  const additionalSleepTimes = watch('additional_sleep_times')
+  const { control, setValue, formState: { errors } } = useFormContext<IntakeFormData>()
+  const fallingAsleepMethod = useWatch({
+    control,
+    name: 'falling_asleep_method',
+    defaultValue: ''
+  }) ?? ''
+  const currentBedtime = useWatch({
+    control,
+    name: 'current_bedtime',
+    defaultValue: ''
+  }) ?? ''
+  const currentWaketime = useWatch({
+    control,
+    name: 'current_waketime',
+    defaultValue: ''
+  }) ?? ''
+  const additionalSleepTimes = useWatch({
+    control,
+    name: 'additional_sleep_times',
+    defaultValue: []
+  }) ?? []
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -37,7 +53,7 @@ export function Step2CurrentSleep() {
             <TimePicker
               id="bedtime"
               value={currentBedtime}
-              onChange={(val) => setValue('current_bedtime', val, { shouldDirty: true })}
+              onChange={(val) => setValue('current_bedtime', val, { shouldDirty: true, shouldValidate: true })}
             />
             <p className="text-sm text-slate-500">When do you start the bedtime routine?</p>
             {errors.current_bedtime && (
@@ -50,7 +66,8 @@ export function Step2CurrentSleep() {
             <TimePicker
               id="waketime"
               value={currentWaketime}
-              onChange={(val) => setValue('current_waketime', val, { shouldDirty: true })}
+              onChange={(val) => setValue('current_waketime', val, { shouldDirty: true, shouldValidate: true })}
+              defaultPeriod="AM"
             />
             <p className="text-sm text-slate-500">When does your baby usually wake up for the day?</p>
             {errors.current_waketime && (
@@ -75,14 +92,15 @@ export function Step2CurrentSleep() {
               <Label>Additional Bedtime {index + 2}</Label>
               <TimePicker
                 value={additionalSleepTimes?.[index]?.bedtime}
-                onChange={(val) => setValue(`additional_sleep_times.${index}.bedtime`, val, { shouldDirty: true })}
+                onChange={(val) => setValue(`additional_sleep_times.${index}.bedtime`, val, { shouldDirty: true, shouldValidate: true })}
               />
             </div>
             <div className="space-y-2">
               <Label>Wake Time {index + 2}</Label>
               <TimePicker
                 value={additionalSleepTimes?.[index]?.waketime}
-                onChange={(val) => setValue(`additional_sleep_times.${index}.waketime`, val, { shouldDirty: true })}
+                onChange={(val) => setValue(`additional_sleep_times.${index}.waketime`, val, { shouldDirty: true, shouldValidate: true })}
+                defaultPeriod="AM"
               />
             </div>
           </div>
@@ -107,7 +125,7 @@ export function Step2CurrentSleep() {
           description="What's the main way your baby falls asleep at night?"
           options={fallingAsleepMethods}
           value={fallingAsleepMethod}
-          onChange={(value) => setValue('falling_asleep_method', value, { shouldDirty: true })}
+          onChange={(value) => setValue('falling_asleep_method', value, { shouldDirty: true, shouldValidate: true })}
           placeholder="Select method"
           otherPlaceholder="Describe how your baby falls asleep..."
           error={errors.falling_asleep_method?.message}

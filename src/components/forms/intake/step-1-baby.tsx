@@ -1,6 +1,6 @@
 'use client'
 
-import { useFormContext } from 'react-hook-form'
+import { useFormContext, useWatch } from 'react-hook-form'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -13,8 +13,12 @@ interface Step1Props {
 }
 
 export function Step1Baby({ babies }: Step1Props) {
-  const { setValue, watch, formState: { errors } } = useFormContext<IntakeFormData>()
-  const babyId = watch('baby_id')
+  const { setValue, control, formState: { errors } } = useFormContext<IntakeFormData>()
+  const babyId = useWatch({
+    control,
+    name: 'baby_id',
+    defaultValue: ''
+  }) ?? ''
 
   const selectedBaby = babies.find(b => b.id === babyId)
 
@@ -32,7 +36,7 @@ export function Step1Baby({ babies }: Step1Props) {
           <Label htmlFor="baby_id">Select Baby</Label>
           <Select
             value={babyId || undefined}
-            onValueChange={(value) => setValue('baby_id', value, { shouldDirty: true })}
+            onValueChange={(value) => setValue('baby_id', value, { shouldDirty: true, shouldValidate: true })}
           >
             <SelectTrigger>
               <SelectValue placeholder="Choose a baby" />

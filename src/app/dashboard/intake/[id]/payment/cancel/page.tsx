@@ -64,7 +64,7 @@ export default async function PaymentCancelPage({
             <li>• Personalized plan based on your baby&apos;s unique needs</li>
             <li>• Evidence-based sleep science approach</li>
             <li>• Methods tailored to your comfort level</li>
-            <li>• 30-day money-back guarantee</li>
+            <li>• Clear, step-by-step guidance for your family</li>
           </ul>
         </CardContent>
       </Card>

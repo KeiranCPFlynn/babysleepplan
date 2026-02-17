@@ -8,13 +8,14 @@ interface TimePickerProps {
   id?: string
   disabled?: boolean
   className?: string
+  defaultPeriod?: 'AM' | 'PM'
 }
 
-function parse24(value: string | null | undefined) {
-  if (!value || !value.includes(':')) return { hour: '', minute: '', period: 'PM' as const }
+function parse24(value: string | null | undefined, defaultPeriod: 'AM' | 'PM') {
+  if (!value || !value.includes(':')) return { hour: '', minute: '', period: defaultPeriod }
   const [hStr, mStr] = value.split(':')
   const h24 = parseInt(hStr, 10)
-  if (isNaN(h24)) return { hour: '', minute: '', period: 'PM' as const }
+  if (isNaN(h24)) return { hour: '', minute: '', period: defaultPeriod }
   const period = h24 >= 12 ? 'PM' as const : 'AM' as const
   const h12 = h24 === 0 ? 12 : h24 > 12 ? h24 - 12 : h24
   return { hour: String(h12), minute: mStr || '00', period }
@@ -29,8 +30,8 @@ function to24(hour: string, minute: string, period: string): string {
   return `${String(h24).padStart(2, '0')}:${minute.padStart(2, '0')}`
 }
 
-export function TimePicker({ value, onChange, id, disabled, className }: TimePickerProps) {
-  const parsed = parse24(value)
+export function TimePicker({ value, onChange, id, disabled, className, defaultPeriod = 'PM' }: TimePickerProps) {
+  const parsed = parse24(value, defaultPeriod)
   const hour = parsed.hour
   const minute = parsed.minute
   const period = parsed.period
@@ -41,12 +42,14 @@ export function TimePicker({ value, onChange, id, disabled, className }: TimePic
   }
 
   function handleMinute(m: string) {
-    onChange(to24(hour, m, period))
+    const h = hour || '12'
+    onChange(to24(h, m, period))
   }
 
   function handlePeriod(p: string) {
+    const h = hour || '12'
     const m = minute || '00'
-    onChange(to24(hour, m, p))
+    onChange(to24(h, m, p))
   }
 
   const selectClass = cn(

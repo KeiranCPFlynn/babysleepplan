@@ -8,6 +8,7 @@ import {
   nightWakingDurations,
   napDurations,
   napLocations,
+  successGoalOptions,
   sleepProblems,
   type IntakeFormData,
 } from '@/lib/validations/intake'
@@ -59,6 +60,13 @@ export function Step8Review({ babies }: Step8Props) {
   const napDuration = displaySelectValue(values.nap_duration, napDurations)
   const napMethod = displaySelectValue(values.nap_method, fallingAsleepMethods)
   const napLocation = displaySelectValue(values.nap_location, napLocations)
+  const selectedSuccessGoals = Array.isArray(values.success_goals)
+    ? values.success_goals
+      .filter((goal): goal is string => typeof goal === 'string')
+      .map((goal) => displaySelectValue(goal, successGoalOptions))
+      .filter(Boolean)
+    : []
+  const successDescription = displaySelectValue(values.success_description, successGoalOptions)
   const selectedProblems = (values.problems || []).map(
     p => sleepProblems.find(sp => sp.value === p)?.label
   ).filter(Boolean)
@@ -232,10 +240,20 @@ export function Step8Review({ babies }: Step8Props) {
             <CardTitle className="text-lg text-sky-900">Goals</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2 text-sm">
-            {values.success_description && (
+            {selectedSuccessGoals.length > 0 && (
+              <div>
+                <span className="text-slate-500">Success goals:</span>
+                <ul className="list-disc list-inside mt-1 space-y-1">
+                  {selectedSuccessGoals.map((goal, index) => (
+                    <li key={index} className="font-medium">{goal}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {selectedSuccessGoals.length === 0 && values.success_description && (
               <div>
                 <span className="text-slate-500">Success looks like:</span>{' '}
-                <span className="font-medium">{values.success_description}</span>
+                <span className="font-medium">{successDescription}</span>
               </div>
             )}
             {values.additional_notes && (

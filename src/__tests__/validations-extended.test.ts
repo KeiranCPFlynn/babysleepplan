@@ -168,11 +168,11 @@ describe('step5Schema', () => {
     expect(result.success).toBe(false)
   })
 
-  it('requires problem_description', () => {
+  it('allows missing problem_description', () => {
     const result = step5Schema.safeParse({
       problems: ['frequent_wakings'],
     })
-    expect(result.success).toBe(false)
+    expect(result.success).toBe(true)
   })
 
   it('accepts problem_description at 2000 char limit', () => {
@@ -215,28 +215,28 @@ describe('step6Schema', () => {
 })
 
 describe('step7Schema', () => {
-  it('requires success_description', () => {
+  it('requires at least one success goal', () => {
     const result = step7Schema.safeParse({})
     expect(result.success).toBe(false)
   })
 
-  it('accepts success_description at 1000 char limit', () => {
+  it('accepts one or more success goals', () => {
     const result = step7Schema.safeParse({
-      success_description: 'a'.repeat(1000),
+      success_goals: ['A consistent daily sleep schedule', 'other: Better mornings'],
     })
     expect(result.success).toBe(true)
   })
 
-  it('rejects success_description over 1000 chars', () => {
+  it('rejects empty success_goals array', () => {
     const result = step7Schema.safeParse({
-      success_description: 'a'.repeat(1001),
+      success_goals: [],
     })
     expect(result.success).toBe(false)
   })
 
   it('accepts additional_notes at 2000 char limit', () => {
     const result = step7Schema.safeParse({
-      success_description: 'Sleep through the night',
+      success_goals: ['A consistent daily sleep schedule'],
       additional_notes: 'a'.repeat(2000),
     })
     expect(result.success).toBe(true)
@@ -244,7 +244,7 @@ describe('step7Schema', () => {
 
   it('rejects additional_notes over 2000 chars', () => {
     const result = step7Schema.safeParse({
-      success_description: 'Sleep through the night',
+      success_goals: ['A consistent daily sleep schedule'],
       additional_notes: 'a'.repeat(2001),
     })
     expect(result.success).toBe(false)
@@ -271,6 +271,7 @@ describe('intakeSchema edge cases', () => {
       problem_description: null,
       crying_comfort_level: null,
       parent_constraints: null,
+      success_goals: null,
       success_description: null,
       additional_notes: null,
       data: null,

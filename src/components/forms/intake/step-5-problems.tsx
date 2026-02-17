@@ -15,7 +15,7 @@ export function Step5Problems() {
     control,
     name: 'problems',
     defaultValue: []
-  }) ?? []
+  })
 
   const toggleProblem = useCallback((problemValue: string) => {
     const currentProblems = Array.isArray(selectedProblems) ? selectedProblems : []
@@ -80,7 +80,7 @@ export function Step5Problems() {
         </div>
 
         <div className="space-y-2 pt-4">
-          <Label htmlFor="problem_description">Tell us more about your challenges <span className="text-red-500">*</span></Label>
+          <Label htmlFor="problem_description">Tell us more about your challenges (optional)</Label>
           <Textarea
             id="problem_description"
             {...register('problem_description')}

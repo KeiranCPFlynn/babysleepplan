@@ -1,6 +1,6 @@
 'use client'
 
-import { useFormContext } from 'react-hook-form'
+import { useFormContext, useWatch } from 'react-hook-form'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -8,8 +8,12 @@ import { SelectWithOther } from '@/components/ui/select-with-other'
 import { nightWakingDurations, type IntakeFormData } from '@/lib/validations/intake'
 
 export function Step3NightWakings() {
-  const { register, setValue, watch, formState: { errors } } = useFormContext<IntakeFormData>()
-  const nightWakingDuration = watch('night_waking_duration')
+  const { register, setValue, control, formState: { errors } } = useFormContext<IntakeFormData>()
+  const nightWakingDuration = useWatch({
+    control,
+    name: 'night_waking_duration',
+    defaultValue: ''
+  }) ?? ''
 
   return (
     <div className="space-y-6">
@@ -42,7 +46,7 @@ export function Step3NightWakings() {
           description="On average, how long does it take to get your baby back to sleep?"
           options={nightWakingDurations}
           value={nightWakingDuration}
-          onChange={(value) => setValue('night_waking_duration', value, { shouldDirty: true })}
+          onChange={(value) => setValue('night_waking_duration', value, { shouldDirty: true, shouldValidate: true })}
           placeholder="Select duration"
           otherPlaceholder="Describe waking duration (e.g., 'first waking 10min, later ones 30-45min')..."
           error={errors.night_waking_duration?.message}

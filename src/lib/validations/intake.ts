@@ -37,7 +37,7 @@ export const step4Schema = z.object({
 // Step 5: The Problem
 export const step5Schema = z.object({
   problems: z.array(z.string()).min(1, 'Please select at least one sleep challenge'),
-  problem_description: z.string().min(1, 'Please describe your sleep challenges').max(2000),
+  problem_description: z.string().max(2000).optional(),
 })
 
 // Step 6: Parent Preferences
@@ -48,7 +48,8 @@ export const step6Schema = z.object({
 
 // Step 7: Goals
 export const step7Schema = z.object({
-  success_description: z.string().min(1, 'Please describe what success looks like').max(1000),
+  success_goals: z.array(z.string().min(1)).min(1, 'Please select at least one goal'),
+  success_description: z.string().max(1000).optional(),
   additional_notes: z.string().max(2000).optional(),
 })
 
@@ -82,6 +83,7 @@ export const intakeSchema = z.object({
   crying_comfort_level: z.number().min(1).max(5).optional().nullable(),
   parent_constraints: z.string().max(1000).optional().nullable(),
   // Step 7
+  success_goals: z.array(z.string()).optional().nullable(),
   success_description: z.string().max(1000).optional().nullable(),
   additional_notes: z.string().max(2000).optional().nullable(),
   // Additional data storage
@@ -134,6 +136,16 @@ export const napLocations = [
   { value: 'car', label: 'Car seat' },
   { value: 'arms', label: 'In arms' },
   { value: 'multiple', label: 'Multiple locations' },
+]
+
+// Success goal options
+export const successGoalOptions = [
+  { value: 'Baby falls asleep independently at bedtime', label: 'Baby falls asleep independently at bedtime' },
+  { value: 'Fewer night wakings and faster resettling', label: 'Fewer night wakings and faster resettling' },
+  { value: 'Longer, more predictable naps', label: 'Longer, more predictable naps' },
+  { value: 'A consistent daily sleep schedule', label: 'A consistent daily sleep schedule' },
+  { value: 'Stop relying on feeding/rocking to sleep', label: 'Stop relying on feeding/rocking to sleep' },
+  { value: 'Smoother bedtimes with less resistance', label: 'Smoother bedtimes with less resistance' },
 ]
 
 // Sleep problems options with descriptions

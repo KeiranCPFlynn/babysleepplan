@@ -40,6 +40,14 @@ const stepTitles = [
   'Review',
 ]
 
+function normalizeGoalForSummary(goal: string) {
+  const trimmed = goal.trim()
+  if (!trimmed) return ''
+  if (trimmed.toLowerCase() === 'other') return ''
+  if (/^other:\s*/i.test(trimmed)) return trimmed.replace(/^other:\s*/i, '').trim()
+  return trimmed
+}
+
 export function IntakeForm({ babies, intake, hasUsedTrial }: IntakeFormProps) {
   const router = useRouter()
   const intakeData = useMemo(() => {
@@ -52,6 +60,18 @@ export function IntakeForm({ babies, intake, hasUsedTrial }: IntakeFormProps) {
       ? intakeData.additional_sleep_times as Array<{ bedtime?: string; waketime?: string }>
       : []
   }, [intakeData])
+  const storedSuccessGoals = useMemo(() => {
+    if (Array.isArray(intakeData.success_goals)) {
+      return intakeData.success_goals
+        .filter((goal): goal is string => typeof goal === 'string')
+        .map((goal) => goal.trim())
+        .filter(Boolean)
+    }
+    if (intake.success_description?.trim()) {
+      return [`other: ${intake.success_description.trim()}`]
+    }
+    return []
+  }, [intakeData, intake.success_description])
   const isAdminSeededDraft = intake.status === 'draft' && intakeData.admin_seeded === true
 
   // Start at step 2 if baby is already selected (from intake creation page)
@@ -90,6 +110,7 @@ export function IntakeForm({ babies, intake, hasUsedTrial }: IntakeFormProps) {
       problem_description: intake.problem_description || '',
       crying_comfort_level: intake.crying_comfort_level ?? 3,
       parent_constraints: intake.parent_constraints || '',
+      success_goals: storedSuccessGoals,
       success_description: intake.success_description || '',
       additional_notes: intake.additional_notes || '',
     },
@@ -109,10 +130,22 @@ export function IntakeForm({ babies, intake, hasUsedTrial }: IntakeFormProps) {
 
   const buildSubmissionData = useCallback(() => {
     const values = methods.getValues()
-    const { additional_sleep_times, ...rest } = values
+    const { additional_sleep_times, success_goals, ...rest } = values
     const normalizedAdditionalTimes = Array.isArray(additional_sleep_times)
       ? additional_sleep_times.filter((time) => time?.bedtime || time?.waketime)
       : []
+    const normalizedSuccessGoals = Array.isArray(success_goals)
+      ? success_goals
+        .filter((goal): goal is string => typeof goal === 'string')
+        .map((goal) => goal.trim())
+        .filter(Boolean)
+      : []
+    const successDescriptionFromGoals = normalizedSuccessGoals
+      .map(normalizeGoalForSummary)
+      .filter(Boolean)
+      .join('; ')
+      .slice(0, 1000)
+    const hasStructuredGoals = Array.isArray(success_goals)
 
     return {
       ...rest,
@@ -128,11 +161,14 @@ export function IntakeForm({ babies, intake, hasUsedTrial }: IntakeFormProps) {
       nap_location: rest.nap_location || null,
       problem_description: rest.problem_description || null,
       parent_constraints: rest.parent_constraints || null,
-      success_description: rest.success_description || null,
+      success_description: hasStructuredGoals
+        ? (successDescriptionFromGoals || null)
+        : (rest.success_description || null),
       additional_notes: rest.additional_notes || null,
       data: {
         ...intakeData,
         additional_sleep_times: normalizedAdditionalTimes,
+        success_goals: normalizedSuccessGoals,
       },
     }
   }, [methods, intakeData])
