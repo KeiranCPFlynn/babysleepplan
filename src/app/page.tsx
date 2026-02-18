@@ -138,7 +138,7 @@ export default function HomePage() {
               Stop the 3am wake-ups with a personalized plan tonight.
             </h1>
             <p className="mt-5 text-base sm:text-lg md:text-xl text-shimmer font-medium max-w-3xl mx-auto hero-load hero-load-2">
-              For babies and toddlers 0-5 years, with gentle or structured options.
+              For babies 0&ndash;5, gentle or structured. The sleep plan that learns from your baby.
             </p>
             <div className="mt-7 hero-load hero-load-3">
               <p className="text-base md:text-lg text-slate-600 dark:text-slate-300">
@@ -212,7 +212,7 @@ export default function HomePage() {
               {[
                 { step: '1', title: 'Tell us about your baby', description: 'A short intake on age, current sleep, and your comfort level.' },
                 { step: '2', title: 'Get your plan tonight', description: 'A personalized plan in minutes, with clear bedtime and night steps.' },
-                { step: '3', title: 'Track and refine', description: 'Log sleep and get practical weekly adjustments from your real patterns.' },
+                { step: '3', title: 'Your plan updates itself', description: 'Log sleep in under a minute. After 7 days, your plan gets a targeted update from your real data.' },
               ].map((item, index) => (
                 <AnimateOnScroll key={item.step} delay={index * 150}>
                   <div className="rounded-3xl border border-white/70 bg-white/80 p-6 text-center shadow-sm card-hover">
@@ -227,6 +227,27 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        {/* Living plan feature callout */}
+        <AnimateOnScroll>
+          <section className="py-14 md:py-18 bg-sky-50/60 dark:bg-slate-900/50 border-y border-sky-100/60 dark:border-slate-800">
+            <div className="container mx-auto px-4 text-center">
+              <h2 className="text-2xl md:text-3xl font-bold mb-10">Most sleep plans are static. Yours isn&apos;t.</h2>
+              <div className="grid grid-cols-3 gap-4 max-w-lg mx-auto">
+                {[
+                  { stat: 'Daily', label: 'Sleep log' },
+                  { stat: '3 days', label: 'Pattern spotted' },
+                  { stat: '7 days', label: 'Plan updated' },
+                ].map((item) => (
+                  <div key={item.stat} className="rounded-2xl border border-white/70 bg-white/90 px-4 py-6 text-center shadow-sm dark:border-slate-700 dark:bg-slate-900/85">
+                    <p className="text-3xl font-bold text-sky-700 dark:text-sky-400">{item.stat}</p>
+                    <p className="mt-1.5 text-xs text-slate-500 dark:text-slate-400">{item.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        </AnimateOnScroll>
 
         {/* 4. Social Proof */}
         <section className="py-16 md:py-20 border-y border-white/60 bg-sky-50/50 dark:border-slate-800 dark:bg-slate-900/70">
@@ -325,7 +346,7 @@ export default function HomePage() {
                       </li>
                       <li className="flex items-start gap-2">
                         <CheckCircle className="h-4 w-4 text-sky-600 mt-0.5 shrink-0" />
-                        Weekly plan updates based on your logs
+                        Plan updates as your baby&apos;s sleep evolves
                       </li>
                       <li className="flex items-start gap-2">
                         <CheckCircle className="h-4 w-4 text-sky-600 mt-0.5 shrink-0" />
