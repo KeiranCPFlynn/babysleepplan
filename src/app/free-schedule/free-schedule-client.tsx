@@ -7,6 +7,12 @@ import { SchedulePreview } from '@/components/free-schedule/schedule-preview'
 import { EmailGate } from '@/components/free-schedule/email-gate'
 import type { ChatMessage, ExtractedFields, SessionPhase } from '@/lib/free-schedule/types'
 
+type FreeScheduleOutputMode = 'standard' | 'admin_social'
+
+interface FreeScheduleClientProps {
+  showAdminSocialTools?: boolean
+}
+
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void
@@ -23,7 +29,7 @@ const INITIAL_MESSAGE: ChatMessage = {
     "Hi! Tell me about your baby — their age and what's going on with sleep. You can paste a post from Reddit or Facebook, or just describe the situation.",
 }
 
-export function FreeScheduleClient() {
+export function FreeScheduleClient({ showAdminSocialTools = false }: FreeScheduleClientProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([INITIAL_MESSAGE])
   const [extractedFields, setExtractedFields] = useState<ExtractedFields | null>(null)
   const [scheduleMarkdown, setScheduleMarkdown] = useState<string | null>(null)
@@ -34,6 +40,9 @@ export function FreeScheduleClient() {
   const [isLoading, setIsLoading] = useState(false)
   const [hasTrackedFirstMessage, setHasTrackedFirstMessage] = useState(false)
   const [isUnlocked, setIsUnlocked] = useState(false)
+  const [outputMode, setOutputMode] = useState<FreeScheduleOutputMode>(
+    showAdminSocialTools ? 'admin_social' : 'standard'
+  )
 
   // Turnstile
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
@@ -140,20 +149,28 @@ export function FreeScheduleClient() {
       setMessages(newMessages)
       setQuickReplies([])
       setIsLoading(true)
+      let requestTimeoutId: number | null = null
 
       try {
+        const controller = new AbortController()
+        requestTimeoutId = window.setTimeout(() => controller.abort(), 45000)
+
         const res = await fetch('/api/free-schedule/generate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
+          signal: controller.signal,
           body: JSON.stringify({
             messages: newMessages,
             sessionId,
             extractedFields,
             questionsAsked,
+            outputMode,
             // Include Turnstile token only on the first message
             ...(shouldSendTurnstileToken ? { turnstileToken } : {}),
           }),
         })
+        clearTimeout(requestTimeoutId)
+        requestTimeoutId = null
 
         const json = await res.json()
 
@@ -231,15 +248,21 @@ export function FreeScheduleClient() {
           ])
           setPhase('preview')
         }
-      } catch {
+      } catch (err) {
+        const isTimeout = err instanceof DOMException && err.name === 'AbortError'
         setMessages((prev) => [
           ...prev,
           {
             role: 'assistant',
-            content: "Network error. Please check your connection and try again.",
+            content: isTimeout
+              ? 'This is taking longer than expected. Please try again.'
+              : "Network error. Please check your connection and try again.",
           },
         ])
       } finally {
+        if (requestTimeoutId !== null) {
+          clearTimeout(requestTimeoutId)
+        }
         setIsLoading(false)
       }
     },
@@ -252,6 +275,7 @@ export function FreeScheduleClient() {
       hasTrackedFirstMessage,
       turnstileToken,
       turnstileSiteKey,
+      outputMode,
     ]
   )
 
@@ -268,6 +292,23 @@ export function FreeScheduleClient() {
         className="fixed -left-[9999px] top-0 h-px w-px opacity-0 pointer-events-none"
         aria-hidden="true"
       />
+
+      {showAdminSocialTools && (
+        <div className="rounded-xl border border-amber-200 bg-amber-50 dark:border-amber-800 dark:bg-amber-950/30 px-4 py-3 flex items-center justify-between gap-4">
+          <div className="text-xs text-amber-900 dark:text-amber-100">
+            Admin local mode: generate social-reply format and enable copy tools.
+          </div>
+          <label className="inline-flex items-center gap-2 text-xs font-medium text-amber-900 dark:text-amber-100 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={outputMode === 'admin_social'}
+              onChange={(e) => setOutputMode(e.target.checked ? 'admin_social' : 'standard')}
+              className="h-4 w-4 rounded border-amber-300 text-amber-600 focus:ring-amber-500"
+            />
+            Social reply format
+          </label>
+        </div>
+      )}
 
       {/* Chat section */}
       {(phase === 'chat' || phase === 'preview' || phase === 'email_sent') && (
@@ -303,6 +344,8 @@ export function FreeScheduleClient() {
             markdown={scheduleMarkdown}
             extractedFields={extractedFields!}
             isUnlocked={isUnlocked}
+            showCopyButton={showAdminSocialTools}
+            copyAllSections={showAdminSocialTools}
           />
 
           {/* Email gate — shown inline below blurred content until unlocked */}

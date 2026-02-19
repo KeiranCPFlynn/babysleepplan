@@ -26,7 +26,9 @@ export const metadata: Metadata = {
   },
 }
 
-export default function FreeSchedulePage() {
+export default async function FreeSchedulePage() {
+  const showAdminSocialTools = process.env.NODE_ENV !== 'production'
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-rose-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 text-slate-900 dark:text-slate-100">
       <Script
@@ -82,7 +84,7 @@ export default function FreeSchedulePage() {
         </div>
 
         {/* Chat UI */}
-        <FreeScheduleClient />
+        <FreeScheduleClient showAdminSocialTools={showAdminSocialTools} />
 
         {/* Footer CTA */}
         <div className="text-center mt-10 text-sm text-slate-500 dark:text-slate-400">

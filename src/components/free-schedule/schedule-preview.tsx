@@ -1,6 +1,6 @@
 'use client'
 
-import { isValidElement, type ComponentProps, type ReactNode } from 'react'
+import { isValidElement, useCallback, useState, type ComponentProps, type ReactNode } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import type { ExtractedFields } from '@/lib/free-schedule/types'
@@ -9,6 +9,8 @@ interface SchedulePreviewProps {
   markdown: string
   extractedFields: ExtractedFields
   isUnlocked: boolean
+  showCopyButton?: boolean
+  copyAllSections?: boolean
 }
 
 // Split markdown into named sections on "## " headings
@@ -31,6 +33,49 @@ function splitSections(markdown: string): Map<string, string> {
   }
   sections.set(key, buf.join('\n').trim())
   return sections
+}
+
+function markdownToPlainText(markdown: string): string {
+  const ascii = markdown
+    .replace(/\r\n/g, '\n')
+    .replace(/[‘’]/g, "'")
+    .replace(/[“”]/g, '"')
+    .replace(/[–—]/g, '-')
+    .replace(/…/g, '...')
+    .replace(/\u00a0/g, ' ')
+
+  const withoutMarkdown = ascii
+    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '$1 ($2)')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1 ($2)')
+    .replace(/^#{1,6}\s+/gm, '')
+    .replace(/^>\s?/gm, '')
+    .replace(/^\s*[-*+]\s+/gm, '- ')
+    .replace(/^\s*\d+\.\s+/gm, (m) => m.trimStart())
+    .replace(/`{3}[\s\S]*?`{3}/g, '')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/\*([^*]+)\*/g, '$1')
+    .replace(/__([^_]+)__/g, '$1')
+    .replace(/_([^_]+)_/g, '$1')
+    .replace(/~~([^~]+)~~/g, '$1')
+    .replace(/[ \t]+\n/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
+
+  return withoutMarkdown
+}
+
+function fallbackCopy(text: string): boolean {
+  const el = document.createElement('textarea')
+  el.value = text
+  el.setAttribute('readonly', '')
+  el.style.position = 'fixed'
+  el.style.opacity = '0'
+  document.body.appendChild(el)
+  el.select()
+  const ok = document.execCommand('copy')
+  document.body.removeChild(el)
+  return ok
 }
 
 function BlurGate({ children, label }: { children: ReactNode; label: string }) {
@@ -114,8 +159,15 @@ const mdComponents: ComponentProps<typeof ReactMarkdown>['components'] = {
   ),
 }
 
-export function SchedulePreview({ markdown, extractedFields, isUnlocked }: SchedulePreviewProps) {
+export function SchedulePreview({
+  markdown,
+  extractedFields,
+  isUnlocked,
+  showCopyButton = false,
+  copyAllSections = false,
+}: SchedulePreviewProps) {
   const { assumptions, confidence_score } = extractedFields
+  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'error'>('idle')
 
   const confidenceLabel =
     confidence_score >= 0.8 ? 'high' : confidence_score >= 0.5 ? 'medium' : 'low'
@@ -154,6 +206,50 @@ export function SchedulePreview({ markdown, extractedFields, isUnlocked }: Sched
     }
   }
 
+  const plainTextToCopy = markdownToPlainText(
+    (copyAllSections
+      ? [
+          sections.get('your_daily_schedule') ?? '',
+          keyGuidanceRaw,
+          ifThenContent,
+          assumptionsContent,
+          nextStepsContent,
+          ...extraSections,
+        ]
+      : [
+          sections.get('your_daily_schedule') ?? '',
+          isUnlocked ? keyGuidanceRaw : visibleGuidance,
+          isUnlocked ? ifThenContent : '',
+          isUnlocked ? assumptionsContent : '',
+          isUnlocked ? nextStepsContent : '',
+          ...(isUnlocked ? extraSections : []),
+        ]
+    )
+      .filter((section) => !!section.trim())
+      .join('\n\n')
+  )
+
+  const handleCopyPlainText = useCallback(async () => {
+    if (!plainTextToCopy) {
+      setCopyState('error')
+      return
+    }
+
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(plainTextToCopy)
+      } else {
+        const ok = fallbackCopy(plainTextToCopy)
+        if (!ok) throw new Error('copy failed')
+      }
+      setCopyState('copied')
+      window.setTimeout(() => setCopyState('idle'), 2200)
+    } catch {
+      setCopyState('error')
+      window.setTimeout(() => setCopyState('idle'), 2200)
+    }
+  }, [plainTextToCopy])
+
   const Md = ({ children }: { children: string }) => (
     <ReactMarkdown remarkPlugins={[remarkGfm]} components={mdComponents}>
       {children}
@@ -162,6 +258,18 @@ export function SchedulePreview({ markdown, extractedFields, isUnlocked }: Sched
 
   return (
     <div className="flex flex-col gap-4">
+      {showCopyButton && (
+        <div className="flex items-center justify-end gap-2">
+          <button
+            type="button"
+            onClick={handleCopyPlainText}
+            className="inline-flex items-center rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+          >
+            {copyState === 'copied' ? 'Copied plain text' : 'Copy plain text'}
+          </button>
+        </div>
+      )}
+
       {/* Confidence + assumptions notice */}
       {(assumptions.length > 0 || confidence_score < 0.8) && (
         <div className="text-xs text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-800/50 rounded-lg px-4 py-3 border border-slate-100 dark:border-slate-700">
@@ -205,8 +313,14 @@ export function SchedulePreview({ markdown, extractedFields, isUnlocked }: Sched
 
       {/* Disclaimer */}
       <p className="text-xs text-slate-400 dark:text-slate-500 text-center pt-2 border-t border-slate-100 dark:border-slate-800">
-        For informational purposes only. Not medical advice. Always follow your paediatrician's guidance.
+        For informational purposes only. Not medical advice. Always follow your paediatrician&apos;s guidance.
       </p>
+
+      {showCopyButton && copyState === 'error' && (
+        <p className="text-xs text-rose-600 dark:text-rose-400 text-center">
+          Could not copy automatically. Please try again.
+        </p>
+      )}
     </div>
   )
 }

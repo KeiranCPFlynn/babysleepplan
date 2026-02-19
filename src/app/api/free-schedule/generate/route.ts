@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { randomUUID } from 'crypto'
-import { getFlashModel } from '@/lib/gemini'
+import { getFlashModel, getModel } from '@/lib/gemini'
 import {
   freeSchedulePreviewLimiter,
   getClientIp,
@@ -17,6 +17,8 @@ import type { ChatMessage, ExtractedFields } from '@/lib/free-schedule/types'
 
 export const runtime = 'nodejs'
 export const maxDuration = 60
+
+type OutputMode = 'standard' | 'admin_social'
 
 const FOLLOW_UP_QUESTIONS = [
   {
@@ -149,7 +151,11 @@ async function isGenuineSleepQuestion(text: string): Promise<boolean> {
   }
 }
 
-function buildSchedulePrompt(fields: ExtractedFields, knowledgeContent: string, originalDescription: string): string {
+function buildStandardSchedulePrompt(
+  fields: ExtractedFields,
+  knowledgeContent: string,
+  originalDescription: string
+): string {
   const ageLabel =
     fields.age_months !== null
       ? `${fields.age_months} month${fields.age_months !== 1 ? 's' : ''}`
@@ -235,6 +241,231 @@ Rules:
 - Do not add any text outside the five sections above`
 }
 
+function buildAdminSocialPrompt(
+  fields: ExtractedFields,
+  knowledgeContent: string,
+  originalDescription: string
+): string {
+  const ageLabel =
+    fields.age_months !== null
+      ? `${fields.age_months} month${fields.age_months !== 1 ? 's' : ''}`
+      : 'unknown age'
+
+  const formatTime = (t: string | null) => {
+    if (!t) return 'not specified'
+    const [h, m] = t.split(':').map(Number)
+    const suffix = h >= 12 ? 'pm' : 'am'
+    const displayH = h > 12 ? h - 12 : h === 0 ? 12 : h
+    return `${displayH}:${String(m).padStart(2, '0')}${suffix}`
+  }
+
+  const assumptionLines =
+    fields.assumptions.length > 0
+      ? fields.assumptions.map((a) => `- ${a}`).join('\n')
+      : '- None — all values provided directly.'
+
+  return `You are writing a concise social-media-ready reply for a parent asking for baby/toddler sleep help.
+Use a calm, human, confident tone. Avoid consultant jargon and avoid hedging words like "might", "possibly", "maybe".
+
+## Knowledge Base
+${knowledgeContent}
+
+## What the Parent Described
+"${originalDescription}"
+
+## Baby Information
+- Age: ${ageLabel}
+- Usual morning wake time: ${formatTime(fields.wake_time)}
+- Current bedtime: ${formatTime(fields.bedtime)}
+- Naps per day: ${fields.naps_count !== null ? fields.naps_count : 'not specified'}
+- Typical nap length: ${fields.nap_lengths || 'not specified'}
+- Main sleep challenge: ${fields.main_issue || 'general schedule optimisation'}
+
+## Assumptions Made
+${assumptionLines}
+
+Output MUST use exactly these five headings:
+
+## Your Daily Schedule
+[First line: one tailored context sentence referencing their exact situation.]
+[Then plain label lines only, no table:]
+Wake: [time]
+Nap 1: [time range + duration] OR Quiet Time: [time + explicitly "no sleep"]
+Nap 2: [time range + duration] if age-appropriate
+Routine: [time]
+Lights Out: [time]
+
+## Key Guidance
+### Why this works
+[Exactly 2 bullets. Keep short and practical.]
+### What to Track for 3 Days
+[Exactly 4 bullets with these metrics: lights out time, asleep time, night waking count, morning wake time.]
+
+## If/Then Adjustments
+[At least 2 and at most 3 blocks in this exact style:]
+If [specific scenario]:
+- [single concrete action]
+
+## Assumptions
+Confidence: [High/Medium/Low] ([one short assumptions sentence]).
+
+## Next Steps
+[One gentle close sentence offering a more detailed adaptive plan; no links.]
+
+Hard rules:
+- No markdown tables
+- Keep total output under 250 words
+- Chronological order only in "Your Daily Schedule"
+- Do not duplicate labels or time rows
+- Wake appears once only
+- If nap is removed, do not reinsert it elsewhere
+- Bedtime/lights out must be after the final daytime activity
+- Mention the age-appropriate total sleep range once
+- Mention sleep pressure or circadian rhythm once
+- Use no more than 6 bullets in "Key Guidance"
+- No emojis
+
+Before finalizing, run this internal validate_schedule checklist:
+1) chronological schedule
+2) no repeated labels
+3) no repeated times
+4) wake appears once
+5) bedtime/lights out after last daytime activity
+If any check fails, rewrite before returning.
+
+Return only the five sections above.`
+}
+
+function parseTimeToMinutes(text: string): number | null {
+  const match = text.toLowerCase().match(/\b(\d{1,2})(?::(\d{2}))?\s*(am|pm)\b/)
+  if (!match) return null
+
+  let hours = parseInt(match[1], 10)
+  const minutes = parseInt(match[2] ?? '0', 10)
+  const meridian = match[3]
+
+  if (hours < 1 || hours > 12 || minutes < 0 || minutes > 59) return null
+  if (hours === 12) hours = 0
+  if (meridian === 'pm') hours += 12
+
+  return hours * 60 + minutes
+}
+
+function getSectionBody(markdown: string, heading: string): string {
+  const escapedHeading = heading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const regex = new RegExp(`##\\s+${escapedHeading}\\s*\\n([\\s\\S]*?)(?=\\n##\\s+|$)`, 'i')
+  const match = markdown.match(regex)
+  return match?.[1]?.trim() ?? ''
+}
+
+function validateSchedule(markdown: string): string[] {
+  const issues: string[] = []
+  const section = getSectionBody(markdown, 'Your Daily Schedule')
+
+  if (!section) {
+    return ['Missing "Your Daily Schedule" section content.']
+  }
+
+  const labelRegex = /^\s*([A-Za-z][A-Za-z0-9 /-]{1,30}):\s*(.+)\s*$/
+  const lines = section.split('\n').map((line) => line.trim()).filter(Boolean)
+  const labels = new Set<string>()
+  const times = new Set<number>()
+  const orderedTimes: number[] = []
+  let wakeCount = 0
+  let lightsOutTime: number | null = null
+
+  for (const line of lines) {
+    const match = line.match(labelRegex)
+    if (!match) continue
+
+    const label = match[1].toLowerCase().replace(/\s+/g, ' ').trim()
+    const value = match[2]
+
+    if (labels.has(label)) {
+      issues.push(`Duplicate schedule label: "${match[1]}".`)
+    }
+    labels.add(label)
+
+    if (label === 'wake') {
+      wakeCount += 1
+    }
+
+    const timeValue = parseTimeToMinutes(value)
+    if (timeValue !== null) {
+      if (times.has(timeValue)) {
+        issues.push(`Repeated time in schedule: "${value}".`)
+      }
+      times.add(timeValue)
+      orderedTimes.push(timeValue)
+
+      if (label === 'lights out' || label === 'bedtime') {
+        lightsOutTime = timeValue
+      }
+    }
+  }
+
+  if (labels.size < 3) {
+    issues.push('Schedule contains too few labeled rows.')
+  }
+
+  if (wakeCount !== 1) {
+    issues.push('Wake must appear exactly once.')
+  }
+
+  for (let i = 1; i < orderedTimes.length; i += 1) {
+    if (orderedTimes[i] <= orderedTimes[i - 1]) {
+      issues.push('Schedule times are not in chronological order.')
+      break
+    }
+  }
+
+  if (lightsOutTime === null) {
+    issues.push('Missing "Lights Out" (or bedtime) entry.')
+  } else if (orderedTimes.length > 1) {
+    const latestNonBedtime = Math.max(
+      ...orderedTimes.filter((t) => t !== lightsOutTime)
+    )
+    if (lightsOutTime <= latestNonBedtime) {
+      issues.push('Lights Out must be after the last daytime activity.')
+    }
+  }
+
+  return issues
+}
+
+function buildAdminRepairPrompt(draft: string, issues: string[]): string {
+  return `The draft below failed schedule validation.
+Fix all issues and return a corrected version using the exact same five headings and constraints.
+
+Validation issues:
+${issues.map((issue) => `- ${issue}`).join('\n')}
+
+Draft:
+${draft}`
+}
+
+async function generateWithTimeout(
+  model: ReturnType<typeof getFlashModel>,
+  prompt: string,
+  timeoutMs: number
+) {
+  let timeoutId: NodeJS.Timeout | null = null
+  try {
+    return await Promise.race([
+      model.generateContent(prompt),
+      new Promise<never>((_, reject) => {
+        timeoutId = setTimeout(() => {
+          reject(new Error(`Model generation timed out after ${timeoutMs}ms`))
+        }, timeoutMs)
+      }),
+    ])
+  } finally {
+    if (timeoutId) {
+      clearTimeout(timeoutId)
+    }
+  }
+}
+
 export async function POST(request: NextRequest) {
   // Kill switch — set FREE_SCHEDULE_ENABLED=false to turn off the whole tool instantly
   if (process.env.FREE_SCHEDULE_ENABLED === 'false') {
@@ -297,6 +528,7 @@ export async function POST(request: NextRequest) {
     extractedFields?: ExtractedFields
     questionsAsked?: number
     turnstileToken?: string
+    outputMode?: OutputMode
   }
   try {
     body = await request.json()
@@ -306,6 +538,9 @@ export async function POST(request: NextRequest) {
 
   const { messages, sessionId: existingSessionId, extractedFields: clientFields } = body
   const questionsAsked = body.questionsAsked ?? 0
+  const outputMode: OutputMode =
+    body.outputMode === 'admin_social' && isDev ? 'admin_social' : 'standard'
+  const isAdminSocialMode = outputMode === 'admin_social'
 
   // Turnstile verification on first message only (questionsAsked === 0)
   // Skipped in local dev when TURNSTILE_SECRET_KEY is not set
@@ -375,7 +610,7 @@ export async function POST(request: NextRequest) {
 
   // Step 4b: Off-topic guard
   // Fast path: keyword check (zero cost)
-  if (questionsAsked === 0 && !isOnTopic(userText)) {
+  if (!isAdminSocialMode && questionsAsked === 0 && !isOnTopic(userText)) {
     return NextResponse.json({
       status: 'needs_info',
       sessionId,
@@ -391,7 +626,7 @@ export async function POST(request: NextRequest) {
   // Semantic fallback: if extraction gave us nothing meaningful (confidence < 0.15),
   // ask Gemini Flash to confirm it's a genuine sleep question before asking follow-ups.
   // Catches absurd inputs that happen to contain sleep words ("my cat never sleeps").
-  if (questionsAsked === 0 && fields.confidence_score < 0.15) {
+  if (!isAdminSocialMode && questionsAsked === 0 && fields.confidence_score < 0.15) {
     const genuine = await isGenuineSleepQuestion(userText)
     if (!genuine) {
       return NextResponse.json({
@@ -409,7 +644,7 @@ export async function POST(request: NextRequest) {
   }
 
   // Step 5: Determine if we need a follow-up question
-  if (fields.age_months === null && questionsAsked < 3) {
+  if (!isAdminSocialMode && fields.age_months === null && questionsAsked < 3) {
     const q = FOLLOW_UP_QUESTIONS[0]
     return NextResponse.json({
       status: 'needs_info',
@@ -421,7 +656,7 @@ export async function POST(request: NextRequest) {
     })
   }
 
-  if (fields.wake_time === null && questionsAsked < 3) {
+  if (!isAdminSocialMode && fields.wake_time === null && questionsAsked < 3) {
     const q = FOLLOW_UP_QUESTIONS[1]
     return NextResponse.json({
       status: 'needs_info',
@@ -435,7 +670,7 @@ export async function POST(request: NextRequest) {
 
   // Optional 3rd question: main_issue (only if no other questions have been asked yet)
   // Using < 1 prevents re-asking when the user gives a free-text answer we couldn't parse
-  if (fields.main_issue === null && questionsAsked < 1) {
+  if (!isAdminSocialMode && fields.main_issue === null && questionsAsked < 1) {
     const q = FOLLOW_UP_QUESTIONS[2]
     return NextResponse.json({
       status: 'needs_info',
@@ -450,7 +685,7 @@ export async function POST(request: NextRequest) {
   // Step 5b: Chip-bypass guard — if the first organic message had no sleep content and the user
   // just clicked through chips, refuse to generate rather than produce a nonsense schedule.
   const firstUserMessage = messages.find((m) => m.role === 'user')?.content ?? ''
-  if (questionsAsked > 0 && !isOnTopic(firstUserMessage)) {
+  if (!isAdminSocialMode && questionsAsked > 0 && !isOnTopic(firstUserMessage)) {
     return NextResponse.json({
       status: 'needs_info',
       sessionId,
@@ -465,11 +700,16 @@ export async function POST(request: NextRequest) {
   }
 
   // Step 6: Age still unknown after all questions — terminal error
-  if (fields.age_months === null) {
+  if (!isAdminSocialMode && fields.age_months === null) {
     return NextResponse.json(
       { status: 'error', error: "I need your baby's age to create a schedule. How old are they in months?" },
       { status: 400 }
     )
+  }
+
+  if (isAdminSocialMode && fields.age_months === null) {
+    fields.age_months = 12
+    fields.assumptions.push('Age assumed to be 12 months (not clearly stated in source post)')
   }
 
   // Step 7: Assume wake_time if still missing
@@ -485,13 +725,49 @@ export async function POST(request: NextRequest) {
   )
 
   const originalDescription = messages.find((m) => m.role === 'user')?.content?.slice(0, 400) ?? ''
-  const prompt = buildSchedulePrompt(fields, knowledgeContent, originalDescription)
+  const prompt =
+    outputMode === 'admin_social'
+      ? buildAdminSocialPrompt(fields, knowledgeContent, originalDescription)
+      : buildStandardSchedulePrompt(fields, knowledgeContent, originalDescription)
 
   let scheduleMarkdown: string
   try {
-    const model = getFlashModel()
-    const result = await model.generateContent(prompt)
+    const primaryModel = isAdminSocialMode ? getModel() : getFlashModel()
+    let result
+    let usedFallback = false
+
+    try {
+      result = await generateWithTimeout(
+        primaryModel,
+        prompt,
+        isAdminSocialMode ? 30000 : 20000
+      )
+    } catch (primaryErr) {
+      if (!isAdminSocialMode) {
+        throw primaryErr
+      }
+      // Social mode prefers Pro, but should still return quickly if Pro is slow/unavailable.
+      result = await generateWithTimeout(getFlashModel(), prompt, 20000)
+      usedFallback = true
+    }
+
     scheduleMarkdown = result.response.text()
+
+    if (outputMode === 'admin_social') {
+      const issues = validateSchedule(scheduleMarkdown)
+      if (issues.length > 0 && !usedFallback) {
+        const repairResult = await generateWithTimeout(
+          getFlashModel(),
+          buildAdminRepairPrompt(scheduleMarkdown, issues),
+          12000
+        )
+        const repairedMarkdown = repairResult.response.text()
+        const repairIssues = validateSchedule(repairedMarkdown)
+        if (repairIssues.length === 0) {
+          scheduleMarkdown = repairedMarkdown
+        }
+      }
+    }
   } catch (err) {
     console.error('Gemini schedule generation failed:', err)
     return NextResponse.json(
