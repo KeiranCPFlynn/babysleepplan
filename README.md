@@ -144,6 +144,8 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 # Optional Google Analytics 4 measurement ID (e.g. G-XXXXXXXXXX)
 NEXT_PUBLIC_GA_MEASUREMENT_ID=
 INTERNAL_API_KEY=                # Required in production
+NEXT_PUBLIC_TURNSTILE_SITE_KEY=  # Optional, but must be paired with TURNSTILE_SECRET_KEY in production
+TURNSTILE_SECRET_KEY=            # Optional, but must be paired with NEXT_PUBLIC_TURNSTILE_SITE_KEY in production
 CRON_SECRET=                     # Recommended in production (Vercel Cron auth)
 # Emergency force override (requires redeploy). Prefer runtime flag toggle in admin controls.
 MAINTENANCE_MODE=false

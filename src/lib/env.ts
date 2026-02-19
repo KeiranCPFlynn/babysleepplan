@@ -47,6 +47,19 @@ function validateEnv() {
   requireEnvInProduction('NEXT_PUBLIC_APP_URL')
   requireEnvInProduction('NEXT_PUBLIC_SITE_URL')
 
+  // Turnstile must be configured as a pair in production.
+  if (isProduction) {
+    const hasTurnstileSecret = !!process.env.TURNSTILE_SECRET_KEY
+    const hasTurnstileSiteKey = !!process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
+
+    if (hasTurnstileSecret && !hasTurnstileSiteKey) {
+      missing.push('NEXT_PUBLIC_TURNSTILE_SITE_KEY (required when TURNSTILE_SECRET_KEY is set)')
+    }
+    if (hasTurnstileSiteKey && !hasTurnstileSecret) {
+      missing.push('TURNSTILE_SECRET_KEY (required when NEXT_PUBLIC_TURNSTILE_SITE_KEY is set)')
+    }
+  }
+
   // Required when Stripe is enabled
   if (isStripeEnabled) {
     let stripeMode: StripeMode

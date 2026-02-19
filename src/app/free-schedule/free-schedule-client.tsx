@@ -39,17 +39,20 @@ export function FreeScheduleClient() {
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
   const turnstileRef = useRef<HTMLDivElement>(null)
   const turnstileWidgetId = useRef<string | null>(null)
+  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
 
   useEffect(() => {
-    const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
-    if (!siteKey || !turnstileRef.current) return
+    if (!turnstileSiteKey || !turnstileRef.current) return
 
     function tryRender() {
       if (window.turnstile && turnstileRef.current && !turnstileWidgetId.current) {
         turnstileWidgetId.current = window.turnstile.render(turnstileRef.current, {
-          sitekey: siteKey,
+          sitekey: turnstileSiteKey,
+          size: 'invisible',
           appearance: 'interaction-only',
           callback: (token: unknown) => setTurnstileToken(token as string),
+          'error-callback': () => setTurnstileToken(null),
+          'expired-callback': () => setTurnstileToken(null),
           'refresh-expired': 'auto',
         })
       }
@@ -63,7 +66,7 @@ export function FreeScheduleClient() {
       clearInterval(intervalId)
       clearTimeout(timeoutId)
     }
-  }, [])
+  }, [turnstileSiteKey])
 
   const handleSend = useCallback(
     async (text: string) => {
@@ -111,6 +114,21 @@ export function FreeScheduleClient() {
         }
       }
 
+      const isFirstMessage = !hasTrackedFirstMessage
+      const shouldSendTurnstileToken = isFirstMessage && !!turnstileToken
+
+      if (isFirstMessage && turnstileSiteKey && !turnstileToken) {
+        setMessages((prev) => [
+          ...prev,
+          { role: 'user', content: text },
+          {
+            role: 'assistant',
+            content: 'Please wait a second while bot verification finishes, then resend your message.',
+          },
+        ])
+        return
+      }
+
       // Track first message
       if (!hasTrackedFirstMessage) {
         window.gtag?.('event', 'free_schedule_first_message', { free_schedule: true })
@@ -133,22 +151,17 @@ export function FreeScheduleClient() {
             extractedFields,
             questionsAsked,
             // Include Turnstile token only on the first message
-            ...(!hasTrackedFirstMessage && turnstileToken ? { turnstileToken } : {}),
+            ...(shouldSendTurnstileToken ? { turnstileToken } : {}),
           }),
         })
-
-        // Reset Turnstile after first send so the token can't be reused
-        if (!hasTrackedFirstMessage) {
-          if (turnstileWidgetId.current) {
-            window.turnstile?.reset(turnstileWidgetId.current)
-          }
-          setTurnstileToken(null)
-          setHasTrackedFirstMessage(true)
-        }
 
         const json = await res.json()
 
         if (!res.ok || json.status === 'error') {
+          if (isFirstMessage && shouldSendTurnstileToken && turnstileWidgetId.current) {
+            window.turnstile?.reset(turnstileWidgetId.current)
+            setTurnstileToken(null)
+          }
           const errMsg =
             json.error || "Something went wrong. Please try again or rephrase your message."
           setMessages((prev) => [...prev, { role: 'assistant', content: errMsg }])
@@ -166,6 +179,15 @@ export function FreeScheduleClient() {
             },
           ])
           return
+        }
+
+        // First message succeeded; consume token and mark session as verified.
+        if (isFirstMessage) {
+          if (shouldSendTurnstileToken && turnstileWidgetId.current) {
+            window.turnstile?.reset(turnstileWidgetId.current)
+            setTurnstileToken(null)
+          }
+          setHasTrackedFirstMessage(true)
         }
 
         if (json.extractedFields) {
@@ -221,7 +243,16 @@ export function FreeScheduleClient() {
         setIsLoading(false)
       }
     },
-    [messages, sessionId, extractedFields, questionsAsked, isLoading, hasTrackedFirstMessage, turnstileToken]
+    [
+      messages,
+      sessionId,
+      extractedFields,
+      questionsAsked,
+      isLoading,
+      hasTrackedFirstMessage,
+      turnstileToken,
+      turnstileSiteKey,
+    ]
   )
 
   const handleEmailSuccess = useCallback(() => {
@@ -232,7 +263,11 @@ export function FreeScheduleClient() {
   return (
     <div className="flex flex-col gap-6">
       {/* Hidden Turnstile widget container */}
-      <div ref={turnstileRef} className="hidden" aria-hidden="true" />
+      <div
+        ref={turnstileRef}
+        className="fixed -left-[9999px] top-0 h-px w-px opacity-0 pointer-events-none"
+        aria-hidden="true"
+      />
 
       {/* Chat section */}
       {(phase === 'chat' || phase === 'preview' || phase === 'email_sent') && (
