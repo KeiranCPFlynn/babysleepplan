@@ -15,3 +15,8 @@ export function getGemini() {
 export function getModel() {
   return getGemini().getGenerativeModel({ model: 'gemini-3-pro-preview' })
 }
+
+// Cheaper model for lightweight structured tasks (extraction, free-tier schedule)
+export function getFlashModel() {
+  return getGemini().getGenerativeModel({ model: 'gemini-3-flash-preview' })
+}

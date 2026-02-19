@@ -18,9 +18,10 @@ Before attempting any training, ensure the physical space supports sleep. A well
 *   **Note:** Use plain white noise, pink noise, or rain. Avoid music/lullabies that change pitch/rhythm.
 
 ### 3. Temperature
-*   **Goal:** 16–20°C (61–68°F).
-*   **Why:** Babies sleep better in cooler environments. Overheating is a safety risk and causes restlessness.
-*   **check:** Feel baby's chest or back. Hands and feet should be cool.
+*   **Goal:** Aim for a comfortably cool room. 16–20°C (61–68°F) is a common benchmark, but not a strict rule in every climate.
+*   **Why:** Overheating is a safety risk and can cause restless sleep.
+*   **Hot climate fallback:** If your room often runs warmer, focus on overheating prevention: light breathable layers, lower-TOG sleepwear, airflow/ventilation, and shade.
+*   **Check:** Feel baby's chest or back. Skin should feel warm and dry, not sweaty or hot.
 
 ### 4. Sleepwear
 *   **Swaddle:** 0-8 weeks (or until rolling signs). Dampens startle reflex.

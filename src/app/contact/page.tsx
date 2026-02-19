@@ -1,8 +1,7 @@
-import Link from 'next/link'
 import { Clock, MessageCircle, Shield } from 'lucide-react'
 import type { Metadata } from 'next'
 import { ContactForm } from './contact-form'
-import { BrandLogo } from '@/components/brand/brand-logo'
+import { MarketingHeader } from '@/components/layout/marketing-header'
 
 export const metadata: Metadata = {
   title: 'Contact Us - LunaCradle',
@@ -12,18 +11,15 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <div className="marketing-shell min-h-screen bg-gradient-to-b from-sky-50 via-white to-rose-50 text-slate-900 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 dark:text-slate-100">
-      <header className="container mx-auto px-4 py-6">
-        <nav className="flex items-center justify-between rounded-3xl border border-white/60 bg-white/70 px-4 py-3 shadow-sm backdrop-blur dark:border-slate-700/70 dark:bg-slate-900/75">
-          <Link href="/" className="flex items-center gap-2">
-            <BrandLogo size={28} className="h-7 w-7" />
-            <span className="text-lg font-semibold tracking-tight text-sky-800 dark:text-sky-200">LunaCradle</span>
-          </Link>
-          <div className="flex items-center gap-4 text-sm">
-            <Link href="/privacy" className="text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100">Privacy</Link>
-            <Link href="/terms" className="text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100">Terms</Link>
-          </div>
-        </nav>
-      </header>
+      <MarketingHeader
+        links={[
+          { href: '/privacy', label: 'Privacy' },
+          { href: '/terms', label: 'Terms' },
+          { href: '/blog', label: 'Blog' },
+          { href: '/free-schedule', label: 'Free Schedule' },
+        ]}
+        activeHref="/contact"
+      />
 
       <main className="container mx-auto max-w-3xl px-4 py-12">
         <h1 className="text-3xl font-semibold mb-2">Contact Us</h1>

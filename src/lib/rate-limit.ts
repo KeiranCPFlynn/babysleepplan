@@ -70,3 +70,37 @@ export const planUpdateLimiter = createRateLimiter('diary-plan-update', {
   max: 5,
   windowMs: 60 * 60 * 1000,
 })
+
+// Free schedule builder limiters (IP-based, not user-based)
+import { createHash } from 'crypto'
+import { type NextRequest } from 'next/server'
+
+export function getClientIp(req: NextRequest): string {
+  return (
+    req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+    req.headers.get('x-real-ip') ||
+    '0.0.0.0'
+  )
+}
+
+export function hashValue(value: string): string {
+  return createHash('sha256').update(value).digest('hex')
+}
+
+// 10 schedule previews per IP per day
+export const freeSchedulePreviewLimiter = createRateLimiter('free-schedule-preview', {
+  max: 10,
+  windowMs: 24 * 60 * 60 * 1000,
+})
+
+// 3 PDF sends per IP per day (hard block)
+export const freeSchedulePdfIpLimiter = createRateLimiter('free-schedule-pdf-ip', {
+  max: 3,
+  windowMs: 24 * 60 * 60 * 1000,
+})
+
+// 1 PDF send per email per day (in-memory; DB is authoritative for monthly)
+export const freeSchedulePdfEmailDayLimiter = createRateLimiter('free-schedule-pdf-email', {
+  max: 1,
+  windowMs: 24 * 60 * 60 * 1000,
+})

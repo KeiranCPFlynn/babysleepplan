@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { AnimateOnScroll } from '@/components/ui/animate-on-scroll'
 import { ArrowLeft, ClipboardList, Sparkles, BarChart3, BookOpen, CalendarDays, TrendingUp } from 'lucide-react'
 import { BrandLogo } from '@/components/brand/brand-logo'
+import { MarketingHeader } from '@/components/layout/marketing-header'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://lunacradle.com'
 
@@ -101,28 +102,16 @@ export default function HowItWorksPage() {
 
       <div className="relative">
         {/* Nav */}
-        <header className="container mx-auto px-4 py-6">
-          <nav className="flex items-center justify-between rounded-3xl border border-white/60 bg-white/70 px-4 py-3 shadow-sm backdrop-blur dark:border-slate-700/70 dark:bg-slate-900/75">
-            <Link href="/" className="flex items-center gap-2">
-              <BrandLogo size={28} className="h-7 w-7" />
-              <span className="text-lg font-semibold tracking-tight text-sky-800 dark:text-sky-200">LunaCradle</span>
-            </Link>
-            <div className="flex items-center gap-3 sm:gap-4 text-sm">
-              <Link href="/science" className="hidden md:inline-flex text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100">
-                Science
-              </Link>
-              <Link href="/blog" className="hidden md:inline-flex text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100">
-                Blog
-              </Link>
-              <Link href="/login" className="text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100">
-                Log in
-              </Link>
-              <Button asChild className="bg-sky-700 text-white hover:bg-sky-800">
-                <Link href="/signup">Get Plan Tonight</Link>
-              </Button>
-            </div>
-          </nav>
-        </header>
+        <MarketingHeader
+          links={[
+            { href: '/science', label: 'Science' },
+            { href: '/blog', label: 'Blog' },
+            { href: '/free-schedule', label: 'Free Schedule' },
+          ]}
+          loginHref="/login"
+          ctaHref="/signup"
+          ctaLabel="Get Plan Tonight"
+        />
 
         {/* Hero */}
         <section className="container mx-auto px-4 pt-10 pb-14 md:pt-16 md:pb-20">

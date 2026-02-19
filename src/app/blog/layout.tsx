@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
 import { BrandLogo } from '@/components/brand/brand-logo'
+import { MarketingHeader } from '@/components/layout/marketing-header'
 
 export default function BlogLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -21,31 +21,20 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
 
       <div className="relative">
         {/* Nav */}
-        <header className="container mx-auto px-4 py-6 animate-in fade-in slide-in-from-top-4 duration-700">
-          <nav className="flex items-center justify-between rounded-3xl border border-white/60 bg-white/70 px-4 py-3 shadow-sm backdrop-blur dark:border-slate-700/70 dark:bg-slate-900/75">
-            <Link href="/" className="flex items-center gap-2">
-              <BrandLogo size={28} className="h-7 w-7" />
-              <span className="text-lg font-semibold tracking-tight text-sky-800 dark:text-sky-200">LunaCradle</span>
-            </Link>
-            <div className="flex items-center gap-3 sm:gap-4 text-sm">
-              <Link href="/how-it-works" className="hidden md:inline-flex text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100">
-                How It Works
-              </Link>
-              <Link href="/science" className="hidden md:inline-flex text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100">
-                Science
-              </Link>
-              <Link href="/blog" className="text-slate-600 hover:text-slate-900 font-medium dark:text-slate-200 dark:hover:text-slate-100">
-                Blog
-              </Link>
-              <Link href="/login" className="text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100">
-                Log in
-              </Link>
-              <Button asChild className="bg-sky-700 text-white hover:bg-sky-800 cta-bounce">
-                <Link href="/signup">Start Free Trial</Link>
-              </Button>
-            </div>
-          </nav>
-        </header>
+        <MarketingHeader
+          headerClassName="animate-in fade-in slide-in-from-top-4 duration-700"
+          links={[
+            { href: '/how-it-works', label: 'How It Works' },
+            { href: '/science', label: 'Science' },
+            { href: '/blog', label: 'Blog' },
+            { href: '/free-schedule', label: 'Free Schedule' },
+          ]}
+          loginHref="/login"
+          ctaHref="/signup"
+          ctaLabel="Start Free Trial"
+          ctaClassName="cta-bounce"
+          activeHref="/blog"
+        />
 
         {/* Content */}
         <main>{children}</main>

@@ -72,7 +72,7 @@ You don't have to commit to a formal sleep training method to make meaningful im
 
 **Audit the last wake window.** This single change fixes more sleep problems than almost anything else. If your baby is having false starts or waking frequently in the first half of the night, try shortening the last wake window by 15 to 20 minutes for a few days and see what shifts.
 
-**Make the sleep environment boring.** A cool room (18-20C / 65-68F), genuinely dark with blackout curtains, and white noise at a consistent volume. The NHS and AAP both recommend keeping the sleep space simple, dark, and free of stimulation. These aren't luxuries, they remove variables that can cause unnecessary wakings.
+**Make the sleep environment boring.** A comfortably cool room, genuinely dark with blackout curtains, and white noise at a consistent volume. Around 16-20C can be a useful benchmark, but if your climate is warmer, prioritize overheating prevention with lighter sleepwear, lower TOG, and airflow. The NHS and AAP both recommend keeping the sleep space simple, dark, and free of stimulation. These aren't luxuries, they remove variables that can cause unnecessary wakings.
 
 **Separate feeding from falling asleep.** You don't have to eliminate feeding before bed. Just move it earlier in the routine so there's a gap between the last feed and being placed in the cot. Even a short buffer, a book, a song, a cuddle, can begin to weaken a feed-to-sleep association over time.
 

@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { AnimateOnScroll } from '@/components/ui/animate-on-scroll'
 import { Star, CheckCircle, BookOpen } from 'lucide-react'
 import { BrandLogo } from '@/components/brand/brand-logo'
+import { MarketingHeader } from '@/components/layout/marketing-header'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://lunacradle.com'
 
@@ -99,34 +100,19 @@ export default function HomePage() {
 
       <div className="relative">
         {/* 1. Nav */}
-        <header className="container mx-auto px-4 py-6">
-          <nav className="flex items-center justify-between rounded-3xl border border-white/60 bg-white/70 px-4 py-3 shadow-sm backdrop-blur dark:border-slate-700/70 dark:bg-slate-900/75">
-            <Link href="/" className="flex items-center gap-2">
-              <BrandLogo size={28} className="h-7 w-7" />
-              <span className="text-lg font-semibold tracking-tight text-sky-800 dark:text-sky-300">LunaCradle</span>
-            </Link>
-            <div className="flex items-center gap-3 sm:gap-4 text-sm">
-              <Link href="/how-it-works" className="hidden md:inline-flex text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100">
-                How It Works
-              </Link>
-              <Link href="/science" className="hidden md:inline-flex text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100">
-                Science
-              </Link>
-              <Link href="/blog" className="hidden md:inline-flex text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100">
-                Blog
-              </Link>
-              <Link href="/login" className="text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100">
-                Log in
-              </Link>
-              <Button asChild className="bg-sky-700 text-white hover:bg-sky-800 cta-bounce">
-                <Link href="/signup">
-                  <span className="sm:hidden">Get Plan</span>
-                  <span className="hidden sm:inline">Get Plan Tonight</span>
-                </Link>
-              </Button>
-            </div>
-          </nav>
-        </header>
+        <MarketingHeader
+          links={[
+            { href: '/how-it-works', label: 'How It Works' },
+            { href: '/science', label: 'Science' },
+            { href: '/blog', label: 'Blog' },
+            { href: '/free-schedule', label: 'Free Schedule' },
+          ]}
+          loginHref="/login"
+          ctaHref="/signup"
+          ctaLabel="Get Plan Tonight"
+          mobileCtaLabel="Get Plan"
+          ctaClassName="cta-bounce"
+        />
 
         {/* 2. Hero */}
         <section className="container mx-auto px-4 pt-10 pb-14 md:pt-16 md:pb-20">
@@ -154,6 +140,12 @@ export default function HomePage() {
               </div>
               <p className="mt-3 text-sm text-slate-500 dark:text-slate-400">
                 Credit card required to start trial.
+              </p>
+              <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+                Not ready?{' '}
+                <Link href="/free-schedule" className="underline underline-offset-2 hover:text-slate-700 dark:hover:text-slate-200">
+                  Try the free schedule builder
+                </Link>{' '}— no account needed.
               </p>
             </div>
             <div className="mt-6 flex items-center justify-center gap-2 text-xs text-slate-500 hero-load hero-load-3 dark:text-slate-400">
@@ -402,6 +394,7 @@ export default function HomePage() {
                   <Link href="/science" className="hover:text-slate-900">Science</Link>
                   <Link href="/compare" className="hover:text-slate-900">Compare</Link>
                   <Link href="/blog" className="hover:text-slate-900">Blog</Link>
+                  <Link href="/free-schedule" className="hover:text-slate-900">Free Schedule</Link>
                   <Link href="/privacy" className="hover:text-slate-900">Privacy</Link>
                   <Link href="/terms" className="hover:text-slate-900">Terms</Link>
                   <Link href="/contact" className="hover:text-slate-900">Contact</Link>

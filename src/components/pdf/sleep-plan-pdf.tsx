@@ -423,6 +423,18 @@ function Moon({ size = 20 }: { size?: number }) {
   )
 }
 
+// Heart bullet — SVG avoids font encoding issues with ♡ in Helvetica
+function Heart({ size = 10, color = colors.pinkAccent }: { size?: number; color?: string }) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24">
+      <Path
+        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+        fill={color}
+      />
+    </Svg>
+  )
+}
+
 // Simple markdown parser types
 type ParsedElement =
   | { type: 'h1' | 'h2' | 'h3' | 'h4'; content: string }
@@ -690,7 +702,9 @@ export function SleepPlanPDF({ babyName, babyAge, createdDate, content }: SleepP
                   <View key={index} style={styles.listContainer}>
                     {element.items.map((item, itemIndex) => (
                       <View key={itemIndex} style={styles.listItem} wrap={false}>
-                        <Text style={styles.bulletPoint}>♡</Text>
+                        <View style={{ width: 20, paddingTop: 2 }}>
+                          <Heart size={10} />
+                        </View>
                         <Text style={styles.listContent}>{renderInlineText(item)}</Text>
                       </View>
                     ))}
@@ -740,7 +754,7 @@ export function SleepPlanPDF({ babyName, babyAge, createdDate, content }: SleepP
               }
               case 'table':
                 return (
-                  <View key={index} style={styles.tableContainer} wrap={false}>
+                  <View key={index} style={styles.tableContainer}>
                     <View style={[styles.tableRow, styles.tableHeader]}>
                       {element.headers.map((header, cellIndex) => (
                         <Text key={cellIndex} style={[styles.tableCell, styles.tableCellHeader]}>
