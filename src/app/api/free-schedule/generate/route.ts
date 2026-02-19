@@ -718,9 +718,17 @@ export async function POST(request: NextRequest) {
     fields.assumptions.push("Wake time assumed to be 7:00 AM (not provided)")
   }
 
+  // Final type/runtime guard so generation always has a concrete age.
+  if (fields.age_months === null) {
+    fields.age_months = 12
+    fields.assumptions.push('Age assumed to be 12 months (not clearly stated in source post)')
+  }
+
+  const resolvedAgeMonths = fields.age_months
+
   // Step 8: Load knowledge base and generate schedule
   const { content: knowledgeContent } = loadFreeKnowledgeBase(
-    fields.age_months,
+    resolvedAgeMonths,
     fields.main_issue
   )
 
