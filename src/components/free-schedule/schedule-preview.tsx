@@ -1,5 +1,6 @@
 'use client'
 
+import { isValidElement, type ComponentProps, type ReactNode } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import type { ExtractedFields } from '@/lib/free-schedule/types'
@@ -32,7 +33,7 @@ function splitSections(markdown: string): Map<string, string> {
   return sections
 }
 
-function BlurGate({ children, label }: { children: React.ReactNode; label: string }) {
+function BlurGate({ children, label }: { children: ReactNode; label: string }) {
   return (
     <div className="relative rounded-lg overflow-hidden mt-4">
       <div className="pointer-events-none select-none" style={{ filter: 'blur(5px)' }}>
@@ -47,18 +48,18 @@ function BlurGate({ children, label }: { children: React.ReactNode; label: strin
 }
 
 // Extract text from React nodes (used to detect "If..." paragraph styling)
-function getNodeText(node: React.ReactNode): string {
+function getNodeText(node: ReactNode): string {
   if (!node) return ''
   if (typeof node === 'string' || typeof node === 'number') return String(node)
   if (Array.isArray(node)) return node.map(getNodeText).join('')
-  if (typeof node === 'object' && 'props' in (node as React.ReactElement)) {
-    return getNodeText((node as React.ReactElement).props?.children)
+  if (isValidElement<{ children?: ReactNode }>(node)) {
+    return getNodeText(node.props.children)
   }
   return ''
 }
 
 // Shared ReactMarkdown component overrides — styled to match the PDF aesthetic
-const mdComponents: React.ComponentProps<typeof ReactMarkdown>['components'] = {
+const mdComponents: ComponentProps<typeof ReactMarkdown>['components'] = {
   h2: ({ children }) => (
     <div className="bg-indigo-50 border-l-[5px] border-indigo-300 rounded-xl py-4 px-6 mt-8 mb-5 shadow-sm dark:bg-indigo-950/40 dark:border-indigo-500/60">
       <h2 className="text-base font-bold text-indigo-800 dark:text-indigo-200 m-0">{children}</h2>
