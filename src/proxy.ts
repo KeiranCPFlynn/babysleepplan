@@ -71,6 +71,11 @@ function isAllowedDuringMaintenance(pathname: string) {
 }
 
 export async function proxy(request: NextRequest) {
+  // Stripe webhooks are unsigned by Supabase auth cookies and should not depend on session refresh.
+  if (request.nextUrl.pathname.startsWith('/api/stripe/webhook')) {
+    return NextResponse.next()
+  }
+
   if (await isMaintenanceEnabled()) {
     const bypassToken = process.env.MAINTENANCE_BYPASS_TOKEN
     const bypassFromQuery = request.nextUrl.searchParams.get('bypass')
