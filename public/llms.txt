@@ -1,0 +1,20 @@
+# LunaCradle
+
+Last-Updated: 2026-02-24
+Website: https://lunacradle.com
+Product: AI-powered, evidence-based baby sleep planning for ages 0-5
+
+LunaCradle helps parents create a personalized sleep plan, track sleep daily, and get data-driven plan updates.
+
+Read full context: https://lunacradle.com/docs/llms-full.txt
+
+Key URLs:
+- https://lunacradle.com/
+- https://lunacradle.com/how-it-works
+- https://lunacradle.com/science
+- https://lunacradle.com/compare
+- https://lunacradle.com/free-schedule
+- https://lunacradle.com/blog
+- https://lunacradle.com/privacy
+- https://lunacradle.com/terms
+- https://lunacradle.com/contact

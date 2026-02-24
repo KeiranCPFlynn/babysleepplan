@@ -6,6 +6,9 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://lunacradle.com'
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     { url: siteUrl, lastModified: new Date(), changeFrequency: 'weekly', priority: 1 },
+    { url: `${siteUrl}/llms.txt`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
+    { url: `${siteUrl}/llms-full.txt`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
+    { url: `${siteUrl}/docs/llms-full.txt`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
     { url: `${siteUrl}/how-it-works`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${siteUrl}/science`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${siteUrl}/compare`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
