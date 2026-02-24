@@ -1,13 +1,14 @@
 import type { MetadataRoute } from 'next'
+import { getSiteUrl } from '@/lib/site-url'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://lunacradle.com'
+const siteUrl = getSiteUrl()
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/dashboard/', '/api/'],
+      disallow: ['/dashboard', '/dashboard/', '/api/'],
     },
     sitemap: `${siteUrl}/sitemap.xml`,
   }

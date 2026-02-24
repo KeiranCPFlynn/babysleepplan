@@ -6,8 +6,9 @@ import { AnimateOnScroll } from '@/components/ui/animate-on-scroll'
 import { ArrowLeft, CheckCircle, XCircle, Minus } from 'lucide-react'
 import { BrandLogo } from '@/components/brand/brand-logo'
 import { MarketingHeader } from '@/components/layout/marketing-header'
+import { getSiteUrl } from '@/lib/site-url'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://lunacradle.com'
+const siteUrl = getSiteUrl()
 
 export const metadata: Metadata = {
   title: "LunaCradle vs Sleep Consultants — Same Science, Fraction of the Cost",
@@ -175,6 +176,31 @@ export default function ComparePage() {
             </AnimateOnScroll>
           </div>
         </section>
+
+        <AnimateOnScroll>
+          <section className="container mx-auto px-4 pb-16">
+            <div className="mx-auto max-w-3xl">
+              <h2 className="text-2xl md:text-3xl font-bold mb-3">More comparison and troubleshooting guides</h2>
+              <p className="text-slate-600 mb-6">
+                Explore deeper pages based on your exact question.
+              </p>
+              <div className="grid gap-4 sm:grid-cols-3">
+                <Link href="/huckleberry-alternative" className="rounded-2xl border border-white/70 bg-white/80 p-4 shadow-sm hover:bg-white">
+                  <h3 className="font-semibold text-sm">Huckleberry alternative</h3>
+                  <p className="mt-2 text-xs text-slate-600">Feature and pricing comparison for parents evaluating options.</p>
+                </Link>
+                <Link href="/4-month-sleep-regression" className="rounded-2xl border border-white/70 bg-white/80 p-4 shadow-sm hover:bg-white">
+                  <h3 className="font-semibold text-sm">4 month sleep regression</h3>
+                  <p className="mt-2 text-xs text-slate-600">A practical tonight plan for frequent wake-ups.</p>
+                </Link>
+                <Link href="/toddler-sleep-2-year-old" className="rounded-2xl border border-white/70 bg-white/80 p-4 shadow-sm hover:bg-white">
+                  <h3 className="font-semibold text-sm">2 year old sleep problems</h3>
+                  <p className="mt-2 text-xs text-slate-600">Bedtime resistance, nap refusal, and split night support.</p>
+                </Link>
+              </div>
+            </div>
+          </section>
+        </AnimateOnScroll>
 
         {/* When a consultant is the right choice */}
         <AnimateOnScroll>

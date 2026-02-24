@@ -3,8 +3,9 @@ import Link from 'next/link'
 import Script from 'next/script'
 import { FreeScheduleClient } from './free-schedule-client'
 import { MarketingHeader } from '@/components/layout/marketing-header'
+import { getSiteUrl } from '@/lib/site-url'
 
-const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://lunacradle.com'
+const siteUrl = getSiteUrl()
 
 export const metadata: Metadata = {
   title: 'Free Baby Sleep Schedule Builder | LunaCradle',

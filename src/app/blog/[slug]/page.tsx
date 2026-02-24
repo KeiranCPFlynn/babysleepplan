@@ -7,8 +7,9 @@ import { PostContent } from '@/components/blog/post-content'
 import { PostCard } from '@/components/blog/post-card'
 import { AnimateOnScroll } from '@/components/ui/animate-on-scroll'
 import { formatUniversalDate } from '@/lib/date-format'
+import { getSiteUrl } from '@/lib/site-url'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://lunacradle.com'
+const siteUrl = getSiteUrl()
 
 export function generateStaticParams() {
   return getPostSlugs().map((slug) => ({ slug }))

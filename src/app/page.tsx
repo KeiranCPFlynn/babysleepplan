@@ -7,8 +7,9 @@ import { AnimateOnScroll } from '@/components/ui/animate-on-scroll'
 import { Star, CheckCircle, BookOpen } from 'lucide-react'
 import { BrandLogo } from '@/components/brand/brand-logo'
 import { MarketingHeader } from '@/components/layout/marketing-header'
+import { getSiteUrl } from '@/lib/site-url'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://lunacradle.com'
+const siteUrl = getSiteUrl()
 
 export const metadata: Metadata = {
   title: "LunaCradle — Personalized Baby Sleep Plans, Ready Tonight",
@@ -371,6 +372,46 @@ export default function HomePage() {
                     <h3 className="font-semibold text-base mb-1 dark:text-slate-100">{faq.q}</h3>
                     <p className="text-slate-600 text-sm dark:text-slate-300">{faq.a}</p>
                   </div>
+                </AnimateOnScroll>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 7. Popular SEO Guides */}
+        <section className="pb-16 md:pb-20">
+          <div className="container mx-auto px-4">
+            <AnimateOnScroll>
+              <h2 className="text-2xl md:text-3xl font-bold text-center mb-3">
+                <span className="heading-underline">Popular Sleep Guides</span>
+              </h2>
+              <p className="text-center text-slate-500 mb-8 max-w-2xl mx-auto">
+                High-intent guides for common parent questions.
+              </p>
+            </AnimateOnScroll>
+            <div className="grid gap-4 md:grid-cols-3 max-w-5xl mx-auto">
+              {[
+                {
+                  href: '/huckleberry-alternative',
+                  title: 'Huckleberry alternative',
+                  text: 'Compare features, fit, and pricing in one place.',
+                },
+                {
+                  href: '/4-month-sleep-regression',
+                  title: '4 month sleep regression',
+                  text: 'What is happening and what helps tonight.',
+                },
+                {
+                  href: '/toddler-sleep-2-year-old',
+                  title: '2 year old sleep problems',
+                  text: 'Bedtime battles, nap refusal, and night waking.',
+                },
+              ].map((guide, index) => (
+                <AnimateOnScroll key={guide.href} delay={index * 100}>
+                  <Link href={guide.href} className="block rounded-2xl border border-white/70 bg-white/80 p-5 shadow-sm card-hover">
+                    <h3 className="font-semibold text-slate-900">{guide.title}</h3>
+                    <p className="mt-2 text-sm text-slate-600">{guide.text}</p>
+                  </Link>
                 </AnimateOnScroll>
               ))}
             </div>

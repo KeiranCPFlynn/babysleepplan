@@ -14,7 +14,7 @@ export function BrandLogo({ size = 28, className = '' }: BrandLogoProps) {
       width={size}
       height={size}
       className={cn(
-        'rounded-xl shadow-sm shadow-sky-900/5 dark:shadow-black/35 dark:brightness-110',
+        'shadow-sm shadow-sky-900/5 dark:shadow-black/35 dark:brightness-110',
         className
       )}
     />

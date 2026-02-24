@@ -1,9 +1,11 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { getAllPosts } from '@/lib/blog'
 import { PostCard } from '@/components/blog/post-card'
 import { AnimateOnScroll } from '@/components/ui/animate-on-scroll'
+import { getSiteUrl } from '@/lib/site-url'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://lunacradle.com'
+const siteUrl = getSiteUrl()
 
 export const metadata: Metadata = {
   title: 'Baby Sleep Blog — Evidence-Based Tips & Guides | LunaCradle',
@@ -69,6 +71,17 @@ export default function BlogPage() {
           <p className="text-center text-slate-500 mb-12 max-w-lg mx-auto">
             Research-backed articles to help your family sleep better.
           </p>
+          <div className="mx-auto mb-10 grid max-w-4xl gap-3 sm:grid-cols-3">
+            <Link href="/4-month-sleep-regression" className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 hover:bg-slate-50">
+              4 month sleep regression guide
+            </Link>
+            <Link href="/toddler-sleep-2-year-old" className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 hover:bg-slate-50">
+              2 year old sleep problems
+            </Link>
+            <Link href="/huckleberry-alternative" className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 hover:bg-slate-50">
+              Huckleberry alternative
+            </Link>
+          </div>
         </AnimateOnScroll>
 
         {posts.length === 0 ? (

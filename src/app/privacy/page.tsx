@@ -1,10 +1,14 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { MarketingHeader } from '@/components/layout/marketing-header'
+import { getSiteUrl } from '@/lib/site-url'
+
+const siteUrl = getSiteUrl()
 
 export const metadata: Metadata = {
   title: 'Privacy Policy - LunaCradle',
   description: 'How LunaCradle collects, uses, and protects your personal information.',
+  alternates: { canonical: `${siteUrl}/privacy` },
 }
 
 export default function PrivacyPage() {

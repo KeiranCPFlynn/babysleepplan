@@ -1,10 +1,14 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { MarketingHeader } from '@/components/layout/marketing-header'
+import { getSiteUrl } from '@/lib/site-url'
+
+const siteUrl = getSiteUrl()
 
 export const metadata: Metadata = {
   title: 'Terms of Service - LunaCradle',
   description: 'Terms and conditions for using LunaCradle.',
+  alternates: { canonical: `${siteUrl}/terms` },
 }
 
 export default function TermsPage() {

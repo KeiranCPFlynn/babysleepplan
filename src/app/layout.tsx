@@ -4,6 +4,7 @@ import "./globals.css";
 import { ToastProvider } from "@/components/providers/toast-provider";
 import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import '@/lib/env'
+import { getSiteUrl } from '@/lib/site-url'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://lunacradle.com'),
+  metadataBase: new URL(getSiteUrl()),
   title: {
     default: "LunaCradle - Personalized AI Sleep Plans for Your Baby",
     template: "%s | LunaCradle",

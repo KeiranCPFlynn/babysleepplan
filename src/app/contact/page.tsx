@@ -2,10 +2,14 @@ import { Clock, MessageCircle, Shield } from 'lucide-react'
 import type { Metadata } from 'next'
 import { ContactForm } from './contact-form'
 import { MarketingHeader } from '@/components/layout/marketing-header'
+import { getSiteUrl } from '@/lib/site-url'
+
+const siteUrl = getSiteUrl()
 
 export const metadata: Metadata = {
   title: 'Contact Us - LunaCradle',
   description: 'Get in touch with the LunaCradle team.',
+  alternates: { canonical: `${siteUrl}/contact` },
 }
 
 export default function ContactPage() {

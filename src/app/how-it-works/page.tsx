@@ -5,8 +5,9 @@ import { AnimateOnScroll } from '@/components/ui/animate-on-scroll'
 import { ArrowLeft, ClipboardList, Sparkles, BarChart3, BookOpen, CalendarDays, TrendingUp } from 'lucide-react'
 import { BrandLogo } from '@/components/brand/brand-logo'
 import { MarketingHeader } from '@/components/layout/marketing-header'
+import { getSiteUrl } from '@/lib/site-url'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://lunacradle.com'
+const siteUrl = getSiteUrl()
 
 export const metadata: Metadata = {
   title: "How It Works — Your Sleep Plan in 3 Steps",
