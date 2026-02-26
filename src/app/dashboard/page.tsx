@@ -9,6 +9,7 @@ import { getDaysRemaining, getSubscriptionLabel, hasActiveSubscription } from '@
 import { SubscriptionStatusDebug } from '@/components/subscription/subscription-status-debug'
 import { TestSubscriptionControls } from '@/components/subscription/test-subscription-controls'
 import { DeleteUserControls } from '@/components/admin/delete-user-controls'
+import { AdminPanel } from '@/components/admin/admin-panel'
 import { AnimateOnScroll } from '@/components/ui/animate-on-scroll'
 import { formatUniversalDate } from '@/lib/date-format'
 
@@ -184,16 +185,23 @@ export default async function DashboardPage() {
     : { data: [] }
 
   const intakeIdsWithPlans = new Set((plansForDrafts || []).map((p) => p.intake_submission_id))
-  const draftIntakes = (allDraftIntakes || []).filter((i) => !intakeIdsWithPlans.has(i.id)).slice(0, 3)
+  // Only show 1 draft per baby (most recent), and limit to 1 total (prevent stacking)
+  const seenBabyIds = new Set<string>()
+  const draftIntakes = (allDraftIntakes || [])
+    .filter((i) => !intakeIdsWithPlans.has(i.id))
+    .filter((i) => {
+      if (seenBabyIds.has(i.baby_id)) return false
+      seenBabyIds.add(i.baby_id)
+      return true
+    })
+    .slice(0, 1)
 
-  const isActive = hasActiveSubscription(subscriptionStatus, isStripeEnabled)
+  const isActive = hasActiveSubscription(subscriptionStatus, isStripeEnabled, profile?.trial_ends_at)
   const daysRemaining = getDaysRemaining(profile?.subscription_period_end ?? null)
   const subscriptionHref = '/dashboard/subscription'
   const babiesHref = babyCount && babyCount > 0 ? '/dashboard/babies' : '/dashboard/babies/new'
   const soleBabyId = babyCount === 1 ? babies?.[0]?.id : null
-  const createPlanHref = soleBabyId
-    ? `/dashboard/intake/new?baby=${encodeURIComponent(soleBabyId)}`
-    : '/dashboard/intake/new'
+  const createPlanHref = '/dashboard/intake/new'
   const primaryPlan = recentPlans && recentPlans.length > 0 ? recentPlans[0] : null
   const primaryCompletedPlan = completedPlans && completedPlans.length > 0 ? completedPlans[0] : null
 
@@ -274,19 +282,24 @@ export default async function DashboardPage() {
         </div>
       </AnimateOnScroll>
 
-      {/* Subscription Status Debug (Admin Only) */}
-      {showAdminTools && isStripeEnabled && (
-        <SubscriptionStatusDebug
-          serverStatus={subscriptionStatus}
-          isStripeEnabled={isStripeEnabled}
-        />
+      {showAdminTools && (
+        <AdminPanel>
+          {isStripeEnabled && (
+            <SubscriptionStatusDebug
+              serverStatus={subscriptionStatus}
+              isStripeEnabled={isStripeEnabled}
+            />
+          )}
+          <Link
+            href="/dashboard/admin/access-codes"
+            className="block rounded-lg border border-sky-200 bg-sky-50/60 px-4 py-3 text-sm font-medium text-sky-800 hover:bg-sky-100 transition-colors"
+          >
+            Manage Access Codes &rarr;
+          </Link>
+          <TestSubscriptionControls babies={babies || []} plans={normalizedAdminPlanOptions} />
+          <DeleteUserControls />
+        </AdminPanel>
       )}
-
-      {/* Admin Test Controls */}
-      {showAdminTools && <TestSubscriptionControls babies={babies || []} plans={normalizedAdminPlanOptions} />}
-
-      {/* Admin Delete User */}
-      {showAdminTools && <DeleteUserControls />}
 
       {/* Night-time quick access */}
       {primaryPlan && (

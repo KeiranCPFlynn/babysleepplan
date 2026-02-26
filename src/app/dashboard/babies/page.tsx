@@ -23,11 +23,11 @@ export default async function BabiesPage() {
 
   const { data: profile } = await supabase
     .from('profiles')
-    .select('subscription_status')
+    .select('subscription_status, trial_ends_at')
     .eq('id', user.id)
     .single()
 
-  const isActive = hasActiveSubscription(profile?.subscription_status, isStripeEnabled)
+  const isActive = hasActiveSubscription(profile?.subscription_status, isStripeEnabled, profile?.trial_ends_at)
   const babyCount = babies?.length ?? 0
 
   return (

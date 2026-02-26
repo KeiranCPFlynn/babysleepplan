@@ -111,6 +111,37 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ success: true, message: 'Trial ended. Stripe will now attempt payment.' })
       }
 
+      case 'expireAccessCodeTrial': {
+        // Set trial_ends_at to 1 minute ago so gating treats it as expired
+        const expired = new Date(Date.now() - 60_000).toISOString()
+        const { error: expireError } = await adminSupabase
+          .from('profiles')
+          .update({ trial_ends_at: expired })
+          .eq('id', user.id)
+
+        if (expireError) {
+          console.error('Failed to expire access code trial:', expireError)
+          return NextResponse.json({ error: 'Failed to expire trial' }, { status: 500 })
+        }
+
+        return NextResponse.json({ success: true, trial_ends_at: expired })
+      }
+
+      case 'clearAccessCodeTrial': {
+        // Remove trial_ends_at entirely
+        const { error: clearError } = await adminSupabase
+          .from('profiles')
+          .update({ trial_ends_at: null })
+          .eq('id', user.id)
+
+        if (clearError) {
+          console.error('Failed to clear access code trial:', clearError)
+          return NextResponse.json({ error: 'Failed to clear trial' }, { status: 500 })
+        }
+
+        return NextResponse.json({ success: true, trial_ends_at: null })
+      }
+
       case 'resetSubscription': {
         // Cancel any active Stripe subscriptions first
         const { data: resetProfile } = await adminSupabase
@@ -142,6 +173,7 @@ export async function POST(request: NextRequest) {
             stripe_customer_id: null,
             subscription_period_end: null,
             has_used_trial: false,
+            trial_ends_at: null,
           })
           .eq('id', user.id)
 

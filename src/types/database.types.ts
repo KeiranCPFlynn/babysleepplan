@@ -13,6 +13,8 @@ export type IntakeStatus = 'draft' | 'submitted' | 'paid'
 export type PlanStatus = 'generating' | 'completed' | 'failed'
 export type PlanRevisionSource = 'initial' | 'weekly-review' | 'manual'
 
+export type AccessCodeCategory = 'founding' | 'partner' | 'student' | 'custom'
+
 export interface Profile {
   id: string
   email: string
@@ -23,8 +25,31 @@ export interface Profile {
   is_admin: boolean
   has_used_trial: boolean
   trial_days_override: number | null
+  trial_ends_at: string | null
+  created_at: string
+}
+
+export interface AccessCode {
+  id: string
+  code: string
+  trial_days: number
+  max_redemptions: number | null
+  redeemed_count: number
+  starts_at: string | null
+  expires_at: string | null
+  enabled: boolean
+  category: AccessCodeCategory
+  note: string | null
   created_at: string
   updated_at: string
+}
+
+export interface AccessCodeRedemption {
+  id: string
+  access_code_id: string
+  user_id: string
+  trial_ends_at: string
+  created_at: string
 }
 
 export interface Baby {

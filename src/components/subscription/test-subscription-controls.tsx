@@ -258,6 +258,58 @@ export function TestSubscriptionControls({ babies = [], plans = [] }: TestSubscr
         }
     }
 
+    const handleExpireAccessCodeTrial = async () => {
+        try {
+            setIsLoading(true)
+            setMessage('')
+
+            const response = await fetch('/api/admin/settings', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'expireAccessCodeTrial' }),
+            })
+
+            const data = await response.json()
+
+            if (!response.ok) {
+                setMessage(`Error: ${data.error}`)
+            } else {
+                setMessage('Access code trial expired. User now has no access. Page will reload.')
+                setTimeout(() => window.location.reload(), 2000)
+            }
+        } catch (error) {
+            setMessage(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`)
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
+    const handleClearAccessCodeTrial = async () => {
+        try {
+            setIsLoading(true)
+            setMessage('')
+
+            const response = await fetch('/api/admin/settings', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'clearAccessCodeTrial' }),
+            })
+
+            const data = await response.json()
+
+            if (!response.ok) {
+                setMessage(`Error: ${data.error}`)
+            } else {
+                setMessage('Access code trial cleared (trial_ends_at set to null). Page will reload.')
+                setTimeout(() => window.location.reload(), 2000)
+            }
+        } catch (error) {
+            setMessage(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`)
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
     const handleSetMaintenanceMode = async (enabled: boolean) => {
         try {
             setIsLoading(true)
@@ -369,10 +421,35 @@ export function TestSubscriptionControls({ babies = [], plans = [] }: TestSubscr
                         variant="outline"
                         className="border-orange-300 text-orange-800 hover:bg-orange-100"
                     >
-                        {isLoading ? 'Ending trial...' : 'End Trial Now'}
+                        {isLoading ? 'Ending trial...' : 'End Stripe Trial Now'}
                     </Button>
                     <p className="text-xs text-orange-600">
-                        Ends the trial immediately. Stripe will attempt to charge the card.
+                        Ends the Stripe trial immediately. Stripe will attempt to charge the card.
+                    </p>
+                </div>
+
+                <div className="border-t border-orange-200 pt-4 space-y-3">
+                    <Label className="text-orange-800 font-medium">Access Code Trial</Label>
+                    <div className="flex flex-wrap gap-2">
+                        <Button
+                            onClick={handleExpireAccessCodeTrial}
+                            disabled={isLoading}
+                            variant="outline"
+                            className="border-orange-300 text-orange-800 hover:bg-orange-100"
+                        >
+                            {isLoading ? 'Expiring...' : 'Expire Access Code Trial'}
+                        </Button>
+                        <Button
+                            onClick={handleClearAccessCodeTrial}
+                            disabled={isLoading}
+                            variant="outline"
+                            className="border-orange-300 text-orange-800 hover:bg-orange-100"
+                        >
+                            {isLoading ? 'Clearing...' : 'Clear Access Code Trial'}
+                        </Button>
+                    </div>
+                    <p className="text-xs text-orange-600">
+                        Expire sets trial_ends_at to the past (user loses access). Clear removes it entirely.
                     </p>
                 </div>
 
@@ -385,7 +462,7 @@ export function TestSubscriptionControls({ babies = [], plans = [] }: TestSubscr
                         {isLoading ? 'Resetting...' : 'Reset Subscription'}
                     </Button>
                     <p className="text-xs text-orange-600 mt-2">
-                        Sets status to inactive and clears Stripe customer ID. Re-test the full flow.
+                        Sets status to inactive, clears Stripe customer ID and access code trial. Re-test the full flow.
                     </p>
                 </div>
 

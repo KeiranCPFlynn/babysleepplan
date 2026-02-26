@@ -26,12 +26,12 @@ export default async function DiaryHubPage() {
 
   const { data: profile } = await supabase
     .from('profiles')
-    .select('subscription_status')
+    .select('subscription_status, trial_ends_at, has_used_trial')
     .eq('id', user.id)
     .single()
 
   const subscriptionStatus = profile?.subscription_status
-  const isActive = hasActiveSubscription(subscriptionStatus, isStripeEnabled)
+  const isActive = hasActiveSubscription(subscriptionStatus, isStripeEnabled, profile?.trial_ends_at)
 
   const todayStr = new Date().toISOString().split('T')[0]
   if (isActive && completedPlans && completedPlans.length === 1) {
@@ -100,10 +100,15 @@ export default async function DiaryHubPage() {
               Your subscription is no longer active. The sleep diary requires an active subscription.
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-3">
             <p className="text-sm text-amber-800">
-              Your plans are still available to view.
+              Your plans are still available to view. Reactivate to continue logging sleep.
             </p>
+            <Button asChild className="bg-sky-700 hover:bg-sky-800">
+              <Link href={profile?.has_used_trial ? '/dashboard/resubscribe' : '/dashboard/subscription'}>
+                Reactivate Subscription
+              </Link>
+            </Button>
           </CardContent>
         </Card>
       ) : (

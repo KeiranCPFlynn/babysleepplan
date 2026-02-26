@@ -55,8 +55,44 @@ export async function POST(request: NextRequest) {
       // Trials fire with 'no_payment_required', paid sessions with 'paid'
       if (session.payment_status === 'paid' || session.payment_status === 'no_payment_required') {
         const intakeId = session.metadata?.intake_id
+        const planIdMeta = session.metadata?.plan_id
         const userId = session.metadata?.user_id
         const babyId = session.metadata?.baby_id
+
+        // Reactivation flow: plan_id is set, no new plan needed — just activate subscription
+        if (planIdMeta && userId && !intakeId) {
+          const adminClient = getSupabaseAdmin()
+
+          let periodEnd: string | null = null
+          let ourStatus: 'active' | 'trialing' = 'active'
+          if (session.subscription) {
+            const sub = await stripe.subscriptions.retrieve(session.subscription as string)
+            const endTimestamp = sub.trial_end ?? sub.items.data[0]?.current_period_end
+            if (endTimestamp) {
+              periodEnd = new Date(endTimestamp * 1000).toISOString()
+            }
+            if (sub.status === 'trialing') {
+              ourStatus = 'trialing'
+            }
+          }
+
+          const { error: reactivateError } = await adminClient
+            .from('profiles')
+            .update({
+              subscription_status: ourStatus,
+              has_used_trial: true,
+              ...(periodEnd ? { subscription_period_end: periodEnd } : {}),
+            })
+            .eq('id', userId)
+
+          if (reactivateError) {
+            console.error('Failed to reactivate subscription:', reactivateError)
+          } else {
+            if (isDev) console.log(`Subscription reactivated for user ${userId}, plan ${planIdMeta}`)
+          }
+
+          break
+        }
 
         if (intakeId && userId && babyId) {
           const adminClient = getSupabaseAdmin()

@@ -102,11 +102,10 @@ export async function POST(request: NextRequest) {
 
     logInfo('Baby verified:', baby.id)
 
-    // Check for existing draft
+    // Check for existing draft (any baby — only 1 draft allowed at a time)
     const { data: existingDraft } = await adminSupabase
       .from('intake_submissions')
-      .select('id')
-      .eq('baby_id', babyId)
+      .select('id, baby_id')
       .eq('user_id', user.id)
       .eq('status', 'draft')
       .order('updated_at', { ascending: false })
@@ -114,17 +113,53 @@ export async function POST(request: NextRequest) {
       .maybeSingle()
 
     if (existingDraft) {
-      return NextResponse.json({ intakeId: existingDraft.id, existing: true })
+      // Same baby — return existing draft to continue
+      if (existingDraft.baby_id === babyId) {
+        return NextResponse.json({ intakeId: existingDraft.id, existing: true })
+      }
+      // Different baby — block: only 1 draft at a time
+      return NextResponse.json(
+        { error: 'draft_exists', draftId: existingDraft.id },
+        { status: 409 }
+      )
     }
 
-    // Create new intake
-    // Note: status defaults to 'draft' in database
-    const insertPayload = {
+    // Look for most recent submitted/paid intake for this baby to pre-populate
+    const { data: previousIntake } = await adminSupabase
+      .from('intake_submissions')
+      .select('*')
+      .eq('baby_id', babyId)
+      .eq('user_id', user.id)
+      .in('status', ['submitted', 'paid'])
+      .order('updated_at', { ascending: false })
+      .limit(1)
+      .maybeSingle()
+
+    // Create new intake, pre-populated from previous if available
+    const insertPayload: Record<string, unknown> = {
       baby_id: babyId,
       user_id: user.id,
-      data: {}, // Required by database
+      data: previousIntake?.data ?? {},
     }
-    logInfo('Inserting intake with:', insertPayload)
+
+    if (previousIntake) {
+      const copyFields = [
+        'current_bedtime', 'current_waketime', 'falling_asleep_method',
+        'night_wakings_count', 'night_wakings_description', 'night_waking_duration', 'night_waking_pattern',
+        'nap_count', 'nap_duration', 'nap_method', 'nap_location',
+        'problems', 'problem_description',
+        'crying_comfort_level', 'parent_constraints',
+        'success_description', 'additional_notes',
+      ] as const
+      for (const field of copyFields) {
+        if (previousIntake[field] != null) {
+          insertPayload[field] = previousIntake[field]
+        }
+      }
+      logInfo('Pre-populated from previous intake:', previousIntake.id)
+    }
+
+    logInfo('Inserting intake with baby_id:', babyId)
 
     const { data: intake, error: intakeError } = await adminSupabase
       .from('intake_submissions')

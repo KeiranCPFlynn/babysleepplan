@@ -43,7 +43,7 @@ export async function GET(request: NextRequest) {
         .single(),
       supabase
         .from('profiles')
-        .select('subscription_status')
+        .select('subscription_status, trial_ends_at')
         .eq('id', user.id)
         .single(),
     ])
@@ -56,7 +56,7 @@ export async function GET(request: NextRequest) {
     const { data: profile } = profileResult
 
     const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
-    if (!hasActiveSubscription(profile?.subscription_status, isStripeEnabled)) {
+    if (!hasActiveSubscription(profile?.subscription_status, isStripeEnabled, profile?.trial_ends_at)) {
       return NextResponse.json({ error: 'Subscription required to access the diary' }, { status: 402 })
     }
 
@@ -128,7 +128,7 @@ export async function POST(request: NextRequest) {
         .single(),
       supabase
         .from('profiles')
-        .select('subscription_status')
+        .select('subscription_status, trial_ends_at')
         .eq('id', user.id)
         .single(),
     ])
@@ -141,7 +141,7 @@ export async function POST(request: NextRequest) {
     const { data: profile } = profileResult
 
     const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
-    if (!hasActiveSubscription(profile?.subscription_status, isStripeEnabled)) {
+    if (!hasActiveSubscription(profile?.subscription_status, isStripeEnabled, profile?.trial_ends_at)) {
       return NextResponse.json({ error: 'Subscription required to log sleep' }, { status: 402 })
     }
 

@@ -12,7 +12,7 @@ export async function POST() {
 
     const { data: profile } = await supabase
       .from('profiles')
-      .select('subscription_status, stripe_customer_id')
+      .select('subscription_status, stripe_customer_id, trial_ends_at')
       .eq('id', user.id)
       .single()
 
@@ -20,6 +20,7 @@ export async function POST() {
 
     return NextResponse.json({
       status: currentStatus,
+      trial_ends_at: profile?.trial_ends_at ?? null,
       debug: {
         userId: user.id,
         stripeCustomerId: profile?.stripe_customer_id,

@@ -37,6 +37,11 @@ export function BabySelector({ babies, selectedBabyId }: BabySelectorProps) {
 
       if (!response.ok) {
         console.error('API Error:', data)
+        if (data.error === 'draft_exists') {
+          toast.error('You have an unfinished questionnaire. Please finish or delete it first.')
+          router.push('/dashboard/intake/new')
+          return
+        }
         throw new Error(data.details || data.error || 'Failed to create intake')
       }
 

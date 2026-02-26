@@ -5,6 +5,7 @@ import { hasActiveSubscription } from '@/lib/subscription'
 
 interface SubscriptionStatus {
     status: string | null
+    trialEndsAt: string | null
     isActive: boolean
     isLoading: boolean
     error: string | null
@@ -13,6 +14,7 @@ interface SubscriptionStatus {
 
 export function useSubscription(): SubscriptionStatus {
     const [status, setStatus] = useState<string | null>(null)
+    const [trialEndsAt, setTrialEndsAt] = useState<string | null>(null)
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
 
@@ -41,6 +43,7 @@ export function useSubscription(): SubscriptionStatus {
             }
 
             setStatus(data.status)
+            setTrialEndsAt(data.trial_ends_at ?? null)
 
             if (data.fixed) {
                 console.log('Subscription status was fixed:', data.status)
@@ -57,10 +60,11 @@ export function useSubscription(): SubscriptionStatus {
         verifySubscription()
     }, [])
 
-    const isActive = hasActiveSubscription(status, isStripeEnabled)
+    const isActive = hasActiveSubscription(status, isStripeEnabled, trialEndsAt)
 
     return {
         status,
+        trialEndsAt,
         isActive,
         isLoading,
         error,

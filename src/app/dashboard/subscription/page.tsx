@@ -5,13 +5,15 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { ArrowLeft, CheckCircle, CreditCard, HelpCircle } from 'lucide-react'
-import { getDaysRemaining, getSubscriptionLabel, hasActiveSubscription, MONTHLY_PRICE, TRIAL_DAYS } from '@/lib/subscription'
+import { getDaysRemaining, getSubscriptionLabel, hasAccessCodeTrial, hasActiveSubscription, MONTHLY_PRICE, TRIAL_DAYS } from '@/lib/subscription'
 import { TestSubscriptionControls } from '@/components/subscription/test-subscription-controls'
 import { DeleteUserControls } from '@/components/admin/delete-user-controls'
+import { AdminPanel } from '@/components/admin/admin-panel'
 import { ManageSubscriptionButton } from '@/components/subscription/manage-subscription-button'
 import { stripe } from '@/lib/stripe'
 import { formatUniversalDate } from '@/lib/date-format'
 import { DisplayNameForm } from '@/components/account/display-name-form'
+import { RedeemAccessCode } from '@/components/access-code/redeem-access-code'
 import type Stripe from 'stripe'
 
 export const dynamic = 'force-dynamic'
@@ -164,7 +166,7 @@ export default async function SubscriptionPage() {
 
   const { data: profile, error: profileError } = await supabase
     .from('profiles')
-    .select('subscription_status, subscription_period_end, stripe_customer_id, is_admin, has_used_trial, created_at, full_name')
+    .select('subscription_status, subscription_period_end, stripe_customer_id, is_admin, has_used_trial, trial_ends_at, created_at, full_name')
     .eq('id', user.id)
     .single()
 
@@ -176,8 +178,10 @@ export default async function SubscriptionPage() {
   const stripeCustomerId = profile?.stripe_customer_id
   let activeStripeSubscription: Stripe.Subscription | null = null
 
+  const trialEndsAt = profile?.trial_ends_at ?? null
+
   // Self-healing: if DB says inactive but user has a Stripe customer, check Stripe directly
-  const shouldSync = isStripeEnabled && stripeCustomerId && !hasActiveSubscription(status, isStripeEnabled)
+  const shouldSync = isStripeEnabled && stripeCustomerId && !hasActiveSubscription(status, isStripeEnabled, trialEndsAt)
 
   if (shouldSync) {
     try {
@@ -215,8 +219,9 @@ export default async function SubscriptionPage() {
     }
   }
 
-  const label = getSubscriptionLabel(status)
-  const isActive = hasActiveSubscription(status, isStripeEnabled)
+  const label = getSubscriptionLabel(status, trialEndsAt)
+  const isActive = hasActiveSubscription(status, isStripeEnabled, trialEndsAt)
+  const isOnAccessCodeTrial = hasAccessCodeTrial(trialEndsAt) && status !== 'active' && status !== 'trialing'
   const isAdmin = profile?.is_admin === true
   const showAdminTools = isAdmin
   const daysRemaining = getDaysRemaining(profile?.subscription_period_end ?? null)
@@ -269,25 +274,23 @@ export default async function SubscriptionPage() {
         <DisplayNameForm initialName={profile?.full_name ?? null} />
       </div>
 
-      {/* Debug Information (Admin Only) */}
       {showAdminTools && (
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <h3 className="text-sm font-medium text-blue-800 mb-2">Debug Information</h3>
-          <div className="text-xs text-blue-600 space-y-1">
-            <p>User ID: {user.id}</p>
-            <p>Current Status: {status || 'null'}</p>
-            <p>Stripe Customer ID: {profile?.stripe_customer_id || 'none'}</p>
-            <p>Is Active: {isActive ? 'yes' : 'no'}</p>
-            <p>Stripe Enabled: {isStripeEnabled ? 'yes' : 'no'}</p>
+        <AdminPanel>
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+            <h3 className="text-sm font-medium text-blue-800 mb-2">Debug Information</h3>
+            <div className="text-xs text-blue-600 space-y-1">
+              <p>User ID: {user.id}</p>
+              <p>Current Status: {status || 'null'}</p>
+              <p>Trial Ends At: {trialEndsAt || 'null'}</p>
+              <p>Stripe Customer ID: {profile?.stripe_customer_id || 'none'}</p>
+              <p>Is Active: {isActive ? 'yes' : 'no'}</p>
+              <p>Stripe Enabled: {isStripeEnabled ? 'yes' : 'no'}</p>
+            </div>
           </div>
-        </div>
+          <TestSubscriptionControls />
+          <DeleteUserControls />
+        </AdminPanel>
       )}
-
-      {/* Test Controls (Admin Only) */}
-      {showAdminTools && <TestSubscriptionControls />}
-
-      {/* Delete User (Admin Only) */}
-      {showAdminTools && <DeleteUserControls />}
 
       <Card className={`dashboard-card-soft ${isActive ? 'border-green-200 bg-green-50/60' : 'border-amber-200 bg-amber-50/60'}`}>
         <CardHeader>
@@ -304,7 +307,9 @@ export default async function SubscriptionPage() {
                 {label}
               </CardTitle>
               <CardDescription className={isActive ? 'text-green-600' : 'text-amber-600'}>
-                {status === 'trialing'
+                {isOnAccessCodeTrial
+                  ? `Access until ${formatUniversalDate(trialEndsAt!)} (${getDaysRemaining(trialEndsAt)} days remaining)`
+                  : status === 'trialing'
                   ? daysRemaining !== null
                     ? `Your free trial ends in ${daysRemaining} day${daysRemaining !== 1 ? 's' : ''}`
                     : `Your ${TRIAL_DAYS}-day free trial is active`
@@ -418,9 +423,9 @@ export default async function SubscriptionPage() {
       )}
 
       {!isActive && (
-        <div className="text-center pt-4">
+        <div className="text-center pt-4 space-y-4">
           <Button asChild size="lg" className="bg-sky-700 hover:bg-sky-800">
-            <Link href="/dashboard/intake/new">
+            <Link href={profile?.has_used_trial ? '/dashboard/resubscribe' : '/dashboard/intake/new'}>
               {profile?.has_used_trial ? 'Resubscribe' : 'Start Your Free Trial'}
             </Link>
           </Button>
@@ -430,6 +435,9 @@ export default async function SubscriptionPage() {
               : `${TRIAL_DAYS} days free, then $${MONTHLY_PRICE}/month. Cancel anytime.`
             }
           </p>
+          <div className="pt-2">
+            <RedeemAccessCode />
+          </div>
         </div>
       )}
     </div>

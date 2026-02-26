@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   hasActiveSubscription,
+  hasAccessCodeTrial,
   getDaysRemaining,
   getSubscriptionLabel,
   MONTHLY_PRICE,
@@ -97,6 +98,54 @@ describe('getSubscriptionLabel', () => {
 
   it('returns "Inactive" for unknown string', () => {
     expect(getSubscriptionLabel('something_else')).toBe('Inactive')
+  })
+})
+
+describe('access code trial', () => {
+  it('hasActiveSubscription returns true when trial_ends_at is in the future', () => {
+    const future = new Date()
+    future.setDate(future.getDate() + 10)
+    expect(hasActiveSubscription('inactive', true, future.toISOString())).toBe(true)
+  })
+
+  it('hasActiveSubscription returns false when trial_ends_at is in the past', () => {
+    const past = new Date()
+    past.setDate(past.getDate() - 1)
+    expect(hasActiveSubscription('inactive', true, past.toISOString())).toBe(false)
+  })
+
+  it('hasActiveSubscription returns true when stripe active even if trial expired', () => {
+    const past = new Date()
+    past.setDate(past.getDate() - 1)
+    expect(hasActiveSubscription('active', true, past.toISOString())).toBe(true)
+  })
+
+  it('hasAccessCodeTrial returns true for future date', () => {
+    const future = new Date()
+    future.setDate(future.getDate() + 5)
+    expect(hasAccessCodeTrial(future.toISOString())).toBe(true)
+  })
+
+  it('hasAccessCodeTrial returns false for past date', () => {
+    const past = new Date()
+    past.setDate(past.getDate() - 1)
+    expect(hasAccessCodeTrial(past.toISOString())).toBe(false)
+  })
+
+  it('hasAccessCodeTrial returns false for null', () => {
+    expect(hasAccessCodeTrial(null)).toBe(false)
+  })
+
+  it('getSubscriptionLabel returns "Access Code Trial" for inactive user with active trial', () => {
+    const future = new Date()
+    future.setDate(future.getDate() + 10)
+    expect(getSubscriptionLabel('inactive', future.toISOString())).toBe('Access Code Trial')
+  })
+
+  it('getSubscriptionLabel returns "Active" for active user even with trial', () => {
+    const future = new Date()
+    future.setDate(future.getDate() + 10)
+    expect(getSubscriptionLabel('active', future.toISOString())).toBe('Active')
   })
 })
 

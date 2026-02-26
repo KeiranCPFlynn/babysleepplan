@@ -4,6 +4,7 @@ import { requireAuth } from '@/lib/auth'
 import Link from 'next/link'
 import { ArrowLeft, Moon, Star } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 import { DiaryClient } from './diary-client'
 import { hasActiveSubscription } from '@/lib/subscription'
 
@@ -54,13 +55,13 @@ export default async function DiaryPage({
 
   const { data: profile } = await supabase
     .from('profiles')
-    .select('subscription_status')
+    .select('subscription_status, trial_ends_at, has_used_trial')
     .eq('id', user.id)
     .single()
 
   const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
 
-  if (!hasActiveSubscription(profile?.subscription_status, isStripeEnabled)) {
+  if (!hasActiveSubscription(profile?.subscription_status, isStripeEnabled, profile?.trial_ends_at)) {
     return (
       <div className="dashboard-surface max-w-3xl mx-auto space-y-6 p-5 sm:p-6">
         <Link
@@ -78,10 +79,15 @@ export default async function DiaryPage({
               Your subscription is no longer active. The sleep diary requires an active subscription.
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-4">
             <p className="text-sm text-amber-800 dark:text-amber-200">
-              Your plan is still available to view.
+              Your plan is still available to view. Reactivate to continue logging sleep.
             </p>
+            <Button asChild className="bg-sky-700 hover:bg-sky-800">
+              <Link href={profile?.has_used_trial ? '/dashboard/resubscribe' : '/dashboard/subscription'}>
+                Reactivate Subscription
+              </Link>
+            </Button>
           </CardContent>
         </Card>
       </div>

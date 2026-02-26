@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { CheckoutButton } from './checkout-button'
 import { CheckCircle, Shield, Sparkles, Ticket } from 'lucide-react'
 import { hasActiveSubscription, ADDITIONAL_BABY_PRICE, MONTHLY_PRICE, TRIAL_DAYS } from '@/lib/subscription'
+import { RedeemAccessCode } from '@/components/access-code/redeem-access-code'
 
 const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
 const foundingOffer = {
@@ -44,11 +45,11 @@ export default async function PaymentPage({
     // Check if user already has an active subscription (additional baby flow)
     const { data: profile } = await supabase
       .from('profiles')
-      .select('subscription_status, has_used_trial')
+      .select('subscription_status, has_used_trial, trial_ends_at')
       .eq('id', user.id)
       .single()
 
-    const isAdditionalBaby = hasActiveSubscription(profile?.subscription_status, isStripeEnabled)
+    const isAdditionalBaby = hasActiveSubscription(profile?.subscription_status, isStripeEnabled, profile?.trial_ends_at)
     const isReturningUser = !isAdditionalBaby && profile?.has_used_trial === true
 
     const showFoundingOffer = foundingOffer.active && isStripeEnabled && !isAdditionalBaby
@@ -162,7 +163,7 @@ export default async function PaymentPage({
                 <>
                   <div className="w-full rounded-lg border border-sky-200 bg-sky-50/70 px-3 py-2 text-center dark:border-slate-600 dark:bg-slate-800/70">
                     <p className="text-xs text-slate-700 dark:text-slate-200">
-                      Have a coupon code? Enter it on the secure Stripe checkout page after you continue.
+                      Have a promo code? Enter it on the Stripe checkout page after you continue.
                     </p>
                   </div>
                   <p className="text-xs text-center text-gray-400 dark:text-slate-400">
@@ -206,6 +207,12 @@ export default async function PaymentPage({
             </CardContent>
           </Card>
         </div>
+
+        {!isAdditionalBaby && (
+          <div className="text-center pt-2">
+            <RedeemAccessCode intakeId={id} babyId={intake.baby_id} />
+          </div>
+        )}
 
         <div className="text-center">
           <Link
