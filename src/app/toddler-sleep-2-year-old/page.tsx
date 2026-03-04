@@ -27,6 +27,10 @@ export const metadata: Metadata = buildMarketingMetadata({
     '2 year sleep regression',
     'toddler nap refusal',
     'toddler waking at night',
+    '2 year old sleep schedule',
+    'toddler sleep regression',
+    'toddler won\'t stay in bed',
+    'bedtime for 2 year old',
   ],
 })
 

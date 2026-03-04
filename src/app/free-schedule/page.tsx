@@ -17,6 +17,9 @@ export const metadata: Metadata = {
     'baby sleep schedule generator',
     'free baby schedule',
     'baby sleep help',
+    'baby nap schedule',
+    'nap schedule by age',
+    'baby sleep schedule sample',
   ],
   alternates: { canonical: `${siteUrl}/free-schedule` },
   openGraph: {

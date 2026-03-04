@@ -9,7 +9,8 @@
     "lint": "eslint",
     "test": "vitest",
     "test:run": "vitest run",
-    "new-post": "node scripts/new-post.mjs"
+    "new-post": "node scripts/new-post.mjs",
+    "blog:add-images": "node scripts/add-blog-images.mjs"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",

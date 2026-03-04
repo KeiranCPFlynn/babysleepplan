@@ -20,6 +20,9 @@ export const metadata: Metadata = {
     'affordable baby sleep plan',
     'best baby sleep app 2026',
     'is a baby sleep consultant worth it',
+    'baby sleep consultant',
+    'online sleep consultant baby',
+    'taking cara babies review',
   ],
   alternates: { canonical: `${siteUrl}/compare` },
   openGraph: {

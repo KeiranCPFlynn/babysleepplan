@@ -19,6 +19,9 @@ export const metadata: Metadata = {
     'NHS baby sleep guidelines',
     'AAP infant sleep guidelines',
     'baby sleep science',
+    'is sleep training safe',
+    'SIDS prevention',
+    'safe sleep baby',
   ],
   alternates: { canonical: `${siteUrl}/science` },
   openGraph: {

@@ -18,6 +18,10 @@ export const metadata: Metadata = {
     'personalized baby sleep plan',
     'how baby sleep plans work',
     'baby sleep diary tracker',
+    'AI baby sleep',
+    'AI sleep plan baby',
+    'custom baby sleep plan',
+    'baby sleep plan online',
   ],
   alternates: { canonical: `${siteUrl}/how-it-works` },
   openGraph: {

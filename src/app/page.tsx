@@ -17,6 +17,8 @@ export const metadata: Metadata = {
   keywords: [
     'baby sleep plan', 'AI sleep consultant', 'personalized baby sleep',
     'infant sleep schedule', 'baby sleep help', 'toddler sleep plan',
+    'how to get baby to sleep', 'baby sleep training', 'baby sleep schedule',
+    'gentle sleep training', 'baby sleep consultant alternative',
   ],
   alternates: { canonical: siteUrl },
   openGraph: {

@@ -31,10 +31,13 @@ export const metadata: Metadata = buildMarketingMetadata({
   path: '/huckleberry-alternative',
   keywords: [
     'huckleberry alternative',
+    'huckleberry app',
+    'huckleberry sleep app',
     'baby sleep app alternative',
+    'best baby sleep app',
+    'best baby sleep app 2026',
     'personalized baby sleep plan',
-    'toddler sleep help',
-    'sleep diary app for babies',
+    'baby sleep tracker app',
   ],
 })
 
