@@ -1,4 +1,6 @@
-const DEFAULT_SITE_URL = 'https://lunacradle.com'
+const DEFAULT_SITE_URL = 'https://www.lunacradle.com'
+const APEX_HOST = 'lunacradle.com'
+const CANONICAL_HOST = 'www.lunacradle.com'
 
 function normalizeSiteUrl(rawUrl: string): string {
   const trimmedUrl = rawUrl.trim()
@@ -7,7 +9,11 @@ function normalizeSiteUrl(rawUrl: string): string {
   const withProtocol = /^https?:\/\//i.test(trimmedUrl) ? trimmedUrl : `https://${trimmedUrl}`
 
   try {
-    return new URL(withProtocol).origin
+    const parsedUrl = new URL(withProtocol)
+    if (parsedUrl.hostname === APEX_HOST) {
+      parsedUrl.hostname = CANONICAL_HOST
+    }
+    return parsedUrl.origin
   } catch {
     return DEFAULT_SITE_URL
   }

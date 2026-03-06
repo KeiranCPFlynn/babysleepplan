@@ -25,6 +25,16 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [{ protocol: 'https', hostname: 'images.unsplash.com' }],
   },
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'lunacradle.com' }],
+        destination: 'https://www.lunacradle.com/:path*',
+        permanent: true,
+      },
+    ]
+  },
   async headers() {
     return [
       {

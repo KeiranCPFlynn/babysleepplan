@@ -141,6 +141,7 @@ RESEND_FROM_EMAIL=               # Optional override, e.g. "LunaCradle <noreply@
 
 # App
 NEXT_PUBLIC_APP_URL=http://localhost:3000
+NEXT_PUBLIC_SITE_URL=http://localhost:3000  # Production: use your canonical host, e.g. https://www.lunacradle.com
 # Optional Google Analytics 4 measurement ID (e.g. G-XXXXXXXXXX)
 NEXT_PUBLIC_GA_MEASUREMENT_ID=
 INTERNAL_API_KEY=                # Required in production
