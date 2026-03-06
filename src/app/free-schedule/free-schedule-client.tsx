@@ -11,6 +11,7 @@ type FreeScheduleOutputMode = 'standard' | 'admin_social'
 
 interface FreeScheduleClientProps {
   showAdminSocialTools?: boolean
+  turnstileSiteKey?: string | null
 }
 
 declare global {
@@ -29,7 +30,10 @@ const INITIAL_MESSAGE: ChatMessage = {
     "Hi! Tell me about your baby — their age and what's going on with sleep. You can paste a post from Reddit or Facebook, or just describe the situation.",
 }
 
-export function FreeScheduleClient({ showAdminSocialTools = false }: FreeScheduleClientProps) {
+export function FreeScheduleClient({
+  showAdminSocialTools = false,
+  turnstileSiteKey = null,
+}: FreeScheduleClientProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([INITIAL_MESSAGE])
   const [extractedFields, setExtractedFields] = useState<ExtractedFields | null>(null)
   const [scheduleMarkdown, setScheduleMarkdown] = useState<string | null>(null)
@@ -48,8 +52,6 @@ export function FreeScheduleClient({ showAdminSocialTools = false }: FreeSchedul
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
   const turnstileRef = useRef<HTMLDivElement>(null)
   const turnstileWidgetId = useRef<string | null>(null)
-  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
-
   useEffect(() => {
     if (!turnstileSiteKey || !turnstileRef.current) return
 
@@ -180,7 +182,9 @@ export function FreeScheduleClient({ showAdminSocialTools = false }: FreeSchedul
             setTurnstileToken(null)
           }
           const errMsg =
-            json.error || "Something went wrong. Please try again or rephrase your message."
+            json.error === 'Bot verification required.'
+              ? 'Please wait a second while bot verification finishes, then resend your message.'
+              : json.error || "Something went wrong. Please try again or rephrase your message."
           setMessages((prev) => [...prev, { role: 'assistant', content: errMsg }])
           return
         }

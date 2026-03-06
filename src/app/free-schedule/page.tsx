@@ -6,6 +6,7 @@ import { MarketingHeader } from '@/components/layout/marketing-header'
 import { getSiteUrl } from '@/lib/site-url'
 
 const siteUrl = getSiteUrl()
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'Free Baby Sleep Schedule Builder | LunaCradle',
@@ -32,6 +33,7 @@ export const metadata: Metadata = {
 
 export default async function FreeSchedulePage() {
   const showAdminSocialTools = process.env.NODE_ENV !== 'production'
+  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? null
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-rose-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 text-slate-900 dark:text-slate-100">
@@ -88,7 +90,10 @@ export default async function FreeSchedulePage() {
         </div>
 
         {/* Chat UI */}
-        <FreeScheduleClient showAdminSocialTools={showAdminSocialTools} />
+        <FreeScheduleClient
+          showAdminSocialTools={showAdminSocialTools}
+          turnstileSiteKey={turnstileSiteKey}
+        />
 
         {/* Footer CTA */}
         <div className="text-center mt-10 text-sm text-slate-500 dark:text-slate-400">
