@@ -4,7 +4,7 @@ import { sanitizeEmailSubject } from '@/lib/sanitize'
 export async function sendFreeScheduleEmail(toEmail: string, pdfBytes: Uint8Array): Promise<void> {
   const resend = getResend()
   const fromEmail = getFromEmail()
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://lunacradle.com'
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.lunacradle.com'
 
   const html = `<!DOCTYPE html>
 <html>
