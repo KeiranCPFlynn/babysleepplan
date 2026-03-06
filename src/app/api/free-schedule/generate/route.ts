@@ -503,25 +503,6 @@ export async function POST(request: NextRequest) {
     process.env.SUPABASE_SERVICE_ROLE_KEY!
   )
 
-  if (!isDev) {
-    const todayStart = new Date()
-    todayStart.setUTCHours(0, 0, 0, 0)
-    const { count: todayCount } = await supabaseAdmin
-      .from('free_schedule_sessions')
-      .select('id', { count: 'exact', head: true })
-      .gte('report_generated_at', todayStart.toISOString())
-
-    if ((todayCount ?? 0) >= dailyGenerateLimit) {
-      return NextResponse.json(
-        {
-          status: 'rate_limited',
-          message: 'The free schedule builder is very busy today. Please try again tomorrow.',
-        },
-        { status: 429 }
-      )
-    }
-  }
-
   let body: {
     messages?: ChatMessage[]
     sessionId?: string
@@ -580,6 +561,8 @@ export async function POST(request: NextRequest) {
     .filter((m) => m.role === 'user')
     .map((m) => m.content)
     .join(' ')
+  const trimmedUserText = userText.trim()
+  const userTextLength = trimmedUserText.length
 
   const sessionId = existingSessionId || randomUUID()
 
@@ -603,8 +586,10 @@ export async function POST(request: NextRequest) {
     }
   }
 
-  // Step 4: Gemini fallback if age is still unknown and confidence is low
-  if (fields.age_months === null && fields.confidence_score < 0.3) {
+  // Step 4: Gemini fallback if age is still unknown and confidence is low.
+  // Gate this for short first messages to keep the first round-trip fast.
+  const shouldUseGeminiExtraction = questionsAsked > 0 || userTextLength >= 80
+  if (fields.age_months === null && fields.confidence_score < 0.3 && shouldUseGeminiExtraction) {
     fields = mergeFields(clientFields || fields, await extractWithGemini(userText))
   }
 
@@ -626,7 +611,12 @@ export async function POST(request: NextRequest) {
   // Semantic fallback: if extraction gave us nothing meaningful (confidence < 0.15),
   // ask Gemini Flash to confirm it's a genuine sleep question before asking follow-ups.
   // Catches absurd inputs that happen to contain sleep words ("my cat never sleeps").
-  if (!isAdminSocialMode && questionsAsked === 0 && fields.confidence_score < 0.15) {
+  if (
+    !isAdminSocialMode &&
+    questionsAsked === 0 &&
+    fields.confidence_score < 0.15 &&
+    userTextLength >= 60
+  ) {
     const genuine = await isGenuineSleepQuestion(userText)
     if (!genuine) {
       return NextResponse.json({
@@ -725,6 +715,27 @@ export async function POST(request: NextRequest) {
   }
 
   const resolvedAgeMonths = fields.age_months
+
+  // Global daily cap (DB-backed — survives deploys and multiple serverless instances).
+  // Run only when we're actually about to generate a schedule.
+  if (!isDev) {
+    const todayStart = new Date()
+    todayStart.setUTCHours(0, 0, 0, 0)
+    const { count: todayCount } = await supabaseAdmin
+      .from('free_schedule_sessions')
+      .select('id', { count: 'exact', head: true })
+      .gte('report_generated_at', todayStart.toISOString())
+
+    if ((todayCount ?? 0) >= dailyGenerateLimit) {
+      return NextResponse.json(
+        {
+          status: 'rate_limited',
+          message: 'The free schedule builder is very busy today. Please try again tomorrow.',
+        },
+        { status: 429 }
+      )
+    }
+  }
 
   // Step 8: Load knowledge base and generate schedule
   const { content: knowledgeContent } = loadFreeKnowledgeBase(

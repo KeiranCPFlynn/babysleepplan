@@ -42,6 +42,7 @@ export function FreeScheduleClient({
   const [quickReplies, setQuickReplies] = useState<string[]>([])
   const [phase, setPhase] = useState<SessionPhase>('chat')
   const [isLoading, setIsLoading] = useState(false)
+  const [loadingStatus, setLoadingStatus] = useState<string | null>(null)
   const [hasTrackedFirstMessage, setHasTrackedFirstMessage] = useState(false)
   const [isUnlocked, setIsUnlocked] = useState(false)
   const [outputMode, setOutputMode] = useState<FreeScheduleOutputMode>(
@@ -52,6 +53,38 @@ export function FreeScheduleClient({
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
   const turnstileRef = useRef<HTMLDivElement>(null)
   const turnstileWidgetId = useRef<string | null>(null)
+  const loadingTimer1 = useRef<number | null>(null)
+  const loadingTimer2 = useRef<number | null>(null)
+  const loadingTimer3 = useRef<number | null>(null)
+
+  const clearLoadingTimers = useCallback(() => {
+    if (loadingTimer1.current !== null) {
+      clearTimeout(loadingTimer1.current)
+      loadingTimer1.current = null
+    }
+    if (loadingTimer2.current !== null) {
+      clearTimeout(loadingTimer2.current)
+      loadingTimer2.current = null
+    }
+    if (loadingTimer3.current !== null) {
+      clearTimeout(loadingTimer3.current)
+      loadingTimer3.current = null
+    }
+  }, [])
+
+  const startLoadingStatus = useCallback(() => {
+    clearLoadingTimers()
+    setLoadingStatus('Checking your details...')
+    loadingTimer1.current = window.setTimeout(() => {
+      setLoadingStatus('Building your schedule...')
+    }, 1400)
+    loadingTimer2.current = window.setTimeout(() => {
+      setLoadingStatus('Adding guidance for your exact situation...')
+    }, 3200)
+    loadingTimer3.current = window.setTimeout(() => {
+      setLoadingStatus('Still working. This can take up to 20 seconds.')
+    }, 7000)
+  }, [clearLoadingTimers])
   useEffect(() => {
     if (!turnstileSiteKey || !turnstileRef.current) return
 
@@ -151,6 +184,7 @@ export function FreeScheduleClient({
       setMessages(newMessages)
       setQuickReplies([])
       setIsLoading(true)
+      startLoadingStatus()
       let requestTimeoutId: number | null = null
 
       try {
@@ -267,6 +301,8 @@ export function FreeScheduleClient({
         if (requestTimeoutId !== null) {
           clearTimeout(requestTimeoutId)
         }
+        clearLoadingTimers()
+        setLoadingStatus(null)
         setIsLoading(false)
       }
     },
@@ -280,8 +316,12 @@ export function FreeScheduleClient({
       turnstileToken,
       turnstileSiteKey,
       outputMode,
+      startLoadingStatus,
+      clearLoadingTimers,
     ]
   )
+
+  useEffect(() => () => clearLoadingTimers(), [clearLoadingTimers])
 
   const handleEmailSuccess = useCallback(() => {
     setIsUnlocked(true)
@@ -321,6 +361,7 @@ export function FreeScheduleClient({
             messages={messages}
             quickReplies={phase === 'chat' ? quickReplies : []}
             isLoading={isLoading && phase === 'chat'}
+            loadingStatus={loadingStatus}
             onSend={phase === 'chat' ? handleSend : () => {}}
           />
         </div>

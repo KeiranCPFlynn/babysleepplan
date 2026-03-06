@@ -170,7 +170,7 @@ export function SchedulePreview({
   const [copyState, setCopyState] = useState<'idle' | 'copied' | 'error'>('idle')
 
   const confidenceLabel =
-    confidence_score >= 0.8 ? 'high' : confidence_score >= 0.5 ? 'medium' : 'low'
+    confidence_score >= 0.8 ? 'High' : confidence_score >= 0.5 ? 'Medium' : 'Low'
 
   const sections = splitSections(markdown)
 
@@ -273,7 +273,16 @@ export function SchedulePreview({
       {/* Confidence + assumptions notice */}
       {(assumptions.length > 0 || confidence_score < 0.8) && (
         <div className="text-xs text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-800/50 rounded-lg px-4 py-3 border border-slate-100 dark:border-slate-700">
-          <span className="font-medium">Confidence: {confidenceLabel}</span>
+          <span className="font-medium">
+            How certain this draft is: {confidenceLabel}
+          </span>
+          <span
+            className="ml-1 text-slate-400 dark:text-slate-500 cursor-help"
+            title="This score reflects how many key details were detected (age, wake time, sleep issue). Lower certainty means more assumptions were needed."
+            aria-label="This score reflects how many key details were detected. Lower certainty means more assumptions were needed."
+          >
+            (what&apos;s this?)
+          </span>
           {assumptions.length > 0 && (
             <span> · Assumptions: {assumptions.join('; ')}</span>
           )}

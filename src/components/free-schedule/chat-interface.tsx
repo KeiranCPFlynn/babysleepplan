@@ -9,10 +9,17 @@ interface ChatInterfaceProps {
   messages: ChatMessage[]
   quickReplies: string[]
   isLoading: boolean
+  loadingStatus?: string | null
   onSend: (text: string) => void
 }
 
-export function ChatInterface({ messages, quickReplies, isLoading, onSend }: ChatInterfaceProps) {
+export function ChatInterface({
+  messages,
+  quickReplies,
+  isLoading,
+  loadingStatus = null,
+  onSend,
+}: ChatInterfaceProps) {
   const [input, setInput] = useState('')
   const [showPasteModal, setShowPasteModal] = useState(false)
   const [pasteText, setPasteText] = useState('')
@@ -81,6 +88,9 @@ export function ChatInterface({ messages, quickReplies, isLoading, onSend }: Cha
                 <span className="typing-dot w-2 h-2 rounded-full bg-slate-400 animate-bounce [animation-delay:150ms]" />
                 <span className="typing-dot w-2 h-2 rounded-full bg-slate-400 animate-bounce [animation-delay:300ms]" />
               </div>
+              {loadingStatus && (
+                <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">{loadingStatus}</p>
+              )}
             </div>
           </div>
         )}
@@ -120,7 +130,7 @@ export function ChatInterface({ messages, quickReplies, isLoading, onSend }: Cha
             onClick={() => inputRef.current?.focus()}
             className="flex-1 border-slate-200 text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300"
           >
-            Just tell me what's happening
+            Just tell me what&apos;s happening
           </Button>
         </div>
       )}
@@ -161,7 +171,7 @@ export function ChatInterface({ messages, quickReplies, isLoading, onSend }: Cha
               Paste your post or message
             </h3>
             <p className="text-sm text-slate-500 dark:text-slate-400">
-              Copy and paste from Reddit, Facebook, or anywhere — we'll extract the key details automatically.
+              Copy and paste from Reddit, Facebook, or anywhere — we&apos;ll extract the key details automatically.
             </p>
             <Textarea
               value={pasteText}
