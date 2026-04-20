@@ -66,35 +66,41 @@ imageCreditUrl: "https://unsplash.com/@minniezhou"
 
 ---
 
-## 3. Finding Unsplash Images
+## 3. Adding Unsplash Images — Use the Script
 
-1. Go to [unsplash.com](https://unsplash.com) and search for your topic (e.g., "baby sleeping", "toddler bedtime")
-2. Click on the photo you want
-3. Look at the browser URL — it will contain something like `photo-1555252333-9f8e92e65df9`
-4. Build your image URL using this pattern:
+**Do not fill in image fields manually.** There is a script that handles this automatically:
 
-```
-https://images.unsplash.com/photo-XXXXXXX?w=1200&h=630&fit=crop
+```bash
+node scripts/add-blog-images.mjs
 ```
 
-Replace `photo-XXXXXXX` with the full photo ID from the URL.
+The script:
+- Reads `UNSPLASH_ACCESS_KEY` from `.env.local`
+- Finds every post with an empty `image: ""` field
+- Searches the Unsplash API using the post's `imageAlt`, title, and tags
+- Picks a suitable landscape photo that hasn't been used in any other post
+- Writes the CDN URL, photographer name, and profile URL directly into the frontmatter
+- Triggers the Unsplash download attribution as required by their terms
 
-**Dimensions:** `w=1200&h=630` gives you the standard Open Graph ratio (1.91:1), which looks correct on social media shares and the blog hero.
+**Workflow:** Write the post with `image: ""`, `imageCredit: ""`, `imageCreditUrl: ""` (leave them empty), then run the script. It will fill everything in.
 
-**Attribution:** Unsplash requires crediting the photographer. When you select a photo:
-1. Note the **photographer's name** (shown below the photo on Unsplash)
-2. Click the photographer's name to go to their profile — the URL will be `https://unsplash.com/@username`
-3. Add both to your frontmatter:
-   - `imageCredit`: The photographer's display name (e.g., `"Minnie Zhou"`)
-   - `imageCreditUrl`: Their profile URL (e.g., `"https://unsplash.com/@minniezhou"`)
+### Image fields — what they look like after the script runs
+
+```yaml
+image: "https://images.unsplash.com/photo-1604807788279-ea778c075cee?w=1200&h=630&fit=crop"
+imageCredit: "Gabriel Tovar"
+imageCreditUrl: "https://unsplash.com/@gabrielrana"
+```
 
 The blog automatically renders this as: "Photo by [Name](profile-link) on [Unsplash](unsplash-link)" with proper UTM referral parameters.
 
-### Image Reuse Rule (Important)
+### Manual image (if needed)
 
-Avoid reusing the same Unsplash `photo-...` ID across nearby posts. As a default rule, do not reuse an image ID if it appears in the **most recent 5 published posts** unless there is a clear editorial reason.
+If you ever need to select a specific image manually: go to [unsplash.com](https://unsplash.com), find your photo, right-click the image and choose "Copy Image Address" to get the CDN URL (starts with `https://images.unsplash.com/photo-`). Append `?w=1200&h=630&fit=crop`. Note the photographer name and profile URL (`https://unsplash.com/@username`).
 
-Quick local check:
+### Image Reuse Rule
+
+The script enforces uniqueness automatically. If running manually, avoid any `photo-...` ID already used in existing posts:
 
 ```bash
 rg -n '^image:' content/blog/*.md
@@ -228,9 +234,9 @@ Open that file, copy everything below the `---` line, paste it into ChatGPT/Clau
 ### Step-by-step
 
 1. **Write or generate the post** using the AI prompt above or by hand
-2. **Find an Unsplash image** — search on [unsplash.com](https://unsplash.com), grab the photo ID, build the URL with `?w=1200&h=630&fit=crop`
-3. **Fill in the frontmatter** — make sure all 7 fields are complete and pass the SEO checklist
-4. **Save the file** as `content/blog/your-slug-here.md`
+2. **Save the file** as `content/blog/your-slug-here.md` with `image: ""` left empty
+3. **Run the image script** — `node scripts/add-blog-images.mjs` fills in the Unsplash image, photographer credit, and profile URL automatically
+4. **Fill in any remaining frontmatter** — make sure all fields are complete and pass the SEO checklist
 5. **Preview locally** — run `npm run dev` and visit `/blog/your-slug-here` to check formatting
 6. **Build** — run `npm run build` to verify there are no errors
 7. **Commit and deploy** — the sitemap at `/sitemap.xml` updates automatically to include the new post

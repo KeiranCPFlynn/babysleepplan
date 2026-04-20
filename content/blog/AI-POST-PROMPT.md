@@ -76,62 +76,19 @@ imageCreditUrl: ""
 | `tags` | 2-4 lowercase tags. Pick from: `"sleep science"`, `"infant sleep"`, `"toddler sleep"`, `"newborn sleep"`, `"bedtime routine"`, `"sleep tips"`, `"sleep environment"`, `"nap schedule"`, `"4-month regression"`, `"night waking"`, `"early rising"`, `"nap transitions"`, `"sleep associations"`. Only create a new tag if none fit. | `["sleep science", "4-month regression", "infant sleep"]` |
 | `imageAlt` | Descriptive alt text for a hero photo. Include keywords naturally. | `"A peacefully sleeping baby in a crib with soft lighting"` |
 
-### Image fields — READ THIS CAREFULLY
+### Image fields — always leave empty
 
-The `image`, `imageCredit`, and `imageCreditUrl` fields require you to find a real photo on Unsplash and extract specific information. **Do not guess or fabricate these values.**
+**Always leave `image`, `imageCredit`, and `imageCreditUrl` as empty strings.** After saving the post, run:
 
-#### Step 1: Find a photo
-
-Go to [unsplash.com](https://unsplash.com) and search for a term related to the post topic (e.g., "baby sleeping in crib", "toddler bedtime"). Click on a photo you like.
-
-Before finalizing the image, scan recent posts in `content/blog/` and avoid reusing any Unsplash `photo-...` ID used in the most recent 5 published posts unless there is a strong editorial reason.
-
-#### Step 2: Get the CDN image URL
-
-The photo page URL will look like this:
-```
-https://unsplash.com/photos/some-description-XXXXXXXXX
+```bash
+node scripts/add-blog-images.mjs
 ```
 
-**You need the CDN URL, NOT the page URL.** These are completely different things:
+This script uses the Unsplash API to automatically find a suitable, unique image for the post and fills in all three fields. It uses the post's `imageAlt`, title, and tags to search, checks for uniqueness across all existing posts, and writes the CDN URL + photographer attribution directly into the file.
 
-| WRONG (page URL) | RIGHT (CDN URL) |
-|---|---|
-| `https://unsplash.com/photos/newborn-baby-sleeping-9_5P8JjSxIk` | `https://images.unsplash.com/photo-1770059706518-ece8f7264055?w=1200&h=630&fit=crop` |
+**Never invent or guess an image URL, photographer name, or profile URL.** Incorrect URLs will break the site. The script handles everything — just leave the fields empty.
 
-To get the CDN URL:
-1. On the photo page, **right-click the image** and select "Copy Image Address" (or "Open Image in New Tab")
-2. The URL will start with `https://images.unsplash.com/photo-` followed by a **long numeric ID** like `1555252333-9f8e92e65df9`
-3. Take everything up to and including the photo ID, then append `?w=1200&h=630&fit=crop`
-
-**Final format:**
-```
-https://images.unsplash.com/photo-XXXXXXXXXX-XXXXXXXXXXXX?w=1200&h=630&fit=crop
-```
-
-Real examples from existing posts:
-```
-https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=1200&h=630&fit=crop
-https://images.unsplash.com/photo-1544126592-807ade215a0b?w=1200&h=630&fit=crop
-https://images.unsplash.com/photo-1770059706518-ece8f7264055?w=1200&h=630&fit=crop
-```
-
-#### Step 3: Get the photographer credit
-
-On the Unsplash photo page, the photographer's name is displayed prominently near the top.
-
-- `imageCredit`: The photographer's **display name** exactly as shown (e.g., `"Ana Curcan"`)
-- `imageCreditUrl`: Click the photographer's name to go to their profile. The URL will be `https://unsplash.com/@username`. Use that URL (e.g., `"https://unsplash.com/@annaacurcan"`)
-
-#### If you cannot browse the web
-
-If you cannot access unsplash.com to look up real photos, **leave all three image fields as empty strings** and add this note at the very end of your output:
-
-```
-<!-- IMAGE TODO: Search Unsplash for "[suggested search term]" and fill in image, imageCredit, and imageCreditUrl -->
-```
-
-**Never invent an image URL, photographer name, or profile URL.** Incorrect URLs will break the site.
+The only exception: if you are manually selecting a specific image for editorial reasons, right-click the image on [unsplash.com](https://unsplash.com) and choose "Copy Image Address" to get the CDN URL (starts with `https://images.unsplash.com/photo-`), then append `?w=1200&h=630&fit=crop`.
 
 ---
 
@@ -195,5 +152,5 @@ Output the complete markdown file (frontmatter + body), then after the file outp
 1. **Title options considered** — List your 3 title candidates and briefly explain why you chose the winner.
 2. **Key sources used** — List the specific AAP guidelines, NHS pages, or studies you drew from so the publisher can verify.
 3. **Suggested filename slug** — lowercase, hyphens, no special characters. Example: `baby-wont-sleep-in-cot-gentle-evidence-based-solutions`
-4. **3 Unsplash search terms** to find a good hero image (in case the image fields were left empty).
-5. **Image uniqueness check** — list the chosen `photo-...` ID and confirm it is not reused in the most recent 5 published posts.
+
+**Note on images:** Leave `image`, `imageCredit`, and `imageCreditUrl` as empty strings. After saving the file, run `node scripts/add-blog-images.mjs` from the project root to auto-fill them via the Unsplash API.

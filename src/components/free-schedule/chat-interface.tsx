@@ -21,11 +21,8 @@ export function ChatInterface({
   onSend,
 }: ChatInterfaceProps) {
   const [input, setInput] = useState('')
-  const [showPasteModal, setShowPasteModal] = useState(false)
-  const [pasteText, setPasteText] = useState('')
   const bottomRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
-  const hasUserMessage = messages.some((m) => m.role === 'user')
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -48,14 +45,6 @@ export function ChatInterface({
 
   function handleChipClick(chip: string) {
     onSend(chip)
-  }
-
-  function handlePasteSubmit() {
-    const trimmed = pasteText.trim()
-    if (!trimmed || isLoading) return
-    setShowPasteModal(false)
-    setPasteText('')
-    onSend(trimmed)
   }
 
   return (
@@ -115,26 +104,6 @@ export function ChatInterface({
         </div>
       )}
 
-      {/* Starter buttons (shown before first user message) */}
-      {!hasUserMessage && !isLoading && (
-        <div className="flex flex-col sm:flex-row gap-2">
-          <Button
-            variant="outline"
-            onClick={() => setShowPasteModal(true)}
-            className="flex-1 border-slate-200 text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300"
-          >
-            Paste a post
-          </Button>
-          <Button
-            variant="outline"
-            onClick={() => inputRef.current?.focus()}
-            className="flex-1 border-slate-200 text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300"
-          >
-            Just tell me what&apos;s happening
-          </Button>
-        </div>
-      )}
-
       {/* Input area */}
       <div className="flex gap-2 items-end">
         <Textarea
@@ -160,46 +129,6 @@ export function ChatInterface({
         Enter to send · Shift+Enter for new line
       </p>
 
-      {/* Paste modal */}
-      {showPasteModal && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
-          onClick={(e) => e.target === e.currentTarget && setShowPasteModal(false)}
-        >
-          <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl w-full max-w-lg p-6 flex flex-col gap-4">
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100">
-              Paste your post or message
-            </h3>
-            <p className="text-sm text-slate-500 dark:text-slate-400">
-              Copy and paste from Reddit, Facebook, or anywhere — we&apos;ll extract the key details automatically.
-            </p>
-            <Textarea
-              value={pasteText}
-              onChange={(e) => setPasteText(e.target.value)}
-              placeholder="Paste your text here…"
-              rows={8}
-              autoFocus
-              className="resize-none text-sm border-slate-200 dark:border-slate-700 dark:bg-slate-800"
-            />
-            <div className="flex gap-2 justify-end">
-              <Button
-                variant="outline"
-                onClick={() => setShowPasteModal(false)}
-                className="border-slate-200 text-slate-600"
-              >
-                Cancel
-              </Button>
-              <Button
-                onClick={handlePasteSubmit}
-                disabled={!pasteText.trim()}
-                className="bg-sky-700 hover:bg-sky-800 text-white"
-              >
-                Analyse this
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
