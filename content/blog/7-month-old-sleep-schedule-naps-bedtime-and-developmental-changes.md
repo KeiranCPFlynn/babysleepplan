@@ -4,10 +4,10 @@ description: "Learn the ideal 7-month-old sleep schedule, including nap timing, 
 date: "2026-04-21"
 author: "LunaCradle Team"
 tags: ["nap schedule", "infant sleep", "sleep tips"]
-image: "https://images.unsplash.com/photo-1605410179372-d23c34bcb354?w=1200&h=630&fit=crop"
+image: "https://images.unsplash.com/photo-1619700639911-43ba7eaf2479?w=1200&h=630&fit=crop"
 imageAlt: "A seven-month-old baby sleeping in a cot with soft afternoon light"
-imageCredit: "Wiwat Khamsawai"
-imageCreditUrl: "https://unsplash.com/@mattermoment"
+imageCredit: "Flávia Gava"
+imageCreditUrl: "https://unsplash.com/@flaviagava"
 ---
 
 ## Seven Months: More Aware, More Capable — and More Opinions About Sleep

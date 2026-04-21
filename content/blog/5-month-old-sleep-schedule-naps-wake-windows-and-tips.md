@@ -4,10 +4,10 @@ description: "Discover the ideal 5-month-old sleep schedule, including nap timin
 date: "2026-04-21"
 author: "LunaCradle Team"
 tags: ["nap schedule", "infant sleep", "sleep tips"]
-image: "https://images.unsplash.com/photo-1560306580-9e204fe45f3e?w=1200&h=630&fit=crop"
+image: "https://images.unsplash.com/photo-1510632233616-88025944e960?w=1200&h=630&fit=crop"
 imageAlt: "A five-month-old baby sleeping peacefully in a cot with soft natural light"
-imageCredit: "Alexander Grey"
-imageCreditUrl: "https://unsplash.com/@sharonmccutcheon"
+imageCredit: "Tara Raye"
+imageCreditUrl: "https://unsplash.com/@tararaye"
 ---
 
 ## The In-Between Stage Nobody Warns You About
