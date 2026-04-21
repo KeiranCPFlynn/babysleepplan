@@ -4,10 +4,10 @@ description: "Learn the ideal 18-month-old sleep schedule, including nap length,
 date: "2026-04-19"
 author: "LunaCradle Team"
 tags: ["nap schedule", "toddler sleep", "sleep tips"]
-image: "https://images.unsplash.com/photo-1605410179372-d23c34bcb354?w=1200&h=630&fit=crop"
+image: "https://images.unsplash.com/photo-1613043547055-4efe0dfa9814?w=1200&h=630&fit=crop"
 imageAlt: "A toddler sleeping soundly in a cot with a soft blanket"
-imageCredit: "Wiwat Khamsawai"
-imageCreditUrl: "https://unsplash.com/@mattermoment"
+imageCredit: "Sven Brandsma"
+imageCreditUrl: "https://unsplash.com/@seffen99"
 ---
 
 ## Welcome to One of the Trickier Sleep Stages

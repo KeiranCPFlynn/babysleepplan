@@ -4,10 +4,10 @@ description: "Learn why the 18-month sleep regression is one of the toughest sta
 date: "2026-04-19"
 author: "LunaCradle Team"
 tags: ["toddler sleep", "night waking", "sleep tips"]
-image: "https://images.unsplash.com/photo-1584502076923-7b3aa47b447d?w=1200&h=630&fit=crop"
+image: "https://images.unsplash.com/photo-1620415063836-b01fbcba4f90?w=1200&h=630&fit=crop"
 imageAlt: "A tired toddler sitting in a cot looking out with soft bedroom lighting"
-imageCredit: "Gabrielle Dickson"
-imageCreditUrl: "https://unsplash.com/@gabrielledawn"
+imageCredit: "Helena Lopes"
+imageCreditUrl: "https://unsplash.com/@helenalopesph"
 ---
 
 ## Why 18 Months Is Such a Hard Sleep Stage
