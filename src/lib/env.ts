@@ -77,9 +77,14 @@ function validateEnv() {
   }
 
   if (missing.length > 0) {
-    throw new Error(
-      `Missing required environment variables:\n  - ${missing.join('\n  - ')}`
-    )
+    const message = `Missing required environment variables:\n  - ${missing.join('\n  - ')}`
+    if (isProduction) {
+      // Log but don't throw — a missing var should degrade specific features,
+      // not crash the entire site and take down every page.
+      console.error(`[env] ${message}`)
+    } else {
+      throw new Error(message)
+    }
   }
 }
 
