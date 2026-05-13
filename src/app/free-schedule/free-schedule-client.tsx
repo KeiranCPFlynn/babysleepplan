@@ -27,7 +27,7 @@ declare global {
 const INITIAL_MESSAGE: ChatMessage = {
   role: 'assistant',
   content:
-    "Hi! Tell me about your baby — their age and what's going on with sleep. You can paste a post from Reddit or Facebook, or just describe the situation.",
+    "Hi! Tell me about your baby — their age and what's going on with sleep.",
 }
 
 export function FreeScheduleClient({
