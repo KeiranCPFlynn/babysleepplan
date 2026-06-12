@@ -64,19 +64,14 @@ async function isMaintenanceEnabled() {
 function isAllowedDuringMaintenance(pathname: string) {
   return (
     pathname === '/maintenance' ||
-    pathname.startsWith('/api/') ||
-    pathname === '/api' ||
     pathname.startsWith('/auth/callback')
   )
 }
 
 export async function proxy(request: NextRequest) {
-  // Stripe webhooks are unsigned by Supabase auth cookies and should not depend on session refresh.
-  if (request.nextUrl.pathname.startsWith('/api/stripe/webhook')) {
-    return NextResponse.next()
-  }
+  const pathname = request.nextUrl.pathname
 
-  if (await isMaintenanceEnabled()) {
+  if (!isAllowedDuringMaintenance(pathname) && await isMaintenanceEnabled()) {
     const bypassToken = process.env.MAINTENANCE_BYPASS_TOKEN
     const bypassFromQuery = request.nextUrl.searchParams.get('bypass')
     const bypassFromCookie = request.cookies.get(MAINTENANCE_BYPASS_COOKIE)?.value
@@ -96,7 +91,7 @@ export async function proxy(request: NextRequest) {
       return response
     }
 
-    if (!hasValidBypass && !isAllowedDuringMaintenance(request.nextUrl.pathname)) {
+    if (!hasValidBypass) {
       const maintenanceUrl = request.nextUrl.clone()
       maintenanceUrl.pathname = '/maintenance'
       maintenanceUrl.search = ''
@@ -109,13 +104,11 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - public files with extensions
-     */
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    '/dashboard/:path*',
+    '/auth/callback/:path*',
+    '/login',
+    '/signup',
+    '/reset-password',
+    '/maintenance',
   ],
 }

@@ -6,7 +6,6 @@ import { MarketingHeader } from '@/components/layout/marketing-header'
 import { getSiteUrl } from '@/lib/site-url'
 
 const siteUrl = getSiteUrl()
-export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'Free Baby Sleep Schedule Builder | LunaCradle',
