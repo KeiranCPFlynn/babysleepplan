@@ -7,6 +7,7 @@ import { AnimateOnScroll } from '@/components/ui/animate-on-scroll'
 import { Star, CheckCircle, BookOpen } from 'lucide-react'
 import { BrandLogo } from '@/components/brand/brand-logo'
 import { MarketingHeader } from '@/components/layout/marketing-header'
+import { getAllPosts } from '@/lib/blog'
 import { getSiteUrl } from '@/lib/site-url'
 
 const siteUrl = getSiteUrl()
@@ -89,6 +90,8 @@ const jsonLd = {
 }
 
 export default function HomePage() {
+  const latestBlogGuides = getAllPosts().slice(0, 12)
+
   return (
     <div className="marketing-shell relative min-h-screen overflow-hidden bg-gradient-to-b from-sky-50 via-white to-rose-50 text-slate-900 pb-24 pt-[max(0.5rem,env(safe-area-inset-top))] md:pb-0 md:pt-3 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 dark:text-slate-100">
       {/* Structured data */}
@@ -380,7 +383,43 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 7. Popular SEO Guides */}
+        {/* 7. Latest Blog Guides */}
+        <section className="pb-16 md:pb-20">
+          <div className="container mx-auto px-4">
+            <AnimateOnScroll>
+              <h2 className="text-2xl md:text-3xl font-bold text-center mb-3">
+                <span className="heading-underline">Latest Baby Sleep Guides</span>
+              </h2>
+              <p className="text-center text-slate-500 mb-8 max-w-2xl mx-auto">
+                Practical guides for common sleep questions, schedules, and regressions.
+              </p>
+            </AnimateOnScroll>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
+              {latestBlogGuides.map((post, index) => (
+                <AnimateOnScroll key={post.slug} delay={Math.min(index, 5) * 60}>
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="block h-full rounded-2xl border border-white/70 bg-white/80 p-4 shadow-sm card-hover dark:border-slate-700 dark:bg-slate-900/85"
+                  >
+                    <h3 className="text-sm font-semibold leading-snug text-slate-900 dark:text-slate-100">
+                      {post.title}
+                    </h3>
+                    <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-slate-600 dark:text-slate-300">
+                      {post.description}
+                    </p>
+                  </Link>
+                </AnimateOnScroll>
+              ))}
+            </div>
+            <div className="mt-8 text-center">
+              <Button variant="outline" asChild className="bg-white/80 dark:bg-slate-900/80">
+                <Link href="/blog">Browse all sleep guides</Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* 8. Popular SEO Guides */}
         <section className="pb-16 md:pb-20">
           <div className="container mx-auto px-4">
             <AnimateOnScroll>
@@ -420,7 +459,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 8. Footer */}
+        {/* 9. Footer */}
         <AnimateOnScroll>
           <footer className="border-t border-white/70 py-10">
             <div className="container mx-auto px-4">
