@@ -1,6 +1,6 @@
 ---
-title: "3-Year-Old Sleep Regression: Signs, Causes & What Actually Helps"
-description: "Discover what causes the 3-year-old sleep regression, how to tell normal toddler sleep from a real regression, and evidence-based strategies to restore peaceful bedtimes."
+title: "3 Year Old Sleep Regression: Signs, Duration & What Actually Helps"
+description: "3 year old sleep regression: fighting bedtime, night wakings, and early rising linked to imagination leaps and preschool transitions. Learn what helps and how long it lasts."
 date: "2026-05-01"
 author: "LunaCradle Team"
 tags: ["toddler sleep", "sleep tips", "bedtime routine"]
@@ -8,13 +8,24 @@ image: "https://images.unsplash.com/photo-1611006964755-076af83b341b?w=1200&h=63
 imageAlt: "Toddler sitting up wide awake in bed at night instead of sleeping"
 imageCredit: "Tim VanDoren"
 imageCreditUrl: "https://unsplash.com/@timvandoren"
+faq:
+  - question: "When does the 3 year old sleep regression happen?"
+    answer: "The 3-year-old sleep regression typically appears around age 3, often coinciding with starting preschool, a new sibling, a move to a big-kid bed, or a noticeable leap in language and imagination. It can show up any time between 2.5 and 3.5 years."
+  - question: "How long does the 3 year old sleep regression last?"
+    answer: "Most 3-year-old sleep regressions last 2–6 weeks if you stay consistent with your routine. The disruption is often tied to specific developmental changes, and once your child adapts to the new milestone, sleep typically improves."
+  - question: "Why is my 3 year old fighting bedtime?"
+    answer: "At 3 years old, children have a growing sense of autonomy and an active imagination. They may stall with requests for water, extra stories, or fears about monsters. This is normal developmental behaviour — consistent limits and a predictable routine help them feel secure enough to settle."
+  - question: "Should my 3 year old still be napping?"
+    answer: "Some 3-year-olds still nap, while others are dropping their nap around this age. Research suggests children benefit from naps until age 3–4. If your child has dropped their nap, move bedtime 30–60 minutes earlier to compensate."
 ---
 
 ## Why Is Your Toddler Suddenly Fighting Bedtime Again?
 
-You made it through the four-month regression, the eight-month regression, and a few bumpy patches in between. Your toddler was sleeping well — or well enough — and you had cautiously started thinking that the hardest sleep challenges were behind you. Then, somewhere around their third birthday, bedtime became a negotiation again. Suddenly there are endless requests for water, one more story, another check for monsters, a need to ask the same question seventeen different ways while you stand at the door willing them to close their eyes.
+You made it through the four-month regression, the eight-month regression, maybe the [2-year-old sleep regression](/blog/2-year-old-sleep-regression-signs-causes-and-how-to-cope), and a few bumpy patches in between. Your toddler was sleeping well — or well enough — and you had cautiously started thinking that the hardest sleep challenges were behind you. Then, somewhere around their third birthday, bedtime became a negotiation again. Suddenly there are endless requests for water, one more story, another check for monsters, a need to ask the same question seventeen different ways while you stand at the door willing them to close their eyes.
 
 The three-year-old sleep regression is real, it's common, and it's driven by some of the most interesting developmental changes of early childhood. Understanding what's behind it makes it considerably easier to manage with your patience intact.
+
+> **Quick answer:** The 3-year-old sleep regression typically shows up as bedtime resistance, night wakings, or early rising that lasts 2-6 weeks. It's often triggered by developmental leaps, imagination development, or nap transitions.
 
 ## Is This Actually a Regression?
 
@@ -36,7 +47,13 @@ Normal toddler bedtime resistance, on the other hand, is often gradual, tied to 
 
 ## Evidence-Based Strategies That Help
 
-**Hold the bedtime routine tightly.** Consistency is the most evidence-backed tool in toddler sleep. A predictable sequence of three to five steps — bath, pyjamas, brush teeth, story, song — tells a three-year-old's nervous system that sleep is coming. Research published in *Sleep* found that children with a consistent bedtime routine fell asleep faster, woke fewer times overnight, and had better overall sleep quality than those without one. The routine itself isn't magic; the predictability is.
+**Hold the [bedtime routine](/blog/perfect-bedtime-routine-by-age) tightly.** Consistency is the most evidence-backed tool in toddler sleep. A predictable sequence of three to five steps — bath, pyjamas, brush teeth, story, song — tells a three-year-old's nervous system that sleep is coming. Research published in *Sleep* found that children with a consistent [toddler bedtime routine](/blog/toddler-bedtime-routine-simple-science-backed-guide) fell asleep faster, woke fewer times overnight, and had better overall sleep quality than those without one. The routine itself isn't magic; the predictability is.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 **Give control in the right places.** A three-year-old's drive for autonomy is a feature, not a bug — use it strategically. Offer genuine choices within a non-negotiable framework: "Do you want the blue pyjamas or the striped ones?" "Should we read two books tonight or three?" These choices satisfy the need for agency without opening up the actual parameters of bedtime to negotiation. The choice is always between two acceptable options you've pre-selected, never "do you want to go to bed or not."
 

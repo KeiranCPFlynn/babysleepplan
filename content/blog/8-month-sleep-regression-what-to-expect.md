@@ -8,11 +8,20 @@ image: "https://images.unsplash.com/photo-1733759348760-be367228c0dc?w=1200&h=63
 imageAlt: "Eight month old baby awake in cot during night looking alert"
 imageCredit: "Zachary Kadolph"
 imageCreditUrl: "https://unsplash.com/@zacharykadolph"
+faq:
+  - question: "When does the 8 month sleep regression start?"
+    answer: "The 8-month sleep regression (often called the 8–10 month regression) typically begins between 7–9 months. It coincides with major developmental leaps including crawling, pulling to stand, and the emergence of object permanence."
+  - question: "How long does the 8 month sleep regression last?"
+    answer: "Most families see significant improvement within 2–4 weeks. The regression is driven by developmental activity — new motor skills, cognitive leaps, and separation anxiety — and resolves as your baby adapts to these changes."
+  - question: "Is separation anxiety causing my 8 month old to not sleep?"
+    answer: "Very likely. Object permanence develops strongly around 8–9 months, meaning your baby now understands you exist when you leave the room. This makes bedtime emotionally loaded in a new way. It's a healthy cognitive milestone, not a sleep problem."
+  - question: "Why is my 8 month old suddenly standing up in the cot?"
+    answer: "Learning to pull to stand is a major motor milestone at this age, and babies often practise new skills during sleep. Your baby isn't doing it to be difficult — their brain is processing the new skill, which increases night-time arousals. Give plenty of standing practice during the day."
 ---
 
 You'd sorted the 4-month regression, maybe done some sleep training, got into a rhythm — and then, somewhere around 7, 8, or 9 months, your baby stopped cooperating again. More night waking, harder to settle, naps going haywire. If this sounds familiar, you're almost certainly in the thick of the 8-month sleep regression.
 
-*Quick answer: The 8-month sleep regression (often described as the 8–10 month regression) is a temporary but real disruption caused by major developmental leaps: crawling and pulling to stand, the emergence of object permanence, and the onset of separation anxiety. Most families see significant improvement within 2–4 weeks.*
+> **Quick answer:** The 8-month sleep regression (often described as the 8–10 month regression) is a temporary but real disruption caused by major developmental leaps: crawling and pulling to stand, the emergence of object permanence, and the onset of separation anxiety. Most families see significant improvement within 2–4 weeks.
 
 ## Is the 8-Month Sleep Regression Real?
 
@@ -24,7 +33,7 @@ Around 7–10 months, several major developmental milestones converge in a way t
 
 **Object permanence.** The full development of object permanence — the understanding that you still exist when you leave the room — typically lands around 8–9 months. This is a cognitive leap, and it's the driver of both stranger anxiety and separation anxiety at bedtime.
 
-**Separation anxiety.** Once your baby understands that you can leave, being left at bedtime becomes emotionally loaded in a new way. A baby who settled easily at 6 months may now protest persistently when you leave the room — not because they've forgotten how to sleep, but because the social and emotional stakes have changed.
+**[Separation anxiety](/blog/separation-anxiety-and-baby-sleep-why-it-happens-and-what-helps).** Once your baby understands that you can leave, being left at bedtime becomes emotionally loaded in a new way. A baby who settled easily at 6 months may now protest persistently when you leave the room — not because they've forgotten how to sleep, but because the social and emotional stakes have changed.
 
 Research from developmental psychologists, including work building on Jean Piaget's original object permanence research, confirms that this cognitive shift reliably occurs in the second half of the first year, though timing varies between individual babies.
 
@@ -40,6 +49,12 @@ Signs that you're in a regression rather than dealing with a scheduling issue:
 
 The regression typically doesn't appear all at once — many parents notice one aspect worsening (say, night wakings) before others (like nap resistance) join in.
 
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
+
 ## What Helps During the 8-Month Regression
 
 ### Keep the Schedule Consistent
@@ -50,7 +65,7 @@ If anything, pulling bedtime slightly earlier (by 15–30 minutes) during partic
 
 ### Don't Introduce New Sleep Props
 
-This is the period when desperate parents start nursing, rocking, or bringing babies into bed to just get through the night — and in the process, create new sleep associations that outlast the regression by months. If your baby was settling independently at bedtime before the regression, do your best to maintain that. It's worth a few harder nights to avoid cementing a new habit.
+This is the period when desperate parents start nursing, rocking, or bringing babies into bed to just get through the night — and in the process, create new [sleep associations](/blog/baby-sleep-training-a-gentle-evidence-based-guide-for-tired-parents) that outlast the regression by months. If your baby was settling independently at bedtime before the regression, do your best to maintain that. It's worth a few harder nights to avoid cementing a new habit.
 
 ### Address Separation Anxiety Directly
 

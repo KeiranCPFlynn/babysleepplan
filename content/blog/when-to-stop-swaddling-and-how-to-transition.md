@@ -8,11 +8,35 @@ image: "https://images.unsplash.com/photo-1618847473137-501eed5f88a7?w=1200&h=63
 imageAlt: "Swaddled newborn baby sleeping peacefully in a soft blanket"
 imageCredit: "Matthew Osborn"
 imageCreditUrl: "https://unsplash.com/@matthewosborn"
+faq:
+  - question: "When should I stop swaddling my baby?"
+    answer: "Stop swaddling the moment your baby shows any sign of rolling — often as early as 8 weeks. A baby who rolls onto their stomach while swaddled cannot use their arms to reposition, creating a suffocation risk. This is a safety issue, not a preference."
+  - question: "How do I transition from swaddling to a sleep sack?"
+    answer: "Transition gradually by freeing one arm at a time over 3–5 nights. Start with the dominant arm out, then both arms out, then move to a sleep sack. Most babies adjust faster than parents expect. The Moro reflex is already fading by 3–4 months, so the biological need for the swaddle is diminishing."
+  - question: "Is it safe to swaddle a newborn?"
+    answer: "Yes, swaddling is safe for newborns who haven't started rolling. It dampens the Moro (startle) reflex and helps babies settle. A 2023 review in Pediatrics confirmed that before rolling, swaddling supports sleep. The key is to stop as soon as rolling signs appear and always place baby on their back."
+  - question: "Will my baby sleep worse after stopping the swaddle?"
+    answer: "There may be a few nights of adjustment, but most babies adapt within 3–7 nights. The Moro reflex that the swaddle was managing is already naturally fading by 3–4 months. Using a sleep sack provides some containment and warmth without the safety risk. Keep your bedtime routine consistent during the transition."
+howTo:
+  name: "How to Transition Out of the Swaddle"
+  steps:
+    - name: "Identify the signs your baby is ready"
+      text: "Stop swaddling the moment your baby shows any sign of rolling — often as early as 8 weeks. Other signs include breaking out of the swaddle regularly or increased resistance to being wrapped. This is a safety issue, not a preference."
+    - name: "Start with one arm out"
+      text: "Swaddle your baby with one arm free for 3–5 nights, choosing the arm they tend to free on their own. This gives them time to build the skill of sleeping with a free arm without losing all the familiar comfort at once."
+    - name: "Move to both arms out"
+      text: "Once your baby has adjusted to one arm out, release the second arm for another 3–5 nights. The Moro reflex is already naturally fading by this age, so the biological need for containment is diminishing."
+    - name: "Switch to a sleep sack"
+      text: "Replace the swaddle blanket with a sleep sack that provides gentle warmth and some containment without restricting arm movement. This keeps your baby safe once rolling begins and maintains a familiar sleep cue."
+    - name: "Adjust room temperature if needed"
+      text: "Without the swaddle, your baby may need slightly different clothing layers to stay comfortable. Ensure the room is at a safe sleeping temperature (around 18–20°C) and use the sleep sack's tog rating as a guide."
 ---
 
 Swaddling can feel like a superpower in those early weeks. Your baby is calm, settled, and sleeping in longer stretches, and then one morning you notice them trying to roll, and suddenly you're wondering **when to stop swaddling** and how on earth you'll manage without it.
 
 If you're dreading the swaddle transition, you're in very good company. It's one of the most common anxieties parents bring up, and the worry is almost always worse than the reality. Most babies adjust faster than their parents expect, especially when you time it well and transition gradually.
+
+> **Quick answer:** Stop swaddling the moment your baby shows any sign of rolling (often as early as 8 weeks) — it's a safety issue, not a preference — and transition gradually by freeing one arm at a time over 3–5 nights before moving to a sleep sack.
 
 ## When to Stop Swaddling: The Key Signs
 
@@ -54,6 +78,12 @@ Some parents wrap the swaddle around the baby's torso only, leaving both arms fr
 ### Direct Switch to a Sleep Sack
 
 If your baby is already breaking free of the swaddle nightly, a direct move to a sleep sack may be the smoothest option. Choose an appropriately sized sack so it feels secure without being restrictive. The consistency of the sack becomes the new sleep cue.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## What to Expect During the Transition
 

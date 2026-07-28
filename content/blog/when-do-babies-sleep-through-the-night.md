@@ -8,13 +8,22 @@ image: "https://images.unsplash.com/photo-1662368355359-830b331349ef?w=1200&h=63
 imageAlt: "Baby sleeping peacefully through the night in a dark nursery"
 imageCredit: "Tamara Govedarovic"
 imageCreditUrl: "https://unsplash.com/@tamaragovedarov"
+faq:
+  - question: "When do babies sleep through the night?"
+    answer: "Most babies begin sleeping longer stretches (5–6 hours) between 3 and 6 months, but consistently sleeping 6–8 hours without a feed typically doesn't happen until 6 months or later. For many healthy babies, it can take until 9–12 months or beyond. There is no universal timeline."
+  - question: "What counts as sleeping through the night for a baby?"
+    answer: "In research, 'sleeping through' often means a 5-hour stretch, typically measured from midnight to 5am. A 2012 study in Pediatrics found that by 12 months, around 28% of babies still didn't meet even this definition. This is very different from the 7pm–7am stretch most parents imagine."
+  - question: "Why is my 6 month old still not sleeping through the night?"
+    answer: "At 6 months, many babies are still developmentally unable to sustain long stretches consistently. The 4-month sleep regression (a shift in sleep architecture) often disrupts emerging patterns, and sleep associations — like feeding or rocking to sleep — strongly influence whether longer stretches happen. This is within the normal range."
+  - question: "Is it normal for a 1 year old to still wake at night?"
+    answer: "Yes. A meaningful minority of healthy children still wake overnight at 12, 18, or even 24 months. This is within the range of normal variation — not evidence of a sleep disorder or parenting failure. Night waking at this age is often driven by sleep associations, developmental leaps, or teething rather than hunger."
 ---
 
 "Is your baby sleeping through the night yet?" It's one of the most loaded questions in early parenthood — asked by well-meaning relatives, smugly by parents whose baby happened to consolidate early, and desperately typed into search bars by exhausted families who can't remember the last full night's sleep they had.
 
 The honest answer is more nuanced than most people expect, and significantly kinder to parents in the thick of it.
 
-*Quick answer: Most babies begin sleeping longer stretches (5–6 hours) sometime between 3 and 6 months, but consistently sleeping 6–8 hours without a feed typically doesn't happen until 6 months or later — and for many healthy babies, not until 9–12 months or beyond. "Sleeping through" is not a single milestone with a universal timeline.*
+> **Quick answer:** Most babies begin sleeping longer stretches (5–6 hours) sometime between 3 and 6 months, but consistently sleeping 6–8 hours without a feed typically doesn't happen until 6 months or later — and for many healthy babies, not until 9–12 months or beyond. "Sleeping through" is not a single milestone with a universal timeline.
 
 ## What Does "Sleeping Through the Night" Actually Mean?
 
@@ -59,6 +68,12 @@ Research published in *Sleep* found that a consistent bedtime routine was associ
 ### Age-Appropriate Feeding During the Day
 
 Once babies are taking good amounts of solid food (typically 6 months+), making sure daytime calories are robust can reduce genuine hunger overnight. This isn't about withholding night feeds before your baby is ready — it's about ensuring the daytime nutrition is there to support night consolidation when your baby is developmentally ready.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## Common Myths About Sleeping Through
 

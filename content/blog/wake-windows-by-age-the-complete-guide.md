@@ -8,7 +8,18 @@ image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=1200&h=63
 imageAlt: "Happy alert baby during a wake window looking up at parent"
 imageCredit: "Jens Johnsson"
 imageCreditUrl: "https://unsplash.com/@jens_johnsson"
+faq:
+  - question: "What are wake windows for a 6 month old?"
+    answer: "Wake windows for a 6-month-old are typically 1.5–2.5 hours. The first wake window of the day is usually the shortest (around 1.5–2 hours), and the last one before bedtime is the longest. Most 6-month-olds take 3 naps per day."
+  - question: "How long should a newborn stay awake between feeds?"
+    answer: "Newborns (0–3 months) have wake windows of just 45–90 minutes. At this age, sleepy cues come fast — a yawn, a turned head, or glazed eyes. If you're waiting for crying, you've already passed the window. Don't worry about a schedule yet; focus on watching your baby's cues."
+  - question: "What are wake windows for a 10 month old?"
+    answer: "A 10-month-old typically has wake windows of 3–4 hours. Most babies this age are on a 2-nap schedule. The last wake window before bedtime is usually the longest. If your baby seems wired at bedtime, the final wake window may be too long."
+  - question: "How do I know if my baby's wake window is too long?"
+    answer: "Signs that a wake window is too long include fussiness, difficulty settling, short naps, and a wired or hyperactive appearance at bedtime. Overtiredness triggers cortisol release, which makes it harder for babies to fall asleep. Try shortening the last wake window by 15–30 minutes."
 ---
+
+> **Quick answer:** Wake windows stretch as babies grow: 45–90 minutes for newborns, 1.5–2.5 hours at 4–6 months, 2.5–3.5 hours at 7–9 months, 3–4 hours at 10–12 months, and 4–6+ hours by toddlerhood. Use these ranges as a starting point and adjust based on your baby's sleepy cues and nap quality.
 
 ## Why Wake Windows Matter More Than Clock Time
 
@@ -34,7 +45,7 @@ The first wake window of the day is typically the shortest, around 1.5 to 2 hour
 
 ### 7-9 Months: 2.5-3.5 Hours
 
-By now, many babies are transitioning from three naps to two. This is one of the trickiest phases because the old schedule stops working but the new one hasn't fully clicked. Wake windows stretch to around 2.5 to 3.5 hours, and the two remaining naps need to carry more restorative weight.
+By now, many babies are [transitioning from three naps to two](/blog/nap-transition-guide-when-to-drop-a-nap). This is one of the trickiest phases because the old schedule stops working but the new one hasn't fully clicked. Wake windows stretch to around 2.5 to 3.5 hours, and the two remaining naps need to carry more restorative weight.
 
 If your baby is suddenly resisting the third nap, that's your signal. Try stretching wake windows by 15 minutes every few days rather than dropping the nap overnight. Gradual transitions are easier on everyone.
 
@@ -56,13 +67,19 @@ Toddlers on a single nap can typically handle 5 to 6 hours of awake time, someti
 
 By two and a half to three years, some children begin phasing out the nap altogether. You'll know it's happening when the nap starts pushing bedtime later or causing split nights. Quiet rest time is a gentle bridge that preserves some downtime even after the nap disappears.
 
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
+
 ## Signs You've Got the Wake Window Wrong
 
 Getting wake windows right is part science, part observation. Here are the signals to watch for:
 
-**Too short (under-tired):** Your baby takes ages to fall asleep, plays or babbles in the cot, or has very short naps of 20 to 30 minutes. They might seem cheerful and not at all ready for sleep.
+**Too short (under-tired):** Your baby takes ages to fall asleep, plays or babbles in the cot, or has very [short naps](/blog/baby-short-naps-30-minutes-why-and-how-to-fix-them) of 20 to 30 minutes. They might seem cheerful and not at all ready for sleep.
 
-**Too long (overtired):** Your baby is fussy, hyperactive, or clingy before sleep. They may cry intensely when put down and wake frequently after falling asleep. Overtiredness triggers a cortisol response that actually makes it *harder* to fall and stay asleep, a finding consistently supported by pediatric sleep research.
+**Too long ([overtired](/blog/overtired-baby-signs-and-what-to-do)):** Your baby is fussy, hyperactive, or clingy before sleep. They may cry intensely when put down and wake frequently after falling asleep. Overtiredness triggers a cortisol response that actually makes it *harder* to fall and stay asleep, a finding consistently supported by pediatric sleep research.
 
 **Just right:** Your baby settles within 10 to 20 minutes, sleeps for a restorative stretch, and wakes relatively content.
 

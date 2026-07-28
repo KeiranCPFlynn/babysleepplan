@@ -1,6 +1,6 @@
 ---
-title: "10-Month-Old Sleep Schedule: Naps, Bedtime & What to Expect"
-description: "Discover what a healthy 10-month-old sleep schedule looks like, including naps, wake windows, bedtime, and how to handle common disruptions at this age."
+title: "10 Month Old Sleep Schedule: Naps, Wake Windows & Bedtime Routine"
+description: "Complete 10 month old sleep schedule: 2 naps, 3-3.5 hour wake windows, 6:30-7:30pm bedtime. Includes a sample daily routine and tips for the 10 month sleep regression."
 date: "2026-05-15"
 author: "LunaCradle Team"
 tags: ["infant sleep", "nap schedule", "sleep tips"]
@@ -8,6 +8,15 @@ image: "https://images.unsplash.com/photo-1630482931131-2cf5c5c20929?w=1200&h=63
 imageAlt: "A 10-month-old baby sleeping peacefully in a crib with soft morning light"
 imageCredit: "Social History Archive"
 imageCreditUrl: "https://unsplash.com/@socialhistoryarchive"
+faq:
+  - question: "How many naps should a 10 month old have?"
+    answer: "Most 10-month-olds take 2 naps per day, typically totaling 2-3 hours of daytime sleep. The first nap is usually 1-1.5 hours and the second nap is 1-1.5 hours. Some babies briefly resist the second nap during the 8-10 month sleep regression, but 2 naps remains appropriate at this age."
+  - question: "How much sleep does a 10 month old need in 24 hours?"
+    answer: "A 10-month-old needs approximately 13-14 hours of total sleep in 24 hours: about 10-11 hours at night and 2-3 hours across two daytime naps. Wake windows at this age are typically 3-3.5 hours."
+  - question: "What time should a 10 month old go to bed?"
+    answer: "Ideal bedtime for a 10-month-old is between 6:30 and 7:30 PM. This allows for the last wake window of 3-3.5 hours after the afternoon nap ends. A consistent bedtime routine of 20-30 minutes (bath, book, feed, bed) helps signal that sleep is coming."
+  - question: "Is there a 10-month sleep regression?"
+    answer: "Yes. Around 8-10 months, many babies experience a sleep regression linked to major developmental milestones — pulling to stand, crawling, separation anxiety, and object permanence. Naps may shorten, night wakings may increase, and baby may fight bedtime. This typically lasts 2-6 weeks and resolves as the baby masters new skills."
 ---
 
 ## The 10-Month Mark: More Alert, More Opinionated, More Fun to Figure Out
@@ -15,6 +24,8 @@ imageCreditUrl: "https://unsplash.com/@socialhistoryarchive"
 At 10 months, your baby is not quite a toddler but definitely not a passive newborn either. They're pulling to stand, babbling with purpose, and testing every boundary — including sleep ones. If you've noticed that naps are suddenly harder to start, nights are more disrupted, or your previously reliable schedule has gone sideways, you're not imagining it.
 
 This is one of those ages where development and sleep collide in interesting ways. Understanding what's typical at 10 months — and what to adjust — makes an enormous difference in how confidently you can navigate this stage.
+
+> **Quick answer:** Most 10-month-olds need 13-14 hours of total sleep: 10-11 hours at night plus 2-3 hours across two naps. Wake windows are about 3-3.5 hours, with bedtime between 6:30-7:30pm.
 
 ## How Much Sleep Does a 10-Month-Old Need?
 
@@ -24,16 +35,38 @@ At 10 months, the typical breakdown is roughly **10 to 11 hours** of overnight s
 
 ## A Sample 10-Month-Old Sleep Schedule
 
-Wake windows — the amount of time your baby can comfortably stay awake between sleep periods — are the best guide for timing naps rather than rigid clock times. At 10 months, most babies can manage **3 to 3.5 hours** between sleeps, with the longest stretch typically falling before bed.
+[Wake windows](/blog/wake-windows-by-age-the-complete-guide) — the amount of time your baby can comfortably stay awake between sleep periods — are the best guide for timing naps rather than rigid clock times. At 10 months, most babies can manage **3 to 3.5 hours** between sleeps, with the longest stretch typically falling before bed.
 
-A typical day might look something like this:
+### Sample daily schedule
 
-- **Wake:** 6:30–7:00 a.m.
-- **Nap 1:** Around 9:30–10:00 a.m. (after ~3 hours awake), lasting 45–90 minutes
-- **Nap 2:** Around 2:00–2:30 p.m. (after ~3 hours awake), lasting 45–75 minutes
-- **Bedtime:** 7:00–7:30 p.m. (after 3–3.5 hours awake from end of second nap)
+| Time           | Activity        | Notes                                     |
+| -------------- | --------------- | ----------------------------------------- |
+| 6:30–7:00 am   | Wake up         | Milk feed on waking                       |
+| 9:30–10:00 am  | Nap 1 starts    | After ~3 hours awake; aim for 1–1.5 hours |
+| 10:30–11:00 am | Wake from nap 1 | Milk feed + solid breakfast               |
+| 2:00–2:30 pm   | Nap 2 starts    | After ~3 hours awake; aim for 1–1.5 hours |
+| 3:00–3:30 pm   | Wake from nap 2 | Milk feed + solid snack                   |
+| 5:00–5:30 pm   | Dinner          | Solids about 1.5–2 hours before bed       |
+| 6:30–7:00 pm   | Bedtime routine | Bath, book, feed, cot                     |
+| 7:00–7:30 pm   | Asleep          | After 3–3.5 hours since end of nap 2      |
 
-This isn't a prescription — it's a starting point. If your baby wakes earlier or later, shift everything forward or back accordingly. The wake windows are what matter most, not the exact clock times.
+### Wake windows at 10 months
+
+The wake windows aren't identical all day. Most babies follow this pattern:
+
+- **Morning window** (wake to nap 1): 2.75–3 hours
+- **Middle window** (nap 1 to nap 2): 3–3.25 hours
+- **Evening window** (end of nap 2 to bedtime): 3.25–3.5 hours (longest of the day)
+
+If your baby is fighting naps or bedtime, the first thing to check is whether these windows are appropriate. Too short and they're not tired enough; too long and they're overtired.
+
+This isn't a prescription — it's a starting point. If your baby wakes earlier or later, shift everything forward or back accordingly. The wake windows are what matter most, not the exact clock times. For a schedule built around your baby's specific routine, try the [free sleep schedule builder](/free-schedule).
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## The 2-to-1 Nap Transition: Is Your 10-Month-Old Ready?
 
@@ -45,7 +78,7 @@ Research from Dr. Jodi Mindell at the Children's Hospital of Philadelphia confir
 
 ## Nap Challenges at 10 Months
 
-**Short naps** are common at this age and often stem from sleep associations rather than schedule issues. If your baby consistently wakes after 30-45 minutes, they're surfacing at the end of a sleep cycle and can't resettle without help. The fix is usually working on how they fall asleep at the start of the nap, not changing the timing.
+[Short naps](/blog/baby-short-naps-30-minutes-why-and-how-to-fix-them) are common at this age and often stem from sleep associations rather than schedule issues. If your baby consistently wakes after 30-45 minutes, they're surfacing at the end of a sleep cycle and can't resettle without help. The fix is usually working on how they fall asleep at the start of the nap, not changing the timing.
 
 **Nap refusals** occasionally happen during developmental leaps. Between 9 and 10 months, many babies hit a big cognitive leap that makes them desperate to practice their new skills — pulling to stand, cruising, waving — rather than lying down for a nap. This phase typically passes within one to two weeks. Staying consistent with the schedule and routine during this time prevents it from becoming a longer-term habit.
 
@@ -53,9 +86,34 @@ Research from Dr. Jodi Mindell at the Children's Hospital of Philadelphia confir
 
 ## Bedtime at 10 Months
 
-Most 10-month-olds do best with a bedtime between **6:30 and 7:30 p.m.**, depending on when the second nap ended. The goal is to put your baby down awake but calm, with enough sleep pressure built up from the day that settling doesn't feel like a battle.
+Most 10-month-olds do best with a bedtime between **6:30 and 7:30 p.m.**, depending on when the second nap ended. The goal is to put your baby down [drowsy but awake](/blog/drowsy-but-awake-does-it-work-and-how-to-do-it) — calm, with enough sleep pressure built up from the day that settling doesn't feel like a battle.
 
 A consistent bedtime routine matters more at this age than it did at earlier stages. Research consistently shows that a predictable 20-30 minute routine — bath, lotion, pyjamas, feed, book, song, cot — significantly reduces the time it takes for babies to fall asleep. The routine signals that sleep is coming and helps manage the cortisol that naturally rises in the early evening.
+
+## Feeding and Sleep at 10 Months
+
+At 10 months, most babies are eating three solid meals a day alongside their milk feeds. The relationship between feeding and sleep becomes more relevant at this age — a baby who isn't getting enough calories during the day may wake more at night from genuine hunger, while a baby who's filling up on milk may not be hungry enough for solids.
+
+**Typical feeding pattern at 10 months:**
+- 3 solid meals per day (breakfast, lunch, dinner)
+- 2 milk feeds (morning and after naps, or before bed)
+- Total milk intake around 500-600ml (17-20oz) per day if breastfed or formula-fed
+
+A common issue at this age is the **bedtime feed association**. If your baby always falls asleep on a breast or bottle, they'll expect the same when they surface between sleep cycles at night. Moving the last feed to earlier in the [bedtime routine](/blog/perfect-bedtime-routine-by-age) — with a gap of 15-20 minutes before sleep — helps break this link gradually.
+
+## Troubleshooting Common 10-Month Sleep Problems
+
+**Problem: Baby stands up in the cot and can't get back down**
+This is one of the most common 10-month sleep disruptions. Your baby has learned to pull to stand and now practises it compulsively — including at 2am. The fix: spend time during the day teaching them to get back down (guide their hips into a sitting position, let them practise). At night, resist the urge to immediately help them down — give them a few minutes to problem-solve. Most babies master this within 1-2 weeks.
+
+**Problem: Separation anxiety making sleep impossible**
+[Separation anxiety](/blog/separation-anxiety-and-baby-sleep-why-it-happens-and-what-helps) peaks around 10-18 months. Your baby now understands you exist when you leave the room and wants you to stay. A consistent bedtime routine, a comfort object (small muslin or soft toy), and a brief, predictable goodbye at bedtime all help. Avoid sneaking out — it increases anxiety long-term.
+
+**Problem: Second nap disappearing**
+If your 10-month-old suddenly refuses the second nap, don't assume they're ready for one nap. More likely, the wake window before nap 2 is too short, the first nap was too long, or there's a developmental leap disrupting things. Try pushing the second nap 15-20 minutes later, or capping the first nap at 90 minutes. See the [nap transition guide](/blog/nap-transition-guide-when-to-drop-a-nap) for when it's truly time to make the switch.
+
+**Problem: Night wakings returning after a good stretch**
+If your baby was sleeping well and suddenly starts waking every 2-3 hours, check for: illness, teething, a new developmental skill, too much or too little daytime sleep, or a changed sleep environment (room too warm, daylight saving time). Address the cause rather than introducing new sleep associations. Most disruptions resolve in 1-2 weeks with consistent responses.
 
 ## Common Mistakes to Avoid at This Age
 

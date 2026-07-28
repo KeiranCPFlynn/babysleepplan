@@ -1,6 +1,6 @@
 ---
-title: "Overtired Baby Signs: How to Spot Them and What to Do"
-description: "Learn the key overtired baby signs, understand why overtiredness makes sleep harder, and discover gentle strategies to help your baby catch up."
+title: "Overtired Baby: 7 Signs, Why It Happens & How to Fix It Fast"
+description: "Overtired baby? Learn the 7 key signs (rubbing eyes, arching, clinginess), why overtiredness makes sleep harder, and how to fix it with wake windows and earlier bedtime."
 date: "2026-03-04"
 author: "LunaCradle Team"
 tags: ["sleep tips", "infant sleep", "sleep science"]
@@ -8,6 +8,13 @@ image: "https://images.unsplash.com/photo-1643992529177-973780be27c5?w=1200&h=63
 imageAlt: "Tired baby rubbing eyes while being held by a parent"
 imageCredit: "Toa Heftiba"
 imageCreditUrl: "https://unsplash.com/@heftiba"
+faq:
+  - question: "What are the signs of an overtired baby?"
+    answer: "Early signs include staring into space, quieting down, and a single yawn. Later signs are crying, arching the back, clenched fists, and hyperactivity. If your baby seems 'wired' or unusually energetic after being awake a while, they're likely overtired — that energy is cortisol and adrenaline, not readiness for play."
+  - question: "How do I settle an overtired baby?"
+    answer: "Take them to a dark, quiet room and use rhythmic motion (rocking, swaying) combined with white noise and gentle shushing. An overtired baby needs more sensory input to settle than a merely tired one. Keep the environment calm and avoid stimulating activities like screens or bright lights."
+  - question: "How long can a baby stay awake before becoming overtired?"
+    answer: "Wake windows vary by age: newborns tolerate 30–90 minutes, 3–6 month olds handle 1.5–2.5 hours, 6–12 month olds manage 2.5–4 hours, and toddlers can stay awake 4–6 hours. Exceeding these windows triggers a cortisol release that makes falling asleep significantly harder."
 ---
 
 ## The Overtired Trap
@@ -15,6 +22,8 @@ imageCreditUrl: "https://unsplash.com/@heftiba"
 Here's the cruel irony of baby sleep: the more tired your baby gets, the harder it becomes for them to actually fall asleep. If you've ever watched your baby go from drowsy to wired in what felt like seconds, or spent an hour trying to settle a baby who was clearly exhausted, you've experienced the overtired trap firsthand. It's one of the most confusing parts of parenting a young baby, and recognizing **overtired baby signs** early is one of the most useful skills you can build.
 
 You're not imagining it, and you're not doing anything wrong. Overtiredness is a physiological state with a clear biological mechanism, and once you understand how it works, it becomes much easier to prevent.
+
+> **Quick answer:** An overtired baby's body releases cortisol and adrenaline as a "second wind," making it harder to fall asleep and stay asleep — catch early tired cues (staring, quieting, a single yawn) before the cortisol kicks in, and use dark rooms, rhythmic motion, and white noise to help them settle once they've crossed into overtiredness.
 
 ## Why Overtiredness Makes Everything Harder
 
@@ -71,6 +80,12 @@ This is worth addressing because the two can look surprisingly similar. An **und
 An undertired baby tends to be chatty, playful, or intermittently fussy. They might protest the crib but calm down when picked up and seem happy. An overtired baby escalates. Their crying has an urgent, frantic quality, and comfort helps briefly but doesn't fully resolve the distress.
 
 If you're consistently battling bedtime and your baby seems energetic rather than distressed, try extending the wake window by 10 to 15 minutes and see if settling improves. If the fussing gets worse with a longer window, you were already in overtired territory.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## Preventing Overtiredness Before It Starts
 

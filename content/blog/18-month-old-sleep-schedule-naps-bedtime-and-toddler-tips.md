@@ -8,6 +8,15 @@ image: "https://images.unsplash.com/photo-1613043547055-4efe0dfa9814?w=1200&h=63
 imageAlt: "A toddler sleeping soundly in a cot with a soft blanket"
 imageCredit: "Sven Brandsma"
 imageCreditUrl: "https://unsplash.com/@seffen99"
+faq:
+  - question: "How much sleep does an 18 month old need?"
+    answer: "Most 18-month-olds need 11–14 hours of total sleep per day — roughly 11–12 hours overnight plus a single nap of 1.5–2 hours. The AAP recommends this range for children aged 1–2 years."
+  - question: "How long should an 18 month old's nap be?"
+    answer: "A single afternoon nap of 1.5–2 hours is typical for most 18-month-olds. By this age, almost all toddlers have transitioned to one nap. If your child is still on two naps and struggling with bedtime, it may be time to consolidate."
+  - question: "Is 18 months too late to start sleep training?"
+    answer: "Not at all. While earlier intervention is often easier, sleep training can be very effective at 18 months and beyond. Toddlers this age can understand simple language and respond well to consistent routines and clear boundaries around sleep."
+  - question: "What time should an 18 month old go to bed?"
+    answer: "A bedtime between 7:00–7:30 pm works well for most 18-month-olds. Wake windows are typically 5–6 hours in the morning and 4.5–5.5 hours after the nap, so timing the last wake window correctly is key to a smooth bedtime."
 ---
 
 ## Welcome to One of the Trickier Sleep Stages
@@ -15,6 +24,8 @@ imageCreditUrl: "https://unsplash.com/@seffen99"
 Eighteen months is a fascinating age — your toddler is a fully-fledged little person now, full of opinions, big feelings, and more energy than seems physically possible. It's also an age where sleep can become a genuine battleground. Bedtime resistance, night waking, and the infamous 18-month sleep regression can all collide at once.
 
 The good news is that an 18-month-old's sleep needs are actually quite predictable, and having a consistent schedule makes an enormous difference. Once you understand what to expect, it's much easier to build a routine that works — and to stop second-guessing yourself every time a night goes sideways.
+
+> **Quick answer:** Most 18-month-olds need 11–14 hours of total sleep per day — roughly 11–12 hours overnight plus a single 1.5–2 hour nap. Wake windows are typically 5–6 hours in the morning and 4.5–5.5 hours after the nap.
 
 ## How Much Sleep Does an 18-Month-Old Need?
 
@@ -26,29 +37,35 @@ By 18 months, almost all toddlers have transitioned to a single daytime nap — 
 
 Every child is different, but here's a schedule that works well for most 18-month-olds:
 
-| Time | Activity |
-|------|----------|
-| 6:30–7:00 am | Wake |
-| 12:00–12:30 pm | Nap starts |
-| 2:00–2:30 pm | Nap ends (aim for 1.5–2 hours) |
-| 7:00–7:30 pm | Bedtime |
+| Time           | Activity                       |
+| -------------- | ------------------------------ |
+| 6:30–7:00 am   | Wake                           |
+| 12:00–12:30 pm | Nap starts                     |
+| 2:00–2:30 pm   | Nap ends (aim for 1.5–2 hours) |
+| 7:00–7:30 pm   | Bedtime                        |
 
 The key principle here is the **gap between nap end and bedtime**. At 18 months, most toddlers need around 4.5 to 5 hours of awake time before bed. If the nap finishes at 2:30 pm and you're putting them down at 7:00 pm, that's a comfortable 4.5-hour window. Push bedtime much later and you risk overtiredness; try to squeeze it in too early and they simply won't be sleepy enough to settle.
 
 ## Wake Windows at 18 Months
 
-Wake windows matter just as much at 18 months as they did when your child was a baby. At this age, typical wake windows are:
+[Wake windows](/blog/wake-windows-by-age-the-complete-guide) matter just as much at 18 months as they did when your child was a baby. At this age, typical wake windows are:
 
 - **Morning (wake to nap):** 5 to 6 hours
 - **Afternoon (nap to bedtime):** 4.5 to 5.5 hours
 
 These windows are a starting point. Some toddlers are naturally on the higher end; others are more sensitive to overtiredness and do better with the shorter windows. Watch for tired cues — eye-rubbing, clinginess, loss of coordination — and use those alongside the clock.
 
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
+
 ## What About the 18-Month Sleep Regression?
 
 This is real, and it's one of the more intense developmental regressions. At around 18 months, toddlers experience a significant leap in language processing, emotional awareness, and independence — all of which can temporarily disrupt sleep. Separation anxiety often peaks right around this time too, which is why so many 18-month-olds suddenly start calling out or crying when left in the cot at bedtime.
 
-Research by Dr. Jodi Mindell published in *Pediatrics* has shown that consistent, warm bedtime routines significantly reduce sleep-onset difficulties in toddlers, even during developmental regressions. The routine acts as a predictable signal that sleep is coming — something your toddler's developing brain genuinely finds reassuring.
+Research by Dr. Jodi Mindell published in *Pediatrics* has shown that consistent, warm [bedtime routines](/blog/perfect-bedtime-routine-by-age) significantly reduce sleep-onset difficulties in toddlers, even during developmental regressions. The routine acts as a predictable signal that sleep is coming — something your toddler's developing brain genuinely finds reassuring.
 
 If you're in the thick of the regression, the most helpful approach is usually to hold your boundaries calmly rather than overhauling the entire sleep setup. Adding extra reassurance at bedtime — a longer cuddle, an extra book — is fine. What tends to backfire is bringing them into your bed or staying until they're fully asleep every night, as those patterns become new habits quickly.
 

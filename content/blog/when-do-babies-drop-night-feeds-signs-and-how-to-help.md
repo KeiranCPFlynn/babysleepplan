@@ -8,6 +8,15 @@ image: "https://images.unsplash.com/photo-1542387960-f8197d82db42?w=1200&h=630&f
 imageAlt: "A baby sleeping through the night peacefully in a darkened nursery"
 imageCredit: "Kelly Sikkema"
 imageCreditUrl: "https://unsplash.com/@kellysikkema"
+faq:
+  - question: "When can a baby go all night without feeding?"
+    answer: "Most healthy, full-term babies can go through the night without a nutritional feed between 6 and 12 months, once they're gaining well and eating solids. Formula-fed babies may consolidate earlier (around 3–6 months), while breastfed babies often continue 1–2 night feeds through 6 months or beyond."
+  - question: "How do I know if my baby is waking from hunger or habit?"
+    answer: "Signs your baby is ready to drop night feeds include shorter, disinterested feeds at night, longer stretches between wakings, and eating well during the day. If your baby takes a full feed at every waking and is under 6 months, hunger is likely the driver. If feeds are short and your baby settles quickly without feeding, it may be habit."
+  - question: "How do I drop a night feed gradually?"
+    answer: "Reduce the volume (for bottle-fed babies) or feed duration (for breastfeeding) gradually over 2–3 weeks rather than stopping cold turkey. For example, reduce by 30ml or 2 minutes every 2–3 nights. This gentle approach minimises distress and, for breastfeeding parents, protects milk supply."
+  - question: "Will dropping night feeds help my baby sleep through the night?"
+    answer: "Dropping night feeds can help consolidate sleep, but it's not the only factor. Sleep associations — how your baby falls asleep at bedtime — also play a major role. Many babies who drop night feeds still wake for comfort. Combining feed reduction with independent settling skills gives the best results."
 ---
 
 ## One of the Questions Every Parent Asks
@@ -15,6 +24,8 @@ imageCreditUrl: "https://unsplash.com/@kellysikkema"
 "When will they sleep through?" is the question most new parents are too tired to stop asking. But before you can get there, there's often a more pressing milestone: when will they stop needing to feed at night? Night feeds serve a genuinely important purpose in the early months — they're not just a habit to be broken as soon as possible. But as your baby grows, the nutritional need for them shifts, and at some point most babies are ready to consolidate their calories into the daytime.
 
 The tricky part is knowing when that point has arrived — and whether waking is still driven by hunger or has become a habit that feeding is simply reinforcing.
+
+> **Quick answer:** Most babies can drop night feeds between 6 and 12 months once they're gaining well and eating solids — look for shorter, disinterested night feeds and longer stretches as readiness signs, then reduce volume or feed length gradually over two to three weeks rather than stopping cold turkey.
 
 ## Why Babies Feed at Night (and Why It Matters)
 
@@ -57,6 +68,12 @@ There's no single right approach, but these evidence-informed strategies are com
 **Ensure daytime calories are robust.** Before reducing night feeds, make sure your baby is feeding well during the day. If they're distracted or snacking during daytime feeds, they may genuinely need the night feeds to compensate. A consistent daily feeding schedule with focused feeds often helps.
 
 **Respond to night waking with a brief settling attempt first.** Once you've assessed that your baby is ready to reduce feeds, when they wake at night, try settling briefly — a hand on the back, a quiet shush — before feeding. Some babies will resettle without a feed; for those who don't, feeding is still fine. This approach, recommended by the NHS as part of responsive settling, helps identify which wakes are genuinely driven by hunger.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## Common Myths About Night Feeds
 

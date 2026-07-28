@@ -62,19 +62,48 @@ image: ""
 imageAlt: ""
 imageCredit: ""
 imageCreditUrl: ""
+faq:
+  - question: ""
+    answer: ""
+  - question: ""
+    answer: ""
+  - question: ""
+    answer: ""
+howTo:
+  name: ""
+  steps:
+    - name: ""
+      text: ""
+    - name: ""
+      text: ""
+    - name: ""
+      text: ""
+    - name: ""
+      text: ""
+    - name: ""
+      text: ""
 ---
 ```
 
 ### Field rules
 
-| Field | What to put | Example |
-|---|---|---|
-| `title` | Your best title from Phase 1. 50-65 characters. | `"Understanding Baby Sleep Cycles: What Every Parent Should Know"` |
-| `description` | 120-155 characters. Action-oriented ("Learn...", "Discover..."). Must include the primary keyword. | `"Learn how your baby's sleep cycles mature around 4-6 months and evidence-based strategies to help your little one sleep longer stretches."` |
-| `date` | Today's date, ISO format, quoted. | `"2026-02-11"` |
-| `author` | Always this exact string. | `"LunaCradle Team"` |
-| `tags` | 2-4 lowercase tags. Pick from: `"sleep science"`, `"infant sleep"`, `"toddler sleep"`, `"newborn sleep"`, `"bedtime routine"`, `"sleep tips"`, `"sleep environment"`, `"nap schedule"`, `"4-month regression"`, `"night waking"`, `"early rising"`, `"nap transitions"`, `"sleep associations"`. Only create a new tag if none fit. | `["sleep science", "4-month regression", "infant sleep"]` |
-| `imageAlt` | Descriptive alt text for a hero photo. Include keywords naturally. | `"A peacefully sleeping baby in a crib with soft lighting"` |
+| Field         | What to put                                                                                                                                                                                                                                                                                                                         | Example                                                                                                                                       |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `title`       | Your best title from Phase 1. 50-65 characters.                                                                                                                                                                                                                                                                                     | `"Understanding Baby Sleep Cycles: What Every Parent Should Know"`                                                                            |
+| `description` | 120-155 characters. Action-oriented ("Learn...", "Discover..."). Must include the primary keyword.                                                                                                                                                                                                                                  | `"Learn how your baby's sleep cycles mature around 4-6 months and evidence-based strategies to help your little one sleep longer stretches."` |
+| `date`        | Today's date, ISO format, quoted.                                                                                                                                                                                                                                                                                                   | `"2026-02-11"`                                                                                                                                |
+| `author`      | Always this exact string.                                                                                                                                                                                                                                                                                                           | `"LunaCradle Team"`                                                                                                                           |
+| `tags`        | 2-4 lowercase tags. Pick from: `"sleep science"`, `"infant sleep"`, `"toddler sleep"`, `"newborn sleep"`, `"bedtime routine"`, `"sleep tips"`, `"sleep environment"`, `"nap schedule"`, `"4-month regression"`, `"night waking"`, `"early rising"`, `"nap transitions"`, `"sleep associations"`. Only create a new tag if none fit. | `["sleep science", "4-month regression", "infant sleep"]`                                                                                     |
+| `imageAlt`    | Descriptive alt text for a hero photo. Include keywords naturally.                                                                                                                                                                                                                                                                  | `"A peacefully sleeping baby in a crib with soft lighting"`                                                                                   |
+| `faq`         | 3-4 question/answer pairs targeting "People also ask" queries for the topic. These render as a visible FAQ accordion on the page AND as FAQPage structured data for Google. Questions should match real parent searches. Answers should be 2-3 sentences, specific, and evidence-based.                                             | See FAQ section below                                                                                                                         |
+
+### FAQ field
+
+Add 3-4 FAQ items based on "People also ask" questions you find during Phase 1 research. Each item has a `question` and `answer` field. Questions should be phrased exactly how parents search (e.g., "How many naps should a 10 month old have?"). Answers should be concise (2-3 sentences), specific, and evidence-based — these also target Google featured snippets.
+
+### HowTo field (optional)
+
+If the post is a step-by-step guide (sleep training methods, transition guides, technique tutorials), add a `howTo` block with a `name` and 5-7 `steps`. Each step has a `name` (short title) and `text` (2-3 sentence description). This renders as HowTo structured data for Google rich results with step previews. Skip this field for informational posts that aren't how-to guides (e.g., "what to expect" or "signs and symptoms" posts).
 
 ### Image fields — always leave empty
 
@@ -142,6 +171,37 @@ Follow this outline (adapt section names to your topic):
 - Structure with clear H2/H3 hierarchy (Google uses this for featured snippets and jump-to links).
 - Write H2s as questions or clear statements that match how parents search (e.g., "Why Does My Baby Wake Up Every Hour?" not "Sleep Cycle Disruption Factors").
 - Prioritize readability signals: short paragraphs, concrete language, and smooth transitions that keep readers on page.
+
+### Required SEO treatments (MUST include in every post)
+
+Every post must include these three elements. They are non-negotiable and should be present in the output markdown:
+
+**1. Quick Answer blockquote** — Add immediately after the opening hook paragraphs, before the first `##` heading. This targets Google featured snippets.
+
+```markdown
+> **Quick answer:** [1-2 sentences summarizing the single most important takeaway for a parent searching this topic]
+```
+
+**2. Contextual internal links** — Include 2-3 links to other blog posts within the body text. These must be contextually relevant — don't force links where they don't fit naturally. Use the format `[link text](/blog/slug)`. Common posts to link to include:
+- `wake-windows-by-age-the-complete-guide` — when discussing wake windows
+- `understanding-baby-sleep-cycles` — when discussing sleep architecture
+- `perfect-bedtime-routine-by-age` — when discussing routines
+- `drowsy-but-awake-does-it-work-and-how-to-do-it` — when discussing independent settling
+- `how-to-get-baby-to-self-settle` — when discussing self-soothing
+- `baby-short-naps-30-minutes-why-and-how-to-fix-them` — when discussing short naps
+- `overtired-baby-signs-and-what-to-do` — when discussing overtiredness
+- `nap-transition-guide-when-to-drop-a-nap` — when discussing nap transitions
+- Age-specific schedule posts (e.g., `10-month-old-sleep-schedule-naps-bedtime-and-what-to-expect`) — when referencing specific ages
+
+**3. Mid-article CTA** — Add at a natural section break roughly in the middle of the article (not at the end). This promotes the free schedule builder tool.
+
+```markdown
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
+```
 
 ---
 

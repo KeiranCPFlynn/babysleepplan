@@ -8,7 +8,18 @@ image: "https://images.unsplash.com/photo-1758874961414-e4f03066e0b5?w=1200&h=63
 imageAlt: "A parent reading a bedtime story to a toddler in a softly lit bedroom"
 imageCredit: "Vitaly Gariev"
 imageCreditUrl: "https://unsplash.com/@silverkblack"
+faq:
+  - question: "What time should a toddler go to bed?"
+    answer: "Most toddlers aged 1–3 do best with a bedtime between 6:30 and 7:30 pm. Going much later leads to overtiredness, which paradoxically makes it harder for toddlers to fall asleep and stay asleep. Start the wind-down routine about 30 minutes before the target bedtime."
+  - question: "How long should a toddler bedtime routine take?"
+    answer: "A toddler bedtime routine of 20–30 minutes is ideal. Shorter than that doesn't give enough time to wind down; longer risks your toddler getting a second wind or the routine becoming unmanageable. Include calming steps like a bath, books, and a brief goodnight ritual."
+  - question: "Why does my toddler fight bedtime?"
+    answer: "Toddler bedtime resistance is usually about difficulty transitioning from high alert to sleep, not defiance. Their brains are absorbing enormous amounts of information daily. A consistent routine, lowering lights, removing screens 30 minutes before bed, and giving a 15-minute warning all help ease the transition."
+  - question: "Should I read to my toddler every night?"
+    answer: "Reading before bed is one of the most effective bedtime routine components. Research tracking over 10,000 children found that consistent bedtime routines — including books — were linked to faster sleep onset, fewer night wakings, and longer sleep. The content matters less than the consistency."
 ---
+
+> **Quick answer:** A consistent toddler bedtime routine of 20–30 minutes — same activities, same order, same time every night — helps toddlers fall asleep faster, wake less often, and sleep longer. Aim for a bedtime between 6:30 and 7:30 pm, and include calming steps like a warm bath, books, and a brief goodnight ritual.
 
 ## Why Bedtime Feels Like a Battle (and How to Change That)
 
@@ -26,7 +37,7 @@ The American Academy of Pediatrics also recommends a predictable pre-sleep routi
 
 For most toddlers, a bedtime routine of 20 to 30 minutes hits the sweet spot. Shorter than that and there may not be enough time to genuinely wind down; longer and you risk your toddler getting a second wind, or the routine becoming so drawn-out that it feels unmanageable on tired evenings.
 
-Starting the routine at roughly the same time each night is also important. Toddlers aged 1 to 3 generally do well with bedtimes somewhere between 6:30 pm and 7:30 pm. Going much later typically leads to overtiredness, which paradoxically makes it harder — not easier — to fall asleep.
+Starting the routine at roughly the same time each night is also important. Toddlers aged 1 to 3 generally do well with bedtimes somewhere between 6:30 pm and 7:30 pm. Going much later typically leads to [overtiredness](/blog/overtired-baby-signs-and-what-to-do), which paradoxically makes it harder — not easier — to fall asleep.
 
 ## A Toddler Bedtime Routine That Works
 
@@ -53,13 +64,19 @@ Reading aloud to toddlers has enormous developmental benefits, but it also serve
 **7. Into the cot or bed with a goodnight ritual**
 A brief, warm, consistent goodbye — the same words or song each night — signals that you are leaving and this is the expected end of the routine. Keep this short. Longer goodbyes or repeated returns tend to escalate rather than soothe anxiety.
 
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
+
 ## Common Mistakes That Make Routines Backfire
 
 The biggest pitfall is inconsistency. A routine that happens four nights out of seven does little for your toddler's sleep drive, because their brain never learns to rely on the cues. Even if some elements have to be abbreviated on difficult evenings, keeping the same sequence matters more than the duration.
 
 Screens right up until bedtime are another common disruptor. A 2019 study in *JAMA Pediatrics* found that pre-bedtime screen use was associated with shorter sleep duration and later sleep onset in children under five. Even calming shows count.
 
-Finally, watch the room environment. A room that is too warm, too bright, or not quiet enough can undermine even the best routine. The AAP recommends a room temperature between 68 and 72°F (20–22°C) for sleep. Blackout curtains and a white noise machine can make a meaningful difference, particularly for toddlers who are light sleepers.
+Finally, watch the [sleep environment](/blog/baby-sleep-environment-complete-guide). A room that is too warm, too bright, or not quiet enough can undermine even the best routine. The AAP recommends a room temperature between 68 and 72°F (20–22°C) for sleep. Blackout curtains and a [white noise machine](/blog/white-noise-baby-sleep-benefits-and-risks) can make a meaningful difference, particularly for toddlers who are light sleepers.
 
 ## When to Seek Help
 

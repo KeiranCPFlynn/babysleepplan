@@ -8,6 +8,15 @@ image: "https://images.unsplash.com/photo-1678762389792-9f85f6509ea9?w=1200&h=63
 imageAlt: "Mother nursing baby in a dimly lit room at night during a breastfeeding session"
 imageCredit: "Frankie"
 imageCreditUrl: "https://unsplash.com/@v3frankie"
+faq:
+  - question: "Does breastfeeding affect baby sleep?"
+    answer: "Breast milk contains tryptophan and CCK, which promote sleepiness — so breastfeeding actually supports sleep biology. The challenge is when nursing becomes the only way a baby can fall asleep, making every night waking require a full feed to resettle."
+  - question: "How do I stop my baby from needing the breast to fall asleep?"
+    answer: "Create a small buffer between the last feed and sleep onset — even 5–10 minutes helps. You don't need to eliminate night feeds, but gradually shifting the bedtime feed earlier in the routine and introducing other settling cues (patting, white noise) helps your baby learn to fall asleep without nursing."
+  - question: "When do breastfed babies start sleeping through the night?"
+    answer: "Breastfed babies often start giving longer stretches around 4–6 months as their stomach capacity increases and they need fewer night feeds. However, 'sleeping through' varies widely — some breastfed babies achieve it earlier, others continue needing 1–2 feeds beyond 6 months, which is normal."
+  - question: "Should I dream feed my breastfed baby?"
+    answer: "A dream feed (feeding while baby is mostly asleep, typically around 10–11pm) can help some babies extend their first long sleep stretch. It works best in the first 3–4 months. After that, it may create a waking habit if your baby doesn't genuinely need the calories."
 ---
 
 ## The Most Common Sleep Question Breastfeeding Parents Have
@@ -15,6 +24,8 @@ imageCreditUrl: "https://unsplash.com/@v3frankie"
 If you're breastfeeding, there's a good chance you've found yourself in this situation: your baby sleeps beautifully on the breast, wakes the moment you try to transfer, and seems to need nursing to fall back asleep multiple times overnight. You may have been told that breastfeeding is causing your baby's sleep problems. You may have been told it's completely normal and will resolve on its own. You've possibly been told both things on the same day by different people.
 
 The truth is more nuanced than either extreme, and the research is actually quite clear on several things that often get lost in the noise. Here's an honest look at what breastfeeding does and doesn't do to baby sleep.
+
+> **Quick answer:** Breastfeeding and good baby sleep are not mutually exclusive — you can continue nursing (including overnight) while improving sleep by creating a small buffer between the last feed and sleep onset, and recognising that not every night waking is driven by hunger.
 
 ## How Breastfeeding Affects Sleep Biology
 
@@ -32,11 +43,17 @@ Formula-fed infants have higher caloric density per feed, which prolongs satiety
 
 The sleep association, not the milk itself, is what most parents are actually dealing with. And that distinction matters enormously for how you respond to it.
 
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
+
 ## The Sleep Association Issue: Understanding Nursing to Sleep
 
 Nursing to sleep becomes a sleep problem when it's the *only* way a baby can fall asleep, and therefore the only way they can return to sleep after waking between sleep cycles. Dr. Jodi Mindell's research across multiple studies confirms that how a baby falls asleep at bedtime is the strongest predictor of how they sleep the rest of the night. A baby who nurses fully to sleep at bedtime will almost certainly need to nurse back to sleep at every overnight waking — not because they're hungry, but because nursing is the condition they associate with sleep onset.
 
-This is sometimes called a "feed-to-sleep association," and it's worth separating it from the question of whether to breastfeed at night at all. Nursing your baby to sleep and night feeding are different things. Many babies genuinely need one or two night feeds through the first six months and beyond, depending on their weight gain and individual needs. But not every night waking in a breastfed baby is driven by hunger, particularly past four to six months.
+This is sometimes called a "[feed-to-sleep association](/blog/feeding-to-sleep-is-it-a-problem-and-how-to-stop)," and it's worth separating it from the question of whether to breastfeed at night at all. Nursing your baby to sleep and night feeding are different things. Many babies genuinely need one or two night feeds through the first six months and beyond, depending on their weight gain and individual needs. But not every night waking in a breastfed baby is driven by hunger, particularly past four to six months.
 
 A useful (if not perfectly precise) signal: a feed driven by genuine hunger typically results in sustained, rhythmic sucking for 5-15 minutes before your baby drifts back to sleep. A comfort-seeking waking often results in a few brief sucks followed by drifting off, or alternating between nursing and looking around, or difficulty resettling even at the breast.
 
@@ -56,13 +73,13 @@ The World Health Organization recommends breastfeeding for at least two years, a
 
 **Try a "top-up" feed rather than a full nursing session for overnight wakings.** If your baby wakes at a time when you don't believe they're genuinely hungry, offer a brief, calm check-in rather than a full feed. This doesn't mean refusing to nurse — it means responding to the level of need rather than reflexively nursing at every waking. Over time, this naturally reduces the association between any overnight waking and a full nursing session.
 
-**Work on falling asleep drowsy but aware.** This is the same "drowsy but awake" principle that applies to all babies, and it applies equally when breastfeeding. After a feed, if your baby is drowsy but not fully asleep, placing them in the cot and allowing them to complete the transition to sleep there — even if it requires some settling support — gradually builds a new association. It won't work every time at first. That's fine.
+**Work on falling asleep drowsy but aware.** This is the same "[drowsy but awake](/blog/drowsy-but-awake-does-it-work-and-how-to-do-it)" principle that applies to all babies, and it applies equally when breastfeeding. After a feed, if your baby is drowsy but not fully asleep, placing them in the cot and allowing them to complete the transition to sleep there — even if it requires some settling support — gradually builds a new association. It won't work every time at first. That's fine.
 
 **Be honest with yourself about what the goal is.** Some families are genuinely happy nursing frequently overnight and find it manageable. The question of whether something is a "problem" depends entirely on whether it's working for your family. If you're exhausted and want to change things, that's a valid reason to make adjustments. If you're managing fine, there's nothing to fix.
 
 ## Common Myths About Breastfeeding and Sleep
 
-**"You have to night-wean to sleep train."** This is simply not true. You can work on sleep associations while continuing to feed overnight. Many sleep approaches involve maintaining one or two night feeds while reducing all other overnight wakings. These are not mutually exclusive goals.
+**"You have to night-wean to sleep train."** This is simply not true. You can work on sleep associations while continuing to feed overnight. Many sleep approaches involve maintaining one or two night feeds while reducing all other overnight wakings. If you're considering reducing night feeds, our [night-weaning guide](/blog/night-weaning-when-and-how-to-drop-night-feeds) walks through the process gently.
 
 **"Breastfed babies never sleep through the night."** Also not true. Many breastfed babies sleep long stretches overnight, particularly when sleep associations are addressed. The babies who don't sleep well are often those with a strong feed-to-sleep association, not those who happen to be breastfed.
 

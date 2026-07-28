@@ -8,6 +8,15 @@ image: "https://images.unsplash.com/photo-1619581910509-4c7400bab992?w=1200&h=63
 imageAlt: "A parent gently watching over a sleeping baby in a safe sleep environment"
 imageCredit: "Brett Durfee"
 imageCreditUrl: "https://unsplash.com/@brettd901"
+faq:
+  - question: "Is co-sleeping safe for babies?"
+    answer: "The AAP and NHS recommend against bedsharing, especially for babies under 4 months. The highest-risk scenarios involve additional factors like parental smoking, alcohol use, or sleeping on a sofa. Room-sharing with a bedside crib is the safest option for the first 6–12 months."
+  - question: "What is the safest way to co-sleep with a baby?"
+    answer: "If you choose to bedshare, reduce risk by ensuring neither parent smokes, has consumed alcohol, or taken sedating medication. Use a firm mattress with no gaps against the wall, remove pillows and heavy blankets near the baby, and place baby on their back. A bedside sleeper or co-sleeper crib is a safer alternative."
+  - question: "At what age is bedsharing safest?"
+    answer: "Bedsharing is highest risk for babies under 4 months and should be avoided entirely at that age. Risk decreases as babies get older and can move independently, but the AAP recommends room-sharing without bedsharing for at least the first 6 months, ideally 12 months."
+  - question: "Does co-sleeping increase the risk of SIDS?"
+    answer: "Bedsharing is associated with an increased risk of SIDS in the AAP's data, particularly when combined with other risk factors. However, the risk from bedsharing alone (without smoking, alcohol, or soft surfaces) is lower than the risk from bedsharing with those additional factors. Room-sharing with a separate sleep surface reduces SIDS risk by up to 50%."
 ---
 
 ## A Topic That Deserves Honest, Nuanced Conversation
@@ -16,9 +25,11 @@ Co-sleeping — sharing a sleep surface with your baby — is one of the most em
 
 The evidence on co-sleeping is genuinely complex, and it deserves an honest conversation rather than a one-size-fits-all prohibition. Understanding the research — including what specifically increases risk and what doesn't — helps families make more informed choices.
 
+> **Quick answer:** The AAP and NHS recommend against bedsharing, especially for babies under 4 months, but the highest-risk scenarios involve additional factors like smoking, alcohol, or sleeping on a sofa. Room-sharing with a bedside crib is the safest option, and for families who do bedshare, removing known risk factors significantly reduces danger.
+
 ## What the AAP and NHS Actually Say
 
-The American Academy of Pediatrics updated its safe sleep guidelines in 2022 and maintains a recommendation against bedsharing, particularly for babies under 4 months. Their position is based on data showing that bedsharing is associated with an increased risk of sleep-related infant deaths, including sudden infant death syndrome (SIDS) and accidental suffocation.
+The American Academy of Pediatrics updated its safe sleep guidelines in 2022 and maintains a recommendation against bedsharing, particularly for babies under 4 months. Their position is based on data showing that bedsharing is associated with an increased risk of sleep-related infant deaths, including sudden infant death syndrome (SIDS) and accidental suffocation. For a broader look at reducing SIDS risk, see our [safe sleep guide](/blog/safe-sleep-for-babies-reducing-the-risk-of-sids).
 
 The NHS similarly advises against sharing a bed with your baby if either parent smokes, has recently consumed alcohol, takes medication that causes drowsiness, or if the baby was born premature or at a low birth weight.
 
@@ -61,13 +72,19 @@ This is not an endorsement of bedsharing — it's recognition that many families
 
 The AAP's recommendation is clear: a baby should sleep on their back, on a firm, flat surface with no soft objects or loose bedding, in their own sleep space ideally in the parents' room for at least the first 6 months.
 
-A **bedside crib or sidecar cot** — which attaches to or sits directly alongside an adult bed — is widely endorsed as the best of both worlds. It allows parents (particularly breastfeeding mothers) to reach the baby easily overnight without sharing a sleep surface. Research from a 2019 study in *Maternal and Child Nutrition* found that bedside crib use was associated with longer breastfeeding duration, suggesting it addresses one of the main practical reasons families bedshare.
+A **bedside crib or sidecar cot** — which attaches to or sits directly alongside an adult bed — is widely endorsed as the best of both worlds. It allows parents (particularly breastfeeding mothers) to reach the baby easily overnight without sharing a sleep surface. If you're considering this setup as part of a [bassinet-to-crib transition](/blog/bassinet-to-crib-transition-when-and-how-to-move-your-baby), it can be a practical middle ground. Research from a 2019 study in *Maternal and Child Nutrition* found that bedside crib use was associated with longer breastfeeding duration, suggesting it addresses one of the main practical reasons families bedshare.
 
 ## Room-Sharing vs Bed-Sharing
 
 It's worth distinguishing between **room-sharing** (baby in their own sleep space in the parents' room) and **bed-sharing** (baby on the same sleep surface as parents). Room-sharing is actively recommended by both the AAP and NHS for at least the first 6 months; it has been shown to reduce SIDS risk, possibly by making parents more aware of the baby's breathing patterns and making night feeds more accessible.
 
 Bed-sharing is the element associated with elevated risk, particularly when combined with the factors above.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## Having an Honest Conversation with Your GP
 

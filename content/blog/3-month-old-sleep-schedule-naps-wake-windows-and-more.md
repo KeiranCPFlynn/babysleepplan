@@ -8,11 +8,20 @@ image: "https://images.unsplash.com/photo-1758541205910-483f1123ed93?w=1200&h=63
 imageAlt: "Three month old baby sleeping on their back in a safe sleep environment"
 imageCredit: "Marius Muresan"
 imageCreditUrl: "https://unsplash.com/@muresan113"
+faq:
+  - question: "How long should a 3 month old nap?"
+    answer: "Most 3-month-olds take 4–5 naps per day, with individual naps ranging from 30 minutes to 2 hours. Wake windows are typically 60–90 minutes at this age, so naps come fairly quickly after each wake-up."
+  - question: "How many times should a 3 month old wake up at night to feed?"
+    answer: "It's normal for a 3-month-old to wake 1–3 times per night for feeds. Some babies begin stretching to longer stretches at this age, but frequent night waking is still developmentally appropriate and expected."
+  - question: "When will my 3 month old sleep through the night?"
+    answer: "Many babies start achieving longer stretches (5–6 hours) around 3–4 months, but truly 'sleeping through' without any feeds is not developmentally expected until closer to 6 months. Every baby is different, and 1–3 night feeds at 3 months is completely normal."
+  - question: "What is a good wake window for a 3 month old?"
+    answer: "Wake windows at 3 months are typically 60–90 minutes. The first window of the day is often the shortest (around 60–75 minutes), and the last window before bedtime may stretch slightly longer. Watch for sleepy cues like eye rubbing, yawning, or fussiness."
 ---
 
 Three months is a genuinely hopeful age for sleep. The complete chaos of the newborn weeks is behind you, your baby is more alert and social during the day, and for many families, slightly longer stretches of night sleep are starting to emerge. But "slightly longer" and "predictable" are different things — and if you're still riding a wave of short naps and frequent night feeds, you haven't missed anything.
 
-*Quick answer: Most 3-month-olds need 14–17 hours of total sleep per day, spread across 4–5 naps and around 10–12 hours overnight (often broken by 1–3 feeds). Wake windows are typically 60–90 minutes. A consistent routine is more useful than a rigid schedule at this age.*
+> **Quick answer:** Most 3-month-olds need 14–17 hours of total sleep per day, spread across 4–5 naps and around 10–12 hours overnight (often broken by 1–3 feeds). Wake windows are typically 60–90 minutes. A consistent routine is more useful than a rigid schedule at this age.
 
 ## What's Happening With Sleep at 3 Months
 
@@ -24,7 +33,7 @@ Research from the American Academy of Pediatrics suggests that total sleep needs
 
 ## How Long Should Wake Windows Be at 3 Months?
 
-Wake windows — the period of wakefulness your baby can comfortably sustain before sleep pressure builds — are one of the most useful tools at this age. For most 3-month-olds, comfortable wake windows fall between **60 and 90 minutes**.
+Wake windows — the period of wakefulness your baby can comfortably sustain before sleep pressure builds — are one of the most useful tools at this age. (For a full breakdown by age, see our [wake windows guide](/blog/wake-windows-by-age-the-complete-guide).) For most 3-month-olds, comfortable wake windows fall between **60 and 90 minutes**.
 
 The first window of the day (after the morning wake-up) is often the shortest — many babies are ready for their first nap just 60–75 minutes after waking. Wake windows often extend slightly toward the end of the day, with the last window before bed sometimes reaching 90 minutes.
 
@@ -41,17 +50,23 @@ Catching these cues just before they escalate to full upset makes settling much 
 
 Because wake windows vary between babies, the times below are starting points — not a rigid prescription. If your baby wakes at 6 a.m. rather than 7 a.m., shift everything accordingly.
 
-| Time | Activity |
-|---|---|
-| 7:00 a.m. | Morning wake-up and feed |
-| 8:15–9:00 a.m. | Nap 1 (45–60 min) |
-| 10:15–11:15 a.m. | Nap 2 (45–60 min) |
-| 12:30–1:30 p.m. | Nap 3 (45–60 min) |
-| 3:00–3:45 p.m. | Nap 4 (30–45 min) |
-| 5:00–5:30 p.m. | Catnap if needed (20–30 min) — skip if risking a late bedtime |
-| 7:00–7:30 p.m. | Bedtime routine and sleep |
+| Time             | Activity                                                      |
+| ---------------- | ------------------------------------------------------------- |
+| 7:00 a.m.        | Morning wake-up and feed                                      |
+| 8:15–9:00 a.m.   | Nap 1 (45–60 min)                                             |
+| 10:15–11:15 a.m. | Nap 2 (45–60 min)                                             |
+| 12:30–1:30 p.m.  | Nap 3 (45–60 min)                                             |
+| 3:00–3:45 p.m.   | Nap 4 (30–45 min)                                             |
+| 5:00–5:30 p.m.   | Catnap if needed (20–30 min) — skip if risking a late bedtime |
+| 7:00–7:30 p.m.   | Bedtime routine and sleep                                     |
 
 Many 3-month-olds take four naps and a late catnap. By the end of this month or early next month, most naturally consolidate to four naps as wake windows extend. You don't need to force this — it tends to happen on its own.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## How Much Night Sleep Is Normal?
 
@@ -63,7 +78,7 @@ If your baby is waking frequently overnight, the most useful question isn't "why
 
 ## Building a Bedtime Routine at 3 Months
 
-Three months is a great age to start a simple, consistent bedtime routine. It doesn't need to be long — 15–20 minutes is enough. A typical routine might be: dim lights → warm bath → feed → song or story → cot. 
+Three months is a great age to start a simple, consistent [bedtime routine](/blog/perfect-bedtime-routine-by-age). It doesn't need to be long — 15–20 minutes is enough. A typical routine might be: dim lights → warm bath → feed → song or story → cot. 
 
 The power of the routine isn't in any single element — it's in the **predictable sequence**. Babies begin to associate the routine with sleep, which reduces the amount of active settling needed at bedtime over time.
 

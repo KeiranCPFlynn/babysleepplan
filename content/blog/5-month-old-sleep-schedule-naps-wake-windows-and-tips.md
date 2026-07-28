@@ -8,6 +8,15 @@ image: "https://images.unsplash.com/photo-1510632233616-88025944e960?w=1200&h=63
 imageAlt: "A five-month-old baby sleeping peacefully in a cot with soft natural light"
 imageCredit: "Tara Raye"
 imageCreditUrl: "https://unsplash.com/@tararaye"
+faq:
+  - question: "How long should a 5 month old nap?"
+    answer: "Most 5-month-olds take 3 naps per day, with individual naps lasting 30 minutes to 2 hours. Total daytime sleep is typically 3–4 hours. Wake windows are 1.5–2.5 hours, with most babies sitting around 2 hours between sleeps."
+  - question: "How many night feeds does a 5 month old need?"
+    answer: "Many 5-month-olds still need 1–2 night feeds, though some begin sleeping longer stretches at this age. Night waking is developmentally normal, and not all babies are ready to drop night feeds until 6–9 months."
+  - question: "When can a 5 month old go to 2 naps?"
+    answer: "Most babies aren't ready to drop from 3 naps to 2 until around 6–8 months. Pushing the transition too early at 5 months often leads to overtiredness and harder bedtimes. A small number of babies begin consolidating by the end of month 5, but it's the exception."
+  - question: "What is a good schedule for a 5 month old?"
+    answer: "A typical 5-month-old schedule includes 3 naps with wake windows of 1.5–2.5 hours, a bedtime between 7:00–8:00 pm, and roughly 10–11 hours of overnight sleep. Total daily sleep is around 14–15 hours. A consistent routine matters more than exact clock times."
 ---
 
 ## The In-Between Stage Nobody Warns You About
@@ -15,6 +24,8 @@ imageCreditUrl: "https://unsplash.com/@tararaye"
 Five months is one of those ages that falls awkwardly between newborn chaos and the more settled rhythms of 6 months onwards. Your baby is no longer a brand-new newborn — they're alert, social, and full of personality — but they're not yet on the three-nap schedule that many parents find easier to plan around. It's a transitional stage, and that means sleep can feel unpredictable.
 
 If you're struggling to figure out how many naps your 5-month-old needs, when to put them down, or why a stretch of good sleep has suddenly gone sideways, you're not alone. Understanding what's developmentally normal at this age makes it much easier to build a schedule that actually works.
+
+> **Quick answer:** Most 5-month-olds need 14–15 hours of total sleep per day, spread across roughly 10–11 hours at night and 3–4 hours of daytime naps (usually three naps). Wake windows of 1.5–2.5 hours are typical.
 
 ## How Much Sleep Does a 5-Month-Old Need?
 
@@ -24,7 +35,7 @@ That daytime total is usually split across three naps at this age, though a smal
 
 ## Wake Windows at 5 Months
 
-Wake windows — the periods of awake time between sleep stretches — are one of the most reliable tools for timing naps. At 5 months, typical wake windows are **1.5 to 2.5 hours**, though many babies sit around 2 hours for most windows.
+Wake windows — the periods of awake time between sleep stretches — are one of the most reliable tools for timing naps. (See our [wake windows by age guide](/blog/wake-windows-by-age-the-complete-guide) for the full picture.) At 5 months, typical wake windows are **1.5 to 2.5 hours**, though many babies sit around 2 hours for most windows.
 
 The last wake window before bed tends to be the longest — often closer to 2.5 hours — as your baby has built up more sleep pressure by the end of the day. Shorter windows early in the day are normal; don't be surprised if the first nap comes just 1.5 hours after morning wake.
 
@@ -34,16 +45,16 @@ Watch for tired cues alongside the clock: yawning, rubbing eyes, losing interest
 
 Here's a schedule that works well for many 5-month-olds on three naps:
 
-| Time | Activity |
-|------|----------|
-| 7:00 am | Wake |
-| 8:45–9:00 am | Nap 1 starts (~45–60 min) |
-| 9:45–10:00 am | Nap 1 ends |
-| 11:45 am–12:00 pm | Nap 2 starts (1–1.5 hrs) |
-| 1:00–1:30 pm | Nap 2 ends |
-| 3:30–3:45 pm | Nap 3 starts (30–45 min — "catnap") |
-| 4:15–4:30 pm | Nap 3 ends |
-| 7:00–7:15 pm | Bedtime |
+| Time              | Activity                            |
+| ----------------- | ----------------------------------- |
+| 7:00 am           | Wake                                |
+| 8:45–9:00 am      | Nap 1 starts (~45–60 min)           |
+| 9:45–10:00 am     | Nap 1 ends                          |
+| 11:45 am–12:00 pm | Nap 2 starts (1–1.5 hrs)            |
+| 1:00–1:30 pm      | Nap 2 ends                          |
+| 3:30–3:45 pm      | Nap 3 starts (30–45 min — "catnap") |
+| 4:15–4:30 pm      | Nap 3 ends                          |
+| 7:00–7:15 pm      | Bedtime                             |
 
 The third nap is often short by design — a "bridge" nap that prevents overtiredness at bedtime without pushing bedtime too late. If it runs too long (over 45 minutes), it can interfere with the night.
 
@@ -54,6 +65,12 @@ Five months is right on the edge of the infamous **4-month sleep regression** �
 Research published in the journal *Sleep Medicine Reviews* notes that the maturation of sleep architecture around 4 to 5 months is one of the most significant transitions in infant sleep, and can temporarily increase night waking even in babies who were previously sleeping in longer stretches.
 
 This isn't a sign that you've done anything wrong, and it doesn't mean your baby's sleep will always look like this. Most babies move through this phase over two to six weeks — especially with a consistent schedule and bedtime routine.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## Building a Bedtime Routine at 5 Months
 
@@ -67,7 +84,7 @@ A 15 to 20-minute routine at this age might look like: a warm bath (every other 
 
 **Letting nap 3 run too late** is another common issue. If the third nap ends after 5:00 or 5:30 pm, bedtime will need to shift later — and a later bedtime often means worse overnight sleep for babies this age, not better. Aim to have nap 3 finished by 4:30 pm to allow a comfortable evening wind-down.
 
-**Assuming short naps are permanent** is worth gently challenging too. At 5 months, many babies are still taking short naps (30 to 45 minutes) simply because that's one sleep cycle. Motion can help consolidate naps at this age, as can working on independent settling — but there's a wide range of normal, and not every baby is ready to self-settle at 5 months.
+**Assuming short naps are permanent** is worth gently challenging too. At 5 months, many babies are still taking [short naps](/blog/baby-short-naps-30-minutes-why-and-how-to-fix-them) (30 to 45 minutes) simply because that's one sleep cycle. Motion can help consolidate naps at this age, as can working on independent settling — but there's a wide range of normal, and not every baby is ready to self-settle at 5 months.
 
 ## When to Talk to Your Paediatrician
 

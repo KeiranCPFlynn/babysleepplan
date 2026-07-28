@@ -8,11 +8,33 @@ image: "https://images.unsplash.com/photo-1588997788996-82d93002250a?w=1200&h=63
 imageAlt: "Toddler sleeping peacefully in a cot during afternoon nap"
 imageCredit: "Helena Lopes"
 imageCreditUrl: "https://unsplash.com/@helenalopesph"
+faq:
+  - question: "When should my baby drop from 3 naps to 2?"
+    answer: "Most babies transition from 3 naps to 2 around 6–8 months. Signs include consistently refusing the third nap, the third nap pushing bedtime past 8 p.m., or your baby being able to handle wake windows of 2.5–3 hours without becoming overtired."
+  - question: "When do babies drop to one nap?"
+    answer: "Most babies transition from 2 naps to 1 between 14 and 18 months. Signs include consistently fighting the morning nap, taking a very long time to fall asleep for the second nap, or the afternoon nap pushing bedtime too late."
+  - question: "How do I know if my baby is ready to drop a nap?"
+    answer: "Look for consistent signs over 1–2 weeks: refusing a nap, taking 20+ minutes to fall asleep at nap time, or the last nap causing bedtime resistance. Don't rush the transition — dropping a nap too early leads to overtiredness and worse sleep overall."
+  - question: "What age do toddlers stop napping?"
+    answer: "Most children drop their final nap between 2.5 and 4 years of age. Signs include consistently refusing the nap, being able to stay happy and engaged through the entire afternoon, and not showing overtiredness signs in the late afternoon."
+howTo:
+  name: "How to Transition Your Baby's Naps"
+  steps:
+    - name: "Identify readiness signs over 1–2 weeks"
+      text: "Look for consistent patterns such as refusing a nap, taking 20+ minutes to fall asleep at nap time, or the last nap pushing bedtime past 8 p.m. Don't rush the transition — dropping a nap too early leads to overtiredness and worse sleep."
+    - name: "Extend wake windows gradually"
+      text: "Stretch the time between sleeps by 10–15 minutes every few days. For example, if your baby currently handles 2-hour wake windows, try pushing to 2 hours 15 minutes before the next nap."
+    - name: "Shift nap timing to the new schedule"
+      text: "Move naps later in small increments until you reach the target schedule. For a 3-to-2 transition, aim for a morning nap around 9–10 a.m. and an afternoon nap no later than 1:30–2 p.m."
+    - name: "Bring bedtime earlier during the adjustment"
+      text: "An earlier bedtime (around 6:30–7 p.m.) protects against overtiredness while the new nap rhythm settles in. Expect 2–3 weeks of unsettled napping before the new schedule feels natural."
+    - name: "Stay consistent and monitor for a few weeks"
+      text: "Keep the new schedule firm for at least 2–3 weeks before deciding it isn't working. If your baby shows persistent overtiredness signs, consider reverting to the previous schedule and trying again in a few weeks."
 ---
 
 Every few months, just when your nap schedule feels like it's finally working, your baby or toddler decides they're done with one of the naps. They resist, they take forever to settle, or they drop off just as you're driving home and then won't sleep at bedtime. Nap transitions are one of the most disruptive parts of the first three years — and also one of the most confusing, because the timing looks different for every child.
 
-*Quick answer: Most babies transition from 4 naps to 3 around 3–4 months, from 3 to 2 around 6–8 months, from 2 to 1 around 14–18 months, and drop the final nap entirely between 2.5 and 4 years. Signs of readiness include consistently refusing a nap, taking longer to fall asleep, or experiencing bedtime difficulty due to the last nap.*
+> **Quick answer:** Most babies transition from 4 naps to 3 around 3–4 months, from 3 to 2 around 6–8 months, from 2 to 1 around 14–18 months, and drop the final nap entirely between 2.5 and 4 years. Signs of readiness include consistently refusing a nap, taking longer to fall asleep, or experiencing bedtime difficulty due to the last nap.
 
 ## Why Nap Transitions Happen
 
@@ -40,7 +62,13 @@ This is one of the bigger transitions, partly because it often coincides with th
 - Two long naps are possible (1 hour or more each)
 - Bedtime is repeatedly disrupted by a late catnap
 
-When dropping to two naps, aim for a morning nap around 9–10 a.m. and an afternoon nap starting no later than 1:30–2 p.m. A bedtime between 6:30 and 7:30 p.m. protects against overtiredness during the adjustment period. Expect two to three weeks of unsettled napping while the new rhythm settles in.
+When dropping to two naps, aim for a morning nap around 9–10 a.m. and an afternoon nap starting no later than 1:30–2 p.m. A bedtime between 6:30 and 7:30 p.m. protects against overtiredness during the adjustment period. Expect two to three weeks of unsettled napping while the new rhythm settles in. For a detailed day-by-day look at what this age looks like, see our [7-month-old sleep schedule](/blog/7-month-old-sleep-schedule-naps-bedtime-and-developmental-changes) guide.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## The 2-to-1 Nap Transition (Around 14–18 Months)
 
@@ -56,7 +84,7 @@ This transition is often the hardest one to call. Many parents attempt it too ea
 - They're a disaster by 3 or 4 p.m. on no-nap days
 - Night sleep worsens dramatically
 
-When making the transition, shift the single nap gradually — start with 11:30 a.m., then 12 p.m., then 12:30 p.m. over a few weeks. Bedtime should be earlier during this adjustment, often as early as 6 p.m. while the new schedule beds in.
+When making the transition, shift the single nap gradually — start with 11:30 a.m., then 12 p.m., then 12:30 p.m. over a few weeks. Bedtime should be earlier during this adjustment, often as early as 6 p.m. while the new schedule beds in. Our [18-month-old sleep schedule](/blog/18-month-old-sleep-schedule-naps-bedtime-and-toddler-tips) guide has more detail on what a typical day looks like at this age.
 
 ### The "Bridge" Nap
 
@@ -74,7 +102,7 @@ During this phase, bedtime may need to move earlier (6–6:30 p.m.) to compensat
 
 **Moving too fast.** Dropping a nap before readiness shows is one of the leading causes of overtiredness in babies and toddlers. If in doubt, hold on a bit longer — an extra week or two rarely sets anyone back.
 
-**Not adjusting bedtime.** A dropped nap means more tiredness at the end of the day, which means an earlier bedtime, at least temporarily. Skipping this adjustment is the number one reason parents struggle with night waking after a nap transition.
+**Not adjusting bedtime.** A dropped nap means more tiredness at the end of the day, which means an earlier bedtime, at least temporarily. Skipping this adjustment is the number one reason parents struggle with night waking after a nap transition — and it's a common trigger for [overtiredness](/blog/overtired-baby-signs-and-what-to-do) in toddlers.
 
 **Expecting the new schedule to click immediately.** Any nap transition takes around two to three weeks to stabilise. The first week often looks worse before it looks better.
 

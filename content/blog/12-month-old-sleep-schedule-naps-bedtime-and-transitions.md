@@ -8,6 +8,15 @@ image: "https://images.unsplash.com/photo-1604807788279-ea778c075cee?w=1200&h=63
 imageAlt: "A one-year-old baby sleeping peacefully in a crib with soft natural light"
 imageCredit: "Gabriel Tovar"
 imageCreditUrl: "https://unsplash.com/@gabrielrana"
+faq:
+  - question: "How many naps should a 12 month old have?"
+    answer: "Most 12-month-olds still take 2 naps per day, though some are beginning to transition to one. The transition from two naps to one typically happens between 12 and 18 months, with most babies making the switch around 14–15 months."
+  - question: "How much sleep does a 12 month old need?"
+    answer: "A 12-month-old typically needs 13–14 hours of total sleep per day, split between 10–12 hours overnight and one or two daytime naps. The AAP recommends 12–16 hours total for babies aged 4–12 months."
+  - question: "When should a 12 month old go to bed?"
+    answer: "A bedtime between 7:00–7:30 pm is typical for most 12-month-olds, with wake-up around 6:00–7:00 am. On a two-nap schedule, aim for wake windows of 3–3.5 hours between sleeps."
+  - question: "How do I know if my 12 month old is ready for one nap?"
+    answer: "Signs include consistently fighting the morning nap for 2+ weeks, taking very short naps, or having difficulty falling asleep at bedtime. However, most babies aren't truly ready until 14–15 months, so try adjusting nap timing before dropping a nap entirely."
 ---
 
 ## Is Your One-Year-Old's Sleep a Mystery Right Now?
@@ -15,6 +24,8 @@ imageCreditUrl: "https://unsplash.com/@gabrielrana"
 If you've reached the twelve-month mark and your baby's sleep feels like it's falling apart — or you're just not sure what "normal" looks like anymore — you're in very good company. The first birthday brings a lot of changes all at once: increased mobility, a surge in language development, and for many families, a shift in daytime sleep that can throw everything off.
 
 Sleep at twelve months sits in a transitional zone. Your baby may still be taking two naps, or they may be ready to drop to one. Some days they'll fall asleep beautifully; others, they'll stand up in the cot and protest as if sleep is the worst idea you've ever had. Understanding what's developmentally normal at this stage makes navigating it a lot easier.
+
+> **Quick answer:** Most 12-month-olds need around 13–14 hours of total sleep per day, split between 10–12 hours at night and one or two daytime naps. Wake windows are typically 3–3.5 hours on a two-nap schedule, and the transition to one nap usually happens between 12 and 18 months.
 
 ## How Much Sleep Does a 12-Month-Old Need?
 
@@ -24,7 +35,7 @@ Nighttime sleep typically runs 10 to 12 hours, with many babies this age going d
 
 ## One Nap or Two? The Big Question at 12 Months
 
-This is where things get genuinely confusing, because twelve months is right at the edge of the nap transition zone. Research from Dr. Jodi Mindell and colleagues published in *Sleep Medicine Reviews* found that the transition from two naps to one typically happens somewhere between 12 and 18 months, with most babies making the switch around 14 to 15 months.
+This is where things get genuinely confusing, because twelve months is right at the edge of the nap transition zone. Research from Dr. Jodi Mindell and colleagues published in *Sleep Medicine Reviews* found that the [transition from two naps to one](/blog/nap-transition-guide-when-to-drop-a-nap) typically happens somewhere between 12 and 18 months, with most babies making the switch around 14 to 15 months.
 
 If your baby is at 12 months, there's a good chance they still need two naps — especially if they're waking up after 6:00 am and have solid wake windows. Rushing the transition too early can lead to overtiredness, which often shows up as more night waking, not less.
 
@@ -37,31 +48,37 @@ If your baby is showing one or two of these signs occasionally, it's likely not 
 
 ### Sample Schedule: Two Naps (Still on Two)
 
-| Time | Activity |
-|------|----------|
-| 6:30 am | Wake |
-| 9:00–10:00 am | First nap (1 hour) |
-| 1:30–3:00 pm | Second nap (1–1.5 hours) |
-| 7:00 pm | Bedtime |
+| Time          | Activity                 |
+| ------------- | ------------------------ |
+| 6:30 am       | Wake                     |
+| 9:00–10:00 am | First nap (1 hour)       |
+| 1:30–3:00 pm  | Second nap (1–1.5 hours) |
+| 7:00 pm       | Bedtime                  |
 
 ### Sample Schedule: Transitioning to One Nap
 
-| Time | Activity |
-|------|----------|
-| 6:30 am | Wake |
-| 12:00–2:00 pm | Single midday nap (1.5–2 hours) |
-| 6:30–7:00 pm | Bedtime (earlier than usual during transition) |
+| Time          | Activity                                       |
+| ------------- | ---------------------------------------------- |
+| 6:30 am       | Wake                                           |
+| 12:00–2:00 pm | Single midday nap (1.5–2 hours)                |
+| 6:30–7:00 pm  | Bedtime (earlier than usual during transition) |
 
 During the transition weeks, bedtime will often need to be earlier — sometimes as early as 6:00 pm — to prevent overtiredness. This is normal and temporary.
 
 ## Wake Windows at 12 Months
 
-Wake windows are the stretches of awake time your baby can comfortably handle between sleep periods. At twelve months, most babies manage:
+[Wake windows](/blog/wake-windows-by-age-the-complete-guide) are the stretches of awake time your baby can comfortably handle between sleep periods. At twelve months, most babies manage:
 
 - **Two-nap schedule:** Around 3 to 3.5 hours between sleep periods
 - **One-nap schedule:** Around 4 to 5 hours in the morning, up to 5 to 6 hours before bedtime
 
 These windows are a guide, not a rule. Watch your baby's tired cues — rubbing eyes, losing interest in play, getting clingy — and factor those in alongside the clock.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## What to Do When Sleep Goes Off the Rails
 

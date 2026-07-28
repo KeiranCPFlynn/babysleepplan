@@ -8,7 +8,18 @@ image: "https://images.unsplash.com/photo-1647792855184-af42f1720b91?w=1200&h=63
 imageAlt: "A baby sleeping peacefully in a travel cot in a hotel room with dim lighting"
 imageCredit: "aiden patrissi"
 imageCreditUrl: "https://unsplash.com/@apatrissi"
+faq:
+  - question: "How do I help my baby sleep in a hotel or unfamiliar place?"
+    answer: "Recreate familiar sleep cues: bring portable blackout blinds, a white noise machine, your usual sleep sack, and a comforter from home. Research shows olfactory cues (familiar smells) are among the strongest sleep signals for babies. Set up the sleep space before your baby arrives so it feels settled."
+  - question: "How long does it take a baby to adjust to a new time zone?"
+    answer: "Expect 2–5 days for full adjustment. Shift sleep times by 15–30 minutes per day toward the new time zone, and use light exposure to help reset the circadian rhythm — bright light in the morning if you need to advance, evening light if you need to delay. Don't expect perfect sleep on day one."
+  - question: "Is it safe for a baby to sleep in a hotel crib?"
+    answer: "Hotel cribs and Airbnb pack-n-plays vary in quality. The AAP safe sleep guidelines apply everywhere — always use a firm, flat surface with no loose bedding. If you're unsure about the provided cot, bring your own travel cot. Never let a baby sleep on an adult bed, sofa, or in a car seat for extended periods."
+  - question: "What should I pack for baby sleep when traveling?"
+    answer: "Pack a portable blackout blind, white noise machine or app, a familiar sleep sack, a comforter or lovey from home, a travel mattress if unsure about surface quality, and any bedtime routine items like a favorite book. These items recreate the sensory cues that signal sleep to your baby."
 ---
+
+> **Quick answer:** Travel almost always disrupts baby sleep somewhat. Bring portable blackout blinds, a white noise machine, and your usual bedtime routine items to recreate familiar sleep cues. For time zone changes, shift sleep times by 15–30 minutes per day using light exposure, and expect 2–5 days to fully readjust once home.
 
 ## Travel and Baby Sleep: Managing Expectations First
 
@@ -20,7 +31,7 @@ The honest truth is that travel almost always disrupts baby sleep to some degree
 
 Young babies and toddlers are powerfully influenced by environmental cues for sleep. The familiar smell, darkness, and sound of their usual sleep space is part of what signals "sleep time" to their nervous system. Away from home, those cues are missing — which is why even well-settled babies sometimes struggle to resettle in a new environment.
 
-The most effective fix is to bring as many of the familiar cues as possible. **A portable blackout blind** (the suction-cup type that attaches directly to windows) is one of the most consistently useful travel sleep items parents report — it blocks unfamiliar light patterns that can cause early waking. **A white noise machine or app** recreates an audio environment your baby associates with sleep. **A familiar sleep sack** and the **same comforter or toy** from the home sleep space all carry the scent and associations of sleep.
+The most effective fix is to bring as many of the familiar cues as possible. **A portable blackout blind** (the suction-cup type that attaches directly to windows) is one of the most consistently useful travel sleep items parents report — it blocks unfamiliar light patterns that can cause early waking. **A [white noise](/blog/white-noise-baby-sleep-benefits-and-risks) machine or app** recreates an audio environment your baby associates with sleep. **A familiar sleep sack** and the **same comforter or toy** from the home sleep space all carry the scent and associations of sleep.
 
 Research in infant sleep consistently shows that **olfactory cues** (smell) are among the strongest sleep signals for young babies — a lightly used sleep sack or muslin from home can be genuinely settling in an unfamiliar environment.
 
@@ -37,15 +48,21 @@ Hotel cribs and Airbnb pack-n-plays vary widely in quality and safety. If you're
 
 ## Keeping the Bedtime Routine Intact
 
-Your bedtime routine is one of the most powerful tools you have when travelling, because it works by signalling to your baby's nervous system that sleep is coming — regardless of the surroundings. Research by Dr. Jodi Mindell found that consistent bedtime routines improve sleep onset time and reduce night waking even in unfamiliar environments.
+Your [bedtime routine](/blog/perfect-bedtime-routine-by-age) is one of the most powerful tools you have when travelling, because it works by signalling to your baby's nervous system that sleep is coming — regardless of the surroundings. Research by Dr. Jodi Mindell found that consistent bedtime routines improve sleep onset time and reduce night waking even in unfamiliar environments.
 
 Bring whatever you need to run your usual routine: the same bath products, the same books, the same pyjamas. Even a shortened version of the routine — 10 to 15 minutes of the usual activities in the usual order — is significantly better than abandoning it. The sameness of the routine in an unfamiliar environment is explicitly reassuring to your baby.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## Handling Time Zone Differences
 
 For short trips (one to two time zone hours difference), many families find it easiest to simply keep home time for the duration. This is especially workable for short stays of two to four days where adapting fully wouldn't be worth the disruption.
 
-For longer trips or larger time zone differences, a gradual approach similar to the daylight saving adjustment works well: shift sleep and feed times by 15 to 30 minutes every day or two, using light exposure to support the reset. On arrival in the new time zone, maximise bright morning light (which advances sleep timing) and dim evening light aggressively.
+For longer trips or larger time zone differences, a gradual approach similar to the [daylight saving adjustment](/blog/daylight-saving-time-and-baby-sleep-how-to-adjust) works well: shift sleep and feed times by 15 to 30 minutes every day or two, using light exposure to support the reset. On arrival in the new time zone, maximise bright morning light (which advances sleep timing) and dim evening light aggressively.
 
 Jet lag in babies is real. A 2019 study in *Sleep Medicine* noted that infants exposed to long-haul eastward travel — where the body clock is pushed forward — typically take longer to adapt than those travelling westward. Giving yourself two to three adjustment days before anything scheduled is a significant help.
 

@@ -8,6 +8,26 @@ image: "https://images.unsplash.com/photo-1457408994065-3c1586bd86d0?w=1200&h=63
 imageAlt: "Parent gently feeding a sleeping baby during a dream feed at night"
 imageCredit: "Laura Lee Moreau"
 imageCreditUrl: "https://unsplash.com/@laura_lee"
+faq:
+  - question: "What time should I do a dream feed?"
+    answer: "Most parents offer a dream feed between 10:00 and 11:30 p.m., right before they go to bed themselves. The goal is to time it so your baby's longest sleep stretch aligns with your own bedtime, typically giving you a 5–6 hour stretch of sleep."
+  - question: "When should I stop the dream feed?"
+    answer: "Most babies no longer need a dream feed between 6 and 9 months, once they're eating solid foods well during the day and consistently sleeping 6+ hours after the feed. If the dream feed starts disrupting night sleep rather than helping, it's time to drop it."
+  - question: "Does a dream feed wake the baby?"
+    answer: "A dream feed should not fully wake your baby. Gently offer the breast or bottle while they're still mostly asleep — most babies will latch and feed in a drowsy state and then drift right back to sleep without fully waking."
+howTo:
+  name: "How to Do a Dream Feed"
+  steps:
+    - name: "Time the dream feed for 10–11 pm"
+      text: "Offer the dream feed between 10:00 and 11:30 pm, right before you go to bed yourself. The goal is to top off your baby's tank so their longest sleep stretch aligns with your bedtime, giving you a 5–6 hour stretch."
+    - name: "Keep the lights low"
+      text: "Do not turn on overhead lights. Use a dim red or warm nightlight if you need visibility. Keeping the room dark helps your baby's brain stay in nighttime mode so they don't fully wake."
+    - name: "Gently lift and offer the feed"
+      text: "Pick your baby up slowly from the cot. Lightly touch the bottle or nipple to their lower lip or cheek to stimulate the rooting reflex. Most babies will latch and feed while still drowsy without opening their eyes."
+    - name: "Feed in a slightly upright position"
+      text: "Hold your baby at a gentle incline in the crook of your arm to help with milk flow and reduce the chance of spit-up. The entire feeding usually takes 10–15 minutes."
+    - name: "Burp gently and put baby back down"
+      text: "Give a brief burp — a quick pat on the back is usually enough — then lay your baby back in the cot while they are still asleep or drowsy. Avoid stimulating them with talking or bright lights."
 ---
 
 ## What Is a Dream Feed?
@@ -18,13 +38,15 @@ A dream feed is a feeding you offer your baby while they're still asleep, usuall
 
 It sounds almost too simple, and it won't work for every baby. But for the families where it clicks, a dream feed can be genuinely transformative. Let's look at what the research says and how to do it well.
 
+> **Quick answer:** A dream feed is a feed offered while your baby is still asleep, usually between 10:00–11:30 p.m., designed to extend their longest sleep stretch to align with yours. It works best between 6 weeks and 6 months, and if it hasn't helped after 5–7 consistent nights, it's probably not the right tool for your baby.
+
 ## The Science Behind Dream Feeding
 
 The logic of the dream feed rests on two well-established principles in infant sleep science. First, young babies wake at night primarily because of hunger. Their stomachs are small and breast milk digests quickly, so caloric need is one of the biggest drivers of night waking in the first six months. Second, babies have a natural long stretch of deeper sleep in the first part of the night, often their best 4-to-6-hour block.
 
 Research published in *Pediatrics* and referenced by the AAP confirms that by around 3 to 4 months, most babies are capable of a longer consolidated sleep stretch, but that stretch often starts at bedtime, meaning it ends at midnight or 1 a.m. while you're only an hour or two into your own sleep. The **dream feed** shifts the starting point of that long stretch to later in the night.
 
-A study in the *Journal of Developmental & Behavioral Pediatrics* found that "focal feeds," where parents proactively offered a late-evening feed, were associated with longer overnight sleep stretches in infants under six months. The effect was most pronounced in babies between 6 and 16 weeks, but many families continue to find it helpful through 6 to 9 months.
+A study in the *Journal of Developmental & Behavioral Pediatrics* found that "focal feeds," where parents proactively offered a late-evening feed, were associated with longer overnight sleep stretches in infants under six months. The effect was most pronounced in babies between 6 and 16 weeks, but many families continue to find it helpful through 6 to 9 months. If you're wondering how this fits into the bigger picture of [when babies sleep through the night](/blog/when-do-babies-sleep-through-the-night), the dream feed is one of several tools that can help extend that first stretch.
 
 ## How to Give a Dream Feed: Step by Step
 
@@ -46,7 +68,7 @@ The entire process usually takes 10 to 15 minutes. If your baby doesn't latch or
 
 ### Starting a Dream Feed
 
-Most families introduce the **dream feed** between 6 and 12 weeks, once feeding is well established and the baby has started showing a slightly longer first stretch of sleep at night. Starting earlier than 4 to 6 weeks can be tricky because newborns often feed so frequently that the dream feed blends into regular night feeds.
+Most families introduce the **dream feed** between 6 and 12 weeks, once feeding is well established and the baby has started showing a slightly longer first stretch of sleep at night. Starting earlier than 4 to 6 weeks can be tricky because newborns often feed so frequently that the dream feed blends into regular night feeds. If you're dealing with intense evening feeding in the early weeks, our [cluster feeding guide](/blog/cluster-feeding-and-sleep-what-parents-need-to-know) explains what's happening and how to cope.
 
 ### When to Stop
 
@@ -59,7 +81,13 @@ Signs it might be time to stop:
 - Your baby has started waking more after the dream feed, not less
 - Your baby is over 6 months and eating solids well during the day
 
-To drop the dream feed, most experts recommend a gradual approach. Move the feed 15 minutes earlier every two to three nights until it's close enough to bedtime to eliminate entirely. This gentler method gives your baby's system time to adjust.
+To drop the dream feed, most experts recommend a gradual approach. Move the feed 15 minutes earlier every two to three nights until it's close enough to bedtime to eliminate entirely. This gentler method gives your baby's system time to adjust. For more on reducing overnight feeds in general, see our [night-weaning guide](/blog/night-weaning-when-and-how-to-drop-night-feeds).
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## Does a Dream Feed Actually Work?
 

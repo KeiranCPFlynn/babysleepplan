@@ -1,6 +1,6 @@
 ---
-title: "Baby Won't Sleep in Cot? Gentle, Evidence-Based Solutions"
-description: "If your baby won't sleep in the cot, you're not alone. Learn evidence-based, gentle techniques to help your little one feel secure and sleep soundly, with tips you can try tonight."
+title: "Baby Only Sleeps in My Arms — Won't Sleep in Cot (Fix It Tonight)"
+description: "Baby only sleeps in arms but wakes the moment you put them in the cot? Learn why this happens and 5 gentle, evidence-based solutions to try tonight."
 date: "2026-02-11"
 author: "LunaCradle Team"
 tags: ["infant sleep", "sleep environment", "sleep associations"]
@@ -8,11 +8,22 @@ image: "https://images.unsplash.com/photo-1770059706518-ece8f7264055?w=1200&h=63
 imageAlt: "Baby sleeping safely on their back in a cot with a fitted sheet"
 imageCredit: "Ana Curcan"
 imageCreditUrl: "https://unsplash.com/@annaacurcan"
+faq:
+  - question: "Why won't my baby sleep in the cot but will sleep in my arms?"
+    answer: "Your arms provide warmth, movement, and closeness that the cot can't replicate. When a baby falls asleep in your arms and is then placed in a different environment, they notice the change at the first sleep cycle transition and wake. This is a sensory transition problem, not stubbornness."
+  - question: "How do I get my baby to sleep in the cot without being held?"
+    answer: "Build a predictable sleep environment with darkness, white noise, and a consistent sleep sack. Start putting your baby in the cot drowsy but awake for at least one nap per day, and use gradual in-cot reassurance (gentle patting, shushing) rather than picking them up immediately."
+  - question: "How long does it take for a baby to get used to sleeping in a cot?"
+    answer: "Most babies show improvement within one to two weeks of consistent practice. The first few days may involve more protest as your baby adjusts to the new setup. Keep the approach steady and resist switching back to arms or contact sleeping, which resets the progress."
+  - question: "Is it okay to let a baby cry in the cot?"
+    answer: "Brief fussing is normal as babies learn a new skill. You can offer reassurance by patting, shushing, or sitting beside the cot without immediately picking them up. If crying escalates, it's fine to pick them up, comfort them, and try again — the goal is gradual progress, not leaving your baby distressed."
 ---
 
 If your **baby won't sleep in cot** and wakes the second you put them down, you are not failing. This is one of the most common sleep struggles in the first year. Most babies are not resisting the cot because they are stubborn. They are reacting to change: different texture, different temperature, and less physical closeness than your arms.
 
 The encouraging part is that cot confidence is a skill most babies can learn with steady, responsive support.
+
+> **Quick answer:** Most babies refuse the cot because of a sensory change (different surface, temperature, and closeness) combined with a feed-to-sleep or rock-to-sleep association — not because anything is wrong with them. A predictable sleep environment, a short repeatable bedtime routine, and gradual in-cot reassurance usually bring improvement within one to two weeks.
 
 ## Why a Baby Won't Sleep in Cot Even When Tired
 
@@ -22,13 +33,13 @@ Developmental windows can amplify this pattern. Around major milestones, babies 
 
 ## Build a Sleep Space That Feels Predictable
 
-Before changing settling techniques, stabilize the environment. Keep the cot setup simple and safe: firm mattress, fitted sheet, clear sleep space, and back sleeping position. A dark room and steady white noise often reduce startle wakeups and environmental distraction.
+Before changing settling techniques, stabilize the environment. Keep the cot setup simple and safe: firm mattress, fitted sheet, clear sleep space, and back sleeping position. A dark room and steady white noise often reduce startle wakeups and environmental distraction — see our [baby sleep environment guide](/blog/baby-sleep-environment-complete-guide) for a full checklist.
 
 Comfort also matters. A consistent sleep sack and stable room temperature can make the transition from arms to cot feel less abrupt. You are trying to create a setting that feels familiar every night.
 
 ## Gentle Techniques That Usually Work Better Than "Starting Over"
 
-Parents often see better progress with small repeatable steps than with dramatic changes. Start by placing baby in the cot drowsy but still aware for a short interval, then offer in-cot reassurance with voice, touch, or brief pauses. If your baby escalates, comfort and reset, then try again.
+Parents often see better progress with small repeatable steps than with dramatic changes. Start by placing baby in the cot [drowsy but still aware](/blog/drowsy-but-awake-does-it-work-and-how-to-do-it) for a short interval, then offer in-cot reassurance with voice, touch, or brief pauses. If your baby escalates, comfort and reset, then try again.
 
 Another helpful strategy is gradual withdrawal: stay close at first, then reduce active help over several nights. This allows your baby to practice settling while still feeling supported.
 
@@ -38,7 +49,13 @@ The key is consistency. A baby who gets one response on Monday, a different one 
 
 A calm 15-25 minute wind-down is usually enough. You do not need a complicated sequence. You need a familiar one your family can repeat on hard days.
 
-A practical routine is: quiet feed, diaper and pajamas, brief song or story, then cot. Same order, same cues, same tone.
+A practical routine is: quiet feed, diaper and pajamas, brief song or story, then cot. Same order, same cues, same tone. If you need age-specific ideas, our [bedtime routine by age guide](/blog/perfect-bedtime-routine-by-age) has step-by-step examples.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## What Helps More Than Parents Expect
 

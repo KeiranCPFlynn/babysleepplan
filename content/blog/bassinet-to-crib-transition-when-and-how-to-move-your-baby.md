@@ -8,6 +8,15 @@ image: "https://images.unsplash.com/photo-1458731909820-5850bdcaee0b?w=1200&h=63
 imageAlt: "A newborn baby sleeping in a white wooden crib with soft bedding"
 imageCredit: "freestocks"
 imageCreditUrl: "https://unsplash.com/@freestocks"
+faq:
+  - question: "When should I move my baby from bassinet to crib?"
+    answer: "Most babies are ready between 3 and 6 months. Move them when they approach the bassinet's weight limit (typically 9–11 kg), show signs of rolling, or visibly outgrow the space. Safety is the primary driver — the AAP recommends a larger sleep space once rolling begins."
+  - question: "How do I transition my baby from bassinet to crib?"
+    answer: "Start by introducing the crib during daytime naps first, when the change feels less overwhelming. Keep everything else in the sleep routine the same — same sleep sack, same white noise, same bedtime routine. Most babies adjust within a week when the transition is gradual."
+  - question: "Will my baby sleep worse after moving to a crib?"
+    answer: "Expect a few adjustment nights, but most babies adapt more smoothly than parents expect. The crib is larger and may feel different, but keeping the rest of the sleep environment consistent (darkness, white noise, sleep sack) helps your baby recognise that sleep cues haven't changed."
+  - question: "Can I move my baby to a crib at 3 months?"
+    answer: "Yes, 3 months is within the normal range for transitioning to a crib, especially if your baby is approaching the bassinet weight limit or showing early signs of rolling. Check your specific bassinet's weight and developmental limits in the manual."
 ---
 
 ## Why the Bassinet-to-Crib Move Feels Like Such a Big Deal
@@ -16,13 +25,15 @@ For the first weeks or months of your baby's life, the bassinet has been the cen
 
 The good news is that most babies transition to a crib more smoothly than their parents expect, especially when the move is timed well and handled with a little preparation. The tricky part is knowing when the right time is.
 
+> **Quick answer:** Most babies are ready to move from bassinet to crib between 3 and 6 months — the key signals are approaching the bassinet's weight limit, showing signs of rolling, or visibly outgrowing the space. Introduce the crib during daytime naps first, keep everything else in the sleep routine the same, and most babies adjust within a week.
+
 ## When to Move from Bassinet to Crib: The Signs
 
 There's no single age that applies to all babies — the right time depends on your specific child, your bassinet model, and your family's circumstances. That said, most babies make the move somewhere between 3 and 6 months.
 
 The clearest signal is safety-related. **Move to a crib when your baby is close to, or has reached, the weight limit for your bassinet** — typically 9 to 11 kg, though this varies by model. Check your specific bassinet's manual. Most parents are surprised by how quickly their baby approaches this limit.
 
-**Rolling ability** is another key indicator. The AAP recommends moving your baby to a larger sleep space when they begin showing signs of rolling, as the sides of a bassinet reduce the free space available if they roll to a position they can't get out of.
+**Rolling ability** is another key indicator. The AAP recommends moving your baby to a larger sleep space when they begin showing signs of rolling, as the sides of a bassinet reduce the free space available if they roll to a position they can't get out of. For a full refresher on what a safe sleep space looks like, see our [safe sleep guide](/blog/safe-sleep-for-babies-reducing-the-risk-of-sids).
 
 **Outgrowing the space** is often obvious before the weight limit. If your baby is stretching into the sides, waking themselves by knocking the edges, or simply looking uncomfortable, the crib is the right next step.
 
@@ -44,7 +55,7 @@ The crib move should be the only change at transition time, not one of several s
 
 ### Use a snug sleep sack rather than loose bedding
 
-The AAP's safe sleep guidelines are clear: the crib sleep surface should be firm and flat, with no pillows, loose blankets, bumpers, or positioners. A well-fitted sleep sack provides warmth without any loose fabric. This is the same guidance as for bassinet sleep — nothing about the safe sleep rules changes when you move to a crib.
+The AAP's safe sleep guidelines are clear: the crib sleep surface should be firm and flat, with no pillows, loose blankets, bumpers, or positioners. A well-fitted sleep sack provides warmth without any loose fabric. This is the same guidance as for bassinet sleep — nothing about the safe sleep rules changes when you move to a crib. Our [baby sleep sack guide](/blog/baby-sleep-sack-or-baby-sleeping-bag-a-safe-guide) can help you choose the right one.
 
 ### Be consistent with settling
 
@@ -54,7 +65,13 @@ Some babies who were sleeping reasonably well in the bassinet have a rough few n
 
 The AAP recommends room-sharing — placing the crib in your room rather than moving it to a separate nursery — for at least the first six months, and ideally for the full first year, as it's associated with a reduced risk of SIDS. This means for many families, the bassinet-to-crib move initially keeps the baby in the parents' room; the second move to the nursery comes later.
 
-Both moves — bassinet to crib in the same room, then crib to a separate nursery — often go more smoothly than parents expect. If your baby has already adjusted to the crib, the room change is usually a small additional step rather than starting from scratch.
+Both moves — bassinet to crib in the same room, then crib to a separate nursery — often go more smoothly than parents expect. If your baby has already adjusted to the crib, the room change is usually a small additional step rather than starting from scratch. For tips on that second move, read our guide on [moving baby to their own room](/blog/moving-baby-to-own-room-when-and-how-to-do-it).
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## Common Questions
 

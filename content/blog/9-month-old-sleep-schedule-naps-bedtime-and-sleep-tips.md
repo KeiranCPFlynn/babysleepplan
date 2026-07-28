@@ -8,11 +8,20 @@ image: "https://images.unsplash.com/photo-1588829237693-232d27723dd4?w=1200&h=63
 imageAlt: "Nine month old baby sleeping in a cot with soft natural light"
 imageCredit: "Helena Lopes"
 imageCreditUrl: "https://unsplash.com/@helenalopesph"
+faq:
+  - question: "How many naps should a 9 month old have?"
+    answer: "Most 9-month-olds take 2 naps per day, with total daytime sleep of 2–3 hours. Wake windows are typically 2.5–3.5 hours. A small number of babies may still be on 3 naps, but most have consolidated to 2 by this age."
+  - question: "Is separation anxiety affecting my 9 month old's sleep?"
+    answer: "Object permanence develops strongly around 8–10 months, and many babies who previously slept well suddenly protest at bedtime. This is a healthy developmental milestone — your baby now understands that your leaving is a real event. A consistent routine with brief, calm reassurance helps."
+  - question: "What are wake windows for a 9 month old?"
+    answer: "Wake windows at 9 months are typically 2.5–3.5 hours. Some babies comfortably handle 3.5 hours, while others do better at 2.5–3 hours. The best indicator is how your baby settles at nap time — if they're fighting it, the window may be too long."
+  - question: "Is it normal for a 9 month old to still wake at night?"
+    answer: "Yes. One or even two night wakings at 9 months is completely normal, especially for breastfed babies. Night waking doesn't always mean hunger — it can also be driven by separation anxiety, developmental leaps, or practise of new motor skills."
 ---
 
 Nine months brings an extraordinary leap in development. Your baby is pulling up, maybe cruising, possibly saying their first syllables, and exploring the world with an intensity that would exhaust anyone. All of that cognitive and physical work can make sleep harder — and easier to understand, once you know what you're dealing with.
 
-*Quick answer: Most 9-month-olds need 12–15 hours of total sleep per day, typically across 2 naps and around 10–12 hours overnight. Wake windows are usually 2.5–3.5 hours. Some babies experience a sleep disruption around 8–10 months linked to developmental leaps and the emergence of separation anxiety.*
+> **Quick answer:** Most 9-month-olds need 12–15 hours of total sleep per day, typically across 2 naps and around 10–12 hours overnight. Wake windows are usually 2.5–3.5 hours. Some babies experience a sleep disruption around 8–10 months linked to developmental leaps and the emergence of separation anxiety.
 
 ## Why Sleep Gets Complicated at 9 Months
 
@@ -26,17 +35,17 @@ Separation anxiety is a healthy developmental milestone, not a sleep problem. Ho
 
 Research from paediatric sleep studies and AAP guidance suggests most 9-month-olds need **12–15 hours of total sleep** across a 24-hour period. Of that, approximately 10–12 hours typically comes overnight (often with one wake-up still normal for many babies), and 2–3 hours during the day spread across two naps.
 
-Wake windows at this age sit between **2.5 and 3.5 hours**, though some more wakeful babies push toward 3.5 hours comfortably while others still do better at 2.5–3 hours. The best indicator isn't the clock — it's how your baby settles at nap time and how happy they are before sleep.
+Wake windows at this age sit between **2.5 and 3.5 hours** (see our [wake windows by age guide](/blog/wake-windows-by-age-the-complete-guide) for the full breakdown), though some more wakeful babies push toward 3.5 hours comfortably while others still do better at 2.5–3 hours. The best indicator isn't the clock — it's how your baby settles at nap time and how happy they are before sleep.
 
 ## A Sample 9 Month Old Sleep Schedule
 
-| Time | Activity |
-|---|---|
-| 6:30–7:00 a.m. | Wake-up and first feed |
-| 9:15–10:15 a.m. | Nap 1 (45–90 min) |
-| 1:30–3:00 p.m. | Nap 2 (45–90 min) |
-| 6:30–7:00 p.m. | Bedtime routine begins |
-| 7:00–7:30 p.m. | Asleep for the night |
+| Time            | Activity               |
+| --------------- | ---------------------- |
+| 6:30–7:00 a.m.  | Wake-up and first feed |
+| 9:15–10:15 a.m. | Nap 1 (45–90 min)      |
+| 1:30–3:00 p.m.  | Nap 2 (45–90 min)      |
+| 6:30–7:00 p.m.  | Bedtime routine begins |
+| 7:00–7:30 p.m.  | Asleep for the night   |
 
 If naps are consistently short (under 45 minutes), ensure the wake window before the nap isn't too long — an overtired 9-month-old often produces the exact short, broken naps parents are trying to avoid. Similarly, if your baby isn't falling asleep within 20 minutes of going down, the wake window may have been too short.
 
@@ -52,7 +61,13 @@ Yes, though it's often discussed as part of a broader "8–10 month regression" 
 
 Most families find the "regression" lasts two to four weeks. If it's persisting beyond that, it's worth looking at the schedule and settling approach rather than waiting it out indefinitely.
 
-## Handling Separation Anxiety at Bedtime
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
+
+## Handling [Separation Anxiety](/blog/separation-anxiety-and-baby-sleep-why-it-happens-and-what-helps) at Bedtime
 
 The key here is building confidence that you come back, rather than disappearing the moment sleep is mentioned. A few things help:
 
@@ -72,7 +87,7 @@ That said, if your baby is still waking once overnight and feeding efficiently (
 
 **Introducing new sleep props during the regression.** Rocking, feeding, or bringing your baby into bed to get through a hard regression week feels like the right call in the moment, but can create new habits that persist after the regression has passed.
 
-**Dropping a nap too early.** The two-to-one nap transition is most appropriate at 14–18 months, not at 9. If your baby is fighting naps, look at the schedule timing before concluding they're done napping.
+**Dropping a nap too early.** The two-to-one [nap transition](/blog/nap-transition-guide-when-to-drop-a-nap) is most appropriate at 14–18 months, not at 9. If your baby is fighting naps, look at the schedule timing before concluding they're done napping.
 
 **Skipping the bedtime routine when you're tired.** The bedtime routine is most valuable on the hardest nights. Cutting it short when you're exhausted can inadvertently make settling harder, not easier.
 

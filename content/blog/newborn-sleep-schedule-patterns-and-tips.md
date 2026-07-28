@@ -8,6 +8,13 @@ image: "https://images.unsplash.com/photo-1765353225650-2280f21cb79e?w=1200&h=63
 imageAlt: "Newborn baby sleeping peacefully in a bassinet"
 imageCredit: "Marius Muresan"
 imageCreditUrl: "https://unsplash.com/@muresan113"
+faq:
+  - question: "When do newborns start sleeping longer at night?"
+    answer: "Most newborns start consolidating sleep into longer stretches around 6–8 weeks, with a 4–5 hour stretch by 2–3 months. A true 'sleeping through the night' stretch (6+ hours) typically develops between 3 and 6 months, though this varies widely."
+  - question: "Should I wake my newborn to feed during the day?"
+    answer: "Yes, in the first 2–3 weeks you should wake your newborn every 2–3 hours to feed if they're sleeping longer, to ensure adequate weight gain and milk supply. Once your pediatrician confirms good weight gain, you can usually let them sleep and feed on demand."
+  - question: "What is day night confusion in newborns?"
+    answer: "Day night confusion is when a newborn sleeps more during the day and is more alert at night, because their circadian rhythm hasn't developed yet. Help correct it by exposing them to bright light and normal activity during the day, and keeping nights dark, quiet, and boring."
 ---
 
 ## There Is No Perfect Newborn Sleep Schedule
@@ -16,20 +23,22 @@ If you've been searching for a **newborn sleep schedule** that maps out every na
 
 What you *can* do is understand newborn sleep patterns, learn what's biologically typical, and use gentle strategies to nudge things in the right direction. You won't be setting alarms or enforcing strict routines at this stage, but you'll have a framework that helps the chaos feel a little less chaotic.
 
+> **Quick answer:** Newborns sleep 14–17 hours per day in short bursts of 45 minutes to 3 hours, with wake windows of just 30–90 minutes. There's no schedule to enforce — focus on light/dark cues, a feed-wake-sleep rhythm, and safe sleep practices.
+
 ## How Much Sleep Does a Newborn Need?
 
 Most newborns sleep between 14 and 17 hours in a 24-hour period, according to the American Academy of Pediatrics. That sounds like a lot, and it is, but it's broken into short bursts spread across day and night. A typical stretch lasts anywhere from 45 minutes to 3 hours, occasionally longer if you're lucky.
 
 Here's a rough guide to **newborn sleep patterns** by week:
 
-| Age | Total Sleep (24 hrs) | Longest Stretch | Wake Windows |
-|---|---|---|---|
-| 0-2 weeks | 16-18 hours | 2-3 hours | 30-45 minutes |
-| 2-4 weeks | 15-17 hours | 2-3 hours | 45-60 minutes |
-| 4-8 weeks | 14-16 hours | 3-4 hours | 60-75 minutes |
-| 8-12 weeks | 14-16 hours | 4-6 hours | 75-90 minutes |
+| Age        | Total Sleep (24 hrs) | Longest Stretch | Wake Windows  |
+| ---------- | -------------------- | --------------- | ------------- |
+| 0-2 weeks  | 16-18 hours          | 2-3 hours       | 30-45 minutes |
+| 2-4 weeks  | 15-17 hours          | 2-3 hours       | 45-60 minutes |
+| 4-8 weeks  | 14-16 hours          | 3-4 hours       | 60-75 minutes |
+| 8-12 weeks | 14-16 hours          | 4-6 hours       | 75-90 minutes |
 
-These numbers are averages. Your baby might sleep more or less, and both can be perfectly healthy. If you're concerned about total sleep or very long stretches without feeding, your pediatrician is always the right person to ask.
+These numbers are averages. Your baby might sleep more or less, and both can be perfectly healthy. For a full breakdown by age, see our guide on [how much sleep your baby needs](/blog/how-much-sleep-does-my-baby-need-complete-guide-by-age). If you're concerned about total sleep or very long stretches without feeding, your pediatrician is always the right person to ask.
 
 ## Why Newborn Day Night Confusion Happens
 
@@ -38,6 +47,12 @@ One of the most exhausting parts of the early weeks is **newborn day night confu
 In the womb, your baby's sleep was influenced by your movement and hormones. Melatonin from the placenta helped regulate their cycles. Once they're born, that external supply disappears, and their own melatonin production doesn't kick in until around 8 to 12 weeks. Without that internal clock, newborns genuinely can't distinguish between day and night.
 
 Research published in *Sleep Medicine Reviews* confirms that the circadian system matures gradually over the first three to four months. Until then, your baby's sleep will look scattered, and the best thing you can do is offer consistent environmental cues to help their brain learn the difference.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## How to Gently Shape a Newborn Sleep Schedule
 
@@ -51,7 +66,7 @@ A 2004 study in the *Journal of Sleep Research* found that newborns exposed to m
 
 ### Feed-Wake-Sleep Rhythm
 
-Rather than watching the clock, follow a loose **feed-wake-sleep** pattern. Feed your baby when they wake, let them have a short period of alertness, and then help them back to sleep before they become overtired. This isn't a rigid cycle. Some wake windows will be 30 minutes, others might stretch a bit longer. The goal is simply to avoid long periods of wakefulness that push your newborn past their comfort zone.
+Rather than watching the clock, follow a loose **feed-wake-sleep** pattern. Feed your baby when they wake, let them have a short period of alertness, and then help them back to sleep before they become overtired. This isn't a rigid cycle. Some wake windows will be 30 minutes, others might stretch a bit longer. The goal is simply to avoid long periods of wakefulness that push your newborn past their comfort zone. If you're navigating frequent feeds and wondering how they connect to sleep, our piece on [cluster feeding and sleep](/blog/cluster-feeding-and-sleep-what-parents-need-to-know) may help.
 
 ### A Simple Pre-Sleep Routine
 
@@ -59,7 +74,7 @@ Even at two weeks old, a brief wind-down can signal that sleep is coming. It doe
 
 ### Safe Swaddling
 
-The AAP recognizes swaddling as a soothing technique for newborns when done safely: on the back, with hips loose, and stopped once your baby shows signs of rolling. A good swaddle dampens the Moro reflex, that startling arm-fling that wakes so many newborns mid-nap. It won't magically extend every sleep, but it removes one common disruptor.
+The AAP recognizes swaddling as a soothing technique for newborns when done safely: on the back, with hips loose, and stopped once your baby shows signs of rolling. A good swaddle dampens the Moro reflex, that startling arm-fling that wakes so many newborns mid-nap. It won't magically extend every sleep, but it removes one common disruptor. When the time comes to stop, our guide on [when to stop swaddling](/blog/when-to-stop-swaddling-and-how-to-transition) walks you through the transition safely.
 
 ## Common Newborn Sleep Myths
 

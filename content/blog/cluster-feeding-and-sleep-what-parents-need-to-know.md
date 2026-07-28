@@ -8,6 +8,15 @@ image: "https://images.unsplash.com/photo-1751890855930-7520793ce160?w=1200&h=63
 imageAlt: "A mother breastfeeding a newborn baby in soft evening light"
 imageCredit: "Blond Fox"
 imageCreditUrl: "https://unsplash.com/@iamblondfox"
+faq:
+  - question: "What is cluster feeding and when does it happen?"
+    answer: "Cluster feeding is when a newborn feeds very frequently — every 30 to 60 minutes — in bunched-together sessions, typically in the late afternoon and evening. It's most common in the first 6–8 weeks and often precedes a longer overnight sleep stretch."
+  - question: "Does cluster feeding mean I don't have enough milk?"
+    answer: "No. Cluster feeding is a normal newborn behaviour, not a sign of low milk supply. It helps regulate your milk production and is often your baby 'tanking up' before a longer sleep period. Research by Dr. Kathleen Kendall-Tackett confirms it is biologically expected, especially in breastfed babies."
+  - question: "How long does cluster feeding last?"
+    answer: "The most intense phase of cluster feeding typically settles by 6–8 weeks as your baby becomes more efficient at feeding and your milk supply regulates. It may recur briefly during growth spurts around 3 weeks, 6 weeks, and 3 months, but each episode is usually shorter than the first."
+  - question: "Will cluster feeding affect my baby's sleep?"
+    answer: "Cluster feeding often leads to a longer first sleep stretch after the evening feeding session ends. However, the frequent feeding itself can make evenings feel chaotic. Setting up a comfortable feeding station and accepting the pattern as temporary makes it much more manageable."
 ---
 
 ## What Is Cluster Feeding and Why Is It Happening at 6pm?
@@ -15,6 +24,8 @@ imageCreditUrl: "https://unsplash.com/@iamblondfox"
 You've fed your newborn, burped them, changed them, rocked them — and 20 minutes later they're rooting again. Then again. And again. You're beginning to wonder whether you have enough milk, whether something is wrong, or whether this will ever stop.
 
 This is cluster feeding, and it is completely normal. It's not a sign of low milk supply, it's not your baby being manipulative, and it won't last forever. Understanding what's driving it makes the evenings feel far less alarming.
+
+> **Quick answer:** Cluster feeding is a normal newborn behaviour where babies feed very frequently in the late afternoon or evening — it helps regulate your milk supply and often precedes a longer overnight sleep stretch. The most intense phase typically settles by 6–8 weeks, and setting up a comfortable feeding station makes it far more manageable.
 
 ## What Cluster Feeding Actually Is
 
@@ -28,7 +39,7 @@ There are several overlapping reasons:
 
 **Milk supply regulation.** In the early weeks of breastfeeding, your supply is being established based on demand. Cluster feeding in the evening drives an increase in prolactin (the hormone that stimulates milk production), which helps establish supply for the coming 24-hour period. For formula-fed babies, cluster feeding behaviour still occurs, though it tends to be slightly less intense.
 
-**Circadian rhythms developing.** Newborns don't yet have a mature circadian rhythm — their internal clock doesn't consolidate until around 3 to 4 months. Evening cluster feeding may partly reflect an early, instinctive attempt to front-load calories ahead of a longer overnight period.
+**Circadian rhythms developing.** Newborns don't yet have a mature circadian rhythm — their internal clock doesn't consolidate until around 3 to 4 months (see our [newborn sleep schedule guide](/blog/newborn-sleep-schedule-patterns-and-tips) for what to expect in these early weeks). Evening cluster feeding may partly reflect an early, instinctive attempt to front-load calories ahead of a longer overnight period.
 
 **Developmental leaps.** Cluster feeding often intensifies around growth spurts and developmental windows — commonly around 2 to 3 weeks, 6 weeks, 3 months, and 6 months. During these periods, increased feeding stimulates milk supply to meet new growth demands.
 
@@ -39,6 +50,12 @@ There are several overlapping reasons:
 The intense cluster feeding of the early newborn period — particularly the first two to six weeks — typically settles considerably by around 6 to 8 weeks as feeding patterns regulate and your milk supply stabilises. That said, some degree of evening clustering (wanting to feed more frequently in the late afternoon) is normal through the first few months.
 
 For most families, the worst of the cluster feeding period — the hours where you feel permanently attached to the sofa wondering if this is all there is — resolves by the end of the second month.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## Managing Cluster Feeding Without Losing Your Mind
 
@@ -54,7 +71,7 @@ For most families, the worst of the cluster feeding period — the hours where y
 
 The good news about cluster feeding is that the longer sleep stretch it often precedes is real. Many parents find that after an evening cluster feeding session, their newborn settles into their longest sleep of the 24-hour period — sometimes three to five hours in the early weeks, increasing as the weeks pass.
 
-This doesn't mean the cluster feeding is causing the long stretch in a direct sense, but the two patterns often go together. As your baby's circadian rhythm develops (typically by 3 to 4 months), the evenings gradually become more predictable and the clustering fades.
+This doesn't mean the cluster feeding is causing the long stretch in a direct sense, but the two patterns often go together. As your baby's circadian rhythm develops (typically by 3 to 4 months), the evenings gradually become more predictable and the clustering fades. If you're wondering when longer night stretches typically emerge, our guide on [when babies sleep through the night](/blog/when-do-babies-sleep-through-the-night) breaks down the timelines.
 
 ## When to Talk to Your Midwife or Health Visitor
 

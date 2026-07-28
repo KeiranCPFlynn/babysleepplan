@@ -1,6 +1,6 @@
 ---
-title: "Moving Baby to Their Own Room: When and How to Do It"
-description: "Discover when to move your baby out of your room, what the AAP recommends, and a practical step-by-step approach for making the transition smoothly and safely."
+title: "When to Move Baby to Own Room: AAP Guidelines & Step-by-Step Plan"
+description: "When should you move baby to their own room? The AAP recommends at least 6 months. Learn the signs baby is ready and a gentle step-by-step transition plan that works."
 date: "2026-05-09"
 author: "LunaCradle Team"
 tags: ["infant sleep", "sleep environment", "sleep tips"]
@@ -8,13 +8,35 @@ image: "https://images.unsplash.com/photo-1745636624761-8173b91e8334?w=1200&h=63
 imageAlt: "A softly lit nursery with a crib, white noise machine, and blackout curtains ready for baby"
 imageCredit: "Justin Simmonds"
 imageCreditUrl: "https://unsplash.com/@justsimms"
+faq:
+  - question: "When should I move my baby to their own room?"
+    answer: "The AAP recommends room-sharing for at least 6 months, ideally 12 months, to reduce SIDS risk. Most families transition between 6 and 12 months. Look for signs like baby outgrowing the bassinet, sleeping through the night consistently, or showing interest in the crib."
+  - question: "Is it safe to move baby to their own room at 6 months?"
+    answer: "Yes. The AAP says room-sharing for at least 6 months is protective against SIDS. At 6 months, babies have reached a significant developmental milestone and the risk of SIDS drops considerably. A consistent bedtime routine and safe sleep environment make the transition smooth."
+  - question: "How do I move baby to their own room without sleep problems?"
+    answer: "Start with naps in the new room to build familiarity. Bring the same white noise machine, sleep sack, and bedtime routine. Do the move on a calm day (not during a regression or illness). Expect 3-7 nights of adjustment. Keep your response to night wakings consistent with what you were doing before the move."
+howTo:
+  name: "How to Move Baby to Their Own Room"
+  steps:
+    - name: "Prepare the room with a safe sleep setup"
+      text: "Set up the crib to meet AAP safe sleep guidelines: firm mattress, fitted sheet only, no loose bedding or toys. Add blackout curtains and a white noise machine to create an environment that supports sleep."
+    - name: "Start with naps in the new room"
+      text: "Move your baby's daytime naps to their new room first so they build familiarity with the space in a low-pressure setting. Aim for at least a few days of naps there before tackling nighttime sleep."
+    - name: "Move nighttime sleep to the new room"
+      text: "Once naps are going well, begin putting your baby down for the night in their own room. Choose a calm evening — avoid timing the move with a sleep regression, illness, or major routine change."
+    - name: "Keep the bedtime routine identical"
+      text: "Use the exact same bedtime routine, sleep sack, white noise, and settling methods you used in your room. Consistency in everything except the location helps your baby feel secure in the new space."
+    - name: "Expect 3–7 nights of adjustment"
+      text: "Most babies need three to seven nights to fully adjust to sleeping in their own room. Keep your response to night wakings calm and consistent, and the new pattern will settle in."
 ---
 
 ## The Moment Every Parent Wonders About
 
 At some point — whether your baby is three months old or nine months old — you find yourself lying in the dark listening to every snuffle, grunt, and sigh coming from the bassinet two feet away, and you wonder: is it time? Is it safe? Will they be okay in their own room?
 
-Moving a baby to their own room is one of those decisions that feels enormous in the moment but is almost always smoother than anticipated. The key is timing it appropriately and knowing what to change — and what to keep the same — when you make the move.
+Moving a baby to their own room is one of those decisions that feels enormous in the moment but is almost always smoother than anticipated. The key is timing it appropriately and knowing what to change — and what to keep the same — when you make the move. If you're also navigating a sleep surface change at the same time, the [bassinet-to-crib transition guide](/blog/bassinet-to-crib-transition-when-and-how-to-move-your-baby) covers that step in detail.
+
+> **Quick answer:** The AAP recommends room-sharing for at least 6 months, ideally 12 months. Most families transition between 6-12 months. A consistent bedtime routine before and after the move helps ease the transition.
 
 ## What the AAP Recommends
 
@@ -34,7 +56,7 @@ Some babies actually sleep better in their own room because they're not being ro
 
 ## How to Set Up the New Sleep Space
 
-Before you move your baby, get the room right. Consistency in the sleep environment is one of the biggest factors in how smoothly the transition goes.
+Before you move your baby, get the room right. Consistency in the [sleep environment](/blog/baby-sleep-environment-complete-guide) is one of the biggest factors in how smoothly the transition goes.
 
 **Darkness matters more than you think.** Even small amounts of light — a nightlight on the landing, streetlights through thin curtains — can suppress melatonin and make it harder for babies to fall and stay asleep. Proper blackout curtains or blinds are not a luxury here; they're one of the most impactful sleep investments you can make.
 
@@ -48,11 +70,17 @@ Before you move your baby, get the room right. Consistency in the sleep environm
 
 **Start with naps first.** Before moving overnight sleep, practice having your baby nap in their new room for several days. This gives them (and you) a chance to get familiar with the space without the stakes feeling as high as a full night.
 
-**Keep the bedtime routine identical.** This is the most important thing you can do. Your baby's bedtime routine is their sleep cue — it signals that sleep is coming in a way that's more powerful than any other environmental factor. The same bath, the same feed, the same song, the same book, the same type of goodbye. Do it all the same, just in the new location.
+**Keep the [bedtime routine](/blog/perfect-bedtime-routine-by-age) identical.** This is the most important thing you can do. Your baby's bedtime routine is their sleep cue — it signals that sleep is coming in a way that's more powerful than any other environmental factor. The same bath, the same feed, the same song, the same book, the same type of goodbye. Do it all the same, just in the new location.
 
 **Move the monitor into position before day one.** Having a reliable monitor set up and tested before the first night prevents the anxiety of feeling cut off. Many parents find a video monitor particularly reassuring in the first week or two.
 
 **Give it five to seven nights before drawing conclusions.** Most babies adjust within a week. The first night or two may involve more waking than usual as your baby adapts, but a week-long trend should give you a meaningful picture of how the transition is going.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## Common Mistakes Parents Make
 

@@ -8,11 +8,33 @@ image: "https://images.unsplash.com/photo-1672928499632-1d040212e3f4?w=1200&h=63
 imageAlt: "Toddler sleeping peacefully in bed without a dummy"
 imageCredit: "Richard Stachmann"
 imageCreditUrl: "https://unsplash.com/@stachmann"
+faq:
+  - question: "When should I stop giving my baby a dummy for sleep?"
+    answer: "Most experts recommend beginning dummy weaning between 6 and 12 months, when the sleep association is less entrenched and the habit hasn't become a strong emotional anchor. The NHS advises that stopping before 12 months is gentler, as babies under a year don't have the same attachment to the dummy."
+  - question: "How do I wean my baby off the dummy at night?"
+    answer: "Choose one approach — gradual reduction (removing it after baby falls asleep, then reducing further), cold turkey (removing it completely), or the dummy fairy (for older toddlers) — and commit consistently for at least 7–10 days. Expect some protest for the first 3–4 nights regardless of method."
+  - question: "Will weaning the dummy cause sleep regression?"
+    answer: "Dummy weaning can temporarily disrupt sleep for 3–7 days as your baby adjusts to falling asleep without it, but this is not a true regression. Most families see significant improvement within the first week, and the key is not reintroducing the dummy after a difficult night."
+howTo:
+  name: "How to Wean Your Baby Off the Dummy/Pacifier"
+  steps:
+    - name: "Choose the right timing"
+      text: "Start during a settled week — not during illness, travel, or a sleep regression. Most experts recommend beginning between 6 and 12 months, when the sleep association is less entrenched and the habit hasn't become a strong emotional anchor."
+    - name: "Reduce gradually — naps first, then bedtime"
+      text: "In week one, offer the dummy only at nap time and bedtime. In week two, limit it to bedtime only. In week three, remove it at bedtime too and offer extra settling support. This gradual approach causes minimal distress because there is no single dramatic change."
+    - name: "Use a cold swap to a sleep sack or comfort object"
+      text: "For a faster approach, remove the dummy entirely and replace it with a sleep sack, a small comfort blanket, or a soft toy. Say something short and warm: 'The dummies have all gone now, here's your bunny.' Keep the message matter-of-fact."
+    - name: "Introduce a comfort object replacement"
+      text: "Offer a small lovey, soft blanket, or stuffed animal as a new sleep association. Introduce it a week before weaning so your baby can start bonding with it. A consistent bedtime routine helps provide the reassurance your child needs during the transition."
+    - name: "Stay consistent for at least 7–10 days"
+      text: "Expect some protest for the first 3–4 nights regardless of the method you choose. The third night is typically the hardest before improvement arrives. Do not reintroduce the dummy after a difficult night — inconsistency resets the process."
 ---
 
 The dummy has probably got you both through a lot. Colic. Long car journeys. Those forty-five-minute settling battles that somehow ended the moment the dummy appeared. There's nothing wrong with any of that — it worked, and that's what mattered. But at some point, most parents start wondering how to get rid of it, and whether that's going to be as hard as they fear.
 
 *Quick answer: Most experts recommend beginning dummy weaning between 6 and 12 months, when the sleep association is less entrenched and the habit hasn't become an emotional anchor in the way it often does by toddlerhood. That said, many parents successfully wean older toddlers using gradual reduction, the dummy fairy, or a cold turkey approach — all of which work when done consistently.*
+
+> **Quick answer:** Start dummy weaning during a settled week (not during illness or travel), choose one approach — gradual reduction, cold turkey, or the dummy fairy — and commit fully for at least 7–10 days. Most families see significant improvement within the first week, and the key to success is not reinstating the dummy after a hard night.
 
 ## Why the Dummy Becomes a Sleep Problem
 
@@ -20,13 +42,13 @@ In the early months, a dummy is one of the safest and most effective soothing to
 
 The complication comes with **sleep onset association**. If your baby always falls asleep with the dummy and then surfaces between sleep cycles in the night (as all babies do), they'll need the dummy replaced to get back to sleep. By around 4–6 months, this can mean multiple wake-ups per night that are entirely about dummy retrieval — not hunger, not discomfort, just the need to recreate the conditions that were present when they fell asleep.
 
-Research from Dr. Jodi Mindell's work on infant sleep associations confirms that any prop consistently present at sleep onset — whether it's a dummy, a feed, or motion — is likely to be needed again at night. The dummy is particularly tenacious because it's portable, immediate, and works every time.
+Research from Dr. Jodi Mindell's work on infant sleep associations confirms that any prop consistently present at sleep onset — whether it's a dummy, a feed, or motion — is likely to be needed again at night. The dummy is particularly tenacious because it's portable, immediate, and works every time. If you're also working on other sleep skills at the same time, our guide on [how to get baby to self-settle](/blog/how-to-get-baby-to-self-settle) covers the broader picture.
 
 ## When Is the Right Time to Wean?
 
 There's no hard deadline. The NHS advises that if you're going to stop using a dummy for sleep, doing so before 12 months is gentler — babies under a year don't have the same emotional attachment or the verbal ability to argue about it at bedtime. By 2–3 years, the dummy has often become a significant comfort object, and the weaning process takes more preparation.
 
-That said, many families successfully wean at 18 months, two years, or beyond. Age matters less than consistency and timing — starting during a disrupted week (illness, travel, a new sibling) is much harder than during a settled stretch.
+That said, many families successfully wean at 18 months, two years, or beyond. Age matters less than consistency and timing — starting during a disrupted week (illness, travel, a new sibling) is much harder than during a settled stretch. If you're in the middle of a [sleep regression](/blog/baby-sleep-regression-what-to-expect-and-what-helps), it's worth waiting until things stabilise before tackling weaning.
 
 ## Approaches That Work
 
@@ -46,7 +68,13 @@ Remove the dummy entirely at once. This sounds brutal, but it often produces fas
 
 Expect two to four difficult nights, with the third night typically being the hardest before improvement arrives. Most parents who choose this method see significant improvement by nights five to seven.
 
-Pair it with a brief explanation for older babies and toddlers: "The dummies have all gone now, we're big now, here's your bunny." Short, warm, matter-of-fact.
+Pair it with a brief explanation for older babies and toddlers: "The dummies have all gone now, we're big now, here's your bunny." Short, warm, matter-of-fact. A consistent [bedtime routine](/blog/perfect-bedtime-routine-by-age) helps provide the reassurance your child needs during this transition.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ### The Dummy Fairy
 

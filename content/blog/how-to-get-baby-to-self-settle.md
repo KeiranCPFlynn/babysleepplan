@@ -8,11 +8,33 @@ image: "https://images.unsplash.com/photo-1634226480504-a2a530bc9a11?w=1200&h=63
 imageAlt: "Baby learning to self-settle in a cot at bedtime with low lighting"
 imageCredit: "Brett Jordan"
 imageCreditUrl: "https://unsplash.com/@brett_jordan"
+faq:
+  - question: "What age can a baby self-settle?"
+    answer: "Most babies can begin practising self-settling from around 4–5 months, when they start developing the ability to self-soothe. Before this age, babies rely heavily on external help to fall asleep, and expecting independent settling is developmentally unrealistic."
+  - question: "How do I teach my baby to self-settle without crying?"
+    answer: "Start by putting your baby down drowsy but awake, and use a gradual approach — sit next the cot while they settle, then move further away over several nights. Introduce a consistent bedtime routine and a comfort object like a small muslin. Gentle methods like pick-up-put-down or the chair method work well for families who prefer minimal crying."
+  - question: "Why can't my baby self-settle?"
+    answer: "If your baby always falls asleep with feeding, rocking, or motion, they've learned that those conditions are required for sleep. When they wake between sleep cycles and those conditions are gone, they can't get back to sleep independently. The skill of self-settling simply hasn't been practised yet."
+  - question: "How long does it take for a baby to learn to self-settle?"
+    answer: "Most babies show improvement within 1–2 weeks of consistent practice, though the timeline depends on the method used and your baby's temperament. Some babies adapt quickly within a few days, while others need 3–4 weeks of gentle, consistent reinforcement."
+howTo:
+  name: "How to Help Your Baby Self-Settle"
+  steps:
+    - name: "Create an optimal sleep environment"
+      text: "Set up the room with white noise, a dark environment, and a comfortable temperature. A consistent sleep space reduces stimulation and signals to your baby that it is time to rest."
+    - name: "Establish a predictable bedtime routine"
+      text: "Run through the same calming sequence each night — such as feed, bath, story, and into the cot. The routine builds a strong sleep association that prepares your baby for what comes next."
+    - name: "Put your baby down drowsy but awake"
+      text: "Place your baby in the cot when they are relaxed and heavy-eyed but not fully asleep. Even one or two practice attempts per night helps them begin to associate the cot with falling asleep independently."
+    - name: "Use a gradual withdrawal approach"
+      text: "Sit next to the cot while your baby settles, then move your chair further away over several nights. This gentle method lets them practise self-settling with your presence fading gradually rather than disappearing all at once."
+    - name: "Start at bedtime and be consistent"
+      text: "Bedtime is the easiest time to practise because sleep pressure is highest. Apply the same approach every night for 1–2 weeks before assessing progress — consistency matters more than the specific method you choose."
 ---
 
 If you've read anything about baby sleep, you've probably encountered the phrase "put them down drowsy but awake." It sounds simple. In practice, for many babies, it results in immediate, emphatic protest. But the concept behind it — teaching your baby to self-settle — is genuinely one of the most valuable sleep skills they can develop, and it doesn't have to be as dramatic as it sometimes feels.
 
-*Quick answer: Baby self-settling means your baby can fall asleep independently at the start of sleep — without feeding, rocking, or motion as part of the sleep trigger. Babies who self-settle at bedtime are significantly more likely to settle themselves back to sleep between sleep cycles overnight, reducing night waking. Most babies can begin practising this skill from 4–5 months.*
+> **Quick answer:** Baby self-settling means your baby can fall asleep independently at the start of sleep — without feeding, rocking, or motion as part of the sleep trigger. Babies who self-settle at bedtime are significantly more likely to settle themselves back to sleep between sleep cycles overnight, reducing night waking. Most babies can begin practising this skill from 4–5 months.
 
 ## What Is Self-Settling?
 
@@ -28,7 +50,7 @@ All babies — and all adults — cycle through lighter and deeper sleep stages 
 
 For a baby who falls asleep at the breast or in motion, the end of each sleep cycle brings a partial awakening into a very different environment. They're now in a cot, not being held. The feeding or movement that was present when they fell asleep is gone. So they signal — they cry — for the conditions to be recreated.
 
-This is the mechanism behind many parents' experience of a baby who seemed fine at 4 months suddenly waking constantly after the 4-month sleep regression hits and the new sleep architecture kicks in. The regression doesn't create the problem; it makes an existing sleep association visible.
+This is the mechanism behind many parents' experience of a baby who seemed fine at 4 months suddenly waking constantly after the 4-month sleep regression hits and the new sleep architecture kicks in. The regression doesn't create the problem; it makes an existing sleep association visible. If you want to understand the mechanics in more detail, our guide to [understanding baby sleep cycles](/blog/understanding-baby-sleep-cycles) walks through exactly what's happening.
 
 ## When Can You Start?
 
@@ -49,7 +71,7 @@ Self-settling is easiest to practise at bedtime when sleep pressure is highest a
 
 You don't have to go cold turkey on contact naps or feeding to sleep immediately. Begin by placing your baby in the cot **before they're fully asleep** — even once or twice a week. The goal is to give them a moment of practice falling asleep in their sleep space.
 
-Some parents do this by feeding, then unlatching before sleep arrives; others rock until drowsy and then transfer. The key is that your baby crosses the final threshold into sleep while already in the cot.
+Some parents do this by feeding, then unlatching before sleep arrives; others rock until drowsy and then transfer. The key is that your baby crosses the final threshold into sleep while already in the cot. Our [drowsy but awake guide](/blog/drowsy-but-awake-does-it-work-and-how-to-do-it) has practical tips for making this transition smoother.
 
 ### Use a Consistent Settling Signal
 
@@ -66,13 +88,19 @@ If you currently rock or feed fully to sleep, you don't have to stop completely 
 
 This graduated approach is gentler than cold turkey and works well for babies between 4 and 8 months who are responsive to parental presence.
 
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
+
 ### Stay Consistent Through the Protest
 
 The hardest part of teaching self-settling isn't knowing what to do — it's holding your nerve when your baby protests. Brief crying during the transition to independent settling is normal and doesn't mean you're doing anything wrong.
 
 Research comparing settling approaches consistently finds that **brief, predictable protest** that resolves within a few nights has no measurable effect on infant wellbeing, attachment, or stress hormones in the long term. The distress is real in the moment; it's not lasting.
 
-If the protest is escalating rather than gradually reducing over several nights, revisit whether the timing is right (is your baby overtired going into settling?), whether the environment is optimal (dark room, white noise), and whether your approach is consistent across caregivers.
+If the protest is escalating rather than gradually reducing over several nights, revisit whether the timing is right (is your baby [overtired](/blog/overtired-baby-signs-and-what-to-do) going into settling?), whether the environment is optimal (dark room, white noise), and whether your approach is consistent across caregivers.
 
 ## What Self-Settling Doesn't Mean
 

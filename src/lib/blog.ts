@@ -4,6 +4,16 @@ import matter from 'gray-matter'
 
 const postsDirectory = path.join(process.cwd(), 'content/blog')
 
+export interface FaqItem {
+  question: string
+  answer: string
+}
+
+export interface HowToStep {
+  name: string
+  text: string
+}
+
 export interface BlogPost {
   slug: string
   title: string
@@ -19,6 +29,8 @@ export interface BlogPost {
   content: string
   readingTime: number
   wordCount: number
+  faq: FaqItem[]
+  howTo: { name: string; steps: HowToStep[] } | null
 }
 
 export function getPostSlugs(): string[] {
@@ -37,6 +49,30 @@ export function getPostBySlug(slug: string): BlogPost {
   const wordCount = content.split(/\s+/g).filter(Boolean).length
   const readingTime = Math.max(1, Math.ceil(wordCount / 200))
 
+  const rawFaq = data.faq ?? []
+  const faq: FaqItem[] = Array.isArray(rawFaq)
+    ? rawFaq
+      .filter(
+        (item: { question?: string; answer?: string }) =>
+          item?.question && item?.answer
+      )
+      .map((item: { question: string; answer: string }) => ({
+        question: item.question,
+        answer: item.answer,
+      }))
+    : []
+
+  const rawHowTo = data.howTo ?? null
+  const howTo =
+    rawHowTo && typeof rawHowTo === 'object' && rawHowTo.name && Array.isArray(rawHowTo.steps)
+      ? {
+        name: rawHowTo.name,
+        steps: (rawHowTo.steps as HowToStep[])
+          .filter((s: HowToStep) => s?.name && s?.text)
+          .map((s: HowToStep) => ({ name: s.name, text: s.text })),
+      }
+      : null
+
   return {
     slug,
     title: data.title ?? '',
@@ -52,6 +88,8 @@ export function getPostBySlug(slug: string): BlogPost {
     content,
     readingTime,
     wordCount,
+    faq,
+    howTo,
   }
 }
 

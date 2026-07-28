@@ -8,11 +8,22 @@ image: "https://images.unsplash.com/photo-1701839640142-082f9aa34a7e?w=1200&h=63
 imageAlt: "Baby sleeping safely in a crib wearing a sleep sack"
 imageCredit: "Jonathan Borba"
 imageCreditUrl: "https://unsplash.com/@jonathanborba"
+faq:
+  - question: "What is the difference between a sleep sack and a sleeping bag?"
+    answer: "There is no real difference — they are the same product. 'Sleep sack' is more common in the US, while 'sleeping bag' or 'sleep bag' is used more in the UK. All refer to a wearable blanket that keeps your baby warm without loose bedding in the cot."
+  - question: "What TOG rating should my baby's sleep sack be?"
+    answer: "Use a 1.0 TOG sleeping bag for warmer rooms above 20°C (68°F), and a 2.5 TOG for cooler rooms between 16–20°C (61–68°F). For very cold rooms below 16°C, a 3.5 TOG may be needed. Always check your room temperature with a thermometer rather than guessing."
+  - question: "When can my baby start using a sleep sack?"
+    answer: "Babies can use a sleep sack from birth as long as it fits properly. Check that the neck hole and armholes are snug enough that your baby can't slip down inside the garment, and choose the appropriate TOG rating for your room temperature."
+  - question: "Are sleep sacks safer than blankets for babies?"
+    answer: "Yes. The AAP recommends against loose bedding including blankets for babies under 12 months because they can cover the face and increase suffocation risk. A sleep sack stays in place and provides warmth without the hazards of loose fabric in the cot."
 ---
 
 If you are shopping for a **baby sleep sack**, you have probably seen several names for what seems like the same product: **baby sleeping bag**, **baby sleep bag**, wearable blanket, and more. That can make a simple purchase feel surprisingly complicated, especially when you are already running on limited sleep.
 
 In practice, these terms are usually describing the same idea: a blanket your baby wears, designed to keep them warm without loose bedding in the cot. The name matters less than the fit, temperature setup, and how consistently you use it.
+
+> **Quick answer:** A baby sleep sack, sleeping bag, or sleep bag is the same thing — a wearable blanket that keeps your baby warm without loose bedding. Choose the right TOG for your room, check the fit around the neck and armholes, and use it consistently as part of your bedtime routine.
 
 ## Baby Sleep Sack vs Baby Sleeping Bag: Is There a Real Difference?
 
@@ -60,6 +71,12 @@ Current safe-sleep guidance favors simple, non-weighted wearable blankets over p
 In the first months, families often use the sleep sack as part of a short, calming sequence: feed, change, sleep sack, down. Around the swaddle transition stage, consistency becomes especially useful because babies are learning new body control and new sleep skills at the same time.
 
 After six months, fit checks become more important again. Babies move more, roll more, and may stand in the cot, so rechecking length and arm opening fit after growth spurts is worth doing.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## Common Mistakes That Create Bedtime Friction
 

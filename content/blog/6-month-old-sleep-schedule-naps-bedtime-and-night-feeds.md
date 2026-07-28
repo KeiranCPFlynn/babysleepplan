@@ -8,13 +8,22 @@ image: "https://images.unsplash.com/photo-1588997788636-3a9a80e41c1c?w=1200&h=63
 imageAlt: "Six month old baby sleeping peacefully in a crib during naptime"
 imageCredit: "Helena Lopes"
 imageCreditUrl: "https://unsplash.com/@helenalopesph"
+faq:
+  - question: "How many naps should a 6 month old have?"
+    answer: "Most 6-month-olds take 2–3 naps per day, with wake windows of 2–2.5 hours. Total daytime sleep is typically 2–3 hours. Many babies are transitioning from 3 naps to 2 around this age."
+  - question: "Does a 6 month old still need night feeds?"
+    answer: "Many 6-month-olds still need 1–2 night feeds, especially if they're exclusively breastfed. While longer stretches become biologically possible at this age, night waking is still normal and doesn't necessarily mean your baby is hungry."
+  - question: "How long should the last wake window be before bedtime for a 6 month old?"
+    answer: "The final wake window before bedtime is typically 2–2.5 hours at 6 months. Some babies can stretch to 2.75 hours if they've had solid naps during the day, but overtiredness at this age often leads to more night waking, not less."
+  - question: "Is it normal for a 6 month old to take short naps?"
+    answer: "Yes. Short naps (30–45 minutes) are very common at 6 months as babies are still learning to connect sleep cycles. As long as your baby seems rested and isn't consistently overtired by evening, short naps aren't necessarily a problem."
 ---
-
-## Why 6 Months Is a Turning Point for Sleep
 
 If you've made it to the six-month mark, you've already survived the unpredictable newborn phase, and that deserves a quiet round of applause. Around this age, something shifts. Your baby's circadian rhythm is more established, melatonin production is stronger, and longer stretches of consolidated night sleep become biologically possible. That's why building a solid **6 month old sleep schedule** can make such a noticeable difference for the whole family.
 
 Of course, "biologically possible" and "happening in your house right now" can feel like two very different things. If your baby is still waking frequently or naps are all over the place, you're not doing anything wrong. Six months is a time of enormous developmental change, and sleep often needs a little help catching up with the rest of your baby's growth.
+
+> **Quick answer:** Most 6-month-olds need about 14 hours of total sleep per day — 10–12 hours overnight (often in one or two long stretches) and 2–3 hours of daytime naps across 2–3 naps. Wake windows of 2–2.5 hours are typical.
 
 ## How Much Sleep Does a 6 Month Old Need?
 
@@ -26,18 +35,18 @@ These are averages, not prescriptions. Some babies thrive on the lower end; othe
 
 Most six-month-olds do well on two to three naps per day with wake windows of roughly 2 to 2.5 hours. Here's what a typical day might look like:
 
-| Time | Activity |
-|---|---|
-| 6:30 - 7:00 a.m. | Wake and first feed |
-| 9:00 - 10:00 a.m. | Nap 1 (about 1 to 1.5 hours) |
-| 12:00 - 1:30 p.m. | Nap 2 (about 1 to 1.5 hours) |
-| 3:30 - 4:00 p.m. | Optional catnap (20 to 30 minutes) |
-| 6:30 - 7:00 p.m. | Bedtime routine begins |
-| 7:00 - 7:30 p.m. | Asleep for the night |
+| Time              | Activity                           |
+| ----------------- | ---------------------------------- |
+| 6:30 - 7:00 a.m.  | Wake and first feed                |
+| 9:00 - 10:00 a.m. | Nap 1 (about 1 to 1.5 hours)       |
+| 12:00 - 1:30 p.m. | Nap 2 (about 1 to 1.5 hours)       |
+| 3:30 - 4:00 p.m.  | Optional catnap (20 to 30 minutes) |
+| 6:30 - 7:00 p.m.  | Bedtime routine begins             |
+| 7:00 - 7:30 p.m.  | Asleep for the night               |
 
 This is a starting framework, not a rigid timetable. Your baby's ideal **bedtime for a 6 month old** depends on when they woke from their last nap and how their day has gone. If the last nap was refused or cut short, pulling bedtime earlier by 20 to 30 minutes can prevent the overtired spiral that leads to more night waking, not less.
 
-## The Science Behind Wake Windows at 6 Months
+## The Science Behind [Wake Windows](/blog/wake-windows-by-age-the-complete-guide) at 6 Months
 
 Sleep pressure, the homeostatic drive that makes us feel drowsy, builds during wakefulness and is closely tied to age. Research in *Sleep Medicine Reviews* has shown that as the brain matures, babies can tolerate longer stretches of awake time before that pressure peaks. At six months, most babies handle about 2 to 2.5 hours comfortably.
 
@@ -60,7 +69,13 @@ This is one of the most common questions parents ask, and it's worth answering h
 
 Research from the *Journal of Developmental & Behavioral Pediatrics* found that by six months, a significant percentage of babies can sleep a 6-to-8-hour stretch without feeding, but plenty of healthy, well-growing babies still wake once or twice. One to two night feeds at this age is within the range of normal, especially for breastfed babies whose milk digests more quickly.
 
-If you're hoping to gently reduce night feeds, the most effective approach is making sure daytime calorie intake is robust. Offering full feeds during the day, including any solids your pediatrician has recommended, helps shift nutrition toward waking hours without leaving your baby hungry at night.
+If you're hoping to gently [reduce night feeds](/blog/night-weaning-when-and-how-to-drop-night-feeds), the most effective approach is making sure daytime calorie intake is robust. Offering full feeds during the day, including any solids your pediatrician has recommended, helps shift nutrition toward waking hours without leaving your baby hungry at night.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## Common Myths About the 6 Month Sleep Schedule
 

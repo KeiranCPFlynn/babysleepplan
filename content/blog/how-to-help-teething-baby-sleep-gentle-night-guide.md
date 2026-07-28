@@ -8,11 +8,20 @@ image: "https://images.unsplash.com/photo-1547175116-94c24f0c4b09?w=1200&h=630&f
 imageAlt: "Parent comforting a teething baby at bedtime in a softly lit nursery"
 imageCredit: "Courtney Kammers"
 imageCreditUrl: "https://unsplash.com/@cskammers"
+faq:
+  - question: "How do I help my teething baby sleep at night?"
+    answer: "Time infant paracetamol or ibuprofen (as advised by your pediatrician) about 20–30 minutes before bed to ease gum pain during the settling period. Keep your bedtime routine consistent, use calm and brief comfort for night wakings, and avoid introducing new sleep props that will be hard to undo later."
+  - question: "Does teething cause night waking?"
+    answer: "Yes, teething can cause frequent night waking because gum discomfort feels more intense at night when there are fewer distractions. Babies who normally sleep through may wake and struggle to resettle during active teething windows, though this disruption is usually temporary."
+  - question: "How long does teething sleep disruption last?"
+    answer: "Teething sleep disruption typically lasts a few days to a week per tooth eruption. The worst nights usually coincide with the tooth breaking through the gum, and sleep generally improves once the tooth has emerged. If disruption continues beyond a week, check for other causes like illness or schedule changes."
 ---
 
 If you are searching for **how to help teething baby sleep**, you are probably running on very little rest right now. Teething nights can feel unpredictable: one bedtime goes smoothly, then the next includes repeated wakeups, extra crying, and a baby who only settles when held. That pattern is exhausting, and it is also very common.
 
 The good news is that teething sleep disruption is usually temporary. You do not need a perfect routine overnight. You need a calm, repeatable plan that reduces discomfort, protects sleep cues, and helps your baby settle again with less struggle.
+
+> **Quick answer:** Help a teething baby sleep by timing pain relief before bed, keeping your bedtime routine consistent, and responding to night wakings with calm, brief comfort — avoid introducing new sleep props that will be hard to undo later.
 
 ## Why Teething Can Disrupt Sleep So Much
 
@@ -24,7 +33,7 @@ During active teething windows, you may notice more drooling, chewing, gum rubbi
 
 One reason these weeks are confusing is that teething and overtiredness can look similar. A baby who is rubbing their gums may also be overdue for sleep. A baby waking from discomfort can then become overtired by the next nap, which makes bedtime harder again.
 
-It helps to think in patterns rather than single nights. If sleep worsens alongside clear teething signs, then gradually improves after a few days, teething is likely a major contributor. If sleep disruption continues without improvement, check schedule fit, illness signs, and feeding patterns too.
+It helps to think in patterns rather than single nights. If sleep worsens alongside clear teething signs, then gradually improves after a few days, teething is likely a major contributor. If sleep disruption continues without improvement, check schedule fit, illness signs, and feeding patterns too. Our guide on [overtired baby signs](/blog/overtired-baby-signs-and-what-to-do) can help you tell whether overtiredness is compounding the problem.
 
 ## How to Help Teething Baby Sleep Tonight
 
@@ -48,11 +57,17 @@ Night wakings during teething are expected, but repeated response changes can ex
 
 This does not mean ignoring pain. It means helping your baby feel supported without fully rebuilding bedtime from scratch each waking.
 
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
+
 ### Protect Day Sleep as Much as You Can
 
 Teething discomfort plus short naps can create a hard overtired cycle by evening. You do not need perfect naps, but protecting at least one solid daytime sleep window often improves nighttime resilience.
 
-If naps are shorter than usual, shift bedtime a little earlier instead of pushing through to the usual time.
+If naps are shorter than usual, shift bedtime a little earlier instead of pushing through to the usual time. If short naps are a recurring issue beyond teething, our article on [baby short naps](/blog/baby-short-naps-30-minutes-why-and-how-to-fix-them) covers what causes them and how to fix them.
 
 ## A Simple Teething-Night Plan You Can Repeat
 
@@ -75,7 +90,7 @@ You do not have to do everything perfectly, but these choices often make nights 
 - Changing approach every waking
 - Using products not aligned with current safe sleep guidance
 
-Think of teething weeks as "steady hand" weeks. Small, consistent adjustments usually beat major overhauls.
+Think of teething weeks as "steady hand" weeks. Small, consistent adjustments usually beat major overhauls. If you're noticing that sleep disruptions are piling up beyond just teething, it may help to review the broader picture of [baby sleep regressions](/blog/baby-sleep-regression-what-to-expect-and-what-helps) to see what else might be going on.
 
 ## When to Check In With Your Pediatrician
 

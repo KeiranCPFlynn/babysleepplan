@@ -8,6 +8,26 @@ image: "https://images.unsplash.com/photo-1766299892744-a0b9d4e11707?w=1200&h=63
 imageAlt: "Parent breastfeeding a newborn during a nighttime feed"
 imageCredit: "Brian Wangenheim"
 imageCreditUrl: "https://unsplash.com/@brianwangenheim"
+faq:
+  - question: "When can I stop night feeds for my baby?"
+    answer: "Most healthy, full-term babies can drop night feeds from around 6 months if they're gaining weight well and eating solids during the day. Some babies naturally drop feeds earlier, while others genuinely need one feed well past 6 months — both are normal."
+  - question: "How do I drop night feeds gradually?"
+    answer: "Reduce each night feed by 1–2 minutes (breastfeeding) or 30ml (bottle) every 2–3 nights, or replace one feed at a time with water or comfort settling. Most babies adjust within 2–3 weeks of gradual reduction. The key is consistency — don't offer the full feed again once you've started reducing."
+  - question: "Is my baby waking from hunger or habit?"
+    answer: "If your baby takes a full feed at each waking and settles back to sleep for 3–4 hours, they may still need the calories. If they take only a few mouthfuls and settle quickly, it's likely a habit or comfort feed rather than hunger. Daytime calorie intake is the best indicator — babies eating well during the day often don't need night calories."
+howTo:
+  name: "How to Night Wean Your Baby"
+  steps:
+    - name: "Confirm readiness with your pediatrician"
+      text: "Check that your baby is at least 6 months old, gaining weight well, and eating enough solids during the day. A quick check-in with your pediatrician confirms they don't need overnight calories before you begin."
+    - name: "Reduce feed duration or amount gradually"
+      text: "Cut each night feed by 1–2 minutes (breastfeeding) or 30ml (bottle) every 2–3 nights. This slow reduction lets your baby adjust without a sudden change that triggers strong protest."
+    - name: "Replace feeds with comfort settling"
+      text: "As feeds shorten, fill the gap with patting, shushing, or offering water if age-appropriate. Your baby still needs help settling — the goal is to change the method, not remove comfort entirely."
+    - name: "Expect 3–7 nights of adjustment"
+      text: "Your baby may protest the change for the first few nights as they learn to settle without a full feed. This is normal and typically improves significantly within a week."
+    - name: "Stay consistent through the transition"
+      text: "Once you begin reducing, don't offer the full feed again — even one full feed can reset progress. Keep your response to night wakings calm and consistent, and the new pattern will settle in."
 ---
 
 ## The Night Feed Question
@@ -15,6 +35,8 @@ imageCreditUrl: "https://unsplash.com/@brianwangenheim"
 At some point, usually somewhere between 4 and 9 months, most parents start wondering the same thing: does my baby still *need* these night feeds, or have they become a habit? It's a fair question, and the answer isn't always simple. **Night weaning** is one of those topics where timing, temperament, and your baby's individual readiness all matter more than any fixed rule.
 
 If you're exhausted from multiple night feeds and wondering whether it's time to make a change, you're in the right place. And if you're not sure your baby is ready, that's okay too. This guide will help you figure out where you are and what to do next.
+
+> **Quick answer:** Most healthy, full-term babies can drop night feeds from around 6 months if they're gaining well and eating solids — but readiness depends on a combination of age, weight, daytime intake, and whether night wakings are driven by hunger or habit, and the gentlest approach is a gradual reduction over two to three weeks.
 
 ## When Are Babies Ready for Night Weaning?
 
@@ -66,6 +88,12 @@ Rather than reducing feed volume or length, this approach focuses on gradually p
 ### Addressing Bedtime First
 
 If your baby feeds to sleep at bedtime, tackling that association first often reduces night wakings on its own, sometimes dramatically. Try moving the feed to the beginning of the bedtime routine rather than the end, so there's a small gap between the last feed and the moment of falling asleep. Even a few minutes of separation between feeding and sleep onset can make a significant difference.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## What to Expect During Night Weaning
 

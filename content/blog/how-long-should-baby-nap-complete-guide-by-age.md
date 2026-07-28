@@ -1,6 +1,6 @@
 ---
-title: "How Long Should a Baby Nap? A Complete Guide by Age"
-description: "Learn how long baby naps should be at every age, from newborns to toddlers, with expert guidance on nap length, frequency, and timing."
+title: "How Long Should Baby Nap? Nap Length by Age (Newborn to 3 Years)"
+description: "Baby nap guide by age: newborns 45min-3hrs, 6-month-olds 1-2hrs, 1-year-olds 1-2hrs. Learn ideal nap lengths, how many naps by age, and when short naps are normal."
 date: "2026-04-19"
 author: "LunaCradle Team"
 tags: ["nap schedule", "infant sleep", "sleep science"]
@@ -8,6 +8,15 @@ image: "https://images.unsplash.com/photo-1496458857386-d2388f1c03e8?w=1200&h=63
 imageAlt: "A baby sleeping peacefully during a daytime nap in a cot"
 imageCredit: "Paul Hanaoka"
 imageCreditUrl: "https://unsplash.com/@plhnk"
+faq:
+  - question: "How long should a 3 month old nap?"
+    answer: "A 3-month-old's naps can range from 20 minutes to 2 hours, with total daytime sleep of about 4–5 hours spread across 3–5 naps. At this age, nap length varies widely and there's no minimum target — focus on watching tired cues and keeping wake windows to about 60–90 minutes."
+  - question: "How long should a 6 month old nap?"
+    answer: "By 6 months, aim for naps of at least 45–60 minutes each, with 2–3 naps totalling about 3–4 hours of daytime sleep. If naps are consistently shorter than 30 minutes, check wake windows, sleep environment darkness, and whether your baby is overtired or undertired."
+  - question: "Is a 30 minute nap enough for a baby?"
+    answer: "A single 30-minute nap is usually not enough on its own — babies need multiple naps across the day to meet their total sleep needs. However, if your baby wakes refreshed after 30 minutes and is happy, it may be sufficient for that particular sleep period. Consistently short naps may indicate overtiredness or a schedule that needs adjusting."
+  - question: "When do baby naps get longer?"
+    answer: "Naps typically start lengthening around 5–6 months as sleep cycles mature and babies learn to connect cycles. Before this age, short naps of 20–45 minutes are developmentally normal because babies haven't yet learned to transition between sleep cycles independently."
 ---
 
 ## Why Nap Length Feels Like a Mystery
@@ -15,6 +24,8 @@ imageCreditUrl: "https://unsplash.com/@plhnk"
 Most parents have stood outside a closed nursery door doing mental maths — wondering whether the nap was long enough, whether waking them will ruin bedtime, or whether this short nap means the rest of the day is a write-off. It's one of the most common anxieties in early parenthood, and it makes sense: nap quality has a direct ripple effect on everything else.
 
 The honest answer is that there's no single perfect nap length. What's appropriate changes significantly with age, and the range of "normal" is wider than most parents realise. But there are clear evidence-based benchmarks that can help you calibrate what you're seeing and troubleshoot when things go wrong.
+
+> **Quick answer:** Newborn naps range from 20 minutes to 2 hours; by 6–8 months, aim for naps of at least 45–60 minutes; toddlers typically need 1.5–2 hours of daytime sleep. Total daytime sleep matters more than any single nap.
 
 ## Nap Length by Age: What to Expect
 
@@ -26,7 +37,7 @@ What matters more than length: total daytime sleep and ensuring your newborn doe
 
 ### 3–5 Months
 
-Sleep architecture begins to mature around 3 months, and you'll likely notice naps becoming slightly more predictable. Many babies this age take 3 to 4 naps per day, ranging from 30 minutes to 2 hours each. The dreaded **30-minute nap** often becomes a fixture around this time — it coincides with the end of the first sleep cycle, and many babies haven't yet developed the ability to link into a second cycle.
+Sleep architecture begins to mature around 3 months, and you'll likely notice naps becoming slightly more predictable. Many babies this age take 3 to 4 naps per day, ranging from 30 minutes to 2 hours each. The dreaded **30-minute nap** often becomes a fixture around this time — it coincides with the end of the first sleep cycle, and many babies haven't yet developed the ability to link into a second cycle. If this sounds familiar, our guide on [baby short naps](/blog/baby-short-naps-30-minutes-why-and-how-to-fix-them) explains why this happens and what you can try.
 
 Total daytime sleep at this age: roughly 3 to 5 hours spread across naps.
 
@@ -41,6 +52,12 @@ Research from Dr. Monique LeBourgeois at the University of Colorado, published i
 Most babies drop to 2 naps around 6 to 9 months and stay on 2 naps through the first year. A healthy nap schedule at this age might look like a 45-minute to 1.5-hour morning nap and a 1- to 1.5-hour afternoon nap. Total daytime sleep: roughly 2.5 to 3.5 hours.
 
 If one nap consistently runs very short (under 30 minutes) and the other runs long (over 2 hours), it can be worth adjusting wake windows or start times to balance things out.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ### 12–18 Months
 
@@ -60,7 +77,7 @@ The most common reason for short naps in babies under 6 months is simply develop
 
 For older babies, short naps often come down to:
 
-- **Mistimed nap windows** — starting the nap too early (undertired) or too late (overtired)
+- **Mistimed nap windows** — starting the nap too early (undertired) or too late (overtired). Check [wake windows by age](/blog/wake-windows-by-age-the-complete-guide) to make sure your timing is in the right range.
 - **Sleep associations** — needing rocking, feeding, or motion to fall asleep, and then being unable to resettle when the cycle ends
 - **Sleep environment** — too much light, noise, or an inconsistent temperature
 

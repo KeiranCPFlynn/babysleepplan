@@ -8,11 +8,22 @@ image: "https://images.unsplash.com/photo-1644691211587-a0107492ad0c?w=1200&h=63
 imageAlt: "Toddler sleeping peacefully after a nighttime waking episode"
 imageCredit: "Toa Heftiba"
 imageCreditUrl: "https://unsplash.com/@heftiba"
+faq:
+  - question: "How can I tell if my child has night terrors or nightmares?"
+    answer: "Night terrors happen in the first third of the night — your child appears awake, may scream or thrash, but isn't actually conscious and won't remember it. Nightmares happen in the second half of the night — your child wakes up scared, needs comfort, and will likely remember the dream."
+  - question: "Should I wake my child during a night terror?"
+    answer: "No — you should not try to wake a child during a night terror. They're not actually awake and attempting to wake them can make the episode more confusing and distressing. Stay close, keep them safe from injury, and wait for the episode to pass, which usually takes 5–15 minutes."
+  - question: "What age do night terrors start?"
+    answer: "Night terrors most commonly begin between ages 3 and 8, and are most frequent around ages 4–6. They're rare in babies and toddlers under 2. Most children outgrow night terrors by their early teens as the brain's sleep architecture matures."
+  - question: "How do I prevent night terrors in toddlers?"
+    answer: "The most effective prevention is ensuring your child gets enough sleep — overtiredness is the biggest trigger for night terrors. Maintain a consistent bedtime, avoid skipping naps, and consider a slightly earlier bedtime if episodes are frequent. A calm, predictable bedtime routine also helps."
 ---
 
 Few things are more alarming than hearing your child screaming at night. Your heart races, you rush in, and you're not sure whether to pick them up, talk to them, or just wait. Understanding **night terrors vs nightmares** is the first step toward responding in the way that actually helps, rather than accidentally making things harder. You're not failing your child by feeling unsure here. These episodes catch almost every parent off guard.
 
 The good news is that both night terrors and nightmares are a normal part of how the developing brain processes sleep, and most children outgrow them without any intervention at all.
+
+> **Quick answer:** Night terrors happen in deep non-REM sleep (first third of the night) — your child appears awake but isn't, and won't remember it. Nightmares happen during REM sleep (second half of the night) — your child wakes fully scared and needs comfort. For night terrors, stay close and don't wake them; for nightmares, offer quick reassurance.
 
 ## What Are Night Terrors and How Are They Different from Nightmares?
 
@@ -24,14 +35,14 @@ Although parents often use the terms interchangeably, **night terrors vs nightma
 
 ### Quick Comparison
 
-| Feature | Night Terrors | Nightmares |
-|---|---|---|
-| **Sleep stage** | Deep non-REM | REM (dreaming) |
-| **Timing** | First 1-3 hours after falling asleep | Second half of the night |
-| **Awareness** | Child appears awake but isn't | Child wakes fully |
-| **Response to comfort** | May resist or not recognise you | Seeks comfort |
-| **Memory next day** | None | Often remembers |
-| **Age range** | Typically 18 months to 6 years | From around age 2 onward |
+| Feature                 | Night Terrors                        | Nightmares               |
+| ----------------------- | ------------------------------------ | ------------------------ |
+| **Sleep stage**         | Deep non-REM                         | REM (dreaming)           |
+| **Timing**              | First 1-3 hours after falling asleep | Second half of the night |
+| **Awareness**           | Child appears awake but isn't        | Child wakes fully        |
+| **Response to comfort** | May resist or not recognise you      | Seeks comfort            |
+| **Memory next day**     | None                                 | Often remembers          |
+| **Age range**           | Typically 18 months to 6 years       | From around age 2 onward |
 
 ## Why Do Night Terrors and Nightmares Happen?
 
@@ -51,6 +62,12 @@ This is the part that feels the most counterintuitive. When your child is scream
 - **Wait it out.** Most episodes resolve within fifteen minutes, and the child returns to restful sleep on their own.
 
 It feels awful to stand by, and it's completely normal to feel helpless watching it. But your calm presence is genuinely the most effective response.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## What to Do After a Nightmare
 

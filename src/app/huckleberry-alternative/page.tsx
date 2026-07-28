@@ -280,6 +280,13 @@ export default function HuckleberryAlternativePage() {
               <li>Review trends weekly to avoid repeating trial-and-error.</li>
               <li>Keep guidance aligned to your child&apos;s current stage.</li>
             </ul>
+            <p className="mt-4 text-slate-600 dark:text-slate-300">
+              Not sure where to start? Try the{' '}
+              <Link href="/free-schedule" className="text-sky-700 dark:text-sky-300 underline underline-offset-2">
+                free baby sleep schedule builder
+              </Link>{' '}
+              to see what a personalised schedule looks like for your baby&apos;s age — no account needed.
+            </p>
           </div>
           <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 p-5">
             <h3 className="text-xl font-semibold">Who should pick which?</h3>

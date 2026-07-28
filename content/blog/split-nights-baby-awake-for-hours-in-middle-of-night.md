@@ -1,6 +1,6 @@
 ---
-title: "Baby Awake for Hours at Night? How to Fix Split Nights"
-description: "Learn what causes split nights — when a baby wakes and stays awake for 1-2 hours in the middle of the night — and evidence-based strategies to resolve them quickly."
+title: "Split Nights: Baby Awake for Hours in the Middle of the Night (Fix It Fast)"
+description: "Baby awake for hours at night? Split nights happen when a baby is fully awake 1-3 hours in the middle of the night. Learn the 3 main causes and how to fix them in days."
 date: "2026-05-07"
 author: "LunaCradle Team"
 tags: ["night waking", "nap schedule", "sleep tips", "infant sleep"]
@@ -8,6 +8,13 @@ image: "https://images.unsplash.com/photo-1582212742497-86a2c4495267?w=1200&h=63
 imageAlt: "Tired parent sitting by baby crib in dim room in the middle of the night"
 imageCredit: "hessam nabavi"
 imageCreditUrl: "https://unsplash.com/@hessamnbv"
+faq:
+  - question: "What are split nights in baby sleep?"
+    answer: "A split night is when a baby wakes in the middle of the night and stays fully awake for 1-3 hours, often appearing happy and alert. Unlike night wakings, the baby is not distressed — they babble, play, or chat. Split nights are caused by schedule issues, not behavioral problems."
+  - question: "Why is my baby awake for hours in the middle of the night?"
+    answer: "Split nights are almost always caused by too much daytime sleep, a nap that ends too close to bedtime, or wake windows that are too short. The baby has essentially had enough sleep and is not tired enough to stay asleep. Adjusting the schedule — capping naps, lengthening wake windows, or pushing bedtime later — usually resolves it within a few days."
+  - question: "Should I let my baby play during a split night?"
+    answer: "Keep the environment dark, boring, and quiet. Turn on a dim night light if needed but avoid bright overhead lights, screens, or interactive play. The goal is to signal that nighttime is still for sleeping. If the split night is happening regularly, the fix is in the daytime schedule, not in the middle-of-the-night response."
 ---
 
 ## The Middle-of-the-Night Party Nobody Asked For
@@ -15,6 +22,8 @@ imageCreditUrl: "https://unsplash.com/@hessamnbv"
 Most parents know the drill of frequent night wakings — the baby cries, you go in, you resettle, you go back to bed, repeat. Exhausting, yes, but at least there's a pattern to it. What's harder to understand is a different kind of disruption: your baby wakes around 1, 2, or 3 a.m. and simply... stays awake. Not screaming. Just awake. Babbling, rolling around, staring at the ceiling, maybe chatting to you for an hour or two before finally drifting back off.
 
 This is called a **split night**, and it's one of the more confusing sleep problems parents encounter — because the baby doesn't seem distressed, yet everyone is exhausted and nothing seems to fix it. The good news is that split nights almost always have an identifiable cause, and once you find it, they resolve relatively quickly.
+
+> **Quick answer:** Split nights happen when a baby is fully awake for 1-3 hours in the middle of the night, often due to too much daytime sleep, a late nap, or insufficient wake windows. Fixing the schedule — especially capping naps and adjusting bedtime — usually resolves it within a few days.
 
 ## What Is a Split Night?
 
@@ -30,7 +39,7 @@ This is the number one cause of split nights, and it's almost always the first t
 
 Sleep researchers describe this as a **homeostatic imbalance** — the balance between sleep debt and wakefulness. When daytime sleep is too generous, the overnight budget runs out too early. A study in the *Journal of Sleep Research* found that adjusting nap durations to match age-appropriate total sleep needs was one of the most effective interventions for consolidating overnight sleep in infants.
 
-At most ages, the fix is either capping naps (particularly long first naps or very late second naps) or, if the baby is approaching a nap transition, beginning to explore whether one nap is too many. Even 20-30 minutes less daytime sleep can shift the overnight picture noticeably within a few days.
+At most ages, the fix is either capping naps (particularly long first naps or very late second naps — if [short naps](/blog/baby-short-naps-30-minutes-why-and-how-to-fix-them) are part of the picture, that changes the capping math) or, if the baby is approaching a nap transition, beginning to explore whether one nap is too many. Even 20-30 minutes less daytime sleep can shift the overnight picture noticeably within a few days.
 
 ### Bedtime That Is Too Early
 
@@ -60,7 +69,13 @@ If your split night happens at exactly the same time every night, a conditioned 
 
 **Do not engage with the waking more than briefly.** If you go in during a split night and turn on lights, bring the baby out, start playing, or feed extensively, you risk teaching the baby that middle-of-the-night waking is a productive activity. Keep any interaction minimal — a quick check-in, a pat, a calm voice — and avoid anything that signals that the night is over.
 
-**Check the nap-to-bedtime gap.** The gap between the last nap and bedtime should be long enough to build sleep pressure but not so long that the baby becomes overtired. At most ages, a last-wake-window of 2.5 to 4 hours (depending on age) before bed is appropriate.
+**Check the nap-to-bedtime gap.** The gap between the last nap and bedtime should be long enough to build sleep pressure but not so long that the baby becomes [overtired](/blog/overtired-baby-signs-and-what-to-do). At most ages, a last-wake-window of 2.5 to 4 hours (depending on age) before bed is appropriate. If you're not sure what the right [wake windows by age](/blog/wake-windows-by-age-the-complete-guide) look like, that guide has a full breakdown.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## What a Split Night Is Not
 

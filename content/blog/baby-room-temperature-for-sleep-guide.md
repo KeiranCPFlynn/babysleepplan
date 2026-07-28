@@ -8,17 +8,28 @@ image: "https://images.unsplash.com/photo-1685660477695-73713eaf512a?w=1200&h=63
 imageAlt: "Digital room thermometer mounted in a nursery for sleep temperature tracking"
 imageCredit: "isens usa"
 imageCreditUrl: "https://unsplash.com/@isensusa"
+faq:
+  - question: "What is the best room temperature for a baby to sleep in?"
+    answer: "The ideal baby room temperature is 68–72°F (20–22°C), as recommended by both the AAP and NHS. This range supports safe sleep and helps your baby regulate their body temperature effectively."
+  - question: "How can I tell if my baby is too hot or too cold at night?"
+    answer: "Feel your baby's chest or the back of their neck — not their hands or feet, which are naturally cooler. If the skin feels warm or sweaty, remove a layer. If it feels cool, add one more layer than you'd comfortably wear yourself."
+  - question: "Does room temperature affect SIDS risk?"
+    answer: "Yes. A study published in the BMJ found that overheating is associated with an increased risk of SIDS. Keeping the room between 68–72°F (20–22°C) and avoiding excess layers or loose bedding are key safety measures."
+  - question: "Should I use a thermometer in the baby's room?"
+    answer: "Yes, a simple digital room thermometer is recommended because your own comfort level is not a reliable indicator. Adults adapt to ambient temperature differently than babies, who lose and gain heat more quickly due to their higher body surface area relative to weight."
 ---
 
 Getting the **baby room temperature** right is one of the simplest changes you can make tonight that has a real impact on how well your baby sleeps. Too warm, and your baby may wake frequently or become restless. Too cold, and they might struggle to settle. More importantly, room temperature is directly linked to safe sleep guidance, so it's worth getting this one dialled in.
 
 If you've been second-guessing yourself every time you walk into the nursery, you're not alone. Most parents worry about this, and the good news is that the guidelines are straightforward once you know what to aim for.
 
+> **Quick answer:** The ideal baby room temperature is 68–72°F (20–22°C). Dress your baby in one more layer than you'd comfortably wear, use a simple room thermometer to check, and always feel their chest or back of neck — not hands or feet — to gauge whether they're comfortable.
+
 ## What Is the Ideal Baby Room Temperature?
 
 Both the American Academy of Pediatrics (AAP) and the NHS recommend keeping the room where your baby sleeps between **68-72°F (20-22°C)**. This range supports safe sleep and helps your baby's body regulate its own temperature effectively.
 
-Babies are less efficient at thermoregulation than adults. Their body surface area relative to their weight is larger, which means they lose and gain heat more quickly. A room that feels comfortable to you in a jumper may actually be too warm for a baby who's dressed and in a sleep sack.
+Babies are less efficient at thermoregulation than adults. Their body surface area relative to their weight is larger, which means they lose and gain heat more quickly. A room that feels comfortable to you in a jumper may actually be too warm for a baby who's dressed and in a [sleep sack](/blog/baby-sleep-sack-or-baby-sleeping-bag-a-safe-guide).
 
 A study published in the *BMJ* found that overheating is associated with an increased risk of SIDS, making **baby room temperature** one of the most evidence-backed environmental factors parents can control.
 
@@ -36,15 +47,21 @@ Once you know the room temperature, dressing your baby appropriately is the othe
 
 ### Baby Sleep Temperature Dressing Guide
 
-| Room Temperature | What to Wear |
-|---|---|
-| **75°F+ / 24°C+** | Nappy or vest only, 0.5 tog sleep sack |
-| **72-75°F / 22-24°C** | Short-sleeve bodysuit, 1.0 tog sleep sack |
-| **68-72°F / 20-22°C** | Long-sleeve bodysuit, 1.0-2.5 tog sleep sack |
+| Room Temperature      | What to Wear                                       |
+| --------------------- | -------------------------------------------------- |
+| **75°F+ / 24°C+**     | Nappy or vest only, 0.5 tog sleep sack             |
+| **72-75°F / 22-24°C** | Short-sleeve bodysuit, 1.0 tog sleep sack          |
+| **68-72°F / 20-22°C** | Long-sleeve bodysuit, 1.0-2.5 tog sleep sack       |
 | **61-68°F / 16-20°C** | Long-sleeve bodysuit + pyjamas, 2.5 tog sleep sack |
 | **Below 61°F / 16°C** | Long-sleeve bodysuit + pyjamas, 3.5 tog sleep sack |
 
 These are guidelines rather than rigid rules. Every baby is slightly different, so use the chest-check method alongside the chart to find what works for yours.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## Why Baby Sleep Temperature Matters So Much
 
@@ -52,7 +69,7 @@ Research consistently identifies overheating as a modifiable risk factor for sud
 
 Beyond safety, temperature also affects sleep quality. A 2012 study in *Sleep Medicine Reviews* found that ambient temperature is one of the strongest environmental determinants of sleep architecture. When the room is too warm, babies spend less time in deep restorative sleep and wake more frequently during lighter sleep stages.
 
-This is why some babies who seem to "wake for no reason" are actually responding to being slightly too warm, especially in rooms with central heating that runs through the night.
+This is why some babies who seem to "wake for no reason" are actually responding to being slightly too warm, especially in rooms with central heating that runs through the night. Temperature is just one part of the [sleep environment](/blog/baby-sleep-environment-complete-guide) — darkness, sound, and a safe setup all matter too.
 
 ## Managing Baby Room Temperature Across Seasons
 

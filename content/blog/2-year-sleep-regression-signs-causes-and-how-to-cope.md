@@ -8,13 +8,24 @@ image: "https://images.unsplash.com/photo-1733759348639-25699d8c3818?w=1200&h=63
 imageAlt: "A toddler lying awake in bed at night looking up"
 imageCredit: "Zachary Kadolph"
 imageCreditUrl: "https://unsplash.com/@zacharykadolph"
+faq:
+  - question: "When does the 2 year sleep regression start?"
+    answer: "The 2-year sleep regression typically appears between 22–26 months, though some toddlers show signs slightly earlier or later. It often coincides with a vocabulary explosion, growing independence, and the emergence of imaginative play."
+  - question: "How long does the 2 year sleep regression last?"
+    answer: "Most families see the 2-year sleep regression resolve within 2–6 weeks. The key is holding firm on your bedtime routine and boundaries without creating new habits that outlast the regression."
+  - question: "Why is my 2 year old waking up at night again?"
+    answer: "At around 24 months, toddlers experience intense cognitive and emotional growth — language is expanding rapidly, imagination is coming online, and fears can become more vivid. This can make settling harder and cause new night wakings, even in previously good sleepers."
+  - question: "Is it normal for a 2 year old to have nightmares?"
+    answer: "Yes. The 2-year mark is when imaginative play truly takes off, and many toddlers experience their first nightmares around this age. Nightmares are a normal part of brain development at this stage. A calm, reassuring bedtime routine and a comfort object can help."
 ---
 
 ## When Your Toddler Suddenly Can't Sleep Again
 
-You thought you'd made it through the hard part. Your two-year-old had been sleeping brilliantly — down at 7:30, through the night, waking at a reasonable hour. And then, almost overnight, everything changed. Bedtime is a battle again. They're calling out in the night. Early mornings are back. What on earth happened?
+You thought you'd made it through the hard part — maybe even the [18-month sleep regression](/blog/18-month-sleep-regression-signs-duration-and-what-helps). Your two-year-old had been sleeping brilliantly — down at 7:30, through the night, waking at a reasonable hour. And then, almost overnight, everything changed. Bedtime is a battle again. They're calling out in the night. Early mornings are back. What on earth happened?
 
 What happened is the 2-year sleep regression, and it's one of the more disruptive developmental sleep disruptions parents encounter. The good news is that it's entirely normal, it's temporary, and there are concrete things you can do to get through it without undoing months of good sleep habits.
+
+> **Quick answer:** The 2-year sleep regression typically appears between 22–26 months and involves bedtime resistance, new night waking, and early rising. It usually lasts 2–6 weeks, and the most effective approach is holding firm on your bedtime routine while acknowledging big feelings calmly.
 
 ## Why It Happens: The Developmental Picture
 
@@ -42,6 +53,12 @@ Most families find the 2-year sleep regression lasts somewhere between two and s
 
 The regression itself passes on its own, but habits that form during it — like bringing your toddler into your bed every night, or sitting with them until they're fully asleep — can outlast it by months if you're not intentional about how you respond.
 
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
+
 ## Strategies That Help
 
 **Hold the line on bedtime routine.** Your toddler's bedtime routine is probably the most powerful tool you have right now. Even if it's taking longer than usual to get through, maintain the same sequence: bath, pyjamas, books, into bed. Research consistently shows that predictable routines reduce sleep-onset time even during developmental regressions, because the routine itself is the sleep cue.
@@ -50,7 +67,7 @@ The regression itself passes on its own, but habits that form during it — like
 
 **Address new fears directly and matter-of-factly.** If your toddler is frightened of the dark, a small night light is a perfectly sensible solution. If they're worried about something specific, name it and address it calmly during the day, not at bedtime when they're already dysregulated. The AAP notes that children this age can't always distinguish between real and imagined fears, so dismissing them as silly tends to backfire.
 
-**Keep the nap.** At two years old, the vast majority of children still need their midday nap. Dropping it prematurely in hopes of improving nighttime sleep usually leads to overtiredness, which makes night waking worse rather than better. If nap-time has become a battle, try adjusting the start time — sometimes just 20 to 30 minutes earlier or later makes a significant difference.
+**Keep the nap.** At two years old, the vast majority of children still need their [midday nap](/blog/how-long-should-baby-nap-complete-guide-by-age). Dropping it prematurely in hopes of improving nighttime sleep usually leads to overtiredness, which makes night waking worse rather than better. If nap-time has become a battle, try adjusting the start time — sometimes just 20 to 30 minutes earlier or later makes a significant difference.
 
 **Avoid co-sleeping if you don't want it as a long-term arrangement.** Bringing your toddler into bed during a regression is understandable when you're desperate for sleep, but if bedsharing isn't something you want to continue, it can be very hard to reverse once the regression passes. If you do bring them in, do so with a clear plan for transitioning back.
 

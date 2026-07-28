@@ -8,7 +8,18 @@ image: "https://images.unsplash.com/photo-1619703604149-efa36a71ffec?w=1200&h=63
 imageAlt: "A newborn baby sleeping safely on their back in a firm, empty crib"
 imageCredit: "Flávia Gava"
 imageCreditUrl: "https://unsplash.com/@flaviagava"
+faq:
+  - question: "What is the safest sleep position for a baby?"
+    answer: "Always place your baby on their back to sleep — for every nap and every night sleep, until 12 months old. Back sleeping keeps the airway open and is the single most effective way to reduce SIDS risk. Once your baby can roll both ways independently, you don't need to reposition them."
+  - question: "What temperature should a baby's room be for sleep?"
+    answer: "The recommended baby room temperature is 16–20°C (61–68°F). Overheating is an independent risk factor for SIDS. Dress your baby in one more layer than you'd be comfortable in, and use a sleep sack instead of loose blankets."
+  - question: "Is it safe for a baby to sleep in a crib with blankets?"
+    answer: "No. The AAP recommends keeping the crib completely empty — no blankets, pillows, bumpers, positioners, or soft toys. These items are associated with infant suffocation. Use a well-fitted sheet and a sleep sack to keep your baby warm instead."
+  - question: "How long should a baby share a room with parents?"
+    answer: "The AAP recommends room-sharing without bed-sharing for at least the first 6 months, ideally the first year. Room-sharing is associated with a 50% reduction in SIDS risk. However, sharing an adult sleeping surface (bed-sharing) significantly increases risk."
 ---
+
+> **Quick answer:** Place your baby on their back to sleep on a firm, flat surface with an empty crib — no pillows, blankets, or bumpers. Room-sharing without bed-sharing for at least the first six months, keeping the room at 16–20°C, and avoiding smoke exposure are the most impactful ways to reduce SIDS risk.
 
 ## The Foundation Under Everything Else
 
@@ -26,13 +37,13 @@ The American Academy of Pediatrics (AAP) updated its safe sleep guidelines in 20
 
 **Keep the sleep space empty** — no pillows, loose blankets, bumpers, positioners, wedges, or soft toys inside the sleeping area. These items, despite being widely sold and marketed, are associated with infant suffocation and add no sleep benefit. Use a well-fitted sheet and a sleep sack instead.
 
-**Room-share without bed-sharing** — the AAP recommends that babies sleep in the same room as a parent for at least the first six months, ideally the first year. This proximity is associated with a 50% reduction in SIDS risk. However, bed-sharing (sharing an adult sleeping surface) significantly increases risk, particularly with soft bedding, when either parent smokes, has consumed alcohol or sedatives, or is very tired.
+**Room-share without bed-sharing** — the AAP recommends that babies sleep in the same room as a parent for at least the first six months, ideally the first year. This proximity is associated with a 50% reduction in SIDS risk. However, [bed-sharing](/blog/co-sleeping-safety-evidence-based-guidelines) (sharing an adult sleeping surface) significantly increases risk, particularly with soft bedding, when either parent smokes, has consumed alcohol or sedatives, or is very tired.
 
 ## Temperature and Clothing
 
-Overheating is identified as an independent risk factor for SIDS by both the AAP and NHS. The recommended room temperature for infant sleep is **16 to 20°C** (61 to 68°F). Your baby should feel warm on their chest, but not sweaty.
+Overheating is identified as an independent risk factor for SIDS by both the AAP and NHS. The recommended [baby room temperature](/blog/baby-room-temperature-for-sleep-guide) for infant sleep is **16 to 20°C** (61 to 68°F). Your baby should feel warm on their chest, but not sweaty.
 
-A useful guideline is to dress your baby in one more layer than you would be comfortable wearing in the same room. Sleep sacks (or grobags) are the safest way to keep babies warm — they provide warmth without the suffocation risk of loose blankets.
+A useful guideline is to dress your baby in one more layer than you would be comfortable wearing in the same room. [Sleep sacks](/blog/baby-sleep-sack-or-baby-sleeping-bag-a-safe-guide) (or grobags) are the safest way to keep babies warm — they provide warmth without the suffocation risk of loose blankets.
 
 Feel the back of your baby's neck or chest to gauge temperature — cool hands and feet are normal and not a sign of being too cold.
 
@@ -41,6 +52,12 @@ Feel the back of your baby's neck or chest to gauge temperature — cool hands a
 Both breastfeeding and formula feeding are compatible with safe sleep practices. The AAP notes that breastfeeding — including expressing breast milk — is associated with a reduced SIDS risk, and recommends it where possible, but also recognises that formula feeding is an equally valid and safe choice.
 
 If you're breastfeeding and concerned about falling asleep during a night feed, the safest plan is to feed in a chair or on the floor rather than in bed, and to transfer your baby to their sleep space as soon as the feed is complete. The risk of accidental overlay (falling asleep with the baby on a soft surface) is highest in the very early weeks when sleep deprivation is at its most extreme.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## What the Evidence Says About Specific Products
 

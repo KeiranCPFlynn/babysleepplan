@@ -8,6 +8,15 @@ image: "https://images.unsplash.com/photo-1619700639911-43ba7eaf2479?w=1200&h=63
 imageAlt: "A seven-month-old baby sleeping in a cot with soft afternoon light"
 imageCredit: "Flávia Gava"
 imageCreditUrl: "https://unsplash.com/@flaviagava"
+faq:
+  - question: "How many naps should a 7 month old have?"
+    answer: "Most 7-month-olds take 2 naps per day, with total daytime sleep of 2.5–3.5 hours. Some babies are still on 3 naps at this age, but the transition to 2 naps typically happens between 6–9 months."
+  - question: "Does a 7 month old still need night feeds?"
+    answer: "Many 7-month-olds still wake for 1–2 feeds, particularly breastfed babies. As solids are introduced, some babies begin sleeping longer stretches, but night waking at 7 months is still developmentally normal."
+  - question: "When will my 7 month old drop to 2 naps?"
+    answer: "Most babies transition from 3 naps to 2 between 6–9 months. Signs of readiness include fighting the third nap, taking very long to fall asleep at bedtime, or the third nap being consistently short. Wake windows of 2.5–3.5 hours support a two-nap schedule."
+  - question: "What are wake windows for a 7 month old?"
+    answer: "Wake windows at 7 months are typically 2.5–3.5 hours, with many babies sitting comfortably around 3 hours between naps. The final wake window before bedtime is often the longest, sometimes stretching to 3.5 hours."
 ---
 
 ## Seven Months: More Aware, More Capable — and More Opinions About Sleep
@@ -16,28 +25,30 @@ By 7 months, your baby is a completely different creature from the newborn who u
 
 The good news is that 7 months is usually a more settled sleep stage than 4 or 5 months. Most babies this age have moved through the 4-month regression and are capable of longer sleep stretches at night. The main challenge now is finding the right nap structure and wake windows to support good overnight sleep.
 
+> **Quick answer:** Most 7-month-olds need 13–15 hours of total sleep per day — around 11–12 hours overnight and 2.5–3.5 hours across two daytime naps. Wake windows of 2.5–3.5 hours are typical, and most babies this age are on two naps.
+
 ## How Much Sleep Does a 7-Month-Old Need?
 
 The AAP recommends 12 to 16 hours of total sleep per 24-hour period for babies aged 4 to 12 months. At 7 months, most babies are getting around 11 to 12 hours overnight and 2.5 to 3.5 hours across daytime naps — giving a daily total of roughly 13.5 to 15 hours.
 
-Most 7-month-olds are on two naps per day, though some are still on three. If your baby is waking very early, fighting the third nap, or taking very long to settle at bedtime, it may be time to move to two naps — a transition that most babies make somewhere between 6 and 9 months.
+Most 7-month-olds are on two naps per day, though some are still on three. If your baby is waking very early, fighting the third nap, or taking very long to settle at bedtime, it may be time to move to two naps — a [transition](/blog/nap-transition-guide-when-to-drop-a-nap) that most babies make somewhere between 6 and 9 months.
 
 ## Wake Windows at 7 Months
 
 At 7 months, typical wake windows range from **2.5 to 3.5 hours**, with many babies sitting comfortably at around 3 hours between naps. The final wake window before bed is often the longest, sometimes stretching to 3.5 hours for babies who nap well.
 
-These windows are noticeably longer than at 5 months, which is why babies this age often resist being put down after only 2 hours — they're simply not tired enough yet. If naps feel like a battle, extending the wake window by 15 to 30 minutes before trying again is often the simplest fix.
+These windows are noticeably longer than at [5 months](/blog/5-month-old-sleep-schedule-naps-wake-windows-and-tips), which is why babies this age often resist being put down after only 2 hours — they're simply not tired enough yet. If naps feel like a battle, extending the wake window by 15 to 30 minutes before trying again is often the simplest fix.
 
 ## A Sample 7-Month-Old Sleep Schedule (Two Naps)
 
-| Time | Activity |
-|------|----------|
-| 7:00 am | Wake |
-| 9:30–10:00 am | Nap 1 starts (1–1.5 hrs) |
-| 11:00–11:30 am | Nap 1 ends |
-| 2:30–3:00 pm | Nap 2 starts (1–1.5 hrs) |
-| 3:30–4:30 pm | Nap 2 ends |
-| 7:00–7:30 pm | Bedtime |
+| Time           | Activity                 |
+| -------------- | ------------------------ |
+| 7:00 am        | Wake                     |
+| 9:30–10:00 am  | Nap 1 starts (1–1.5 hrs) |
+| 11:00–11:30 am | Nap 1 ends               |
+| 2:30–3:00 pm   | Nap 2 starts (1–1.5 hrs) |
+| 3:30–4:30 pm   | Nap 2 ends               |
+| 7:00–7:30 pm   | Bedtime                  |
 
 The goal is to balance nap length and timing so that bedtime falls roughly 3 to 3.5 hours after the last nap ends. If the second nap ends before 3:00 pm, bedtime may need to shift earlier to avoid overtiredness.
 
@@ -46,6 +57,12 @@ The goal is to balance nap length and timing so that bedtime falls roughly 3 to 
 Most families begin introducing solid foods somewhere around 6 months, in line with NHS and AAP guidance. It's worth knowing that introducing solids doesn't directly cause better overnight sleep — a common myth. Research published in *JAMA Pediatrics* in 2018 found no significant difference in overnight sleep between babies introduced to solids earlier versus later.
 
 That said, hunger from genuinely inadequate milk feeds *can* contribute to night waking, and solids begin to become a meaningful source of calories from around 7 to 8 months. If your baby has recently increased solids intake significantly and is also waking less at night, that's likely to be a developmental coincidence rather than a direct causal effect.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## Night Sleep at 7 Months
 

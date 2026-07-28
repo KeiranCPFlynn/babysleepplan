@@ -8,17 +8,26 @@ image: "https://images.unsplash.com/photo-1620415063836-b01fbcba4f90?w=1200&h=63
 imageAlt: "A tired toddler sitting in a cot looking out with soft bedroom lighting"
 imageCredit: "Helena Lopes"
 imageCreditUrl: "https://unsplash.com/@helenalopesph"
+faq:
+  - question: "How long does the 18 month sleep regression last?"
+    answer: "The 18-month sleep regression typically lasts 2–6 weeks, though some families see improvement within 2–3 weeks. It's driven by separation anxiety, a language explosion, and growing independence — once these developmental leaps settle, sleep usually improves."
+  - question: "Why is my 18 month old fighting bedtime?"
+    answer: "At 18 months, separation anxiety peaks and toddlers develop a strong sense of independence. Your child isn't being difficult on purpose — their brain now fully understands what your absence means, making it harder to settle. A consistent bedtime routine with extra daytime reassurance helps."
+  - question: "Is the 18 month sleep regression caused by separation anxiety?"
+    answer: "Separation anxiety is one of the primary drivers, along with a rapid language explosion and emerging imaginative play. Research by Dr. Jodi Mindell identifies the 18-month mark as a high-risk period for new sleep problems, with separation anxiety as a key factor."
+  - question: "What do I do when my 18 month old wakes up crying at night?"
+    answer: "Offer brief, calm reassurance without creating new sleep dependencies. Keep interactions minimal and the room dark. During the day, provide extra connection and one-on-one time to help reduce the separation anxiety driving night wakings."
 ---
 
-## Why 18 Months Is Such a Hard Sleep Stage
-
-If you've made it through the 4-month sleep regression, survived teething, and pushed through the 8 or 9-month disruptions, you might have hoped the sleep regressions were mostly behind you. Then your 18-month-old started fighting bedtime, waking in the night, and generally behaving as if sleep were a terrible injustice.
+If you've made it through the [4-month sleep regression](/blog/baby-sleep-regression-what-to-expect-and-what-helps), survived teething, and pushed through the 8 or 9-month disruptions, you might have hoped the sleep regressions were mostly behind you. Then your 18-month-old started fighting bedtime, waking in the night, and generally behaving as if sleep were a terrible injustice.
 
 The 18-month sleep regression is widely considered one of the most intense sleep disruptions of early childhood — and there are good developmental reasons for that. It's not a fluke, and it's not a sign that you've done something wrong. Understanding what's driving it makes it much easier to respond in a way that helps rather than entrenches new habits.
 
+> **Quick answer:** The 18-month sleep regression is driven by a peak in separation anxiety, a language explosion, and growing independence. It typically lasts 2–6 weeks, and the most effective response is staying consistent with your bedtime routine while offering extra daytime reassurance.
+
 ## What Causes the 18-Month Sleep Regression
 
-At 18 months, toddlers are in the middle of an extraordinary developmental period. Language is accelerating — many children this age are adding multiple new words per week. Their understanding of the world is expanding rapidly, which brings a new awareness of things they don't yet understand. Imaginative play is emerging. And crucially, separation anxiety often peaks right around 18 months.
+At 18 months, toddlers are in the middle of an extraordinary developmental period. Language is accelerating — many children this age are adding multiple new words per week. Their understanding of the world is expanding rapidly, which brings a new awareness of things they don't yet understand. Imaginative play is emerging. And crucially, [separation anxiety](/blog/separation-anxiety-and-baby-sleep-why-it-happens-and-what-helps) often peaks right around 18 months.
 
 This combination — cognitive overload, language explosion, and heightened separation anxiety — makes falling asleep alone significantly harder than it was a few months ago. Your toddler isn't manipulating you when they cry at bedtime. They're genuinely finding it harder to be away from you, because their brain now fully understands what your absence means in a way it didn't at 12 months.
 
@@ -41,6 +50,12 @@ It's also common to see corresponding changes during the day: increased clingine
 The regression itself typically lasts two to six weeks for most toddlers. The developmental trigger — the language leap and the peak of separation anxiety — does pass. Children come out the other side with new skills and usually, once the regression has moved through, their previous sleep abilities intact.
 
 The caveat is habits. If you spend six weeks bringing your toddler into your bed every time they wake, or lying with them until they're fully asleep at bedtime, those patterns become the new normal. They outlast the regression by months and can be much harder to unwind than the original disruption.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## What Actually Helps
 

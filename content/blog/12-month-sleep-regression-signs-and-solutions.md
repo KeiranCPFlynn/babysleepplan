@@ -8,11 +8,20 @@ image: "https://images.unsplash.com/photo-1650484544184-32a788179b4f?w=1200&h=63
 imageAlt: "One year old toddler sleeping in a cot at bedtime"
 imageCredit: "Road Ahead"
 imageCreditUrl: "https://unsplash.com/@roadahead_2223"
+faq:
+  - question: "How long does the 12 month sleep regression last?"
+    answer: "The 12-month sleep regression typically lasts 2–4 weeks, though some families see improvement sooner. It often coincides with major developmental leaps like first words, walking, and the nap transition, which can extend the disruption if the underlying changes are still unfolding."
+  - question: "Why is my 12 month old suddenly not sleeping?"
+    answer: "The 12-month sleep regression is driven by a burst of developmental activity — language acquisition, learning to walk, and growing independence — all of which increase night-time brain activity. The looming nap transition can also destabilise the schedule, making naps and bedtime harder."
+  - question: "Is the 12 month sleep regression the nap transition?"
+    answer: "They often overlap but aren't the same thing. The regression is caused by cognitive and motor leaps, while the nap transition is a separate developmental shift. Most babies aren't truly ready to drop to one nap until 14–18 months, even if they resist the morning nap at 12 months."
+  - question: "What do I do when my 1 year old won't sleep?"
+    answer: "Stay consistent with your bedtime routine and avoid creating new sleep associations that will outlast the regression. Offer plenty of practice time for new skills during the day, keep the sleep environment calm and dark, and remember that this phase is temporary."
 ---
 
-Your baby is almost one. You've made it through a whole year — through the newborn weeks, the 4-month regression, possibly the 8-month regression, and everything in between. And now, just as you're approaching the finish line, sleep has gone sideways again. Welcome to the 12-month sleep regression.
+Your baby is almost one. You've made it through a whole year — through the newborn weeks, the 4-month regression, possibly the [8-month sleep regression](/blog/8-month-sleep-regression-what-to-expect), and everything in between. And now, just as you're approaching the finish line, sleep has gone sideways again. Welcome to the 12-month sleep regression.
 
-*Quick answer: The 12-month sleep regression is triggered by a major developmental leap — language explosion, walking, intense independence — and often complicated by the imminent 2-to-1 nap transition. Most families see improvement within 2–4 weeks. The hardest part is not creating new habits that outlast the regression.*
+> **Quick answer:** The 12-month sleep regression is triggered by a major developmental leap — language explosion, walking, intense independence — and often complicated by the imminent 2-to-1 nap transition. Most families see improvement within 2–4 weeks. The key is not creating new habits that outlast the regression.
 
 ## Why the 12-Month Regression Happens
 
@@ -24,7 +33,7 @@ The one-year mark is one of the most developmentally concentrated periods of chi
 
 **Independence and its conflict.** Your one-year-old is becoming aware of themselves as a separate person — capable of wanting things, refusing things, and having strong feelings about both. This is wonderful and also very hard to switch off at 7 p.m.
 
-**The nap transition looms.** Around 12 months, many babies start to resist the morning nap. This doesn't mean they're ready to drop to one nap — most aren't until 14–18 months — but the morning nap fight can make the whole schedule feel unstable.
+**The nap transition looms.** Around 12 months, many babies start to resist the morning nap. This doesn't mean they're ready to drop to one nap — most aren't until 14–18 months — but the morning nap fight can make the whole [sleep schedule](/blog/12-month-old-sleep-schedule-naps-bedtime-and-transitions) feel unstable.
 
 Research in developmental psychology consistently shows that cognitive and motor leaps of this magnitude create measurable effects on sleep architecture, including lighter sleep, more frequent arousals, and increased night-time brain activity.
 
@@ -37,6 +46,12 @@ Research in developmental psychology consistently shows that cognitive and motor
 - Increased separation anxiety at sleep times
 
 Not every baby experiences all of these. Some have primarily disrupted nights; others have nap struggles but fine nights. The pattern is individualised.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## What Helps During the 12-Month Regression
 

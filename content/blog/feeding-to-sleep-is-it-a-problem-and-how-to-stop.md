@@ -8,11 +8,31 @@ image: "https://images.unsplash.com/photo-1705833936036-9f28b57b85f1?w=1200&h=63
 imageAlt: "Mother breastfeeding baby in dim bedroom light during nighttime settling"
 imageCredit: "Khanh Do"
 imageCreditUrl: "https://unsplash.com/@donguyenkhanhs"
+faq:
+  - question: "Is feeding baby to sleep bad?"
+    answer: "Feeding to sleep is not inherently bad — it's a natural sleep association that works because breast milk contains sleep-inducing hormones. It only becomes a problem when it leads to frequent night waking (every 45–90 minutes) because your baby needs the feed to transition between sleep cycles."
+  - question: "How do I stop feeding my baby to sleep?"
+    answer: "Gradually separate the feed from sleep onset by moving the last feed earlier in the bedtime routine, then introducing a new settling method like patting, shushing, or a sleep sack. Most babies adjust within 1–2 weeks of consistent practice."
+  - question: "At what age should I stop feeding to sleep?"
+    answer: "There's no fixed deadline — many families feed to sleep happily through the first year. Most parents decide to change when night waking becomes unsustainable, typically around 4–6 months when sleep cycles mature and the feeding association starts triggering more frequent wakings."
+howTo:
+  name: "How to Stop Feeding to Sleep"
+  steps:
+    - name: "Identify the feeding-to-sleep association"
+      text: "Observe whether your baby relies on feeding to fall asleep at bedtime and after every night waking. If they take only a few mouthfuls before dozing off, the feed has become a sleep association rather than nourishment."
+    - name: "Separate the feed from sleep onset"
+      text: "Begin unlatching or removing the bottle when your baby is drowsy but not fully asleep. This gives them the chance to practise crossing the final threshold into sleep without the feed."
+    - name: "Move the feed earlier in the bedtime routine"
+      text: "Shift the last feed from the end of the routine to earlier — for example, bath → feed → quiet time → sleep instead of bath → feed → sleep. Start with a five-minute gap and extend it over a week."
+    - name: "Introduce alternative settling methods"
+      text: "Replace the feed with a new settling tool such as patting, shushing, a sleep sack, or gentle rocking. Your baby needs a new cue to signal that it's time for sleep."
+    - name: "Stay consistent for 1–2 weeks"
+      text: "Expect some protest during the first few nights as your baby adjusts to the new pattern. With consistent practice, most babies adapt within one to two weeks and night waking decreases significantly."
 ---
 
 Feeding your baby to sleep might be the thing that's kept you sane for the past several months. It works, it's immediate, and for a newborn in the thick of it, it was exactly what everyone needed. But now you're waking three, four, five times a night to nurse or bottle-feed a baby who isn't hungry — they just can't get back to sleep without it. If you're exhausted and ready for something to change, this post is for you.
 
-*Quick answer: Feeding to sleep is a sleep onset association — not a bad habit in the moral sense, but one that can lead to frequent night waking once your baby starts cycling through lighter sleep stages around 3–4 months. It can be gently broken by gradually separating the feed from the sleep onset, which typically takes 1–2 weeks of consistency.*
+> **Quick answer:** Feeding to sleep is a sleep onset association — not a bad habit in the moral sense, but one that can lead to frequent night waking once your baby starts cycling through lighter [sleep stages](/blog/understanding-baby-sleep-cycles) around 3–4 months. It can be gently broken by gradually separating the feed from sleep onset, which typically takes 1–2 weeks of consistency.
 
 ## Why Feeding to Sleep Works So Well (and Why It Becomes a Problem)
 
@@ -38,7 +58,7 @@ This approach works because it breaks the conditioned sequence: feed doesn't alw
 
 ### Step 2: Unlatching or Removing the Bottle Before Fully Asleep
 
-Rather than allowing your baby to fall fully asleep at the breast or bottle, try removing the feed when they are drowsy but still slightly awake — eyes fluttering, sucking slowing. This gives them the chance to practise crossing the final threshold into sleep independently, even if you're still holding them.
+Rather than allowing your baby to fall fully asleep at the breast or bottle, try removing the feed when they are [drowsy but awake](/blog/drowsy-but-awake-does-it-work-and-how-to-do-it) — eyes fluttering, sucking slowing. This gives them the chance to practise crossing the final threshold into sleep independently, even if you're still holding them.
 
 This is harder than it sounds, and there will be protests. But even small amounts of practice at independent sleep onset begin to shift the association.
 
@@ -49,6 +69,12 @@ Once you've started separating the feed from sleep at bedtime, begin addressing 
 ### Step 4: Gradual Withdrawal
 
 If your baby still needs your presence to fall asleep at bedtime even without the feed, gradually reduce how much you're doing each night — from full holding to rocking in the cot, to hand on chest, to sitting nearby, to sitting by the door. Most families who do this consistently see improvement within 5–10 days.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## What About Night Weaning Completely?
 

@@ -1,6 +1,6 @@
 ---
-title: "Separation Anxiety and Baby Sleep: Why It Happens and What Helps"
-description: "Learn why separation anxiety disrupts baby sleep between 8 and 18 months, what the research says about it, and evidence-based strategies to help your baby feel safe at night."
+title: "Separation Anxiety & Baby Sleep: Why It Happens (8-18 Months)"
+description: "Separation anxiety peaks at 8-18 months and causes night wakings, nap resistance, and bedtime protests. Learn why it happens and gentle strategies to help baby feel secure."
 date: "2026-05-11"
 author: "LunaCradle Team"
 tags: ["infant sleep", "night waking", "sleep associations", "sleep tips"]
@@ -8,6 +8,15 @@ image: "https://images.unsplash.com/photo-1517898717281-8e4385a41802?w=1200&h=63
 imageAlt: "Parent gently comforting a baby in a crib in a softly lit nursery at night"
 imageCredit: "Kinga Howard"
 imageCreditUrl: "https://unsplash.com/@all_who_wander"
+faq:
+  - question: "When does separation anxiety start in babies?"
+    answer: "Separation anxiety typically emerges between 8 and 10 months of age, peaks around 12–18 months, and gradually resolves by age 2. It coincides with the development of object permanence — your baby now understands you exist even when you leave the room."
+  - question: "Why does separation anxiety make baby wake at night?"
+    answer: "Separation anxiety causes night wakings because your baby now understands you exist when you leave the room and wants you to stay. It's a cognitive milestone, not a sleep problem — babies who protest separation are showing secure attachment, not regression."
+  - question: "How long does separation anxiety last?"
+    answer: "Separation anxiety usually lasts several months, easing through the second year. It often comes in waves tied to developmental milestones like learning to walk or starting nursery. Most children outgrow it without intervention as cognitive and emotional development matures."
+  - question: "Should I let my baby cry with separation anxiety?"
+    answer: "Research shows that responsive approaches work well during separation anxiety. You can comfort your baby without creating new sleep dependencies — try a consistent goodbye phrase, a gradual retreat method, or a comfort object. Avoid sneaking out, which can increase anxiety."
 ---
 
 ## When Sleep Suddenly Gets Harder Again
@@ -16,11 +25,13 @@ You thought you were past the worst of it. Your baby was settling well, maybe ev
 
 If this sounds familiar, what you're almost certainly dealing with is separation anxiety, and as exhausting as it is, it's one of the clearest signs that your baby's brain is developing exactly the way it should.
 
+> **Quick answer:** Separation anxiety typically emerges between 8-10 months, peaks around 12-18 months, and gradually resolves by age 2. It causes bedtime resistance and night wakings — not because something went wrong, but because your baby now understands object permanence and knows you exist when you leave the room.
+
 ## Why Separation Anxiety Happens: The Developmental Story
 
 Separation anxiety isn't a sleep problem at its root — it's a cognitive milestone that happens to collide directly with sleep. And understanding *why* it happens makes it considerably easier to manage.
 
-Around 8-9 months, babies develop what psychologists call **object permanence** — the understanding that things continue to exist even when they can't be seen. Before this milestone, "out of sight" genuinely meant "gone" to your baby. Now they know you exist when you leave the room. They know you could come back. And they have opinions about whether or not you should.
+Around 8-9 months, babies develop what psychologists call **object permanence** — the understanding that things continue to exist even when they can't be seen. Before this milestone, "out of sight" genuinely meant "gone" to your baby. This is the same cognitive leap that drives the [8-month sleep regression](/blog/8-month-sleep-regression-what-to-expect), and it lands at almost exactly the moment separation anxiety begins. Now they know you exist when you leave the room. They know you could come back. And they have opinions about whether or not you should.
 
 At the same time, babies at this age are becoming acutely aware of the difference between familiar and unfamiliar people — a phenomenon called **stranger anxiety** — and they've formed a primary attachment to their caregivers that feels urgent and essential to their survival. From your baby's perspective, wanting to stay close to you at night isn't irrational. It's deeply logical.
 
@@ -42,11 +53,17 @@ The goal isn't to eliminate your baby's separation response — that's both impo
 
 **Use a consistent, predictable goodbye at bedtime.** The worst thing for a separating baby is an unpredictable or sneaky departure. Research from developmental psychology consistently shows that clear, warm goodbyes — even when they result in initial crying — produce less overall anxiety than parents who try to slip away unnoticed. Tell your baby you're going, say the same thing every night, and leave calmly. The predictability is the point.
 
-**Keep the bedtime routine consistent and comforting.** A reliable 20-30 minute sequence — the same steps, in the same order, every night — communicates safety and predictability. For a baby navigating separation anxiety, the routine itself becomes a transition bridge between being with you and being alone. Studies published in *Sleep* have confirmed that consistent bedtime routines reduce both the time it takes to fall asleep and the frequency of night wakings.
+**Keep the [bedtime routine](/blog/perfect-bedtime-routine-by-age) consistent and comforting.** A reliable 20-30 minute sequence — the same steps, in the same order, every night — communicates safety and predictability. For a baby navigating separation anxiety, the routine itself becomes a transition bridge between being with you and being alone. Studies published in *Sleep* have confirmed that consistent bedtime routines reduce both the time it takes to fall asleep and the frequency of night wakings.
 
 **Offer a comfort object.** From around nine months, introducing a small, soft comfort object — a stuffed animal or a small blanket — can give your baby something to "hold onto" in your absence. The AAP notes that soft comfort objects are safe for babies over 12 months; before that age, keep the sleep space clear per safe sleep guidelines, but you can begin introducing the object during supervised awake time so it builds positive associations.
 
-**Respond to night wakings with confidence, not alarm.** When your baby wakes calling for you, go in, offer brief reassurance — a pat, a calm voice, a short check-in — and leave before they're fully asleep. The goal is to communicate that you're there without recreating a new falling-asleep dependency. Some nights this works smoothly. Some nights it takes a few repetitions. Both are normal.
+**Respond to night wakings with confidence, not alarm.** When your baby wakes calling for you, go in, offer brief reassurance — a pat, a calm voice, a short check-in — and leave before they're fully asleep. The goal is to communicate that you're there without recreating a new falling-asleep dependency. If you're also working on helping your baby [self-settle](/blog/how-to-get-baby-to-self-settle), separation anxiety is one of the phases that can temporarily reverse progress — and that's expected. Some nights this works smoothly. Some nights it takes a few repetitions. Both are normal.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## Common Myths Worth Addressing
 

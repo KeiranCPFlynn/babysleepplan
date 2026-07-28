@@ -8,11 +8,37 @@ image: "https://images.unsplash.com/photo-1544126592-807ade215a0b?w=1200&h=630&f
 imageAlt: "Parent reading a bedtime story to a young child in a cozy room"
 imageCredit: "Picsea"
 imageCreditUrl: "https://unsplash.com/@picsea"
+faq:
+  - question: "How long should a bedtime routine be for a baby?"
+    answer: "Most pediatric sleep experts recommend a bedtime routine of 15–30 minutes for babies and toddlers. Short enough to be manageable on tired nights, but long enough for the brain to receive clear sleep cues. Consistency in the sequence matters more than the length."
+  - question: "What time should a baby go to bed?"
+    answer: "Bedtime varies by age. Newborns don't have a fixed bedtime, but from around 3–4 months, aim for 7–8 pm. Babies aged 6–12 months typically do best with a bedtime between 6:30–7:30 pm, and toddlers generally benefit from bedtimes between 6:30–7:30 pm to avoid overtiredness."
+  - question: "What should a newborn bedtime routine include?"
+    answer: "Keep it simple: a diaper change, a feed, a short cuddle or song, and then into the sleep space. Newborns don't need a bath or books — calm and consistency matter more than a complex routine at this stage."
+  - question: "Does a bedtime routine really help babies sleep better?"
+    answer: "Yes. Research consistently links predictable bedtime routines with faster sleep onset, fewer night wakings, and longer sleep duration in babies and toddlers. A 2009 study published in Sleep found that children with a consistent routine fell asleep faster and woke less often."
+howTo:
+  name: "How to Build a Bedtime Routine by Age"
+  steps:
+    - name: "Choose age-appropriate activities"
+      text: "For newborns (0–3 months), keep it simple: diaper change, feed, short cuddle or song. For infants (4–12 months), add a bath, book, or quiet play. For toddlers (1–3 years), include teeth brushing, two books, and a song — letting them choose between two options gives a sense of control."
+    - name: "Set a consistent time every night"
+      text: "Aim for the same bedtime each evening — typically between 6:30 and 8:00 pm depending on age. Run the routine for 15–30 minutes so it is long enough for the brain to receive sleep cues but short enough to stick with on tiring nights."
+    - name: "Follow the same order every night"
+      text: "Keep activities in a fixed sequence — bath, feed, book, bed — so your baby's brain learns the pattern. The order matters more than the specific activities. Consistency in the sequence is what builds the sleep association."
+    - name: "Keep lighting and stimulation low"
+      text: "Use dim lights and a calm voice throughout the routine. Do most of the routine close to the sleep space so your baby connects the cues with sleep, not with parent attention in another room."
+    - name: "Adjust as your baby grows"
+      text: "As your baby matures, gradually move the feed earlier in the routine to reduce feed-to-sleep dependence. Add new steps like teeth brushing for toddlers. The routine should evolve with your child's developmental stage."
+    - name: "Stay consistent during travel and disruptions"
+      text: "When away from home or during schedule changes, keep the same sequence of activities even if the setting is different. A portable version of your routine — same book, same song — helps your baby feel secure and preserves the sleep cues."
 ---
 
 If bedtime has started to feel like a nightly negotiation, you are in good company. Most families do not need a more complicated plan. They need a routine that matches their child's age and can still be done on a tiring Tuesday.
 
 A strong bedtime routine works because it gives the brain repeated cues that sleep is coming. Pediatric sleep research consistently links predictable routines with faster sleep onset, fewer night wakings, and better parental confidence. The routine itself does not need to be elaborate. It needs to be familiar.
+
+> **Quick answer:** The best bedtime routine is a short (15–30 minute), predictable sequence done in the same order every night — adapted to your child's age — that keeps stimulation low and ends close to the sleep space, because consistency matters far more than complexity.
 
 ## Why a Bedtime Routine by Age Works Better
 
@@ -43,6 +69,12 @@ Where feeding sits in the sequence matters more over time. Early on, many famili
 Toddlers usually resist bedtime less when the routine feels predictable and participatory. A helpful structure is wash, teeth, pajamas, two books, one song, lights out. The details can vary, but the order should remain stable.
 
 This is also the stage where small choices help. Let your toddler choose between two pajamas or two books, but keep the bedtime boundary firm. Choice within structure reduces power struggles without turning bedtime into open negotiation.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## What to Do About Bedtime Stalling
 

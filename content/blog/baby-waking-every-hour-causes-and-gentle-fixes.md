@@ -1,6 +1,6 @@
 ---
-title: "Baby Waking Every Hour? Causes and Gentle Fixes That Work"
-description: "Discover why your baby is waking every hour at night. Learn about false starts, sleep associations, and what to change first without sleep training."
+title: "Baby Waking Every Hour at Night? Here's Why (And What to Do)"
+description: "Baby waking every hour? Hourly night wakings are usually caused by sleep associations, overtiredness, or schedule issues. Learn the 4 main causes and gentle fixes that work."
 date: "2026-02-17"
 author: "LunaCradle Team"
 tags: ["night waking", "sleep associations", "sleep tips", "infant sleep"]
@@ -8,6 +8,15 @@ image: "https://images.unsplash.com/photo-1672862683946-9e3c606f71ab?w=1200&h=63
 imageAlt: "Baby yawning while lying on a bed during a night waking"
 imageCredit: "Kadyn Pierce"
 imageCreditUrl: "https://unsplash.com/@gymxratpapii"
+faq:
+  - question: "Why is my baby waking every hour at night?"
+    answer: "Hourly wakings are almost always driven by a sleep association — your baby needs the same help to fall asleep that they received at bedtime (feeding, rocking, patting) at every natural waking between sleep cycles. Other causes include a schedule mismatch (overtired or undertired) or a developmental regression."
+  - question: "Is it normal for a baby to wake every hour?"
+    answer: "For newborns under 3 months, frequent waking is normal because their sleep cycles are short and they need regular feeds. After 4–6 months, hourly waking usually signals a sleep association issue or schedule problem that can be improved with gradual changes."
+  - question: "What is a false start bedtime?"
+    answer: "A false start is when your baby wakes 30–60 minutes after bedtime — often before you've even gone to bed yourself. It typically means the last wake window was too short (baby is undertired), the sleep environment isn't right, or the bedtime routine needs more consistency."
+  - question: "How can I stop my baby waking every hour without sleep training?"
+    answer: "Start with the last wake window — make sure it's age-appropriate and not too short. Ensure genuine blackout and white noise. Then gradually reduce the level of help your baby needs to fall asleep, for example by reducing rocking time by a minute each night, so they learn to do more of the settling themselves."
 ---
 
 ## You're Not Doing Anything Wrong
@@ -18,6 +27,8 @@ The hard part is that "baby waking every hour" can mean several different things
 
 Let's untangle all of it.
 
+> **Quick answer:** Hourly night wakings are almost always driven by a sleep association (needing help to fall asleep that you can't recreate mid-cycle), a schedule mismatch (overtired or undertired), or a developmental regression — and in most cases, small adjustments to the last wake window, sleep environment, and bedtime routine bring meaningful improvement within days.
+
 ## Why Your Baby Is Waking So Often at Night
 
 Frequent night wakings in babies rarely come down to a single cause. More often, it's a combination of factors stacking on top of each other. Understanding the most common ones helps you figure out which levers to pull first.
@@ -26,7 +37,7 @@ Frequent night wakings in babies rarely come down to a single cause. More often,
 
 This is the big one. A sleep association is anything your baby relies on to fall asleep that they can't recreate on their own when they naturally wake between sleep cycles. Research from Dr. Jodi Mindell's lab at the Children's Hospital of Philadelphia has consistently shown that how a baby falls asleep at bedtime is the strongest predictor of how often they wake overnight.
 
-Every human, babies included, cycles through light and deep sleep roughly every 45 minutes to 2 hours. At the end of each cycle, we briefly surface toward wakefulness. Adults roll over and drift back off without remembering. But if your baby fell asleep while being rocked, fed, or held, they wake up and the conditions have changed. The rocking stopped. The breast or bottle is gone. They need you to recreate those conditions before they can fall back asleep.
+Every human, babies included, cycles through light and deep sleep roughly every 45 minutes to 2 hours (learn more in our guide to [understanding baby sleep cycles](/blog/understanding-baby-sleep-cycles)). At the end of each cycle, we briefly surface toward wakefulness. Adults roll over and drift back off without remembering. But if your baby fell asleep while being rocked, fed, or held, they wake up and the conditions have changed. The rocking stopped. The breast or bottle is gone. They need you to recreate those conditions before they can fall back asleep.
 
 This isn't a flaw in your baby. It's completely logical from their perspective. But it does explain why some babies wake every single sleep cycle overnight, sometimes every hour or even every 45 minutes.
 
@@ -34,7 +45,7 @@ This isn't a flaw in your baby. It's completely logical from their perspective. 
 
 If your baby falls asleep at bedtime and then wakes crying 30 to 45 minutes later, you're dealing with what sleep consultants call a "false start." This is one of the most frustrating patterns because you've just done the whole bedtime routine, finally sat down, and now you're back at square one.
 
-False starts usually point to one of two things. The first is overtiredness. When a baby is awake too long before bed, their body produces cortisol as a compensatory stress response. That cortisol burst helps them *fall* asleep, sometimes quite quickly, but it fragments the first sleep cycle and jolts them awake shortly after. If your baby crashes fast at bedtime but pops up 40 minutes later, check whether the last wake window is too long.
+False starts usually point to one of two things. The first is overtiredness. When a baby is awake too long before bed, their body produces cortisol as a compensatory stress response. That cortisol burst helps them *fall* asleep, sometimes quite quickly, but it fragments the first sleep cycle and jolts them awake shortly after. If your baby crashes fast at bedtime but pops up 40 minutes later, check whether the last wake window is too long — our guide on [overtired baby signs](/blog/overtired-baby-signs-and-what-to-do) can help you spot the warning signs.
 
 The second common cause is a sleep association tied specifically to the onset of sleep. The baby falls asleep in your arms, you transfer them to the cot, and when they surface at the end of that first cycle, they register the change and wake fully. The fix for each cause is different, so identifying which one you're dealing with matters.
 
@@ -54,7 +65,7 @@ The question isn't whether your baby wakes to feed, it's whether *every* waking 
 
 Babies' brains are doing extraordinary things in the first two years, and big developmental shifts often disrupt sleep temporarily. The well-documented four-month sleep regression, for example, is actually a permanent change in sleep architecture as your baby's cycles begin to resemble adult patterns. Other common disruption points include learning to roll, pull to stand, and major language bursts.
 
-These phases are real and they do pass, usually within one to three weeks. But here's the nuance: a regression can expose an underlying sleep association that was previously masked by immature sleep cycles.
+These phases are real and they do pass, usually within one to three weeks (see our overview of [baby sleep regression](/blog/baby-sleep-regression-what-to-expect-and-what-helps) for age-by-age timelines). But here's the nuance: a regression can expose an underlying sleep association that was previously masked by immature sleep cycles.
 
 ## Is This a Regression or a Schedule Issue?
 
@@ -65,6 +76,12 @@ This is one of the most important questions to ask, because the answer changes y
 **Signs it's a schedule issue:** The wakings have been gradually getting worse over days or weeks. Your baby's nap schedule hasn't been updated recently even though they've grown. They seem either wired at bedtime (overtired) or wide awake and playful in the cot (undertired). Naps are consistently short or bedtime takes a long time.
 
 **Signs it's both:** A regression can land on top of a schedule that was already slightly off, making everything worse. In this case, gently adjusting the schedule while riding out the regression gives you the best outcome.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## What to Change First Without Sleep Training
 

@@ -1,6 +1,6 @@
 ---
-title: "Baby Sleep Environment: The Complete Evidence-Based Guide"
-description: "Learn how to optimise your baby's sleep environment — from room temperature and darkness to white noise and safe sleep setup — based on AAP and sleep research."
+title: "Ideal Baby Sleep Environment: Temperature, Darkness & Safe Setup"
+description: "Set up the ideal baby sleep environment: 16-20°C room temp, blackout darkness, white noise under 50dB, and a safe cot setup. Evidence-based guide based on AAP recommendations."
 date: "2026-04-25"
 author: "LunaCradle Team"
 tags: ["sleep environment", "sleep science", "infant sleep", "sleep tips"]
@@ -8,6 +8,15 @@ image: "https://images.unsplash.com/photo-1613685301918-59b1039422cc?w=1200&h=63
 imageAlt: "A beautifully prepared, dimly lit nursery with blackout curtains, a white noise machine, and a safe sleep crib setup"
 imageCredit: "Collov Home Design"
 imageCreditUrl: "https://unsplash.com/@collovhome"
+faq:
+  - question: "What is the best sleep environment for a baby?"
+    answer: "Optimise four things: room temperature of 16–20°C (61–68°F), genuine blackout darkness, white noise below 50 decibels placed 2 metres from the cot, and a safe sleep setup with a firm flat mattress and no loose bedding. These changes are evidence-based and often produce noticeable improvements within days."
+  - question: "Should a baby's room be completely dark for sleep?"
+    answer: "Yes, genuine blackout darkness is one of the most powerful tools for baby sleep. Even small amounts of light suppress melatonin, the hormone that signals sleepiness. Blackout curtains or blinds are recommended to keep the room as dark as possible during naps and nighttime sleep."
+  - question: "Is white noise safe for babies?"
+    answer: "Yes, when used correctly. Keep white noise below 50 decibels and place the machine at least 2 metres from the cot. White noise helps mask household sounds that can trigger arousals during light sleep phases and provides a consistent auditory cue for sleep."
+  - question: "What should NOT be in a baby's crib?"
+    answer: "The AAP recommends no loose bedding, blankets, pillows, bumpers, or soft toys in the cot for babies under 12 months. A firm flat mattress with a fitted sheet and a properly fitted sleep sack are all your baby needs for a safe sleep environment."
 ---
 
 ## Why the Room Matters More Than You Think
@@ -16,11 +25,13 @@ When parents struggle with baby sleep, the first instinct is usually to examine 
 
 Your baby's sleep space sends constant biological signals. Light suppresses melatonin. Temperature affects sleep cycle depth. Sound disrupts transitions between sleep stages. Getting the environment right doesn't guarantee perfect sleep, but getting it wrong can undermine everything else you're doing correctly. The good news is that environmental changes are among the fastest and easiest improvements you can make.
 
+> **Quick answer:** Optimise four things first — room temperature (16–20°C / 61–68°F), genuine blackout darkness, white noise below 50 decibels placed 2 metres from the cot, and a safe sleep setup with a firm flat mattress and no loose bedding. These changes are evidence-based, low-cost, and often produce noticeable improvements within days.
+
 ## Room Temperature: The Goldilocks Factor
 
 The **American Academy of Pediatrics** recommends keeping a baby's sleep room at a temperature that is comfortable for a lightly clothed adult — broadly, between **16 and 20 degrees Celsius** (61–68°F). The NHS offers the same guidance. This cooler range is not arbitrary: overheating is associated with increased risk of sudden infant death syndrome (SIDS), and a room that's too warm can produce lighter, more fragmented sleep even when safety isn't a concern.
 
-Most parents instinctively dress babies warmly and keep rooms warm because they worry about the baby being cold. The instinct is understandable, but the evidence consistently points toward cooler being safer and better for sleep quality. A simple digital room thermometer — inexpensive and worth every penny — removes the guesswork entirely.
+Most parents instinctively dress babies warmly and keep rooms warm because they worry about the baby being cold. The instinct is understandable, but the evidence consistently points toward cooler being safer and better for sleep quality. A simple digital room thermometer — inexpensive and worth every penny — removes the guesswork entirely. For a deeper dive on temperature and what to dress your baby in, see our [baby room temperature guide](/blog/baby-room-temperature-for-sleep-guide).
 
 The right clothing or sleeping bag is the companion to room temperature. **TOG ratings** (thermal overall grade) help you pick the right weight: a 1.0 TOG sleeping bag for warmer rooms (above 20°C), 2.5 TOG for cooler rooms (16-20°C). The AAP is clear that loose bedding — blankets, pillows, bumpers — should not be in the cot for babies under 12 months, which is exactly why sleeping bags are the recommended solution.
 
@@ -32,9 +43,15 @@ Light is the primary regulator of melatonin, the hormone that signals to the bra
 
 A common concern is that babies will become "addicted" to the dark and won't be able to sleep anywhere else. This concern isn't supported by evidence. Darkness is a biological cue for sleep, not a learned dependency in the problematic sense. Babies who nap well in a dark room typically also nap reasonably well in other contexts once tired enough — the association works *with* biology rather than against it.
 
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
+
 ## White Noise: What the Research Shows
 
-White noise has become one of the most debated baby sleep tools, and the evidence on it is genuinely nuanced. Here's what we know:
+White noise has become one of the most debated baby sleep tools, and the evidence on it is genuinely nuanced (we cover this in more detail in our [white noise guide](/blog/white-noise-baby-sleep-benefits-and-risks)). Here's what we know:
 
 A 1990 study published in *Archives of Disease in Childhood* found that white noise helped 80% of newborns fall asleep within five minutes. More recent research from Dr. Harvey Karp and others confirms that continuous, steady sound has a calming effect on infant nervous systems, likely because it resembles sounds heard in the womb. It also masks environmental noise — a barking dog, a sibling, a doorbell — that can disrupt sleep transitions.
 
@@ -50,7 +67,7 @@ It's not a requirement. Many babies sleep perfectly well without it. But for fam
 
 ## The Safe Sleep Setup: Non-Negotiables
 
-Beyond the optimisation factors above, the AAP's safe sleep guidelines form the non-negotiable foundation of the sleep environment. The core recommendations, updated in 2022:
+Beyond the optimisation factors above, the AAP's [safe sleep guidelines](/blog/safe-sleep-for-babies-reducing-the-risk-of-sids) form the non-negotiable foundation of the sleep environment. The core recommendations, updated in 2022:
 
 **Back to sleep, every time.** Placing babies on their backs for every sleep (including naps) reduces SIDS risk by approximately 50%. Once a baby can roll both ways independently, you can leave them to find their own position — but you should always start them on their back.
 

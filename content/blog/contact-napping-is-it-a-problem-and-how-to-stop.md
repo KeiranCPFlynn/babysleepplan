@@ -1,6 +1,6 @@
 ---
-title: "Contact Napping: Is It a Problem and How to Stop?"
-description: "Understand why your baby only sleeps on you, whether contact napping causes harm, and gentle evidence-based strategies to help your baby nap independently in their cot."
+title: "Baby Only Sleeps on You? How to Stop Contact Napping (Gentle Methods)"
+description: "Baby only naps on you? Contact napping is exhausting but fixable. Learn why it happens, when to transition, and gentle step-by-step methods to help baby nap in the cot."
 date: "2026-05-05"
 author: "LunaCradle Team"
 tags: ["nap schedule", "sleep associations", "sleep tips", "infant sleep"]
@@ -8,6 +8,13 @@ image: "https://images.unsplash.com/photo-1531353826977-0941b4779a1c?w=1200&h=63
 imageAlt: "Baby sleeping contentedly on parent's chest during a contact nap at home"
 imageCredit: "Greg Pappas"
 imageCreditUrl: "https://unsplash.com/@vagabondage"
+faq:
+  - question: "Is contact napping bad for my baby?"
+    answer: "Contact napping is not harmful — it is a normal behavior in early infancy. Babies sleep better on a parent because they can hear your heartbeat and feel your warmth. However, if it is exhausting you or preventing baby from getting quality naps in a cot, it may be time to gently transition."
+  - question: "How do I stop contact napping without crying it out?"
+    answer: "Start with one nap a day in the cot — usually the first morning nap is easiest. Use a consistent pre-nap routine, a sleep sack, and white noise. Put baby down drowsy but awake and give 10-15 minutes before intervening. Gradually increase the number of cot naps over 2-3 weeks. Gentle methods take longer but build sustainable habits."
+  - question: "When do babies naturally stop contact napping?"
+    answer: "Most babies start to consolidate naps and sleep more independently around 4-6 months as their sleep cycles mature. By 6-8 months, many babies naturally prefer sleeping in a flat surface. If contact napping persists past 6 months and is causing problems, a gentle transition plan can help."
 ---
 
 ## Pinned to the Sofa Again
@@ -17,6 +24,8 @@ You've been sitting in the same position for 45 minutes. Your tea is cold. Your 
 If you're contact napping — sitting or lying with your baby sleeping on you for every nap — you are in very large company. It's one of the most common situations parents ask about, and it carries an enormous amount of guilt on both sides: guilt about wanting more freedom, and guilt about wanting to change something that clearly brings your baby comfort.
 
 Before we talk about how to change it (if you want to), let's be honest about whether it needs to change at all.
+
+> **Quick answer:** Contact napping — when your baby only sleeps on you — is normal in early infancy but can become exhausting. Most babies outgrow the need by 4-6 months. Gentle transitions to independent naps start with putting them down [drowsy but awake](/blog/drowsy-but-awake-does-it-work-and-how-to-do-it).
 
 ## Is Contact Napping Harmful?
 
@@ -38,7 +47,7 @@ This is also why the "transfer" is such an art form: timing it to a deep sleep p
 
 There's no single method that works for every baby, and it's worth matching the approach to your baby's age. Newborns and young infants (under 3-4 months) have limited ability to self-settle regardless of what you do, so expectations should be modest. The strategies below tend to work best from around four months onward.
 
-**The "drowsy but not asleep" approach.** Rather than waiting until your baby is fully asleep and then attempting a transfer, practise putting them down when they're drowsy but still partially aware. This doesn't work overnight — it takes days or weeks of consistent practice — but it gradually teaches your baby that the cot is a safe place to transition into sleep, rather than a cold unknown they wake up in. If they protest, pick them back up and try again the next nap.
+**The "drowsy but not asleep" approach.** Rather than waiting until your baby is fully asleep and then attempting a transfer, practise putting them down when they're drowsy but still partially aware. This doesn't work overnight — it takes days or weeks of consistent practice — but it gradually teaches your baby that the cot is a safe place to transition into sleep, rather than a cold unknown they wake up in. If you're also working on [how to get baby to self-settle](/blog/how-to-get-baby-to-self-settle) at night, this same approach reinforces that skill across all sleep times. If they protest, pick them back up and try again the next nap.
 
 **Warm the cot before putting them down.** A warm mattress (using a hot water bottle that you remove before the baby goes in, or simply a warmed blanket you swap out) reduces the thermal shock of the transfer. It's a small thing, but it noticeably improves transfer success rates.
 
@@ -54,7 +63,13 @@ Even the best technique fails if the timing is wrong. Attempting a cot transfer 
 - Not tired enough — they're too alert to drift back off without the extra support
 - Too tired — they're overtired and will wake at the slightest disturbance
 
-Both situations stack the odds against you. Aiming for cot transfers when your baby has been awake for an age-appropriate amount of time and you can see sleepy cues — heavy eyelids, slowing movements, rubbing eyes — gives you the best window.
+Both situations stack the odds against you. Aiming for cot transfers when your baby has been awake for an age-appropriate amount of time — check the [wake windows by age](/blog/wake-windows-by-age-the-complete-guide) if you're unsure what that looks like — and you can see sleepy cues — heavy eyelids, slowing movements, rubbing eyes — gives you the best window.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## Common Mistakes When Transitioning Away from Contact Napping
 

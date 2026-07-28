@@ -8,17 +8,26 @@ image: "https://images.unsplash.com/photo-1517138902993-8fab79fc86b6?w=1200&h=63
 imageAlt: "Four month old baby sleeping peacefully on a soft blanket"
 imageCredit: "Ciprian Sam"
 imageCreditUrl: "https://unsplash.com/@samihaian"
+faq:
+  - question: "How many naps should a 4 month old have?"
+    answer: "Most 4-month-olds take 3–4 naps per day, with wake windows of 1–1.75 hours between sleeps. The first wake window of the day is usually the shortest (around 60–75 minutes), and naps may range from 30 minutes to 2 hours."
+  - question: "What is the 4 month sleep regression?"
+    answer: "The 4-month sleep regression is a permanent change in sleep architecture — your baby's brain begins cycling through lighter and deeper sleep stages like an adult. This causes more frequent partial arousals between cycles. It's not caused by anything you did, and it typically happens between 3–5 months."
+  - question: "How much sleep does a 4 month old need?"
+    answer: "Most 4-month-olds need 14–16 hours of total sleep per day, split across roughly 10–11 hours overnight (often broken by feeds) and 4–5 hours of daytime naps. The AAP recommends 12–16 hours total for babies aged 4–12 months."
+  - question: "Why is my 4 month old waking every hour?"
+    answer: "Around 4 months, babies begin cycling through adult-like sleep stages with lighter phases between cycles. During these lighter phases, they may partially wake and need help settling back. This is a normal developmental shift, not a sign of a sleep problem."
 ---
 
 Four months is one of those ages that shows up in every tired parent's search history. Sleep that was sort of working — or at least predictable — can suddenly fall apart. Naps get shorter, nights get choppier, and nothing seems to settle your baby the way it used to. If this sounds familiar, you've landed in the right place.
 
-*Quick answer: Most 4-month-olds need 14–16 hours of total sleep per day, split across 3–4 naps and roughly 10–11 hours overnight. Wake windows of 1–1.75 hours are typical at this age. The infamous "4-month sleep regression" is caused by a permanent change in sleep architecture — not a phase you did anything wrong to create.*
+> **Quick answer:** Most 4-month-olds need 14–16 hours of total sleep per day, split across 3–4 naps and roughly 10–11 hours overnight. Wake windows of 1–1.75 hours are typical at this age. The infamous "4-month sleep regression" is caused by a permanent change in sleep architecture — not a phase you did anything wrong to create.
 
 ## Why 4 Months Changes Everything
 
 The reason four months is such a pivotal age comes down to biology. Before this point, babies cycle between active sleep and quiet sleep. Around 3–4 months, the brain begins reorganising sleep into the lighter and deeper stages that adults experience, complete with more frequent partial arousals between cycles.
 
-This is a **permanent developmental shift**, not a regression that passes and leaves you back where you started. The good news is that it also creates a window to start building healthier sleep habits — because now your baby's sleep is structured in a way that can actually respond to routine and settling skills.
+This is a **permanent developmental shift**, not a regression that passes and leaves you back where you started. (Learn more about what's happening in our guide to [understanding baby sleep cycles](/blog/understanding-baby-sleep-cycles).) The good news is that it also creates a window to start building healthier sleep habits — because now your baby's sleep is structured in a way that can actually respond to routine and settling skills.
 
 Research published in *Sleep Medicine Reviews* confirms that this maturation of sleep architecture is universal across healthy infants, typically occurring between 3 and 5 months. It's not caused by a growth spurt, a nursing change, or anything you did.
 
@@ -32,15 +41,15 @@ At this age, most babies are on **3–4 naps per day**, with wake windows — th
 
 Here's a realistic starting framework. Adjust based on when your baby naturally wakes in the morning.
 
-| Time | Activity |
-|---|---|
-| 7:00 a.m. | Wake and first feed |
-| 8:15–9:00 a.m. | Nap 1 (45–60 min) |
-| 10:15–11:30 a.m. | Nap 2 (1–1.5 hours) |
-| 1:00–2:00 p.m. | Nap 3 (45–60 min) |
-| 3:30–4:00 p.m. | Short catnap (optional, 20–30 min) |
-| 6:00–6:30 p.m. | Bedtime routine begins |
-| 7:00 p.m. | Asleep for the night |
+| Time             | Activity                           |
+| ---------------- | ---------------------------------- |
+| 7:00 a.m.        | Wake and first feed                |
+| 8:15–9:00 a.m.   | Nap 1 (45–60 min)                  |
+| 10:15–11:30 a.m. | Nap 2 (1–1.5 hours)                |
+| 1:00–2:00 p.m.   | Nap 3 (45–60 min)                  |
+| 3:30–4:00 p.m.   | Short catnap (optional, 20–30 min) |
+| 6:00–6:30 p.m.   | Bedtime routine begins             |
+| 7:00 p.m.        | Asleep for the night               |
 
 Note the early bedtime. Parents sometimes resist 7 p.m. bedtimes thinking their baby will wake earlier, but the research consistently shows that an **overtired baby wakes more, not less**. An early bedtime during the newborn-to-infant transition actually helps extend overnight sleep.
 
@@ -56,11 +65,17 @@ Signs your baby is entering the sleepy window:
 
 Aiming to begin your nap settling routine a few minutes *before* these cues peak — when you're watching for them rather than reacting to them — is one of the biggest game-changers at this age.
 
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
+
 ## The 4-Month Regression: What It Actually Is
 
 The "4-month sleep regression" is a term that can cause a lot of unnecessary panic, partly because it implies something went wrong. Nothing went wrong. It's simply the moment that the new, adult-like sleep architecture kicks in. Babies who previously fell asleep at the breast or on motion now rouse partially between sleep cycles and can't transition back independently if those conditions aren't present.
 
-This is why settling techniques and consistent sleep conditions become so important around this age. If your baby can only fall asleep being rocked, they'll need rocking at 1 a.m., 3 a.m., and 5 a.m. when they surface between cycles. Working on what sleep researchers call **"sleep onset association"** — helping your baby practise falling asleep in their sleep space, with minimal intervention — is the most effective thing you can do now.
+This is why settling techniques and consistent sleep conditions become so important around this age. If your baby can only fall asleep being rocked, they'll need rocking at 1 a.m., 3 a.m., and 5 a.m. when they surface between cycles. Working on what sleep researchers call **"sleep onset association"** (more on this in our guide to [how to get baby to self-settle](/blog/how-to-get-baby-to-self-settle)) — helping your baby practise falling asleep in their sleep space, with minimal intervention — is the most effective thing you can do now.
 
 ## Common Myths About 4-Month Sleep
 

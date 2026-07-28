@@ -1,6 +1,6 @@
 ---
-title: "11-Month-Old Sleep Schedule: Naps, Bedtime & Nap Transitions"
-description: "Learn what to expect from an 11-month-old's sleep schedule — nap timing, wake windows, bedtime, and how to tell if your baby is ready to drop to one nap."
+title: "11 Month Old Sleep Schedule: Naps, Wake Windows & Bedtime Guide"
+description: "Complete 11 month old sleep schedule: 2 naps, 3-3.5 hour wake windows, 7-8pm bedtime. Includes signs baby is ready for the one-nap transition and a sample daily routine."
 date: "2026-05-13"
 author: "LunaCradle Team"
 tags: ["infant sleep", "nap schedule", "nap transitions"]
@@ -8,6 +8,15 @@ image: "https://images.unsplash.com/photo-1774578342155-8d7e44a18bfd?w=1200&h=63
 imageAlt: "Eleven-month-old baby sleeping soundly in a crib with soft nursery lighting"
 imageCredit: "Franco Debartolo"
 imageCreditUrl: "https://unsplash.com/@francotheshooter"
+faq:
+  - question: "How many naps should an 11 month old have?"
+    answer: "Most 11-month-olds take 2 naps per day, typically totalling 2–3 hours of daytime sleep. Some babies begin showing signs of nap consolidation around this age, but two naps remain appropriate for the majority until at least 13 months."
+  - question: "What time should an 11 month old go to bed?"
+    answer: "A bedtime between 7:00–8:00 pm works well for most 11-month-olds, assuming the last nap ends by around 4:00–4:30 pm. The key is keeping the final wake window to roughly 3–3.5 hours so your baby is tired enough to settle but not overtired."
+  - question: "How long should an 11 month old be awake between naps?"
+    answer: "Wake windows at 11 months are typically 3–3.5 hours. The first window of the day is often slightly shorter (around 3 hours), while the last window before bedtime may stretch to 3.5–3.75 hours as your baby's sleep pressure builds."
+  - question: "Is 11 months too early to drop to one nap?"
+    answer: "Yes, 11 months is generally too early for most babies. Research suggests the transition from two naps to one typically happens between 13 and 18 months. If your 11-month-old is fighting the second nap, try shortening it rather than dropping it entirely."
 ---
 
 ## Almost One, and Sleep Is Getting Interesting
@@ -15,6 +24,8 @@ imageCreditUrl: "https://unsplash.com/@francotheshooter"
 The run-up to a baby's first birthday is one of the most developmentally intense periods of early childhood. At 11 months, your baby is likely cruising along furniture, possibly taking first steps, saying a few words, and demonstrating a will of their own that you may not have anticipated quite this soon. All of that neurological activity is wonderful — and it can absolutely wreak havoc on sleep.
 
 If naps have become a negotiation, bedtime is taking longer than it used to, or nights feel inconsistent, you are in very good company. The good news is that most 11-month-old sleep challenges have clear, addressable causes. Here's what to know.
+
+> **Quick answer:** An 11-month-old typically needs 13-14 hours of total sleep: about 10-11 hours overnight and 2-3 hours across two naps. Wake windows are roughly 3-4 hours.
 
 ## How Much Sleep Does an 11-Month-Old Need?
 
@@ -24,7 +35,7 @@ Typically, this breaks down as **10 to 11 hours** of overnight sleep and **2 to 
 
 ## A Sample 11-Month-Old Sleep Schedule
 
-Wake windows at 11 months generally run **3 to 3.5 hours**, though some babies stretch comfortably to 3.75 hours by the end of the day. Here's what a solid schedule might look like:
+[Wake windows](/blog/wake-windows-by-age-the-complete-guide) at 11 months generally run **3 to 3.5 hours**, though some babies stretch comfortably to 3.75 hours by the end of the day. Here's what a solid schedule might look like:
 
 - **Morning wake:** 6:30–7:00 a.m.
 - **Nap 1:** Around 9:30–10:00 a.m., lasting 45–90 minutes
@@ -33,11 +44,17 @@ Wake windows at 11 months generally run **3 to 3.5 hours**, though some babies s
 
 The last wake window — from the end of nap two to bedtime — is the most critical one to get right. Too short and your baby won't have built enough sleep pressure to settle easily. Too long and overtiredness kicks in, making bedtime harder and potentially fragmenting overnight sleep.
 
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
+
 ## The Big Question: Is Your 11-Month-Old Ready to Drop to One Nap?
 
 This comes up constantly at this age, and it deserves a thoughtful answer: **probably not yet**, but the picture is nuanced.
 
-Research and clinical experience from pediatric sleep specialists like Dr. Jodi Mindell suggest that most babies aren't developmentally ready for the 2-to-1 nap transition until 13 to 18 months. The average is closer to 15-16 months. Moving to one nap before a baby is ready almost always backfires — it creates an accumulated sleep debt that shows up as early waking, harder bedtimes, and more frequent night waking.
+Research and clinical experience from pediatric sleep specialists like Dr. Jodi Mindell suggest that most babies aren't developmentally ready for the [2-to-1 nap transition](/blog/nap-transition-guide-when-to-drop-a-nap) until 13 to 18 months. The average is closer to 15-16 months. Moving to one nap before a baby is ready almost always backfires — it creates an accumulated sleep debt that shows up as early waking, harder bedtimes, and more frequent night waking.
 
 That said, some 11-month-olds do show genuine signs of readiness early. The signals to look for include **consistently refusing the second nap for two to three consecutive weeks** (not just two or three days), taking the second nap without trouble but then being unable to fall asleep at bedtime until 8:30 p.m. or later, or waking significantly earlier in the morning than usual.
 
@@ -45,7 +62,7 @@ If only one or two of those signs are present, the safer move is to adjust the s
 
 ## What's Making Naps Harder Right Now
 
-The 8-to-10 month period is typically associated with a significant developmental surge, and its effects often linger into 11 months. Object permanence — the understanding that things continue to exist when out of sight — is now fully in place, which is part of why many babies this age protest more intensely when a parent leaves the room. Separation anxiety peaks around 9-18 months, and it makes falling asleep independently feel much harder for some babies.
+The 8-to-10 month period is typically associated with a significant developmental surge, and its effects often linger into 11 months. Object permanence — the understanding that things continue to exist when out of sight — is now fully in place, which is part of why many babies this age protest more intensely when a parent leaves the room. [Separation anxiety](/blog/separation-anxiety-and-baby-sleep-why-it-happens-and-what-helps) peaks around 9-18 months, and it makes falling asleep independently feel much harder for some babies.
 
 If your 11-month-old was napping reliably and has suddenly started fighting naps or waking early from them, a developmental phase is very likely the culprit. These phases generally resolve within one to three weeks if you stay consistent with the schedule and routine. Introducing new sleep associations during this time — rocking to sleep, feeding to sleep — can extend the disruption well past the developmental phase itself.
 

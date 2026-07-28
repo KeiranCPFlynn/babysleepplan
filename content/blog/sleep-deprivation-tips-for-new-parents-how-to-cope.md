@@ -8,13 +8,24 @@ image: "https://images.unsplash.com/photo-1614286566782-719853c90688?w=1200&h=63
 imageAlt: "An exhausted new parent resting on a sofa while their baby sleeps nearby"
 imageCredit: "Helena Lopes"
 imageCreditUrl: "https://unsplash.com/@helenalopesph"
+faq:
+  - question: "How much sleep do new parents lose?"
+    answer: "Research published in the journal Sleep found that parents of newborns lose an average of 44 minutes per night in the first year, with the biggest impact in the early weeks. Studies suggest it can take up to six years for parents' sleep to fully return to pre-baby levels."
+  - question: "How do I cope with sleep deprivation as a new parent?"
+    answer: "The most effective strategies are splitting the night with a partner (one handles duties until 2–3am, the other takes over after), protecting at least one daytime nap of 10–20 minutes, and going straight to sleep rather than scrolling when the baby is down. Even occasional naps significantly restore alertness and mood."
+  - question: "Is sleep deprivation dangerous for new parents?"
+    answer: "Yes — the AAP notes that sleep-deprived parents are at higher risk of falling asleep with the baby on an unsafe surface, and fragmented sleep is associated with more cognitive impairment than continuous sleep of the same duration. If you feel unsafe, ask for help and prioritise one longer sleep stretch per 24 hours."
+  - question: "When will I start feeling less sleep deprived with a newborn?"
+    answer: "Most parents see gradual improvement as babies begin consolidating sleep around 3–6 months, with longer night stretches reducing fragmentation. However, the total sleep deficit accumulates, so even once nights improve, catching up on rest takes time."
 ---
+
+> **Quick answer:** New parent sleep deprivation is real — parents lose an average of 44 minutes per night in the first year. The most effective coping strategies are splitting the night with a partner, protecting at least one daytime nap, and working toward a consistent bedtime routine so your baby's sleep stretches gradually lengthen.
 
 ## What Nobody Quite Prepares You For
 
 You knew it would be tiring. Everyone told you it would be tiring. And yet — the reality of sleeping in 90-minute fragments, operating on four hours in a 24-hour period, and being required to make decisions and care for a human being while feeling like your brain has been replaced with wet sand: that's something that can't quite be conveyed in advance.
 
-New parent sleep deprivation is real, significant, and routinely underestimated. Research published in *Sleep* in 2019 found that parents of newborns lose an average of 44 minutes of sleep per night in the first year, with the biggest hit in the early weeks — and that it can take up to six years for parents' sleep to fully return to pre-baby levels. You are not weak for finding this hard. It's objectively hard.
+New parent sleep deprivation is real, significant, and routinely underestimated. Research published in *Sleep* in 2019 found that parents of [newborns](/blog/newborn-sleep-schedule-patterns-and-tips) lose an average of 44 minutes of sleep per night in the first year, with the biggest hit in the early weeks — and that it can take up to six years for parents' sleep to fully return to pre-baby levels. You are not weak for finding this hard. It's objectively hard.
 
 The good news is that there are genuine strategies that help — not magic solutions, but practical approaches that protect your health and functioning during one of the more demanding periods of your life.
 
@@ -44,11 +55,17 @@ Sleep deprivation doesn't only affect your physical functioning — it has signi
 
 This matters because postnatal depression and anxiety affect roughly 10 to 15% of mothers and an estimated 10% of fathers, and sleep deprivation is both a risk factor and a symptom. If you're finding that exhaustion is accompanied by persistent low mood, anxiety, an inability to feel connected to your baby, or thoughts of harming yourself, please speak to your GP or midwife. Postnatal mental health difficulties are common, treatable, and nothing to be ashamed of.
 
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
+
 ## What Actually Makes Baby Sleep Better (the Non-Magic Version)
 
 The fastest path to your own better sleep is, of course, your baby sleeping in longer stretches. The evidence consistently supports a few approaches:
 
-A **consistent bedtime routine** from around 6 to 8 weeks helps the baby's circadian system begin to regulate. Differentiating **day from night** from the early weeks — bright and active during the day, dim and boring at night — accelerates this process. And where you're ready for it, gently working toward **independent settling** (putting the baby down drowsy rather than fully asleep) from around 4 months makes a significant difference to overnight wake frequency.
+A **consistent [bedtime routine](/blog/perfect-bedtime-routine-by-age)** from around 6 to 8 weeks helps the baby's circadian system begin to regulate. Differentiating **day from night** from the early weeks — bright and active during the day, dim and boring at night — accelerates this process. And where you're ready for it, gently working toward **[independent settling](/blog/how-to-get-baby-to-self-settle)** (putting the baby down drowsy rather than fully asleep) from around 4 months makes a significant difference to overnight wake frequency.
 
 These things take time. Exhaustion makes time feel both endless and elastic. But the trajectory with consistent effort does improve.
 

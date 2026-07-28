@@ -1,6 +1,6 @@
 ---
-title: "How Much Sleep Does My Baby Need? A Complete Guide by Age"
-description: "Find out exactly how much sleep babies and toddlers need at every age, from newborns to 3-year-olds, based on AAP sleep research recommendations."
+title: "How Much Sleep Does Baby Need? Complete Guide by Age (0-3 Years)"
+description: "Baby sleep needs by age: newborns 14-17hrs, 6-month-olds 12-16hrs, 1-year-olds 11-14hrs. Based on AAP recommendations with wake windows and nap totals for each stage."
 date: "2026-04-27"
 author: "LunaCradle Team"
 tags: ["sleep science", "infant sleep", "nap schedule", "toddler sleep"]
@@ -8,6 +8,15 @@ image: "https://images.unsplash.com/photo-1546015720-b8b30df5aa27?w=1200&h=630&f
 imageAlt: "Baby sleeping peacefully in a crib with a clock visible in the softly lit nursery"
 imageCredit: "Minnie Zhou"
 imageCreditUrl: "https://unsplash.com/@marslady"
+faq:
+  - question: "How much sleep does a newborn need?"
+    answer: "Newborns (0–3 months) need 14–17 hours of total sleep per 24 hours, including naps, according to the AAP. Sleep is spread across many short stretches of 45 minutes to 3 hours, with wake windows of just 30–90 minutes between sleeps."
+  - question: "How much sleep does a 6 month old need?"
+    answer: "A 6-month-old typically needs 12–16 hours of total sleep per 24 hours, including 2–3 naps totalling about 3–4 hours. Nighttime sleep usually stretches to 6–8 hours or longer, though this varies significantly between babies."
+  - question: "How much sleep does a 1 year old need?"
+    answer: "A 1-year-old needs about 11–14 hours of total sleep per 24 hours, typically with 2 naps (transitioning to 1 nap around 14–18 months). Nighttime sleep is usually 10–12 hours with daytime sleep of about 2–3 hours."
+  - question: "Is my baby sleeping too much or too little?"
+    answer: "There's wide normal variation — some babies need an hour more or less than the guidelines. Focus on whether your baby is gaining well, alert during wake windows, and meeting developmental milestones rather than chasing an exact number. Consult your pediatrician if total sleep is consistently well above or below the age range."
 ---
 
 ## The Question Every Parent Has
@@ -17,6 +26,8 @@ Whether you're staring at a two-week-old who seems to sleep all day and then scr
 Sleep needs change dramatically in the first three years of life, and the difference between what a newborn needs and what a two-year-old needs is enormous. Equally important: there's real variation within age groups — not every baby at six months needs exactly the same amount of sleep, and knowing the range helps you calibrate expectations rather than chasing a single number.
 
 Here's what the research actually says, age by age.
+
+> **Quick answer:** Newborns need 14-17 hours, infants (4-12 months) need 12-16 hours, and toddlers (1-3 years) need 11-14 hours of total sleep per 24 hours, including naps.
 
 ## The AAP and NSF Recommendations
 
@@ -38,9 +49,9 @@ The circadian rhythm typically begins consolidating from around **6-8 weeks**, w
 
 **Total sleep needed: 12-16 hours per 24 hours.**
 
-By three months, many babies are beginning to show the first signs of day/night organisation. Overnight stretches may be lengthening to 4-6 hours for some babies, and naps are starting to become more predictable. Most babies this age take **3-4 naps** per day, and wake windows (the amount of time they can comfortably stay awake) are typically **60-90 minutes**.
+By three months, many babies are beginning to show the first signs of day/night organisation. Overnight stretches may be lengthening to 4-6 hours for some babies, and naps are starting to become more predictable. Most babies this age take **3-4 naps** per day, and [wake windows](/blog/wake-windows-by-age-the-complete-guide) (the amount of time they can comfortably stay awake) are typically **60-90 minutes**.
 
-The four-month mark brings what's commonly called the "four-month sleep regression" — actually a permanent shift in sleep architecture as babies' cycles begin to resemble adult patterns. This is a key developmental milestone that makes sleep temporarily harder, and it's the age at which sleep associations become particularly relevant because babies now cycle through lighter sleep stages more frequently.
+The four-month mark brings what's commonly called the "four-month sleep regression" — actually a permanent shift in [sleep architecture](/blog/understanding-baby-sleep-cycles) as babies' cycles begin to resemble adult patterns. This is a key developmental milestone that makes sleep temporarily harder, and it's the age at which sleep associations become particularly relevant because babies now cycle through lighter sleep stages more frequently.
 
 ## Sleep by Age: 6-9 Months
 
@@ -48,7 +59,7 @@ The four-month mark brings what's commonly called the "four-month sleep regressi
 
 This is one of the most productive ages for sleep work. By six months, babies have the neurological maturity to begin learning independent settling skills, many are physiologically capable of longer overnight stretches without a feed, and wake windows have extended to around **2-3 hours**.
 
-Most babies this age take **2 naps** — a morning nap and an afternoon nap — totalling roughly 2.5-3.5 hours of daytime sleep. The transition from 3 naps to 2 typically happens somewhere between 5 and 8 months, and it's one of the most impactful schedule changes of early infancy.
+Most babies this age take **2 naps** — a morning nap and an afternoon nap — totalling roughly 2.5-3.5 hours of daytime sleep. The transition from 3 naps to 2 typically happens somewhere between 5 and 8 months, and it's one of the most impactful schedule changes of early infancy. If your baby's naps are consistently [shorter than 30 minutes](/blog/baby-short-naps-30-minutes-why-and-how-to-fix-them) during this transition, that's a sign the timing may need adjusting rather than the nap being unnecessary.
 
 Overnight sleep at this age is typically **10-11 hours**, though many babies still take one or two night feeds, particularly if breastfeeding. The AAP notes that most babies are nutritionally capable of longer overnight stretches by six months, but individual variation is significant and a conversation with your pediatrician is always worth having before night-weaning.
 
@@ -81,6 +92,12 @@ Most toddlers in this range are on a single nap lasting 1-2 hours, with overnigh
 The **two-year regression** and **three-year developmental disruption** are common in this period, usually driven by cognitive leaps, big life transitions (new sibling, starting nursery, moving house), or simply the ongoing negotiation that characterises toddler development.
 
 Even when the nap is dropped, a **quiet time** in the afternoon remains valuable for many toddlers — 30-60 minutes in their room with books or calm activities helps manage afternoon energy without requiring sleep.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## What to Do If Your Baby Seems to Need More or Less Than Average
 

@@ -1,6 +1,6 @@
 ---
-title: "Baby Waking at 5am? Why It Happens and How to Fix It"
-description: "Discover why your baby is waking at 5am (or earlier) and learn evidence-based fixes for early morning wakings, split nights, and light disruption."
+title: "Baby Waking at 5am? 5 Fixes That Actually Work"
+description: "Baby waking at 5am every day? Early rising is usually caused by overtiredness, too much daytime sleep, or light exposure. Learn 5 evidence-based fixes to shift wake time later."
 date: "2026-02-17"
 author: "LunaCradle Team"
 tags: ["early rising", "nap schedule", "sleep environment", "sleep tips"]
@@ -8,6 +8,15 @@ image: "https://images.unsplash.com/photo-1733759343333-5ee8d76d58ca?w=1200&h=63
 imageAlt: "Wide awake baby lying in bed during an early morning waking"
 imageCredit: "Zachary Kadolph"
 imageCreditUrl: "https://unsplash.com/@zacharykadolph"
+faq:
+  - question: "Why is my baby waking at 5am?"
+    answer: "By 4–5am, most deep sleep has already happened and your baby is in lighter REM-dominant sleep with less biological motivation to stay asleep. Common causes include insufficient blackout in the room, too much or too little daytime sleep, and a bedtime that's either too early or too late."
+  - question: "Is 5am too early for a baby to wake up?"
+    answer: "Yes, 5am is generally considered an early morning waking rather than a natural wake time. Most babies are ready to start the day between 6–7am. A consistent early wake before 6am usually signals that something in the schedule or environment needs adjusting."
+  - question: "How do I stop my baby from waking at 5am?"
+    answer: "Blackout-proof the room completely — even small amounts of early morning light can trigger waking. Check that total daytime sleep isn't too generous, and make sure bedtime isn't too early (which can cause split nights) or too late (which leads to overtiredness and early rising)."
+  - question: "Should I put my baby to bed earlier if they wake at 5am?"
+    answer: "Not necessarily. An earlier bedtime can sometimes make early waking worse by creating split nights — your baby gets enough deep sleep and then wakes in lighter sleep. Instead, check whether the current bedtime is already too early, and focus on blackout and daytime sleep adjustments first."
 ---
 
 ## The 5am Problem
@@ -15,6 +24,8 @@ imageCreditUrl: "https://unsplash.com/@zacharykadolph"
 It's still dark outside, the coffee machine hasn't switched on yet, and your baby is wide awake, babbling or crying, ready to start the day. If your baby is waking at 5am, or 4am, or sometimes even 3am with no intention of going back to sleep, you know this particular brand of exhaustion.
 
 Early morning wakings are one of the most stubborn sleep problems to fix. That's not because they're complicated, but because they sit at the intersection of several factors: biology, schedule, environment, and habit. The good news is that once you figure out which combination is driving your baby's early starts, the fixes are surprisingly practical.
+
+> **Quick answer:** Early morning wakings (4–5am) happen when deep sleep has already been banked and lighter REM sleep takes over — the fix is almost always a combination of blackout-proofing the room, checking that total daytime sleep isn't too generous, and making sure bedtime isn't too early or too late for your baby's actual sleep need.
 
 ## Why Early Morning Wakings Are Different
 
@@ -77,6 +88,12 @@ Most babies aged 6 to 12 months need roughly 2.5 to 3.5 hours of daytime sleep. 
 If your baby is consistently exceeding these ranges and waking early, try capping the longest nap by 15 minutes. Give the change three to four days to show an effect. If early waking improves, you've found your lever. If it doesn't budge, daytime sleep probably isn't the issue.
 
 The last nap of the day deserves special attention. A late afternoon nap that runs past 4 or 4:30pm can steal sleep pressure from the early morning hours. If your baby naps late and wakes early, cutting or shortening that last nap is often the fastest fix.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## Light and Temperature Fixes
 

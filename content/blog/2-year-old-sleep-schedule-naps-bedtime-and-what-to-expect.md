@@ -1,6 +1,6 @@
 ---
-title: "2-Year-Old Sleep Schedule: Naps, Bedtime, and What to Expect"
-description: "Learn the ideal sleep schedule for a 2-year-old, including nap length, bedtime timing, wake windows, and what to do when toddler sleep gets tricky."
+title: "2 Year Old Sleep Schedule: Naps, Bedtime & Toddler Sleep Tips"
+description: "Complete 2 year old sleep schedule: 11-14 hours total, 1 nap (1-2 hours), 7-8pm bedtime. Includes tips for bedtime resistance, night wakings, and the 2-year sleep regression."
 date: "2026-04-21"
 author: "LunaCradle Team"
 tags: ["nap schedule", "toddler sleep", "sleep tips"]
@@ -8,6 +8,15 @@ image: "https://images.unsplash.com/photo-1619704684523-4c80099dc332?w=1200&h=63
 imageAlt: "A two-year-old toddler sleeping in a small bed with a soft toy beside them"
 imageCredit: "Flávia Gava"
 imageCreditUrl: "https://unsplash.com/@flaviagava"
+faq:
+  - question: "How much sleep does a 2 year old need?"
+    answer: "A 2-year-old needs 11–14 hours of total sleep per 24-hour period, according to the AAP. Most get around 11–12 hours overnight plus a 1–2 hour afternoon nap, though some toddlers are beginning to drop their nap around this age."
+  - question: "Should a 2 year old still be napping?"
+    answer: "Yes, most 2-year-olds still benefit from a daily nap. Research by Dr. Monique LeBourgeois found that children retain sleep benefits from naps until age 3–4, even if they resist it. A 1–2 hour afternoon nap is typical at this age."
+  - question: "Is 2 years old too early for a toddler bed?"
+    answer: "There's no fixed age, but many families make the transition between 18 months and 3 years. If your 2-year-old is climbing out of the cot or showing interest in a bed, it may be time. Otherwise, there's no developmental urgency to switch."
+  - question: "What time should a 2 year old go to bed?"
+    answer: "A bedtime between 7:00–8:00 pm is appropriate for most 2-year-olds. On days with a nap, bedtime may be closer to 7:30–8:00 pm; on days without a nap, consider moving it 30–60 minutes earlier to prevent overtiredness."
 ---
 
 ## Two Years Old: Opinions, Independence, and Bedtime Battles
@@ -15,6 +24,10 @@ imageCreditUrl: "https://unsplash.com/@flaviagava"
 If your 2-year-old has recently discovered the word "no" — including at bedtime — you're right on schedule. Two is an age of extraordinary developmental growth: language is exploding, imagination is coming online, and toddlers are actively testing the boundaries of their world. All of this is wonderful and exactly as it should be. It also makes settling for sleep significantly more interesting than it was six months ago.
 
 The good news is that most 2-year-olds still have fairly predictable sleep needs, and a consistent schedule paired with a calm routine does a remarkable amount of heavy lifting. Understanding what to expect at this age makes it much easier to hold your ground when bedtime becomes a negotiation.
+
+If your child is still adjusting from the toddler years, the [18-month-old sleep schedule](/blog/18-month-old-sleep-schedule-naps-bedtime-and-toddler-tips) covers what changes between 18 months and 2 years.
+
+> **Quick answer:** A 2-year-old needs 11-14 hours of total sleep in a 24-hour period. Most still take one afternoon nap (1-2 hours), with bedtime between 7:00-8:00pm.
 
 ## How Much Sleep Does a 2-Year-Old Need?
 
@@ -26,12 +39,12 @@ Most 2-year-olds are still napping, though some are beginning to show signs of d
 
 A workable schedule for most 2-year-olds looks something like this:
 
-| Time | Activity |
-|------|----------|
-| 6:30–7:00 am | Wake |
-| 12:30–1:00 pm | Nap starts |
-| 2:30–3:00 pm | Nap ends (aim for 1–1.5 hours) |
-| 7:00–7:30 pm | Bedtime |
+| Time          | Activity                       |
+| ------------- | ------------------------------ |
+| 6:30–7:00 am  | Wake                           |
+| 12:30–1:00 pm | Nap starts                     |
+| 2:30–3:00 pm  | Nap ends (aim for 1–1.5 hours) |
+| 7:00–7:30 pm  | Bedtime                        |
 
 The key lever here is the gap between nap end and bedtime. At 2 years, most toddlers do well with around 4 to 4.5 hours of awake time before bed. If the nap finishes at 2:30 pm and bedtime is at 7:00 pm, that's a comfortable 4.5-hour window. Push bedtime later and overtiredness becomes a real problem.
 
@@ -41,11 +54,17 @@ Wake windows at this age are typically **5 to 6 hours** in the morning (from wak
 
 Many parents of 2-year-olds find that the biggest sleep problems come from a too-late nap end or a too-late bedtime pushing overtiredness. A toddler who falls asleep at 9:00 pm after fighting bedtime for two hours is almost never getting enough sleep.
 
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
+
 ## Bedtime Resistance: Why It Happens and What Helps
 
 Bedtime resistance at 2 is extremely common and largely developmental. Toddlers this age have a growing understanding of what "going to sleep" means — including the fact that it means being away from the action, and away from you. Separation anxiety, which often persists or re-emerges at this age, plays a significant role.
 
-The most reliable strategy is a **short, predictable bedtime routine** done in the same order every night. The NHS recommends keeping the routine to around 20 to 30 minutes and choosing activities that reliably calm your specific child. A warm bath, pyjamas, two or three books, a song, a cuddle, and a firm but loving goodbye is a classic template — and it works because consistency creates expectation.
+The most reliable strategy is a [short, predictable bedtime routine](/blog/perfect-bedtime-routine-by-age) done in the same order every night. The NHS recommends keeping the routine to around 20 to 30 minutes and choosing activities that reliably calm your specific child. A warm bath, pyjamas, two or three books, a song, a cuddle, and a firm but loving goodbye is a classic template — and it works because consistency creates expectation.
 
 What tends to make bedtime resistance worse is extending the routine indefinitely in response to protests, or returning repeatedly after lights out. Both approaches are understandable, but they teach a toddler that protest is productive, which simply invites more of it the next night.
 
@@ -63,7 +82,7 @@ If your 2-year-old genuinely drops the nap, bedtime will almost certainly need t
 
 ## Night Waking at 2 Years
 
-Two-year-olds who are sleeping through the night sometimes begin waking again. The most common culprits are developmental regressions (a significant one can occur around 2 years), a change in circumstances (new sibling, house move, starting nursery), or illness.
+Two-year-olds who are sleeping through the night sometimes begin waking again. The most common culprits are developmental regressions (a significant one can occur around 2 years, and another follows at [3 years old](/blog/3-year-old-sleep-regression-signs-causes-and-what-helps)), a change in circumstances (new sibling, house move, starting nursery), or illness.
 
 Night fears also begin to emerge around this age. Toddlers' imaginations are coming online, and the dark can become genuinely frightening. A small nightlight, a comfort toy, and brief but consistent reassurance at bedtime ("You're safe, I'm here, I'll be just down the hall") tends to work better than extended settling sessions.
 

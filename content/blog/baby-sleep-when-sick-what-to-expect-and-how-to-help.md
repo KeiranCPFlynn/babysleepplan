@@ -8,6 +8,15 @@ image: "https://images.unsplash.com/photo-1768198566756-c4395ca31b29?w=1200&h=63
 imageAlt: "A sick baby resting in a cot with a parent's hand gently on their back"
 imageCredit: "Brooke Balentine"
 imageCreditUrl: "https://unsplash.com/@brookebalentine"
+faq:
+  - question: "Why does my baby sleep worse when sick?"
+    answer: "Illness disrupts sleep through pain, congestion, fever, and the body's immune response. A 2020 review in Sleep Medicine found that even mild respiratory illness reduces deep sleep time and increases overnight arousals in babies and toddlers."
+  - question: "How long does illness-related sleep disruption last?"
+    answer: "Most common illnesses disrupt sleep for 3–7 days. Night waking increases and naps may become shorter or harder to achieve. Most babies return to their previous sleep patterns within a week of recovery once symptoms have resolved."
+  - question: "Should I let my baby sleep more when sick?"
+    answer: "Yes, allow extra sleep during illness — the body needs rest to fight infection. Cytokines released during illness can increase daytime sleepiness. However, if your baby is sleeping significantly more than usual and is difficult to rouse for feeds, contact your pediatrician."
+  - question: "Will extra comfort during illness create bad sleep habits?"
+    answer: "Offering extra comfort during illness is appropriate and won't create lasting problems if you return to your normal routine once your baby recovers. Most babies go back to their previous sleep patterns within a week. The key is not to make permanent changes to your settling approach during a temporary illness."
 ---
 
 ## When Illness Undoes Everything You've Built
@@ -15,6 +24,8 @@ imageCreditUrl: "https://unsplash.com/@brookebalentine"
 You've done the work. Your baby has a solid routine, is settling independently, and sleeping in good stretches. Then they get their first cold — or ear infection, or bout of hand foot and mouth — and suddenly they're waking every hour, refusing to go down in the cot, and wanting to be held all night. It can feel like you're back at square one.
 
 You're not. Understanding what happens to sleep during illness, and how to support your baby without accidentally creating new habits that outlast the sickness, makes a stressful situation considerably easier to navigate.
+
+> **Quick answer:** Illness typically disrupts baby sleep for 3–7 days with more night waking and shorter naps. Prioritise comfort, manage symptoms, and protect the bedtime routine where possible — most babies return to their previous sleep patterns within a week of recovery.
 
 ## Why Illness Disrupts Sleep So Reliably
 
@@ -37,6 +48,12 @@ It's completely normal for a baby to want significantly more contact than usual 
 **Offer more comfort without abandoning the sleep space.** There's a difference between staying in the room to rub your baby's back through a wake, and lying with them until fully asleep every time. The former is responsive parenting during illness; the latter can create a new association that becomes a habit post-recovery. Sit close, offer reassurance, touch and calm — but try to keep your response consistent with your usual approach where possible.
 
 **Protect the bedtime routine.** Even when everything else is disrupted, keeping some version of the usual routine — bath, book, song, sleep — gives your sick baby a familiar signal that sleep is coming. It doesn't have to be perfect; even a shortened version carries comfort through its predictability.
+
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
 
 ## The Post-Illness Sleep Regression
 

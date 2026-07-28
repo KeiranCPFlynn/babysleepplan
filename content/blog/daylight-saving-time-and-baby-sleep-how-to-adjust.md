@@ -8,6 +8,13 @@ image: "https://images.unsplash.com/photo-1540416822568-edab9487db77?w=1200&h=63
 imageAlt: "A sleeping baby in a darkened nursery with blackout curtains drawn"
 imageCredit: "Amanda Jones"
 imageCreditUrl: "https://unsplash.com/@amandagraphc"
+faq:
+  - question: "How do I adjust my baby's sleep schedule for daylight saving time?"
+    answer: "Shift your baby's naps, meals, and bedtime by 15 minutes every 1–2 days starting a few days before the clock change. Use bright morning light to help reset their circadian rhythm and blackout curtains in the evening to prevent early waking."
+  - question: "How long does it take for a baby to adjust to the clock change?"
+    answer: "Most babies and toddlers fully adjust within one to two weeks with gradual shifting. Babies who are already on a solid schedule tend to adapt faster than those whose routines are still being established."
+  - question: "Is spring forward or autumn clock change harder for babies?"
+    answer: "Spring forward is generally harder because your child's body still thinks it's an hour earlier, meaning they may wake earlier and resist bedtime when they're not biologically ready. Autumn back tends to be easier since naps and bedtime land earlier on the new clock."
 ---
 
 ## Why Daylight Saving Hits Parents of Young Children Hard
@@ -15,6 +22,8 @@ imageCreditUrl: "https://unsplash.com/@amandagraphc"
 For adults, the clocks moving forward or back is a minor inconvenience. For parents of babies and toddlers, it can feel like someone secretly tampered with a schedule you spent months building. A child who was waking at 6:30 am suddenly starts waking at 5:30 am, or a toddler who was reliably settled by 7:00 pm abruptly refuses to go down until well past 8:00 pm.
 
 The reason is straightforward: young children are powerfully governed by their internal circadian rhythms, which are anchored to light, temperature, and feeding cues rather than the numbers on a clock. When the clocks change and the light patterns shift, their bodies don't update automatically. But with a bit of preparation and patience, the adjustment is very manageable.
+
+> **Quick answer:** Shift your baby's naps, meals, and bedtime by 15 minutes every 1–2 days starting a few days before the clock change, and use light management (bright morning light for spring forward, blackout curtains for autumn back) — most children fully adjust within one to two weeks.
 
 ## The Two Types of Clock Change (and Why They're Different)
 
@@ -38,6 +47,12 @@ Simply keep your child's schedule as is relative to the new clock time. On the d
 
 For many babies over 5 months and most toddlers, the cold turkey approach resolves itself within three to five days, especially with consistent light management.
 
+---
+
+*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+
+---
+
 ## Light: The Most Powerful Reset Tool
 
 Research in circadian biology consistently identifies light as the dominant external cue (or "zeitgeber") for the human body clock. A 2019 review in *Sleep Medicine Reviews* confirmed that light exposure in the morning advances sleep timing, while evening light suppresses melatonin and delays it.
@@ -47,11 +62,11 @@ Practically, this means:
 - **Spring forward:** Maximise bright morning light as soon as your child wakes. Pull back the curtains immediately and get outside within the first hour if possible. This signals to the body that it's time to wake up, helping anchor the schedule to the new morning time.
 - **Autumn back:** Dim all lights significantly in the hour before the (new) bedtime. Use blackout curtains to keep the bedroom dark for morning sleep-ins, so an earlier sunrise doesn't pull your child awake too early.
 
-Blackout curtains are worth their weight in gold at both clock changes and should be tight-fitting enough to block the increased evening light in spring and the early dawn in summer.
+Blackout curtains are worth their weight in gold at both clock changes and should be tight-fitting enough to block the increased evening light in spring and the early dawn in summer. For a full rundown of how to optimise the sleep space, see our [baby sleep environment guide](/blog/baby-sleep-environment-complete-guide).
 
 ## Managing the First Few Days
 
-However you approach the transition, expect a few days of slightly messier sleep than usual. An overtired child is harder to settle, so it's worth prioritising a consistent bedtime response even when settling takes longer. Maintain your usual bedtime routine — the predictability is reassuring during a period of mild disruption.
+However you approach the transition, expect a few days of slightly messier sleep than usual. An overtired child is harder to settle, so it's worth prioritising a consistent bedtime response even when settling takes longer. Maintain your usual [bedtime routine](/blog/perfect-bedtime-routine-by-age) — the predictability is reassuring during a period of mild disruption.
 
 If naps fall apart temporarily, an earlier bedtime (by 30 to 45 minutes) on those days can prevent the overtiredness spiral that often extends the adjustment period.
 
