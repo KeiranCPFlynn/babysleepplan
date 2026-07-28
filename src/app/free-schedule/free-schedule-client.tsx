@@ -6,6 +6,7 @@ import { ChatInterface } from '@/components/free-schedule/chat-interface'
 import { SchedulePreview } from '@/components/free-schedule/schedule-preview'
 import { EmailGate } from '@/components/free-schedule/email-gate'
 import type { ChatMessage, ExtractedFields, SessionPhase } from '@/lib/free-schedule/types'
+import { PRICING_COPY } from '@/lib/subscription'
 
 type FreeScheduleOutputMode = 'standard' | 'admin_social'
 
@@ -362,7 +363,7 @@ export function FreeScheduleClient({
             quickReplies={phase === 'chat' ? quickReplies : []}
             isLoading={isLoading && phase === 'chat'}
             loadingStatus={loadingStatus}
-            onSend={phase === 'chat' ? handleSend : () => {}}
+            onSend={phase === 'chat' ? handleSend : () => { }}
           />
         </div>
       )}
@@ -422,7 +423,7 @@ export function FreeScheduleClient({
             Start a full personalised plan
           </Link>
           <p className="text-xs text-slate-400 dark:text-slate-500">
-            5-day free trial · $19/month · Cancel anytime
+            {PRICING_COPY.emailPricing}
           </p>
         </div>
       )}

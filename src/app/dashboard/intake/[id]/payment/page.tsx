@@ -7,15 +7,10 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import Link from 'next/link'
 import { CheckoutButton } from './checkout-button'
 import { CheckCircle, Shield, Sparkles, Ticket } from 'lucide-react'
-import { hasActiveSubscription, ADDITIONAL_BABY_PRICE, MONTHLY_PRICE, TRIAL_DAYS } from '@/lib/subscription'
+import { hasActiveSubscription, ADDITIONAL_BABY_PRICE, MONTHLY_PRICE, TRIAL_DAYS, FOUNDING_OFFER, PRICING_COPY } from '@/lib/subscription'
 import { RedeemAccessCode } from '@/components/access-code/redeem-access-code'
 
 const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
-const foundingOffer = {
-  active: true,
-  code: 'FOUNDING50',
-  discount: '50% off your first 3 months',
-}
 
 export default async function PaymentPage({
   params,
@@ -52,7 +47,7 @@ export default async function PaymentPage({
     const isAdditionalBaby = hasActiveSubscription(profile?.subscription_status, isStripeEnabled, profile?.trial_ends_at)
     const isReturningUser = !isAdditionalBaby && profile?.has_used_trial === true
 
-    const showFoundingOffer = foundingOffer.active && isStripeEnabled && !isAdditionalBaby
+    const showFoundingOffer = FOUNDING_OFFER.active && isStripeEnabled && !isAdditionalBaby
 
     return (
       <div className="dashboard-surface max-w-3xl mx-auto space-y-6 p-5 sm:p-6">
@@ -90,11 +85,11 @@ export default async function PaymentPage({
                   Founding Families
                 </div>
                 <p className="text-sm text-slate-700 dark:text-slate-200">
-                  <span className="font-semibold">{foundingOffer.discount}</span> with code{' '}
-                    <span className="font-bold text-amber-900 dark:text-amber-200">{foundingOffer.code}</span> on checkout.
-                  </p>
-                </div>
-              </CardContent>
+                  <span className="font-semibold">{FOUNDING_OFFER.discount}</span> with code{' '}
+                  <span className="font-bold text-amber-900 dark:text-amber-200">{FOUNDING_OFFER.code}</span> on checkout.
+                </p>
+              </div>
+            </CardContent>
           </Card>
         )}
 
@@ -114,7 +109,7 @@ export default async function PaymentPage({
                       ${ADDITIONAL_BABY_PRICE}<span className="text-lg font-normal text-slate-500 dark:text-slate-300">/month</span>
                     </p>
                     <p className="text-sm text-slate-600 dark:text-slate-300 mt-1">
-                      Added to your existing subscription. Cancel anytime.
+                      {PRICING_COPY.additionalBabyBilling}
                     </p>
                   </>
                 ) : isReturningUser ? (
@@ -123,7 +118,7 @@ export default async function PaymentPage({
                       ${MONTHLY_PRICE}<span className="text-lg font-normal text-slate-500 dark:text-slate-300">/month</span>
                     </p>
                     <p className="text-sm text-slate-600 dark:text-slate-300 mt-1">
-                      Billed monthly. Cancel anytime.
+                      {PRICING_COPY.monthlyBilling}
                     </p>
                   </>
                 ) : (
@@ -163,11 +158,11 @@ export default async function PaymentPage({
                 <>
                   <div className="w-full rounded-lg border border-sky-200 bg-sky-50/70 px-3 py-2 text-center dark:border-slate-600 dark:bg-slate-800/70">
                     <p className="text-xs text-slate-700 dark:text-slate-200">
-                      Have a promo code? Enter it on the Stripe checkout page after you continue.
+                      {PRICING_COPY.promoCodeHint}
                     </p>
                   </div>
                   <p className="text-xs text-center text-gray-400 dark:text-slate-400">
-                    Credit card required. Cancel anytime. Secure payment powered by Stripe.
+                    {PRICING_COPY.stripeFooter}
                   </p>
                 </>
               )}

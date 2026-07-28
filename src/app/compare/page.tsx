@@ -7,6 +7,7 @@ import { ArrowLeft, CheckCircle, XCircle, Minus } from 'lucide-react'
 import { BrandLogo } from '@/components/brand/brand-logo'
 import { MarketingHeader } from '@/components/layout/marketing-header'
 import { getSiteUrl } from '@/lib/site-url'
+import { PRICING_COPY, TRIAL_DAYS, MONTHLY_PRICE } from '@/lib/subscription'
 
 const siteUrl = getSiteUrl()
 
@@ -43,7 +44,7 @@ const jsonLd = {
     '@type': 'Offer',
     price: '0',
     priceCurrency: 'USD',
-    description: '5-day free trial, then $19/month',
+    description: `${TRIAL_DAYS}-day free trial, then $${MONTHLY_PRICE}/month`,
     availability: 'https://schema.org/InStock',
   },
 }
@@ -121,7 +122,7 @@ export default function ComparePage() {
                   <CardContent className="p-6 text-center">
                     <p className="text-xs font-semibold uppercase tracking-widest text-sky-700 mb-2">LunaCradle</p>
                     <p className="text-4xl font-bold text-slate-900">$0</p>
-                    <p className="text-sm text-slate-500 mt-1">for 5 days, then $19/mo</p>
+                    <p className="text-sm text-slate-500 mt-1">for {TRIAL_DAYS} days, then ${MONTHLY_PRICE}/mo</p>
                     <p className="text-xs text-slate-400 mt-2">Cancel anytime. Includes ongoing updates.</p>
                   </CardContent>
                 </Card>
@@ -156,9 +157,8 @@ export default function ComparePage() {
                 {features.map((feature, i) => (
                   <div
                     key={feature.name}
-                    className={`grid grid-cols-3 gap-4 px-5 py-3.5 text-sm ${
-                      i < features.length - 1 ? 'border-b border-slate-50' : ''
-                    }`}
+                    className={`grid grid-cols-3 gap-4 px-5 py-3.5 text-sm ${i < features.length - 1 ? 'border-b border-slate-50' : ''
+                      }`}
                   >
                     <div className="text-slate-700 font-medium">{feature.name}</div>
                     <div className="flex items-center justify-center gap-1.5 text-center">
@@ -257,7 +257,7 @@ export default function ComparePage() {
               <Button size="lg" asChild className="w-full sm:w-auto bg-sky-700 text-white hover:bg-sky-800 cta-smooth cta-fancy text-base px-6 py-6">
                 <Link href="/signup">Get Your Sleep Plan Tonight</Link>
               </Button>
-              <p className="mt-3 text-sm text-slate-500">$0 for 5 days. Then $19/month. Cancel anytime.</p>
+              <p className="mt-3 text-sm text-slate-500">{PRICING_COPY.trialLead}</p>
             </div>
           </section>
         </AnimateOnScroll>

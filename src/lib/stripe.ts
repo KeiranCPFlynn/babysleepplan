@@ -1,5 +1,6 @@
 import Stripe from 'stripe'
 import { getStripeEnv, getStripeMode } from '@/lib/stripe-config'
+import { MONTHLY_PRICE, ADDITIONAL_BABY_PRICE, TRIAL_DAYS } from '@/lib/subscription'
 
 let stripeInstance: Stripe | null = null
 export const STRIPE_MODE = getStripeMode()
@@ -39,9 +40,9 @@ export const stripe = {
   get invoices() { return getStripe().invoices },
 }
 
-export const MONTHLY_PRICE_CENTS = 1900 // $19.00/month in cents
-export const ADDITIONAL_BABY_PRICE_CENTS = 900 // $9.00/month in cents
-export const TRIAL_DAYS = 5
+export const MONTHLY_PRICE_CENTS = MONTHLY_PRICE * 100
+export const ADDITIONAL_BABY_PRICE_CENTS = ADDITIONAL_BABY_PRICE * 100
+export { TRIAL_DAYS }
 export const STRIPE_WEBHOOK_SECRET = getStripeEnv('STRIPE_WEBHOOK_SECRET', STRIPE_MODE)
 export const SUBSCRIPTION_PRICE_ID = getStripeEnv('STRIPE_PRICE_ID', STRIPE_MODE)
 export const SUBSCRIPTION_ADDITIONAL_BABY_PRICE_ID = getStripeEnv('STRIPE_ADDITIONAL_BABY_PRICE_ID', STRIPE_MODE)

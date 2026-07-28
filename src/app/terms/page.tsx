@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { MarketingHeader } from '@/components/layout/marketing-header'
 import { getSiteUrl } from '@/lib/site-url'
+import { TRIAL_DAYS, MONTHLY_PRICE } from '@/lib/subscription'
 
 const siteUrl = getSiteUrl()
 
@@ -64,9 +65,9 @@ export default function TermsPage() {
           <section>
             <h2 className="text-xl font-semibold text-slate-900 mb-3">5. Free Trial &amp; Subscription</h2>
             <ul className="list-disc pl-6 space-y-1.5 text-sm">
-              <li>New users receive a <strong>5-day free trial</strong> with full access to all features.</li>
+              <li>New users receive a <strong>{TRIAL_DAYS}-day free trial</strong> with full access to all features.</li>
               <li>A valid credit card is required to start the trial.</li>
-              <li>After the trial, your subscription automatically continues at <strong>$19 per month</strong> unless you cancel before the trial ends.</li>
+              <li>After the trial, your subscription automatically continues at <strong>${MONTHLY_PRICE} per month</strong> unless you cancel before the trial ends.</li>
               <li>You may cancel at any time from your account settings or by contacting support. Cancellation takes effect at the end of the current billing period.</li>
               <li>We do not offer refunds for partial billing periods, but you will retain access until the end of your paid period.</li>
             </ul>

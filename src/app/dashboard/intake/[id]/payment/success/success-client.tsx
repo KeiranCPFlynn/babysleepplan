@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { CheckCircle, Moon, Star, Sparkles, Heart } from 'lucide-react'
+import { TRIAL_DAYS } from '@/lib/subscription'
 
 const generationStages = [
   {
@@ -292,7 +293,7 @@ export function SuccessClient({ intakeId, babyName, isDevMode, isAdditionalBaby,
               ? 'Your sleep plan is being created.'
               : isAdditionalBaby
                 ? `${babyName}'s sleep plan has been added to your subscription.`
-                : 'Your 5-day free trial has begun. Your personalized plan is being created.'}
+                : `Your ${TRIAL_DAYS}-day free trial has begun. Your personalized plan is being created.`}
           </CardDescription>
         </CardHeader>
       </Card>
@@ -354,18 +355,16 @@ export function SuccessClient({ intakeId, babyName, isDevMode, isAdditionalBaby,
               return (
                 <div key={stage.title} className="flex items-center gap-2">
                   <span
-                    className={`h-2.5 w-2.5 rounded-full ${
-                      isComplete
-                        ? 'bg-emerald-500'
-                        : isActive
-                          ? 'bg-purple-500 animate-pulse'
-                          : 'bg-purple-200'
-                    }`}
+                    className={`h-2.5 w-2.5 rounded-full ${isComplete
+                      ? 'bg-emerald-500'
+                      : isActive
+                        ? 'bg-purple-500 animate-pulse'
+                        : 'bg-purple-200'
+                      }`}
                   />
                   <p
-                    className={`text-xs ${
-                      isComplete || isActive ? 'text-purple-700' : 'text-purple-400'
-                    }`}
+                    className={`text-xs ${isComplete || isActive ? 'text-purple-700' : 'text-purple-400'
+                      }`}
                   >
                     {stage.title}
                   </p>

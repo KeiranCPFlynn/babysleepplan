@@ -6,6 +6,7 @@ import { BookOpen, ExternalLink, ArrowLeft } from 'lucide-react'
 import { BrandLogo } from '@/components/brand/brand-logo'
 import { MarketingHeader } from '@/components/layout/marketing-header'
 import { getSiteUrl } from '@/lib/site-url'
+import { PRICING_COPY } from '@/lib/subscription'
 
 const siteUrl = getSiteUrl()
 
@@ -432,7 +433,7 @@ export default function SciencePage() {
               <Button size="lg" asChild className="w-full sm:w-auto bg-sky-700 text-white hover:bg-sky-800 cta-smooth cta-fancy text-base px-6 py-6">
                 <Link href="/signup">Get Your Sleep Plan Tonight</Link>
               </Button>
-              <p className="mt-3 text-sm text-slate-500">$0 for 5 days. Then $19/month. Cancel anytime.</p>
+              <p className="mt-3 text-sm text-slate-500">{PRICING_COPY.trialLead}</p>
             </div>
           </section>
         </AnimateOnScroll>

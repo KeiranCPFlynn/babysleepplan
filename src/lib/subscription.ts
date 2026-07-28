@@ -2,6 +2,24 @@ export const MONTHLY_PRICE = 19
 export const ADDITIONAL_BABY_PRICE = 9
 export const TRIAL_DAYS = 5
 
+export const FOUNDING_OFFER = {
+  active: true,
+  code: 'FOUNDING50',
+  discount: '50% off your first 3 months',
+  seats: 50,
+} as const
+
+export const PRICING_COPY = {
+  trialLead: `$0 for ${TRIAL_DAYS} days. Then $${MONTHLY_PRICE}/month. Cancel anytime.`,
+  trialShort: `$0 for ${TRIAL_DAYS} days`,
+  paidShort: `Then $${MONTHLY_PRICE}/month, cancel anytime`,
+  monthlyBilling: 'Billed monthly. Cancel anytime.',
+  additionalBabyBilling: 'Added to your existing subscription. Cancel anytime.',
+  promoCodeHint: 'Have a promo code? Enter it on the Stripe checkout page after you continue.',
+  stripeFooter: 'Credit card required. Cancel anytime. Secure payment powered by Stripe.',
+  emailPricing: `${TRIAL_DAYS}-day free trial · $${MONTHLY_PRICE}/month · Cancel anytime`,
+} as const
+
 /**
  * Single source of truth: is this user active?
  * Active = Stripe subscription active/trialing OR access-code trial still valid.

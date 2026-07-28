@@ -9,6 +9,7 @@ import { BrandLogo } from '@/components/brand/brand-logo'
 import { MarketingHeader } from '@/components/layout/marketing-header'
 import { getAllPosts } from '@/lib/blog'
 import { getSiteUrl } from '@/lib/site-url'
+import { FOUNDING_OFFER, PRICING_COPY, TRIAL_DAYS, MONTHLY_PRICE } from '@/lib/subscription'
 
 const siteUrl = getSiteUrl()
 
@@ -27,13 +28,6 @@ export const metadata: Metadata = {
     description: "We built LunaCradle because every tired parent deserves expert-level sleep guidance without the $500 price tag.",
     url: siteUrl,
   },
-}
-
-const foundingOffer = {
-  active: true,
-  code: 'FOUNDING50',
-  discount: '50% off your first 3 months',
-  seats: 50,
 }
 
 const faqs = [
@@ -59,7 +53,7 @@ const faqs = [
   },
   {
     q: 'What happens after the free trial?',
-    a: 'Your subscription continues at $19/month. Cancel anytime from your account.',
+    a: `Your subscription continues at $${MONTHLY_PRICE}/month. Cancel anytime from your account.`,
   },
 ]
 
@@ -134,7 +128,7 @@ export default function HomePage() {
             </p>
             <div className="mt-7 hero-load hero-load-3">
               <p className="text-base md:text-lg text-slate-600 dark:text-slate-300">
-                $0 for 5 days. Then $19/month. Cancel anytime.
+                {PRICING_COPY.trialLead}
               </p>
               <div className="mt-5">
                 <Button size="lg" asChild className="w-full sm:w-auto max-w-sm mx-auto bg-sky-700 text-white hover:bg-sky-800 cta-smooth cta-fancy text-base px-6 py-6">
@@ -177,7 +171,7 @@ export default function HomePage() {
         </section>
 
         {/* Founding families offer */}
-        {foundingOffer.active && (
+        {FOUNDING_OFFER.active && (
           <AnimateOnScroll>
             <section className="pb-6 md:pb-10">
               <div className="container mx-auto px-4">
@@ -186,10 +180,10 @@ export default function HomePage() {
                     Founding Families
                   </p>
                   <p className="mt-2 text-slate-800 font-medium">
-                    We&apos;re opening LunaCradle to our first {foundingOffer.seats} families. Get {foundingOffer.discount} and help shape the product.
+                    We&apos;re opening LunaCradle to our first {FOUNDING_OFFER.seats} families. Get {FOUNDING_OFFER.discount} and help shape the product.
                   </p>
                   <p className="mt-2 text-sm text-slate-600">
-                    Use code <span className="font-semibold text-slate-800">{foundingOffer.code}</span> at checkout. Limited to first {foundingOffer.seats} redemptions.
+                    Use code <span className="font-semibold text-slate-800">{FOUNDING_OFFER.code}</span> at checkout. Limited to first {FOUNDING_OFFER.seats} redemptions.
                   </p>
                 </div>
               </div>
@@ -322,14 +316,14 @@ export default function HomePage() {
                   </CardHeader>
                   <CardContent className="space-y-5">
                     <div className="text-center">
-                      <p className="text-5xl font-bold text-slate-900">$0 <span className="text-lg font-normal text-slate-500">for 5 days</span></p>
-                      <p className="text-sm text-slate-500 mt-1">then $19/month &middot; cancel anytime</p>
+                      <p className="text-5xl font-bold text-slate-900">$0 <span className="text-lg font-normal text-slate-500">for {TRIAL_DAYS} days</span></p>
+                      <p className="text-sm text-slate-500 mt-1">then ${MONTHLY_PRICE}/month &middot; cancel anytime</p>
                     </div>
-                    {foundingOffer.active && (
+                    {FOUNDING_OFFER.active && (
                       <div className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-slate-700">
-                        <p className="font-semibold text-amber-800">Founding Families: {foundingOffer.discount}</p>
+                        <p className="font-semibold text-amber-800">Founding Families: {FOUNDING_OFFER.discount}</p>
                         <p className="mt-1">
-                          Use code <span className="font-semibold text-slate-800">{foundingOffer.code}</span> at checkout.
+                          Use code <span className="font-semibold text-slate-800">{FOUNDING_OFFER.code}</span> at checkout.
                         </p>
                       </div>
                     )}
@@ -492,8 +486,8 @@ export default function HomePage() {
         <div className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200/80 bg-white/95 px-3 py-3 backdrop-blur md:hidden">
           <div className="mx-auto flex max-w-lg items-center justify-between gap-3">
             <div>
-              <p className="text-sm font-semibold text-slate-900">$0 for 5 days</p>
-              <p className="text-xs text-slate-500">Then $19/month, cancel anytime</p>
+              <p className="text-sm font-semibold text-slate-900">{PRICING_COPY.trialShort}</p>
+              <p className="text-xs text-slate-500">{PRICING_COPY.paidShort}</p>
             </div>
             <Button asChild className="bg-sky-700 text-white hover:bg-sky-800">
               <Link href="/signup">Start Tonight</Link>

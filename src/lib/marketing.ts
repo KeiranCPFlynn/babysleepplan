@@ -1,8 +1,10 @@
+import { FOUNDING_OFFER } from '@/lib/subscription'
+
 export const MARKETING_PRIMARY_CTA_HREF = '/dashboard/intake/new'
 export const MARKETING_PRIMARY_CTA_LABEL = 'Get a personalized plan'
 
 export const MARKETING_PRICING_LINES = [
-  '50% off your first 3 months',
+  FOUNDING_OFFER.discount,
 ]
 
 export const MARKETING_TRUST_BULLETS = [

@@ -15,6 +15,7 @@ import {
 } from '@/lib/marketing'
 import { buildMarketingMetadata } from '@/lib/seo'
 import { getSiteUrl } from '@/lib/site-url'
+import { MONTHLY_PRICE, FOUNDING_OFFER } from '@/lib/subscription'
 
 const siteUrl = getSiteUrl()
 const gbpToUsdRate = 1.365
@@ -49,7 +50,7 @@ const comparisonRows: ComparisonRow[] = [
   { feature: 'Platform', lunaCradle: 'Web (mobile-friendly)', competitor: 'iOS / Android' },
   {
     feature: 'Pricing (sleep-plan tier)',
-    lunaCradle: '$19/month standard; $9.50/month for your first 3 months with 50% off',
+    lunaCradle: `$${MONTHLY_PRICE}/month standard; ${(MONTHLY_PRICE / 2).toFixed(2).replace(/\.00$/, '')}/month for your first 3 months with ${FOUNDING_OFFER.discount}`,
     competitor: `Premium £12.99/month (monthly), about $${huckleberryPremiumMonthlyUsd.toFixed(2)} at current FX`,
   },
   {

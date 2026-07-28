@@ -1,5 +1,6 @@
 import { getResend, getFromEmail } from './resend'
 import { sanitizeEmailSubject } from '@/lib/sanitize'
+import { PRICING_COPY } from '@/lib/subscription'
 
 export async function sendFreeScheduleEmail(toEmail: string, pdfBytes: Uint8Array): Promise<void> {
   const resend = getResend()
@@ -44,7 +45,7 @@ export async function sendFreeScheduleEmail(toEmail: string, pdfBytes: Uint8Arra
            style="background-color: #0369a1; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: 600; font-size: 15px;">
           Get a Full Personalised Plan
         </a>
-        <p style="margin: 12px 0 0; font-size: 13px; color: #94a3b8;">5-day free trial · $19/month · Cancel anytime</p>
+        <p style="margin: 12px 0 0; font-size: 13px; color: #94a3b8;">${PRICING_COPY.emailPricing}</p>
       </div>
 
       <p style="margin: 0; color: #64748b; font-size: 14px;">Sweet dreams,<br><strong>The LunaCradle Team</strong></p>
