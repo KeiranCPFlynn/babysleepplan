@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
+import Link from 'next/link'
 import { getAllPosts, getPostBySlug, getPostSlugs } from '@/lib/blog'
 import { PostContent } from '@/components/blog/post-content'
 import { PostCard } from '@/components/blog/post-card'
@@ -80,6 +81,9 @@ export default async function BlogPostPage({
     datePublished: post.date,
     dateModified: post.dateModified || post.date,
     wordCount: post.wordCount,
+    ...(post.sources.length > 0
+      ? { citation: post.sources.map((s) => ({ '@type': 'CreativeWork', name: s.label, url: s.url })) }
+      : {}),
     author: {
       '@type': 'Organization',
       name: post.author,
@@ -266,6 +270,38 @@ export default async function BlogPostPage({
             </a>
           </p>
         ) : null}
+
+        {/* Sources & editorial note */}
+        {post.sources.length > 0 && (
+          <section className="mt-14 rounded-xl border border-slate-200 bg-slate-50/70 px-5 py-5">
+            <h2 className="text-lg font-bold text-slate-900 mb-3">
+              Sources &amp; references
+            </h2>
+            <ul className="space-y-2">
+              {post.sources.map((source) => (
+                <li key={source.url} className="text-sm text-slate-600">
+                  <a
+                    href={source.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline decoration-slate-300 hover:text-slate-900"
+                  >
+                    {source.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 text-xs leading-relaxed text-slate-500">
+              LunaCradle guides are researched against published guidance from bodies like the
+              American Academy of Pediatrics, the NHS and the World Health Organization, and
+              reviewed for accuracy before publishing. They are general information, not
+              medical advice &mdash; always follow your pediatrician&rsquo;s guidance.{' '}
+              <Link href="/about" className="underline hover:text-slate-700">
+                About our editorial standards
+              </Link>
+            </p>
+          </section>
+        )}
 
         {/* FAQ section */}
         {post.faq.length > 0 && (

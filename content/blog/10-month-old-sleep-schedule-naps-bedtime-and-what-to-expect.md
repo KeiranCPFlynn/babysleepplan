@@ -1,7 +1,8 @@
 ---
 title: "10 Month Old Sleep Schedule: Naps, Wake Windows & Bedtime Routine"
-description: "Complete 10 month old sleep schedule: 2 naps, 3-3.5 hour wake windows, 6:30-7:30pm bedtime. Includes a sample daily routine and tips for the 10 month sleep regression."
+description: "A realistic 10-month-old sleep schedule with two-nap example timetables, wake windows, bedtime timing and what changes at this age."
 date: "2026-05-15"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["infant sleep", "nap schedule", "sleep tips"]
 image: "https://images.unsplash.com/photo-1630482931131-2cf5c5c20929?w=1200&h=630&fit=crop"
@@ -17,7 +18,14 @@ faq:
     answer: "Ideal bedtime for a 10-month-old is between 6:30 and 7:30 PM. This allows for the last wake window of 3-3.5 hours after the afternoon nap ends. A consistent bedtime routine of 20-30 minutes (bath, book, feed, bed) helps signal that sleep is coming."
   - question: "Is there a 10-month sleep regression?"
     answer: "Yes. Around 8-10 months, many babies experience a sleep regression linked to major developmental milestones — pulling to stand, crawling, separation anxiety, and object permanence. Naps may shorten, night wakings may increase, and baby may fight bedtime. This typically lasts 2-6 weeks and resolves as the baby masters new skills."
----
+
+sources:
+  - label: "Paruthi et al. (2016) — Recommended amount of sleep for pediatric populations (AASM consensus)"
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4877308/"
+  - label: "WHO — Guidelines on physical activity, sedentary behaviour and sleep for children under 5 years of age"
+    url: "https://www.who.int/publications/i/item/9789241550536"
+
+------
 
 ## The 10-Month Mark: More Alert, More Opinionated, More Fun to Figure Out
 

@@ -1,7 +1,8 @@
 ---
 title: "18-Month-Old Sleep Schedule: Naps, Bedtime, and Toddler Tips"
-description: "Learn the ideal 18-month-old sleep schedule, including nap length, wake windows, bedtime timing, and how to handle sleep changes at this age."
+description: "A realistic 18-month-old sleep schedule with example timetables for one-nap days, bedtime guidance, and how to handle the 18-month sleep regression."
 date: "2026-04-19"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["nap schedule", "toddler sleep", "sleep tips"]
 image: "https://images.unsplash.com/photo-1613043547055-4efe0dfa9814?w=1200&h=630&fit=crop"
@@ -17,7 +18,14 @@ faq:
     answer: "Not at all. While earlier intervention is often easier, sleep training can be very effective at 18 months and beyond. Toddlers this age can understand simple language and respond well to consistent routines and clear boundaries around sleep."
   - question: "What time should an 18 month old go to bed?"
     answer: "A bedtime between 7:00–7:30 pm works well for most 18-month-olds. Wake windows are typically 5–6 hours in the morning and 4.5–5.5 hours after the nap, so timing the last wake window correctly is key to a smooth bedtime."
----
+
+sources:
+  - label: "Paruthi et al. (2016) — Recommended amount of sleep for pediatric populations (AASM consensus)"
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4877308/"
+  - label: "WHO — Guidelines on physical activity, sedentary behaviour and sleep for children under 5 years of age"
+    url: "https://www.who.int/publications/i/item/9789241550536"
+
+------
 
 ## Welcome to One of the Trickier Sleep Stages
 

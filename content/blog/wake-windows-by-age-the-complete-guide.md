@@ -1,7 +1,8 @@
 ---
 title: "Wake Windows by Age: Your Complete Guide to Baby Sleep Timing"
-description: "Learn the ideal wake windows by age from newborn to toddler. Evidence-based timing to help your baby nap better and sleep longer at night."
+description: "Wake windows by age from newborn to 3 years — what pediatric sleep guidance suggests, with sample daily schedules for every stage."
 date: "2026-02-17"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["nap schedule", "sleep tips", "infant sleep", "newborn sleep"]
 image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=1200&h=630&fit=crop"
@@ -17,7 +18,14 @@ faq:
     answer: "A 10-month-old typically has wake windows of 3–4 hours. Most babies this age are on a 2-nap schedule. The last wake window before bedtime is usually the longest. If your baby seems wired at bedtime, the final wake window may be too long."
   - question: "How do I know if my baby's wake window is too long?"
     answer: "Signs that a wake window is too long include fussiness, difficulty settling, short naps, and a wired or hyperactive appearance at bedtime. Overtiredness triggers cortisol release, which makes it harder for babies to fall asleep. Try shortening the last wake window by 15–30 minutes."
----
+
+sources:
+  - label: "Paruthi et al. (2016) — Recommended amount of sleep for pediatric populations (AASM consensus)"
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4877308/"
+  - label: "WHO — Guidelines on physical activity, sedentary behaviour and sleep for children under 5 years of age"
+    url: "https://www.who.int/publications/i/item/9789241550536"
+
+------
 
 > **Quick answer:** Wake windows stretch as babies grow: 45–90 minutes for newborns, 1.5–2.5 hours at 4–6 months, 2.5–3.5 hours at 7–9 months, 3–4 hours at 10–12 months, and 4–6+ hours by toddlerhood. Use these ranges as a starting point and adjust based on your baby's sleepy cues and nap quality.
 

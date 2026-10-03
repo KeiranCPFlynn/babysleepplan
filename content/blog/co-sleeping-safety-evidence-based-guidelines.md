@@ -1,7 +1,8 @@
 ---
 title: "Co-Sleeping Safety: Evidence-Based Guidelines for Families"
-description: "Understand the evidence on co-sleeping safety, including AAP guidelines, key risk factors, and how to make informed decisions for your family."
+description: "Co-sleeping safety: what NHS, Lullaby Trust and AAP guidance says about bed-sharing risks, and how to reduce them if you share a bed."
 date: "2026-04-19"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["sleep environment", "infant sleep", "sleep tips"]
 image: "https://images.unsplash.com/photo-1619581910509-4c7400bab992?w=1200&h=630&fit=crop"
@@ -17,7 +18,16 @@ faq:
     answer: "Bedsharing is highest risk for babies under 4 months and should be avoided entirely at that age. Risk decreases as babies get older and can move independently, but the AAP recommends room-sharing without bedsharing for at least the first 6 months, ideally 12 months."
   - question: "Does co-sleeping increase the risk of SIDS?"
     answer: "Bedsharing is associated with an increased risk of SIDS in the AAP's data, particularly when combined with other risk factors. However, the risk from bedsharing alone (without smoking, alcohol, or soft surfaces) is lower than the risk from bedsharing with those additional factors. Room-sharing with a separate sleep surface reduces SIDS risk by up to 50%."
----
+
+sources:
+  - label: "The Lullaby Trust — Safer sleep advice"
+    url: "https://www.lullabytrust.org.uk/safer-sleep-advice/"
+  - label: "NHS — Reducing the risk of sudden infant death syndrome (SIDS)"
+    url: "https://www.nhs.uk/baby/caring-for-a-newborn/sudden-infant-death-syndrome-sids/"
+  - label: "American Academy of Pediatrics — Safe sleep recommendations"
+    url: "https://www.aap.org/en/patient-care/safe-sleep/"
+
+------
 
 ## A Topic That Deserves Honest, Nuanced Conversation
 

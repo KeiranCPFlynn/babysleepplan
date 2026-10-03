@@ -84,7 +84,24 @@ const jsonLd = {
 }
 
 export default function HomePage() {
-  const latestBlogGuides = getAllPosts().slice(0, 12)
+  // Curated mix: GSC striking-distance pages first (positions ~10-25),
+  // then the most recent posts to fill the grid.
+  const CURATED_GUIDE_SLUGS = [
+    '18-month-old-sleep-schedule-naps-bedtime-and-toddler-tips',
+    'bassinet-to-crib-transition-when-and-how-to-move-your-baby',
+    'baby-sleep-environment-complete-guide',
+    '12-month-old-sleep-schedule-naps-bedtime-and-transitions',
+    'moving-baby-to-own-room-when-and-how-to-do-it',
+    'drowsy-but-awake-does-it-work-and-how-to-do-it',
+  ]
+  const allPosts = getAllPosts()
+  const curated = CURATED_GUIDE_SLUGS.map((slug) =>
+    allPosts.find((post) => post.slug === slug)
+  ).filter((post): post is NonNullable<typeof post> => Boolean(post))
+  const latestBlogGuides = [
+    ...curated,
+    ...allPosts.filter((post) => !CURATED_GUIDE_SLUGS.includes(post.slug)),
+  ].slice(0, 12)
 
   return (
     <div className="marketing-shell relative min-h-screen overflow-hidden bg-gradient-to-b from-sky-50 via-white to-rose-50 text-slate-900 pb-24 pt-[max(0.5rem,env(safe-area-inset-top))] md:pb-0 md:pt-3 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 dark:text-slate-100">
@@ -382,7 +399,7 @@ export default function HomePage() {
           <div className="container mx-auto px-4">
             <AnimateOnScroll>
               <h2 className="text-2xl md:text-3xl font-bold text-center mb-3">
-                <span className="heading-underline">Latest Baby Sleep Guides</span>
+                <span className="heading-underline">Baby Sleep Guides</span>
               </h2>
               <p className="text-center text-slate-500 mb-8 max-w-2xl mx-auto">
                 Practical guides for common sleep questions, schedules, and regressions.
@@ -466,11 +483,12 @@ export default function HomePage() {
                   &copy; {new Date().getFullYear()} LunaCradle. All rights reserved.
                 </p>
                 <div className="flex flex-wrap justify-center gap-4 text-sm text-slate-500">
-                  <Link href="/how-it-works" className="hover:text-slate-900">How It Works</Link>
-                  <Link href="/science" className="hover:text-slate-900">Science</Link>
-                  <Link href="/compare" className="hover:text-slate-900">Compare</Link>
-                  <Link href="/blog" className="hover:text-slate-900">Blog</Link>
-                  <Link href="/free-schedule" className="hover:text-slate-900">Free Schedule</Link>
+                <Link href="/how-it-works" className="hover:text-slate-900">How It Works</Link>
+                <Link href="/science" className="hover:text-slate-900">Science</Link>
+                <Link href="/compare" className="hover:text-slate-900">Compare</Link>
+                <Link href="/blog" className="hover:text-slate-900">Blog</Link>
+                <Link href="/free-schedule" className="hover:text-slate-900">Free Schedule</Link>
+                <Link href="/about" className="hover:text-slate-900">About</Link>
                   <Link href="/privacy" className="hover:text-slate-900">Privacy</Link>
                   <Link href="/terms" className="hover:text-slate-900">Terms</Link>
                   <Link href="/contact" className="hover:text-slate-900">Contact</Link>

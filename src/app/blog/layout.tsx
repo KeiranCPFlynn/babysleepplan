@@ -55,6 +55,7 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
                 <Link href="/science" className="hover:text-slate-900">Science</Link>
                 <Link href="/compare" className="hover:text-slate-900">Compare</Link>
                 <Link href="/blog" className="hover:text-slate-900">Blog</Link>
+                <Link href="/about" className="hover:text-slate-900">About</Link>
                 <Link href="/privacy" className="hover:text-slate-900">Privacy</Link>
                 <Link href="/terms" className="hover:text-slate-900">Terms</Link>
                 <Link href="/contact" className="hover:text-slate-900">Contact</Link>

@@ -1,7 +1,8 @@
 ---
 title: "12-Month-Old Sleep Schedule: Naps, Bedtime, and Transitions"
-description: "Discover the ideal 12-month-old sleep schedule including nap timing, bedtime windows, and how to navigate the tricky transition to one nap."
+description: "A complete 12-month-old sleep schedule: nap transitions, wake windows, bedtime timing and night feeds — with example timetables."
 date: "2026-04-19"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["nap schedule", "infant sleep", "sleep tips"]
 image: "https://images.unsplash.com/photo-1604807788279-ea778c075cee?w=1200&h=630&fit=crop"
@@ -17,7 +18,16 @@ faq:
     answer: "A bedtime between 7:00–7:30 pm is typical for most 12-month-olds, with wake-up around 6:00–7:00 am. On a two-nap schedule, aim for wake windows of 3–3.5 hours between sleeps."
   - question: "How do I know if my 12 month old is ready for one nap?"
     answer: "Signs include consistently fighting the morning nap for 2+ weeks, taking very short naps, or having difficulty falling asleep at bedtime. However, most babies aren't truly ready until 14–15 months, so try adjusting nap timing before dropping a nap entirely."
----
+
+sources:
+  - label: "Paruthi et al. (2016) — Recommended amount of sleep for pediatric populations (AASM consensus)"
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4877308/"
+  - label: "WHO — Guidelines on physical activity, sedentary behaviour and sleep for children under 5 years of age"
+    url: "https://www.who.int/publications/i/item/9789241550536"
+  - label: "NHS — Helping your baby to sleep"
+    url: "https://www.nhs.uk/baby/caring-for-a-newborn/helping-your-baby-to-sleep/"
+
+------
 
 ## Is Your One-Year-Old's Sleep a Mystery Right Now?
 

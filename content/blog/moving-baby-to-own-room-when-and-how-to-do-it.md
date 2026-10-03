@@ -1,7 +1,8 @@
 ---
 title: "When to Move Baby to Own Room: AAP Guidelines & Step-by-Step Plan"
-description: "When should you move baby to their own room? The AAP recommends at least 6 months. Learn the signs baby is ready and a gentle step-by-step transition plan that works."
+description: "When to move baby to their own room: what AAP guidance says about room-sharing, signs you're both ready, and a gentle step-by-step plan."
 date: "2026-05-09"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["infant sleep", "sleep environment", "sleep tips"]
 image: "https://images.unsplash.com/photo-1745636624761-8173b91e8334?w=1200&h=630&fit=crop"
@@ -28,7 +29,14 @@ howTo:
       text: "Use the exact same bedtime routine, sleep sack, white noise, and settling methods you used in your room. Consistency in everything except the location helps your baby feel secure in the new space."
     - name: "Expect 3–7 nights of adjustment"
       text: "Most babies need three to seven nights to fully adjust to sleeping in their own room. Keep your response to night wakings calm and consistent, and the new pattern will settle in."
----
+
+sources:
+  - label: "American Academy of Pediatrics — Safe sleep recommendations"
+    url: "https://www.aap.org/en/patient-care/safe-sleep/"
+  - label: "NHS — Reducing the risk of sudden infant death syndrome (SIDS)"
+    url: "https://www.nhs.uk/baby/caring-for-a-newborn/sudden-infant-death-syndrome-sids/"
+
+------
 
 ## The Moment Every Parent Wonders About
 

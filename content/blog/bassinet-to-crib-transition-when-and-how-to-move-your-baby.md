@@ -1,7 +1,8 @@
 ---
 title: "Bassinet to Crib Transition: When and How to Move Your Baby"
-description: "Learn when to move your baby from a bassinet to a crib, the signs they're ready, and gentle strategies to make the transition smooth and stress-free."
+description: "When to move baby from bassinet to crib: signs of readiness, AAP room-sharing guidance, and a gentle step-by-step transition plan."
 date: "2026-04-21"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["sleep environment", "infant sleep", "sleep tips"]
 image: "https://images.unsplash.com/photo-1458731909820-5850bdcaee0b?w=1200&h=630&fit=crop"
@@ -17,7 +18,16 @@ faq:
     answer: "Expect a few adjustment nights, but most babies adapt more smoothly than parents expect. The crib is larger and may feel different, but keeping the rest of the sleep environment consistent (darkness, white noise, sleep sack) helps your baby recognise that sleep cues haven't changed."
   - question: "Can I move my baby to a crib at 3 months?"
     answer: "Yes, 3 months is within the normal range for transitioning to a crib, especially if your baby is approaching the bassinet weight limit or showing early signs of rolling. Check your specific bassinet's weight and developmental limits in the manual."
----
+
+sources:
+  - label: "American Academy of Pediatrics — Safe sleep recommendations"
+    url: "https://www.aap.org/en/patient-care/safe-sleep/"
+  - label: "NHS — Reducing the risk of sudden infant death syndrome (SIDS)"
+    url: "https://www.nhs.uk/baby/caring-for-a-newborn/sudden-infant-death-syndrome-sids/"
+  - label: "The Lullaby Trust — Safer sleep advice"
+    url: "https://www.lullabytrust.org.uk/safer-sleep-advice/"
+
+------
 
 ## Why the Bassinet-to-Crib Move Feels Like Such a Big Deal
 

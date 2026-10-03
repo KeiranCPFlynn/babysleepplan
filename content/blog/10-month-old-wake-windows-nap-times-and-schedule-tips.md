@@ -1,7 +1,8 @@
 ---
 title: "10 Month Old Wake Windows: Exact Times, Nap Schedule & Tips"
-description: "10 month old wake windows: 3-3.5 hours between sleeps. Learn the exact morning, afternoon, and evening windows, how to handle the 10-month regression, and a sample daily schedule."
+description: "10-month-old wake windows with exact times, a sample two-nap schedule, and how to adjust when naps are short or refused."
 date: "2026-07-28"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["nap schedule", "infant sleep", "sleep tips"]
 image: "https://images.unsplash.com/photo-1586376433960-6992db7572ca?w=1200&h=630&fit=crop"
@@ -17,7 +18,14 @@ faq:
     answer: "Nap fighting at 10 months is usually caused by one of three things: wake windows that are too short (baby isn't tired enough), a developmental leap (pulling to stand, separation anxiety), or the second nap becoming less reliable as the one-nap transition approaches. Check your wake windows first, then look at developmental factors."
   - question: "How long should a 10 month old nap?"
     answer: "Most 10-month-olds take 2 naps totaling 2-3 hours. The first nap is typically 1-1.5 hours and the second is 45 minutes to 1.5 hours. If naps are consistently under 30 minutes, the issue is usually how baby falls asleep (sleep association) rather than the schedule itself."
----
+
+sources:
+  - label: "Paruthi et al. (2016) — Recommended amount of sleep for pediatric populations (AASM consensus)"
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4877308/"
+  - label: "WHO — Guidelines on physical activity, sedentary behaviour and sleep for children under 5 years of age"
+    url: "https://www.who.int/publications/i/item/9789241550536"
+
+------
 
 ## The Wake Window Sweet Spot at 10 Months
 

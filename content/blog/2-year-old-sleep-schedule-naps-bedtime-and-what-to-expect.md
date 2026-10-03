@@ -1,7 +1,8 @@
 ---
 title: "2 Year Old Sleep Schedule: Naps, Bedtime & Toddler Sleep Tips"
-description: "Complete 2 year old sleep schedule: 11-14 hours total, 1 nap (1-2 hours), 7-8pm bedtime. Includes tips for bedtime resistance, night wakings, and the 2-year sleep regression."
+description: "A realistic 2-year-old sleep schedule with one-nap and no-nap example days, bedtime timing and boundary-friendly tips for toddlers."
 date: "2026-04-21"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["nap schedule", "toddler sleep", "sleep tips"]
 image: "https://images.unsplash.com/photo-1619704684523-4c80099dc332?w=1200&h=630&fit=crop"
@@ -17,7 +18,14 @@ faq:
     answer: "There's no fixed age, but many families make the transition between 18 months and 3 years. If your 2-year-old is climbing out of the cot or showing interest in a bed, it may be time. Otherwise, there's no developmental urgency to switch."
   - question: "What time should a 2 year old go to bed?"
     answer: "A bedtime between 7:00–8:00 pm is appropriate for most 2-year-olds. On days with a nap, bedtime may be closer to 7:30–8:00 pm; on days without a nap, consider moving it 30–60 minutes earlier to prevent overtiredness."
----
+
+sources:
+  - label: "Paruthi et al. (2016) — Recommended amount of sleep for pediatric populations (AASM consensus)"
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4877308/"
+  - label: "WHO — Guidelines on physical activity, sedentary behaviour and sleep for children under 5 years of age"
+    url: "https://www.who.int/publications/i/item/9789241550536"
+
+------
 
 ## Two Years Old: Opinions, Independence, and Bedtime Battles
 

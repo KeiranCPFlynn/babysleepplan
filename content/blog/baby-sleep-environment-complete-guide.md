@@ -1,7 +1,8 @@
 ---
 title: "Ideal Baby Sleep Environment: Temperature, Darkness & Safe Setup"
-description: "Set up the ideal baby sleep environment: 16-20°C room temp, blackout darkness, white noise under 50dB, and a safe cot setup. Evidence-based guide based on AAP recommendations."
+description: "The evidence-based baby sleep environment: safe crib setup, ideal room temperature, darkness and noise — with what the guidance actually says."
 date: "2026-04-25"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["sleep environment", "sleep science", "infant sleep", "sleep tips"]
 image: "https://images.unsplash.com/photo-1613685301918-59b1039422cc?w=1200&h=630&fit=crop"
@@ -17,7 +18,16 @@ faq:
     answer: "Yes, when used correctly. Keep white noise below 50 decibels and place the machine at least 2 metres from the cot. White noise helps mask household sounds that can trigger arousals during light sleep phases and provides a consistent auditory cue for sleep."
   - question: "What should NOT be in a baby's crib?"
     answer: "The AAP recommends no loose bedding, blankets, pillows, bumpers, or soft toys in the cot for babies under 12 months. A firm flat mattress with a fitted sheet and a properly fitted sleep sack are all your baby needs for a safe sleep environment."
----
+
+sources:
+  - label: "American Academy of Pediatrics — Safe sleep recommendations"
+    url: "https://www.aap.org/en/patient-care/safe-sleep/"
+  - label: "NICHD — Safe to Sleep® campaign"
+    url: "https://safetosleep.nichd.nih.gov/"
+  - label: "The Lullaby Trust — Safer sleep advice"
+    url: "https://www.lullabytrust.org.uk/safer-sleep-advice/"
+
+------
 
 ## Why the Room Matters More Than You Think
 

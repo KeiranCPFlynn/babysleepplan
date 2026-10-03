@@ -14,6 +14,11 @@ export interface HowToStep {
   text: string
 }
 
+export interface SourceItem {
+  label: string
+  url: string
+}
+
 export interface BlogPost {
   slug: string
   title: string
@@ -31,6 +36,7 @@ export interface BlogPost {
   wordCount: number
   faq: FaqItem[]
   howTo: { name: string; steps: HowToStep[] } | null
+  sources: SourceItem[]
 }
 
 export function getPostSlugs(): string[] {
@@ -66,12 +72,25 @@ export function getPostBySlug(slug: string): BlogPost {
   const howTo =
     rawHowTo && typeof rawHowTo === 'object' && rawHowTo.name && Array.isArray(rawHowTo.steps)
       ? {
-        name: rawHowTo.name,
-        steps: (rawHowTo.steps as HowToStep[])
-          .filter((s: HowToStep) => s?.name && s?.text)
-          .map((s: HowToStep) => ({ name: s.name, text: s.text })),
-      }
+          name: rawHowTo.name,
+          steps: (rawHowTo.steps as HowToStep[])
+            .filter((s: HowToStep) => s?.name && s?.text)
+            .map((s: HowToStep) => ({ name: s.name, text: s.text })),
+        }
       : null
+
+  const rawSources = data.sources ?? []
+  const sources: SourceItem[] = Array.isArray(rawSources)
+    ? rawSources
+        .filter(
+          (item: { label?: string; url?: string }) =>
+            item?.label && item?.url && /^https?:\/\//.test(item.url)
+        )
+        .map((item: { label: string; url: string }) => ({
+          label: item.label,
+          url: item.url,
+        }))
+    : []
 
   return {
     slug,
@@ -90,6 +109,7 @@ export function getPostBySlug(slug: string): BlogPost {
     wordCount,
     faq,
     howTo,
+    sources,
   }
 }
 

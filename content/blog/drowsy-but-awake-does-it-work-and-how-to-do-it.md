@@ -1,7 +1,8 @@
 ---
 title: "How to Do Drowsy but Awake: Step-by-Step (That Actually Works)"
-description: "Learn how to do drowsy but awake with a step-by-step method backed by sleep research. Includes when to start (from 4 months), common mistakes, and what to do when it's not working."
+description: "Drowsy but awake, explained: why it helps self-settling, when it backfires, and a realistic step-by-step method to try this week."
 date: "2026-05-03"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["sleep tips", "sleep associations", "sleep science", "infant sleep"]
 image: "https://images.unsplash.com/photo-1765526236367-e0577b526acd?w=1200&h=630&fit=crop"
@@ -32,7 +33,14 @@ howTo:
       text: "Decide in advance how you will respond to crying — whether that is pick-up-put-down, shushing without picking up, or a brief graduated check-in. Whatever you choose, do it the same way every time so your baby learns what to expect."
     - name: "Practise consistently for 1–2 weeks"
       text: "Start with a low-stakes morning nap where sleep pressure is highest. Give the technique at least 1–2 weeks of daily practice before deciding whether it is working — progress is gradual, not immediate."
----
+
+sources:
+  - label: "NHS — Helping your baby to sleep"
+    url: "https://www.nhs.uk/baby/caring-for-a-newborn/helping-your-baby-to-sleep/"
+  - label: "Paruthi et al. (2016) — Recommended amount of sleep for pediatric populations (AASM consensus)"
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4877308/"
+
+------
 
 ## The Advice You've Heard a Thousand Times
 

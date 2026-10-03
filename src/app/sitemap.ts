@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     { url: siteUrl, changeFrequency: 'weekly', priority: 1 },
     { url: `${siteUrl}/how-it-works`, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${siteUrl}/about`, changeFrequency: 'monthly', priority: 0.5 },
     { url: `${siteUrl}/science`, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${siteUrl}/compare`, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${siteUrl}/free-schedule`, changeFrequency: 'weekly', priority: 0.9 },

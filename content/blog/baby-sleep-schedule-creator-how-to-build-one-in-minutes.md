@@ -1,7 +1,8 @@
 ---
 title: "Baby Sleep Schedule Creator: Build a Custom Schedule in Minutes"
-description: "Create a personalized baby sleep schedule in minutes — not hours. Learn what goes into a good schedule and use our free builder to generate one tailored to your baby's age and routine."
+description: "Build a baby sleep schedule in minutes: pick your baby's age, get nap times and bedtime, then fine-tune with our free schedule builder."
 date: "2026-07-28"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["nap schedule", "sleep tips", "infant sleep"]
 image: "https://images.unsplash.com/photo-1650651129774-72f8250e4393?w=1200&h=630&fit=crop"
@@ -17,7 +18,7 @@ faq:
     answer: "You can start establishing a loose routine from around 6-8 weeks, but a structured sleep schedule with fixed nap times typically works best from 3-4 months when circadian rhythms develop. Before that, focus on wake windows rather than clock-based timing."
   - question: "Should I follow a schedule strictly or go with the flow?"
     answer: "Aim for consistency with flexibility. A schedule gives you a framework — same wake windows, similar nap times, predictable bedtime — but babies aren't clocks. If a nap runs short or your baby needs an extra feed, adjust the rest of the day accordingly. The goal is rhythm, not rigidity."
----
+------
 
 ## Why Most Printed Schedules Don't Work
 
