@@ -18,6 +18,10 @@ faq:
     answer: "Ideal bedtime for a 10-month-old is between 6:30 and 7:30 PM. This allows for the last wake window of 3-3.5 hours after the afternoon nap ends. A consistent bedtime routine of 20-30 minutes (bath, book, feed, bed) helps signal that sleep is coming."
   - question: "Is there a 10-month sleep regression?"
     answer: "Yes. Around 8-10 months, many babies experience a sleep regression linked to major developmental milestones — pulling to stand, crawling, separation anxiety, and object permanence. Naps may shorten, night wakings may increase, and baby may fight bedtime. This typically lasts 2-6 weeks and resolves as the baby masters new skills."
+  - question: "What are the wake windows for a 10 month old?"
+    answer: "A 10-month-old's wake windows are typically 3-3.5 hours: about 2.75-3 hours from morning wake to nap 1, 3-3.25 hours between naps, and 3.25-3.5 hours from the end of nap 2 to bedtime (the longest window of the day)."
+  - question: "Is 4 hours too long for a 10 month old wake window?"
+    answer: "Yes, 4 hours is generally too long at 10 months. Most babies this age max out at 3.5 hours before becoming overtired, which makes settling harder and can cause night wakings and early rising. Save 4-hour windows for closer to 12-13 months."
 
 sources:
   - label: "Paruthi et al. (2016) — Recommended amount of sleep for pediatric populations (AASM consensus)"
@@ -66,7 +70,9 @@ The wake windows aren't identical all day. Most babies follow this pattern:
 - **Middle window** (nap 1 to nap 2): 3–3.25 hours
 - **Evening window** (end of nap 2 to bedtime): 3.25–3.5 hours (longest of the day)
 
-If your baby is fighting naps or bedtime, the first thing to check is whether these windows are appropriate. Too short and they're not tired enough; too long and they're overtired.
+If your baby is fighting naps or bedtime, the first thing to check is whether these windows are appropriate. Too short and they're not tired enough; too long and they're overtired. Adjust in 15-minute increments and give each change 3-5 days before judging it: if your baby falls asleep within a couple of minutes at bedtime, the last window may be too short; if they're wired and fighting sleep for 30+ minutes, it may be too long.
+
+Signs that wake windows have stretched too far include rubbing eyes, pulling ears, fussiness that escalates quickly, difficulty settling despite obvious tiredness, consistently short naps, and early or frequent night wakings. Counterintuitively, the fix is usually *shortening* the windows by 15 minutes — an overtired baby runs on cortisol, which makes both falling asleep and staying asleep harder.
 
 This isn't a prescription — it's a starting point. If your baby wakes earlier or later, shift everything forward or back accordingly. The wake windows are what matter most, not the exact clock times. For a schedule built around your baby's specific routine, try the [free sleep schedule builder](/free-schedule).
 

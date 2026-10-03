@@ -33,6 +33,13 @@ const nextConfig: NextConfig = {
         destination: 'https://www.lunacradle.com/:path*',
         permanent: true,
       },
+      {
+        // Merged into the 10-month schedule post to consolidate
+        // cannibalizing "10 month old" pages.
+        source: '/blog/10-month-old-wake-windows-nap-times-and-schedule-tips',
+        destination: '/blog/10-month-old-sleep-schedule-naps-bedtime-and-what-to-expect',
+        permanent: true,
+      },
     ]
   },
   async headers() {
