@@ -2,6 +2,7 @@
 title: "Feeding to Sleep: Is It a Problem, and How to Stop"
 description: "Feeding to sleep is one of the most common baby sleep associations. Learn whether it's a problem, why it works so well, and how to gently break the habit."
 date: "2026-04-16"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["sleep associations", "infant sleep", "sleep tips", "night waking"]
 image: "https://images.unsplash.com/photo-1705833936036-9f28b57b85f1?w=1200&h=630&fit=crop"
@@ -28,7 +29,14 @@ howTo:
       text: "Replace the feed with a new settling tool such as patting, shushing, a sleep sack, or gentle rocking. Your baby needs a new cue to signal that it's time for sleep."
     - name: "Stay consistent for 1–2 weeks"
       text: "Expect some protest during the first few nights as your baby adjusts to the new pattern. With consistent practice, most babies adapt within one to two weeks and night waking decreases significantly."
----
+
+sources:
+  - label: "NHS — Helping your baby to sleep"
+    url: "https://www.nhs.uk/baby/caring-for-a-newborn/helping-your-baby-to-sleep/"
+  - label: "Mindell et al. (2006) — Behavioral treatment of bedtime problems and night wakings in infants and young children (Sleep)"
+    url: "https://pubmed.ncbi.nlm.nih.gov/17068979/"
+
+------
 
 Feeding your baby to sleep might be the thing that's kept you sane for the past several months. It works, it's immediate, and for a newborn in the thick of it, it was exactly what everyone needed. But now you're waking three, four, five times a night to nurse or bottle-feed a baby who isn't hungry — they just can't get back to sleep without it. If you're exhausted and ready for something to change, this post is for you.
 

@@ -2,6 +2,7 @@
 title: "Daylight Saving Time and Baby Sleep: How to Adjust"
 description: "Learn how to manage daylight saving time with a baby or toddler, including strategies to shift the schedule gradually or all at once with minimal disruption."
 date: "2026-04-21"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["sleep tips", "nap schedule", "infant sleep"]
 image: "https://images.unsplash.com/photo-1540416822568-edab9487db77?w=1200&h=630&fit=crop"
@@ -15,7 +16,14 @@ faq:
     answer: "Most babies and toddlers fully adjust within one to two weeks with gradual shifting. Babies who are already on a solid schedule tend to adapt faster than those whose routines are still being established."
   - question: "Is spring forward or autumn clock change harder for babies?"
     answer: "Spring forward is generally harder because your child's body still thinks it's an hour earlier, meaning they may wake earlier and resist bedtime when they're not biologically ready. Autumn back tends to be easier since naps and bedtime land earlier on the new clock."
----
+
+sources:
+  - label: "NHS — Helping your baby to sleep"
+    url: "https://www.nhs.uk/baby/caring-for-a-newborn/helping-your-baby-to-sleep/"
+  - label: "Paruthi et al. (2016) — Recommended amount of sleep for pediatric populations (AASM consensus)"
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4877308/"
+
+------
 
 ## Why Daylight Saving Hits Parents of Young Children Hard
 

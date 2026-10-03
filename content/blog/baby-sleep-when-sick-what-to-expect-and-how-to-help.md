@@ -2,6 +2,7 @@
 title: "Baby Sleep When Sick: What to Expect and How to Help"
 description: "Discover why illness disrupts baby sleep, what's normal to expect, and gentle strategies to help your sick baby rest and recover without creating new habits."
 date: "2026-04-21"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["sleep tips", "infant sleep", "night waking"]
 image: "https://images.unsplash.com/photo-1768198566756-c4395ca31b29?w=1200&h=630&fit=crop"
@@ -17,7 +18,12 @@ faq:
     answer: "Yes, allow extra sleep during illness — the body needs rest to fight infection. Cytokines released during illness can increase daytime sleepiness. However, if your baby is sleeping significantly more than usual and is difficult to rouse for feeds, contact your pediatrician."
   - question: "Will extra comfort during illness create bad sleep habits?"
     answer: "Offering extra comfort during illness is appropriate and won't create lasting problems if you return to your normal routine once your baby recovers. Most babies go back to their previous sleep patterns within a week. The key is not to make permanent changes to your settling approach during a temporary illness."
----
+
+sources:
+  - label: "NHS — Helping your baby to sleep"
+    url: "https://www.nhs.uk/baby/caring-for-a-newborn/helping-your-baby-to-sleep/"
+
+------
 
 ## When Illness Undoes Everything You've Built
 

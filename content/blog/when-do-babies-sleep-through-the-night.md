@@ -2,6 +2,7 @@
 title: "When Do Babies Sleep Through the Night? What to Expect"
 description: "Discover when babies sleep through the night, what 'sleeping through' actually means developmentally, and evidence-based steps to help your baby get there."
 date: "2026-04-16"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["sleep science", "infant sleep", "sleep tips", "night waking"]
 image: "https://images.unsplash.com/photo-1662368355359-830b331349ef?w=1200&h=630&fit=crop"
@@ -17,7 +18,14 @@ faq:
     answer: "At 6 months, many babies are still developmentally unable to sustain long stretches consistently. The 4-month sleep regression (a shift in sleep architecture) often disrupts emerging patterns, and sleep associations — like feeding or rocking to sleep — strongly influence whether longer stretches happen. This is within the normal range."
   - question: "Is it normal for a 1 year old to still wake at night?"
     answer: "Yes. A meaningful minority of healthy children still wake overnight at 12, 18, or even 24 months. This is within the range of normal variation — not evidence of a sleep disorder or parenting failure. Night waking at this age is often driven by sleep associations, developmental leaps, or teething rather than hunger."
----
+
+sources:
+  - label: "Galland et al. (2012) — Normal sleep patterns in infants and children: a systematic review (Sleep Medicine Reviews)"
+    url: "https://pubmed.ncbi.nlm.nih.gov/21784676/"
+  - label: "Paruthi et al. (2016) — Recommended amount of sleep for pediatric populations (AASM consensus)"
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4877308/"
+
+------
 
 "Is your baby sleeping through the night yet?" It's one of the most loaded questions in early parenthood — asked by well-meaning relatives, smugly by parents whose baby happened to consolidate early, and desperately typed into search bars by exhausted families who can't remember the last full night's sleep they had.
 

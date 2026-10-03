@@ -2,6 +2,7 @@
 title: "Cluster Feeding and Sleep: What Parents Need to Know"
 description: "Learn what cluster feeding is, why it happens, how long it lasts, and how to manage it so your newborn gets the rest they need — and so do you."
 date: "2026-04-21"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["newborn sleep", "sleep tips", "night waking"]
 image: "https://images.unsplash.com/photo-1751890855930-7520793ce160?w=1200&h=630&fit=crop"
@@ -17,7 +18,12 @@ faq:
     answer: "The most intense phase of cluster feeding typically settles by 6–8 weeks as your baby becomes more efficient at feeding and your milk supply regulates. It may recur briefly during growth spurts around 3 weeks, 6 weeks, and 3 months, but each episode is usually shorter than the first."
   - question: "Will cluster feeding affect my baby's sleep?"
     answer: "Cluster feeding often leads to a longer first sleep stretch after the evening feeding session ends. However, the frequent feeding itself can make evenings feel chaotic. Setting up a comfortable feeding station and accepting the pattern as temporary makes it much more manageable."
----
+
+sources:
+  - label: "NHS — Helping your baby to sleep"
+    url: "https://www.nhs.uk/baby/caring-for-a-newborn/helping-your-baby-to-sleep/"
+
+------
 
 ## What Is Cluster Feeding and Why Is It Happening at 6pm?
 

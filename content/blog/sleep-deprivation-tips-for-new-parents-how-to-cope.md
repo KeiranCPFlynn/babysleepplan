@@ -2,6 +2,7 @@
 title: "Sleep Deprivation Tips for New Parents: How to Cope"
 description: "Discover evidence-based strategies to manage new parent sleep deprivation, including how to maximise rest, protect your health, and know when to ask for help."
 date: "2026-04-21"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["sleep tips", "newborn sleep", "infant sleep"]
 image: "https://images.unsplash.com/photo-1614286566782-719853c90688?w=1200&h=630&fit=crop"
@@ -17,7 +18,12 @@ faq:
     answer: "Yes — the AAP notes that sleep-deprived parents are at higher risk of falling asleep with the baby on an unsafe surface, and fragmented sleep is associated with more cognitive impairment than continuous sleep of the same duration. If you feel unsafe, ask for help and prioritise one longer sleep stretch per 24 hours."
   - question: "When will I start feeling less sleep deprived with a newborn?"
     answer: "Most parents see gradual improvement as babies begin consolidating sleep around 3–6 months, with longer night stretches reducing fragmentation. However, the total sleep deficit accumulates, so even once nights improve, catching up on rest takes time."
----
+
+sources:
+  - label: "NHS — Helping your baby to sleep"
+    url: "https://www.nhs.uk/baby/caring-for-a-newborn/helping-your-baby-to-sleep/"
+
+------
 
 > **Quick answer:** New parent sleep deprivation is real — parents lose an average of 44 minutes per night in the first year. The most effective coping strategies are splitting the night with a partner, protecting at least one daytime nap, and working toward a consistent bedtime routine so your baby's sleep stretches gradually lengthen.
 

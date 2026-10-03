@@ -2,6 +2,7 @@
 title: "8 Month Sleep Regression: Signs, Causes, and What Helps"
 description: "Is the 8 month sleep regression wrecking your nights? Learn the signs, what causes this regression, and evidence-based strategies to get through it faster."
 date: "2026-04-16"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["sleep science", "infant sleep", "night waking"]
 image: "https://images.unsplash.com/photo-1733759348760-be367228c0dc?w=1200&h=630&fit=crop"
@@ -17,7 +18,14 @@ faq:
     answer: "Very likely. Object permanence develops strongly around 8–9 months, meaning your baby now understands you exist when you leave the room. This makes bedtime emotionally loaded in a new way. It's a healthy cognitive milestone, not a sleep problem."
   - question: "Why is my 8 month old suddenly standing up in the cot?"
     answer: "Learning to pull to stand is a major motor milestone at this age, and babies often practise new skills during sleep. Your baby isn't doing it to be difficult — their brain is processing the new skill, which increases night-time arousals. Give plenty of standing practice during the day."
----
+
+sources:
+  - label: "Galland et al. (2012) — Normal sleep patterns in infants and children: a systematic review (Sleep Medicine Reviews)"
+    url: "https://pubmed.ncbi.nlm.nih.gov/21784676/"
+  - label: "NHS — Helping your baby to sleep"
+    url: "https://www.nhs.uk/baby/caring-for-a-newborn/helping-your-baby-to-sleep/"
+
+------
 
 You'd sorted the 4-month regression, maybe done some sleep training, got into a rhythm — and then, somewhere around 7, 8, or 9 months, your baby stopped cooperating again. More night waking, harder to settle, naps going haywire. If this sounds familiar, you're almost certainly in the thick of the 8-month sleep regression.
 

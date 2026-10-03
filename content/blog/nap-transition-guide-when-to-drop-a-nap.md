@@ -2,6 +2,7 @@
 title: "When to Drop a Nap: The Complete Nap Transition Guide"
 description: "Discover when to drop a nap — from 4 to 3, 3 to 2, and 2 to 1 — with signs of readiness, timing advice, and gentle strategies for each transition."
 date: "2026-04-16"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["nap transitions", "nap schedule", "toddler sleep", "infant sleep"]
 image: "https://images.unsplash.com/photo-1588997788996-82d93002250a?w=1200&h=630&fit=crop"
@@ -30,7 +31,16 @@ howTo:
       text: "An earlier bedtime (around 6:30–7 p.m.) protects against overtiredness while the new nap rhythm settles in. Expect 2–3 weeks of unsettled napping before the new schedule feels natural."
     - name: "Stay consistent and monitor for a few weeks"
       text: "Keep the new schedule firm for at least 2–3 weeks before deciding it isn't working. If your baby shows persistent overtiredness signs, consider reverting to the previous schedule and trying again in a few weeks."
----
+
+sources:
+  - label: "Paruthi et al. (2016) — Recommended amount of sleep for pediatric populations (AASM consensus)"
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4877308/"
+  - label: "WHO — Guidelines on physical activity, sedentary behaviour and sleep for children under 5 years of age"
+    url: "https://www.who.int/publications/i/item/9789241550536"
+  - label: "Galland et al. (2012) — Normal sleep patterns in infants and children: a systematic review (Sleep Medicine Reviews)"
+    url: "https://pubmed.ncbi.nlm.nih.gov/21784676/"
+
+------
 
 Every few months, just when your nap schedule feels like it's finally working, your baby or toddler decides they're done with one of the naps. They resist, they take forever to settle, or they drop off just as you're driving home and then won't sleep at bedtime. Nap transitions are one of the most disruptive parts of the first three years — and also one of the most confusing, because the timing looks different for every child.
 

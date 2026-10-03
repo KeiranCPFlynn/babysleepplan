@@ -2,6 +2,7 @@
 title: "Overtired Baby: 7 Signs, Why It Happens & How to Fix It Fast"
 description: "Overtired baby? Learn the 7 key signs (rubbing eyes, arching, clinginess), why overtiredness makes sleep harder, and how to fix it with wake windows and earlier bedtime."
 date: "2026-03-04"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["sleep tips", "infant sleep", "sleep science"]
 image: "https://images.unsplash.com/photo-1643992529177-973780be27c5?w=1200&h=630&fit=crop"
@@ -15,7 +16,14 @@ faq:
     answer: "Take them to a dark, quiet room and use rhythmic motion (rocking, swaying) combined with white noise and gentle shushing. An overtired baby needs more sensory input to settle than a merely tired one. Keep the environment calm and avoid stimulating activities like screens or bright lights."
   - question: "How long can a baby stay awake before becoming overtired?"
     answer: "Wake windows vary by age: newborns tolerate 30–90 minutes, 3–6 month olds handle 1.5–2.5 hours, 6–12 month olds manage 2.5–4 hours, and toddlers can stay awake 4–6 hours. Exceeding these windows triggers a cortisol release that makes falling asleep significantly harder."
----
+
+sources:
+  - label: "NHS — Helping your baby to sleep"
+    url: "https://www.nhs.uk/baby/caring-for-a-newborn/helping-your-baby-to-sleep/"
+  - label: "Galland et al. (2012) — Normal sleep patterns in infants and children: a systematic review (Sleep Medicine Reviews)"
+    url: "https://pubmed.ncbi.nlm.nih.gov/21784676/"
+
+------
 
 ## The Overtired Trap
 

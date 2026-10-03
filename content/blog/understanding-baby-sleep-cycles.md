@@ -2,6 +2,7 @@
 title: "Understanding Baby Sleep Cycles: What Every Parent Should Know"
 description: "Learn how your baby's sleep cycles mature around 4-6 months, what causes the 4-month sleep regression, and practical strategies for longer stretches."
 date: "2026-02-11"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["sleep science", "4-month regression", "infant sleep"]
 image: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=1200&h=630&fit=crop"
@@ -17,7 +18,14 @@ faq:
     answer: "Around 4–6 months, your baby's sleep cycles mature into an adult-like pattern with distinct light and deep sleep stages. This causes more partial wakings between cycles, especially if the conditions at bedtime don't match the conditions at wake-ups. Sleep isn't getting worse — it's developing."
   - question: "How much sleep does a baby need in 24 hours?"
     answer: "Total sleep typically lands around 14–16 hours in 24 hours for babies aged 4–12 months, though this varies. This includes nighttime sleep and daytime naps. Wake windows are commonly 1.5–2.5 hours at this age, and naps may still be short while sleep consolidates."
----
+
+sources:
+  - label: "Galland et al. (2012) — Normal sleep patterns in infants and children: a systematic review (Sleep Medicine Reviews)"
+    url: "https://pubmed.ncbi.nlm.nih.gov/21784676/"
+  - label: "Paruthi et al. (2016) — Recommended amount of sleep for pediatric populations (AASM consensus)"
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4877308/"
+
+------
 
 > **Quick answer:** Around 4–6 months, your baby's sleep cycles mature into an adult-like pattern with lighter and deeper stages. This means more partial wakings between cycles — especially if the conditions at bedtime don't match the conditions at wake-ups. Sleep isn't getting worse; it's developing.
 

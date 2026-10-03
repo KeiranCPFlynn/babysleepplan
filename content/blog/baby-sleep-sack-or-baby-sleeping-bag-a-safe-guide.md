@@ -2,6 +2,7 @@
 title: "Baby Sleep Sack or Baby Sleeping Bag? A Safe Sleep Guide"
 description: "Choosing a baby sleep sack, baby sleeping bag, or baby sleep bag? Learn safe sizing, TOG, layering, and age-by-age tips for better sleep."
 date: "2026-02-13"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["sleep environment", "infant sleep", "sleep tips"]
 image: "https://images.unsplash.com/photo-1701839640142-082f9aa34a7e?w=1200&h=630&fit=crop"
@@ -17,7 +18,16 @@ faq:
     answer: "Babies can use a sleep sack from birth as long as it fits properly. Check that the neck hole and armholes are snug enough that your baby can't slip down inside the garment, and choose the appropriate TOG rating for your room temperature."
   - question: "Are sleep sacks safer than blankets for babies?"
     answer: "Yes. The AAP recommends against loose bedding including blankets for babies under 12 months because they can cover the face and increase suffocation risk. A sleep sack stays in place and provides warmth without the hazards of loose fabric in the cot."
----
+
+sources:
+  - label: "American Academy of Pediatrics — Safe sleep recommendations"
+    url: "https://www.aap.org/en/patient-care/safe-sleep/"
+  - label: "The Lullaby Trust — Safer sleep advice"
+    url: "https://www.lullabytrust.org.uk/safer-sleep-advice/"
+  - label: "NICHD — Safe to Sleep® campaign"
+    url: "https://safetosleep.nichd.nih.gov/"
+
+------
 
 If you are shopping for a **baby sleep sack**, you have probably seen several names for what seems like the same product: **baby sleeping bag**, **baby sleep bag**, wearable blanket, and more. That can make a simple purchase feel surprisingly complicated, especially when you are already running on limited sleep.
 

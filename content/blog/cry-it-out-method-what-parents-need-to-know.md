@@ -2,6 +2,7 @@
 title: "The Cry It Out Method: What Parents Need to Know"
 description: "The cry it out method explained honestly: what it is, what the research actually says about safety, how it works, and how to decide if it's right for your family."
 date: "2026-04-16"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["sleep tips", "infant sleep", "sleep science"]
 image: "https://images.unsplash.com/photo-1588885444188-b241478ece92?w=1200&h=630&fit=crop"
@@ -32,7 +33,16 @@ howTo:
       text: "Stick with the same approach for at least 5–7 nights. The first night is usually the hardest, with crying decreasing noticeably by night two or three. Inconsistency — giving in on hard nights — resets the learning process."
     - name: "Stay responsive during the day"
       text: "Continue to be fully responsive to your baby's needs during waking hours — feed on demand, offer comfort, and engage in play. Cry it out applies only to sleep time and does not replace daytime attunement."
----
+
+sources:
+  - label: "Mindell et al. (2006) — Behavioral treatment of bedtime problems and night wakings in infants and young children (Sleep)"
+    url: "https://pubmed.ncbi.nlm.nih.gov/17068979/"
+  - label: "Gradisar et al. (2016) — Behavioral interventions for infant sleep problems: a randomized controlled trial (Pediatrics)"
+    url: "https://pubmed.ncbi.nlm.nih.gov/27221288/"
+  - label: "Price et al. (2012) — Five-year follow-up of harms and benefits of behavioral infant sleep intervention (Pediatrics)"
+    url: "https://pubmed.ncbi.nlm.nih.gov/22966034/"
+
+------
 
 Few parenting topics generate as much heat as cry it out. It's been called damaging, desperate, cruel, and life-changing — sometimes by the same people at different stages of the sleep deprivation journey. If you're trying to work out whether this approach is right for your family, you deserve an honest, research-grounded answer rather than someone's strongly-held opinion.
 

@@ -2,6 +2,7 @@
 title: "Baby Naps Only 30 Minutes? Why Short Naps Happen & How to Fix Them"
 description: "Baby napping only 30 minutes? Short naps happen when baby can't connect sleep cycles. Learn the 4 main causes and how to extend naps to 1-2 hours with gentle methods."
 date: "2026-02-17"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["nap schedule", "sleep tips", "infant sleep", "sleep science"]
 image: "https://images.unsplash.com/photo-1528948587461-06aa206c1cd4?w=1200&h=630&fit=crop"
@@ -17,7 +18,14 @@ faq:
     answer: "It depends on how many naps your baby takes. A single 30-minute nap is usually not restorative enough and leads to an overtired baby. If your baby takes multiple short naps totalling their age-appropriate daytime sleep need, they may cope — but longer naps are generally better for mood and overnight sleep."
   - question: "At what age do babies stop taking 30-minute naps?"
     answer: "Most babies start linking sleep cycles and extending naps beyond 30–45 minutes around five to six months as their brain matures. However, some babies need help with wake windows and sleep environment to make the shift, and short naps can persist if those factors aren't addressed."
----
+
+sources:
+  - label: "NHS — Helping your baby to sleep"
+    url: "https://www.nhs.uk/baby/caring-for-a-newborn/helping-your-baby-to-sleep/"
+  - label: "Mindell et al. (2006) — Behavioral treatment of bedtime problems and night wakings in infants and young children (Sleep)"
+    url: "https://pubmed.ncbi.nlm.nih.gov/17068979/"
+
+------
 
 ## The 30-Minute Nap Club
 

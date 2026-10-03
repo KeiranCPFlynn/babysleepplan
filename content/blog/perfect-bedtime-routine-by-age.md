@@ -2,6 +2,7 @@
 title: "The Perfect Bedtime Routine by Age: A Research-Backed Guide"
 description: "A practical guide to building the right bedtime routine by age, with research-backed steps for newborns, infants, and toddlers."
 date: "2026-02-11"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["bedtime routine", "sleep tips", "toddler sleep"]
 image: "https://images.unsplash.com/photo-1544126592-807ade215a0b?w=1200&h=630&fit=crop"
@@ -32,7 +33,14 @@ howTo:
       text: "As your baby matures, gradually move the feed earlier in the routine to reduce feed-to-sleep dependence. Add new steps like teeth brushing for toddlers. The routine should evolve with your child's developmental stage."
     - name: "Stay consistent during travel and disruptions"
       text: "When away from home or during schedule changes, keep the same sequence of activities even if the setting is different. A portable version of your routine — same book, same song — helps your baby feel secure and preserves the sleep cues."
----
+
+sources:
+  - label: "Mindell et al. (2009) — A nightly bedtime routine: impact on sleep in young children and maternal mood (Sleep)"
+    url: "https://pubmed.ncbi.nlm.nih.gov/19480226/"
+  - label: "Mindell et al. (2015) — Bedtime routines for young children: a dose-dependent association with sleep outcomes (Sleep)"
+    url: "https://pubmed.ncbi.nlm.nih.gov/25325483/"
+
+------
 
 If bedtime has started to feel like a nightly negotiation, you are in good company. Most families do not need a more complicated plan. They need a routine that matches their child's age and can still be done on a tiring Tuesday.
 

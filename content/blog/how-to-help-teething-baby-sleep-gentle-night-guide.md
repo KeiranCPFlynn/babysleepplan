@@ -2,6 +2,7 @@
 title: "How to Help Teething Baby Sleep: A Gentle Night Guide"
 description: "Learn how to help teething baby sleep with practical bedtime steps, pain-comfort timing, and safe routines that reduce night waking."
 date: "2026-02-13"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["infant sleep", "night waking", "sleep tips"]
 image: "https://images.unsplash.com/photo-1547175116-94c24f0c4b09?w=1200&h=630&fit=crop"
@@ -15,7 +16,12 @@ faq:
     answer: "Yes, teething can cause frequent night waking because gum discomfort feels more intense at night when there are fewer distractions. Babies who normally sleep through may wake and struggle to resettle during active teething windows, though this disruption is usually temporary."
   - question: "How long does teething sleep disruption last?"
     answer: "Teething sleep disruption typically lasts a few days to a week per tooth eruption. The worst nights usually coincide with the tooth breaking through the gum, and sleep generally improves once the tooth has emerged. If disruption continues beyond a week, check for other causes like illness or schedule changes."
----
+
+sources:
+  - label: "NHS — Helping your baby to sleep"
+    url: "https://www.nhs.uk/baby/caring-for-a-newborn/helping-your-baby-to-sleep/"
+
+------
 
 If you are searching for **how to help teething baby sleep**, you are probably running on very little rest right now. Teething nights can feel unpredictable: one bedtime goes smoothly, then the next includes repeated wakeups, extra crying, and a baby who only settles when held. That pattern is exhausting, and it is also very common.
 

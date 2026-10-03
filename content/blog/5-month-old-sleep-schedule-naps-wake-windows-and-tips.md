@@ -2,6 +2,7 @@
 title: "5-Month-Old Sleep Schedule: Naps, Wake Windows, and Tips"
 description: "Discover the ideal 5-month-old sleep schedule, including nap timing, wake windows, total sleep needs, and how to navigate the changes at this age."
 date: "2026-04-21"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["nap schedule", "infant sleep", "sleep tips"]
 image: "https://images.unsplash.com/photo-1510632233616-88025944e960?w=1200&h=630&fit=crop"
@@ -17,7 +18,14 @@ faq:
     answer: "Most babies aren't ready to drop from 3 naps to 2 until around 6–8 months. Pushing the transition too early at 5 months often leads to overtiredness and harder bedtimes. A small number of babies begin consolidating by the end of month 5, but it's the exception."
   - question: "What is a good schedule for a 5 month old?"
     answer: "A typical 5-month-old schedule includes 3 naps with wake windows of 1.5–2.5 hours, a bedtime between 7:00–8:00 pm, and roughly 10–11 hours of overnight sleep. Total daily sleep is around 14–15 hours. A consistent routine matters more than exact clock times."
----
+
+sources:
+  - label: "Paruthi et al. (2016) — Recommended amount of sleep for pediatric populations (AASM consensus)"
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4877308/"
+  - label: "Galland et al. (2012) — Normal sleep patterns in infants and children: a systematic review (Sleep Medicine Reviews)"
+    url: "https://pubmed.ncbi.nlm.nih.gov/21784676/"
+
+------
 
 ## The In-Between Stage Nobody Warns You About
 

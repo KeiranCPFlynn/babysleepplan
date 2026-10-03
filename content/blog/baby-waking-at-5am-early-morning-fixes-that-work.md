@@ -2,6 +2,7 @@
 title: "Baby Waking at 5am? 5 Fixes That Actually Work"
 description: "Baby waking at 5am every day? Early rising is usually caused by overtiredness, too much daytime sleep, or light exposure. Learn 5 evidence-based fixes to shift wake time later."
 date: "2026-02-17"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["early rising", "nap schedule", "sleep environment", "sleep tips"]
 image: "https://images.unsplash.com/photo-1733759343333-5ee8d76d58ca?w=1200&h=630&fit=crop"
@@ -17,7 +18,14 @@ faq:
     answer: "Blackout-proof the room completely — even small amounts of early morning light can trigger waking. Check that total daytime sleep isn't too generous, and make sure bedtime isn't too early (which can cause split nights) or too late (which leads to overtiredness and early rising)."
   - question: "Should I put my baby to bed earlier if they wake at 5am?"
     answer: "Not necessarily. An earlier bedtime can sometimes make early waking worse by creating split nights — your baby gets enough deep sleep and then wakes in lighter sleep. Instead, check whether the current bedtime is already too early, and focus on blackout and daytime sleep adjustments first."
----
+
+sources:
+  - label: "NHS — Helping your baby to sleep"
+    url: "https://www.nhs.uk/baby/caring-for-a-newborn/helping-your-baby-to-sleep/"
+  - label: "Galland et al. (2012) — Normal sleep patterns in infants and children: a systematic review (Sleep Medicine Reviews)"
+    url: "https://pubmed.ncbi.nlm.nih.gov/21784676/"
+
+------
 
 ## The 5am Problem
 

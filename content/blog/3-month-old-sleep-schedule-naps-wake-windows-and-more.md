@@ -2,6 +2,7 @@
 title: "3 Month Old Sleep Schedule: Naps, Wake Windows, and More"
 description: "Build a realistic 3 month old sleep schedule with evidence-based wake windows, sample nap routines, and guidance on what's developmentally normal at this age."
 date: "2026-04-16"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["nap schedule", "infant sleep", "sleep tips", "newborn sleep"]
 image: "https://images.unsplash.com/photo-1758541205910-483f1123ed93?w=1200&h=630&fit=crop"
@@ -17,7 +18,14 @@ faq:
     answer: "Many babies start achieving longer stretches (5–6 hours) around 3–4 months, but truly 'sleeping through' without any feeds is not developmentally expected until closer to 6 months. Every baby is different, and 1–3 night feeds at 3 months is completely normal."
   - question: "What is a good wake window for a 3 month old?"
     answer: "Wake windows at 3 months are typically 60–90 minutes. The first window of the day is often the shortest (around 60–75 minutes), and the last window before bedtime may stretch slightly longer. Watch for sleepy cues like eye rubbing, yawning, or fussiness."
----
+
+sources:
+  - label: "Paruthi et al. (2016) — Recommended amount of sleep for pediatric populations (AASM consensus)"
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4877308/"
+  - label: "Galland et al. (2012) — Normal sleep patterns in infants and children: a systematic review (Sleep Medicine Reviews)"
+    url: "https://pubmed.ncbi.nlm.nih.gov/21784676/"
+
+------
 
 Three months is a genuinely hopeful age for sleep. The complete chaos of the newborn weeks is behind you, your baby is more alert and social during the day, and for many families, slightly longer stretches of night sleep are starting to emerge. But "slightly longer" and "predictable" are different things — and if you're still riding a wave of short naps and frequent night feeds, you haven't missed anything.
 

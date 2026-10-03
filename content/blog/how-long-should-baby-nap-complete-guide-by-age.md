@@ -2,6 +2,7 @@
 title: "How Long Should Baby Nap? Nap Length by Age (Newborn to 3 Years)"
 description: "Baby nap guide by age: newborns 45min-3hrs, 6-month-olds 1-2hrs, 1-year-olds 1-2hrs. Learn ideal nap lengths, how many naps by age, and when short naps are normal."
 date: "2026-04-19"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["nap schedule", "infant sleep", "sleep science"]
 image: "https://images.unsplash.com/photo-1496458857386-d2388f1c03e8?w=1200&h=630&fit=crop"
@@ -17,7 +18,14 @@ faq:
     answer: "A single 30-minute nap is usually not enough on its own — babies need multiple naps across the day to meet their total sleep needs. However, if your baby wakes refreshed after 30 minutes and is happy, it may be sufficient for that particular sleep period. Consistently short naps may indicate overtiredness or a schedule that needs adjusting."
   - question: "When do baby naps get longer?"
     answer: "Naps typically start lengthening around 5–6 months as sleep cycles mature and babies learn to connect cycles. Before this age, short naps of 20–45 minutes are developmentally normal because babies haven't yet learned to transition between sleep cycles independently."
----
+
+sources:
+  - label: "Paruthi et al. (2016) — Recommended amount of sleep for pediatric populations (AASM consensus)"
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4877308/"
+  - label: "Galland et al. (2012) — Normal sleep patterns in infants and children: a systematic review (Sleep Medicine Reviews)"
+    url: "https://pubmed.ncbi.nlm.nih.gov/21784676/"
+
+------
 
 ## Why Nap Length Feels Like a Mystery
 

@@ -2,6 +2,7 @@
 title: "Toddler Bedtime Routine: A Simple, Science-Backed Guide"
 description: "Build a calming toddler bedtime routine that helps your child wind down and fall asleep faster with evidence-based steps that actually work."
 date: "2026-04-19"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["bedtime routine", "toddler sleep", "sleep tips"]
 image: "https://images.unsplash.com/photo-1758874961414-e4f03066e0b5?w=1200&h=630&fit=crop"
@@ -17,7 +18,16 @@ faq:
     answer: "Toddler bedtime resistance is usually about difficulty transitioning from high alert to sleep, not defiance. Their brains are absorbing enormous amounts of information daily. A consistent routine, lowering lights, removing screens 30 minutes before bed, and giving a 15-minute warning all help ease the transition."
   - question: "Should I read to my toddler every night?"
     answer: "Reading before bed is one of the most effective bedtime routine components. Research tracking over 10,000 children found that consistent bedtime routines — including books — were linked to faster sleep onset, fewer night wakings, and longer sleep. The content matters less than the consistency."
----
+
+sources:
+  - label: "Mindell et al. (2009) — A nightly bedtime routine: impact on sleep in young children and maternal mood (Sleep)"
+    url: "https://pubmed.ncbi.nlm.nih.gov/19480226/"
+  - label: "Mindell et al. (2015) — Bedtime routines for young children: a dose-dependent association with sleep outcomes (Sleep)"
+    url: "https://pubmed.ncbi.nlm.nih.gov/25325483/"
+  - label: "WHO — Guidelines on physical activity, sedentary behaviour and sleep for children under 5 years of age"
+    url: "https://www.who.int/publications/i/item/9789241550536"
+
+------
 
 > **Quick answer:** A consistent toddler bedtime routine of 20–30 minutes — same activities, same order, same time every night — helps toddlers fall asleep faster, wake less often, and sleep longer. Aim for a bedtime between 6:30 and 7:30 pm, and include calming steps like a warm bath, books, and a brief goodnight ritual.
 

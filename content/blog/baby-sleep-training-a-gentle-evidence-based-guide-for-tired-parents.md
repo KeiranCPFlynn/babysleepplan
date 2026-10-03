@@ -2,6 +2,7 @@
 title: "Baby Sleep Training: A Gentle, Evidence-Based Guide for Tired Parents"
 description: "Learn safe, effective baby sleep training approaches backed by pediatric research, and how to choose a method that fits your family."
 date: "2026-02-11"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["sleep science", "infant sleep", "sleep tips", "bedtime routine", "night waking"]
 image: "https://images.unsplash.com/photo-1504151932400-72d4384f04b3?w=1200&h=630&fit=crop"
@@ -17,7 +18,16 @@ faq:
     answer: "Gentle methods include the chair method (sitting beside the cot and gradually moving further away over several nights) and the pick-up-put-down method (comforting baby in the cot and picking them up only when needed). Both maintain parental presence while teaching independent sleep skills."
   - question: "Does sleep training cause crying?"
     answer: "Some crying is normal with any method that involves change, including gentle approaches. The goal is not to eliminate crying entirely but to teach your baby a new skill with warmth and consistency. Gradual methods typically involve less crying than more direct approaches."
----
+
+sources:
+  - label: "Mindell et al. (2006) — Behavioral treatment of bedtime problems and night wakings in infants and young children (Sleep)"
+    url: "https://pubmed.ncbi.nlm.nih.gov/17068979/"
+  - label: "Price et al. (2012) — Five-year follow-up of harms and benefits of behavioral infant sleep intervention (Pediatrics)"
+    url: "https://pubmed.ncbi.nlm.nih.gov/22966034/"
+  - label: "NHS — Helping your baby to sleep"
+    url: "https://www.nhs.uk/baby/caring-for-a-newborn/helping-your-baby-to-sleep/"
+
+------
 
 If you are reading about **baby sleep training** at 2 or 3 a.m., you are probably exhausted and second-guessing everything. That is a hard place to be. Most parents who reach this point are not trying to force independence too early. They are trying to help their baby sleep better while keeping everyone emotionally safe.
 

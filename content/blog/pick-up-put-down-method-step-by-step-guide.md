@@ -2,6 +2,7 @@
 title: "Pick Up Put Down Method: A Gentle Step-by-Step Guide"
 description: "Learn the pick up put down method — a gentle, evidence-based approach to baby sleep training from 4 months. Step-by-step instructions with realistic expectations."
 date: "2026-04-16"
+dateModified: "2026-10-03"
 author: "LunaCradle Team"
 tags: ["sleep tips", "infant sleep", "sleep associations"]
 image: "https://images.unsplash.com/photo-1614286566673-b781fe08d3f7?w=1200&h=630&fit=crop"
@@ -30,7 +31,14 @@ howTo:
       text: "Once your baby is calm but still awake, place them back in the cot. This is the crucial step — if they drift off in your arms, you reinforce falling asleep outside the cot, which defeats the purpose of the method."
     - name: "Repeat the cycle until they fall asleep in the cot"
       text: "Expect 15–25 repetitions in the first few nights — this is normal and not a sign the method isn't working. Stay consistent and the number of repetitions will decrease significantly within 5–7 nights."
----
+
+sources:
+  - label: "NHS — Helping your baby to sleep"
+    url: "https://www.nhs.uk/baby/caring-for-a-newborn/helping-your-baby-to-sleep/"
+  - label: "Mindell et al. (2006) — Behavioral treatment of bedtime problems and night wakings in infants and young children (Sleep)"
+    url: "https://pubmed.ncbi.nlm.nih.gov/17068979/"
+
+------
 
 If the thought of any amount of crying makes your stomach drop, the pick up put down method might be the approach you've been looking for. It's one of the gentler sleep training techniques out there — designed to keep you actively involved in your baby's settling process rather than stepping back and waiting. But it also has a reputation for being exhausting in the early days, and it's worth knowing that going in.
 
