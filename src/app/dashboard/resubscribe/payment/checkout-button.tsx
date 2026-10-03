@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
 import { CreditCard, Loader2, Sparkles } from 'lucide-react'
+import { trackEvent } from '@/lib/analytics/track'
 
 const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
 
@@ -17,6 +18,7 @@ export function ReactivateCheckoutButton({ planId, babyName }: ReactivateCheckou
 
   const handleCheckout = async () => {
     setLoading(true)
+    trackEvent('checkout_started', { flow: 'resubscribe' })
 
     try {
       const response = await fetch('/api/stripe/reactivate', {

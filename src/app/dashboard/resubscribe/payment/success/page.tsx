@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { CheckCircle } from 'lucide-react'
+import { ConversionPing } from '@/components/analytics/conversion-ping'
 
 const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
 
@@ -91,6 +92,7 @@ export default async function ReactivateSuccessPage({
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 p-5 sm:p-6">
+      <ConversionPing event="resubscribe_completed" params={{ dev_mode: dev_mode === 'true' }} />
       <Card className="border-green-200 bg-gradient-to-b from-green-50 to-white overflow-hidden dark:border-green-800/60 dark:from-green-950/30 dark:to-slate-950">
         <CardHeader className="text-center pb-2">
           <div className="mx-auto w-20 h-20 bg-green-100 dark:bg-green-900/40 rounded-full flex items-center justify-center mb-4 animate-in zoom-in duration-500">

@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server'
 import { createClient as createAdminClient } from '@supabase/supabase-js'
 import { stripe } from '@/lib/stripe'
 import { SuccessClient } from './success-client'
+import { ConversionPing } from '@/components/analytics/conversion-ping'
 
 const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
 
@@ -178,12 +179,21 @@ export default async function PaymentSuccessPage({
   const isDevMode = dev_mode === 'true' || !isStripeEnabled
 
   return (
-    <SuccessClient
+    <>
+      <ConversionPing
+        event="trial_started"
+        params={{
+          additional_baby: additional_baby === 'true',
+          dev_mode: isDevMode,
+        }}
+      />
+      <SuccessClient
       intakeId={id}
       babyName={intake.baby?.name || 'Baby'}
       isDevMode={isDevMode}
       isAdditionalBaby={additional_baby === 'true'}
       initialPlan={plan ? { id: plan.id, status: plan.status } : null}
     />
+    </>
   )
 }

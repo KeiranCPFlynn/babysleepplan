@@ -11,6 +11,7 @@ import Link from 'next/link'
 import { toast } from 'sonner'
 import { Mail, Sparkles } from 'lucide-react'
 import { buildAuthCallbackUrl } from '@/lib/auth-redirect'
+import { trackEvent } from '@/lib/analytics/track'
 import {
   getPasswordPolicyErrors,
   PASSWORD_POLICY_HINT,
@@ -65,6 +66,12 @@ export function SignupForm() {
       return
     }
 
+    if (data.user) {
+      // Account was created in Supabase in both branches below (with or
+      // without an email-confirmation step), so this is the signup event.
+      trackEvent('signup_completed', { method: 'email' })
+    }
+
     if (data.user && !data.session) {
       // Email confirmation required — show check-email screen
       setConfirmEmail(formData.email)
@@ -83,6 +90,7 @@ export function SignupForm() {
 
   const handleGoogleSignup = async () => {
     setLoading(true)
+    trackEvent('signup_google_started')
 
     const supabase = createClient()
     const { error } = await supabase.auth.signInWithOAuth({

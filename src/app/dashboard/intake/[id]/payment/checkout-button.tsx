@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
 import { CreditCard, Loader2, Sparkles, PlusCircle } from 'lucide-react'
+import { trackEvent } from '@/lib/analytics/track'
 
 const isStripeEnabled = process.env.NEXT_PUBLIC_STRIPE_ENABLED !== 'false'
 
@@ -19,6 +20,9 @@ export function CheckoutButton({ intakeId, babyName, isAdditionalBaby, isReturni
 
   const handleCheckout = async () => {
     setLoading(true)
+    trackEvent('checkout_started', {
+      flow: isAdditionalBaby ? 'additional_baby' : isReturningUser ? 'resubscribe' : 'trial',
+    })
 
     try {
       const response = await fetch('/api/stripe/checkout', {

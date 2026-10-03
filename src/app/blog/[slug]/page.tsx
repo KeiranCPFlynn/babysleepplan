@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
-import Link from 'next/link'
 import { getAllPosts, getPostBySlug, getPostSlugs } from '@/lib/blog'
 import { PostContent } from '@/components/blog/post-content'
 import { PostCard } from '@/components/blog/post-card'
+import { TrackedLink } from '@/components/blog/tracked-link'
 import { AnimateOnScroll } from '@/components/ui/animate-on-scroll'
 import { formatUniversalDate } from '@/lib/date-format'
 import { getSiteUrl } from '@/lib/site-url'
@@ -218,12 +218,14 @@ export default async function BlogPostPage({
             <p className="text-sm font-semibold text-slate-800">Get your baby&apos;s personalized sleep schedule</p>
             <p className="text-xs text-slate-500 mt-0.5">Free builder — no account needed</p>
           </div>
-          <Link
+          <TrackedLink
             href="/free-schedule"
+            event="blog_cta_click"
+            params={{ source: 'top', slug }}
             className="shrink-0 inline-block rounded-full bg-sky-600 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-700 transition-colors"
           >
             Try Free
-          </Link>
+          </TrackedLink>
         </div>
 
         {/* Body */}
@@ -308,18 +310,22 @@ export default async function BlogPostPage({
               Get a personalized schedule in seconds — or a full adaptive plan that learns from your baby&apos;s sleep patterns.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Link
+              <TrackedLink
                 href="/free-schedule"
+                event="blog_cta_click"
+                params={{ source: 'bottom_free', slug }}
                 className="inline-block rounded-full bg-white px-6 py-3 text-sm font-semibold text-sky-700 shadow-sm hover:bg-sky-50 transition-colors"
               >
                 Free Schedule Builder
-              </Link>
-              <Link
+              </TrackedLink>
+              <TrackedLink
                 href="/signup"
+                event="blog_cta_click"
+                params={{ source: 'bottom_signup', slug }}
                 className="inline-block rounded-full border-2 border-white/40 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
               >
                 Full Plan — 5 Days Free
-              </Link>
+              </TrackedLink>
             </div>
           </div>
         </AnimateOnScroll>
@@ -332,12 +338,14 @@ export default async function BlogPostPage({
             <p className="text-sm font-semibold text-slate-900">Free sleep schedule builder</p>
             <p className="text-xs text-slate-500">Personalized for your baby — no account needed</p>
           </div>
-          <Link
+          <TrackedLink
             href="/free-schedule"
+            event="blog_cta_click"
+            params={{ source: 'sticky_mobile', slug }}
             className="shrink-0 rounded-full bg-sky-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-700 transition-colors"
           >
             Try Free
-          </Link>
+          </TrackedLink>
         </div>
       </div>
 
