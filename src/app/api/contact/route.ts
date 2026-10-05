@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { name, email, topic, message } = body
+    const { name, email, topic, message, website } = body
 
     if (!name || !email || !topic || !message) {
       return NextResponse.json(
@@ -52,6 +52,13 @@ export async function POST(request: NextRequest) {
         { error: 'Please provide a valid email address.' },
         { status: 400 }
       )
+    }
+
+    // Honeypot: the real form always sends a "website" field that is hidden
+    // from humans and left empty. Filled or absent means a bot submitting the
+    // API directly — return fake success so bots see no signal.
+    if (typeof website !== 'string' || website !== '') {
+      return NextResponse.json({ success: true })
     }
 
     const supabase = createClient(supabaseUrl, supabaseServiceKey)

@@ -99,6 +99,7 @@ describe('Contact API - Validation', () => {
         email: 'john@example.com',
         topic: 'Help',
         message: 'I need help with sleep training',
+        website: '',
       },
       { 'x-forwarded-for': '1.1.1.1' }
     )
@@ -106,6 +107,54 @@ describe('Contact API - Validation', () => {
     expect(res.status).toBe(200)
     const data = await res.json()
     expect(data.success).toBe(true)
+  })
+})
+
+describe('Contact API - Honeypot', () => {
+  it('silently drops submissions with a filled honeypot field', async () => {
+    const req = createRequest(
+      {
+        name: 'Bot',
+        email: 'bot@example.com',
+        topic: 'Help',
+        message: 'spam message',
+        website: 'http://spam.example.com',
+      },
+      { 'x-forwarded-for': '192.168.150.1' }
+    )
+    const res = await POST(req)
+    expect(res.status).toBe(200)
+    const data = await res.json()
+    expect(data.success).toBe(true)
+    expect(mockInsert).not.toHaveBeenCalled()
+    expect(sendContactNotificationEmail).not.toHaveBeenCalled()
+  })
+
+  it('silently drops submissions missing the honeypot field (direct API bots)', async () => {
+    const req = createRequest(
+      {
+        name: 'Bot',
+        email: 'bot@example.com',
+        topic: 'Help',
+        message: 'spam message',
+      },
+      { 'x-forwarded-for': '192.168.150.2' }
+    )
+    const res = await POST(req)
+    expect(res.status).toBe(200)
+    const data = await res.json()
+    expect(data.success).toBe(true)
+    expect(mockInsert).not.toHaveBeenCalled()
+    expect(sendContactNotificationEmail).not.toHaveBeenCalled()
+  })
+
+  it('still validates required fields before the honeypot check', async () => {
+    const req = createRequest(
+      { name: 'John' },
+      { 'x-forwarded-for': '192.168.150.3' }
+    )
+    const res = await POST(req)
+    expect(res.status).toBe(400)
   })
 })
 
@@ -117,6 +166,7 @@ describe('Contact API - Sanitization', () => {
         email: 'john@example.com',
         topic: '<script>alert</script>Help',
         message: '<p>Hello</p>',
+        website: '',
       },
       { 'x-forwarded-for': '10.0.0.1' }
     )
@@ -138,6 +188,7 @@ describe('Contact API - Sanitization', () => {
         email: 'b'.repeat(400) + '@example.com',
         topic: 'c'.repeat(100),
         message: 'd'.repeat(6000),
+        website: '',
       },
       { 'x-forwarded-for': '10.0.0.2' }
     )
@@ -163,6 +214,7 @@ describe('Contact API - Rate limiting', () => {
           email: 'john@example.com',
           topic: 'Help',
           message: 'Test message',
+          website: '',
         },
         { 'x-forwarded-for': ip }
       )
@@ -180,6 +232,7 @@ describe('Contact API - Rate limiting', () => {
           email: 'john@example.com',
           topic: 'Help',
           message: 'Test',
+          website: '',
         },
         { 'x-forwarded-for': ip }
       )
@@ -192,6 +245,7 @@ describe('Contact API - Rate limiting', () => {
         email: 'john@example.com',
         topic: 'Help',
         message: 'Test',
+        website: '',
       },
       { 'x-forwarded-for': ip }
     )
@@ -205,7 +259,7 @@ describe('Contact API - Rate limiting', () => {
     for (let i = 0; i < 3; i++) {
       await POST(
         createRequest(
-          { name: 'A', email: 'a@example.com', topic: 'T', message: 'M' },
+          { name: 'A', email: 'a@example.com', topic: 'T', message: 'M', website: '' },
           { 'x-forwarded-for': ipA }
         )
       )
@@ -215,7 +269,7 @@ describe('Contact API - Rate limiting', () => {
     const ipB = '192.168.100.4'
     const res = await POST(
       createRequest(
-        { name: 'B', email: 'b@example.com', topic: 'T', message: 'M' },
+        { name: 'B', email: 'b@example.com', topic: 'T', message: 'M', website: '' },
         { 'x-forwarded-for': ipB }
       )
     )
@@ -226,7 +280,7 @@ describe('Contact API - Rate limiting', () => {
     const ip = '192.168.100.5'
     // The route splits on comma and takes the first
     const req = createRequest(
-      { name: 'John', email: 'john@example.com', topic: 'T', message: 'M' },
+      { name: 'John', email: 'john@example.com', topic: 'T', message: 'M', website: '' },
       { 'x-forwarded-for': `${ip}, 10.0.0.1` }
     )
     const res = await POST(req)
@@ -235,7 +289,7 @@ describe('Contact API - Rate limiting', () => {
 
   it('falls back to x-real-ip header', async () => {
     const req = createRequest(
-      { name: 'John', email: 'john@example.com', topic: 'T', message: 'M' },
+      { name: 'John', email: 'john@example.com', topic: 'T', message: 'M', website: '' },
       { 'x-real-ip': '192.168.100.6' }
     )
     const res = await POST(req)
@@ -250,6 +304,7 @@ describe('Contact API - Rate limiting', () => {
       email: 'john@example.com',
       topic: 'T',
       message: 'M',
+      website: '',
     })
     const res = await POST(req)
     // Might be 200 or 429 depending on test order, but should not be 500
@@ -265,6 +320,7 @@ describe('Contact API - Email notification', () => {
         email: 'john@example.com',
         topic: 'Help',
         message: '<p>Hello</p>',
+        website: '',
       },
       { 'x-forwarded-for': '192.168.200.1' }
     )
@@ -287,6 +343,7 @@ describe('Contact API - Email notification', () => {
         email: 'john@example.com',
         topic: 'Help',
         message: 'Message',
+        website: '',
       },
       { 'x-forwarded-for': '192.168.200.2' }
     )

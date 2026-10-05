@@ -24,6 +24,7 @@ export function ContactForm() {
       email: formData.get('email') as string,
       topic: formData.get('topic') as string,
       message: formData.get('message') as string,
+      website: (formData.get('website') as string) ?? '',
     }
 
     try {
@@ -120,6 +121,20 @@ export function ContactForm() {
             placeholder="How can we help?"
             rows={5}
             required
+            disabled={status === 'submitting'}
+          />
+        </div>
+
+        {/* Honeypot field: hidden from humans; the API drops submissions where
+            it is filled or missing, so do not remove or make it visible. */}
+        <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
+          <label htmlFor="website">Website</label>
+          <input
+            id="website"
+            name="website"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
             disabled={status === 'submitting'}
           />
         </div>
