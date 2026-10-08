@@ -4,7 +4,7 @@ AI-powered personalized sleep plans for babies, with ongoing support through dai
 
 ## Overview
 
-Parents complete an intake questionnaire about their baby's sleep situation, and the app generates a personalized sleep plan using AI (Gemini). The plan is tailored based on:
+Parents complete an intake questionnaire about their baby's sleep situation, and the app generates a personalized sleep plan using AI (OpenAI). The plan is tailored based on:
 - Baby's age and temperament
 - Current sleep patterns and challenges
 - Parent's comfort level with different methods
@@ -17,7 +17,7 @@ Parents complete an intake questionnaire about their baby's sleep situation, and
 - **Framework:** Next.js 16 (App Router)
 - **Language:** TypeScript
 - **Database:** Supabase (PostgreSQL + Auth)
-- **AI:** Google Gemini API
+- **AI:** OpenAI API (Responses API; GPT-6.1 Sol / GPT-6 Luna)
 - **Payments:** Stripe (optional, can run in dev mode without)
 - **Email:** Resend
 - **Styling:** Tailwind CSS 4
@@ -65,7 +65,7 @@ src/
 │   ├── auth.ts          # Auth helpers
 │   ├── blog.ts          # Blog content loader
 │   ├── env.ts           # Startup env var validation
-│   ├── gemini.ts        # Gemini AI client
+│   ├── openai.ts        # OpenAI client
 │   ├── sanitize.ts      # HTML escaping + prompt sanitization
 │   ├── stripe.ts        # Stripe client setup
 │   └── subscription.ts  # Subscription helpers
@@ -107,8 +107,8 @@ NEXT_PUBLIC_SUPABASE_URL=        # Required
 NEXT_PUBLIC_SUPABASE_ANON_KEY=   # Required
 SUPABASE_SERVICE_ROLE_KEY=       # Required
 
-# Google AI
-GEMINI_API_KEY=                  # Required
+# OpenAI
+OPENAI_API_KEY=                  # Required
 
 # Internal API key for service-to-service calls (plan generation trigger)
 # MUST be a strong random secret (32+ chars). No fallback — required in production.
@@ -225,7 +225,7 @@ Plan generation has multiple fallbacks to reduce dropped-trigger risk:
 - Server trigger from checkout/webhook/success flows.
 - Client-side retry trigger on the payment success page.
 - Vercel cron safety net (`vercel.json`) calling `/api/internal/retry-plan-generation` every 2 minutes.
-- DB lock lease to prevent concurrent generation for the same plan (avoids redundant Gemini calls).
+- DB lock lease to prevent concurrent generation for the same plan (avoids redundant AI calls).
 
 Production setup:
 - Set `INTERNAL_API_KEY`.
@@ -252,7 +252,7 @@ See `docs/SECURITY.md` for comprehensive details. Key measures:
 
 1. **User Authentication** - Email/password via Supabase Auth
 2. **Intake Questionnaire** - Multi-step wizard with progress saving
-3. **AI Plan Generation** - Personalized plans via Gemini API
+3. **AI Plan Generation** - Personalized plans via OpenAI API
 4. **Sleep Diary Logging** - Daily entries with summary view and edits
 5. **Weekly Diary Reviews** - AI review of the last 7 days
 6. **Living Plan Updates** - Append-only plan updates + plan history
