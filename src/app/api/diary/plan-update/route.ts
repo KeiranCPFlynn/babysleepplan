@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
-import { getModel } from '@/lib/gemini'
+import { callOpenAI } from '@/lib/openai'
 import { hasActiveSubscription } from '@/lib/subscription'
 import { sanitizeForPrompt } from '@/lib/sanitize'
 import { planUpdateLimiter } from '@/lib/rate-limit'
@@ -358,17 +358,14 @@ If you include encouragement, tie it to one concrete observation and one clear n
 Avoid generic praise phrases such as "you're doing amazing", "you're doing great", or "you've got this".
 Return ONLY the Markdown for the new section.`
 
-    const model = getModel()
-    const timeoutPromise = new Promise<never>((_, reject) => {
-      setTimeout(() => reject(new Error('AI update timeout after 60 seconds')), 60000)
+    const result = await callOpenAI({
+      role: 'primary',
+      prompt,
+      timeoutMs: 60 * 1000,
+      maxOutputTokens: 4000,
     })
 
-    const result = await Promise.race([
-      model.generateContent(prompt),
-      timeoutPromise
-    ])
-
-    const updateSection = result.response.text().trim()
+    const updateSection = result.text.trim()
     const hasWhyThisChange = /why this change/i.test(updateSection)
     const updateSectionWithWhy = hasWhyThisChange
       ? updateSection

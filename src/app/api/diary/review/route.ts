@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
-import { getModel } from '@/lib/gemini'
+import { callOpenAI } from '@/lib/openai'
 import { hasActiveSubscription } from '@/lib/subscription'
 import { sanitizeForPrompt } from '@/lib/sanitize'
 import { weeklyReviewLimiter } from '@/lib/rate-limit'
@@ -263,18 +263,14 @@ Keep it conversational, specific, and supportive. No emojis.`
       console.log('Generating check-in review for plan:', planId)
     }
 
-    const model = getModel()
-
-    const timeoutPromise = new Promise<never>((_, reject) => {
-      setTimeout(() => reject(new Error('AI review timeout after 60 seconds')), 60000)
+    const result = await callOpenAI({
+      role: 'primary',
+      prompt,
+      timeoutMs: 60 * 1000,
+      maxOutputTokens: 4000,
     })
 
-    const result = await Promise.race([
-      model.generateContent(prompt),
-      timeoutPromise
-    ])
-
-    const reviewContent = result.response.text()
+    const reviewContent = result.text
 
     // Save the review (upsert by plan_id + week_start)
     const { data: review, error: saveError } = await supabase

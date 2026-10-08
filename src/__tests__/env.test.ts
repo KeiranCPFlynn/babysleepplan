@@ -12,7 +12,7 @@ describe('env validation', () => {
     process.env.NEXT_PUBLIC_SUPABASE_URL = 'https://test.supabase.co'
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY = 'test-anon-key'
     process.env.SUPABASE_SERVICE_ROLE_KEY = 'test-service-role-key'
-    process.env.GEMINI_API_KEY = 'test-gemini-key'
+    process.env.OPENAI_API_KEY = 'test-openai-key'
     process.env.RESEND_API_KEY = 'test-resend-key'
     // Disable Stripe by default
     process.env.NEXT_PUBLIC_STRIPE_ENABLED = 'false'
@@ -54,9 +54,14 @@ describe('env validation', () => {
     await expect(import('@/lib/env')).rejects.toThrow('SUPABASE_SERVICE_ROLE_KEY')
   })
 
-  it('throws when GEMINI_API_KEY is missing', async () => {
+  it('throws when OPENAI_API_KEY is missing', async () => {
+    delete process.env.OPENAI_API_KEY
+    await expect(import('@/lib/env')).rejects.toThrow('OPENAI_API_KEY')
+  })
+
+  it('does NOT require GEMINI_API_KEY once migrated to OpenAI', async () => {
     delete process.env.GEMINI_API_KEY
-    await expect(import('@/lib/env')).rejects.toThrow('GEMINI_API_KEY')
+    await expect(import('@/lib/env')).resolves.not.toThrow()
   })
 
   it('throws when RESEND_API_KEY is missing', async () => {
@@ -102,13 +107,13 @@ describe('env validation', () => {
     process.env.NEXT_PHASE = 'phase-production-build'
     // Remove all required vars
     delete process.env.NEXT_PUBLIC_SUPABASE_URL
-    delete process.env.GEMINI_API_KEY
+    delete process.env.OPENAI_API_KEY
     await expect(import('@/lib/env')).resolves.not.toThrow()
   })
 
   it('lists all missing vars in error message', async () => {
     delete process.env.NEXT_PUBLIC_SUPABASE_URL
-    delete process.env.GEMINI_API_KEY
+    delete process.env.OPENAI_API_KEY
     delete process.env.RESEND_API_KEY
     try {
       await import('@/lib/env')
@@ -116,7 +121,7 @@ describe('env validation', () => {
     } catch (err: unknown) {
       const message = (err as Error).message
       expect(message).toContain('NEXT_PUBLIC_SUPABASE_URL')
-      expect(message).toContain('GEMINI_API_KEY')
+      expect(message).toContain('OPENAI_API_KEY')
       expect(message).toContain('RESEND_API_KEY')
     }
   })
