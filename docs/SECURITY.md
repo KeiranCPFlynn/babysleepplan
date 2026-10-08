@@ -153,7 +153,7 @@ Debug panels showing user IDs, Stripe customer IDs, and subscription internals a
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 - `SUPABASE_SERVICE_ROLE_KEY`
-- `GEMINI_API_KEY`
+- `OPENAI_API_KEY`
 - `RESEND_API_KEY`
 
 **Required in production only:**

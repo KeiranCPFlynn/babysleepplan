@@ -38,7 +38,7 @@ User clicks "Get Plan"
   → Loads relevant knowledge base files
   → Sanitizes user-provided fields (sanitizeForPrompt)
   → Builds prompt with all context
-  → Calls Gemini API (120s timeout, 5min overall timeout)
+  → Calls OpenAI API (gpt-6.1-sol; 100s per attempt, 2 attempts max, 5min overall timeout)
   → Saves plan_content to database
   → Sends "plan ready" email (HTML-escaped baby name)
 ```
@@ -86,7 +86,7 @@ User triggers 7-day plan update
 - `calculateAge()` - Handles premature baby adjustment
 - Format helpers convert DB values to readable text
 - User-provided fields wrapped with `sanitizeForPrompt()` before prompt interpolation
-- 120 second timeout on Gemini calls, 5 minute overall generation timeout
+- 100 second per-attempt timeout on OpenAI calls (2 attempts max), 5 minute overall generation timeout
 - Auth: accepts `INTERNAL_API_KEY` bearer token (for webhook-triggered calls) or verifies user owns the plan
 
 ### Plan Display (`src/app/dashboard/plans/[id]/`)

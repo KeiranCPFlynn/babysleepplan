@@ -49,7 +49,7 @@
 | `next.config.ts` | Security headers (CSP, HSTS, etc.) |
 | `src/lib/env.ts` | Startup env var validation |
 | `src/lib/sanitize.ts` | HTML escaping, prompt sanitization |
-| `src/lib/gemini.ts` | Gemini AI client setup |
+| `src/lib/openai.ts` | OpenAI client setup |
 | `src/lib/supabase/server.ts` | Server-side Supabase client |
 | `src/lib/email/send.ts` | Email templates (HTML-escaped) |
 | `src/middleware.ts` | Route protection |
