@@ -178,7 +178,7 @@ export function SchedulePreview({
   const keyGuidanceRaw = sections.get('key_guidance') ?? ''
   const keyGuidanceLines = keyGuidanceRaw.split('\n')
   const headingLine = keyGuidanceLines[0] ?? '' // "## Key Guidance"
-  // Accept both "- " and "* " list formats (Gemini may use either)
+  // Accept both "- " and "* " list formats (the model may use either)
   const bulletLines = keyGuidanceLines.filter((l) => /^\s*[-*]\s/.test(l))
   const visibleBullets = bulletLines.slice(0, 2)
   const hiddenBullets = bulletLines.slice(2)

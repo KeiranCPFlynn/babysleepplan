@@ -39,7 +39,7 @@ function validateEnv() {
   requireEnv('NEXT_PUBLIC_SUPABASE_URL')
   requireEnv('NEXT_PUBLIC_SUPABASE_ANON_KEY')
   requireEnv('SUPABASE_SERVICE_ROLE_KEY')
-  requireEnv('GEMINI_API_KEY')
+  requireEnv('OPENAI_API_KEY')
   requireEnv('RESEND_API_KEY')
 
   // Required in production

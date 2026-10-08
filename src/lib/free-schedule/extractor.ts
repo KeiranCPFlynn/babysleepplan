@@ -1,4 +1,4 @@
-import { getFlashModel } from '@/lib/gemini'
+import { callOpenAI } from '@/lib/openai'
 import { sanitizeForPrompt } from '@/lib/sanitize'
 import type { ExtractedFields } from './types'
 
@@ -148,8 +148,7 @@ export function mergeFields(
   }
 }
 
-export async function extractWithGemini(text: string): Promise<ExtractedFields> {
-  const model = getFlashModel()
+export async function extractFieldsWithAI(text: string): Promise<ExtractedFields> {
   const prompt = `Extract baby sleep information from the text below. Return ONLY valid JSON with no other text or markdown.
 
 ${sanitizeForPrompt(text, 1000)}
@@ -165,8 +164,13 @@ Return this exact JSON structure (use null for unknown fields, times in HH:MM 24
 }`
 
   try {
-    const result = await model.generateContent(prompt)
-    const responseText = result.response.text().trim()
+    const result = await callOpenAI({
+      role: 'light',
+      prompt,
+      timeoutMs: 15 * 1000,
+      maxOutputTokens: 1000,
+    })
+    const responseText = result.text.trim()
 
     // Strip markdown code fences if present
     const cleaned = responseText

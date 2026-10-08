@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { createClient as createServerClient } from '@/lib/supabase/server'
-import { getModel } from '@/lib/gemini'
+import { callOpenAI, isOpenAIRetryableError, type OpenAIResult } from '@/lib/openai'
 import { appendEvidenceSection, collectEvidenceSourcesForKnowledgeFiles } from '@/lib/plan-evidence'
 import { sanitizeForPrompt } from '@/lib/sanitize'
 import { planGenerationLimiter } from '@/lib/rate-limit'
@@ -13,9 +13,12 @@ const isDev = process.env.NODE_ENV !== 'production'
 export const runtime = 'nodejs'
 export const maxDuration = 300
 const PLAN_LOCK_LEASE_SECONDS = 8 * 60
-const GEMINI_MAX_ATTEMPTS = 2
-const GEMINI_ATTEMPT_TIMEOUT_MS = 100 * 1000
-const GEMINI_BASE_BACKOFF_MS = 1500
+const OPENAI_MAX_ATTEMPTS = 2
+const OPENAI_ATTEMPT_TIMEOUT_MS = 100 * 1000
+const OPENAI_BASE_BACKOFF_MS = 1500
+// Reasoning tokens count toward the output limit; keep generous headroom so a
+// full plan is never truncated to an "incomplete" response.
+const PLAN_MAX_OUTPUT_TOKENS = 16000
 
 const knowledgeFileCache = new Map<string, string | null>()
 
@@ -99,75 +102,28 @@ function getErrorMessage(error: unknown) {
   return String(error)
 }
 
-function isTransientGeminiError(error: unknown) {
-  const status = Number(getErrorField(error, 'status') ?? getErrorField(error, 'statusCode'))
-  if (!Number.isNaN(status) && [408, 429, 500, 502, 503, 504].includes(status)) {
-    return true
-  }
-
-  const code = String(getErrorField(error, 'code') ?? '').toLowerCase()
-  if (
-    code.includes('resource_exhausted')
-    || code.includes('unavailable')
-    || code.includes('deadline_exceeded')
-    || code.includes('internal')
-  ) {
-    return true
-  }
-
-  const message = getErrorMessage(error).toLowerCase()
-  return (
-    message.includes('timeout')
-    || message.includes('timed out')
-    || message.includes('rate limit')
-    || message.includes('resource exhausted')
-    || message.includes('temporarily unavailable')
-    || message.includes('service unavailable')
-    || message.includes('internal error')
-    || message.includes('network')
-  )
-}
-
 function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-type GeminiModel = ReturnType<typeof getModel>
-type GeminiResult = Awaited<ReturnType<GeminiModel['generateContent']>>
-
-async function callGeminiWithTimeout(model: GeminiModel, prompt: string): Promise<GeminiResult> {
-  let timeoutId: ReturnType<typeof setTimeout> | undefined
-  const timeoutPromise = new Promise<never>((_, reject) => {
-    timeoutId = setTimeout(() => {
-      reject(new Error(`Gemini API timeout after ${GEMINI_ATTEMPT_TIMEOUT_MS / 1000} seconds`))
-    }, GEMINI_ATTEMPT_TIMEOUT_MS)
-  })
-
-  try {
-    const result = await Promise.race([
-      model.generateContent(prompt),
-      timeoutPromise,
-    ])
-    return result as GeminiResult
-  } finally {
-    if (timeoutId) clearTimeout(timeoutId)
-  }
-}
-
-async function generateWithRetry(prompt: string): Promise<GeminiResult> {
-  const model = getModel()
+async function generateWithRetry(prompt: string): Promise<OpenAIResult> {
   let lastError: unknown
 
-  for (let attempt = 1; attempt <= GEMINI_MAX_ATTEMPTS; attempt++) {
+  for (let attempt = 1; attempt <= OPENAI_MAX_ATTEMPTS; attempt++) {
     try {
       if (isDev) {
-        console.log('[generate-plan] Gemini attempt', { attempt, maxAttempts: GEMINI_MAX_ATTEMPTS })
+        console.log('[generate-plan] OpenAI attempt', { attempt, maxAttempts: OPENAI_MAX_ATTEMPTS })
       }
-      return await callGeminiWithTimeout(model, prompt)
+      return await callOpenAI({
+        role: 'primary',
+        prompt,
+        timeoutMs: OPENAI_ATTEMPT_TIMEOUT_MS,
+        maxOutputTokens: PLAN_MAX_OUTPUT_TOKENS,
+      })
     } catch (error) {
       lastError = error
-      const shouldRetry = attempt < GEMINI_MAX_ATTEMPTS && isTransientGeminiError(error)
-      console.error('[generate-plan] Gemini attempt failed', {
+      const shouldRetry = attempt < OPENAI_MAX_ATTEMPTS && isOpenAIRetryableError(error)
+      console.error('[generate-plan] OpenAI attempt failed', {
         attempt,
         shouldRetry,
         error: getErrorMessage(error),
@@ -177,12 +133,12 @@ async function generateWithRetry(prompt: string): Promise<GeminiResult> {
         throw error
       }
 
-      const backoffMs = GEMINI_BASE_BACKOFF_MS * attempt
+      const backoffMs = OPENAI_BASE_BACKOFF_MS * attempt
       await sleep(backoffMs)
     }
   }
 
-  throw lastError instanceof Error ? lastError : new Error('Gemini generation failed')
+  throw lastError instanceof Error ? lastError : new Error('OpenAI generation failed')
 }
 
 // Smart knowledge base loader - only loads relevant files
@@ -889,9 +845,9 @@ Remember: Write like a skilled, supportive human coach, not a cheerleader. Parag
     const result = await generateWithRetry(prompt)
 
     if (isDev) {
-      console.log('Gemini API response received')
+      console.log('OpenAI response received')
     }
-    const rawPlanContent = result.response.text()
+    const rawPlanContent = result.text
     const evidenceSources = collectEvidenceSourcesForKnowledgeFiles(loadedFiles)
     const planContent = appendEvidenceSection(rawPlanContent, evidenceSources)
 

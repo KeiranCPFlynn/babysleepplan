@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { randomUUID } from 'crypto'
-import { getFlashModel, getModel } from '@/lib/gemini'
+import { callOpenAI, type OpenAIRole, type OpenAIResult } from '@/lib/openai'
 import {
   freeSchedulePreviewLimiter,
   getClientIp,
@@ -9,7 +9,7 @@ import {
 } from '@/lib/rate-limit'
 import {
   extractFieldsFromText,
-  extractWithGemini,
+  extractFieldsWithAI,
   mergeFields,
 } from '@/lib/free-schedule/extractor'
 import { loadFreeKnowledgeBase } from '@/lib/free-schedule/knowledge-loader'
@@ -137,15 +137,18 @@ function isOnTopic(text: string): boolean {
 }
 
 // Lightweight semantic check — only called when keyword extraction gives confidence < 0.15.
-// Uses Gemini Flash for a single YES/NO token. Fails open so a Flash error never blocks real users.
+// Uses the light model for a single YES/NO answer. Fails open so an AI error never blocks real users.
 async function isGenuineSleepQuestion(text: string): Promise<boolean> {
   try {
-    const model = getFlashModel()
-    const result = await model.generateContent(
-      `Is the following message a genuine request for help with a real baby or toddler's sleep schedule?\n` +
-      `Reply with only YES or NO.\n\nMessage: "${text.slice(0, 300)}"`
-    )
-    return result.response.text().trim().toUpperCase().startsWith('YES')
+    const result = await callOpenAI({
+      role: 'light',
+      prompt:
+        `Is the following message a genuine request for help with a real baby or toddler's sleep schedule?\n` +
+        `Reply with only YES or NO.\n\nMessage: "${text.slice(0, 300)}"`,
+      timeoutMs: 8 * 1000,
+      maxOutputTokens: 1000,
+    })
+    return result.text.trim().toUpperCase().startsWith('YES')
   } catch {
     return true // fail open — classifier failure must never block a real user
   }
@@ -444,26 +447,18 @@ Draft:
 ${draft}`
 }
 
+// Output limits leave headroom above the prompt's word ceilings; the light
+// model runs without reasoning, so the whole budget is available as text.
+const SCHEDULE_MAX_OUTPUT_TOKENS = 4000
+const ADMIN_SOCIAL_MAX_OUTPUT_TOKENS = 2000
+
 async function generateWithTimeout(
-  model: ReturnType<typeof getFlashModel>,
+  role: OpenAIRole,
   prompt: string,
-  timeoutMs: number
-) {
-  let timeoutId: NodeJS.Timeout | null = null
-  try {
-    return await Promise.race([
-      model.generateContent(prompt),
-      new Promise<never>((_, reject) => {
-        timeoutId = setTimeout(() => {
-          reject(new Error(`Model generation timed out after ${timeoutMs}ms`))
-        }, timeoutMs)
-      }),
-    ])
-  } finally {
-    if (timeoutId) {
-      clearTimeout(timeoutId)
-    }
-  }
+  timeoutMs: number,
+  maxOutputTokens: number
+): Promise<OpenAIResult> {
+  return callOpenAI({ role, prompt, timeoutMs, maxOutputTokens })
 }
 
 export async function POST(request: NextRequest) {
@@ -496,7 +491,7 @@ export async function POST(request: NextRequest) {
   }
 
   // Global daily cap (DB-backed — survives deploys and multiple serverless instances)
-  // Protects Gemini API costs. Default: 100 generations/day. Override via env var.
+  // Protects AI API costs. Default: 100 generations/day. Override via env var.
   const dailyGenerateLimit = parseInt(process.env.FREE_SCHEDULE_MAX_DAILY_GENERATES ?? '100', 10)
   const supabaseAdmin = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -586,11 +581,11 @@ export async function POST(request: NextRequest) {
     }
   }
 
-  // Step 4: Gemini fallback if age is still unknown and confidence is low.
+  // Step 4: AI fallback if age is still unknown and confidence is low.
   // Gate this for short first messages to keep the first round-trip fast.
-  const shouldUseGeminiExtraction = questionsAsked > 0 || userTextLength >= 80
-  if (fields.age_months === null && fields.confidence_score < 0.3 && shouldUseGeminiExtraction) {
-    fields = mergeFields(clientFields || fields, await extractWithGemini(userText))
+  const shouldUseAIExtraction = questionsAsked > 0 || userTextLength >= 80
+  if (fields.age_months === null && fields.confidence_score < 0.3 && shouldUseAIExtraction) {
+    fields = mergeFields(clientFields || fields, await extractFieldsWithAI(userText))
   }
 
   // Step 4b: Off-topic guard
@@ -609,7 +604,7 @@ export async function POST(request: NextRequest) {
     })
   }
   // Semantic fallback: if extraction gave us nothing meaningful (confidence < 0.15),
-  // ask Gemini Flash to confirm it's a genuine sleep question before asking follow-ups.
+  // ask the light model to confirm it's a genuine sleep question before asking follow-ups.
   // Catches absurd inputs that happen to contain sleep words ("my cat never sleeps").
   if (
     !isAdminSocialMode &&
@@ -751,36 +746,38 @@ export async function POST(request: NextRequest) {
 
   let scheduleMarkdown: string
   try {
-    const primaryModel = isAdminSocialMode ? getModel() : getFlashModel()
+    const primaryRole: OpenAIRole = isAdminSocialMode ? 'primary' : 'light'
     let result
     let usedFallback = false
 
     try {
       result = await generateWithTimeout(
-        primaryModel,
+        primaryRole,
         prompt,
-        isAdminSocialMode ? 30000 : 20000
+        isAdminSocialMode ? 30000 : 20000,
+        isAdminSocialMode ? ADMIN_SOCIAL_MAX_OUTPUT_TOKENS : SCHEDULE_MAX_OUTPUT_TOKENS
       )
     } catch (primaryErr) {
       if (!isAdminSocialMode) {
         throw primaryErr
       }
-      // Social mode prefers Pro, but should still return quickly if Pro is slow/unavailable.
-      result = await generateWithTimeout(getFlashModel(), prompt, 20000)
+      // Social mode prefers the primary model, but should still return quickly if it is slow/unavailable.
+      result = await generateWithTimeout('light', prompt, 20000, ADMIN_SOCIAL_MAX_OUTPUT_TOKENS)
       usedFallback = true
     }
 
-    scheduleMarkdown = result.response.text()
+    scheduleMarkdown = result.text
 
     if (outputMode === 'admin_social') {
       const issues = validateSchedule(scheduleMarkdown)
       if (issues.length > 0 && !usedFallback) {
         const repairResult = await generateWithTimeout(
-          getFlashModel(),
+          'light',
           buildAdminRepairPrompt(scheduleMarkdown, issues),
-          12000
+          12000,
+          ADMIN_SOCIAL_MAX_OUTPUT_TOKENS
         )
-        const repairedMarkdown = repairResult.response.text()
+        const repairedMarkdown = repairResult.text
         const repairIssues = validateSchedule(repairedMarkdown)
         if (repairIssues.length === 0) {
           scheduleMarkdown = repairedMarkdown
@@ -788,7 +785,7 @@ export async function POST(request: NextRequest) {
       }
     }
   } catch (err) {
-    console.error('Gemini schedule generation failed:', err)
+    console.error('Schedule generation failed:', err)
     return NextResponse.json(
       { status: 'error', error: 'Failed to generate schedule. Please try again.' },
       { status: 500 }
