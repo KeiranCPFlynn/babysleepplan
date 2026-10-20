@@ -377,6 +377,7 @@ export function FreeScheduleClient({
             isLoading={isLoading && phase === 'chat'}
             loadingStatus={loadingStatus}
             isComplete={phase !== 'chat'}
+            isFirstMessage={!hasVerifiedSession}
             onSend={phase === 'chat' ? handleSend : () => { }}
           />
         </div>
