@@ -68,8 +68,7 @@ describe('Diary Seed API', () => {
   })
 
   it('allows admin seeding in production mode', async () => {
-    const previousNodeEnv = process.env.NODE_ENV
-    process.env.NODE_ENV = 'production'
+    vi.stubEnv('NODE_ENV', 'production')
 
     const upsert = vi.fn().mockResolvedValue({ error: null })
 
@@ -113,7 +112,7 @@ describe('Diary Seed API', () => {
       expect(entries[0].user_id).toBe('user-123')
       expect(options).toEqual({ onConflict: 'plan_id,date' })
     } finally {
-      process.env.NODE_ENV = previousNodeEnv
+      vi.unstubAllEnvs()
     }
   })
 })

@@ -127,11 +127,10 @@ describe('Intake Create - Draft detection', () => {
   it('returns existing draft ID with { existing: true } if draft exists', async () => {
     const babyChain = setupBabyFound()
 
-    const draftMaybeSingle = vi.fn().mockResolvedValue({ data: { id: 'draft-123' } })
+    const draftMaybeSingle = vi.fn().mockResolvedValue({ data: { id: 'draft-123', baby_id: 'baby-1' } })
     const draftLimit = vi.fn().mockReturnValue({ maybeSingle: draftMaybeSingle })
     const draftOrder = vi.fn().mockReturnValue({ limit: draftLimit })
-    const draftEq3 = vi.fn().mockReturnValue({ order: draftOrder })
-    const draftEq2 = vi.fn().mockReturnValue({ eq: draftEq3 })
+    const draftEq2 = vi.fn().mockReturnValue({ order: draftOrder })
     const draftEq1 = vi.fn().mockReturnValue({ eq: draftEq2 })
     const draftSelect = vi.fn().mockReturnValue({ eq: draftEq1 })
 
@@ -154,8 +153,7 @@ describe('Intake Create - Draft detection', () => {
     const draftMaybeSingle = vi.fn().mockResolvedValue({ data: null })
     const draftLimit = vi.fn().mockReturnValue({ maybeSingle: draftMaybeSingle })
     const draftOrder = vi.fn().mockReturnValue({ limit: draftLimit })
-    const draftEq3 = vi.fn().mockReturnValue({ order: draftOrder })
-    const draftEq2 = vi.fn().mockReturnValue({ eq: draftEq3 })
+    const draftEq2 = vi.fn().mockReturnValue({ order: draftOrder })
     const draftEq1 = vi.fn().mockReturnValue({ eq: draftEq2 })
     const draftSelect = vi.fn().mockReturnValue({ eq: draftEq1 })
 
@@ -172,6 +170,13 @@ describe('Intake Create - Draft detection', () => {
       if (table === 'intake_submissions') {
         callCount++
         if (callCount === 1) return { select: draftSelect }
+        if (callCount === 2) {
+          const previousIntake = {
+            eq: vi.fn().mockReturnThis(),
+            in: vi.fn().mockReturnValue({ order: draftOrder }),
+          }
+          return { select: vi.fn().mockReturnValue(previousIntake) }
+        }
         return { insert: insertFn }
       }
       return {}
@@ -196,8 +201,7 @@ describe('Intake Create - Creation', () => {
     const draftMaybeSingle = vi.fn().mockResolvedValue({ data: null })
     const draftLimit = vi.fn().mockReturnValue({ maybeSingle: draftMaybeSingle })
     const draftOrder = vi.fn().mockReturnValue({ limit: draftLimit })
-    const draftEq3 = vi.fn().mockReturnValue({ order: draftOrder })
-    const draftEq2 = vi.fn().mockReturnValue({ eq: draftEq3 })
+    const draftEq2 = vi.fn().mockReturnValue({ order: draftOrder })
     const draftEq1 = vi.fn().mockReturnValue({ eq: draftEq2 })
     const draftSelect = vi.fn().mockReturnValue({ eq: draftEq1 })
 
@@ -214,6 +218,13 @@ describe('Intake Create - Creation', () => {
       if (table === 'intake_submissions') {
         callCount++
         if (callCount === 1) return { select: draftSelect }
+        if (callCount === 2) {
+          const previousIntake = {
+            eq: vi.fn().mockReturnThis(),
+            in: vi.fn().mockReturnValue({ order: draftOrder }),
+          }
+          return { select: vi.fn().mockReturnValue(previousIntake) }
+        }
         return { insert: insertFn }
       }
       return {}
@@ -238,8 +249,7 @@ describe('Intake Create - Creation', () => {
     const draftMaybeSingle = vi.fn().mockResolvedValue({ data: null })
     const draftLimit = vi.fn().mockReturnValue({ maybeSingle: draftMaybeSingle })
     const draftOrder = vi.fn().mockReturnValue({ limit: draftLimit })
-    const draftEq3 = vi.fn().mockReturnValue({ order: draftOrder })
-    const draftEq2 = vi.fn().mockReturnValue({ eq: draftEq3 })
+    const draftEq2 = vi.fn().mockReturnValue({ order: draftOrder })
     const draftEq1 = vi.fn().mockReturnValue({ eq: draftEq2 })
     const draftSelect = vi.fn().mockReturnValue({ eq: draftEq1 })
 
@@ -256,6 +266,13 @@ describe('Intake Create - Creation', () => {
       if (table === 'intake_submissions') {
         callCount++
         if (callCount === 1) return { select: draftSelect }
+        if (callCount === 2) {
+          const previousIntake = {
+            eq: vi.fn().mockReturnThis(),
+            in: vi.fn().mockReturnValue({ order: draftOrder }),
+          }
+          return { select: vi.fn().mockReturnValue(previousIntake) }
+        }
         return { insert: insertFn }
       }
       return {}
@@ -277,8 +294,7 @@ describe('Intake Create - Creation', () => {
     const draftMaybeSingle = vi.fn().mockResolvedValue({ data: null })
     const draftLimit = vi.fn().mockReturnValue({ maybeSingle: draftMaybeSingle })
     const draftOrder = vi.fn().mockReturnValue({ limit: draftLimit })
-    const draftEq3 = vi.fn().mockReturnValue({ order: draftOrder })
-    const draftEq2 = vi.fn().mockReturnValue({ eq: draftEq3 })
+    const draftEq2 = vi.fn().mockReturnValue({ order: draftOrder })
     const draftEq1 = vi.fn().mockReturnValue({ eq: draftEq2 })
     const draftSelect = vi.fn().mockReturnValue({ eq: draftEq1 })
 
@@ -295,6 +311,13 @@ describe('Intake Create - Creation', () => {
       if (table === 'intake_submissions') {
         callCount++
         if (callCount === 1) return { select: draftSelect }
+        if (callCount === 2) {
+          const previousIntake = {
+            eq: vi.fn().mockReturnThis(),
+            in: vi.fn().mockReturnValue({ order: draftOrder }),
+          }
+          return { select: vi.fn().mockReturnValue(previousIntake) }
+        }
         return { insert: insertFn }
       }
       return {}

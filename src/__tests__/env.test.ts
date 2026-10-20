@@ -64,12 +64,20 @@ describe('env validation', () => {
     await expect(import('@/lib/env')).rejects.toThrow('RESEND_API_KEY')
   })
 
-  it('throws for production-only vars in production mode', async () => {
+  it('logs missing production-only vars without crashing the site', async () => {
     ;(process.env as Record<string, string | undefined>).NODE_ENV = 'production'
     delete process.env.INTERNAL_API_KEY
     delete process.env.NEXT_PUBLIC_APP_URL
     delete process.env.NEXT_PUBLIC_SITE_URL
-    await expect(import('@/lib/env')).rejects.toThrow('INTERNAL_API_KEY')
+    const logError = vi.spyOn(console, 'error').mockImplementation(() => {})
+    try {
+      await expect(import('@/lib/env')).resolves.not.toThrow()
+      expect(logError).toHaveBeenCalledWith(expect.stringContaining('INTERNAL_API_KEY'))
+      expect(logError).toHaveBeenCalledWith(expect.stringContaining('NEXT_PUBLIC_APP_URL'))
+      expect(logError).toHaveBeenCalledWith(expect.stringContaining('NEXT_PUBLIC_SITE_URL'))
+    } finally {
+      logError.mockRestore()
+    }
   })
 
   it('throws for Stripe vars when Stripe is enabled', async () => {
