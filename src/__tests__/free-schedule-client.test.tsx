@@ -32,7 +32,7 @@ function send(text = DESCRIPTION) {
   fireEvent.change(screen.getByRole('textbox', { name: "Your baby's sleep situation" }), {
     target: { value: text },
   })
-  fireEvent.click(screen.getByRole('button', { name: 'Send' }))
+  fireEvent.click(screen.getByRole('button', { name: /^(Build my schedule|Send)$/ }))
 }
 
 function events(name: string) {
@@ -54,6 +54,23 @@ afterEach(() => {
 })
 
 describe('free schedule journey', () => {
+  it('fills an editable example without starting generation or tracking until sent', async () => {
+    fetchMock.mockResolvedValue(complete())
+    render(<FreeScheduleClient />)
+    fireEvent.click(screen.getByRole('button', { name: 'Use this example' }))
+    const input = screen.getByRole('textbox', { name: "Your baby's sleep situation" })
+    expect(input).toHaveProperty('value', DESCRIPTION)
+    expect(document.activeElement).toBe(input)
+    expect(fetchMock).not.toHaveBeenCalled()
+    expect(gtag).not.toHaveBeenCalled()
+    fireEvent.change(input, { target: { value: 'My 9 month old wakes at 6am and has short naps.' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Build my schedule' }))
+    await screen.findByText('A generated daily schedule')
+    expect(events('free_schedule_first_message')).toHaveLength(1)
+    expect(JSON.parse(fetchMock.mock.calls[0][1].body).messages.at(-1).content).toContain('9 month old')
+    expect(screen.queryByRole('button', { name: 'Use this example' })).toBeNull()
+  })
+
   it('counts a successful preview once, focuses it, and removes the inactive chat input', async () => {
     let resolveRequest!: (value: ReturnType<typeof response>) => void
     fetchMock.mockReturnValue(new Promise((resolve) => { resolveRequest = resolve }))
@@ -96,6 +113,8 @@ describe('free schedule journey', () => {
     render(<FreeScheduleClient />)
     send('My baby is 8 months and has short naps.')
     await screen.findByText('What time do they wake?')
+    expect(screen.queryByRole('button', { name: 'Build my schedule' })).toBeNull()
+    expect(screen.getByRole('button', { name: 'Send' })).toBeTruthy()
     expect(events('free_schedule_follow_up')).toEqual([['event', 'free_schedule_follow_up', { question_number: 1 }]])
     fireEvent.click(screen.getByRole('button', { name: '7:00–7:30am' }))
     await screen.findByText('A generated daily schedule')
