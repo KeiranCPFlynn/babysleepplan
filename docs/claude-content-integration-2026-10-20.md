@@ -44,6 +44,26 @@ Evidence in the traffic-audit artifact directory: `integration-link-check.json`,
 
 Recheck **every retained competitor feature, price link and subscription term on the actual release day**; this integration check is dated October 20, not a promise about a later publication date. In particular, resolve Hatch's inconsistent membership terms if adding an exact term or price. Recheck LunaCradle's price/trial and active founding offer. Resolve the existing TypeScript release-check failures, then review the full release diff before deployment approval. No scheduled job was created to perform these checks.
 
-The package flags older linked guides that still contain room-sharing/white-noise claims; they remain outside this requested integration and need a separate accuracy pass. There is no claim that the entire site has been medically reviewed.
+The five older guides flagged by the package were addressed in the subsequent file-06 accuracy pass below. Other passages have not received a full clinical review; there is no claim that the entire site has been medically reviewed.
 
 Uncommitted `package.json` and `scripts/indexnow.mjs` are preserved and excluded from commits. No push, deployment, indexing request, email, signup, checkout, contact or external publication was performed.
+
+## File 06 accuracy follow-up
+
+Applied after items 1–3 as a separate local commit, **Correct outdated AAP room-sharing and white-noise claims**. Updated the five specified posts: bassinet transition, safe sleep/SIDS, co-sleeping, sleep environment and white noise. Their publication dates and URLs are unchanged; modification dates reflect October 20, 2026, with no future dates. No indexing request was submitted for the environment guide or any other page.
+
+Corrected the room-sharing duration, qualified the SIDS reduction as “as much as”, separated product-manual bassinet limits from the AAP's stop-swaddling advice, attributed the numeric temperature range to NHS/Lullaby Trust, removed the unsupported monitor false-alarm claim and replaced blanket monitor discouragement with the AAP's specific warning against using them to prevent SIDS. Corrected sound-machine thresholds, authorship and practical precautions, and added primary sources. Spencer's 16/20 versus 5/20 finding and Hugh's three outputs above 85 dBA were checked against primary abstracts ([Spencer](https://pubmed.ncbi.nlm.nih.gov/2405784/), [Hugh publisher record](https://publications.aap.org/pediatrics/article-pdf/133/4/677/1099550/peds_2013-3617.pdf)). The draft's first-author given name was incorrect; the publisher lists Sarah C. Hugh. Article citations use “Hugh et al.”.
+
+The draft's blanket “no guidance” wording was narrowed: [AAP's current parent guidance](https://www.healthychildren.org/English/safety-prevention/all-around/Pages/how-noise-affects-your-child.aspx) recommends greater distance and short use. A hospital-nursery threshold is not presented as a universal safe home setting. Fixed-volume and distance instructions elsewhere in the same white-noise article were made consistent. The old room-sharing quotation in the previously integrated own-room guide was paraphrased, retaining the historical explanation while allowing the requested global grep to return no matches.
+
+Two directly unsafe statements encountered in the affected posts were also corrected against [AAP safe-sleep guidance](https://www.healthychildren.org/English/ages-stages/baby/sleep/Pages/a-parents-guide-to-safe-sleep.aspx): recommending a chair if a feeding parent might fall asleep, and unconditionally endorsing a floor mattress for infant sleep. These are narrow corrections, not a full rewrite or review of those posts. The environment guide's unrelated introductory claims remain outside this pass, as specified in file 06.
+
+Validation: **23 tests passed** (`blog.test.ts` plus expanded content integration tests covering all nine edited articles), ESLint passed for the changed test, and `git diff --check` passed. No application code changed in this follow-up. The previously reported TypeScript failures and unverified production build remain unchanged.
+
+Ran the exact requested command against the whole blog directory:
+
+```sh
+grep -rniE "ideally (the )?(first year|12 months)|optimally|AAP[^.]{0,80}50 ?(dB|decibels)" content/blog
+```
+
+Result: **no output, zero matches**. Grep exit status 1 means no matches; it was not a command failure.

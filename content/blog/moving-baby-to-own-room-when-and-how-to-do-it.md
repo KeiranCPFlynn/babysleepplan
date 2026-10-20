@@ -15,7 +15,7 @@ faq:
   - question: "Is it safe to move baby to their own room at 6 months?"
     answer: "Six months is the minimum both the AAP and NHS give for room-sharing. This is not a guarantee that moving at 6 months is risk-free. Discuss individual concerns with your clinician and keep following safe-sleep guidance: baby on their back, on a firm, flat surface, with nothing else in the cot. The AAP's safe-sleep advice applies until the first birthday wherever your baby sleeps."
   - question: "Did the AAP change its room-sharing advice?"
-    answer: "Yes. The AAP's 2016 statement said room-sharing should continue for at least 6 months and 'optimally' the first year. Its 2022 update recommends room-sharing 'preferably for at least the first six months' and doesn't mention the first year. Many articles still quote the older wording."
+    answer: "Yes. The AAP's 2016 statement also encouraged continuing room-sharing through the first year. Its 2022 update recommends room-sharing 'preferably for at least the first six months' and doesn't mention the first year. Many articles still quote the older wording."
   - question: "How do I move baby to their own room without sleep problems?"
     answer: "Set up the new room safely first, then try one or two naps there before the first night. Keep the bedtime routine, sleep bag and sounds the same, and avoid moving during illness, travel or another big change. Many babies take a few nights to adjust. This is a practical expectation, not a research-based timeline."
 howTo:
@@ -54,7 +54,7 @@ sources:
 
 **American Academy of Pediatrics (AAP).** The AAP's 2022 safe-sleep update recommends room-sharing without bed-sharing, "preferably for at least the first six months" ([AAP, 2022](https://www.aap.org/en/news-room/news-releases/aap/2022/american-academy-of-pediatrics-updates-safe-sleep-recommendations-back-is-best/)). Its parent guide says the same: share a room "for at least the first 6 months," with your baby's sleep space near your bed but not in it ([HealthyChildren.org](https://www.healthychildren.org/English/ages-stages/baby/sleep/Pages/a-parents-guide-to-safe-sleep.aspx)).
 
-The AAP's 2016 statement also said "optimally for the first year." The 2022 update no longer says that, but many websites and older articles still quote it. If you've read that you *must* wait until 12 months, that is the older wording.
+The AAP's 2016 statement also encouraged room-sharing through the first year. The 2022 update no longer says that, but many websites and older articles still quote it. If you've read that you *must* wait until 12 months, that is the older wording.
 
 **NHS (UK).** Place your baby in a separate cot or Moses basket in the same room as you, for every sleep, for at least the first 6 months ([NHS](https://www.nhs.uk/baby/caring-for-a-newborn/sudden-infant-death-syndrome-sids/)). The NHS doesn't give an age after which you should move.
 

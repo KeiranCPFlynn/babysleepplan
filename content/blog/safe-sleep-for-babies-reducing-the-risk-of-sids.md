@@ -2,6 +2,7 @@
 title: "Safe Sleep for Babies: Reducing the Risk of SIDS"
 description: "Learn the AAP and NHS safe sleep guidelines for babies, including sleep position, environment, and what to avoid to reduce the risk of SIDS and suffocation."
 date: "2026-04-21"
+dateModified: "2026-10-20"
 author: "LunaCradle Team"
 tags: ["sleep environment", "newborn sleep", "infant sleep"]
 image: "https://images.unsplash.com/photo-1619703604149-efa36a71ffec?w=1200&h=630&fit=crop"
@@ -16,7 +17,17 @@ faq:
   - question: "Is it safe for a baby to sleep in a crib with blankets?"
     answer: "No. The AAP recommends keeping the crib completely empty — no blankets, pillows, bumpers, positioners, or soft toys. These items are associated with infant suffocation. Use a well-fitted sheet and a sleep sack to keep your baby warm instead."
   - question: "How long should a baby share a room with parents?"
-    answer: "The AAP recommends room-sharing without bed-sharing for at least the first 6 months, ideally the first year. Room-sharing is associated with a 50% reduction in SIDS risk. However, sharing an adult sleeping surface (bed-sharing) significantly increases risk."
+    answer: "The AAP and NHS recommend room-sharing without bed-sharing for at least the first 6 months. The AAP says room-sharing can decrease SIDS risk by as much as 50%. Sharing an adult sleeping surface (bed-sharing) significantly increases risk."
+sources:
+  - label: "AAP news release (2022) — Updated safe sleep recommendations"
+    url: "https://www.aap.org/en/news-room/news-releases/aap/2022/american-academy-of-pediatrics-updates-safe-sleep-recommendations-back-is-best/"
+  - label: "AAP / HealthyChildren.org — How to keep your sleeping baby safe"
+    url: "https://www.healthychildren.org/English/ages-stages/baby/sleep/Pages/a-parents-guide-to-safe-sleep.aspx"
+  - label: "NHS — Sudden infant death syndrome (SIDS)"
+    url: "https://www.nhs.uk/baby/caring-for-a-newborn/sudden-infant-death-syndrome-sids/"
+  - label: "The Lullaby Trust — Room temperature"
+    url: "https://www.lullabytrust.org.uk/baby-safety/safer-sleep-information/room-temperature/"
+
 ---
 
 > **Quick answer:** Place your baby on their back to sleep on a firm, flat surface with an empty crib — no pillows, blankets, or bumpers. Room-sharing without bed-sharing for at least the first six months, keeping the room at 16–20°C, and avoiding smoke exposure are the most impactful ways to reduce SIDS risk.
@@ -37,11 +48,11 @@ The American Academy of Pediatrics (AAP) updated its safe sleep guidelines in 20
 
 **Keep the sleep space empty** — no pillows, loose blankets, bumpers, positioners, wedges, or soft toys inside the sleeping area. These items, despite being widely sold and marketed, are associated with infant suffocation and add no sleep benefit. Use a well-fitted sheet and a sleep sack instead.
 
-**Room-share without bed-sharing** — the AAP recommends that babies sleep in the same room as a parent for at least the first six months, ideally the first year. This proximity is associated with a 50% reduction in SIDS risk. However, [bed-sharing](/blog/co-sleeping-safety-evidence-based-guidelines) (sharing an adult sleeping surface) significantly increases risk, particularly with soft bedding, when either parent smokes, has consumed alcohol or sedatives, or is very tired.
+**Room-share without bed-sharing** — the AAP recommends that babies sleep in the same room as a parent for at least the first six months. The AAP says room-sharing can decrease the risk of SIDS by as much as 50%. However, [bed-sharing](/blog/co-sleeping-safety-evidence-based-guidelines) (sharing an adult sleeping surface) significantly increases risk, particularly with soft bedding, when either parent smokes, has consumed alcohol or sedatives, or is very tired.
 
 ## Temperature and Clothing
 
-Overheating is identified as an independent risk factor for SIDS by both the AAP and NHS. The recommended [baby room temperature](/blog/baby-room-temperature-for-sleep-guide) for infant sleep is **16 to 20°C** (61 to 68°F). Your baby should feel warm on their chest, but not sweaty.
+Both the AAP and NHS warn that overheating increases SIDS risk. The NHS and The Lullaby Trust recommend a [baby room temperature](/blog/baby-room-temperature-for-sleep-guide) for infant sleep of **16 to 20°C** (61 to 68°F). The AAP doesn't give a specific temperature; it suggests dressing your baby in one more layer than you'd wear. Your baby should feel warm on their chest, but not sweaty.
 
 A useful guideline is to dress your baby in one more layer than you would be comfortable wearing in the same room. [Sleep sacks](/blog/baby-sleep-sack-or-baby-sleeping-bag-a-safe-guide) (or grobags) are the safest way to keep babies warm — they provide warmth without the suffocation risk of loose blankets.
 
@@ -51,7 +62,7 @@ Feel the back of your baby's neck or chest to gauge temperature — cool hands a
 
 Both breastfeeding and formula feeding are compatible with safe sleep practices. The AAP notes that breastfeeding — including expressing breast milk — is associated with a reduced SIDS risk, and recommends it where possible, but also recognises that formula feeding is an equally valid and safe choice.
 
-If you're breastfeeding and concerned about falling asleep during a night feed, the safest plan is to feed in a chair or on the floor rather than in bed, and to transfer your baby to their sleep space as soon as the feed is complete. The risk of accidental overlay (falling asleep with the baby on a soft surface) is highest in the very early weeks when sleep deprivation is at its most extreme.
+If you might fall asleep during a night feed, avoid feeding on a sofa or armchair. Return your baby to their own separate sleep space as soon as feeding or comforting is finished. If you feed in bed and could doze off, the [AAP advises clearing pillows, blankets and other items that could obstruct breathing](https://www.healthychildren.org/English/ages-stages/baby/sleep/Pages/a-parents-guide-to-safe-sleep.aspx) and moving your baby back to their own sleep space as soon as you wake. Bed-sharing is not recommended.
 
 ---
 
@@ -66,7 +77,7 @@ The safe sleep guidelines exist in part because the infant product market is ful
 - **Inclined sleepers** (at angles greater than 10 degrees) have been recalled in multiple countries following infant deaths. Babies can slide into a position that obstructs the airway.
 - **Crib bumpers** have been banned in several US states following deaths linked to their use, despite being widely marketed.
 - **Wedges and positioners** are sometimes recommended anecdotally for reflux, but the AAP advises against them and states that there is no evidence they reduce reflux or improve sleep.
-- **Baby monitors with sensor pads or oxygen monitors** marketed for home use are not recommended by the AAP for healthy babies — they have a high false-alarm rate and have not been shown to reduce SIDS risk.
+- **Baby monitors with sensor pads or oxygen monitors** should not be used as a strategy to prevent SIDS — the AAP says there's no evidence they reduce SIDS risk, and they shouldn't give you a false sense of security. If your clinician prescribes monitoring for a medical condition, follow their advice.
 
 ## Smoke Exposure and Safe Sleep
 

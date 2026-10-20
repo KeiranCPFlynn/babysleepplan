@@ -2,7 +2,7 @@
 title: "Bassinet to Crib Transition: When and How to Move Your Baby"
 description: "When to move baby from bassinet to crib: signs of readiness, AAP room-sharing guidance, and a gentle step-by-step transition plan."
 date: "2026-04-21"
-dateModified: "2026-10-03"
+dateModified: "2026-10-20"
 author: "LunaCradle Team"
 tags: ["sleep environment", "infant sleep", "sleep tips"]
 image: "https://images.unsplash.com/photo-1458731909820-5850bdcaee0b?w=1200&h=630&fit=crop"
@@ -11,7 +11,7 @@ imageCredit: "freestocks"
 imageCreditUrl: "https://unsplash.com/@freestocks"
 faq:
   - question: "When should I move my baby from bassinet to crib?"
-    answer: "Most babies are ready between 3 and 6 months. Move them when they approach the bassinet's weight limit (typically 9–11 kg), show signs of rolling, or visibly outgrow the space. Safety is the primary driver — the AAP recommends a larger sleep space once rolling begins."
+    answer: "Most babies are ready between 3 and 6 months. Move them when they approach the bassinet's weight limit (typically 9–11 kg), show signs of rolling, or visibly outgrow the space. Safety is the primary driver: follow your bassinet's weight and development limits, which often include stopping once your baby can roll or push up."
   - question: "How do I transition my baby from bassinet to crib?"
     answer: "Start by introducing the crib during daytime naps first, when the change feels less overwhelming. Keep everything else in the sleep routine the same — same sleep sack, same white noise, same bedtime routine. Most babies adjust within a week when the transition is gradual."
   - question: "Will my baby sleep worse after moving to a crib?"
@@ -26,6 +26,10 @@ sources:
     url: "https://www.nhs.uk/baby/caring-for-a-newborn/sudden-infant-death-syndrome-sids/"
   - label: "The Lullaby Trust — Safer sleep advice"
     url: "https://www.lullabytrust.org.uk/safer-sleep-advice/"
+  - label: "AAP news release (2022) — Updated safe sleep recommendations"
+    url: "https://www.aap.org/en/news-room/news-releases/aap/2022/american-academy-of-pediatrics-updates-safe-sleep-recommendations-back-is-best/"
+  - label: "AAP / HealthyChildren.org — How to keep your sleeping baby safe"
+    url: "https://www.healthychildren.org/English/ages-stages/baby/sleep/Pages/a-parents-guide-to-safe-sleep.aspx"
 
 ------
 
@@ -43,11 +47,11 @@ There's no single age that applies to all babies — the right time depends on y
 
 The clearest signal is safety-related. **Move to a crib when your baby is close to, or has reached, the weight limit for your bassinet** — typically 9 to 11 kg, though this varies by model. Check your specific bassinet's manual. Most parents are surprised by how quickly their baby approaches this limit.
 
-**Rolling ability** is another key indicator. The AAP recommends moving your baby to a larger sleep space when they begin showing signs of rolling, as the sides of a bassinet reduce the free space available if they roll to a position they can't get out of. For a full refresher on what a safe sleep space looks like, see our [safe sleep guide](/blog/safe-sleep-for-babies-reducing-the-risk-of-sids).
+**Rolling ability** is another key indicator. Many bassinet manuals say to stop using the bassinet once your baby can roll over or push up on their hands and knees, because the space is small and shallow. Check yours. Rolling is also when the AAP says to stop swaddling. For a full refresher on what a safe sleep space looks like, see our [safe sleep guide](/blog/safe-sleep-for-babies-reducing-the-risk-of-sids).
 
 **Outgrowing the space** is often obvious before the weight limit. If your baby is stretching into the sides, waking themselves by knocking the edges, or simply looking uncomfortable, the crib is the right next step.
 
-Finally, **your sleep quality** matters too. The AAP recommends room-sharing for at least the first six months — ideally the first year — but acknowledges that parents' sleep affects infant safety. If your baby's sounds are waking you unnecessarily (not genuine feeds or distress), transitioning to a separate room at or after 6 months is a reasonable choice.
+Finally, **your sleep quality** matters too. The AAP and NHS both recommend room-sharing for at least the first six months. After that, neither sets a date. If your baby's sounds are waking you unnecessarily (not genuine feeds or distress), transitioning to a separate room at or after 6 months is a reasonable choice.
 
 ## How to Make the Transition Easier
 
@@ -73,7 +77,7 @@ Some babies who were sleeping reasonably well in the bassinet have a rough few n
 
 ## What About Room-Sharing vs. Moving to Their Own Room?
 
-The AAP recommends room-sharing — placing the crib in your room rather than moving it to a separate nursery — for at least the first six months, and ideally for the full first year, as it's associated with a reduced risk of SIDS. This means for many families, the bassinet-to-crib move initially keeps the baby in the parents' room; the second move to the nursery comes later.
+The AAP recommends room-sharing — placing the crib in your room rather than moving it to a separate nursery — for at least the first six months, because it's associated with a reduced risk of SIDS. Earlier AAP guidance also mentioned continuing through the first year; the 2022 update changed that wording. This means for many families, the bassinet-to-crib move initially keeps the baby in the parents' room; the second move to the nursery comes later.
 
 Both moves — bassinet to crib in the same room, then crib to a separate nursery — often go more smoothly than parents expect. If your baby has already adjusted to the crib, the room change is usually a small additional step rather than starting from scratch. For tips on that second move, read our guide on [moving baby to their own room](/blog/moving-baby-to-own-room-when-and-how-to-do-it).
 
@@ -89,6 +93,6 @@ Both moves — bassinet to crib in the same room, then crib to a separate nurser
 
 **My baby only sleeps in the bassinet with the vibration on — do I need to drop that first?** It's worth separating the two transitions if possible, but if your baby is approaching weight or rolling limits, move the crib first and adjust the vibration habit once settled in.
 
-**Can I move straight to a floor bed or cot bed?** Yes — many families skip the standard cot and move directly to a floor mattress (Montessori-style) or a cot bed. Safe sleep principles apply equally.
+**Can I move straight to a floor bed or cot bed?** For an infant, use a crib, bassinet, portable crib or play yard that meets applicable safety standards. A floor mattress is not automatically an approved infant sleep surface. Follow the product’s age and development limits; see the [AAP safe-sleep guidance](https://www.healthychildren.org/English/ages-stages/baby/sleep/Pages/a-parents-guide-to-safe-sleep.aspx).
 
 *This article is based on published research from the American Academy of Pediatrics (AAP), the National Health Service (NHS), and peer-reviewed pediatric sleep studies. It is not medical advice — always consult your pediatrician for individual guidance.*
