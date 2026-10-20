@@ -10,6 +10,7 @@ interface ChatInterfaceProps {
   quickReplies: string[]
   isLoading: boolean
   loadingStatus?: string | null
+  isComplete?: boolean
   onSend: (text: string) => void
 }
 
@@ -18,6 +19,7 @@ export function ChatInterface({
   quickReplies,
   isLoading,
   loadingStatus = null,
+  isComplete = false,
   onSend,
 }: ChatInterfaceProps) {
   const [input, setInput] = useState('')
@@ -25,8 +27,11 @@ export function ChatInterface({
   const inputRef = useRef<HTMLTextAreaElement>(null)
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages, isLoading])
+    // Leave the completed preview in view instead of scrolling back to the chat.
+    if (!isComplete && messages.length > 1) {
+      bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [messages, isLoading, isComplete])
 
   function handleSend() {
     const trimmed = input.trim()
@@ -50,7 +55,7 @@ export function ChatInterface({
   return (
     <div className="flex flex-col gap-4">
       {/* Message list */}
-      <div className="flex flex-col gap-3 min-h-[200px]">
+      <div className="flex flex-col gap-3">
         {messages.map((msg, i) => (
           <div
             key={i}
@@ -105,29 +110,34 @@ export function ChatInterface({
       )}
 
       {/* Input area */}
-      <div className="flex gap-2 items-end">
-        <Textarea
-          ref={inputRef}
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleKeyDown}
-          placeholder="Describe your baby's sleep situation…"
-          disabled={isLoading}
-          rows={2}
-          className="flex-1 resize-none text-sm rounded-xl border-slate-200 focus:border-sky-300 dark:border-slate-700 dark:bg-slate-900"
-        />
-        <Button
-          onClick={handleSend}
-          disabled={!input.trim() || isLoading}
-          className="bg-sky-700 hover:bg-sky-800 text-white rounded-xl px-4 py-2 self-end shrink-0"
-        >
-          Send
-        </Button>
-      </div>
+      {!isComplete && (
+        <>
+          <div className="flex gap-2 items-end">
+            <Textarea
+              ref={inputRef}
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              aria-label="Your baby's sleep situation"
+              placeholder="E.g. My baby is 8 months, wakes at 7am and takes two short naps. Bedtime is 7pm."
+              disabled={isLoading}
+              rows={2}
+              className="flex-1 resize-none text-sm rounded-xl border-slate-200 focus:border-sky-300 dark:border-slate-700 dark:bg-slate-900"
+            />
+            <Button
+              onClick={handleSend}
+              disabled={!input.trim() || isLoading}
+              className="bg-sky-700 hover:bg-sky-800 text-white rounded-xl px-4 py-2 self-end shrink-0"
+            >
+              Send
+            </Button>
+          </div>
 
-      <p className="text-xs text-slate-400 dark:text-slate-500 text-center">
-        Enter to send · Shift+Enter for new line
-      </p>
+          <p className="text-xs text-slate-400 dark:text-slate-500 text-center">
+            Enter to send · Shift+Enter for new line
+          </p>
+        </>
+      )}
 
     </div>
   )
