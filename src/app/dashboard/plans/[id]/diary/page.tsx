@@ -13,7 +13,7 @@ export default async function DiaryPage({
   searchParams,
 }: {
   params: Promise<{ id: string }>
-  searchParams?: { date?: string; autoReview?: string; autoUpdate7?: string }
+  searchParams?: Promise<{ date?: string; autoReview?: string; autoUpdate7?: string }>
 }) {
   const user = await requireAuth()
   const supabase = await createClient()
@@ -128,9 +128,10 @@ export default async function DiaryPage({
       .eq('week_start', last7StartStr)
       .maybeSingle()
 
-  const preselectDate = searchParams?.date
-  const initialAutoGenerateReview = searchParams?.autoReview === '1' || searchParams?.autoReview === 'true'
-  const initialAutoApplySevenDayUpdate = searchParams?.autoUpdate7 === '1' || searchParams?.autoUpdate7 === 'true'
+  const query = await searchParams
+  const preselectDate = query?.date
+  const initialAutoGenerateReview = query?.autoReview === '1' || query?.autoReview === 'true'
+  const initialAutoApplySevenDayUpdate = query?.autoUpdate7 === '1' || query?.autoUpdate7 === 'true'
 
   return (
     <div className="dashboard-surface max-w-3xl mx-auto space-y-6 p-5 sm:p-6">
