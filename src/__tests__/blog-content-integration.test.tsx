@@ -13,6 +13,11 @@ const slugs = [
   'moving-baby-to-own-room-when-and-how-to-do-it',
   '18-month-old-sleep-schedule-naps-bedtime-and-toddler-tips',
   'best-baby-sleep-apps-2026',
+  'bassinet-to-crib-transition-when-and-how-to-move-your-baby',
+  'safe-sleep-for-babies-reducing-the-risk-of-sids',
+  'co-sleeping-safety-evidence-based-guidelines',
+  'baby-sleep-environment-complete-guide',
+  'white-noise-baby-sleep-benefits-and-risks',
 ]
 
 afterEach(cleanup)

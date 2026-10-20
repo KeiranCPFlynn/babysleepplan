@@ -2,6 +2,7 @@
 title: "White Noise for Baby Sleep: Benefits, Risks, and Best Use"
 description: "Is white noise safe for your baby? Learn how white noise helps baby sleep, what the research says about volume and safety, and how to use it well."
 date: "2026-03-04"
+dateModified: "2026-10-20"
 author: "LunaCradle Team"
 tags: ["sleep environment", "sleep tips", "infant sleep"]
 image: "https://images.unsplash.com/photo-1481728236344-b5c828da9edf?w=1200&h=630&fit=crop"
@@ -10,13 +11,21 @@ imageCredit: "Bastien Jaillot"
 imageCreditUrl: "https://unsplash.com/@bastnic"
 faq:
   - question: "Is white noise safe for babies?"
-    answer: "Yes, white noise is safe when used correctly — place the machine at least 2 metres from the crib and keep the volume below 50 decibels (roughly the volume of a quiet conversation). An AAP study found that many sound machines exceed safe levels at close range, so distance and volume matter."
+    answer: "Volume, placement and duration matter. Keep sound low and well away from the crib, and limit how long it runs. A 2014 study in Pediatrics found infant sleep machines at maximum volume could exceed a hospital-nursery noise threshold; that threshold does not guarantee safety at home."
   - question: "How loud should white noise be for a baby?"
-    answer: "Keep white noise below 50 decibels at your baby's ear level — about the volume of a quiet conversation or a running shower. A 2014 AAP study found that all 14 tested infant sound machines exceeded safe levels at 30cm on maximum volume, so always place the machine at least 2 metres away."
+    answer: "The 50 dBA limit recommended for hospital nurseries was a reference point in a 2014 study, not a universal safe home setting. All 14 machines tested exceeded it at 30 cm on maximum volume. Use low volume and as much distance as practical, and limit how long the machine runs."
   - question: "Does white noise help babies sleep longer?"
-    answer: "Research found that 80% of newborns exposed to white noise fell asleep within 5 minutes, compared to 25% without it. White noise masks household sounds that trigger startle responses and mimics the womb environment. It helps babies fall asleep faster, though evidence for longer total sleep is less conclusive."
+    answer: "A small 1990 trial of 40 newborns aged 2–7 days found that 16 of 20 in the white-noise group fell asleep within five minutes, compared with 5 of 20 in the control group. It did not establish longer total sleep or safety with repeated use."
   - question: "When should I stop using white noise for my baby?"
     answer: "There's no mandatory age to stop — white noise can be phased out whenever you're ready. A gradual approach works best: reduce the volume by a small amount every few nights over 1–2 weeks. Some families continue using it through the toddler years for naps and bedtime without issues."
+sources:
+  - label: "Hugh et al. (2014) — Infant sleep machines and hazardous sound pressure levels (Pediatrics)"
+    url: "https://pubmed.ncbi.nlm.nih.gov/24590753/"
+  - label: "Spencer et al. (1990) — White noise and sleep induction"
+    url: "https://pubmed.ncbi.nlm.nih.gov/2405784/"
+  - label: "AAP / HealthyChildren.org (2023) — How noise affects children"
+    url: "https://www.healthychildren.org/English/safety-prevention/all-around/Pages/how-noise-affects-your-child.aspx"
+
 ---
 
 ## The Sound That Helps Babies Sleep
@@ -25,7 +34,7 @@ Walk into any nursery group or parenting forum and you'll find strong opinions a
 
 If you've been using white noise and wondering whether it's safe, or if you're considering it for the first time, this guide will walk you through what the evidence actually says, how to use it well, and when to eventually phase it out.
 
-> **Quick answer:** White noise is safe and effective for baby sleep when placed at least 2 metres from the crib and kept below 50 decibels — it masks household noise and mimics the womb environment, helping 80% of newborns fall asleep faster, and it can be phased out gradually when you're ready.
+> **Quick answer:** White noise can help some babies settle: in one [small 1990 trial](https://pubmed.ncbi.nlm.nih.gov/2405784/), 16 of 20 newborns fell asleep within five minutes with white noise, compared with 5 of 20 without it. This does not establish longer sleep or safety. Keep sound low, place it well away from the crib and limit how long it runs; it can be phased out gradually.
 
 ## How White Noise Helps Babies Sleep
 
@@ -37,15 +46,15 @@ A frequently cited study published in *Archives of Disease in Childhood* found t
 
 ## What the Research Says About Safety
 
-The most important study on white noise safety was published by the AAP in *Pediatrics* in 2014. Researchers tested 14 commercially available infant sound machines at maximum volume and found that all of them exceeded 50 decibels at a distance of 30 centimeters, and several exceeded 85 decibels, the level at which prolonged exposure can cause hearing damage in adults.
+The most important study on white noise safety was published in *Pediatrics* (the AAP's journal) in 2014 by Hugh and colleagues. Researchers tested 14 commercially available infant sound machines at maximum volume and found that all of them exceeded 50 dBA at a distance of 30 centimeters, and three exceeded 85 dBA, which, over more than 8 hours, would exceed workplace noise limits for adults.
 
-That sounds alarming, but the key word is *maximum volume at close range*. The study's lead author, Dr. Blake Papsin, didn't recommend against white noise entirely. Instead, the recommendations were practical and clear:
+That sounds alarming, but the key word is *maximum volume at close range*. The study's senior author was Dr. Blake Papsin. The authors' suggestions were intended to reduce exposure, not establish a guaranteed safe home setting ([Hugh et al., 2014](https://pubmed.ncbi.nlm.nih.gov/24590753/)):
 
-- Place the sound machine at least 200 centimeters (about 7 feet) from your baby's head
-- Keep the volume below 50 decibels at the baby's ear level, roughly the volume of a quiet conversation
-- Don't run it continuously all night if possible, though many sleep professionals note that consistent use through sleep cycles has benefits
+- Place the sound machine as far from your baby as practical. Distance alone does not make a loud machine safe.
+- Keep volume low rather than treating a research threshold as a safe setting.
+- Limit how long the machine runs.
 
-The NHS similarly advises that white noise machines should not be placed in or on the cot and should be kept at a moderate volume.
+Current [AAP parent guidance](https://www.healthychildren.org/English/safety-prevention/all-around/Pages/how-noise-affects-your-child.aspx) recommends placing a sleep machine as far from the baby’s head as possible and using it for a short time only. Keep cords and the device out of the cot and out of reach.
 
 ## How to Use White Noise Effectively for Baby Sleep
 
@@ -55,7 +64,7 @@ Getting the most benefit from **white noise for baby sleep** comes down to a few
 
 This is the most critical factor. Your sound machine should be across the room from the crib, not next to your baby's head. A simple test: stand at your baby's sleep space and listen. The white noise should be clearly audible but comfortable, a steady background layer, not a wall of sound. If you need to raise your voice to talk over it, it's too loud.
 
-Many parents find it helpful to use a free decibel meter app on their phone to check the level at crib height. Aim for 50 decibels or below at that distance.
+A phone sound-meter app can give an approximate reading, but it does not establish that an exposure is safe for your baby. Keep sound low, maximise distance and limit duration rather than relying on one reading.
 
 ### Type of Sound
 

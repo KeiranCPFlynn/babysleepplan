@@ -2,7 +2,7 @@
 title: "Co-Sleeping Safety: Evidence-Based Guidelines for Families"
 description: "Co-sleeping safety: what NHS, Lullaby Trust and AAP guidance says about bed-sharing risks, and how to reduce them if you share a bed."
 date: "2026-04-19"
-dateModified: "2026-10-03"
+dateModified: "2026-10-20"
 author: "LunaCradle Team"
 tags: ["sleep environment", "infant sleep", "sleep tips"]
 image: "https://images.unsplash.com/photo-1619581910509-4c7400bab992?w=1200&h=630&fit=crop"
@@ -11,13 +11,13 @@ imageCredit: "Brett Durfee"
 imageCreditUrl: "https://unsplash.com/@brettd901"
 faq:
   - question: "Is co-sleeping safe for babies?"
-    answer: "The AAP and NHS recommend against bedsharing, especially for babies under 4 months. The highest-risk scenarios involve additional factors like parental smoking, alcohol use, or sleeping on a sofa. Room-sharing with a bedside crib is the safest option for the first 6–12 months."
+    answer: "The AAP and NHS recommend against bedsharing, especially for babies under 4 months. The highest-risk scenarios involve additional factors like parental smoking, alcohol use, or sleeping on a sofa. The AAP and NHS recommend room-sharing, with your baby in their own cot or bassinet, for at least the first 6 months."
   - question: "What is the safest way to co-sleep with a baby?"
     answer: "If you choose to bedshare, reduce risk by ensuring neither parent smokes, has consumed alcohol, or taken sedating medication. Use a firm mattress with no gaps against the wall, remove pillows and heavy blankets near the baby, and place baby on their back. A bedside sleeper or co-sleeper crib is a safer alternative."
   - question: "At what age is bedsharing safest?"
-    answer: "Bedsharing is highest risk for babies under 4 months and should be avoided entirely at that age. Risk decreases as babies get older and can move independently, but the AAP recommends room-sharing without bedsharing for at least the first 6 months, ideally 12 months."
+    answer: "Bedsharing is highest risk for babies under 4 months and should be avoided entirely at that age. Risk decreases as babies get older and can move independently, but the AAP recommends room-sharing without bedsharing for at least the first 6 months."
   - question: "Does co-sleeping increase the risk of SIDS?"
-    answer: "Bedsharing is associated with an increased risk of SIDS in the AAP's data, particularly when combined with other risk factors. However, the risk from bedsharing alone (without smoking, alcohol, or soft surfaces) is lower than the risk from bedsharing with those additional factors. Room-sharing with a separate sleep surface reduces SIDS risk by up to 50%."
+    answer: "Bedsharing is associated with an increased risk of SIDS in the AAP's data, particularly when combined with other risk factors. However, the risk from bedsharing alone (without smoking, alcohol, or soft surfaces) is lower than the risk from bedsharing with those additional factors. Room-sharing with a separate sleep surface can decrease SIDS risk by as much as 50%."
 
 sources:
   - label: "The Lullaby Trust — Safer sleep advice"
@@ -26,6 +26,10 @@ sources:
     url: "https://www.nhs.uk/baby/caring-for-a-newborn/sudden-infant-death-syndrome-sids/"
   - label: "American Academy of Pediatrics — Safe sleep recommendations"
     url: "https://www.aap.org/en/patient-care/safe-sleep/"
+  - label: "AAP news release (2022) — Updated safe sleep recommendations"
+    url: "https://www.aap.org/en/news-room/news-releases/aap/2022/american-academy-of-pediatrics-updates-safe-sleep-recommendations-back-is-best/"
+  - label: "AAP / HealthyChildren.org — How to keep your sleeping baby safe"
+    url: "https://www.healthychildren.org/English/ages-stages/baby/sleep/Pages/a-parents-guide-to-safe-sleep.aspx"
 
 ------
 
@@ -86,7 +90,7 @@ A **bedside crib or sidecar cot** — which attaches to or sits directly alongsi
 
 ## Room-Sharing vs Bed-Sharing
 
-It's worth distinguishing between **room-sharing** (baby in their own sleep space in the parents' room) and **bed-sharing** (baby on the same sleep surface as parents). Room-sharing is actively recommended by both the AAP and NHS for at least the first 6 months; it has been shown to reduce SIDS risk, possibly by making parents more aware of the baby's breathing patterns and making night feeds more accessible.
+It's worth distinguishing between **room-sharing** (baby in their own sleep space in the parents' room) and **bed-sharing** (baby on the same sleep surface as parents). Room-sharing is actively recommended by both the AAP and NHS for at least the first 6 months; it is associated with a lower SIDS risk (the AAP says by as much as 50%), possibly by making parents more aware of the baby's breathing patterns and making night feeds more accessible.
 
 Bed-sharing is the element associated with elevated risk, particularly when combined with the factors above.
 
