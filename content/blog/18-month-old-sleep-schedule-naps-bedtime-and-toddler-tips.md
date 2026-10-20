@@ -2,7 +2,7 @@
 title: "18-Month-Old Sleep Schedule: Naps, Bedtime, and Toddler Tips"
 description: "A realistic 18-month-old sleep schedule with example timetables for one-nap days, bedtime guidance, and how to handle the 18-month sleep regression."
 date: "2026-04-19"
-dateModified: "2026-10-03"
+dateModified: "2026-10-20"
 author: "LunaCradle Team"
 tags: ["nap schedule", "toddler sleep", "sleep tips"]
 image: "https://images.unsplash.com/photo-1613043547055-4efe0dfa9814?w=1200&h=630&fit=crop"
@@ -11,20 +11,26 @@ imageCredit: "Sven Brandsma"
 imageCreditUrl: "https://unsplash.com/@seffen99"
 faq:
   - question: "How much sleep does an 18 month old need?"
-    answer: "Most 18-month-olds need 11–14 hours of total sleep per day — roughly 11–12 hours overnight plus a single nap of 1.5–2 hours. The AAP recommends this range for children aged 1–2 years."
+    answer: "The American Academy of Sleep Medicine consensus, endorsed by the AAP, recommends 11–14 hours per 24 hours for children aged 1–2 years, including naps. For many 18-month-olds, that works out to roughly 10.5–12 hours at night plus one daytime nap, but individual children vary within and around that range."
   - question: "How long should an 18 month old's nap be?"
-    answer: "A single afternoon nap of 1.5–2 hours is typical for most 18-month-olds. By this age, almost all toddlers have transitioned to one nap. If your child is still on two naps and struggling with bedtime, it may be time to consolidate."
+    answer: "There's no official nap length. Many 18-month-olds take one midday nap of about 1.5–2.5 hours, and some still take two shorter naps. Judge by how your child copes in the late afternoon and settles at bedtime, not by an exact number."
   - question: "Is 18 months too late to start sleep training?"
-    answer: "Not at all. While earlier intervention is often easier, sleep training can be very effective at 18 months and beyond. Toddlers this age can understand simple language and respond well to consistent routines and clear boundaries around sleep."
+    answer: "No. A review of behavioural treatments for bedtime problems and night wakings in young children found good support for several approaches, including toddlers. Choose a method you can apply consistently, and check with your child's clinician first if you have health concerns."
   - question: "What time should an 18 month old go to bed?"
-    answer: "A bedtime between 7:00–7:30 pm works well for most 18-month-olds. Wake windows are typically 5–6 hours in the morning and 4.5–5.5 hours after the nap, so timing the last wake window correctly is key to a smooth bedtime."
-
+    answer: "There's no official bedtime. Many families aim for somewhere between 6:30 and 8:00 pm, chosen so your child gets enough total sleep before your usual wake-up time. On days with a short or missed nap, an earlier bedtime often helps. This is a practical suggestion, not clinical guidance."
 sources:
-  - label: "Paruthi et al. (2016) — Recommended amount of sleep for pediatric populations (AASM consensus)"
+  - label: "Paruthi et al. (2016) — Recommended amount of sleep for pediatric populations (AASM consensus, endorsed by the AAP)"
     url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4877308/"
   - label: "WHO — Guidelines on physical activity, sedentary behaviour and sleep for children under 5 years of age"
     url: "https://www.who.int/publications/i/item/9789241550536"
-
+  - label: "Mindell et al. (2009) — A nightly bedtime routine: impact on sleep in young children and maternal mood (SLEEP)"
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC2675894/"
+  - label: "Mindell et al. (2006) — Behavioral treatment of bedtime problems and night wakings in infants and young children (SLEEP)"
+    url: "https://pubmed.ncbi.nlm.nih.gov/17068979/"
+  - label: "NHS — Helping your baby to sleep"
+    url: "https://www.nhs.uk/baby/caring-for-a-newborn/helping-your-baby-to-sleep/"
+  - label: "AAP (2012) — Diagnosis and management of childhood obstructive sleep apnea syndrome (clinical practice guideline)"
+    url: "https://pubmed.ncbi.nlm.nih.gov/22926173/"
 ------
 
 ## Welcome to One of the Trickier Sleep Stages
@@ -33,13 +39,13 @@ Eighteen months is a fascinating age — your toddler is a fully-fledged little 
 
 The good news is that an 18-month-old's sleep needs are actually quite predictable, and having a consistent schedule makes an enormous difference. Once you understand what to expect, it's much easier to build a routine that works — and to stop second-guessing yourself every time a night goes sideways.
 
-> **Quick answer:** Most 18-month-olds need 11–14 hours of total sleep per day — roughly 11–12 hours overnight plus a single 1.5–2 hour nap. Wake windows are typically 5–6 hours in the morning and 4.5–5.5 hours after the nap.
+> **Quick answer:** Most 18-month-olds need 11–14 hours of sleep in 24 hours, including naps (AASM consensus, endorsed by the AAP). Many have moved to one midday nap of about 1.5–2.5 hours, with a bedtime chosen to fit that total. Wake windows of roughly 5–6 hours before the nap and 4–5.5 hours after it are a practical starting point, not a rule.
 
 ## How Much Sleep Does an 18-Month-Old Need?
 
-The AAP recommends 11 to 14 hours of total sleep per day for children aged 1 to 2 years, including naps. At 18 months, most toddlers get around 13 to 14 hours in total: roughly 11 to 12 hours overnight and a single nap of 1.5 to 2 hours during the day.
+The American Academy of Sleep Medicine's consensus, which the AAP endorsed, recommends **11–14 hours of sleep per 24 hours** for children aged 1–2, including naps ([Paruthi et al., 2016](https://pmc.ncbi.nlm.nih.gov/articles/PMC4877308/)).
 
-By 18 months, almost all toddlers have transitioned to a single daytime nap — or should be close to it. If your child is still on two naps and struggling with bedtime or early waking, it's likely time for the switch.
+How that total splits between night and day varies. Many 18-month-olds have moved to a single midday nap. Others still take two shorter naps, and that's normal too. There's no official age for dropping the second nap. The checklist below helps you decide.
 
 ## A Typical 18-Month-Old Sleep Schedule
 
@@ -63,23 +69,70 @@ The key principle here is the **gap between nap end and bedtime**. At 18 months,
 
 These windows are a starting point. Some toddlers are naturally on the higher end; others are more sensitive to overtiredness and do better with the shorter windows. Watch for tired cues — eye-rubbing, clinginess, loss of coordination — and use those alongside the clock.
 
+## Three Illustrative Days
+
+*These examples are illustrative, not recommended timetables. Use them to see how one change ripples through the day.*
+
+**A typical one-nap day** (wakes 6:45 am)
+
+| Time | |
+|---|---|
+| 6:45 am | Wake |
+| 12:15 pm | Nap (about 5.5 h awake) |
+| 2:15 pm | Wake from nap (2 h) |
+| 6:45 pm | Start bedtime routine |
+| 7:15 pm | Asleep (5 h awake) |
+
+**Short-nap day** (same child, nap lasts 50 minutes)
+
+| Time | |
+|---|---|
+| 12:15 pm | Nap |
+| 1:05 pm | Wake from nap |
+| 5:45 pm | Start bedtime routine early |
+| 6:15–6:30 pm | Asleep. Bedtime moved earlier to make up for the short nap |
+
+**Still on two naps** (wakes 6:30 am)
+
+| Time | |
+|---|---|
+| 6:30 am | Wake |
+| 9:45–10:30 am | Short morning nap |
+| 2:30–3:45 pm | Afternoon nap |
+| 7:30–8:00 pm | Asleep |
+
+### One nap or two? A quick checklist
+
+Over **a week or more**, these signs suggest a child may be ready for one nap:
+
+- [ ] They regularly take 30+ minutes to fall asleep for one of the naps, or skip it.
+- [ ] The second nap is pushing bedtime later than you'd like.
+- [ ] They're waking earlier in the morning or settling less easily at bedtime.
+- [ ] They cope well with a single nap on busy days, such as at nursery.
+
+If you're making the switch, many families start by moving the morning nap later by 15–30 minutes every few days until it's around midday. They use an earlier bedtime while the child adjusts. This is a practical approach, not a clinical protocol.
+
 ---
 
-*Want a schedule built for your baby's exact routine? Try the [free baby sleep schedule builder](/free-schedule) — no account needed.*
+*Working out where the single nap and bedtime should fall? The [free sleep schedule builder](/free-schedule) drafts a timetable from your toddler's age and usual wake-up time, plus two tips related to what you describe. For example: "18 months, wakes at 6:30, fighting the nap, bedtime getting later." You can see the preview without an account or email.*
 
 ---
 
 ## What About the 18-Month Sleep Regression?
 
-This is real, and it's one of the more intense developmental regressions. At around 18 months, toddlers experience a significant leap in language processing, emotional awareness, and independence — all of which can temporarily disrupt sleep. Separation anxiety often peaks right around this time too, which is why so many 18-month-olds suddenly start calling out or crying when left in the cot at bedtime.
+Many parents report that sleep gets bumpier around 18 months: more bedtime protest, calling out after lights-out, or new night wakings. "Sleep regression" is a common term, not a medical diagnosis, and not every child goes through it. Plausible contributors at this age include separation anxiety, a growing urge for independence, teething, illness and changes to the nap.
 
-Research by Dr. Jodi Mindell published in *Pediatrics* has shown that consistent, warm [bedtime routines](/blog/perfect-bedtime-routine-by-age) significantly reduce sleep-onset difficulties in toddlers, even during developmental regressions. The routine acts as a predictable signal that sleep is coming — something your toddler's developing brain genuinely finds reassuring.
+What has the best evidence is consistency. In a randomised trial of infants and toddlers, introducing a consistent nightly bedtime routine improved mothers' reports of how long it took children to fall asleep and how often they woke at night, compared with a control group, over three weeks ([Mindell et al., 2009, *SLEEP*](https://pmc.ncbi.nlm.nih.gov/articles/PMC2675894/)). See our [bedtime routines by age](/blog/perfect-bedtime-routine-by-age) guide for examples.
 
-If you're in the thick of the regression, the most helpful approach is usually to hold your boundaries calmly rather than overhauling the entire sleep setup. Adding extra reassurance at bedtime — a longer cuddle, an extra book — is fine. What tends to backfire is bringing them into your bed or staying until they're fully asleep every night, as those patterns become new habits quickly.
+Practical suggestions if you're in a rough patch:
+
+- Keep the same routine and sleep space, and add warmth within it: a longer cuddle or one more book.
+- Avoid starting new habits you don't want to keep, if you can. This is a judgement call, not a rule. Comfort your child when they're unwell or very distressed.
+- Give a change a week or two before deciding it isn't working.
 
 ## Nap Refusal: When Your Toddler Won't Sleep
 
-Nap refusal at 18 months is extremely common — but it usually doesn't mean the nap should disappear. Most children this age still need that midday sleep until at least 2.5 to 3 years. What often looks like "refusing the nap" is actually a toddler testing boundaries, a slightly mistimed nap window, or overtiredness that's paradoxically making it harder to fall asleep.
+Nap refusal at 18 months is extremely common — but it usually doesn't mean the nap should disappear. Most children this age still benefit from a midday nap, and many keep napping well into their third year or beyond. When they stop varies widely. What often looks like "refusing the nap" is actually a toddler testing boundaries, a slightly mistimed nap window, or overtiredness that's paradoxically making it harder to fall asleep.
 
 If your toddler is nap-refusing, try:
 
@@ -87,7 +140,7 @@ If your toddler is nap-refusing, try:
 - Keeping a consistent, brief pre-nap wind-down routine — even just drawing the curtains, a quiet song, and into the cot
 - Implementing a "quiet time" if the nap truly won't happen, so they still get rest
 
-A toddler who skips the nap regularly will almost always need bedtime moved earlier — sometimes as early as 6:00 pm — to avoid the overtiredness spiral.
+On days without a nap, many families find an earlier bedtime helps, sometimes as early as 6:00–6:30 pm.
 
 ## Building a Bedtime Routine That Works
 
@@ -97,8 +150,8 @@ The whole thing should take around 20 to 30 minutes. The consistency matters mor
 
 ## When to Talk to Your Paediatrician
 
-Reach out to your GP or paediatrician if your toddler is regularly sleeping significantly less than 11 hours overnight, if there are signs of sleep-disordered breathing (snoring, gasping, laboured breathing), or if the sleep difficulties are significantly affecting your family's functioning after a few weeks.
+Talk to your GP, health visitor or paediatrician if your toddler snores most nights, gasps, or has pauses in breathing during sleep. The AAP recommends that clinicians ask about snoring, which can be a sign of obstructive sleep apnoea ([AAP clinical practice guideline, 2012](https://pubmed.ncbi.nlm.nih.gov/22926173/)). Also check in if your toddler is regularly getting much less sleep than the 11–14-hour range, if they're very sleepy or irritable during the day, or if sleep difficulties are affecting your family's wellbeing after a few weeks.
 
 The 18-month phase is intense, but it moves through. Consistency and a good routine will carry you further than any other strategy.
 
-*This article is based on published research from the American Academy of Pediatrics (AAP), the National Health Service (NHS), and peer-reviewed pediatric sleep studies. It is not medical advice — always consult your pediatrician for individual guidance.*
+*This article is general information, not medical advice. The total-sleep figures come from the AASM consensus (endorsed by the AAP), and the bedtime-routine findings from Mindell et al. (2009), all linked in the sources below. The wake windows, illustrative days and nap checklist are practical suggestions from LunaCradle, not clinical guidance.*

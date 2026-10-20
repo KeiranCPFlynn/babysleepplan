@@ -39,15 +39,15 @@ const components: Components = {
   p: ({ children }) => (
     <p className="text-slate-600 leading-relaxed mb-4">{children}</p>
   ),
-  ul: ({ children }) => (
-    <ul className="space-y-2 mb-4 ml-1">{children}</ul>
+  ul: ({ children, className }) => (
+    <ul className={`space-y-2 mb-4 ml-1 ${className ?? ''}`}>{children}</ul>
   ),
   ol: ({ children }) => (
     <ol className="space-y-2 mb-4 ml-1 list-decimal list-inside">{children}</ol>
   ),
-  li: ({ children }) => (
-    <li className="text-slate-600 leading-relaxed pl-2">
-      <span className="inline text-sky-500 mr-2">&bull;</span>
+  li: ({ children, className }) => (
+    <li className={`text-slate-600 leading-relaxed pl-2 [&_input]:mr-2 [&_input]:align-middle ${className ?? ''}`}>
+      {!className?.includes('task-list-item') && <span className="inline text-sky-500 mr-2">&bull;</span>}
       {children}
     </li>
   ),
