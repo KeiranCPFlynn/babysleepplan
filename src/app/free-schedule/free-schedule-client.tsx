@@ -7,6 +7,7 @@ import { SchedulePreview } from '@/components/free-schedule/schedule-preview'
 import { EmailGate } from '@/components/free-schedule/email-gate'
 import type { ChatMessage, ExtractedFields, SessionPhase } from '@/lib/free-schedule/types'
 import { PRICING_COPY } from '@/lib/subscription'
+import { trackEvent } from '@/lib/analytics/track'
 
 type FreeScheduleOutputMode = 'standard' | 'admin_social'
 
@@ -28,7 +29,7 @@ declare global {
 const INITIAL_MESSAGE: ChatMessage = {
   role: 'assistant',
   content:
-    "Hi! Tell me about your baby — their age and what's going on with sleep.",
+    "Tell me your baby's age, usual morning wake time and what you'd like help with. I'll ask if I need another detail.",
 }
 
 export function FreeScheduleClient({
@@ -44,7 +45,9 @@ export function FreeScheduleClient({
   const [phase, setPhase] = useState<SessionPhase>('chat')
   const [isLoading, setIsLoading] = useState(false)
   const [loadingStatus, setLoadingStatus] = useState<string | null>(null)
-  const [hasTrackedFirstMessage, setHasTrackedFirstMessage] = useState(false)
+  const [hasVerifiedSession, setHasVerifiedSession] = useState(false)
+  const firstMessageTracked = useRef(false)
+  const previewRef = useRef<HTMLDivElement>(null)
   const [isUnlocked, setIsUnlocked] = useState(false)
   const [outputMode, setOutputMode] = useState<FreeScheduleOutputMode>(
     showAdminSocialTools ? 'admin_social' : 'standard'
@@ -119,7 +122,7 @@ export function FreeScheduleClient({
 
       // Client-side guard: only on the very first message, before hitting the API.
       // Follow-up answers (questionsAsked > 0) are always short/expected so we skip this.
-      if (!hasTrackedFirstMessage) {
+      if (!hasVerifiedSession) {
         const trimmed = text.trim()
         const lower = trimmed.toLowerCase()
         // Disqualifiers override everything — explicit self-contradiction or cancellation.
@@ -159,7 +162,7 @@ export function FreeScheduleClient({
         }
       }
 
-      const isFirstMessage = !hasTrackedFirstMessage
+      const isFirstMessage = !hasVerifiedSession
       const shouldSendTurnstileToken = isFirstMessage && !!turnstileToken
 
       if (isFirstMessage && turnstileSiteKey && !turnstileToken) {
@@ -174,9 +177,10 @@ export function FreeScheduleClient({
         return
       }
 
-      // Track first message
-      if (!hasTrackedFirstMessage) {
-        window.gtag?.('event', 'free_schedule_first_message', { free_schedule: true })
+      // Count one start per mounted journey, including when a failed request is retried.
+      if (!firstMessageTracked.current) {
+        firstMessageTracked.current = true
+        trackEvent('free_schedule_first_message', { free_schedule: true })
       }
 
       // Add user message
@@ -211,20 +215,8 @@ export function FreeScheduleClient({
 
         const json = await res.json()
 
-        if (!res.ok || json.status === 'error') {
-          if (isFirstMessage && shouldSendTurnstileToken && turnstileWidgetId.current) {
-            window.turnstile?.reset(turnstileWidgetId.current)
-            setTurnstileToken(null)
-          }
-          const errMsg =
-            json.error === 'Bot verification required.'
-              ? 'Please wait a second while bot verification finishes, then resend your message.'
-              : json.error || "Something went wrong. Please try again or rephrase your message."
-          setMessages((prev) => [...prev, { role: 'assistant', content: errMsg }])
-          return
-        }
-
         if (json.status === 'rate_limited') {
+          trackEvent('free_schedule_error', { reason: 'rate_limited' })
           setMessages((prev) => [
             ...prev,
             {
@@ -237,13 +229,29 @@ export function FreeScheduleClient({
           return
         }
 
+        if (!res.ok || json.status === 'error') {
+          trackEvent('free_schedule_error', {
+            reason: json.error?.startsWith('Bot verification') ? 'verification' : 'generation',
+          })
+          if (isFirstMessage && shouldSendTurnstileToken && turnstileWidgetId.current) {
+            window.turnstile?.reset(turnstileWidgetId.current)
+            setTurnstileToken(null)
+          }
+          const errMsg =
+            json.error === 'Bot verification required.'
+              ? 'Please wait a second while bot verification finishes, then resend your message.'
+              : json.error || "Something went wrong. Please try again or rephrase your message."
+          setMessages((prev) => [...prev, { role: 'assistant', content: errMsg }])
+          return
+        }
+
         // First message succeeded; consume token and mark session as verified.
         if (isFirstMessage) {
           if (shouldSendTurnstileToken && turnstileWidgetId.current) {
             window.turnstile?.reset(turnstileWidgetId.current)
             setTurnstileToken(null)
           }
-          setHasTrackedFirstMessage(true)
+          setHasVerifiedSession(true)
         }
 
         if (json.extractedFields) {
@@ -257,7 +265,7 @@ export function FreeScheduleClient({
         if (json.status === 'needs_info') {
           // Track follow-up question
           const newQ = json.questionsAsked as number
-          window.gtag?.('event', 'free_schedule_follow_up', { question_number: newQ })
+          trackEvent('free_schedule_follow_up', { question_number: newQ })
 
           setQuestionsAsked(newQ)
           setQuickReplies(json.quickReplies || [])
@@ -270,10 +278,7 @@ export function FreeScheduleClient({
 
         if (json.status === 'complete' && json.scheduleMarkdown) {
           // Track report generated
-          window.gtag?.('event', 'free_schedule_report_generated', {
-            age_months: json.extractedFields?.age_months,
-            confidence_score: json.extractedFields?.confidence_score,
-          })
+          trackEvent('free_schedule_report_generated', { free_schedule: true })
 
           setScheduleMarkdown(json.scheduleMarkdown)
           setMessages((prev) => [
@@ -289,6 +294,7 @@ export function FreeScheduleClient({
         }
       } catch (err) {
         const isTimeout = err instanceof DOMException && err.name === 'AbortError'
+        trackEvent('free_schedule_error', { reason: isTimeout ? 'timeout' : 'network' })
         setMessages((prev) => [
           ...prev,
           {
@@ -313,7 +319,7 @@ export function FreeScheduleClient({
       extractedFields,
       questionsAsked,
       isLoading,
-      hasTrackedFirstMessage,
+      hasVerifiedSession,
       turnstileToken,
       turnstileSiteKey,
       outputMode,
@@ -323,6 +329,13 @@ export function FreeScheduleClient({
   )
 
   useEffect(() => () => clearLoadingTimers(), [clearLoadingTimers])
+
+  useEffect(() => {
+    if (phase === 'preview') {
+      previewRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      previewRef.current?.focus({ preventScroll: true })
+    }
+  }, [phase])
 
   const handleEmailSuccess = useCallback(() => {
     setIsUnlocked(true)
@@ -363,6 +376,7 @@ export function FreeScheduleClient({
             quickReplies={phase === 'chat' ? quickReplies : []}
             isLoading={isLoading && phase === 'chat'}
             loadingStatus={loadingStatus}
+            isComplete={phase !== 'chat'}
             onSend={phase === 'chat' ? handleSend : () => { }}
           />
         </div>
@@ -370,7 +384,7 @@ export function FreeScheduleClient({
 
       {/* Schedule preview + email gate (combined card) */}
       {(phase === 'preview' || phase === 'email_sent') && scheduleMarkdown && (
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm p-4 sm:p-6">
+        <div ref={previewRef} tabIndex={-1} aria-label="Your generated schedule" className="scroll-mt-6 bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm p-4 sm:p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">
               Your Schedule
@@ -416,7 +430,7 @@ export function FreeScheduleClient({
           <Link
             href="/signup"
             onClick={() =>
-              window.gtag?.('event', 'free_schedule_cta_click', { source: 'post_email' })
+              trackEvent('free_schedule_cta_click', { source: 'post_email' })
             }
             className="inline-flex items-center justify-center bg-sky-700 hover:bg-sky-800 text-white text-sm font-medium px-6 py-3 rounded-lg transition-colors"
           >

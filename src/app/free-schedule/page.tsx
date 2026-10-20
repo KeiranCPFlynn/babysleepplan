@@ -8,9 +8,9 @@ import { getSiteUrl } from '@/lib/site-url'
 const siteUrl = getSiteUrl()
 
 export const metadata: Metadata = {
-  title: 'Free Baby Sleep Schedule Builder | LunaCradle',
+  title: 'Free Baby Sleep Schedule Builder',
   description:
-    "Paste your baby's sleep situation or chat — get a free, age-specific schedule in seconds. No account needed.",
+    "Describe your baby's age and routine to create a free sleep schedule preview. No account or email needed to preview; email unlocks the full guidance and PDF.",
   keywords: [
     'free baby sleep schedule',
     'baby sleep schedule builder',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Free Baby Sleep Schedule Builder | LunaCradle',
     description:
-      "Paste your baby's sleep situation or chat — get a free, age-specific schedule in seconds.",
+      "Create a free sleep schedule preview from your baby's age and routine. See nap times and bedtime without an account or email.",
     url: `${siteUrl}/free-schedule`,
   },
 }
@@ -59,7 +59,7 @@ export default async function FreeSchedulePage() {
       {/* Main content */}
       <main className="container mx-auto px-4 pb-16 max-w-2xl">
         {/* Hero */}
-        <div className="text-center mb-8 pt-4">
+        <div className="text-center mb-6 pt-4">
           <p className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-4 py-1.5 text-sm font-medium text-sky-700 mb-4">
             Free — no account needed
           </p>
@@ -67,25 +67,13 @@ export default async function FreeSchedulePage() {
             Free Baby Sleep Schedule Builder
           </h1>
           <p className="text-base text-slate-600 dark:text-slate-400 max-w-lg mx-auto">
-            Paste a post or describe your situation. We&apos;ll create an age-specific schedule with
-            guidance tailored to your baby — no signup required.
+            Tell us your baby&apos;s age, morning wake time and sleep challenge.
+            Get a daily timetable with nap times, bedtime and two guidance tips.
           </p>
-        </div>
-
-        {/* Trust badges */}
-        <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-slate-500 dark:text-slate-400 mb-8">
-          <span className="flex items-center gap-1">
-            <span className="text-sky-600">✓</span> Evidence-based
-          </span>
-          <span className="flex items-center gap-1">
-            <span className="text-sky-600">✓</span> Ages 0–5 years
-          </span>
-          <span className="flex items-center gap-1">
-            <span className="text-sky-600">✓</span> PDF emailed free
-          </span>
-          <span className="flex items-center gap-1">
-            <span className="text-sky-600">✓</span> No account needed
-          </span>
+          <p className="mt-3 text-sm text-slate-500 dark:text-slate-400 max-w-lg mx-auto">
+            Preview without an account or email. Choose to email the PDF to unlock
+            the full guidance and adjustments, plus occasional sleep tips.
+          </p>
         </div>
 
         {/* Chat UI */}
@@ -93,6 +81,26 @@ export default async function FreeSchedulePage() {
           showAdminSocialTools={showAdminSocialTools}
           turnstileSiteKey={turnstileSiteKey}
         />
+
+        <details className="mt-6 rounded-xl border border-slate-200 bg-white p-4 text-sm dark:border-slate-800 dark:bg-slate-900">
+          <summary className="cursor-pointer font-medium text-slate-700 dark:text-slate-200">
+            What will my preview look like?
+          </summary>
+          <div className="mt-4 space-y-3 text-slate-600 dark:text-slate-400">
+            <p>You&apos;ll see a timetable with exact times and activities, followed by two guidance tips.</p>
+            <div className="rounded-lg bg-slate-50 p-3 dark:bg-slate-800">
+              <p className="font-medium text-slate-700 dark:text-slate-200">Example input</p>
+              <p className="mt-1">&ldquo;My baby is 8 months, wakes at 7am and takes two short naps. Bedtime is 7pm.&rdquo;</p>
+              <p className="mt-3 font-medium text-slate-700 dark:text-slate-200">Your preview includes</p>
+              <ul className="mt-1 list-disc space-y-1 pl-5">
+                <li>A morning wake time, suggested nap times and bedtime</li>
+                <li>Two tips related to the sleep challenge you described</li>
+              </ul>
+            </div>
+            <p>This example shows what to enter, not a recommended routine. Your draft uses the details you share. You can leave out names and other identifying information.</p>
+            <p>General information, not medical advice. For health or development concerns, speak to your child&apos;s clinician.</p>
+          </div>
+        </details>
 
         {/* Footer CTA */}
         <div className="text-center mt-10 text-sm text-slate-500 dark:text-slate-400">
