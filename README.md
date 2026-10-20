@@ -154,6 +154,10 @@ MAINTENANCE_MODE=false
 MAINTENANCE_BYPASS_TOKEN=
 ```
 
+For local OpenAI setup, add `OPENAI_API_KEY=your_actual_key` to `.env.local` at the repository root and restart `npm run dev`. One key is used for both models; the defaults are `gpt-6.1-sol` for paid plans and diary calls and `gpt-6-luna` for free schedules. Optional server-only overrides are `OPENAI_PRIMARY_MODEL` and `OPENAI_LIGHT_MODEL`. Keep the key server-side, without a `NEXT_PUBLIC_` prefix. `.env.local` is ignored by Git; never commit or paste the key into chat.
+
+For Vercel, open the existing project's **Settings → Environment Variables** and add `OPENAI_API_KEY` for the deployment environments you use (Production and, if needed, Preview). A new deployment is required to apply it. Keep existing Gemini credentials until the OpenAI rollout is verified. Hosted configuration changes and deployment require the user's approval.
+
 Environment variables are validated at runtime by `src/lib/env.ts` (imported in the root layout). The app will throw a clear error on startup if any required variable is missing. The validation is skipped during the Next.js build phase since server-only env vars aren't available at build time.
 
 When Stripe is enabled, the app reads mode-specific keys using `STRIPE_MODE` (`test` or `live`) and falls back to legacy single-mode keys if needed.

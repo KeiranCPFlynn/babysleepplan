@@ -60,7 +60,7 @@ export interface OpenAIResult {
 export class OpenAIError extends Error {
   /** HTTP status when the server responded. */
   readonly status?: number
-  /** Upstream error code from the response body, treated as data. */
+  /** Recognized upstream error code; arbitrary response text is never retained. */
   readonly code?: string
   /** True only for errors worth retrying: timeouts, network faults, retryable rate limits, server failures. */
   readonly retryable: boolean
@@ -87,6 +87,13 @@ export function isOpenAIRetryableError(error: unknown): boolean {
 // 429 is normally retryable, but exhausted billing quota is a permanent condition.
 const RETRYABLE_HTTP_STATUSES = [408, 429, 500, 502, 503, 504]
 const NON_RETRYABLE_ERROR_CODES = ['insufficient_quota']
+const SAFE_ERROR_CODES = new Set([
+  'insufficient_quota', 'rate_limit_exceeded', 'invalid_api_key',
+  'model_not_found', 'invalid_request_error', 'server_error',
+  'context_length_exceeded', 'billing_hard_limit_reached', 'billing_not_active',
+])
+const SAFE_RESPONSE_STATUSES = new Set(['incomplete', 'failed', 'cancelled', 'queued', 'in_progress'])
+const SAFE_INCOMPLETE_REASONS = new Set(['max_output_tokens', 'content_filter'])
 
 function isRetryableHttpStatus(status: number, code?: string) {
   if (code && NON_RETRYABLE_ERROR_CODES.some((c) => code.toLowerCase().includes(c))) {
@@ -137,16 +144,16 @@ function extractTextFromPayload(payload: ResponsesApiPayload): string {
   return parts.join('')
 }
 
-function findRefusal(payload: ResponsesApiPayload): string | null {
+function hasRefusal(payload: ResponsesApiPayload): boolean {
   for (const item of payload.output ?? []) {
     if (item.type !== 'message') continue
     for (const block of item.content ?? []) {
       if (block.type === 'refusal') {
-        return block.refusal ?? 'unspecified refusal'
+        return true
       }
     }
   }
-  return null
+  return false
 }
 
 function extractUsage(payload: ResponsesApiPayload): OpenAIUsageCounts {
@@ -160,13 +167,16 @@ function extractUsage(payload: ResponsesApiPayload): OpenAIUsageCounts {
   }
 }
 
-async function readErrorBody(response: Response): Promise<{ message: string; code?: string }> {
+async function readErrorCode(response: Response): Promise<string | undefined> {
   try {
     const body = (await response.json()) as ResponsesApiErrorBody
-    const message = body.error?.message || `OpenAI request failed with HTTP ${response.status}`
-    return { message, code: body.error?.code }
-  } catch {
-    return { message: `OpenAI request failed with HTTP ${response.status}` }
+    const code = body?.error?.code
+    return typeof code === 'string' && SAFE_ERROR_CODES.has(code) ? code : undefined
+  } catch (error) {
+    // A gateway can return a non-JSON error. Body-read failures and aborts must
+    // still reach the request boundary so they retain their retry behavior.
+    if (error instanceof SyntaxError) return undefined
+    throw error
   }
 }
 
@@ -181,9 +191,8 @@ export async function callOpenAI(options: OpenAICallOptions): Promise<OpenAIResu
   const controller = new AbortController()
   const timeoutId = setTimeout(() => controller.abort(), options.timeoutMs)
 
-  let response: Response
   try {
-    response = await fetch(OPENAI_RESPONSES_URL, {
+    const response = await fetch(OPENAI_RESPONSES_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -198,54 +207,58 @@ export async function callOpenAI(options: OpenAICallOptions): Promise<OpenAIResu
       }),
       signal: controller.signal,
     })
+    if (!response.ok) {
+      const code = await readErrorCode(response)
+      throw new OpenAIError(`OpenAI request failed with HTTP ${response.status}`, {
+        status: response.status,
+        code,
+        retryable: isRetryableHttpStatus(response.status, code),
+      })
+    }
+
+    let payload: ResponsesApiPayload
+    try {
+      payload = (await response.json()) as ResponsesApiPayload
+    } catch (error) {
+      if (error instanceof SyntaxError) {
+        throw new OpenAIError('OpenAI returned a non-JSON response body')
+      }
+      throw error
+    }
+
+    const status = payload.status === 'completed'
+      ? 'completed'
+      : SAFE_RESPONSE_STATUSES.has(payload.status ?? '') ? payload.status! : 'unknown'
+    if (status !== 'completed') {
+      const reason = payload.incomplete_details?.reason
+      const detail = reason && SAFE_INCOMPLETE_REASONS.has(reason) ? ` (reason: ${reason})` : ''
+      throw new OpenAIError(`OpenAI response status was "${status}"${detail}`, { status: response.status })
+    }
+
+    if (hasRefusal(payload)) {
+      throw new OpenAIError('OpenAI refused to respond', { status: response.status })
+    }
+
+    const text = extractTextFromPayload(payload)
+    if (!text.trim()) {
+      throw new OpenAIError('OpenAI returned an empty response text', { status: response.status })
+    }
+
+    const usage = extractUsage(payload)
+    // Privacy-safe operational logging: model and token counts only — never
+    // prompts, response text, baby information, or diary content.
+    console.log('[openai] response', { model, status, usage })
+
+    return { text, model, status, usage }
   } catch (error) {
-    if (error instanceof Error && error.name === 'AbortError') {
+    if (controller.signal.aborted) {
       throw new OpenAIError(`OpenAI request timed out after ${options.timeoutMs}ms`, { retryable: true })
     }
-    throw new OpenAIError(`OpenAI request failed: ${error instanceof Error ? error.message : String(error)}`, {
-      retryable: true,
-    })
+    if (error instanceof OpenAIError) throw error
+    // Transport messages can include request details; retain no raw text/cause.
+    throw new OpenAIError('OpenAI request failed', { retryable: true })
   } finally {
+    // fetch resolves at headers. Keep the deadline through body consumption.
     clearTimeout(timeoutId)
   }
-
-  if (!response.ok) {
-    const { message, code } = await readErrorBody(response)
-    throw new OpenAIError(message, {
-      status: response.status,
-      code,
-      retryable: isRetryableHttpStatus(response.status, code),
-    })
-  }
-
-  let payload: ResponsesApiPayload
-  try {
-    payload = (await response.json()) as ResponsesApiPayload
-  } catch {
-    throw new OpenAIError('OpenAI returned a non-JSON response body')
-  }
-
-  const status = payload.status ?? 'unknown'
-  if (status !== 'completed') {
-    const reason = payload.incomplete_details?.reason
-    const detail = reason ? ` (reason: ${reason})` : ''
-    throw new OpenAIError(`OpenAI response status was "${status}"${detail}`, { status: response.status })
-  }
-
-  const refusal = findRefusal(payload)
-  if (refusal) {
-    throw new OpenAIError(`OpenAI refused to respond: ${refusal}`, { status: response.status })
-  }
-
-  const text = extractTextFromPayload(payload)
-  if (!text.trim()) {
-    throw new OpenAIError('OpenAI returned an empty response text', { status: response.status })
-  }
-
-  const usage = extractUsage(payload)
-  // Privacy-safe operational logging: model and token counts only — never
-  // prompts, response text, baby information, or diary content.
-  console.log('[openai] response', { model, status, usage })
-
-  return { text, model, status, usage }
 }

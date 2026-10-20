@@ -183,7 +183,8 @@ describe('OpenAI helper - failure handling', () => {
       .catch((e) => e)
     expect(error).toBeInstanceOf(OpenAIError)
     expect(error.status).toBe(status)
-    expect(error.message).toBe('upstream problem')
+    expect(error.message).toBe(`OpenAI request failed with HTTP ${status}`)
+    expect(error.code).toBeUndefined()
     expect(error.retryable).toBe(false)
   })
 
@@ -210,13 +211,15 @@ describe('OpenAI helper - failure handling', () => {
   })
 
   it('network failures are retryable and never include the API key', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new TypeError('fetch failed')))
+    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new TypeError('fetch failed: test-openai-key PRIVATE FAMILY DETAIL')))
 
     const error = await callOpenAI({ role: 'primary', prompt: 'x', timeoutMs: 1000, maxOutputTokens: 100 })
       .catch((e) => e)
     expect(error).toBeInstanceOf(OpenAIError)
     expect(error.retryable).toBe(true)
     expect(error.message).not.toContain('test-openai-key')
+    expect(error.message).toBe('OpenAI request failed')
+    expect(error.stack).not.toContain('PRIVATE FAMILY DETAIL')
   })
 
   it('rejects incomplete responses instead of accepting truncated text', async () => {
@@ -236,18 +239,58 @@ describe('OpenAI helper - failure handling', () => {
     expect(error.retryable).toBe(false)
   })
 
-  it('rejects refusals', async () => {
+  it('rejects refusals without retaining model-generated private details', async () => {
     const payload = completedPayload({
       output: [
-        { type: 'message', role: 'assistant', content: [{ type: 'refusal', refusal: 'cannot help with that' }] },
+        { type: 'message', role: 'assistant', content: [{ type: 'refusal', refusal: 'PRIVATE FAMILY DETAIL' }] },
       ],
     })
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue(okResponse(payload)))
 
     const error = await callOpenAI({ role: 'primary', prompt: 'x', timeoutMs: 1000, maxOutputTokens: 100 })
       .catch((e) => e)
-    expect(error.message).toContain('refused')
+    expect(error.message).toBe('OpenAI refused to respond')
+    expect(error.stack).not.toContain('PRIVATE FAMILY DETAIL')
+    expect(JSON.stringify(error)).not.toContain('PRIVATE FAMILY DETAIL')
     expect(error.retryable).toBe(false)
+  })
+
+  it.each(['rate_limit_exceeded', 'PRIVATE FAMILY DETAIL'])('retains only recognized error metadata (%s)', async (code) => {
+    const logSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(errorResponse(429, {
+      error: { message: 'PRIVATE FAMILY DETAIL test-openai-key', code, type: 'PRIVATE FAMILY DETAIL' },
+    })))
+
+    const error = await callOpenAI({ role: 'primary', prompt: 'x', timeoutMs: 1000, maxOutputTokens: 100 })
+      .catch((e) => e)
+    expect(error.message).toBe('OpenAI request failed with HTTP 429')
+    expect(error.code).toBe(code === 'rate_limit_exceeded' ? code : undefined)
+    expect(error.retryable).toBe(true)
+    // Routes log the error object and can persist its message. Both are safe.
+    console.error(error)
+    expect(error.stack).not.toContain('PRIVATE FAMILY DETAIL')
+    expect(JSON.stringify(logSpy.mock.calls)).not.toContain('PRIVATE FAMILY DETAIL')
+    expect(JSON.stringify(logSpy.mock.calls)).not.toContain('test-openai-key')
+  })
+
+  it('discards arbitrary status and incomplete-reason text', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(okResponse(completedPayload({
+      status: 'PRIVATE FAMILY DETAIL',
+      incomplete_details: { reason: 'PRIVATE FAMILY DETAIL' },
+    }))))
+
+    const error = await callOpenAI({ role: 'primary', prompt: 'x', timeoutMs: 1000, maxOutputTokens: 100 })
+      .catch((e) => e)
+    expect(error.message).toBe('OpenAI response status was "unknown"')
+    expect(error.stack).not.toContain('PRIVATE FAMILY DETAIL')
+  })
+
+  it('preserves HTTP retry behavior for a non-JSON error body', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response('gateway failure', { status: 503 })))
+    const error = await callOpenAI({ role: 'primary', prompt: 'x', timeoutMs: 1000, maxOutputTokens: 100 })
+      .catch((e) => e)
+    expect(error.message).toBe('OpenAI request failed with HTTP 503')
+    expect(error.retryable).toBe(true)
   })
 
   it('rejects empty response text', async () => {
@@ -326,6 +369,47 @@ describe('OpenAI helper - request abort', () => {
     // request; there is nothing to observe, so this mainly guards no hang.)
     await vi.advanceTimersByTimeAsync(60_000)
     expect(vi.getTimerCount()).toBe(0)
+  })
+
+  it.each([200, 429])('aborts a stalled HTTP %s body after headers arrive', async (status) => {
+    vi.useFakeTimers()
+    let observedSignal: AbortSignal | undefined
+    vi.stubGlobal('fetch', vi.fn((_url: string, init: RequestInit) => {
+      observedSignal = init.signal!
+      const body = new ReadableStream({
+        start(controller) {
+          observedSignal!.addEventListener('abort', () => {
+            controller.error(new DOMException('PRIVATE FAMILY DETAIL', 'AbortError'))
+          }, { once: true })
+        },
+      })
+      return Promise.resolve(new Response(body, { status }))
+    }))
+
+    const pending = callOpenAI({ role: 'primary', prompt: 'x', timeoutMs: 5000, maxOutputTokens: 100 })
+    const rejection = pending.catch((e) => e)
+    await vi.advanceTimersByTimeAsync(4999)
+    expect(observedSignal?.aborted).toBe(false)
+    await vi.advanceTimersByTimeAsync(1)
+
+    const error = await rejection
+    expect(observedSignal?.aborted).toBe(true)
+    expect(error).toBeInstanceOf(OpenAIError)
+    expect(error.message).toBe('OpenAI request timed out after 5000ms')
+    expect(error.retryable).toBe(true)
+    expect(error.stack).not.toContain('PRIVATE FAMILY DETAIL')
+    expect(vi.getTimerCount()).toBe(0)
+  })
+
+  it.each([200, 503])('treats HTTP %s body connection failures as retryable', async (status) => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response(new ReadableStream({
+      start(controller) { controller.error(new TypeError('PRIVATE FAMILY DETAIL')) },
+    }), { status })))
+    const error = await callOpenAI({ role: 'primary', prompt: 'x', timeoutMs: 1000, maxOutputTokens: 100 })
+      .catch((e) => e)
+    expect(error.message).toBe('OpenAI request failed')
+    expect(error.retryable).toBe(true)
+    expect(error.stack).not.toContain('PRIVATE FAMILY DETAIL')
   })
 })
 
